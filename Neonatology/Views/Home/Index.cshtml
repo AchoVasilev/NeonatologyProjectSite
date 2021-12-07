@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@section head{
+    <style type="text/css">
+        body {
+            background-image: url('/img/homepage.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+}
+<div class="jumbotron jumbotron-fluid jumbotron-opacity">
+    <div class="container">
+        <h1 class="display-4">Добре дошли в @Common.GlobalConstants.SystemName</h1>
+        <p class="lead">Тук можете да запишете вашия час за преглед и да получите консултация</p>
+        <hr class="my-4">
+        <p>За да направите това, трябва първо да се регистрирате.</p>
+        <p class="lead">
+            <a id="registerBtn" class="btn btn-primary btn-lg hvr-grow" asp-area="Identity" asp-page="/Account/Register">Регистрирай се</a>
+        </p>
+    </div>
+</div>
