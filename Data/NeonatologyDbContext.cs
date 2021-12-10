@@ -7,7 +7,7 @@
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    public class NeonatologyDbContext : IdentityDbContext<ApplicationUser>
+    public class NeonatologyDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public NeonatologyDbContext(DbContextOptions<NeonatologyDbContext> options)
         : base(options)

@@ -9,6 +9,14 @@
     {
         public DateTime DateTime { get; set; }
 
+        public string ParentFirstName { get; set; }
+
+        public string ParentLastName { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public string ChildFirstName { get; set; }
+
         [ForeignKey(nameof(Doctor))]
         public string DoctorId { get; set; }
 

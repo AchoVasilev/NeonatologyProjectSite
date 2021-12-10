@@ -1,4 +1,8 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -17,9 +21,20 @@
         <h1 class="display-4">Добре дошли в @Common.GlobalConstants.SystemName</h1>
         <p class="lead">Тук можете да запишете вашия час за преглед и да получите консултация</p>
         <hr class="my-4">
-        <p>За да направите това, трябва първо да се регистрирате.</p>
-        <p class="lead">
-            <a id="registerBtn" class="btn btn-primary btn-lg hvr-grow" asp-area="Identity" asp-page="/Account/Register">Регистрирай се</a>
-        </p>
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole(Common.GlobalConstants.DoctorRoleName))
+        {
+            <p class="lead">
+                <a class="btn btn-primary btn-lg hvr-grow" asp-area="DoctorRole" asp-controller="Appointment" asp-action="Index">Запазени часове</a>
+            </p>
+        }
+        else
+        {
+            <p class="lead">
+                <a type="submit" class="btn btn-info hvr-grow" asp-area="PatientRole" asp-controller="Appointment" asp-action="MakeAnAppointment">
+                    Запази час
+                </a>
+            </p>
+        }
+
     </div>
 </div>
