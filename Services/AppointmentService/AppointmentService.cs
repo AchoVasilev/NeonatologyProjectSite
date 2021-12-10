@@ -55,7 +55,6 @@
                 ParentLastName = model.ParentLastName,
                 ChildFirstName = model.ChildFirstName,
                 PhoneNumber = model.PhoneNumber,
-                IsRated = model.IsRated,
                 DoctorId = doctorId
             };
 

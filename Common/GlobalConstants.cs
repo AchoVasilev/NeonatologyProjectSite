@@ -10,6 +10,7 @@
         public const string AdministratorEmail = "angavasilev@gmail.com";
         public const string AdministratorPassword = "administrator123";
 
+        public const string DoctorId = "9858f28d-b5dd-451b-9015-148704acf2b8";
         public const string DoctorRoleName = "Doctor";
         public const string DoctorEmail = "dr.p.petrova@abv.bg";
         public const string DoctorPassword = "ASDASD";
@@ -36,6 +37,13 @@
             public const string TimeFormat = "HH:mm";
 
             public const string DateTimeFormat = "dd/MM/yyyy HH:mm";
+        }
+
+        public static class Messages
+        {
+            public const string SuccessfullAppointment = "Успешно си записахте час за {0} от {1} часа.";
+            public const string RequiredFieldErrorMsg = "Полето е задължително.";
+            public const string LengthErrorMsg = "Полето трябва да е между {0} {1} символа.";
         }
     }
 }

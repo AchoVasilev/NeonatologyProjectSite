@@ -6,6 +6,11 @@
     ViewBag.Title = "Начало";
 }
 
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-info" id="locationMessage" style="font-size: 20px">@this.TempData["Message"]</div>
+}
+
 @section head{
 <style type="text/css">
     body {

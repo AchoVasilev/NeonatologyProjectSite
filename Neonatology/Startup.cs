@@ -6,13 +6,13 @@ namespace Neonatology
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
     using Services.AppointmentService;
+    using Services.DateTimeParser;
     using Services.PatientService;
 
     public class Startup
@@ -45,7 +45,8 @@ namespace Neonatology
             services.AddControllersWithViews();
 
             services.AddTransient<IAppointmentService, AppointmentService>()
-                .AddTransient<IPatientService, PatientService>();
+                .AddTransient<IPatientService, PatientService>()
+                .AddTransient<IDateTimeParserService, DateTimeParserService>();
 
             services.AddAutoMapper(typeof(Startup));
         }
