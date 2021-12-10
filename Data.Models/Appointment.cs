@@ -1,20 +1,27 @@
 ﻿namespace Data.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using Data.Common.Models;
+
+    using static Data.Common.DataConstants.Constants;
 
     public class Appointment : BaseModel<int>
     {
         public DateTime DateTime { get; set; }
 
+        [MaxLength(DefaultMaxLength)]
         public string ParentFirstName { get; set; }
 
+        [MaxLength(DefaultMaxLength)]
         public string ParentLastName { get; set; }
 
+        [MaxLength(DefaultMaxLength)]
         public string PhoneNumber { get; set; }
 
+        [MaxLength(DefaultMaxLength)]
         public string ChildFirstName { get; set; }
 
         [ForeignKey(nameof(Doctor))]
@@ -26,8 +33,6 @@
         public string PatientId { get; set; }
 
         public virtual Patient Patient { get; set; }
-
-        public bool? Confirmed { get; set; }
 
         public bool IsRated { get; set; }
 

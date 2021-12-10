@@ -3,38 +3,50 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Начало";
 }
 
 @section head{
-    <style type="text/css">
-        body {
-            background-image: url('/img/homepage.jpg');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-        }
-    </style>
+<style type="text/css">
+    body {
+        background-image: url('/img/homepage.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+</style>
 }
 <div class="jumbotron jumbotron-fluid jumbotron-opacity">
     <div class="container">
         <h1 class="display-4">Добре дошли в @Common.GlobalConstants.SystemName</h1>
         <p class="lead">Тук можете да запишете вашия час за преглед и да получите консултация</p>
         <hr class="my-4">
-        @if (SignInManager.IsSignedIn(User) && User.IsInRole(Common.GlobalConstants.DoctorRoleName))
+        @if (SignInManager.IsSignedIn(User))
         {
-            <p class="lead">
-                <a class="btn btn-primary btn-lg hvr-grow" asp-area="DoctorRole" asp-controller="Appointment" asp-action="Index">Запазени часове</a>
-            </p>
+            @if (User.IsInRole(Common.GlobalConstants.DoctorRoleName))
+            {
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg hvr-grow" asp-area="DoctorRole"
+               asp-controller="Appointment" asp-action="Index">Запазени часове</a>
+                </p>
+            }
+            else
+            {
+                <p class="lead">
+                    <a type="submit" class="btn btn-info hvr-grow" asp-area="PatientRole"
+                    asp-controller="Appointment" asp-action="MakeAnAppointment">
+                        Запази час
+                    </a>
+                </p>
+            }
         }
         else
         {
             <p class="lead">
-                <a type="submit" class="btn btn-info hvr-grow" asp-area="PatientRole" asp-controller="Appointment" asp-action="MakeAnAppointment">
+                <a type="submit" class="btn btn-info hvr-grow" asp-area="" asp-controller="Appointment" asp-action="MakeAnAppointment">
                     Запази час
                 </a>
             </p>
         }
-
     </div>
 </div>

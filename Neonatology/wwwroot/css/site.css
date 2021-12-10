@@ -1,6 +1,9 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -10,6 +13,38 @@ a.navbar-brand {
 /* Provide sufficient contrast against white background */
 a {
     color: #0366d6;
+}
+
+.button-large {
+    width: 254px !important;
+    height: 54px;
+    background: #60dad6;
+    overflow: hidden;
+}
+
+.button {
+    width: 137px;
+    height: 54px;
+    background: #60dad6;
+    overflow: hidden;
+}
+
+.button_2 {
+    background: #404040;
+}
+
+    .button_2 a span {
+        color: #FFFFFF;
+    }
+
+.button_3 {
+    background: transparent;
+    border: solid 2px #60dad6;
+}
+
+.elements_button {
+    display: inline-block;
+    margin-bottom: 10px;
 }
 
 .btn-primary {
@@ -55,6 +90,7 @@ button.accept-policy {
 
 /* Sticky footer styles
 -------------------------------------------------- */
+
 html {
     position: relative;
     min-height: 100%;
@@ -73,19 +109,197 @@ body {
     line-height: 60px; /* Vertically center the text there */
 }
 
-.hvr-grow {
-    display: inline-block;
-    vertical-align: middle;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform;
+
+.top-bottom-padding {
+    padding-bottom: 10px;
+    padding-top: 70px;
 }
 
-    .hvr-grow:hover,
-    .hvr-grow:focus,
-    .hvr-grow:active {
-        transform: scale(1.1);
-    }
+.bottom-padding-rating {
+    padding-bottom: 20px;
+}
+
+.bg {
+    /* The image used */
+    background-image: url("/img/banner-img-doctor.jpg");
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.about_text_highlight {
+    font-size: 16px;
+    font-weight: 700;
+    color: #404040;
+    margin-top: 28px;
+}
+
+.about_text_2 {
+    margin-top: 12px;
+}
+
+/*
+    -------- search bar
+*/
+.search-sec {
+    background: #1A4668;
+    padding: 2rem;
+}
+
+.search-slt {
+    display: block;
+    width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    height: calc(3rem + 2px) !important;
+    border-radius: 0;
+}
+
+.wrn-btn {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: capitalize;
+    height: calc(3rem + 2px) !important;
+    border-radius: 0;
+}
+
+/*
+    rating
+*/
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center
+}
+
+.rating > input {
+    display: none
+}
+
+.rating > label {
+    position: relative;
+    width: 1em;
+    font-size: 6vw;
+    color: #FFD600;
+    cursor: pointer
+}
+
+.rating > label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating > label:hover:before,
+.rating > label:hover ~ label:before {
+    opacity: 1 !important
+}
+
+.rating > input:checked ~ label:before {
+    opacity: 1
+}
+
+.rating:hover > input:checked ~ label:before {
+    opacity: 0.4
+}
+
+.starrating1 > input {
+    display: none;
+}
+/* Remove radio buttons */
+
+.starrating1 > label:before {
+    cursor: pointer;
+    content: "\f005"; /* Star */
+    margin: 2px;
+    font-size: 5em;
+    font-family: FontAwesome;
+    display: inline-block;
+}
+.starrating2 > label:before {
+    content: "\f005"; /* Star */
+    margin: 2px;
+    font-size: 1em;
+    font-family: FontAwesome;
+    display: inline-block;
+}
+
+.starrating1 > label {
+    cursor: pointer;
+    color: #222222; /* Start color when not clicked */
+}
+
+.starrating2 > label {
+    color: #ffca08; /* Start color when not clicked */
+}
+
+.starrating1 > input:checked ~ label {
+    color: #ffca08;
+}
+/* Set yellow color when star checked */
+
+.starrating1 > input:hover ~ label {
+    color: #ffca08;
+}
+/* Set yellow color when star hover */
+
+
+.text-black {
+    color: #000000;
+}
+
+.container-outline {
+    border: 1px solid #a7e4e8;
+}
+
+/* messaging*/
+
+.time-date {
+    color: #747474;
+    display: block;
+    font-size: 12px;
+    margin: 8px 0 0;
+}
+
+.cropped1 {
+    width: 340px; /* width of container */
+    height: 340px; /* height of container */
+    object-fit: cover;
+}
+
+.jumbotron-opacity {
+    background-color: rgba(255,255,255,0.6);
+}
+
+.jumbotron-opacity-chat {
+    background-color: rgba(255,255,255,0.4);
+}
+
+.search-form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.medex-color {
+    color: #1b6ec2;
+}
+
+.messages {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 500px;
+    display: block;
+    word-break: break-word;
+}

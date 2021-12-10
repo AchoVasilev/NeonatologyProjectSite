@@ -1,0 +1,165 @@
+﻿@model AppointmentViewModel
+@{
+    ViewBag.Title = "Запази си час";
+}
+
+@section Styles {
+<link href="~/css/date-picker.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<h3 class="text-center">@ViewBag.Title</h3>
+
+<div class="container-fluid ">
+    <div class="row justify-content-center mx-0">
+        <div class="col-lg-6">
+            <div class="card">
+                <form autocomplete="off">
+                    <div class="card-header">
+                        <div class=" row justify-content-sm-center justify-content-center">
+                            <input type="text" id="dp1" class="datepicker" placeholder="Избери дата" style="font-family:Arial, FontAwesome" name="date" readonly />
+                        </div>
+                    </div>
+                    <div class="card-body p-3 p-sm-5">
+                        <div class="row text-center mx-0">
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">08:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">08:20</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">08:40</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">09:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">09:20</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">09:40</div>
+                            </div>
+                        </div>
+                        <div class="row text-center mx-0">
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">10:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">10:20</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">10:40</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">11:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">11:20</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">11:40</div>
+                            </div>
+                        </div>
+                        <div class="row text-center mx-0">
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">12:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">12:20</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">12:40</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">13:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <form method="post" enctype="multipart/form-data">
+                <input asp-for="@Model.DoctorId" value="@Model.DoctorId" class="form-control" hidden>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Дата</label>
+                    <div class="col-sm-10">
+                        <div id="selectedDate" asp-for="@Model.Date" class="form-control" hidden></div>
+                        <input asp-for="@Model.Date" value="" class="form-control" required readonly />
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Час</label>
+                    <div class="col-sm-10">
+                        <div id="selectedTime" asp-for="@Model.Time" class="form-control" hidden></div>
+                        <input asp-for="@Model.Time" value="" class="form-control" required readonly />
+                        <span asp-validation-for="Time" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Име</label>
+                    <div class="col-sm-10">
+                        <div id="selectedTime" asp-for="@Model.ParentFirstName" class="form-control" hidden></div>
+                        <input asp-for="@Model.ParentFirstName" value="" class="form-control" />
+                        <span asp-validation-for="ParentFirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Фамилия</label>
+                    <div class="col-sm-10">
+                        <div id="selectedTime" asp-for="@Model.ParentLastName" class="form-control" hidden></div>
+                        <input asp-for="@Model.ParentLastName" value="" class="form-control" />
+                        <span asp-validation-for="ParentLastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Име на дете</label>
+                    <div class="col-sm-10">
+                        <div id="selectedTime" asp-for="@Model.ChildFirstName" class="form-control" hidden></div>
+                        <input asp-for="@Model.ChildFirstName" value="" class="form-control" />
+                        <span asp-validation-for="ChildFirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Тел. номер</label>
+                    <div class="col-sm-10">
+                        <div id="selectedTime" asp-for="@Model.PhoneNumber" class="form-control" hidden></div>
+                        <input asp-for="@Model.PhoneNumber" value="" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row mt-4">
+                    <div class="col-sm-10">
+                        <button class="btn btn-primary hvr-grow" type="submit"
+                                asp-area="" asp-controller="Appointment" asp-action="MakeAnAppointment" asp-route-doctorId="@Model.DoctorId">
+                            Запази час
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="form-group row mt-4">
+                <div class="col-sm-10">
+                    <a class="btn btn-danger hvr-grow" type="submit"
+                       asp-area="" asp-controller="Home" asp-action="Index">
+                        Откажи
+                    </a>
+                </div>
+            </div>
+            <div asp-validation-summary="All" data-valmsg-summary="true"></div>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts {
+<script src="~/js/bootstrap-datepicker.js" asp-append-version="true"></script>
+<script src="~/js/date-picker.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $.validator.setDefaults({
+        ignore: ""
+    })
+</script>
+}

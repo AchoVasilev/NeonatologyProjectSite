@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "1a162e21-2540-4028-8efe-cdd5ee51dd86": {
+      "ProjectGuid": "1a162e21-2540-4028-8efe-cdd5ee51dd86",
+      "DisplayName": "Data.Models",
+      "ColorIndex": 0
+    },
+    "c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31": {
+      "ProjectGuid": "c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31",
+      "DisplayName": "Infrastructure",
+      "ColorIndex": 1
+    },
+    "cbe66609-3802-431d-b4b6-895658b29053": {
+      "ProjectGuid": "cbe66609-3802-431d-b4b6-895658b29053",
+      "DisplayName": "Data",
+      "ColorIndex": 2
+    },
+    "058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e": {
+      "ProjectGuid": "058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e",
+      "DisplayName": "Data.Common",
+      "ColorIndex": 3
+    },
+    "ae4ff6ca-9fad-40b7-90e4-e0775217b8ca": {
+      "ProjectGuid": "ae4ff6ca-9fad-40b7-90e4-e0775217b8ca",
+      "DisplayName": "Common",
+      "ColorIndex": 4
+    }
+  },
+  "NextColorIndex": 5
+}

@@ -31,6 +31,10 @@
 
         public string Gender { get; set; }
 
+        [Required]
+        [MaxLength(DefaultMaxLength)]
+        public string ChildFirstName { get; set; }
+
         [MaxLength(DefaultMaxLength)]
         public string Phone { get; set; }
 

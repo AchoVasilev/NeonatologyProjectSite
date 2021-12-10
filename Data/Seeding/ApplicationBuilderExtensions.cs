@@ -33,6 +33,7 @@
             await SeedAdministratorAsync(serviceProvider);
             await SeedDoctorAsync(data, serviceProvider);
             await SeedPatientRoleAsync(serviceProvider, PatientRoleName);
+            await SeedSpecializations(data);
 
             return app;
         }
@@ -63,39 +64,40 @@
             await data.SaveChangesAsync();
         }
 
-        //private static async Task SeedSpecializations(NeonatologyDbContext data)
-        //{
-        //    if(data.Specializations.Any())
-        //    {
-        //        return;
-        //    }
+        private static async Task SeedSpecializations(NeonatologyDbContext data)
+        {
+            if (data.Specializations.Any())
+            {
+                return;
+            }
 
-        //    var specializations = new List<SpecializationDto>();
-        //    specializations.Add(new SpecializationDto
-        //    {
-        //        Name = "Неонатология",
-        //        Description = "Подспециалност на детските болести, която се занимава с медицински грижи за новородените, по-специално болните или недоносените."
-        //    });
+            var specializations = new List<SpecializationDto>();
+            specializations.Add(new SpecializationDto
+            {
+                Name = "Неонатология",
+                Description = "Подспециалност на детските болести, която се занимава с медицински грижи за новородените, по-специално болните или недоносените.",
+            });
 
-        //    specializations.Add(new SpecializationDto
-        //    {
-        //        Name = "Детски болести",
-        //        Description = "Дял от медицината, който се занимава с проследяване на физическото и нервно-психическото развитие на детския организъм, диагностика и лечения на детски заболявания."
-        //    });
+            specializations.Add(new SpecializationDto
+            {
+                Name = "Детски болести",
+                Description = "Дял от медицината, който се занимава с проследяване на физическото и нервно-психическото развитие на детския организъм, диагностика и лечения на детски заболявания."
+            });
 
-        //    foreach (var specializationDto in specializations)
-        //    {
-        //        var specialization = new Specialization()
-        //        {
-        //            Name = specializationDto.Name,
-        //            Description = specializationDto.Description
-        //        };
+            foreach (var specializationDto in specializations)
+            {
+                var specialization = new Specialization()
+                {
+                    Name = specializationDto.Name,
+                    Description = specializationDto.Description,
+                    DoctorId = "9858f28d-b5dd-451b-9015-148704acf2b8"
+                };
 
-        //        await data.AddAsync(specialization);
-        //    }
+                await data.AddAsync(specialization);
+            }
 
-        //    await data.SaveChangesAsync();
-        //}
+            await data.SaveChangesAsync();
+        }
 
         private static async Task SeedDoctorAsync(NeonatologyDbContext data, IServiceProvider serviceProvider)
         {
@@ -128,7 +130,8 @@
                     Age = DoctorAge,
                     Biography = Biography,
                     CityId = 582,
-                    YearsOfExperience = YearsOfExperience
+                    YearsOfExperience = YearsOfExperience,
+                    Email = DoctorEmail
                 }
             };
 

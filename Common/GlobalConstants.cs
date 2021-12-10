@@ -28,5 +28,14 @@
             "От 2017 г. работи в Отделение по неонатология УМБАЛ Георги Странски ЕАД - Гр. Плевен. " +
             "Към момента има и самостоятелни практики като педиатър в Плевен и Габрово.";
         public const int CityId = 582;
+
+        public static class DateTimeFormats
+        {
+            public const string DateFormat = "dd/MM/yyyy";
+
+            public const string TimeFormat = "HH:mm";
+
+            public const string DateTimeFormat = "dd/MM/yyyy HH:mm";
+        }
     }
 }

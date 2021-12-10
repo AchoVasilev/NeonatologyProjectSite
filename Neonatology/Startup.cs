@@ -12,6 +12,9 @@ namespace Neonatology
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
+    using Services.AppointmentService;
+    using Services.PatientService;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -38,7 +41,11 @@ namespace Neonatology
             })
                  .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<NeonatologyDbContext>();
+
             services.AddControllersWithViews();
+
+            services.AddTransient<IAppointmentService, AppointmentService>()
+                .AddTransient<IPatientService, PatientService>();
 
             services.AddAutoMapper(typeof(Startup));
         }

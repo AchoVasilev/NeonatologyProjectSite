@@ -1,12 +1,9 @@
 ﻿namespace Services.PatientService
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
-    internal interface IPatientService
+    public interface IPatientService
     {
+        public Task<string> GetPatientIdByUserId(string userId);
     }
 }
