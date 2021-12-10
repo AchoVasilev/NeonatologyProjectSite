@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Neonatology</title>
+    <title>@ViewData["Title"] - @Common.GlobalConstants.SystemName</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     @await this.RenderSectionAsync("Styles", required: false);
@@ -11,7 +11,7 @@
 <body>
     @RenderSection("head", required: false)
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3 fixed-top">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -20,7 +20,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <i class="fa-solid fa-user-doctor-hair-long"></i><a class="nav-link text-dark hvr-grow" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
+                            <a class="navbar-brand hvr-grow" asp-area="" asp-controller="Home" asp-action="Index"> <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display: inline-block; vertical-align: text-bottom;"><path fill-rule="evenodd" d="M9.002 2.5a.75.75 0 01.691.464l6.302 15.305 2.56-6.301a.75.75 0 01.695-.468h4a.75.75 0 010 1.5h-3.495l-3.06 7.532a.75.75 0 01-1.389.004L8.997 5.21l-3.054 7.329A.75.75 0 015.25 13H.75a.75.75 0 010-1.5h4l3.558-8.538a.75.75 0 01.694-.462z"></path></svg>@Common.GlobalConstants.SystemName</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand hvr-grow" asp-area="" asp-controller="Doctor" asp-action="Profile">Професионален профил</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -34,9 +37,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer bg-info">
         <div class="container">
-            &copy; @DateTime.UtcNow.Year - Neonatology - <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика за поверителност</a>
+            &copy; @DateTime.UtcNow.Year - @Common.GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика за поверителност</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

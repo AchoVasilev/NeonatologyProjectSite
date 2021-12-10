@@ -13,6 +13,7 @@ namespace Neonatology
 
     using Services.AppointmentService;
     using Services.DateTimeParser;
+    using Services.DoctorService;
     using Services.PatientService;
 
     public class Startup
@@ -46,7 +47,8 @@ namespace Neonatology
 
             services.AddTransient<IAppointmentService, AppointmentService>()
                 .AddTransient<IPatientService, PatientService>()
-                .AddTransient<IDateTimeParserService, DateTimeParserService>();
+                .AddTransient<IDateTimeParserService, DateTimeParserService>()
+                .AddTransient<IDoctorService, DoctorService>();
 
             services.AddAutoMapper(typeof(Startup));
         }

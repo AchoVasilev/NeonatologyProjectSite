@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model DoctorProfileViewModel
+
+@inject UserManager<ApplicationUser> UserManager
+@section head{
+<style type="text/css">
+    body {
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 36%, rgba(23,162,184,1) 100%);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+</style>
+}
+<div class="container jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-6">
+                <div class="mt-2">
+                    <img class="w-100" src="@Model.ImageUrl" alt="@Model.FullName">
+                </div>
+                <div class="mb-2 d-flex">
+                    <h2 class="font-weight-normal">Д-р @Model.FullName</h2>
+                </div>
+                <div class="mb-2">
+
+                    <span class="w-25 text-black font-weight-normal">Специализации: </span>
+                    @foreach (var specialization in @Model.Specializations)
+                    {
+                        <li class="media-body">@specialization.Name</li>
+                        <label class="media-body">@specialization.Description</label>
+                    }
+                    <ul class="list-unstyled">
+                        <li class="media">
+                            <span class="w-25 text-black font-weight-normal">Опит: </span>
+                            <label class="media-body">@($"{Model.YearsOfExperience} години")</label>
+                        </li>
+                        <li class="media">
+                            <span class="w-25 text-black font-weight-normal">Телефон: </span>
+                            <label class="media-body">@Model.PhoneNumber</label>
+                        </li>
+                        <li class="media">
+                            <span class="w-25 text-black font-weight-normal">И-мейл: </span>
+                            <label class="media-body">@Model.Email</label>
+                        </li>
+                        <li class="media">
+                            <span class="w-25 text-black font-weight-normal">Адрес: </span>
+                            <label class="media-body">@Model.Address, @Model.CityName</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-6 pl-xl-3">
+                <h3 class="font-weight-normal">Биография</h3>
+                <p>@(Model.Biography)</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2898.819925584631!2d24.615436515357782!3d43.40169307913067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40abf357ab258323%3A0xec76c43400d09d81!2z0YPQuy4g4oCe0KHRgtC10YTQsNC9INCa0LDRgNCw0LTQttCw4oCcIDQ5LCA1ODA0INCf0LvQtdCy0LXQvSDQptC10L3RgtGK0YAsINCf0LvQtdCy0LXQvQ!5e0!3m2!1sbg!2sbg!4v1639168499656!5m2!1sbg!2sbg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
