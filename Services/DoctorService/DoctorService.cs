@@ -28,5 +28,11 @@
             .Where(x => x.Id == userId)
             .ProjectTo<DoctorProfileViewModel>(this.mapper.ConfigurationProvider)
             .FirstOrDefaultAsync();
+
+        public async Task<string> GetDoctorIdByUserId(string userId)
+            => await this.data.Users
+                .Where(x => x.Id == userId)
+                .Select(x => x.DoctorId)
+                .FirstOrDefaultAsync();
     }
 }

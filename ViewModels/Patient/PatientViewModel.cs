@@ -8,6 +8,8 @@
 
     public class PatientViewModel
     {
+        public string Id { get; set; }
+
         [Display(Name = Name)]
         [Required(ErrorMessage = RequiredFieldErrorMsg)]
         [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]

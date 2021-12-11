@@ -16,6 +16,10 @@
 
         ICollection<AppointmentViewModel> GetUpcomingUserAppointments(string patientId);
 
+        ICollection<AppointmentViewModel> GetUpcomingDoctorAppointments(string doctorId);
+
+        ICollection<AppointmentViewModel> GetPastDoctorAppointments(string doctorId);
+
         Task<bool> AddAsync(string doctorId, CreateAppointmentModel model, DateTime date);
 
         Task<bool> AddAsync(string doctorId, PatientAppointmentCreateModel model, DateTime date);

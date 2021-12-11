@@ -44,6 +44,18 @@
                 .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
+        public ICollection<AppointmentViewModel> GetUpcomingDoctorAppointments(string doctorId)
+            => this.data.Appointments
+                .Where(x => x.DoctorId == doctorId && x.IsDeleted == false && x.DateTime.Date > DateTime.UtcNow.Date)
+                .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
+                .ToList();
+
+        public ICollection<AppointmentViewModel> GetPastDoctorAppointments(string doctorId)
+            => this.data.Appointments
+                .Where(x => x.DoctorId == doctorId && x.IsDeleted == false && x.DateTime.Date <= DateTime.UtcNow.Date)
+                .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
+                .ToList();
+
         public ICollection<CreateAppointmentModel> GetAllDoctorAppointmentsById(string doctorId)
             => this.data.Appointments
                 .Where(x => x.DoctorId == doctorId && x.IsDeleted == false)

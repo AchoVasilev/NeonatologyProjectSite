@@ -8,11 +8,11 @@
 
         public DateTime DateTime { get; set; }
 
-        public string ParentFirstName { get; set; }
+        public string PatientFirstName { get; set; }
 
-        public string ParentLastName { get; set; }
+        public string PatientLastName { get; set; }
 
-        public string PhoneNumber { get; set; }
+        public string PatientPhone { get; set; }
 
         public string ChildFirstName { get; set; }
 
@@ -21,6 +21,10 @@
         public string DoctorName { get; set; }
 
         public bool IsRated { get; set; }
+
+        public int? Rating { get; set; }
+
+        public string RatingComment { get; set; }
 
         public string Address { get; set; }
     }

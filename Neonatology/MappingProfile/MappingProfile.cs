@@ -24,6 +24,10 @@
                 .ForMember(x => x.Address, opt =>
                 {
                     opt.MapFrom(d => string.Join(", ", d.Doctor.City.Name, d.Doctor.Address));
+                })
+                .ForMember(x => x.Rating, opt =>
+                {
+                    opt.MapFrom(d => d.Rating.Number);
                 });
 
             this.CreateMap<Doctor, DoctorProfileViewModel>()
