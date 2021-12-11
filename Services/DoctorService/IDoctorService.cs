@@ -7,7 +7,5 @@
     public interface IDoctorService
     {
         Task<DoctorProfileViewModel> GetDoctorById(string userId);
-
-        Task<DoctorProfileViewModel> DoctoryById(string userId);
     }
 }

@@ -15,33 +15,26 @@
         {
             this.Id = Guid.NewGuid().ToString();
         }
+        public string Id { get; init; }
+
+        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+
+        public DateTime ModifiedOn { get; set; }
+
+        public DateTime DeletedOn { get; set; }
+
+        public bool IsDeleted { get; set; }
 
         [Required]
         [MaxLength(DefaultMaxLength)]
         public string FirstName { get; set; }
 
-        [MaxLength(DefaultMaxLength)]
-        public string MiddleName { get; set; }
-
         [Required]
         [MaxLength(DefaultMaxLength)]
         public string LastName { get; set; }
 
-        public int Age { get; set; }
-
-        public string Gender { get; set; }
-
-        [Required]
-        [MaxLength(DefaultMaxLength)]
-        public string ChildFirstName { get; set; }
-
         [MaxLength(DefaultMaxLength)]
         public string Phone { get; set; }
-
-        [ForeignKey(nameof(City))]
-        public int CityId { get; set; }
-
-        public virtual City City { get; set; }
 
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }

@@ -10,6 +10,16 @@
 
     public class Appointment : BaseModel<int>
     {
+        public int Id { get; init; }
+
+        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+
+        public DateTime ModifiedOn { get; set; }
+
+        public DateTime DeletedOn { get; set; }
+
+        public bool IsDeleted { get; set; }
+
         public DateTime DateTime { get; set; }
 
         [MaxLength(DefaultMaxLength)]
@@ -23,6 +33,9 @@
 
         [MaxLength(DefaultMaxLength)]
         public string ChildFirstName { get; set; }
+
+        [Required]
+        public string AppointmentCause { get; set; }
 
         [ForeignKey(nameof(Doctor))]
         public string DoctorId { get; set; }

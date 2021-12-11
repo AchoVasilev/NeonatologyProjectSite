@@ -8,12 +8,16 @@
 
     public interface IAppointmentService
     {
-        ICollection<AppointmentViewModel> GetAllPatientAppointmentsById(string patientId);
+        ICollection<CreateAppointmentModel> GetAllDoctorAppointmentsById(string doctorId);
 
-        ICollection<AppointmentViewModel> GetAllDoctorAppointmentsById(string doctorId);
+        ICollection<AppointmentViewModel> GetUserAppointments(string patientId);
 
-        Task<bool> AddAsync(string doctorId, AppointmentViewModel model, DateTime date);
+        ICollection<AppointmentViewModel> GetPastUserAppointments(string patientId);
 
-        Task<bool> AddAsync(string doctorId, string patientId, DateTime date);
+        ICollection<AppointmentViewModel> GetUpcomingUserAppointments(string patientId);
+
+        Task<bool> AddAsync(string doctorId, CreateAppointmentModel model, DateTime date);
+
+        Task<bool> AddAsync(string doctorId, PatientAppointmentCreateModel model, DateTime date);
     }
 }

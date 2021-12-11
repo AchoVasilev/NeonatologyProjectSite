@@ -2,11 +2,11 @@
 {
     using System;
 
-    public class BaseModel<TKey>
+    public interface BaseModel<TKey>
     {
         public TKey Id { get; init; }
 
-        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedOn { get; set; }
 
         public DateTime ModifiedOn { get; set; }
 

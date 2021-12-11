@@ -12,6 +12,7 @@ namespace Neonatology
     using Microsoft.Extensions.Hosting;
 
     using Services.AppointmentService;
+    using Services.CityService;
     using Services.DateTimeParser;
     using Services.DoctorService;
     using Services.PatientService;
@@ -44,13 +45,13 @@ namespace Neonatology
                 .AddEntityFrameworkStores<NeonatologyDbContext>();
 
             services.AddControllersWithViews();
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddTransient<IAppointmentService, AppointmentService>()
                 .AddTransient<IPatientService, PatientService>()
                 .AddTransient<IDateTimeParserService, DateTimeParserService>()
-                .AddTransient<IDoctorService, DoctorService>();
-
-            services.AddAutoMapper(typeof(Startup));
+                .AddTransient<IDoctorService, DoctorService>()
+                .AddTransient<ICityService, CityService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,6 +83,10 @@ namespace Neonatology
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

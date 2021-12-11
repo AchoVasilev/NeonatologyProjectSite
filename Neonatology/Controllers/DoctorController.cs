@@ -19,7 +19,7 @@
 
         public async Task<IActionResult> Profile()
         {
-            var viewModel = await this.doctorService.DoctoryById(DoctorId);
+            var viewModel = await this.doctorService.GetDoctorById(DoctorId);
 
             return View(viewModel);
         }

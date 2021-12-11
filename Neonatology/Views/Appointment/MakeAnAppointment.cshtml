@@ -1,4 +1,4 @@
-﻿@model AppointmentViewModel
+﻿@model CreateAppointmentModel
 @{
     ViewBag.Title = "Запази своя час";
 }
@@ -149,6 +149,16 @@
                         <input asp-for="@Model.ChildFirstName" value="" class="form-control" />
                         <span asp-validation-for="ChildFirstName" class="text-danger"></span>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-form-label" style="font-size:20px">Вид преглед</label>
+                    <select asp-for="AppointmentCause" class="form-control">
+                        <option value="Първичен преглед">Първичен преглед</option>
+                        <option value="Вторичен преглед">Вторичен преглед</option>
+                        <option value="Детско здравеопазване">Детско здравеопазване</option>
+                        <option value="Свободен прием">Свободен прием</option>
+                    </select>
+                    <span asp-validation-for="AppointmentCause" class="small text-danger"></span>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label" style="font-size:20px">Тел. номер</label>

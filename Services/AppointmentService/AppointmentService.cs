@@ -26,19 +26,31 @@
             this.mapper = mapper;
         }
 
-        public ICollection<AppointmentViewModel> GetAllPatientAppointmentsById(string patientId)
+        public ICollection<AppointmentViewModel> GetUserAppointments(string patientId)
             => this.data.Appointments
                 .Where(x => x.PatientId == patientId && x.IsDeleted == false)
                 .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
-        public ICollection<AppointmentViewModel> GetAllDoctorAppointmentsById(string doctorId)
+        public ICollection<AppointmentViewModel> GetUpcomingUserAppointments(string patientId)
             => this.data.Appointments
-                .Where(x => x.DoctorId == doctorId && x.IsDeleted == false)
+                .Where(x => x.PatientId == patientId && x.IsDeleted == false && x.DateTime.Date > DateTime.UtcNow.Date)
                 .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
-        public async Task<bool> AddAsync(string doctorId, AppointmentViewModel model, DateTime date)
+        public ICollection<AppointmentViewModel> GetPastUserAppointments(string patientId)
+            => this.data.Appointments
+                .Where(x => x.PatientId == patientId && x.IsDeleted == false && x.DateTime.Date <= DateTime.UtcNow.Date)
+                .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
+                .ToList();
+
+        public ICollection<CreateAppointmentModel> GetAllDoctorAppointmentsById(string doctorId)
+            => this.data.Appointments
+                .Where(x => x.DoctorId == doctorId && x.IsDeleted == false)
+                .ProjectTo<CreateAppointmentModel>(this.mapper.ConfigurationProvider)
+                .ToList();
+
+        public async Task<bool> AddAsync(string doctorId, CreateAppointmentModel model, DateTime date)
         {
             var doctorAppointment = await this.data.Doctors
                 .FirstOrDefaultAsync(x => x.Id == doctorId && x.Appointments.Any(a => a.DateTime == date));
@@ -55,7 +67,8 @@
                 ParentLastName = model.ParentLastName,
                 ChildFirstName = model.ChildFirstName,
                 PhoneNumber = model.PhoneNumber,
-                DoctorId = doctorId
+                DoctorId = doctorId,
+                AppointmentCause = model.AppointmentCause
             };
 
             await this.data.Appointments.AddAsync(appointment);
@@ -64,7 +77,7 @@
             return true;
         }
 
-        public async Task<bool> AddAsync(string doctorId, string patientId, DateTime date)
+        public async Task<bool> AddAsync(string doctorId, PatientAppointmentCreateModel model, DateTime date)
         {
             var doctorAppointment = await this.data.Doctors
                 .FirstOrDefaultAsync(x => x.Id == doctorId && x.Appointments.Any(a => a.DateTime == date));
@@ -78,7 +91,9 @@
             {
                 DateTime = date,
                 DoctorId = doctorId,
-                PatientId = patientId
+                PatientId = model.PatientId,
+                ChildFirstName = model.ChildFirstName,
+                AppointmentCause = model.AppointmentCause
             };
 
             await this.data.Appointments.AddAsync(appointment);

@@ -1,0 +1,176 @@
+﻿@model PatientAppointmentCreateModel
+@{
+    ViewBag.Title = "Запази своя час";
+}
+
+@section Styles {
+<link href="~/css/date-picker.css" rel="stylesheet" asp-append-version="true" />
+}
+
+@section head{
+<style type="text/css">
+    body {
+        background-image: url('/img/patientAppointment.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+</style>
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+
+<div class="container-fluid ">
+    <div class="row justify-content-center mx-0">
+        <div class="col-lg-6">
+            <div class="card">
+                <form autocomplete="off">
+                    <div class="card-header">
+                        <div class="row justify-content-sm-center justify-content-center">
+                            <input type="text" id="dp1" class="datepicker" placeholder="Избери дата" name="date" readonly />
+                        </div>
+                    </div>
+                    <div class="card-body p-3 p-sm-5">
+                        <div class="row text-center mx-0">
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">09:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">09:15</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">09:30</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">09:45</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">10:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">10:15</div>
+                            </div>
+                        </div>
+                        <div class="row text-center mx-0">
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">10:30</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">10:45</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">11:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">11:15</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">11:30</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">11:45</div>
+                            </div>
+                        </div>
+                        <div class="row text-center mx-0">
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">12:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">12:15</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">12:30</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">12:45</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">13:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">13:15</div>
+                            </div>
+                        </div>
+                        <div class="row text-center mx-0">
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">13:30</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">13:45</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">14:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <form method="post" enctype="multipart/form-data">
+                <input asp-for="@Model.DoctorId" value="@Model.DoctorId" class="form-control" hidden>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" style="font-size:20px">Дата</label>
+                    <div class="col-sm-10">
+                        <div id="selectedDate" asp-for="@Model.Date" class="form-control" hidden></div>
+                        <input asp-for="@Model.Date" value="" class="form-control" required readonly />
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" style="font-size:20px">Час</label>
+                    <div class="col-sm-10">
+                        <div id="selectedTime" asp-for="@Model.Time" class="form-control" hidden></div>
+                        <input asp-for="@Model.Time" value="" class="form-control" required readonly />
+                        <span asp-validation-for="Time" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" style="font-size:20px">Име на дете</label>
+                    <div class="col-sm-10">
+                        <div id="selectedTime" asp-for="@Model.ChildFirstName" class="form-control" hidden></div>
+                        <input asp-for="@Model.ChildFirstName" value="" class="form-control" />
+                        <span asp-validation-for="ChildFirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-form-label" style="font-size:20px">Вид преглед</label>
+                    <select asp-for="AppointmentCause" class="form-control">
+                        <option value="Първичен преглед">Първичен преглед</option>
+                        <option value="Вторичен преглед">Вторичен преглед</option>
+                        <option value="Детско здравеопазване">Детско здравеопазване</option>
+                        <option value="Свободен прием">Свободен прием</option>
+                    </select>
+                    <span asp-validation-for="AppointmentCause" class="small text-danger"></span>
+                </div>
+                <div class="form-group row mt-4">
+                    <div class="col-sm-10">
+                        <button class="btn btn-primary hvr-grow" type="submit"
+                                asp-area="" asp-controller="Appointment" asp-action="MakePatientAppointment" asp-route-doctorId="@Model.DoctorId">
+                            Запази час
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="form-group row mt-4">
+                <div class="col-sm-10">
+                    <a class="btn btn-danger hvr-grow" type="submit"
+                       asp-area="" asp-controller="Home" asp-action="Index">
+                        Откажи
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script src="~/js/bootstrap-datepicker.js" asp-append-version="true"></script>
+<script src="~/js/date-picker.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $.validator.setDefaults({
+        ignore: ""
+    })
+</script>
+}

@@ -46,5 +46,13 @@
             public const string RequiredFieldErrorMsg = "Полето е задължително.";
             public const string LengthErrorMsg = "Полето трябва да е между {0} {1} символа.";
         }
+
+        public static class PatientConstants
+        {
+            public const string Name = "Име";
+            public const string FamilyName = "Фамилия";
+            public const string Phone = "Тел. номер";
+            public const string ChildName = "Име на дете";
+        }
     }
 }

@@ -2,8 +2,14 @@
 {
     using System.Threading.Tasks;
 
+    using ViewModels.Patient;
+
     public interface IPatientService
     {
-        public Task<string> GetPatientIdByUserId(string userId);
+        Task CreatePatientAsync(CreatePatientFormModel model, string userId);
+
+        Task<string> GetPatientIdByUserIdAsync(string userId);
+
+        Task<PatientViewModel> GetPatientByUserIdAsync(string userId);
     }
 }
