@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using Data.Models;
+
     using ViewModels.Appointments;
 
     public interface IAppointmentService
@@ -23,5 +25,9 @@
         Task<bool> AddAsync(string doctorId, CreateAppointmentModel model, DateTime date);
 
         Task<bool> AddAsync(string doctorId, PatientAppointmentCreateModel model, DateTime date);
+
+        Task<AppointmentViewModel> GetUserAppointmentAsync(string userId, int appointmentId);
+
+        Task<Appointment> GetAppointmentByIdAsync(int id);
     }
 }

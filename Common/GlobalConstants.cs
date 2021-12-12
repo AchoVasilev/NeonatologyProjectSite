@@ -43,6 +43,9 @@
         public static class Messages
         {
             public const string SuccessfullAppointment = "Успешно си записахте час за {0} от {1} часа.";
+            public const string RatedAppointment = "Вече сте дали своята оценка";
+            public const string SuccessfulRating = "Вие дадохте оценка {0}";
+
             public const string RequiredFieldErrorMsg = "Полето е задължително.";
             public const string LengthErrorMsg = "Полето трябва да е между {0} {1} символа.";
         }

@@ -20,9 +20,11 @@ using System;
 
         public bool IsDeleted { get; set; }
 
+        public bool IsConfirmed { get; set; }
+
         public int Number { get; set; }
 
-        [MaxLength(DescriptionMaxLength)]
+        [MaxLength(CommentMaxLength)]
         public string Comment { get; set; }
 
         [ForeignKey(nameof(Appointment))]

@@ -16,6 +16,7 @@ namespace Neonatology
     using Services.DateTimeParser;
     using Services.DoctorService;
     using Services.PatientService;
+    using Services.RatingService;
 
     public class Startup
     {
@@ -51,7 +52,8 @@ namespace Neonatology
                 .AddTransient<IPatientService, PatientService>()
                 .AddTransient<IDateTimeParserService, DateTimeParserService>()
                 .AddTransient<IDoctorService, DoctorService>()
-                .AddTransient<ICityService, CityService>();
+                .AddTransient<ICityService, CityService>()
+                .AddTransient<IRatingService, RatingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

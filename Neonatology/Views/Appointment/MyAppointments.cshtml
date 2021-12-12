@@ -96,8 +96,10 @@
                         <td>@appointment.ChildFirstName</td>
                         <td>@appointment.AppointmentCause</td>
                         <td>
-                            <a class="btn btn-outline-info btn-sm hvr-grow @(appointment.IsRated ? "disabled" : string.Empty)"
-                       asp-area="PatientRole" asp-controller="Appointment" asp-action="RateAppointment" asp-route-appointmentId="@appointment.Id">
+                            <a class="btn btn-outline-info btn-sm hvr-grow 
+                            @(appointment.IsRated ? "disabled" : string.Empty)"
+                            asp-area="" asp-controller="Rating" asp-action="RateAppointment" 
+                            asp-route-appointmentId="@appointment.Id">
                                 @(appointment.IsRated ? "Оценено" : "Оцени")
                             </a>
                         </td>

@@ -113,5 +113,16 @@
 
             return true;
         }
+
+        public async Task<AppointmentViewModel> GetUserAppointmentAsync(string userId, int appointmentId)
+            => await this.data.Appointments
+                        .Where(x => x.Patient.UserId == userId && x.Id == appointmentId)
+                        .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
+                        .FirstOrDefaultAsync();
+
+        public async Task<Appointment> GetAppointmentByIdAsync(int id)
+            => await this.data.Appointments
+                        .Where(x => x.Id == id && x.IsDeleted == false)
+                        .FirstOrDefaultAsync();
     }
 }

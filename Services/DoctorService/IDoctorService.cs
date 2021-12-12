@@ -9,5 +9,7 @@
         Task<DoctorProfileViewModel> GetDoctorById(string userId);
 
         Task<string> GetDoctorIdByUserId(string userId);
+
+        Task<string> GetDoctorIdByAppointmentId(int appointmentId);
     }
 }

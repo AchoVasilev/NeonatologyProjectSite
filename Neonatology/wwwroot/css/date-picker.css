@@ -44,7 +44,7 @@ button:focus {
 }
 
 .datepicker {
-    background-color: rgba(96, 218, 214, 0.7) !important;
+    background-color: rgba(108, 98, 218, 0.5) !important;
     color: #000000 !important;
     text-align: center;
     border: none;

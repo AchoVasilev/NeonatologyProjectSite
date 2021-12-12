@@ -27,5 +27,7 @@
         public string RatingComment { get; set; }
 
         public string Address { get; set; }
+
+        public bool IsConfirmed { get; set; }
     }
 }

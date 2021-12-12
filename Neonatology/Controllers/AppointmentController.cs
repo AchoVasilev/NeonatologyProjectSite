@@ -113,6 +113,7 @@
             {
                 return RedirectToAction(nameof(MakeAnAppointment), new { model.DoctorId });
             }
+
             var userId = this.User.GetId();
             var patientId = await this.patientService.GetPatientIdByUserIdAsync(userId);
 

@@ -4,7 +4,8 @@
         format: 'dd/mm/yyyy',
         autoclose: true,
         startDate: '0d',
-        daysOfWeekDisabled: [0, 2, 3, 4, 6]
+        daysOfWeekDisabled: [0, 2, 3, 4, 6],
+        daysOfWeekHighlighted: [0, 2, 3, 4, 6],
     });
 
     $('.cell').click(function () {
