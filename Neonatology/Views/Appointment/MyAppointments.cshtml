@@ -1,9 +1,5 @@
 ﻿@model AllAppointmentsViewModel
 
-@{
-    ViewBag.Title = "Моите часове";
-}
-
 @if (this.TempData.ContainsKey("Message"))
 {
     <div class="alert alert-success" id="locationMessage">@this.TempData["Message"]</div>
@@ -21,7 +17,7 @@
 }
 
 <div class="container jumbotron-opacity">
-    <h1 class="text-center">@ViewBag.Title</h1>
+    <h1 class="text-center">Моите часове</h1>
 
     <hr />
 

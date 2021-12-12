@@ -1,6 +1,5 @@
 ﻿namespace Neonatology.MappingProfile
 {
-    using System.Linq;
 
     using AutoMapper;
 
@@ -33,7 +32,7 @@
             this.CreateMap<Doctor, DoctorProfileViewModel>()
                 .ForMember(x => x.ImageUrl, opt =>
                 {
-                    opt.MapFrom(d => d.Images.Where(x => x.IsDeleted == false).FirstOrDefault().RemoteImageUrl);
+                    opt.MapFrom(d => d.Image.RemoteImageUrl ?? d.Image.Url);
                 })
                 .ForMember(x => x.FullName, opt =>
                 {

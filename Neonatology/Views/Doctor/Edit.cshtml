@@ -1,0 +1,117 @@
+﻿@model DoctorEditFormModel
+@{
+    ViewBag.Title = "Променете своята информация";
+}
+@section head{
+<style type="text/css">
+    body {
+        background-image: url('/img/editForm.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+</style>
+}
+<div class="container jumbotron-opacity">
+    <h1 class="text-center">@ViewBag.Title</h1>
+    <hr />
+    <form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="form-group">
+            <input asp-for="Id" value="@Model.Id" type="hidden" />
+        </div>
+        <div class="form-group">
+            <input asp-for="ImageUrl" value="@Model.ImageUrl" type="hidden" />
+        </div>
+        <div class="form-group">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control" placeholder="@Model.FirstName" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control" placeholder="@Model.LastName" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="@Model.ImageUrl">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+        <div class="form-group" id="img-form">
+            <label asp-for="Picture"></label>
+            <input asp-for="Picture" class="form-control-file nameExistErrClass" id="files" />
+            <span asp-validation-for="Picture" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Age"></label>
+            <input asp-for="Age" class="form-control" placeholder="@Model.Age" />
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PhoneNumber"></label>
+            <input asp-for="PhoneNumber" class="form-control" placeholder="@Model.PhoneNumber" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="YearsOfExperience"></label>
+            <input asp-for="YearsOfExperience" class="form-control" placeholder="@Model.YearsOfExperience" />
+            <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" placeholder="@Model.Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" class="form-control" placeholder="@Model.Address" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CityId"></label>
+            <select asp-for="CityId" class="form-control">
+                @foreach (var city in Model.Cities)
+                {
+                    <option value="@city.Id">@city.Name</option>
+                }
+            </select>
+            <span asp-validation-for="CityId" class="small text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Biography"></label>
+            <textarea asp-for="Biography" class="form-control" rows="3" placeholder="@Model.Biography"></textarea>
+            <span asp-validation-for="Biography" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+             <a class="btn btn-success" asp-area="" asp-controller="Specializations" asp-action="Add">Добави специализации</a>
+        </div>
+    </form>
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <input class="btn btn-primary" type="submit" data-toggle="modal" data-target="#modalEdit" value="Запази промени" />
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modalEdit" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm edit</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Сигурни ли сте, че желаете да запазите промените?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Затвори</button>
+                    <button type="button" class="btn btn-primary" onclick="carForm.submit()">Запази промени</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

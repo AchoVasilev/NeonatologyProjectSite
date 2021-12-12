@@ -13,7 +13,7 @@
       ]
     },
     {
-      "library": "@fortawesome/fontawesome-free@latest",
+      "library": "@fortawesome/fontawesome-free@5.15.4",
       "destination": "wwwroot/lib/fontawesome/",
       "files": [
         "webfonts/fa-brands-400.eot",
@@ -33,6 +33,17 @@
         "webfonts/fa-solid-900.woff2",
         "css/all.css",
         "css/all.min.css"
+      ]
+    },
+    {
+      "library": "font-awesome@4.7.0",
+      "destination": "wwwroot/lib/fonts",
+      "files": [
+        "css/font-awesome.css",
+        "css/font-awesome.css.map",
+        "css/font-awesome.min.css",
+        "fonts/fontawesome-webfont.woff",
+        "fonts/fontawesome-webfont.woff2"
       ]
     }
   ]

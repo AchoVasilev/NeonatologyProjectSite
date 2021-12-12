@@ -1,11 +1,18 @@
 namespace Neonatology
 {
+    using System;
+
+    using CloudinaryDotNet;
+
     using global::Data;
     using global::Data.Models;
     using global::Data.Seeding;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity.UI.Services;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -15,8 +22,11 @@ namespace Neonatology
     using Services.CityService;
     using Services.DateTimeParser;
     using Services.DoctorService;
+    using Services.EmailSenderService;
+    using Services.ImageService;
     using Services.PatientService;
     using Services.RatingService;
+    using Services.SpecializationService;
 
     public class Startup
     {
@@ -45,15 +55,52 @@ namespace Neonatology
                  .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<NeonatologyDbContext>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(configure =>
+            {
+                configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
+
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddTransient<IAppointmentService, AppointmentService>()
+            services
+                .AddTransient<IAppointmentService, AppointmentService>()
                 .AddTransient<IPatientService, PatientService>()
                 .AddTransient<IDateTimeParserService, DateTimeParserService>()
                 .AddTransient<IDoctorService, DoctorService>()
                 .AddTransient<ICityService, CityService>()
-                .AddTransient<IRatingService, RatingService>();
+                .AddTransient<IRatingService, RatingService>()
+                .AddTransient<IImageService, ImageService>()
+                .AddTransient<ISpecializationService, SpecializationService>();
+
+            //Configure SMTP MailKit
+            services.AddTransient<IEmailSender, MailKitSender>();
+            services.Configure<MailKitEmailSenderOptions>(options =>
+            {
+                options.HostAddress = this.Configuration["SmtpSettings:Server"];
+                options.HostPort = Convert.ToInt32(this.Configuration["SmtpSettings:Port"]);
+                options.HostUsername = this.Configuration["SmtpSettings:Username"];
+                options.HostPassword = this.Configuration["SmtpSettings:Password"];
+                options.SenderEmail = this.Configuration["SmtpSettings:SenderEmail"];
+                options.SenderName = this.Configuration["SmtpSettings:SenderName"];
+            });
+
+            //Configure Cloudinary
+            var cloud = this.Configuration["Cloudinary:CloudifyName"];
+            var apiKey = this.Configuration["Cloudinary:ApiKey"];
+            var apiSecret = this.Configuration["Cloudinary:ApiSecret"];
+            var cloudinaryAccount = new Account(cloud, apiKey, apiSecret);
+            var cloudinary = new Cloudinary(cloudinaryAccount);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +112,8 @@ namespace Neonatology
 
             if (env.IsDevelopment())
             {
+                app.UseExceptionHandler("/Home/Error");
+
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
             }
@@ -75,10 +124,12 @@ namespace Neonatology
                 app.UseHsts();
             }
 
+            app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCookiePolicy();
 
             app.UseAuthentication();
             app.UseAuthorization();

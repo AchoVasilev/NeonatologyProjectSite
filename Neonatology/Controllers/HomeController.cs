@@ -5,7 +5,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
-    using Neonatology.Models;
+    using ViewModels.ErrorViewModel;
 
     public class HomeController : Controller
     {
@@ -17,6 +17,18 @@
         }
 
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [Route("/Home/Error/404")]
+        public IActionResult Error404()
+        {
+            return View();
+        }
+
+        [Route("/Home/Error/400")]
+        public IActionResult Error400()
         {
             return View();
         }

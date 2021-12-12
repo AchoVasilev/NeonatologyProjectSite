@@ -38,7 +38,7 @@
 
             await this.patientService.CreatePatientAsync(model, userId);
 
-            return RedirectToAction("/");
+            return RedirectToAction("MyAppointments", "Appointment", new { area = "" });
         }
     }
 }
