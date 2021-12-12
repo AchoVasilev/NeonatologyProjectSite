@@ -3,7 +3,8 @@
     $('.datepicker').datepicker({
         format: 'dd/mm/yyyy',
         autoclose: true,
-        startDate: '0d'
+        startDate: '0d',
+        daysOfWeekDisabled: [0, 2, 3, 4, 6]
     });
 
     $('.cell').click(function () {

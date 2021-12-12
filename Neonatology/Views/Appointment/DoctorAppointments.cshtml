@@ -1,0 +1,118 @@
+﻿@model AllAppointmentsViewModel
+
+@{
+    ViewBag.Title = "Моите часове";
+}
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success" id="locationMessage">@this.TempData["Message"]</div>
+}
+
+@section head{
+<style type="text/css">
+    body {
+        background-image: url('/img/myAppointments.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+</style>
+}
+
+<div class="container jumbotron-opacity">
+    <h1 class="text-center">@ViewBag.Title</h1>
+
+    <hr />
+
+    @if (!Model.Upcoming.Any() && !Model.Past.Any())
+    {
+        <h3 style="margin-top:2%">
+            Все още нямате записани часове
+        </h3>
+    }
+
+    @if (@Model.Upcoming.Any())
+    {
+        <h2>Предстоящи (@Model.Upcoming.Count())</h2>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Дата и час</th>
+                    <th scope="col">Имена на пациент</th>
+                    <th scope="col">Тел. номер</th>
+                    <th scope="col">Адрес</th>
+                    <th scope="col">Дете</th>
+                    <th scope="col">Вид преглед</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var appointment in Model.Upcoming)
+                {
+                    <tr>
+                        <th scope="row">@appointment.DateTime</th>
+                        <td>@appointment.PatientFirstName @appointment.PatientLastName</td>
+                        <td>@appointment.PatientPhone</td>
+                        <td>гр. @appointment.Address</td>
+                        <td>@appointment.ChildFirstName</td>
+                        <td>@appointment.AppointmentCause</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    @if (@Model.Past.Any())
+    {
+        <h2>Минали (@Model.Past.Count())</h2>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Дата и час</th>
+                    <th scope="col">Имена на пациент</th>
+                    <th scope="col">Тел. номер</th>
+                    <th scope="col">Адрес</th>
+                    <th scope="col">Дете</th>
+                    <th scope="col">Вид преглед</th>
+                    <th scope="col">Оценка</th>
+                    <th scope="col">Коментар</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var appointment in Model.Past)
+                {
+                    <tr>
+                        <th scope="row">@appointment.DateTime</th>
+                        <td>@appointment.PatientFirstName @appointment.PatientLastName</td>
+                        <td>@appointment.PatientPhone</td>
+                        <td>гр. @appointment.Address</td>
+                        <td>@appointment.ChildFirstName</td>
+                        <td>@appointment.AppointmentCause</td>
+                        <td>
+                            @if (appointment.Rating != null)
+                            {
+                                <div class="col-6 starrating2 d-flex justify-content-center flex-row-reverse">
+                                    @for (var i = 1; i <= @appointment.Rating; i++)
+                                    {
+                                        <i id="star@i"></i>
+                                        <label for="star@i"></label>
+                                    }
+                                </div>
+                            }
+                            @if (appointment.Rating == null)
+                            {
+                                <span>Няма оценка</span>
+                            }
+                        </td>
+                        <td>
+                            @(appointment.RatingComment ?? "")
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
