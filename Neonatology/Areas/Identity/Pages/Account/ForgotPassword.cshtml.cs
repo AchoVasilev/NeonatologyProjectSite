@@ -16,6 +16,8 @@ namespace Neonatology.Areas.Identity.Pages.Account
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
+    using static Common.GlobalConstants.AccountConstants;
+    using static Common.GlobalConstants.Messages;
 
     public class ForgotPasswordModel : PageModel
     {
@@ -45,8 +47,9 @@ namespace Neonatology.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = RequiredFieldErrorMsg)]
             [EmailAddress]
+            [Display(Name = EmailName)]
             public string Email { get; set; }
         }
 
@@ -74,7 +77,7 @@ namespace Neonatology.Areas.Identity.Pages.Account
                 await emailSender.SendEmailAsync(
                     Input.Email,
                     "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    $"Променете паролата си като <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>цъкнете тук</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

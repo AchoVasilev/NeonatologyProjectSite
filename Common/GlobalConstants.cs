@@ -48,14 +48,27 @@
 
             public const string RequiredFieldErrorMsg = "Полето е задължително.";
             public const string LengthErrorMsg = "Полето трябва да е между {0} {1} символа.";
+            public const string PasswordLengthErrorMsg = "Паролата трябва да е между {0} {1} символа.";
+            public const string PasswordsNotMatchErrorMsg = "Паролите не съвпадат";
         }
 
-        public static class PatientConstants
+        public static class AccountConstants
         {
             public const string Name = "Име";
             public const string FamilyName = "Фамилия";
             public const string Phone = "Тел. номер";
             public const string ChildName = "Име на дете";
+            public const string AgeName = "Възраст";
+            public const string EmailName = "Имейл";
+            public const string AddressName = "Служебен адрес";
+            public const string CityName = "Град";
+            public const string SpecializationsName = "Специализации";
+            public const string PictureName = "Снимка";
+            public const string PictureLinkName = "Линк на снимка";
+            public const string YearsExpierence = "Стаж";
+            public const string BiographyName = "Биография";
+            public const string PasswordName = "Парола";
+            public const string RepeatPasswordName = "Повтори парола";
         }
     }
 }

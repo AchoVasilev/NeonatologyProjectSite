@@ -141,7 +141,7 @@
                 RemoteImageUrl = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1639079041/264612402_286215640113581_1185377196531358262_n_putyw3.jpg"
             };
 
-            doctor.Doctor.Images.Add(image);
+            doctor.Doctor.Image = image;
 
             await userManager.CreateAsync(doctor, DoctorPassword);
             await userManager.AddToRoleAsync(doctor, identityRole.Name);

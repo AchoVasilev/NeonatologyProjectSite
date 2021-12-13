@@ -5,6 +5,7 @@
 
 @section Styles {
 <link href="~/css/date-picker.css" rel="stylesheet" asp-append-version="true" />
+<link href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css" rel="stylesheet" />
 }
 
 @section head{
@@ -27,7 +28,7 @@
                 <form autocomplete="off">
                     <div class="card-header">
                         <div class="row justify-content-sm-center justify-content-center">
-                            <input type="text" id="dp1" class="datepicker" placeholder="Избери дата" name="date" readonly />
+                            <input type="text" value="" id="dp1" class="datepicker" placeholder="Избери дата" name="date" />
                         </div>
                     </div>
                     <div class="card-body p-3 p-sm-5">
@@ -150,14 +151,16 @@
                         <span asp-validation-for="ChildFirstName" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group row">
                     <label class="col-sm-4 col-form-label" style="font-size:20px">Вид преглед</label>
-                    <select asp-for="AppointmentCause" class="form-control">
-                        <option value="Първичен преглед">Първичен преглед</option>
-                        <option value="Вторичен преглед">Вторичен преглед</option>
-                        <option value="Детско здравеопазване">Детско здравеопазване</option>
-                        <option value="Свободен прием">Свободен прием</option>
-                    </select>
+                    <div class="col-sm-10">
+                        <select asp-for="AppointmentCause" class="form-control">
+                            <option value="Първичен преглед">Първичен преглед</option>
+                            <option value="Вторичен преглед">Вторичен преглед</option>
+                            <option value="Детско здравеопазване">Детско здравеопазване</option>
+                            <option value="Свободен прием">Свободен прием</option>
+                        </select>
+                    </div>
                     <span asp-validation-for="AppointmentCause" class="small text-danger"></span>
                 </div>
                 <div class="form-group row">
@@ -186,11 +189,11 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
 @section Scripts {
 <script src="~/js/bootstrap-datepicker.js" asp-append-version="true"></script>
 <script src="~/js/date-picker.js" asp-append-version="true"></script>
+<script src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"></script>
 }

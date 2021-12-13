@@ -40,5 +40,9 @@
                         .Where(x => x.Id == appointmentId && x.IsDeleted == false)
                         .Select(x => x.DoctorId)
                         .FirstOrDefaultAsync();
+
+        public async Task<bool> UserIsDoctor(string userId)
+            => await this.data.Users
+                          .AnyAsync(x => x.Id == userId && x.DoctorId != null);
     }
 }

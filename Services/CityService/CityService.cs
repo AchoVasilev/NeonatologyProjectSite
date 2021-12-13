@@ -21,9 +21,9 @@
             this.mapper = mapper;
         }
 
-        public ICollection<CityFormModel> GetAllCities() 
+        public ICollection<CityFormModel> GetAllCities()
             => this.data.Cities
-                                   .ProjectTo<CityFormModel>(this.mapper.ConfigurationProvider)
-                                   .ToList();
+                 .ProjectTo<CityFormModel>(this.mapper.ConfigurationProvider)
+                 .ToList();
     }
 }

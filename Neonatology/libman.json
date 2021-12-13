@@ -45,6 +45,18 @@
         "fonts/fontawesome-webfont.woff",
         "fonts/fontawesome-webfont.woff2"
       ]
+    },
+    {
+      "library": "fullcalendar@5.10.1",
+      "destination": "wwwroot/lib/fullcallendar",
+      "files": [
+        "locales-all.js",
+        "locales-all.min.js",
+        "main.css",
+        "main.min.css",
+        "main.js",
+        "main.min.js",
+      ]
     }
   ]
 }

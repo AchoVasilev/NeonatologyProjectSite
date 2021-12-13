@@ -76,5 +76,11 @@
 
             return RedirectToAction();
         }
+
+        [Authorize(Roles = DoctorRoleName)]
+        public IActionResult EditDates()
+        {
+            return View();
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace Neonatology
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
@@ -54,6 +55,13 @@ namespace Neonatology
             })
                  .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<NeonatologyDbContext>();
+
+            services.Configure<IdentityOptions>(opts =>
+            {
+                opts.Lockout.AllowedForNewUsers = true;
+                opts.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                opts.Lockout.MaxFailedAccessAttempts = 3;
+            });
 
             services.AddControllersWithViews(configure =>
             {
@@ -101,6 +109,7 @@ namespace Neonatology
             var apiSecret = this.Configuration["Cloudinary:ApiSecret"];
             var cloudinaryAccount = new Account(cloud, apiKey, apiSecret);
             var cloudinary = new Cloudinary(cloudinaryAccount);
+            services.AddSingleton(cloudinary);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

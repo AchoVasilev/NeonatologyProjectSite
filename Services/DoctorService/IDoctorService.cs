@@ -11,5 +11,7 @@
         Task<string> GetDoctorIdByUserId(string userId);
 
         Task<string> GetDoctorIdByAppointmentId(int appointmentId);
+
+        Task<bool> UserIsDoctor(string userId);
     }
 }

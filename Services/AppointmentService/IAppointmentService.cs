@@ -10,6 +10,8 @@
 
     public interface IAppointmentService
     {
+        ICollection<AppointmentViewModel> GetAllAppointments();
+
         ICollection<CreateAppointmentModel> GetAllDoctorAppointmentsById(string doctorId);
 
         ICollection<AppointmentViewModel> GetUserAppointments(string patientId);

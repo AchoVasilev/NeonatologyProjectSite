@@ -162,5 +162,13 @@
 
             return View(model);
         }
+
+        [HttpGet]
+        public JsonResult GetDoctorAppointments()
+        {
+            var result = this.appointmentService.GetAllAppointments();
+
+            return Json(result);
+        }
     }
 }

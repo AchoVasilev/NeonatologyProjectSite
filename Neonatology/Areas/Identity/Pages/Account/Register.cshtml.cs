@@ -11,6 +11,8 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.Extensions.Logging;
+    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.AccountConstants;
 
     [AllowAnonymous]
     public class RegisterModel : PageModel
@@ -41,20 +43,20 @@
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = RequiredFieldErrorMsg)]
             [EmailAddress]
-            [Display(Name = "И-мейл")]
+            [Display(Name = EmailName)]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "Паролата трябва да е с дължина между {2} и {1} символа.", MinimumLength = 6)]
+            [Required(ErrorMessage = RequiredFieldErrorMsg)]
+            [StringLength(100, ErrorMessage = PasswordLengthErrorMsg, MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Парола")]
+            [Display(Name = PasswordName)]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Повтори парола")]
-            [Compare("Password", ErrorMessage = "Паролите не съвпадат.")]
+            [Display(Name = RepeatPasswordName)]
+            [Compare("Password", ErrorMessage = PasswordsNotMatchErrorMsg)]
             public string ConfirmPassword { get; set; }
         }
 
@@ -79,7 +81,8 @@
                 var user = new ApplicationUser
                 {
                     UserName = Input.Email,
-                    Email = Input.Email
+                    Email = Input.Email,
+                    EmailConfirmed = true
                 };
 
                 var result = await userManager.CreateAsync(user, Input.Password);

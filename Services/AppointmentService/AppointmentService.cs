@@ -26,6 +26,12 @@
             this.mapper = mapper;
         }
 
+        public ICollection<AppointmentViewModel> GetAllAppointments()
+            => this.data.Appointments
+                .Where(x => x.IsDeleted == false)
+                .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
+                .ToList();
+
         public ICollection<AppointmentViewModel> GetUserAppointments(string patientId)
             => this.data.Appointments
                 .Where(x => x.PatientId == patientId && x.IsDeleted == false)

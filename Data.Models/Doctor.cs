@@ -61,7 +61,7 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<Image> Images { get; set; } = new HashSet<Image>();
+        public virtual Image Image { get; set; }
 
         public virtual ICollection<Rating> Ratings { get; set; } = new HashSet<Rating>();
 

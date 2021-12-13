@@ -1,6 +1,5 @@
 ﻿namespace Neonatology.MappingProfile
 {
-
     using AutoMapper;
 
     using global::Data.Models;
@@ -32,7 +31,7 @@
             this.CreateMap<Doctor, DoctorProfileViewModel>()
                 .ForMember(x => x.ImageUrl, opt =>
                 {
-                    opt.MapFrom(d => d.Image.RemoteImageUrl ?? d.Image.Url);
+                    opt.MapFrom(d => d.Image.Url ?? d.Image.RemoteImageUrl);
                 })
                 .ForMember(x => x.FullName, opt =>
                 {
