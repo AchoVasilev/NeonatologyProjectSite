@@ -81,6 +81,7 @@
             var appointment = new Appointment()
             {
                 DateTime = date,
+                End = date.AddMinutes(15),
                 ParentFirstName = model.ParentFirstName,
                 ParentLastName = model.ParentLastName,
                 ChildFirstName = model.ChildFirstName,
@@ -108,6 +109,7 @@
             var appointment = new Appointment()
             {
                 DateTime = date,
+                End = date.AddMinutes(15),
                 DoctorId = doctorId,
                 PatientId = model.PatientId,
                 ChildFirstName = model.ChildFirstName,

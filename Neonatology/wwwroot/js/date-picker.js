@@ -8,7 +8,6 @@
         autoClose:true,
         minDate: new Date(),
         selectedDate: new Date(),
-        disableWeekDays: [0, 1, 2, 3, 4, 5, 6],
         customWeekDays: ['Неделя', 'Понеделник', 'Вторник', 'Сряда', 'Четвъртък', 'Петък', 'Събота'],
         customMonths: ['Януари', 'Февруари', 'Март', 'Април', 'Май', 'Юни', 'Юли', 'Август', 'Септември', 'Октомври', 'Ноември', 'Декември']
     });
@@ -17,15 +16,15 @@
 
     myDatePicker.onClose((date, formatedDate) => changeHandler());
 
-    for (let i = 1; i <= 5; i++) {
-        const day = document.getElementById(i);
-        day.addEventListener('click', clickHandler);
-    }
+    //for (let i = 1; i <= 5; i++) {
+    //    const day = document.getElementById(i);
+    //    day.addEventListener('click', clickHandler);
+    //}
 
-    function clickHandler(e) {
-        console.log(e.target.id);
-        myDatePicker.options.disableWeekDays = myDatePicker.options.disableWeekDays.filter(x => x != e.target.id);
-    }
+    //function clickHandler(e) {
+    //    console.log(e.target.id);
+    //    myDatePicker.options.disableWeekDays = myDatePicker.options.disableWeekDays.filter(x => x != e.target.id);
+    //}
 
     function changeHandler() {
         let dateField = document.getElementById('selectedDate');

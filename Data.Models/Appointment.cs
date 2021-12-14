@@ -22,6 +22,8 @@
 
         public DateTime DateTime { get; set; }
 
+        public DateTime End { get; set; }
+
         [MaxLength(DefaultMaxLength)]
         public string ParentFirstName { get; set; }
 

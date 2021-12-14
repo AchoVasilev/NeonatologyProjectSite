@@ -1,160 +1,124 @@
-﻿@*@section Styles {
-    <link href="~/css/date-picker.css" rel="stylesheet" asp-append-version="true" />
-    <link href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css" rel="stylesheet" />
-    }
-
-    <div class="container-fluid ">
-    <div class="row justify-content-center mx-0">
-    <div class="col-lg-6">
-    <div class="card">
-    <form autocomplete="off">
-    <div class="card-header">
-    <div class="row justify-content-sm-center justify-content-center">
-    <input type="text" id="dp1" class="datepicker" placeholder="Избери дата" name="date" readonly />
-    </div>
-    </div>
-    <div class="card-body p-3 p-sm-5">
-    <div class="row text-center mx-0">
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div id="1" class="cell">Понеделник</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div id="2" class="cell">Вторник</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div id="3" class="cell">Сряда</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div id="4" class="cell">Четвъртък</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div id="5" class="cell">Петък</div>
-    </div>
-    </div>
-    </div>
-
-    <div class="card-body p-3 p-sm-5">
-    <div class="row text-center mx-0">
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">09:00</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">09:15</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">09:30</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">09:45</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">10:00</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">10:15</div>
-    </div>
-    </div>
-    <div class="row text-center mx-0">
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">10:30</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">10:45</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">11:00</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">11:15</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">11:30</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">11:45</div>
-    </div>
-    </div>
-    <div class="row text-center mx-0">
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">12:00</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">12:15</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">12:30</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">12:45</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">13:00</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">13:15</div>
-    </div>
-    </div>
-    <div class="row text-center mx-0">
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">13:30</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">13:45</div>
-    </div>
-    <div class="col-md-2 col-4 my-1 px-2">
-    <div class="cell py-1">14:00</div>
-    </div>
-    </div>
-    </div>
-    </form>
-    </div>
-    </div>
-    </div>
-    </div>
-
-    @section Scripts {
-    <script src="~/js/bootstrap-datepicker.js" asp-append-version="true"></script>
-    <script src="~/js/date-picker.js" asp-append-version="true"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"></script>
-    }*@
-
-@section head{
+﻿@section head{
 <link href='~/lib/fullcallendar/main.css' rel='stylesheet' />
 <script src='~/lib/fullcallendar/main.js'></script>
+}
+
+@{
+    var userIsDoctor = this.User.IsInRole(DoctorRoleName);
+}
+
+<div id='calendar'></div>
+
+<div class="modal" id="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><span id="eventTitle"></span></h2>
+            </div>
+            <div class="modal-body">
+                <p id="pDetails"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Затвори</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+        let events = await attachEvents();
 
-    document.addEventListener('DOMContentLoaded', function() {
+        let calendar = generateCalendar(events);
+        calendar.render();
 
+        const day = document.querySelectorAll('td[role="gridcell"]');
+        let days = [...day];
+
+        async function attachEvents (){
         let events = [];
-        (async function (){
             const response = await fetch('/Appointment/GetDoctorAppointments', {
                 method: 'Get'
             });
 
             var eventObjs = await response.json();
-            events.push(eventObjs);
-            console.log(eventObjs);
-        })()
+
+            Object.values(eventObjs).forEach(x => {
+                events.push({
+                    id: x.id,
+                    title: x.childFirstName + ' ' + x.appointmentCause,
+                    start: x.dateTime,
+                    end: x.end,
+                    allDay: false
+                });
+            });
+
+            return events;
+        }
 
         function generateCalendar(events) {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            defaultDate: new Date(),
-            timeFormat: 'dd/mm/yyyy',
+            initialView: 'timeGridWeek',
+            slotDuration: '00:05:00',
             firstDay: 1,
+            allDaySlot: false,
             headerToolbar: {
-                start: 'title',
                 center: '',
-                end: 'today prev, next'
+                end: 'prev,next today'
             },
-            events: events
+            locale: 'bg',
+            slotMinTime:'09:00',
+            slotMaxTime:'14:00',
+            businessHours: {
+                daysOfWeek: [ 1, 5 ],
+                startTime: '09:00',
+                endTime: '18:00'
+              },
+            events: events,
+            eventTimeFormat: {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  meridiem: false,
+                  hour12: false
+            },
+            eventColor: '#378006',
+            eventDisplay: 'block',
+            eventClick: function(info) {
+                const headerSpan = document.getElementById('eventTitle');
+                headerSpan.textContent = info.event.title;
+                const details = document.getElementById('pDetails');
+
+                const description = document.createElement('div');
+                const pStartElement = document.createElement('p');
+                const strongStartEl = document.createElement('strong');
+
+                let startStr = new Date(info.event.startStr).toLocaleTimeString();
+                let endStr = new Date(info.event.endStr).toLocaleTimeString();
+                let date = new Date(info.event.startStr).toLocaleDateString();
+
+                const h4Element = document.createElement('h4');
+                h4Element.textContent = 'Дата:' + ' ' + date;
+
+                strongStartEl.textContent = 'Начален час:' + ' ' + startStr;
+
+                const pEndElement = document.createElement('p');
+                const strongEndEl = document.createElement('strong');
+                strongEndEl.textContent = 'Краен час:' + ' ' + endStr;
+
+                pStartElement.appendChild(strongStartEl);
+                pEndElement.appendChild(strongEndEl);
+
+                description.appendChild(h4Element);
+                description.appendChild(pStartElement);
+                description.appendChild(pEndElement);
+
+                $(details).empty().html(description);
+                $('#modal').modal();
+            }
           });
 
-        calendar.render();
+          return calendar;
     }
     });
 </script>
-}
-
-<div id='calendar'></div>

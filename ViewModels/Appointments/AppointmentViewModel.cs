@@ -8,6 +8,8 @@
 
         public DateTime DateTime { get; set; }
 
+        public DateTime End { get; set; }
+
         public string PatientFirstName { get; set; }
 
         public string PatientLastName { get; set; }
