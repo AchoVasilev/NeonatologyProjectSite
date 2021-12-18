@@ -31,5 +31,6 @@
         Task<AppointmentViewModel> GetUserAppointmentAsync(string userId, int appointmentId);
 
         Task<Appointment> GetAppointmentByIdAsync(int id);
+
     }
 }

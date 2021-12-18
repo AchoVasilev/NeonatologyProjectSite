@@ -34,6 +34,7 @@
             await SeedDoctorAsync(data, serviceProvider);
             await SeedPatientRoleAsync(serviceProvider, PatientRoleName);
             await SeedSpecializations(data);
+            await SeedOfferedServices(data);
 
             return app;
         }
@@ -145,6 +146,33 @@
 
             await userManager.CreateAsync(doctor, DoctorPassword);
             await userManager.AddToRoleAsync(doctor, identityRole.Name);
+        }
+
+        private static async Task SeedOfferedServices(NeonatologyDbContext data)
+        {
+            if (data.OfferedServices.Any())
+            {
+                return;
+            }
+
+            await data.OfferedServices.AddRangeAsync(new[]
+            {
+                new OfferedService() {Name = "Първичен преглед", Price = 60.00m},
+                new OfferedService() {Name = "Вторичен преглед в рамките на едно заболяване", Price = 30.00m},
+                new OfferedService() {Name = "Консултация по документи", Price = 30.00m},
+                new OfferedService() {Name = "Онлайн консултация", Price = 30.00m},
+                new OfferedService() {Name = "Домашно посещение в рамките на гр. Плевен", Price = 80.00m},
+                new OfferedService() {Name = "Вземане на венозна кръв и поставяне на абокат", Price = 20.00m},
+                new OfferedService() {Name = "Поставяне на мускулна инжекция", Price = 10.00m},
+                new OfferedService() {Name = "Измерване на АН (кръвно налягане)", Price = 05.00m},
+                new OfferedService() {Name = "Вземане на периферен секрет за микробиологично изследване", Price = 10.00m},
+                new OfferedService() {Name = "Стомашна промивка", Price = 25.00m},
+                new OfferedService() {Name = "Клизма", Price = 15.00m},
+                new OfferedService() {Name = "Инхалация на медикамент", Price = 10.00m},
+                new OfferedService() {Name = "Първична обработка на рана и поставяне на тетанус", Price = 25.00m}
+            });
+
+            await data.SaveChangesAsync();
         }
 
         private static async Task SeedAdministratorAsync(IServiceProvider serviceProvider)

@@ -4,11 +4,9 @@ namespace Neonatology.Areas.Identity.Pages.Account
 {
 #nullable disable
 
-    using System;
     using System.ComponentModel.DataAnnotations;
     using System.Text;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Authorization;
     using global::Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;

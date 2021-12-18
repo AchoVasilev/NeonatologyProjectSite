@@ -10,7 +10,6 @@ namespace Neonatology
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
@@ -76,9 +75,12 @@ namespace Neonatology
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
             });
 
+            services.AddSingleton(Configuration);
+            services.AddRazorPages();
+            services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
 
             services
@@ -121,7 +123,7 @@ namespace Neonatology
 
             if (env.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
+                //app.UseExceptionHandler("/Home/Error");
 
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
@@ -145,6 +147,16 @@ namespace Neonatology
 
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapPost("/appointment/generateSlots", async context =>
+                //{
+                //    var cancellationToken = context.RequestAborted;
+
+                //    context.Response.ContentType = "text/plain";
+                //    context.Response.Headers[HeaderNames.CacheControl] = "no-cache";
+
+                //    await context.Response.StartAsync(cancellationToken);
+                //});
+
                 endpoints.MapControllerRoute(
                     name: "areas",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");

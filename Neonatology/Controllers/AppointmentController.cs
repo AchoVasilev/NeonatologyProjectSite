@@ -28,7 +28,7 @@
         public AppointmentController(
             IDateTimeParserService dateTimeParserService,
             IAppointmentService appointmentService,
-            IPatientService patientService, 
+            IPatientService patientService,
             IDoctorService doctorService)
         {
             this.dateTimeParserService = dateTimeParserService;
@@ -161,14 +161,6 @@
             };
 
             return View(model);
-        }
-
-        [HttpGet]
-        public JsonResult GetDoctorAppointments()
-        {
-            var result = this.appointmentService.GetAllAppointments();
-
-            return Json(result);
         }
     }
 }

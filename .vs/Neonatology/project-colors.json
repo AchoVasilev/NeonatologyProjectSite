@@ -25,7 +25,27 @@
       "ProjectGuid": "ae4ff6ca-9fad-40b7-90e4-e0775217b8ca",
       "DisplayName": "Common",
       "ColorIndex": 4
+    },
+    "7ba7dc60-221d-4302-9e7f-e25efedf0f06": {
+      "ProjectGuid": "7ba7dc60-221d-4302-9e7f-e25efedf0f06",
+      "DisplayName": "Neonatology",
+      "ColorIndex": 5
+    },
+    "bf515c8b-7cda-4528-9dcb-755489d6e83a": {
+      "ProjectGuid": "bf515c8b-7cda-4528-9dcb-755489d6e83a",
+      "DisplayName": "ViewModels",
+      "ColorIndex": 6
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "4e32bcad-c865-421a-9432-a7b6ddabb1d7": {
+      "ProjectGuid": "4e32bcad-c865-421a-9432-a7b6ddabb1d7",
+      "DisplayName": "Services",
+      "ColorIndex": 7
     }
   },
-  "NextColorIndex": 5
+  "NextColorIndex": 8
 }

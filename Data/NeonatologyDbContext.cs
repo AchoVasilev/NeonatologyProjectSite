@@ -34,6 +34,10 @@
 
         public DbSet<Feedback> Feedbacks { get; set; }
 
+        public DbSet<AppointmentSlot> AppointmentSlots { get; set; }
+
+        public DbSet<OfferedService> OfferedServices { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
