@@ -50,6 +50,8 @@
             public const string LengthErrorMsg = "Полето трябва да е между {0} {1} символа.";
             public const string PasswordLengthErrorMsg = "Паролата трябва да е между {0} {1} символа.";
             public const string PasswordsNotMatchErrorMsg = "Паролите не съвпадат";
+
+            public const string DateBeforeNowErrorMsg = "Не можете да създавате събития за минала дата";
         }
 
         public static class AccountConstants

@@ -1,5 +1,4 @@
 ﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
-@model AppointmentSlotInputModel
 
 @{
     var requestToken = Antiforgery.GetAndStoreTokens(Context).RequestToken;
@@ -38,110 +37,110 @@
     <div class="container-fluid">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="dateForm" method="post" enctype="multipart/form-data">
-                    <div class="modal-header">
-                        <h5 asp-for="Date" id="doctorTitle" class="modal-title"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <h6>Работно време</h6>
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label class="my-1 mr-2">От</label>
-                                    <select asp-for="StartHours" id="start" class="custom-select">
-                                        <option selected>Избери час</option>
-                                        <option value="08:00">08:00</option>
-                                        <option value="08:30">08:30</option>
-                                        <option value="09:00">09:00</option>
-                                        <option value="09:30">09:30</option>
-                                        <option value="10:00">10:00</option>
-                                        <option value="10:30">10:30</option>
-                                        <option value="11:00">11:00</option>
-                                        <option value="11:30">11:30</option>
-                                        <option value="12:00">12:00</option>
-                                        <option value="12:30">12:30</option>
-                                        <option value="13:00">13:00</option>
-                                        <option value="13:30">13:30</option>
-                                        <option value="14:00">14:00</option>
-                                        <option value="14:30">14:30</option>
-                                        <option value="15:00">15:00</option>
-                                        <option value="15:30">15:30</option>
-                                        <option value="16:00">16:00</option>
-                                        <option value="16:30">16:30</option>
-                                        <option value="17:00">17:00</option>
-                                        <option value="17:30">17:30</option>
-                                        <option value="18:00">18:00</option>
-                                        <option value="18:30">18:30</option>
-                                        <option value="19:00">19:00</option>
-                                        <option value="19:30">19:30</option>
-                                        <option value="20:00">20:00</option>
-                                    </select>
-                                </div>
+                <div class="modal-header">
+                    <h5 asp-for="Date" id="doctorTitle" class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6>Работно време</h6>
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="my-1 mr-2">От</label>
+                                <select id="start" class="custom-select">
+                                    <option selected>Избери час</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="08:30">08:30</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="09:30">09:30</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="10:30">10:30</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="11:30">11:30</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="12:30">12:30</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="13:30">13:30</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="14:30">14:30</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:30">16:30</option>
+                                    <option value="17:00">17:00</option>
+                                    <option value="17:30">17:30</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="18:30">18:30</option>
+                                    <option value="19:00">19:00</option>
+                                    <option value="19:30">19:30</option>
+                                    <option value="20:00">20:00</option>
+                                </select>
                             </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label class="my-1 mr-2">До</label>
-                                    <select asp-for="EndHours" id="end" class="custom-select">
-                                        <option selected>Избери час</option>
-                                        <option value="08:00">08:00</option>
-                                        <option value="08:30">08:30</option>
-                                        <option value="09:00">09:00</option>
-                                        <option value="09:30">09:30</option>
-                                        <option value="10:00">10:00</option>
-                                        <option value="10:30">10:30</option>
-                                        <option value="11:00">11:00</option>
-                                        <option value="11:30">11:30</option>
-                                        <option value="12:00">12:00</option>
-                                        <option value="12:30">12:30</option>
-                                        <option value="13:00">13:00</option>
-                                        <option value="13:30">13:30</option>
-                                        <option value="14:00">14:00</option>
-                                        <option value="14:30">14:30</option>
-                                        <option value="15:00">15:00</option>
-                                        <option value="15:30">15:30</option>
-                                        <option value="16:00">16:00</option>
-                                        <option value="16:30">16:30</option>
-                                        <option value="17:00">17:00</option>
-                                        <option value="17:30">17:30</option>
-                                        <option value="18:00">18:00</option>
-                                        <option value="18:30">18:30</option>
-                                        <option value="19:00">19:00</option>
-                                        <option value="19:30">19:30</option>
-                                        <option value="20:00">20:00</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="my-1 mr-2">До</label>
+                                <select id="end" class="custom-select">
+                                    <option selected>Избери час</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="08:30">08:30</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="09:30">09:30</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="10:30">10:30</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="11:30">11:30</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="12:30">12:30</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="13:30">13:30</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="14:30">14:30</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:30">16:30</option>
+                                    <option value="17:00">17:00</option>
+                                    <option value="17:30">17:30</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="18:30">18:30</option>
+                                    <option value="19:00">19:00</option>
+                                    <option value="19:30">19:30</option>
+                                    <option value="20:00">20:00</option>
+                                </select>
                             </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label class="my-1 mr-2">По</label>
-                                    <select asp-for="SlotDurationMinutes" id="minutes" class="custom-select">
-                                        <option selected>Избери минути</option>
-                                        <option value="10">10 минути</option>
-                                        <option value="15">15 минути</option>
-                                        <option value="20">20 минути</option>
-                                        <option value="25">25 минути</option>
-                                        <option value="30">30 минути</option>
-                                        <option value="35">35 минути</option>
-                                        <option value="40">40 минути</option>
-                                        <option value="45">45 минути</option>
-                                        <option value="50">50 минути</option>
-                                        <option value="55">55 минути</option>
-                                        <option value="60">60 минути</option>
-                                        <option value="90">90 минути</option>
-                                        <option value="120">120 минути</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="my-1 mr-2">По</label>
+                                <select id="minutes" class="custom-select">
+                                    <option selected>Избери минути</option>
+                                    <option value="10">10 минути</option>
+                                    <option value="15">15 минути</option>
+                                    <option value="20">20 минути</option>
+                                    <option value="25">25 минути</option>
+                                    <option value="30">30 минути</option>
+                                    <option value="35">35 минути</option>
+                                    <option value="40">40 минути</option>
+                                    <option value="45">45 минути</option>
+                                    <option value="50">50 минути</option>
+                                    <option value="55">55 минути</option>
+                                    <option value="60">60 минути</option>
+                                    <option value="90">90 минути</option>
+                                    <option value="120">120 минути</option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Затвори</button>
-                    <button id="save" type="submit" class="btn btn-success" 
-                    asp-area="" asp-controller="Appointment" asp-action="GenerateSlots">Запази</button>
+                    <button id="save" type="submit" class="btn btn-success"
+                            asp-area="" asp-controller="Appointment" asp-action="GenerateSlots">
+                        Запази
+                    </button>
                 </div>
             </div>
         </div>
@@ -155,123 +154,6 @@
         let calendar = generateCalendar(events);
 
         calendar.render();
-
-        //const day = document.querySelectorAll('th[role="columnheader"]');
-
-        //let days = [...day];
-        //const daysArr = [];
-
-        //days.forEach((d) => {
-        //    daysArr.push(d.dataset.date);
-
-        //    [...d.children].forEach(c => c.firstElementChild.addEventListener('click', attachDay));
-        //});
-
-        function attachDay(ev) {
-            const date = ev.target.textContent;
-            const title = document.getElementById('doctorTitle');
-            title.textContent = ev.target.ariaLabel;
-
-            console.log(ev.target);
-            const saveBtn = document.getElementById('save');
-            saveBtn.addEventListener('click', e => saveChanges(e, date));
-
-            $('#doctorModal').modal();
-        }
-
-        async function saveChanges(ev, date) {
-
-            // let days = {
-            //    0: 'нд',
-            //    1: 'пн',
-            //    2: 'вт',
-            //    3: 'ср',
-            //    4: 'чт',
-            //    5: 'пт',
-            //    6: 'сб'
-            //};
-
-            //let key = Object.keys(days).find(key => days[key] === day);
-            //console.log(key);
-
-            //let option = calendar.getOption('businessHours');
-            //console.log(option);
-            const startDate = new Date(date);
-            const endDate = new Date(date);
-
-            const startTime = document.getElementById('start').value;
-            const startHour = startTime.split(':')[0];
-            const startMinutes = startTime.split(':')[1];
-
-            const endTime = document.getElementById('end').value;
-            const endHour = endTime.split(':')[0];
-            const endMinutes = endTime.split(':')[1];
-
-            startDate.setHours(startDate.getHours() + startHour);
-            startDate.setMinutes(startDate.getMinutes() + startMinutes);
-
-            endDate.setHours(endDate.getHours() + endHour);
-            endDate.setMinutes(endDate.getMinutes() + endMinutes);
-
-            const scale = document.getElementById('minutes').value;
-
-            //const xsrfToken = document.cookie
-            //    .split("; ")
-            //    .find(row => row.startsWith("XSRF-TOKEN="))
-            //    .split("=")[1];
-
-            const params = {
-                start: startDate,
-                end: endDate,
-                slotDurationMinutes: Number(scale)
-            };
-
-            console.log(JSON.stringify(params));
-
-            const response = await fetch('/calendar/generate', {
-                method: 'POST',
-                headers:{
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.getElementById("RequestVerificationToken").value
-                },
-                body: JSON.stringify(params)
-            });
-
-            console.log(await response.json());
-            //option = {
-            //    daysOfWeek: [Number(key)],
-            //    startTime: startHour,
-            //    endTime: endHour
-            //};
-
-            //const events = calendar.getOption('events');
-            //console.log(events);
-            //console.log(option);
-            $('#doctorModal').modal('hide');
-
-            //calendar.render();
-        }
-
-        async function attachEvents (){
-        let events = [];
-            const response = await fetch('/calendar', {
-                method: 'Get'
-            });
-
-            var eventObjs = await response.json();
-
-            Object.values(eventObjs).forEach(x => {
-                events.push({
-                    id: x.id,
-                    title: x.childFirstName + ' ' + x.appointmentCause,
-                    start: x.dateTime,
-                    end: x.end,
-                    allDay: false,
-                });
-            });
-
-            return events;
-        }
 
         function generateCalendar(events) {
             const calendarEl = document.getElementById('calendar');
@@ -356,7 +238,82 @@
                 }
               });
 
-          return calendar;
-    }
+              return calendar;
+          }
+
+          async function saveChanges(ev, date) {
+            const startDate = new Date(date);
+            const endDate = new Date(date);
+
+            const startTime = document.getElementById('start').value;
+            const startHour = startTime.split(':')[0];
+            const startMinutes = startTime.split(':')[1];
+
+            const endTime = document.getElementById('end').value;
+            const endHour = endTime.split(':')[0];
+            const endMinutes = endTime.split(':')[1];
+
+            startDate.setHours(startDate.getHours() + startHour);
+            startDate.setMinutes(startDate.getMinutes() + startMinutes);
+
+            endDate.setHours(endDate.getHours() + endHour);
+            endDate.setMinutes(endDate.getMinutes() + endMinutes);
+
+            const scale = document.getElementById('minutes').value;
+
+            const params = {
+                start: startDate,
+                end: endDate,
+                slotDurationMinutes: Number(scale)
+            };
+
+            const response = await fetch('/calendar/generate', {
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.getElementById("RequestVerificationToken").value
+                },
+                body: JSON.stringify(params)
+            });
+
+            $('#doctorModal').modal('hide');
+            calendar.render();
+        }
+
+        async function attachEvents() {
+            let events = [];
+            const response = await fetch('/calendar', {
+                method: 'Get'
+            });
+
+            var eventObjs = await response.json();
+
+            Object.values(eventObjs).forEach(x => {
+                events.push({
+                    id: x.id,
+                    title: x.childFirstName + ' ' + x.appointmentCause,
+                    start: x.dateTime,
+                    end: x.end,
+                    allDay: false,
+                });
+            });
+
+            return events;
+        }
+
+        async function getSlots() {
+            const response = await fetch('/calendar/getSlots')
+
+            const slots = await response.json();
+
+            Object.values(slots).forEach(x => {
+                calendar.addEvent({
+                    id: x.id,
+                    title: x.status,
+                    start: x.start,
+                    end: x.end
+                });
+            });
+        }
     });
 </script>

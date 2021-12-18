@@ -26,6 +26,7 @@ namespace Neonatology
     using Services.ImageService;
     using Services.PatientService;
     using Services.RatingService;
+    using Services.SlotService;
     using Services.SpecializationService;
 
     public class Startup
@@ -91,7 +92,8 @@ namespace Neonatology
                 .AddTransient<ICityService, CityService>()
                 .AddTransient<IRatingService, RatingService>()
                 .AddTransient<IImageService, ImageService>()
-                .AddTransient<ISpecializationService, SpecializationService>();
+                .AddTransient<ISpecializationService, SpecializationService>()
+                .AddTransient<ISlotService, SlotService>();
 
             //Configure SMTP MailKit
             services.AddTransient<IEmailSender, MailKitSender>();

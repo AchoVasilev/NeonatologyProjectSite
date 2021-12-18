@@ -8,6 +8,7 @@
     using ViewModels.City;
     using ViewModels.Doctor;
     using ViewModels.Patient;
+    using ViewModels.Slot;
 
     public class MappingProfile : Profile
     {
@@ -43,6 +44,8 @@
             this.CreateMap<City, CityFormModel>();
 
             this.CreateMap<Patient, PatientViewModel>();
+
+            this.CreateMap<AppointmentSlot, SlotViewModel>();
         }
     }
 }
