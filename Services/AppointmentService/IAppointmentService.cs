@@ -24,6 +24,8 @@
 
         ICollection<AppointmentViewModel> GetPastDoctorAppointments(string doctorId);
 
+        Task<ICollection<TakenAppointmentsViewModel>> GetTakenAppointmentSlots();
+
         Task<bool> AddAsync(string doctorId, CreateAppointmentModel model, DateTime date);
 
         Task<bool> AddAsync(string doctorId, PatientAppointmentCreateModel model, DateTime date);

@@ -68,6 +68,17 @@
                 .ProjectTo<CreateAppointmentModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
+        public async Task<ICollection<TakenAppointmentsViewModel>> GetTakenAppointmentSlots()
+            => await this.data.Appointments
+                    .Where(x => x.DateTime >= DateTime.UtcNow)
+                    .Select(x => new TakenAppointmentsViewModel()
+                    {
+                        Start = x.DateTime,
+                        End = x.End,
+                        Status = "Зает"
+                    })
+                    .ToListAsync();
+
         public async Task<bool> AddAsync(string doctorId, CreateAppointmentModel model, DateTime date)
         {
             var doctorAppointment = await this.data.Doctors
