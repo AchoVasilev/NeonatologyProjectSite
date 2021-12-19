@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - @Common.GlobalConstants.SystemName</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    @await this.RenderSectionAsync("Styles", required: false);
+    @await this.RenderSectionAsync("Styles", required: false)
 </head>
 <body>
     @RenderSection("head", required: false)
@@ -32,6 +32,12 @@
         </nav>
     </header>
     <div class="container">
+        <!-- Notifications -->
+        <section id="notifications">
+            <div id="errorBox" class="notification">
+                <span>MESSAGE</span>
+            </div>
+        </section>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

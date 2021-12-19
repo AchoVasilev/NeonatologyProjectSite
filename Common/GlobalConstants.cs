@@ -52,6 +52,8 @@
             public const string PasswordsNotMatchErrorMsg = "Паролите не съвпадат";
 
             public const string DateBeforeNowErrorMsg = "Не можете да създавате събития за минала дата";
+            public const string StartDateIsAfterEndDateMsg = "Подали сте грешни часове";
+            public const string FailedSlotEditMsg = "Грешка при редакция, опитайте пак";
         }
 
         public static class AccountConstants

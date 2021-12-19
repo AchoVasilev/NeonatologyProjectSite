@@ -8,6 +8,15 @@
 <link href='~/lib/fullcallendar/main.css' rel='stylesheet' />
 <link href='~/lib/fontawesome/css/all.min.css' rel='stylesheet'>
 <script src='~/lib/fullcallendar/main.js'></script>
+
+<style type="text/css">
+    body {
+        background-image: url('/img/edit.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+</style>
 }
 
 @{
@@ -25,9 +34,15 @@
             </div>
             <div class="modal-body">
                 <p id="pDetails"></p>
+                <label class="my-1 mr-2">Редактирай час</label>
+                <select id="hourType" class="custom-select">
+                    <option value="Свободен" selected>Свободен</option>
+                    <option value="Зает">Зает</option>
+                </select>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Затвори</button>
+                <button type="button" class="btn btn-primary hvr-grow" data-dismiss="modal">Затвори</button>
+                <button id="saveBtn" class="btn btn-success hvr-grow">Запази</button>
             </div>
         </div>
     </div>
@@ -48,7 +63,7 @@
                     <div class="form-row">
                         <div class="col">
                             <div class="form-group">
-                                <label class="my-1 mr-2">От</label>
+                                <label class="my-1 mr-2">Начален час</label>
                                 <select id="start" class="custom-select">
                                     <option selected>Избери час</option>
                                     <option value="08:00">08:00</option>
@@ -81,7 +96,7 @@
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <label class="my-1 mr-2">До</label>
+                                <label class="my-1 mr-2">Краен час</label>
                                 <select id="end" class="custom-select">
                                     <option selected>Избери час</option>
                                     <option value="08:00">08:00</option>
@@ -136,11 +151,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Затвори</button>
-                    <button id="save" type="submit" class="btn btn-success"
-                            asp-area="" asp-controller="Appointment" asp-action="GenerateSlots">
-                        Запази
-                    </button>
+                    <button type="button" class="btn btn-primary hvr-grow" data-dismiss="modal">Затвори</button>
+                    <button id="save" class="btn btn-success hvr-grow">Запази</button>
                 </div>
             </div>
         </div>
@@ -162,6 +174,7 @@
                 slotDuration: '00:05:00',
                 firstDay: 1,
                 allDaySlot: false,
+                nowIndicator: true,
                 themeSystem: 'bootstrap',
                 navLinks: true,
                 navLinkDayClick: function(date, jsEvent) {
@@ -234,11 +247,54 @@
                     description.appendChild(pEndElement);
 
                     $(details).empty().html(description);
+
+                    const saveBtn = document.getElementById('saveBtn');
+                    saveBtn.addEventListener('click', ev => editSlot(ev, info));
+
                     $('#modal').modal();
                 }
               });
 
               return calendar;
+          }
+
+          async function editSlot(ev, info) {
+              const hourType = document.getElementById('hourType').value;
+
+              if(hourType == 'Свободен') {
+                  $('#modal').modal('hide');
+                  return;
+              }
+
+              const eventId = info.event.id;
+              const params = {
+                  id: eventId,
+                  status: hourType
+              };
+
+              try {
+                  const response = await fetch('/calendar/' + eventId, {
+                      method: 'Put',
+                      headers: {
+                          'Content-Type': 'application/json',
+                          'X-CSRF-TOKEN': document.getElementById("RequestVerificationToken").value
+                      },
+                      body: JSON.stringify(params)
+                  });
+
+                  if(response.ok != true) {
+                    const error = await response.json();
+                    throw new Error(error.response);
+                  }
+              } catch(err) {
+                  notify(err.message);
+                  throw err;
+              }
+
+              $('#modal').modal('hide');
+
+              calendar.refetchEvents();
+              setTimeout(() => location.reload(), 3000);
           }
 
           async function saveChanges(ev, date) {
@@ -267,17 +323,31 @@
                 slotDurationMinutes: Number(scale)
             };
 
-            const response = await fetch('/calendar/generate', {
-                method: 'POST',
-                headers:{
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.getElementById("RequestVerificationToken").value
-                },
-                body: JSON.stringify(params)
-            });
+            try {
+                const response = await fetch('/calendar/generate', {
+                    method: 'POST',
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.getElementById("RequestVerificationToken").value
+                    },
+                    body: JSON.stringify(params)
+                });
+
+                if (response.ok == false) {
+                    const error = await response.json();
+                    throw new Error(error.response);
+                }
+            } catch(err) {
+                $('#doctorModal').modal('hide');
+                notify(err.message);
+                throw err;
+            }
 
             $('#doctorModal').modal('hide');
-            calendar.render();
+
+            calendar.refetchEvents();
+
+            setTimeout(() => location.reload(), 3000);
         }
 
         async function attachEvents() {
@@ -298,6 +368,17 @@
                 });
             });
 
+            let slots = await getSlots();
+
+            Object.values(slots).forEach(x => {
+                events.push({
+                    id: x.id,
+                    title: x.status,
+                    start: x.start,
+                    end: x.end
+                });
+            });
+
             return events;
         }
 
@@ -306,14 +387,16 @@
 
             const slots = await response.json();
 
-            Object.values(slots).forEach(x => {
-                calendar.addEvent({
-                    id: x.id,
-                    title: x.status,
-                    start: x.start,
-                    end: x.end
-                });
-            });
+            return slots;
+        }
+
+        function notify(msg) {
+            const element = document.getElementById('errorBox');
+            const output = element.querySelector('span');
+            output.textContent = msg;
+            element.style.display = 'block';
+
+            setTimeout(() => element.style.display = 'none', 3000);
         }
     });
 </script>
