@@ -76,7 +76,7 @@ namespace Neonatology.Areas.Identity.Pages.Account
 
                 await emailSender.SendEmailAsync(
                     Input.Email,
-                    "Reset Password",
+                    "Рестартиране на парола",
                     $"Променете паролата си като <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>цъкнете тук</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");

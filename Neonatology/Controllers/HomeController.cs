@@ -1,24 +1,35 @@
 ﻿namespace Neonatology.Controllers
 {
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
+    using Services.DoctorService;
+
     using ViewModels.ErrorViewModel;
+    using ViewModels.Home;
 
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> logger;
+        private readonly IDoctorService doctorService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IDoctorService doctorService)
         {
-            _logger = logger;
+            this.logger = logger;
+            this.doctorService = doctorService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = new HomeViewModel()
+            {
+                DoctorId = await this.doctorService.GetDoctorId()
+            };
+
+            return View(model);
         }
 
         [Route("/Home/Error/404")]

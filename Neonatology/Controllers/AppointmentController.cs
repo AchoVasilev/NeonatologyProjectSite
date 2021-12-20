@@ -38,57 +38,22 @@
         }
 
         [AllowAnonymous]
-        public IActionResult MakeAnAppointment(string doctorId = DoctorId)
+        public async Task<IActionResult> MakeAnAppointment()
         {
             var viewModel = new CreateAppointmentModel
             {
-                DoctorId = doctorId
+                DoctorId = await this.doctorService.GetDoctorId()
             };
 
             return View(viewModel);
         }
 
-        [AllowAnonymous]
-        [HttpPost]
-        public async Task<IActionResult> MakeAnAppointment(CreateAppointmentModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            DateTime dateTime;
-
-            try
-            {
-                dateTime = this.dateTimeParserService.ConvertStrings(model.Date, model.Time);
-            }
-            catch (Exception)
-            {
-                return RedirectToAction(nameof(MakeAnAppointment), new { model.DoctorId });
-            }
-
-            var result = await this.appointmentService.AddAsync(model.DoctorId, model, dateTime);
-
-            if (result == false)
-            {
-                return RedirectToAction("MakeAnAppointment", new { model.DoctorId });
-            }
-
-            if (result == true)
-            {
-                this.TempData["Message"] = string.Format(SuccessfullAppointment, model.Date, model.Time);
-            }
-
-            return RedirectToAction("Index", "Home", new { area = "" });
-        }
-
         [Authorize(Roles = PatientRoleName)]
-        public IActionResult MakePatientAppointment(string doctorId = DoctorId)
+        public async Task<IActionResult> MakePatientAppointment()
         {
             var viewModel = new PatientAppointmentCreateModel
             {
-                DoctorId = doctorId
+                DoctorId = await this.doctorService.GetDoctorId()
             };
 
             return View(viewModel);

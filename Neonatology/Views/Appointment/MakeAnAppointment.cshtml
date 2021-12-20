@@ -25,6 +25,7 @@
 }
 
 <input id="RequestVerificationToken" type="hidden" value="@requestToken" />
+<input id="doctorId" type="hidden" value="@Model.DoctorId" />
 
 <div id="calendar"></div>
 
@@ -43,7 +44,7 @@
                         <label class="col-sm-4 col-form-label" style="font-size:20px">Име</label>
                         <div class="col-sm-10">
                             <div id="selectedTime" asp-for="@Model.ParentFirstName" class="form-control" hidden></div>
-                            <input asp-for="@Model.ParentFirstName" value="" class="form-control" required/>
+                            <input asp-for="@Model.ParentFirstName" value="" class="form-control" required />
                             <span asp-validation-for="ParentFirstName" class="text-danger"></span>
                         </div>
                     </div>
@@ -51,7 +52,7 @@
                         <label class="col-sm-4 col-form-label" style="font-size:20px">Фамилия</label>
                         <div class="col-sm-10">
                             <div id="selectedTime" asp-for="@Model.ParentLastName" class="form-control" hidden></div>
-                            <input asp-for="@Model.ParentLastName" value="" class="form-control" required/>
+                            <input asp-for="@Model.ParentLastName" value="" class="form-control" required />
                             <span asp-validation-for="ParentLastName" class="text-danger"></span>
                         </div>
                     </div>
@@ -59,7 +60,7 @@
                         <label class="col-sm-4 col-form-label" style="font-size:20px">Име на дете</label>
                         <div class="col-sm-10">
                             <div id="selectedTime" asp-for="@Model.ChildFirstName" class="form-control" hidden></div>
-                            <input asp-for="@Model.ChildFirstName" value="" class="form-control" required/>
+                            <input asp-for="@Model.ChildFirstName" value="" class="form-control" required />
                             <span asp-validation-for="ChildFirstName" class="text-danger"></span>
                         </div>
                     </div>
@@ -78,14 +79,22 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label" style="font-size:20px">Тел. номер</label>
                         <div class="col-sm-10">
-                            <div id="selectedTime" asp-for="@Model.PhoneNumber" class="form-control" hidden></div>
-                            <input asp-for="@Model.PhoneNumber" value="" class="form-control" required/>
+                            <div asp-for="@Model.PhoneNumber" class="form-control" hidden></div>
+                            <input asp-for="@Model.PhoneNumber" value="" class="form-control" required />
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" style="font-size:20px">И-мейл</label>
+                        <div class="col-sm-10">
+                            <div asp-for="@Model.Email" class="form-control" hidden></div>
+                            <input type="email" asp-for="@Model.Email" value="" class="form-control" required />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
                     <div class="modal-footer">
-                        <button type="submit" id="saveBtn" class="btn btn-primary hvr-grow">Запази час</button>
                         <button type="button" class="btn btn-secondary hvr-grow" data-dismiss="modal">Затвори</button>
+                        <button type="submit" id="saveBtn" class="btn btn-primary hvr-grow">Запази час</button>
                     </div>
                 </form>
             </div>
@@ -93,142 +102,23 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', async function() {
-        let events = await attachEvents();
+<div class="modal" id="smallModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><span id="eventTitle"></span></h2>
+            </div>
+            <div class="modal-body">
+                <p id="pDetails"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary hvr-grow" data-dismiss="modal">Затвори</button>
+                <button id="saveBtn" class="btn btn-success hvr-grow">Запази</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-        let calendar = generateCalendar(events);
-
-        calendar.render();
-
-        function generateCalendar(events) {
-            const calendarEl = document.getElementById('calendar');
-            let calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridWeek',
-                slotDuration: '00:05:00',
-                firstDay: 1,
-                allDaySlot: false,
-                nowIndicator: true,
-                themeSystem: 'bootstrap',
-                headerToolbar: {
-                    center: 'title',
-                    end: 'prev,next today',
-                    start: '',
-                },
-                buttonText: {
-                  today: 'днес',
-                },
-                bootstrapFontAwesome: {
-                    prev: 'fas fa-arrow-circle-left',
-                    next: 'fas fa-arrow-circle-right'
-                },
-                locale: 'bg',
-                slotMinTime:'08:00',
-                slotMaxTime:'20:00',
-                businessHours: {
-                    daysOfWeek: [ 1, 5 ],
-                    startTime: '09:00',
-                    endTime: '14:00'
-                  },
-                events: events,
-                eventTimeFormat: {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      meridiem: false,
-                      hour12: false
-                },
-                eventColor: '#378006',
-                eventDisplay: 'block',
-                eventClick: function(info) {
-                    let startStr = new Date(info.event.startStr).toLocaleTimeString();
-                    let endStr = new Date(info.event.endStr).toLocaleTimeString();
-                    let date = new Date(info.event.startStr).toLocaleDateString();
-
-                    const headerSpan = document.getElementById('title');
-                    headerSpan.textContent = info.event.title + ': ' + startStr + '-' + endStr + ' ' + date;
-
-                    const form = document.getElementById('form');
-                    form.addEventListener('submit', onSubmit);
-
-                    $('#modal').modal();
-                }
-              });
-
-              return calendar;
-          }
-
-        async function onSubmit(ev) {
-            ev.preventDefault();
-            
-            const form = new FormData(ev.target);
-            const parentFirstName = form.get('ParentFirstName').trim();
-            const parentLastName = form.get('ParentLastName').trim();
-            const childFirstName = form.get('ChildFirstName').trim();
-            const appointmentCause = form.get('AppointmentCause');
-            const phoneNumber = form.get('PhoneNumber').trim();
-
-            if(parentFirstName == '' || parentLastName == '' || childFirstName == '' || phoneNumber == '') {
-                return notify("Всички полета са задължителни");
-            }
-
-            const data = {
-                parentFirstName,
-                parentLastName,
-                childFirstName,
-                appointmentCause,
-                phoneNumber
-            };
-
-            console.log(data);
-        }
-
-        async function attachEvents() {
-            let events = [];
-            const response = await fetch('/calendar/appointments', {
-                method: 'Get'
-            });
-
-            var eventObjs = await response.json();
-
-            Object.values(eventObjs).forEach(x => {
-                events.push({
-                    id: x.id,
-                    title: x.status,
-                    start: x.start,
-                    end: x.end,
-                    allDay: false,
-                });
-            });
-
-            let slots = await getSlots();
-
-            Object.values(slots).forEach(x => {
-                events.push({
-                    id: x.id,
-                    title: x.status,
-                    start: x.start,
-                    end: x.end
-                });
-            });
-
-            return events;
-        }
-
-        async function getSlots() {
-            const response = await fetch('/calendar/getSlots')
-
-            const slots = await response.json();
-
-            return slots;
-        }
-
-        function notify(msg) {
-            const element = document.getElementById('errorBox');
-            const output = element.querySelector('span');
-            output.textContent = msg;
-            element.style.display = 'block';
-
-            setTimeout(() => element.style.display = 'none', 3000);
-        }
-    });
-</script>
+@section Scripts {
+    <script type="text/javascript" src="~/js/appointmentCalendar.js" asp-append-version="true"></script>
+}

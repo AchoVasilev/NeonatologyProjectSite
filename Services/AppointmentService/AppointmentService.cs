@@ -70,19 +70,19 @@
 
         public async Task<ICollection<TakenAppointmentsViewModel>> GetTakenAppointmentSlots()
             => await this.data.Appointments
-                    .Where(x => x.DateTime >= DateTime.UtcNow)
+                    .Where(x => x.DateTime.Date >= DateTime.UtcNow.Date)
                     .Select(x => new TakenAppointmentsViewModel()
                     {
-                        Start = x.DateTime,
-                        End = x.End,
+                        Start = x.DateTime.ToLocalTime(),
+                        End = x.End.ToLocalTime(),
                         Status = "Зает"
                     })
                     .ToListAsync();
 
-        public async Task<bool> AddAsync(string doctorId, CreateAppointmentModel model, DateTime date)
+        public async Task<bool> AddAsync(string doctorId, CreateAppointmentModel model)
         {
             var doctorAppointment = await this.data.Doctors
-                .FirstOrDefaultAsync(x => x.Id == doctorId && x.Appointments.Any(a => a.DateTime == date));
+                .FirstOrDefaultAsync(x => x.Id == doctorId && x.Appointments.Any(a => a.DateTime == model.Start));
 
             if (doctorAppointment != null)
             {
@@ -91,8 +91,8 @@
 
             var appointment = new Appointment()
             {
-                DateTime = date,
-                End = date.AddMinutes(15),
+                DateTime = model.Start,
+                End = model.End,
                 ParentFirstName = model.ParentFirstName,
                 ParentLastName = model.ParentLastName,
                 ChildFirstName = model.ChildFirstName,

@@ -31,6 +31,8 @@
             "Към момента има и самостоятелни практики като педиатър в Плевен и Габрово.";
         public const int CityId = 582;
 
+        public const string SuccessfulApointmentEmailMsgSubject = "Записване на час при д-р Петрова";
+
         public static class DateTimeFormats
         {
             public const string DateFormat = "dd/MM/yyyy";
@@ -42,7 +44,7 @@
 
         public static class Messages
         {
-            public const string SuccessfullAppointment = "Успешно си записахте час за {0} от {1} часа.";
+            public const string SuccessfullAppointment = "Успешно си записахте час за {0} от {1} часа. Може да проверите Вашия и-мейл";
             public const string RatedAppointment = "Вече сте дали своята оценка";
             public const string SuccessfulRating = "Вие дадохте оценка {0}";
 
@@ -54,6 +56,12 @@
             public const string DateBeforeNowErrorMsg = "Не можете да създавате събития за минала дата";
             public const string StartDateIsAfterEndDateMsg = "Подали сте грешни часове";
             public const string FailedSlotEditMsg = "Грешка при редакция, опитайте пак";
+
+            public const string TakenDateMsg = "Съжаляваме, но някой Ви изпревари. Опитайте да запишете друг час.";
+            public const string AppointmentBeforeNowErrorMsg = "Не можете да си запишете час за минала дата";
+
+            public const string IvalidEmailErrorMsg = "Моля въведете валиден и-мейл адрес";
+            public const string AppointmentMakeEmailMsg = "Успешно си записахте час. Вашият час е от {0} часа на {1}";
         }
 
         public static class AccountConstants

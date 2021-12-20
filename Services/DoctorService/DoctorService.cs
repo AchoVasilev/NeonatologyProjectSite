@@ -44,5 +44,10 @@
         public async Task<bool> UserIsDoctor(string userId)
             => await this.data.Users
                           .AnyAsync(x => x.Id == userId && x.DoctorId != null);
+
+        public async Task<string> GetDoctorId()
+            => await this.data.Doctors
+                    .Select(x => x.Id)
+                    .FirstOrDefaultAsync();
     }
 }

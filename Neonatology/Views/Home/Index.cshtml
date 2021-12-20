@@ -1,7 +1,7 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<ApplicationUser> SignInManager
+﻿@inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
+@model HomeViewModel
 @{
     ViewBag.Title = "Начало";
 }
@@ -38,8 +38,11 @@
             else
             {
                 <p class="lead">
-                    <a class="btn btn-info hvr-grow" asp-area=""
-               asp-controller="Appointment" asp-action="MakePatientAppointment">
+                    <a class="btn btn-info hvr-grow" 
+                    asp-area=""
+                    asp-controller="Appointment" 
+                    asp-action="MakePatientAppointment"
+                    asp-route-id="@Model.DoctorId">
                         Запази час
                     </a>
                 </p>
@@ -48,7 +51,11 @@
         else
         {
             <p class="lead">
-                <a type="submit" class="btn btn-info hvr-grow" asp-area="" asp-controller="Appointment" asp-action="MakeAnAppointment">
+                <a type="submit" class="btn btn-info hvr-grow" 
+                asp-area="" 
+                asp-controller="Appointment" 
+                asp-action="MakeAnAppointment"
+                asp-route-id="@Model.DoctorId">
                     Запази час
                 </a>
             </p>
