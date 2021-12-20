@@ -28,7 +28,7 @@
 
         Task<bool> AddAsync(string doctorId, CreateAppointmentModel model);
 
-        Task<bool> AddAsync(string doctorId, PatientAppointmentCreateModel model, DateTime date);
+        Task<bool> AddAsync(string doctorId, PatientAppointmentCreateModel model);
 
         Task<AppointmentViewModel> GetUserAppointmentAsync(string userId, int appointmentId);
 

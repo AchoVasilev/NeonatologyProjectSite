@@ -107,10 +107,10 @@
             return true;
         }
 
-        public async Task<bool> AddAsync(string doctorId, PatientAppointmentCreateModel model, DateTime date)
+        public async Task<bool> AddAsync(string doctorId, PatientAppointmentCreateModel model)
         {
             var doctorAppointment = await this.data.Doctors
-                .FirstOrDefaultAsync(x => x.Id == doctorId && x.Appointments.Any(a => a.DateTime == date));
+                .FirstOrDefaultAsync(x => x.Id == doctorId && x.Appointments.Any(a => a.DateTime == model.Start));
 
             if (doctorAppointment != null)
             {
@@ -119,8 +119,8 @@
 
             var appointment = new Appointment()
             {
-                DateTime = date,
-                End = date.AddMinutes(15),
+                DateTime = model.Start,
+                End = model.End,
                 DoctorId = doctorId,
                 PatientId = model.PatientId,
                 ChildFirstName = model.ChildFirstName,

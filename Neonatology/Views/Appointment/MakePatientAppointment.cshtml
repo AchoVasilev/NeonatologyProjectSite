@@ -1,17 +1,18 @@
-﻿@model PatientAppointmentCreateModel
-@{
-    ViewBag.Title = "Запази своя час";
-}
+﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+@model PatientAppointmentCreateModel
 
-@section Styles {
-<link href="~/css/date-picker.css" rel="stylesheet" asp-append-version="true" />
-<link href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css" rel="stylesheet" />
+@{
+    var requestToken = Antiforgery.GetAndStoreTokens(Context).RequestToken;
 }
 
 @section head{
+<link href='~/lib/fullcallendar/main.css' rel='stylesheet' />
+<link href='~/lib/fontawesome/css/all.min.css' rel='stylesheet'>
+<script src='~/lib/fullcallendar/main.js'></script>
+
 <style type="text/css">
     body {
-        background-image: url('/img/patientAppointment.jpg');
+        background-image: url('/img/edit.png');
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
@@ -19,155 +20,277 @@
 </style>
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+@{
+    var userIsDoctor = this.User.IsInRole(DoctorRoleName);
+}
 
-<div class="container-fluid ">
-    <div class="row justify-content-center mx-0">
-        <div class="col-lg-6">
-            <div class="card">
-                <form autocomplete="off">
-                    <div class="card-header">
-                        <div class="row justify-content-sm-center justify-content-center">
-                            <input type="text" id="dp1" class="datepicker" placeholder="Избери дата" name="date" readonly />
+<input id="RequestVerificationToken" type="hidden" value="@requestToken" />
+<input id="doctorId" type="hidden" value="@Model.DoctorId" />
+
+<div id="calendar"></div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="details">
+                <form id="form" method="post" enctype="multipart/form-data">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" style="font-size:20px">Име на дете</label>
+                        <div class="col-sm-10">
+                            <div id="selectedTime" asp-for="@Model.ChildFirstName" class="form-control" hidden></div>
+                            <input asp-for="@Model.ChildFirstName" value="" class="form-control" required />
+                            <span asp-validation-for="ChildFirstName" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="card-body p-3 p-sm-5">
-                        <div class="row text-center mx-0">
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">09:00</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">09:15</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">09:30</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">09:45</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">10:00</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">10:15</div>
-                            </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" style="font-size:20px">Вид преглед</label>
+                        <div class="col-sm-10">
+                            <select asp-for="AppointmentCause" class="form-control">
+                                <option value="Първичен преглед">Първичен преглед</option>
+                                <option value="Вторичен преглед">Вторичен преглед</option>
+                                <option value="Детско здравеопазване">Детско здравеопазване</option>
+                                <option value="Свободен прием">Свободен прием</option>
+                            </select>
                         </div>
-                        <div class="row text-center mx-0">
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">10:30</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">10:45</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">11:00</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">11:15</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">11:30</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">11:45</div>
-                            </div>
-                        </div>
-                        <div class="row text-center mx-0">
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">12:00</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">12:15</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">12:30</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">12:45</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">13:00</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">13:15</div>
-                            </div>
-                        </div>
-                        <div class="row text-center mx-0">
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">13:30</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">13:45</div>
-                            </div>
-                            <div class="col-md-2 col-4 my-1 px-2">
-                                <div class="cell py-1">14:00</div>
-                            </div>
-                        </div>
+                        <span asp-validation-for="AppointmentCause" class="small text-danger"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary hvr-grow" data-dismiss="modal">Затвори</button>
+                        <button type="submit" id="saveBtn" class="btn btn-primary hvr-grow">Запази час</button>
                     </div>
                 </form>
-            </div>
-        </div>
-
-        <div class="col-lg-6">
-            <form method="post" enctype="multipart/form-data">
-                <input asp-for="@Model.DoctorId" value="@Model.DoctorId" class="form-control" hidden>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" style="font-size:20px">Дата</label>
-                    <div class="col-sm-10">
-                        <div id="selectedDate" asp-for="@Model.Date" class="form-control" hidden></div>
-                        <input asp-for="@Model.Date" value="" class="form-control" required readonly />
-                        <span asp-validation-for="Date" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" style="font-size:20px">Час</label>
-                    <div class="col-sm-10">
-                        <div id="selectedTime" asp-for="@Model.Time" class="form-control" hidden></div>
-                        <input asp-for="@Model.Time" value="" class="form-control" required readonly />
-                        <span asp-validation-for="Time" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" style="font-size:20px">Име на дете</label>
-                    <div class="col-sm-10">
-                        <div id="selectedTime" asp-for="@Model.ChildFirstName" class="form-control" hidden></div>
-                        <input asp-for="@Model.ChildFirstName" value="" class="form-control" />
-                        <span asp-validation-for="ChildFirstName" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-4 col-form-label" style="font-size:20px">Вид преглед</label>
-                    <select asp-for="AppointmentCause" class="form-control">
-                        <option value="Първичен преглед">Първичен преглед</option>
-                        <option value="Вторичен преглед">Вторичен преглед</option>
-                        <option value="Детско здравеопазване">Детско здравеопазване</option>
-                        <option value="Свободен прием">Свободен прием</option>
-                    </select>
-                    <span asp-validation-for="AppointmentCause" class="small text-danger"></span>
-                </div>
-                <div class="form-group row mt-4">
-                    <div class="col-sm-10">
-                        <button class="btn btn-primary hvr-grow" type="submit"
-                                asp-area="" asp-controller="Appointment" asp-action="MakePatientAppointment" asp-route-doctorId="@Model.DoctorId">
-                            Запази час
-                        </button>
-                    </div>
-                </div>
-            </form>
-            <div class="form-group row mt-4">
-                <div class="col-sm-10">
-                    <a class="btn btn-danger hvr-grow" type="submit"
-                       asp-area="" asp-controller="Home" asp-action="Index">
-                        Откажи
-                    </a>
-                </div>
             </div>
         </div>
     </div>
 </div>
 
-@section Scripts {
-<script src="~/js/bootstrap-datepicker.js" asp-append-version="true"></script>
-<script src="~/js/date-picker.js" asp-append-version="true"></script>
-<script src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"></script>
-}
+<div class="modal" id="smallModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><span id="eventTitle"></span></h2>
+            </div>
+            <div class="modal-body">
+                <p id="pDetails"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary hvr-grow" data-dismiss="modal">Затвори</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@section Scripts {
+    <script type="text/javascript" src="~/js/appointmentCalendar.js" asp-append-version="true"></script>
+}*@
+
+<script type="text/javascript">
+var calendar;
+document.addEventListener('DOMContentLoaded', async function () {
+    calendar = await generateCalendar();
+
+    calendar.render();
+
+    async function generateCalendar() {
+        const calendarEl = document.getElementById('calendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridWeek',
+            slotDuration: '00:05:00',
+            firstDay: 1,
+            allDaySlot: false,
+            nowIndicator: true,
+            themeSystem: 'bootstrap',
+            headerToolbar: {
+                center: 'title',
+                end: 'prev,next today',
+                start: '',
+            },
+            buttonText: {
+                today: 'днес',
+            },
+            bootstrapFontAwesome: {
+                prev: 'fas fa-arrow-circle-left',
+                next: 'fas fa-arrow-circle-right'
+            },
+            locale: 'bg',
+            slotMinTime: '08:00',
+            slotMaxTime: '20:00',
+            businessHours: {
+                daysOfWeek: [1, 5],
+                startTime: '09:00',
+                endTime: '14:00'
+            },
+            eventSources: [{
+                id: 1,
+                events: await attachEvents(),
+            },
+            {
+                id: 2,
+                events: await getSlots()
+            }],
+            eventTimeFormat: {
+                hour: '2-digit',
+                minute: '2-digit',
+                meridiem: false,
+                hour12: false
+            },
+            eventColor: '#378006',
+            eventDisplay: 'block',
+            eventClick: function (info) {
+                let startStr = new Date(info.event.startStr).toLocaleTimeString();
+                let endStr = new Date(info.event.endStr).toLocaleTimeString();
+                let dateStr = new Date(info.event.startStr).toLocaleDateString();
+
+                const headerSpan = document.getElementById('title');
+                headerSpan.textContent = info.event.title + ': ' + startStr + '-' + endStr + ' ' + dateStr;
+
+                if (info.event.title == 'Зает') {
+                    const smallHeaderSpan = document.getElementById('eventTitle');
+                    smallHeaderSpan.textContent = info.event.title;
+                    const details = document.getElementById('pDetails');
+
+                    const description = document.createElement('div');
+                    const pStartElement = document.createElement('p');
+                    const strongStartEl = document.createElement('strong');
+
+                    let startStr = new Date(info.event.startStr).toLocaleTimeString();
+                    let endStr = new Date(info.event.endStr).toLocaleTimeString();
+                    let date = new Date(info.event.startStr).toLocaleDateString();
+
+                    const h4Element = document.createElement('h4');
+                    h4Element.textContent = 'Дата:' + ' ' + date;
+
+                    strongStartEl.textContent = 'Начален час:' + ' ' + startStr;
+
+                    const pEndElement = document.createElement('p');
+                    const strongEndEl = document.createElement('strong');
+                    strongEndEl.textContent = 'Краен час:' + ' ' + endStr;
+
+                    pStartElement.appendChild(strongStartEl);
+                    pEndElement.appendChild(strongEndEl);
+
+                    description.appendChild(h4Element);
+                    description.appendChild(pStartElement);
+                    description.appendChild(pEndElement);
+
+                    $(details).empty().html(description);
+
+                    $('#smallModal').modal();
+                } else {
+                    const form = document.getElementById('form');
+                    form.addEventListener('submit', ev => onSubmit(ev, info));
+
+                    $('#modal').modal();
+                }
+            }
+        });
+
+        return calendar;
+    }
+
+    async function onSubmit(ev, info) {
+        ev.preventDefault();
+
+        $('#modal').modal('hide');
+        const form = new FormData(ev.target);
+        const childFirstName = form.get('ChildFirstName').trim();
+        const appointmentCause = form.get('AppointmentCause');
+        const doctorId = document.getElementById('doctorId').value;
+
+        if (childFirstName == '') {
+            return notify("Всички полета са задължителни");
+        }
+
+        const start = info.event.start;
+        const end = info.event.end;
+
+        const data = {
+            doctorId,
+            start,
+            end,
+            childFirstName,
+            appointmentCause,
+        };
+
+        try {
+            const response = await fetch('/calendar/makePatientAppointment/' + info.event.id, {
+                method: 'Post',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.getElementById('RequestVerificationToken').value
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok != true) {
+                const error = await response.json();
+                throw new Error(error.message);
+            }
+
+            const obj = await response.json();
+            notify(obj.message);
+        } catch (err) {
+            notify(err.message);
+            throw err;
+        }
+
+        calendar.refetchEvents();
+        setTimeout(() => window.location = '/appointment/myappointments', 3000);
+    }
+
+    async function attachEvents() {
+        let events = [];
+        const response = await fetch('/calendar/appointments', {
+            method: 'Get'
+        });
+
+        var eventObjs = await response.json();
+
+        Object.values(eventObjs).forEach(x => {
+            events.push({
+                id: x.id,
+                title: x.status,
+                start: x.start,
+                end: x.end,
+                allDay: false,
+            });
+        });
+
+        return events;
+    }
+
+    async function getSlots() {
+        const response = await fetch('/calendar/getSlots')
+
+        const slots = await response.json();
+
+        let slotsArr = [];
+
+        Object.values(slots).forEach(x => {
+            slotsArr.push({
+                id: x.id,
+                title: x.status,
+                start: x.start,
+                end: x.end
+            });
+        });
+
+        return slotsArr;
+    }
+
+    function notify(msg) {
+        const element = document.getElementById('errorBox');
+        const output = element.querySelector('span');
+        output.textContent = msg;
+        element.style.display = 'block';
+
+        setTimeout(() => element.style.display = 'none', 3000);
+    }
+});    
+</script>

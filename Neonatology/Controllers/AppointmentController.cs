@@ -1,6 +1,5 @@
 ﻿namespace Neonatology.Controllers
 {
-    using System;
     using System.Threading.Tasks;
 
     using Infrastructure;
@@ -16,7 +15,6 @@
     using ViewModels.Appointments;
 
     using static Common.GlobalConstants;
-    using static Common.GlobalConstants.Messages;
 
     public class AppointmentController : BaseController
     {
@@ -57,45 +55,6 @@
             };
 
             return View(viewModel);
-        }
-
-        [Authorize(Roles = PatientRoleName)]
-        [HttpPost]
-        public async Task<IActionResult> MakePatientAppointment(PatientAppointmentCreateModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            DateTime dateTime;
-
-            try
-            {
-                dateTime = this.dateTimeParserService.ConvertStrings(model.Date, model.Time);
-            }
-            catch (Exception)
-            {
-                return RedirectToAction(nameof(MakeAnAppointment), new { model.DoctorId });
-            }
-
-            var userId = this.User.GetId();
-            var patientId = await this.patientService.GetPatientIdByUserIdAsync(userId);
-
-            model.PatientId = patientId;
-            var result = await this.appointmentService.AddAsync(model.DoctorId, model, dateTime);
-
-            if (result == false)
-            {
-                return RedirectToAction("MakePatientAppointment", new { model.DoctorId });
-            }
-
-            if (result == true)
-            {
-                this.TempData["Message"] = string.Format(SuccessfullAppointment, model.Date, model.Time);
-            }
-
-            return RedirectToAction("MyAppointments", "Appointment", new { area = "" });
         }
 
         [Authorize(Roles = PatientRoleName)]
