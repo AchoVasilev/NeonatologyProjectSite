@@ -15,5 +15,7 @@
         Task<bool> UserIsDoctor(string userId);
 
         Task<string> GetDoctorId();
+
+        Task<bool> EditDoctorAsync(DoctorEditFormModel model);
     }
 }

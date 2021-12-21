@@ -64,6 +64,8 @@
             public const string AppointmentMakeEmailMsg = "Успешно си записахте час. Вашият час е от {0} часа на {1}";
 
             public const string PatientProfileIsNotFinishedMsg = "За да си запазите час, трябва да си довършите профила";
+
+            public const string UnsuccessfulDoctorEditMsg = "Нещо се обърка, опитайте пак";
         }
 
         public static class AccountConstants

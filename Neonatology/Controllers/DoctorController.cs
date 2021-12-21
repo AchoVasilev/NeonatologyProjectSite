@@ -13,6 +13,7 @@
     using ViewModels.Doctor;
 
     using static Common.GlobalConstants;
+    using static Common.GlobalConstants.Messages;
 
     public class DoctorController : BaseController
     {
@@ -58,7 +59,6 @@
                 ImageUrl = doctorInfo.ImageUrl,
                 Email = doctorInfo.Email,
                 YearsOfExperience = doctorInfo.YearsOfExperience,
-                Specializations = doctorInfo.Specializations,
                 Cities = this.cityService.GetAllCities()
             };
 
@@ -74,11 +74,19 @@
                 return View(model);
             }
 
+            var isEdited = await this.doctorService.EditDoctorAsync(model);
+
+            if (isEdited == false)
+            {
+                this.TempData["Message"] = UnsuccessfulDoctorEditMsg;
+                return View(model);
+            }
+
             return RedirectToAction();
         }
 
         [Authorize(Roles = DoctorRoleName)]
-        public IActionResult EditDates()
+        public IActionResult Calendar()
         {
             return View();
         }

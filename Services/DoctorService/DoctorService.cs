@@ -1,26 +1,35 @@
 ﻿namespace Services.DoctorService
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
+    using CloudinaryDotNet;
+
     using Data;
 
     using Microsoft.EntityFrameworkCore;
+
+    using Services.ImageService;
 
     using ViewModels.Doctor;
 
     public class DoctorService : IDoctorService
     {
         private readonly NeonatologyDbContext data;
+        private readonly IImageService imageService;
         private readonly IMapper mapper;
+        private readonly Cloudinary cloudinary;
 
-        public DoctorService(NeonatologyDbContext data, IMapper mapper)
+        public DoctorService(NeonatologyDbContext data, IMapper mapper, IImageService imageService, Cloudinary cloudinary)
         {
             this.data = data;
             this.mapper = mapper;
+            this.imageService = imageService;
+            this.cloudinary = cloudinary;
         }
 
         public async Task<DoctorProfileViewModel> GetDoctorById(string userId)
@@ -49,5 +58,32 @@
             => await this.data.Doctors
                     .Select(x => x.Id)
                     .FirstOrDefaultAsync();
+
+        public async Task<bool> EditDoctorAsync(DoctorEditFormModel model)
+        {
+            var doctor = await this.data.Doctors.FindAsync(model.Id);
+
+            if (doctor == null)
+            {
+                return false;
+            }
+
+            doctor.FirstName = model.FirstName;
+            doctor.LastName = model.LastName;
+            doctor.PhoneNumber = model.PhoneNumber;
+            doctor.YearsOfExperience = model.YearsOfExperience;
+            doctor.Image.RemoteImageUrl = model.ImageUrl;
+            doctor.Age = model.Age;
+            doctor.Biography = model.Biography;
+            doctor.CityId = model.CityId;
+
+            doctor.Image.IsDeleted = true;
+            doctor.Image.DeletedOn = DateTime.UtcNow;
+
+            await this.imageService.UploadImage(cloudinary, model.Picture, doctor);
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

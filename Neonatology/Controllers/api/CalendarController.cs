@@ -46,6 +46,12 @@
         {
             var result = this.appointmentService.GetAllAppointments();
 
+            foreach (var res in result)
+            {
+                res.DateTime = res.DateTime.ToLocalTime();
+                res.End = res.DateTime.ToLocalTime();
+            }
+
             return new JsonResult(result);
         }
 

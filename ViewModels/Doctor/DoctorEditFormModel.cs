@@ -59,9 +59,6 @@
 
         public DateTime ModifiedOn { get; set; } = DateTime.UtcNow;
 
-        [Display(Name = SpecializationsName)]
-        public ICollection<SpecializationFormModel> Specializations { get; set; }
-
         public ICollection<CityFormModel> Cities { get; set; }
     }
 }
