@@ -4,12 +4,9 @@
 
     using CloudinaryDotNet;
 
-    using Data.Models;
-
     using Infrastructure;
 
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     using Services.DoctorService;
@@ -17,7 +14,7 @@
 
     using ViewModels.Galery;
 
-    public class GaleryController : Controller
+    public class GaleryController : BaseController
     {
         private readonly IImageService imageService;
         private readonly Cloudinary cloudinary;

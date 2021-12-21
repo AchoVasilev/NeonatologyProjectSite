@@ -6,7 +6,7 @@
 
     using Services.OfferService;
 
-    public class OfferController : Controller
+    public class OfferController : BaseController
     {
         private readonly IOfferService offerService;
 

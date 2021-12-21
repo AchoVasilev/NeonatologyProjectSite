@@ -11,7 +11,7 @@
     using ViewModels.ErrorViewModel;
     using ViewModels.Home;
 
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> logger;
         private readonly IDoctorService doctorService;

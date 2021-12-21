@@ -67,6 +67,11 @@
         "media/js/jquery.dataTables.js",
         "media/js/jquery.dataTables.min.js"
       ]
+    },
+    {
+      "provider": "unpkg",
+      "library": "@microsoft/signalr@6.0.1",
+      "destination": "wwwroot/lib/microsoft/signalr/"
     }
   ]
 }

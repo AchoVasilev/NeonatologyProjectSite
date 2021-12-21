@@ -18,17 +18,21 @@ namespace Neonatology
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
+    using Neonatology.Hubs;
+
     using Services.AppointmentService;
     using Services.CityService;
     using Services.DateTimeParser;
     using Services.DoctorService;
     using Services.EmailSenderService;
     using Services.ImageService;
+    using Services.MessageService;
     using Services.OfferService;
     using Services.PatientService;
     using Services.RatingService;
     using Services.SlotService;
     using Services.SpecializationService;
+    using Services.UserService;
 
     public class Startup
     {
@@ -83,6 +87,7 @@ namespace Neonatology
             services.AddSingleton(Configuration);
             services.AddRazorPages();
             services.AddControllers();
+            services.AddSignalR();
             services.AddAutoMapper(typeof(Startup));
 
             services
@@ -95,7 +100,9 @@ namespace Neonatology
                 .AddTransient<IImageService, ImageService>()
                 .AddTransient<ISpecializationService, SpecializationService>()
                 .AddTransient<ISlotService, SlotService>()
-                .AddTransient<IOfferService, OfferService>();
+                .AddTransient<IOfferService, OfferService>()
+                .AddTransient<IMessageService, MessageService>()
+                .AddTransient<IUserService, UserService>();
 
             //Configure SMTP MailKit
             services.AddTransient<IEmailSender, MailKitSender>();
@@ -158,7 +165,10 @@ namespace Neonatology
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
+
+                endpoints.MapHub<ChatHub>("/chat");
             });
         }
     }

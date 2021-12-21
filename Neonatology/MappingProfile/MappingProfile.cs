@@ -1,10 +1,12 @@
 ﻿namespace Neonatology.MappingProfile
 {
     using AutoMapper;
+using Common;
 
     using global::Data.Models;
 
     using ViewModels.Appointments;
+    using ViewModels.Chat;
     using ViewModels.City;
     using ViewModels.Doctor;
     using ViewModels.Galery;
@@ -52,6 +54,30 @@
             this.CreateMap<OfferedService, OfferViewModel>();
 
             this.CreateMap<Image, UploadImageModel>();
+
+            this.CreateMap<ApplicationUser, ChatConversationsViewModel>()
+                .ForMember(x => x.FullName, opt =>
+                {
+                    opt.MapFrom(y => y.Doctor.FirstName != null ?
+                    "Д-р " + y.Doctor.FirstName + " " + y.Doctor.LastName :
+                    y.Patient.FirstName + " " + y.Patient.LastName);
+                });
+
+            this.CreateMap<ApplicationUser, ChatUserViewModel>()
+                .ForMember(x => x.FullName, opt =>
+                {
+                    opt.MapFrom(y => y.Doctor.FirstName != null ?
+                    "Д-р " + y.Doctor.FirstName + " " + y.Doctor.LastName :
+                    y.Patient.FirstName + " " + y.Patient.LastName);
+                });
+
+            this.CreateMap<Message, ChatMessageWithUserViewModel>()
+                .ForMember(vm => vm.CreatedOn, opt =>
+                    opt.MapFrom(m => m.CreatedOn.AddHours(3).ToString(GlobalConstants.DateTimeFormats.DateTimeFormat)))
+                .ForMember(vm => vm.FullName, opt =>
+                    opt.MapFrom(m => m.Sender.Doctor.FirstName != null
+                        ? "Д-р " + m.Sender.Doctor.FirstName + " " + m.Sender.Doctor.LastName
+                        : m.Sender.Patient.FirstName + " " + m.Sender.Patient.LastName));
         }
     }
 }

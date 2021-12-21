@@ -1,0 +1,125 @@
+﻿@model ChatWithUserViewModel
+@{
+    ViewBag.Title = $"Разговор с {Model.User.FullName}";
+}
+@section head{
+    <style type="text/css">
+        body {
+            background: rgb(255,255,255);
+            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 36%, rgba(23,162,184,1) 100%);
+        }
+    </style>
+}
+<div class="container jumbotron-opacity-chat">
+    <div class="row no-gutters">
+        <div class="col-md-12">
+            <h2 class=" text-center">
+                @ViewBag.Title
+            </h2>
+
+            <hr />
+
+            <div id="messagesList" class="messages">
+                @foreach (var message in Model.Messages)
+                {
+                    <div class="card">
+                        <h4 class="@(Model.User.Id == message.SenderId ? "text-left" : "text-right")">@message.FullName</h4>
+                        <div class="container">
+                            <p class="card-text @(Model.User.Id == message.SenderId ? "text-left" : "text-right")">@message.Content</p>
+                            <span class="time-date @(Model.User.Id == message.SenderId ? "text-left" : "text-right")">@message.CreatedOn</span>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div id="whoIsTyping"></div>
+            <div class="form-control-plaintext">
+                <div id="addMessageForm">
+                    <div class="form-group">
+                        <textarea id="messageInput" class="form-control" placeholder="Напиши съобщение..."></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto ml-auto">
+                            <button id="sendButton" class="btn btn-primary hvr-grow">Изпрати</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $('#messagesList')[0].scrollTop = $('#messagesList')[0].scrollHeight;
+        $('#messageInput').on('keypress',
+            function(e) {
+                if (e.which === 13 && !e.shiftKey) {
+                    e.preventDefault();
+                    $('#sendButton').click();
+                }
+            });
+        @*$("#messageInput").on('change keyup copy paste cut',
+            function() {
+                if (!this.value) {
+                    connection.invoke("WhoIsTyping", '');
+                } else {
+                    connection.invoke("WhoIsTyping", '@User.Identity?.Name');
+                }
+            });*@
+        var connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chat")
+            .build();
+        //connection.on("SayWhoIsTyping",
+        //    function(name) {
+        //        if (name === null || name === "") {
+        //            $("#whoIsTyping").html('');
+        //        } else {
+        //            var whoIsTypingInfo = `<em>&nbsp;&nbsp;${name} is typing...</em>`;
+        //            $("#whoIsTyping").html(whoIsTypingInfo);
+        //        }
+        //    });
+        connection.on("ReceiveMessage",
+            function(message) {
+                location.reload(); // this is the easier way because otherwise i would have to write new js methods with group logic
+            });
+//            function (message) {
+//                var date = new Date();
+//                date.setMonth(date.getMonth() + 1);
+//                var timeOfDay = date.getHours() < 12 ? 'AM' : 'PM';
+//                var hours = date.getHours() > 12 ? date.getHours()-12 : date.getHours();
+//                var chatInfo = `
+//<div class="card">
+//    <h4>${message.senderUserName}</h4>
+//        <div class="container ">
+//            <p class="card-text">${escapeHtml(message.content)}</p>
+//        <span class="time-date">${date.getDate() + '/' + (date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth()) + '/' + date.getFullYear() + ' ' + hours + ':' + (date.getMinutes() < 10 ? `0${date.getMinutes()}` :date.getMinutes())  + timeOfDay}</span>
+//        </div>
+//</div>`;
+//                $("#messagesList").append(chatInfo);
+//                $('#messagesList')[0].scrollTop = $('#messagesList')[0].scrollHeight;
+//            });
+        $("#sendButton").click(function() {
+            var message = $.trim($('#messageInput').val());
+            $('#messageInput').val('');
+            connection.invoke("SendMessage", escapeHtml(message), '@Model.User.Id');
+        });
+        connection.start().catch(function(err) {
+            return console.error(err.toString());
+        });
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(':)', "🙂")
+                .replace(':(', "🙁")
+                .replace(';)', "😉")
+                .replace(':*', "😘")
+                .replace(/<3/g, "❤")
+                .replace(/:D/g, "😀")
+                .replace(/:P/g, "😜")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+}
