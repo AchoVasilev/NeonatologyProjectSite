@@ -62,6 +62,8 @@
 
             public const string IvalidEmailErrorMsg = "Моля въведете валиден и-мейл адрес";
             public const string AppointmentMakeEmailMsg = "Успешно си записахте час. Вашият час е от {0} часа на {1}";
+
+            public const string PatientProfileIsNotFinishedMsg = "За да си запазите час, трябва да си довършите профила";
         }
 
         public static class AccountConstants

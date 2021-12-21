@@ -23,8 +23,18 @@
             this.patientService = patientService;
         }
 
-        public IActionResult Finish()
-            => View(new CreatePatientFormModel());
+        public async Task<IActionResult> Finish()
+        {
+            var patient = await this.patientService.GetPatientByUserIdAsync(this.User.GetId());
+            var model = new CreatePatientFormModel()
+            {
+                FirstName = patient.FirstName,
+                LastName = patient.LastName,
+                PhoneNumber = patient.Phone
+            };
+
+            return View(model);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Finish(CreatePatientFormModel model)

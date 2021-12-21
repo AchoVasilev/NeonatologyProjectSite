@@ -1,6 +1,8 @@
 ﻿@model CreatePatientFormModel
-@{
-    ViewBag.Title = "Довършете своя профил";
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-danger" id="carMessage">@this.TempData["Message"]</div>
 }
 
 @section head{
@@ -15,7 +17,7 @@
 }
 
 <div class="container jumbotron-opacity">
-    <h1 class="text-center">@ViewBag.Title</h1>
+    <h1 class="text-center">Довършете своя профил</h1>
     <hr />
     <form method="post" class="col-md-6 offset-md-3">
         <div class="form-group">
@@ -34,7 +36,7 @@
             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
         </div>
         <div class="col-md-12 text-center">
-            <input type="submit" class="btn btn-primary mb-2" />
+            <input type="submit" class="btn btn-primary mb-2 hvr-grow" />
         </div>
     </form>
 </div>

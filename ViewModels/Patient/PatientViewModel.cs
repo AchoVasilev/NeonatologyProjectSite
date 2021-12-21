@@ -20,9 +20,9 @@
         [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
         public string LastName { get; set; }
 
-        [Display(Name = Phone)]
+        [Display(Name = Common.GlobalConstants.AccountConstants.Phone)]
         [Required(ErrorMessage = RequiredFieldErrorMsg)]
         [Phone]
-        public string PhoneNumber { get; set; }
+        public string Phone { get; set; }
     }
 }

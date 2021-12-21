@@ -8,28 +8,25 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Services.AppointmentService;
-    using Services.DateTimeParser;
     using Services.DoctorService;
     using Services.PatientService;
 
     using ViewModels.Appointments;
 
     using static Common.GlobalConstants;
+    using static Common.GlobalConstants.Messages;
 
     public class AppointmentController : BaseController
     {
-        private readonly IDateTimeParserService dateTimeParserService;
         private readonly IAppointmentService appointmentService;
         private readonly IPatientService patientService;
         private readonly IDoctorService doctorService;
 
         public AppointmentController(
-            IDateTimeParserService dateTimeParserService,
             IAppointmentService appointmentService,
             IPatientService patientService,
             IDoctorService doctorService)
         {
-            this.dateTimeParserService = dateTimeParserService;
             this.appointmentService = appointmentService;
             this.patientService = patientService;
             this.doctorService = doctorService;
@@ -49,6 +46,17 @@
         [Authorize(Roles = PatientRoleName)]
         public async Task<IActionResult> MakePatientAppointment()
         {
+            var patient = await this.patientService.GetPatientByUserIdAsync(this.User.GetId());
+
+            if (string.IsNullOrWhiteSpace(patient.FirstName) || 
+                string.IsNullOrWhiteSpace(patient.LastName) || 
+                string.IsNullOrWhiteSpace(patient.Phone))
+            {
+                this.TempData["Message"] = PatientProfileIsNotFinishedMsg;
+
+                return RedirectToAction("Finish", "Patient", new { area = "" });
+            }
+
             var viewModel = new PatientAppointmentCreateModel
             {
                 DoctorId = await this.doctorService.GetDoctorId()
