@@ -11,5 +11,7 @@
         Task<string> GetPatientIdByUserIdAsync(string userId);
 
         Task<PatientViewModel> GetPatientByUserIdAsync(string userId);
+
+        Task<bool> EditPatientAsync(string patientId, CreatePatientFormModel model);
     }
 }

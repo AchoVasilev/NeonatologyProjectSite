@@ -1,5 +1,6 @@
 ﻿namespace Services.PatientService
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -56,5 +57,25 @@
                   .Where(x => x.UserId == userId && x.IsDeleted == false)
                   .ProjectTo<PatientViewModel>(this.mapper.ConfigurationProvider)
                   .FirstOrDefaultAsync();
+
+        public async Task<bool> EditPatientAsync(string patientId, CreatePatientFormModel model)
+        {
+            var patient = await this.data.Patients
+                                .FirstOrDefaultAsync(x => x.Id == patientId && x.IsDeleted == false);
+
+            if (patient == null)
+            {
+                return false;
+            }
+
+            patient.Phone = model.PhoneNumber;
+            patient.FirstName = model.FirstName;
+            patient.LastName = model.LastName;
+            patient.ModifiedOn = DateTime.UtcNow;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

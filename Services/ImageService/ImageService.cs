@@ -8,55 +8,66 @@
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Http;
     using Data.Models;
+    using System.Collections.Generic;
+    using Data;
+    using ViewModels.Galery;
+    using Microsoft.EntityFrameworkCore;
 
     public class ImageService : IImageService
     {
-        //public async Task UploadImages(Cloudinary cloudinary, IEnumerable<IFormFile> images, int companyId, Car car)
-        //{
-        //    var AllowedExtensions = new[] { "jpg", "png", "gif", "jpeg" };
+        private readonly NeonatologyDbContext data;
 
-        //    foreach (var image in images)
-        //    {
-        //        var extension = Path.GetExtension(image.FileName).TrimStart('.');
+        public ImageService(NeonatologyDbContext data)
+        {
+            this.data = data;
+        }
 
-        //        if (!AllowedExtensions.Any(x => extension.EndsWith(x)))
-        //        {
-        //            throw new Exception($"Invalid image extension {extension}");
-        //        }
+        public async Task UploadImages(Cloudinary cloudinary, IEnumerable<IFormFile> images)
+        {
+            var AllowedExtensions = new[] { "jpg", "png", "gif", "jpeg" };
 
-        //        string imageName = image.FileName;
+            foreach (var image in images)
+            {
+                var extension = Path.GetExtension(image.FileName).TrimStart('.');
 
-        //        byte[] destinationImage;
-        //        using (var memoryStream = new MemoryStream())
-        //        {
-        //            await image.CopyToAsync(memoryStream);
-        //            destinationImage = memoryStream.ToArray();
-        //        }
+                if (!AllowedExtensions.Any(x => extension.EndsWith(x)))
+                {
+                    throw new Exception($"Invalid image extension {extension}");
+                }
 
-        //        using (var ms = new MemoryStream(destinationImage))
-        //        {
-        //            // Cloudinary doesn't work with &
-        //            imageName = imageName.Replace("&", "And");
+                string imageName = image.FileName;
 
-        //            var uploadParams = new ImageUploadParams()
-        //            {
-        //                File = new FileDescription(imageName, ms),
-        //                PublicId = imageName,
-        //            };
+                byte[] destinationImage;
+                using (var memoryStream = new MemoryStream())
+                {
+                    await image.CopyToAsync(memoryStream);
+                    destinationImage = memoryStream.ToArray();
+                }
 
-        //            var uploadResult = cloudinary.Upload(uploadParams);
+                using (var ms = new MemoryStream(destinationImage))
+                {
+                    // Cloudinary doesn't work with &
+                    imageName = imageName.Replace("&", "And");
 
-        //            var dbImage = new Image()
-        //            {
-        //                CompanyId = companyId,
-        //                Extension = extension,
-        //                Url = uploadResult.SecureUrl.AbsoluteUri
-        //            };
+                    var uploadParams = new ImageUploadParams()
+                    {
+                        File = new FileDescription(imageName, ms),
+                        PublicId = $"pediamed/{imageName}",
+                    };
 
-        //            car.CarImages.Add(dbImage);
-        //        }
-        //    }
-        //}
+                    var uploadResult = cloudinary.Upload(uploadParams);
+
+                    var dbImage = new Image()
+                    {
+                        Extension = extension,
+                        Url = uploadResult.SecureUrl.AbsoluteUri
+                    };
+
+                    await this.data.Images.AddAsync(dbImage);
+                    await this.data.SaveChangesAsync();
+                }
+            }
+        }
 
         public async Task UploadImage(Cloudinary cloudinary, IFormFile image, Doctor doctor)
         {
@@ -99,6 +110,22 @@
 
                 doctor.Image = dbImage;
             }
+        }
+
+        public async Task<UploadImageModel> GetGaleryImagesAsync()
+        {
+            var images = await this.data.Images
+                .Where(x => string.IsNullOrWhiteSpace(x.DoctorId) && x.IsDeleted == false)
+                .ToListAsync();
+
+            var model = new UploadImageModel();
+
+            foreach (var image in images)
+            {
+                model.Urls.Add(image.Url);  
+            }
+
+            return model;
         }
     }
 }

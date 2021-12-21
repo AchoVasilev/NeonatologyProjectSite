@@ -45,6 +45,17 @@
             }
 
             var userId = this.User.GetId();
+            var patientId = await this.patientService.GetPatientIdByUserIdAsync(userId);
+
+            if (string.IsNullOrWhiteSpace(patientId) == false)
+            {
+                var isEdited = await this.patientService.EditPatientAsync(patientId, model);
+
+                if (isEdited)
+                {
+                    return RedirectToAction("MyAppointments", "Appointment", new { area = "" });
+                }
+            }
 
             await this.patientService.CreatePatientAsync(model, userId);
 

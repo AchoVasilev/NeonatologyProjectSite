@@ -7,6 +7,8 @@
     using ViewModels.Appointments;
     using ViewModels.City;
     using ViewModels.Doctor;
+    using ViewModels.Galery;
+    using ViewModels.Offer;
     using ViewModels.Patient;
     using ViewModels.Slot;
 
@@ -46,6 +48,10 @@
             this.CreateMap<Patient, PatientViewModel>();
 
             this.CreateMap<AppointmentSlot, SlotViewModel>();
+
+            this.CreateMap<OfferedService, OfferViewModel>();
+
+            this.CreateMap<Image, UploadImageModel>();
         }
     }
 }

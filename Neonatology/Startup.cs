@@ -4,9 +4,9 @@ namespace Neonatology
 
     using CloudinaryDotNet;
 
-    using global::Data;
-    using global::Data.Models;
-    using global::Data.Seeding;
+    using Data;
+    using Data.Models;
+    using Data.Seeding;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -24,6 +24,7 @@ namespace Neonatology
     using Services.DoctorService;
     using Services.EmailSenderService;
     using Services.ImageService;
+    using Services.OfferService;
     using Services.PatientService;
     using Services.RatingService;
     using Services.SlotService;
@@ -53,7 +54,7 @@ namespace Neonatology
                 options.Password.RequireDigit = false;
                 options.Password.RequiredUniqueChars = 0;
             })
-                 .AddRoles<ApplicationRole>()
+                .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<NeonatologyDbContext>();
 
             services.Configure<IdentityOptions>(opts =>
@@ -93,7 +94,8 @@ namespace Neonatology
                 .AddTransient<IRatingService, RatingService>()
                 .AddTransient<IImageService, ImageService>()
                 .AddTransient<ISpecializationService, SpecializationService>()
-                .AddTransient<ISlotService, SlotService>();
+                .AddTransient<ISlotService, SlotService>()
+                .AddTransient<IOfferService, OfferService>();
 
             //Configure SMTP MailKit
             services.AddTransient<IEmailSender, MailKitSender>();
@@ -149,16 +151,6 @@ namespace Neonatology
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapPost("/appointment/generateSlots", async context =>
-                //{
-                //    var cancellationToken = context.RequestAborted;
-
-                //    context.Response.ContentType = "text/plain";
-                //    context.Response.Headers[HeaderNames.CacheControl] = "no-cache";
-
-                //    await context.Response.StartAsync(cancellationToken);
-                //});
-
                 endpoints.MapControllerRoute(
                     name: "areas",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
