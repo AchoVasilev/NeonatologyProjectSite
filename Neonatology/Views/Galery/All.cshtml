@@ -1,0 +1,39 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@model UploadImageModel
+
+@if (SignInManager.IsSignedIn(User) &&
+User.IsInRole(Common.GlobalConstants.DoctorRoleName) ||
+User.IsInRole(Common.GlobalConstants.AdministratorRoleName))
+{
+    <form method="post" enctype="multipart/form-data">
+        <div class="row-sm">
+            <label asp-for="Images">Качи снимки</label>
+            <input asp-for="Images" class="form-control" />
+            <span asp-validation-for="Images" class="text-danger"></span>
+        </div>
+        <input type="submit" class="btn btn-primary hvr-grow" />
+    </form>
+}
+
+<h1 class="text-center">Галерия</h1>
+
+<hr />
+
+@if (Model.Urls.Count == 0)
+{
+    <h3 style="margin-top:2%">
+        Все още няма добавени снимки
+    </h3>
+}
+else
+{
+    <div class="row">
+        @for (int i = 0; i < Model.Urls.Count; i++)
+        {
+            <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                <img src="@Model.Urls[i]" class="w-100 shadow-1-strong rounded mb-4" alt="children" />
+            </div>
+        }
+    </div>
+}

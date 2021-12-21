@@ -1,0 +1,58 @@
+﻿@model ICollection<OfferViewModel>
+@{
+   var i = 1;
+}
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success" id="locationMessage">@this.TempData["Message"]</div>
+}
+
+@section head{
+<style type="text/css">
+    body {
+        background-image: url('/img/services.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+</style>
+}
+
+<div class="container jumbotron-opacity">
+    <h1 class="text-center">Моите часове</h1>
+
+    <hr />
+
+    @if (!Model.Any())
+    {
+
+        <h3 style="margin-top:2%">
+            Все още няма записани услуги
+        </h3>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">&#8470;</th>
+                    <th scope="col">Вид услуга</th>
+                    <th scope="col">Цена (лв.)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var offer in Model)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@offer.Name</td>
+                        <td>@offer.Price</td>
+                    </tr>
+
+                    i++;
+                }
+            </tbody>
+        </table>
+    }
+</div>
