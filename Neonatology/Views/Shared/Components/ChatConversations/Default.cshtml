@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ChatConversationsViewModel>
+<div class="container col-6 row">
+    @if (Model.Any())
+    {
+        foreach (var conversation in Model)
+        {
+            <div class="jumbotron-opacity-chat">
+                <div class="container row table-bordered rounded-top rounded-bottom ">
+                    <h4 class="col-md-4">Разговор с: </h4>
+                    <a class="col-md-8 text-right" asp-controller="Chat" asp-action="WithUser" asp-route-id="@conversation.Id"><h4>@conversation.FullName</h4></a>
+                    <div class="text-body container-fluid col-md-12">
+                        <p class="card-text">Последно съобщение: @conversation.LastMessage</p>
+                        <span class="time-date">Последна активност: @conversation.LastMessageActivity</span>
+                    </div>
+                </div>
+                <br />
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-center align-content-center">
+            <p>
+                Нямате съобщения
+            </p>
+        </div>
+    }
+</div>
