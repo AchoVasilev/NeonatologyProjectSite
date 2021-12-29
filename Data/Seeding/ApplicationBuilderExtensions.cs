@@ -35,6 +35,7 @@
             await SeedPatientRoleAsync(serviceProvider, PatientRoleName);
             await SeedSpecializations(data);
             await SeedOfferedServices(data);
+            await SeedAppointmentCause(data);
 
             return app;
         }
@@ -172,6 +173,25 @@
                 new OfferedService() {Name = "Първична обработка на рана и поставяне на тетанус", Price = 25.00m}
             });
 
+            await data.SaveChangesAsync();
+        }
+
+        private static async Task SeedAppointmentCause(NeonatologyDbContext data)
+        {
+            if (await data.AppointmentCauses.AnyAsync())
+            {
+                return;
+            }
+
+            var appointmentCauses = new List<AppointmentCause>
+            {
+                new AppointmentCause() {Name = "Първичен преглед"},
+                new AppointmentCause() {Name = "Вторичен преглед"},
+                new AppointmentCause() {Name = "Детско здравеопазване"},
+                new AppointmentCause() {Name = "Свободен прием"},
+            };
+
+            await data.AddRangeAsync(appointmentCauses);
             await data.SaveChangesAsync();
         }
 

@@ -5,6 +5,7 @@
 
     using static Data.Common.DataConstants.Constants;
     using static Common.GlobalConstants.Messages;
+using System.Collections.Generic;
 
     public class PatientAppointmentCreateModel
     {
@@ -16,10 +17,12 @@
         [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
         public string ChildFirstName { get; set; }
 
-        public string AppointmentCause { get; set; }
-
         public string DoctorId { get; set; }
 
         public string PatientId { get; set; }
+
+        public int AppointmentCauseId { get; set; }
+
+        public ICollection<AppointmentCauseViewModel> AppointmentCauses { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace Neonatology
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,7 @@ namespace Neonatology
 
     using Neonatology.Hubs;
 
+    using Services.AppointmentCauseService;
     using Services.AppointmentService;
     using Services.CityService;
     using Services.DateTimeParser;
@@ -44,12 +46,7 @@ namespace Neonatology
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<NeonatologyDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
-
-            services.AddDefaultIdentity<ApplicationUser>(options =>
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -58,7 +55,6 @@ namespace Neonatology
                 options.Password.RequireDigit = false;
                 options.Password.RequiredUniqueChars = 0;
             })
-                .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<NeonatologyDbContext>();
 
             services.Configure<IdentityOptions>(opts =>
@@ -81,7 +77,7 @@ namespace Neonatology
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
+                options.MinimumSameSitePolicy = SameSiteMode.Lax;
             });
 
             services.AddSingleton(Configuration);
@@ -102,7 +98,8 @@ namespace Neonatology
                 .AddTransient<ISlotService, SlotService>()
                 .AddTransient<IOfferService, OfferService>()
                 .AddTransient<IMessageService, MessageService>()
-                .AddTransient<IUserService, UserService>();
+                .AddTransient<IUserService, UserService>()
+                .AddTransient<IAppointmentCauseService, AppointmentCauseService>();
 
             //Configure SMTP MailKit
             services.AddTransient<IEmailSender, MailKitSender>();
@@ -115,6 +112,11 @@ namespace Neonatology
                 options.SenderEmail = this.Configuration["SmtpSettings:SenderEmail"];
                 options.SenderName = this.Configuration["SmtpSettings:SenderName"];
             });
+
+            services.AddDbContext<NeonatologyDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDatabaseDeveloperPageExceptionFilter();
 
             //Configure Cloudinary
             var cloud = this.Configuration["Cloudinary:CloudifyName"];

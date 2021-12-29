@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using Services.AppointmentCauseService;
     using Services.AppointmentService;
     using Services.DoctorService;
     using Services.PatientService;
@@ -21,15 +22,18 @@
         private readonly IAppointmentService appointmentService;
         private readonly IPatientService patientService;
         private readonly IDoctorService doctorService;
+        private readonly IAppointmentCauseService appointmentCauseService;
 
         public AppointmentController(
             IAppointmentService appointmentService,
             IPatientService patientService,
-            IDoctorService doctorService)
+            IDoctorService doctorService,
+            IAppointmentCauseService appointmentCauseService)
         {
             this.appointmentService = appointmentService;
             this.patientService = patientService;
             this.doctorService = doctorService;
+            this.appointmentCauseService = appointmentCauseService;
         }
 
         [AllowAnonymous]
@@ -37,7 +41,8 @@
         {
             var viewModel = new CreateAppointmentModel
             {
-                DoctorId = await this.doctorService.GetDoctorId()
+                DoctorId = await this.doctorService.GetDoctorId(),
+                AppointmentCauses = await this.appointmentCauseService.GetAllCauses()
             };
 
             return View(viewModel);
@@ -59,7 +64,8 @@
 
             var viewModel = new PatientAppointmentCreateModel
             {
-                DoctorId = await this.doctorService.GetDoctorId()
+                DoctorId = await this.doctorService.GetDoctorId(),
+                AppointmentCauses = await this.appointmentCauseService.GetAllCauses()
             };
 
             return View(viewModel);

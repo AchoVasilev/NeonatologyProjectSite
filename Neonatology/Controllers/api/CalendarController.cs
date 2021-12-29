@@ -117,7 +117,7 @@
         {
             if (model.Start.Date < DateTime.Now.Date)
             {
-                return BadRequest(new { response = AppointmentBeforeNowErrorMsg });
+                return BadRequest(new { message = AppointmentBeforeNowErrorMsg });
             }
 
             await this.slotService.DeleteSlotById(id);

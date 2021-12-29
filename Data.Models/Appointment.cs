@@ -36,9 +36,6 @@
         [MaxLength(DefaultMaxLength)]
         public string ChildFirstName { get; set; }
 
-        [Required]
-        public string AppointmentCause { get; set; }
-
         [ForeignKey(nameof(Doctor))]
         public string DoctorId { get; set; }
 
@@ -48,6 +45,11 @@
         public string PatientId { get; set; }
 
         public virtual Patient Patient { get; set; }
+
+        [ForeignKey(nameof(AppointmentCause))]
+        public int AppointmentCauseId { get; set; }
+
+        public virtual AppointmentCause AppointmentCause { get; set; }
 
         public bool IsRated { get; set; }
 

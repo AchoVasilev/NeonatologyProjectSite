@@ -38,6 +38,8 @@
 
         public DbSet<OfferedService> OfferedServices { get; set; }
 
+        public DbSet<AppointmentCause> AppointmentCauses { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder

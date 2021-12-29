@@ -18,6 +18,7 @@ using Common;
     {
         public MappingProfile()
         {
+            this.CreateMap<AppointmentCause, AppointmentCauseViewModel>();
             this.CreateMap<Appointment, CreateAppointmentModel>();
             this.CreateMap<Appointment, AppointmentViewModel>()
                 .ForMember(x => x.DoctorName, opt =>

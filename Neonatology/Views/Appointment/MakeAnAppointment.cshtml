@@ -67,14 +67,14 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label" style="font-size:20px">Вид преглед</label>
                         <div class="col-sm-10">
-                            <select asp-for="AppointmentCause" class="form-control">
-                                <option value="Първичен преглед">Първичен преглед</option>
-                                <option value="Вторичен преглед">Вторичен преглед</option>
-                                <option value="Детско здравеопазване">Детско здравеопазване</option>
-                                <option value="Свободен прием">Свободен прием</option>
+                            <select asp-for="AppointmentCauseId" class="form-control">
+                                @foreach (var cause in Model.AppointmentCauses)
+                                {
+                                    <option class="@cause.Id" value="@cause.Id">@cause.Name</option>
+                                }
                             </select>
                         </div>
-                        <span asp-validation-for="AppointmentCause" class="small text-danger"></span>
+                        <span asp-validation-for="AppointmentCauseId" class="small text-danger"></span>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label" style="font-size:20px">Тел. номер</label>

@@ -82,7 +82,7 @@
                 return View(model);
             }
 
-            return RedirectToAction();
+            return RedirectToAction(nameof(Profile));
         }
 
         [Authorize(Roles = DoctorRoleName)]

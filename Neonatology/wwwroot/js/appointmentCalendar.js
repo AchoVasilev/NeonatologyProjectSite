@@ -151,6 +151,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             const obj = await response.json();
             notify(obj.message);
         } catch (err) {
+            console.log(err.message)
             notify(err.message);
             throw err;
         }
@@ -177,7 +178,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             });
         });
 
-        console.log(events);
         return events;
     }
 
