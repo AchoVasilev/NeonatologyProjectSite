@@ -11,7 +11,6 @@ namespace Neonatology
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
@@ -54,15 +53,10 @@ namespace Neonatology
                 options.Password.RequireLowercase = false;
                 options.Password.RequireDigit = false;
                 options.Password.RequiredUniqueChars = 0;
+                options.Lockout.MaxFailedAccessAttempts = 3;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
             })
                 .AddEntityFrameworkStores<NeonatologyDbContext>();
-
-            services.Configure<IdentityOptions>(opts =>
-            {
-                opts.Lockout.AllowedForNewUsers = true;
-                opts.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
-                opts.Lockout.MaxFailedAccessAttempts = 3;
-            });
 
             services.AddControllersWithViews(configure =>
             {
@@ -77,7 +71,7 @@ namespace Neonatology
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             services.AddSingleton(Configuration);

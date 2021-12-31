@@ -66,6 +66,7 @@
 
             if (appointment.IsRated)
             {
+                this.TempData["Message"] = RatedAppointment;
                 return RedirectToAction("MyAppointments", "Appointment");
             }
 
@@ -91,7 +92,7 @@
                 return new StatusCodeResult(404);
             }
 
-            this.TempData["Message"] = string.Format(RatedAppointment, model.Number);
+            this.TempData["Message"] = string.Format(SuccessfulRating, model.Number);
 
             return RedirectToAction("MyAppointments", "Appointment", new { area = "" });
         }
