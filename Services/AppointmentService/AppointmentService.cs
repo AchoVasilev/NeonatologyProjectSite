@@ -26,47 +26,47 @@
             this.mapper = mapper;
         }
 
-        public ICollection<AppointmentViewModel> GetAllAppointments()
-            => this.data.Appointments
-                .Where(x => x.IsDeleted == false)
-                .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+        public async Task<ICollection<AppointmentViewModel>> GetAllAppointments()
+            => await this.data.Appointments
+                        .Where(x => x.IsDeleted == false)
+                        .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
+                        .ToListAsync();
 
-        public ICollection<AppointmentViewModel> GetUserAppointments(string patientId)
-            => this.data.Appointments
-                .Where(x => x.PatientId == patientId && x.IsDeleted == false)
-                .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+        public async Task<ICollection<AppointmentViewModel>> GetUserAppointments(string patientId)
+            => await this.data.Appointments
+                    .Where(x => x.PatientId == patientId && x.IsDeleted == false)
+                    .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
+                    .ToListAsync();
 
-        public ICollection<AppointmentViewModel> GetUpcomingUserAppointments(string patientId)
-            => this.data.Appointments
-                .Where(x => x.PatientId == patientId && x.IsDeleted == false && x.DateTime.Date > DateTime.UtcNow.Date)
-                .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+        public async Task<ICollection<AppointmentViewModel>> GetUpcomingUserAppointments(string patientId)
+            => await this.data.Appointments
+                        .Where(x => x.PatientId == patientId && x.IsDeleted == false && x.DateTime.Date > DateTime.UtcNow.Date)
+                        .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
+                        .ToListAsync();
 
-        public ICollection<AppointmentViewModel> GetPastUserAppointments(string patientId)
-            => this.data.Appointments
-                .Where(x => x.PatientId == patientId && x.IsDeleted == false && x.DateTime.Date <= DateTime.UtcNow.Date)
-                .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+        public async Task<ICollection<AppointmentViewModel>> GetPastUserAppointments(string patientId)
+            => await this.data.Appointments
+                        .Where(x => x.PatientId == patientId && x.IsDeleted == false && x.DateTime.Date <= DateTime.UtcNow.Date)
+                        .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
+                        .ToListAsync();
 
-        public ICollection<AppointmentViewModel> GetUpcomingDoctorAppointments(string doctorId)
-            => this.data.Appointments
-                .Where(x => x.DoctorId == doctorId && x.IsDeleted == false && x.DateTime.Date > DateTime.UtcNow.Date)
-                .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+        public async Task<ICollection<AppointmentViewModel>> GetUpcomingDoctorAppointments(string doctorId)
+            => await this.data.Appointments
+                        .Where(x => x.DoctorId == doctorId && x.IsDeleted == false && x.DateTime.Date > DateTime.UtcNow.Date)
+                        .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
+                        .ToListAsync();
 
-        public ICollection<AppointmentViewModel> GetPastDoctorAppointments(string doctorId)
-            => this.data.Appointments
-                .Where(x => x.DoctorId == doctorId && x.IsDeleted == false && x.DateTime.Date <= DateTime.UtcNow.Date)
-                .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+        public async Task<ICollection<AppointmentViewModel>> GetPastDoctorAppointments(string doctorId)
+            => await this.data.Appointments
+                        .Where(x => x.DoctorId == doctorId && x.IsDeleted == false && x.DateTime.Date <= DateTime.UtcNow.Date)
+                        .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
+                        .ToListAsync();
 
-        public ICollection<CreateAppointmentModel> GetAllDoctorAppointmentsById(string doctorId)
-            => this.data.Appointments
-                .Where(x => x.DoctorId == doctorId && x.IsDeleted == false)
-                .ProjectTo<CreateAppointmentModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+        public async Task<ICollection<CreateAppointmentModel>> GetAllDoctorAppointmentsById(string doctorId)
+            => await this.data.Appointments
+                        .Where(x => x.DoctorId == doctorId && x.IsDeleted == false)
+                        .ProjectTo<CreateAppointmentModel>(this.mapper.ConfigurationProvider)
+                        .ToListAsync();
 
         public async Task<ICollection<TakenAppointmentsViewModel>> GetTakenAppointmentSlots()
             => await this.data.Appointments

@@ -79,8 +79,8 @@
 
             var model = new AllAppointmentsViewModel()
             {
-                Upcoming = this.appointmentService.GetUpcomingUserAppointments(patientId),
-                Past = this.appointmentService.GetPastUserAppointments(patientId)
+                Upcoming = await this.appointmentService.GetUpcomingUserAppointments(patientId),
+                Past = await this.appointmentService.GetPastUserAppointments(patientId)
             };
 
             return View(model);
@@ -94,8 +94,8 @@
 
             var model = new AllAppointmentsViewModel()
             {
-                Upcoming = this.appointmentService.GetUpcomingDoctorAppointments(doctorId),
-                Past = this.appointmentService.GetPastDoctorAppointments(doctorId)
+                Upcoming = await this.appointmentService.GetUpcomingDoctorAppointments(doctorId),
+                Past = await this.appointmentService.GetPastDoctorAppointments(doctorId)
             };
 
             return View(model);

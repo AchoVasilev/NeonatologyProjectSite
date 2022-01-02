@@ -1,11 +1,12 @@
 ﻿namespace Services.SpecializationService
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using ViewModels.Doctor;
 
     public interface ISpecializationService
     {
-        ICollection<SpecializationFormModel> GetAllDoctorSpecializations(string doctorId);
+        Task<ICollection<SpecializationFormModel>> GetAllDoctorSpecializations(string doctorId);
     }
 }

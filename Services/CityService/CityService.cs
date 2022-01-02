@@ -1,12 +1,14 @@
 ﻿namespace Services.CityService
 {
     using System.Collections.Generic;
-    using System.Linq;
+    using System.Threading.Tasks;
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
     using Data;
+
+    using Microsoft.EntityFrameworkCore;
 
     using ViewModels.City;
 
@@ -21,9 +23,9 @@
             this.mapper = mapper;
         }
 
-        public ICollection<CityFormModel> GetAllCities()
-            => this.data.Cities
-                 .ProjectTo<CityFormModel>(this.mapper.ConfigurationProvider)
-                 .ToList();
+        public async Task<ICollection<CityFormModel>> GetAllCities()
+            => await this.data.Cities
+                         .ProjectTo<CityFormModel>(this.mapper.ConfigurationProvider)
+                         .ToListAsync();
     }
 }

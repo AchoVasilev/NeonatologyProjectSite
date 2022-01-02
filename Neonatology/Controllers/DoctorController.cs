@@ -59,7 +59,7 @@
                 ImageUrl = doctorInfo.ImageUrl,
                 Email = doctorInfo.Email,
                 YearsOfExperience = doctorInfo.YearsOfExperience,
-                Cities = this.cityService.GetAllCities()
+                Cities = await this.cityService.GetAllCities()
             };
 
             return View(model);

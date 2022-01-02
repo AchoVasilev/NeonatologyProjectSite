@@ -42,9 +42,9 @@
 
         [Authorize(Roles = DoctorRoleName)]
         [HttpGet]
-        public JsonResult GetDoctorAppointments()
+        public async Task<JsonResult> GetDoctorAppointments()
         {
-            var result = this.appointmentService.GetAllAppointments();
+            var result = await this.appointmentService.GetAllAppointments();
 
             foreach (var res in result)
             {
@@ -162,13 +162,13 @@
                 return BadRequest(new { message = TakenDateMsg });
             }
 
-            var emailMsg = string.Format(AppointmentMakeEmailMsg, model.Start.ToLocalTime().Hour, model.Start.ToString("dd/MM/yyyy"));
+            var emailMsg = string.Format(AppointmentMakeEmailMsg, model.Start.Hour.ToString("hh/mm"), model.Start.ToString("dd/MM/yyyy"));
 
             await this.emailSender.SendEmailAsync(userEmail, SuccessfulApointmentEmailMsgSubject, emailMsg);
 
             return Ok(new
             {
-                message = string.Format(SuccessfullAppointment, model.Start.ToString("dd/MM/yyyy"), model.Start.ToLocalTime().Hour),
+                message = string.Format(SuccessfullAppointment, model.Start.ToString("dd/MM/yyyy"), model.Start.Hour.ToString("hh/mm")),
             });
         }
     }

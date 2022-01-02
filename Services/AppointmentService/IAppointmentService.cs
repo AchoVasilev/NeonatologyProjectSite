@@ -9,19 +9,19 @@
 
     public interface IAppointmentService
     {
-        ICollection<AppointmentViewModel> GetAllAppointments();
+        Task<ICollection<AppointmentViewModel>> GetAllAppointments();
 
-        ICollection<CreateAppointmentModel> GetAllDoctorAppointmentsById(string doctorId);
+        Task<ICollection<CreateAppointmentModel>> GetAllDoctorAppointmentsById(string doctorId);
 
-        ICollection<AppointmentViewModel> GetUserAppointments(string patientId);
+        Task<ICollection<AppointmentViewModel>> GetUserAppointments(string patientId);
 
-        ICollection<AppointmentViewModel> GetPastUserAppointments(string patientId);
+        Task<ICollection<AppointmentViewModel>> GetPastUserAppointments(string patientId);
 
-        ICollection<AppointmentViewModel> GetUpcomingUserAppointments(string patientId);
+        Task<ICollection<AppointmentViewModel>> GetUpcomingUserAppointments(string patientId);
 
-        ICollection<AppointmentViewModel> GetUpcomingDoctorAppointments(string doctorId);
+        Task<ICollection<AppointmentViewModel>> GetUpcomingDoctorAppointments(string doctorId);
 
-        ICollection<AppointmentViewModel> GetPastDoctorAppointments(string doctorId);
+        Task<ICollection<AppointmentViewModel>> GetPastDoctorAppointments(string doctorId);
 
         Task<ICollection<TakenAppointmentsViewModel>> GetTakenAppointmentSlots();
 

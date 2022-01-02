@@ -2,11 +2,14 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
     using Data;
+
+    using Microsoft.EntityFrameworkCore;
 
     using ViewModels.Doctor;
 
@@ -21,10 +24,10 @@
             this.mapper = mapper;
         }
 
-        public ICollection<SpecializationFormModel> GetAllDoctorSpecializations(string doctorId)
-            => this.data.Specializations
-                   .Where(x => x.DoctorId == doctorId)
-                   .ProjectTo<SpecializationFormModel>(this.mapper.ConfigurationProvider)
-                   .ToList();
+        public async Task<ICollection<SpecializationFormModel>> GetAllDoctorSpecializations(string doctorId)
+            => await this.data.Specializations
+                           .Where(x => x.DoctorId == doctorId)
+                           .ProjectTo<SpecializationFormModel>(this.mapper.ConfigurationProvider)
+                           .ToListAsync();
     }
 }

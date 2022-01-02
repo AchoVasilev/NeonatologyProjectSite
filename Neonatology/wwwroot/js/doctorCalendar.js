@@ -160,7 +160,7 @@
             end: endDate,
             slotDurationMinutes: Number(scale)
         };
-
+        
         try {
             const response = await fetch('/calendar/generate', {
                 method: 'POST',
