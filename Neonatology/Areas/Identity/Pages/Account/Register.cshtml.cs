@@ -13,6 +13,7 @@
     using Microsoft.Extensions.Logging;
     using static Common.GlobalConstants.Messages;
     using static Common.GlobalConstants.AccountConstants;
+    using Services;
 
     [AllowAnonymous]
     public class RegisterModel : PageModel
@@ -21,17 +22,19 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<ApplicationRole> roleManager;
         private readonly ILogger<RegisterModel> logger;
-
+        private readonly ReCaptchaService reCaptchaService;
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            RoleManager<ApplicationRole> roleManager)
+            RoleManager<ApplicationRole> roleManager, 
+            ReCaptchaService reCaptchaService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.roleManager = roleManager;
+            this.reCaptchaService = reCaptchaService;
         }
 
         [BindProperty]
@@ -58,6 +61,9 @@
             [Display(Name = RepeatPasswordName)]
             [Compare("Password", ErrorMessage = PasswordsNotMatchErrorMsg)]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            public string Token { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -69,6 +75,16 @@
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            var recaptchaResponse = this.reCaptchaService.ValidateResponse(Input.Token);
+
+            if (recaptchaResponse.Result.Success == false && recaptchaResponse.Result.Score <= 0.5)
+            {
+                this.ModelState.AddModelError(string.Empty, "Не преминахте проверката!");
+
+                return this.Page();
+            }
+
             if (ModelState.IsValid)
             {
                 var identityRole = new ApplicationRole()

@@ -69,7 +69,7 @@
                 return BadRequest(new { response = StartDateIsAfterEndDateMsg });
             }
 
-            var result = await this.slotService.GenerateSlots(model.Start, model.End, model.SlotDurationMinutes);
+            var result = await this.slotService.GenerateSlots(model.Start.ToLocalTime(), model.End.ToLocalTime(), model.SlotDurationMinutes);
 
             return new JsonResult(result);
         }

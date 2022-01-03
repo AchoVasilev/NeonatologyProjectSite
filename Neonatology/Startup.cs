@@ -20,6 +20,7 @@ namespace Neonatology
 
     using Neonatology.Hubs;
 
+    using Services;
     using Services.AppointmentCauseService;
     using Services.AppointmentService;
     using Services.CityService;
@@ -34,6 +35,8 @@ namespace Neonatology
     using Services.SlotService;
     using Services.SpecializationService;
     using Services.UserService;
+
+    using ViewModels.GoogleRecaptcha;
 
     public class Startup
     {
@@ -93,7 +96,11 @@ namespace Neonatology
                 .AddTransient<IOfferService, OfferService>()
                 .AddTransient<IMessageService, MessageService>()
                 .AddTransient<IUserService, UserService>()
-                .AddTransient<IAppointmentCauseService, AppointmentCauseService>();
+                .AddTransient<IAppointmentCauseService, AppointmentCauseService>()
+                .AddTransient<ReCaptchaService>();
+
+            //Configure ReCAPTCHA
+            services.Configure<RecaptchaSetting>(Configuration.GetSection("GoogleRecaptchaV3"));
 
             //Configure SMTP MailKit
             services.AddTransient<IEmailSender, MailKitSender>();

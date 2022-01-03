@@ -1,5 +1,6 @@
 ﻿@page
 @model LoginModel
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 
 @{
     ViewData["Title"] = "Влезте с акаунта си";
@@ -22,6 +23,7 @@
                     <label asp-for="Input.Password" class="form-label"></label>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
+                <input type="hidden" asp-for="Input.Token" />
                 <div>
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe" class="form-label">
@@ -47,5 +49,14 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
+
+<script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration["GoogleRecaptchaV3:SiteKey"]"></script>
+<script>
+    grecaptcha.ready(function() {
+      grecaptcha.execute('@this.Configuration["GoogleRecaptchaV3:SiteKey"]', {action: 'submit'}).then(function(token) {
+          $('#Input_Token').val(token);
+      });
+    });
+</script>
 }

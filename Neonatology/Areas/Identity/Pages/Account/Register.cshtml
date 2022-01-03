@@ -1,5 +1,7 @@
 ﻿@page
 @model RegisterModel
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+
 @{
     ViewData["Title"] = "Регистрация";
 }
@@ -27,11 +29,22 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+            <input type="hidden" asp-for="Input.Token" />
             <button type="submit" class="btn btn-primary hvr-grow">Регистрация</button>
         </form>
     </div>
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
+
+<script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration["GoogleRecaptchaV3:SiteKey"]"></script>
+<script>
+    grecaptcha.ready(function() {
+      grecaptcha.execute('@this.Configuration["GoogleRecaptchaV3:SiteKey"]', {action: 'submit'}).then(function(token) {
+          $('#Input_Token').val(token);
+      });
+    });
+</script>
+
 }

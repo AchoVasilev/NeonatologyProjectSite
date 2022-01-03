@@ -1,5 +1,6 @@
 ﻿namespace Neonatology.Controllers
 {
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Infrastructure;
@@ -38,7 +39,7 @@
         {
             var userId = this.User.GetId();
             var userIsDoctor = await this.doctorService.UserIsDoctor(userId);
-
+           
             if (!userIsDoctor)
             {
                 return new StatusCodeResult(404);
