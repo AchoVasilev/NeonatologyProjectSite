@@ -3,6 +3,7 @@
 
 @{
     var requestToken = Antiforgery.GetAndStoreTokens(Context).RequestToken;
+    var causes = Model.AppointmentCauses.Select(x => new SelectListItem(x.Name, x.Id.ToString())).ToList();
 }
 
 @section head{
@@ -67,11 +68,7 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label" style="font-size:20px">Вид преглед</label>
                         <div class="col-sm-10">
-                            <select asp-for="AppointmentCauseId" class="form-control">
-                                @foreach (var cause in Model.AppointmentCauses)
-                                {
-                                    <option class="@cause.Id" value="@cause.Id">@cause.Name</option>
-                                }
+                            <select asp-for="AppointmentCauseId" asp-items="causes" class="form-control">
                             </select>
                         </div>
                         <span asp-validation-for="AppointmentCauseId" class="small text-danger"></span>

@@ -64,9 +64,9 @@
                 const pStartElement = document.createElement('p');
                 const strongStartEl = document.createElement('strong');
 
-                let startStr = new Date(info.event.startStr).toLocaleTimeString();
-                let endStr = new Date(info.event.endStr).toLocaleTimeString();
-                let date = new Date(info.event.startStr).toLocaleDateString();
+                let startStr = new Date(info.event.startStr).toLocaleTimeString('bg-BG');
+                let endStr = new Date(info.event.endStr).toLocaleTimeString('bg-BG');
+                let date = new Date(info.event.startStr).toLocaleDateString('bg-BG');
 
                 const h4Element = document.createElement('h4');
                 h4Element.textContent = 'Дата:' + ' ' + date;

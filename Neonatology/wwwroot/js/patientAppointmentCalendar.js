@@ -50,9 +50,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             eventColor: '#378006',
             eventDisplay: 'block',
             eventClick: function (info) {
-                let startStr = new Date(info.event.startStr).toLocaleTimeString();
-                let endStr = new Date(info.event.endStr).toLocaleTimeString();
-                let dateStr = new Date(info.event.startStr).toLocaleDateString();
+                let startStr = new Date(info.event.startStr).toLocaleTimeString('bg-BG');
+                let endStr = new Date(info.event.endStr).toLocaleTimeString('bg-BG');
+                let dateStr = new Date(info.event.startStr).toLocaleDateString('bg-BG');
 
                 const headerSpan = document.getElementById('title');
                 headerSpan.textContent = info.event.title + ': ' + startStr + '-' + endStr + ' ' + dateStr;
@@ -66,12 +66,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                     const pStartElement = document.createElement('p');
                     const strongStartEl = document.createElement('strong');
 
-                    let startStr = new Date(info.event.startStr).toLocaleTimeString();
-                    let endStr = new Date(info.event.endStr).toLocaleTimeString();
-                    let date = new Date(info.event.startStr).toLocaleDateString();
-
                     const h4Element = document.createElement('h4');
-                    h4Element.textContent = 'Дата:' + ' ' + date;
+                    h4Element.textContent = 'Дата:' + ' ' + dateStr;
 
                     strongStartEl.textContent = 'Начален час:' + ' ' + startStr;
 
