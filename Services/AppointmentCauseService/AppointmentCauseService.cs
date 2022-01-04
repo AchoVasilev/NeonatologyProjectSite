@@ -31,5 +31,11 @@
                     .Where(x => x.IsDeleted == false)
                     .ProjectTo<AppointmentCauseViewModel>(this.mapper.ConfigurationProvider)
                     .ToListAsync();
+
+        public async Task<AppointmentCauseViewModel> GetAppointmentCauseByIdAsync(int id)
+            => await this.data.AppointmentCauses
+                        .Where(x => x.Id == id && x.IsDeleted == false)
+                        .ProjectTo< AppointmentCauseViewModel>(this.mapper.ConfigurationProvider)
+                        .FirstOrDefaultAsync();
     }
 }

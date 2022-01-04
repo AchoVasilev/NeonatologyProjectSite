@@ -66,6 +66,7 @@
             public const string PatientProfileIsNotFinishedMsg = "За да си запазите час, трябва да си довършите профила";
 
             public const string UnsuccessfulDoctorEditMsg = "Нещо се обърка, опитайте пак";
+            public const string AppointmentCauseWrongId = "Такъв преглед не съществува!";
         }
 
         public static class AccountConstants

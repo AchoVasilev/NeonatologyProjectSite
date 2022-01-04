@@ -8,5 +8,7 @@
     public interface IAppointmentCauseService
     {
         Task<ICollection<AppointmentCauseViewModel>> GetAllCauses();
+
+        Task<AppointmentCauseViewModel> GetAppointmentCauseByIdAsync(int id);
     }
 }

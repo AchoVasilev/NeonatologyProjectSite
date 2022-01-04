@@ -91,8 +91,8 @@
 
             var appointment = new Appointment()
             {
-                DateTime = model.Start,
-                End = model.End,
+                DateTime = model.Start.ToLocalTime(),
+                End = model.End.ToLocalTime(),
                 ParentFirstName = model.ParentFirstName,
                 ParentLastName = model.ParentLastName,
                 ChildFirstName = model.ChildFirstName,
@@ -119,8 +119,8 @@
 
             var appointment = new Appointment()
             {
-                DateTime = model.Start,
-                End = model.End,
+                DateTime = model.Start.ToLocalTime(),
+                End = model.End.ToLocalTime(),
                 DoctorId = doctorId,
                 PatientId = model.PatientId,
                 ChildFirstName = model.ChildFirstName,

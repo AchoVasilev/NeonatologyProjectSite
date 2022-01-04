@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         $('#modal').modal('hide');
         const form = new FormData(ev.target);
         const childFirstName = form.get('ChildFirstName').trim();
-        const appointmentCause = form.get('AppointmentCause');
+        const appointmentCauseId = form.get('AppointmentCauseId');
         const doctorId = document.getElementById('doctorId').value;
 
         if (childFirstName == '') {
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             start,
             end,
             childFirstName,
-            appointmentCause,
+            appointmentCauseId,
         };
 
         try {

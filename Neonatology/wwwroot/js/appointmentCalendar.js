@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const parentFirstName = form.get('ParentFirstName').trim();
         const parentLastName = form.get('ParentLastName').trim();
         const childFirstName = form.get('ChildFirstName').trim();
-        const appointmentCause = form.get('AppointmentCause');
+        const appointmentCauseId = form.get('AppointmentCauseId');
         const phoneNumber = form.get('PhoneNumber').trim();
         const email = form.get('Email').trim();
         const doctorId = document.getElementById('doctorId').value;
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             parentFirstName,
             parentLastName,
             childFirstName,
-            appointmentCause,
+            appointmentCauseId,
             phoneNumber,
             email
         };

@@ -9,6 +9,7 @@
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
 
+    using Services.AppointmentCauseService;
     using Services.AppointmentService;
     using Services.PatientService;
     using Services.SlotService;
@@ -26,18 +27,21 @@
         private readonly IAppointmentService appointmentService;
         private readonly ISlotService slotService;
         private readonly IPatientService patientService;
+        private readonly IAppointmentCauseService appointmentCauseService;
         private readonly IEmailSender emailSender;
 
         public CalendarController(
             ISlotService slotService,
             IAppointmentService appointmentService,
-            IEmailSender emailSender, 
+            IEmailSender emailSender,
+            IAppointmentCauseService appointmentCauseService,
             IPatientService patientService)
         {
             this.slotService = slotService;
             this.appointmentService = appointmentService;
             this.emailSender = emailSender;
             this.patientService = patientService;
+            this.appointmentCauseService = appointmentCauseService;
         }
 
         [Authorize(Roles = DoctorRoleName)]
@@ -115,6 +119,12 @@
         [HttpPost("makeAppointment/{id}")]
         public async Task<IActionResult> MakeAnAppointment(CreateAppointmentModel model, int id)
         {
+            var cause = this.appointmentCauseService.GetAppointmentCauseByIdAsync(model.AppointmentCauseId);
+            if (cause == null)
+            {
+                return BadRequest(new { message = AppointmentCauseWrongId });
+            }
+            
             if (model.Start.Date < DateTime.Now.Date)
             {
                 return BadRequest(new { message = AppointmentBeforeNowErrorMsg });
@@ -143,6 +153,12 @@
         [HttpPost("makePatientAppointment/{id}")]
         public async Task<IActionResult> MakePatientAppointment(PatientAppointmentCreateModel model, int id)
         {
+            var cause = this.appointmentCauseService.GetAppointmentCauseByIdAsync(model.AppointmentCauseId);
+            if (cause == null)
+            {
+                return BadRequest(new { message = AppointmentCauseWrongId });
+            }
+
             var userId = this.User.GetId();
             var userEmail = this.User.FindFirst(ClaimTypes.Email).Value;
             var patientId = await this.patientService.GetPatientIdByUserIdAsync(userId);
