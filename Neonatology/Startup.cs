@@ -36,7 +36,10 @@ namespace Neonatology
     using Services.SpecializationService;
     using Services.UserService;
 
+    using Stripe;
+
     using ViewModels.GoogleRecaptcha;
+    using ViewModels.Stripe;
 
     public class Startup
     {
@@ -102,6 +105,9 @@ namespace Neonatology
             //Configure ReCAPTCHA
             services.Configure<RecaptchaSetting>(Configuration.GetSection("GoogleRecaptchaV3"));
 
+            //Configure Stripe
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+
             //Configure SMTP MailKit
             services.AddTransient<IEmailSender, MailKitSender>();
             services.Configure<MailKitEmailSenderOptions>(options =>
@@ -123,7 +129,7 @@ namespace Neonatology
             var cloud = this.Configuration["Cloudinary:CloudifyName"];
             var apiKey = this.Configuration["Cloudinary:ApiKey"];
             var apiSecret = this.Configuration["Cloudinary:ApiSecret"];
-            var cloudinaryAccount = new Account(cloud, apiKey, apiSecret);
+            var cloudinaryAccount = new CloudinaryDotNet.Account(cloud, apiKey, apiSecret);
             var cloudinary = new Cloudinary(cloudinaryAccount);
             services.AddSingleton(cloudinary);
         }
@@ -131,6 +137,8 @@ namespace Neonatology
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            StripeConfiguration.ApiKey = this.Configuration.GetSection("Stripe")["SecretKey"];
+
             app.PrepareDatabase()
                 .GetAwaiter()
                 .GetResult();
