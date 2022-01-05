@@ -1,7 +1,9 @@
 ﻿namespace Neonatology.Controllers
 {
     using System.Collections.Generic;
+    using System.Security.Claims;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
 
@@ -10,9 +12,11 @@
 
     using ViewModels.Stripe;
 
+    [Authorize]
     public class CheckoutController : BaseController
     {
         private readonly IOptions<StripeSettings> settings;
+
         public CheckoutController(IOptions<StripeSettings> settings)
         {
             this.settings = settings;
@@ -29,20 +33,21 @@
         {
             var options = new SessionCreateOptions
             {
+                CustomerEmail = this.User.FindFirst(ClaimTypes.Email).Value,
                 LineItems = new List<SessionLineItemOptions>
                 {
                     new SessionLineItemOptions
                     {
                         PriceData = new SessionLineItemPriceDataOptions
                         {
-                              UnitAmount = 6000,
-                              Currency = "bgn",
-                              ProductData = new SessionLineItemPriceDataProductDataOptions
-                              {
+                            UnitAmount = 6000,
+                            Currency = "bgn",
+                            ProductData = new SessionLineItemPriceDataProductDataOptions
+                            {
                                 Name = "Онлайн консултация",
-                              },
+                            },
                         },
-                        
+
                         Quantity = 1,
                     },
                 },
@@ -53,9 +58,10 @@
             };
 
             var service = new SessionService();
-            Session session = service.Create(options);
+            var session = service.Create(options);
 
             Response.Headers.Add("Location", session.Url);
+
             return new StatusCodeResult(303);
         }
 

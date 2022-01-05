@@ -40,6 +40,8 @@
 
         public DbSet<AppointmentCause> AppointmentCauses { get; set; }
 
+        public DbSet<StripeCheckoutSession> StripeCheckoutSessions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder

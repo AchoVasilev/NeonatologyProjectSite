@@ -1,13 +1,13 @@
 ﻿namespace Services.MessageService
 {
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
-using Common;
+
+    using Common;
 
     using Data;
     using Data.Models;

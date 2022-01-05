@@ -1,6 +1,5 @@
 ﻿namespace Neonatology.Controllers
 {
-    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Infrastructure;

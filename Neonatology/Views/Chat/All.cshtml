@@ -1,8 +1,5 @@
-﻿@{
-    ViewBag.Title = "Съобщения";
-}
+﻿@model ChatUserViewModel
 
-@model ChatUserViewModel
 
 @section head{
 <style type="text/css">
@@ -11,6 +8,10 @@
         background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 36%, rgba(23,162,184,1) 100%);
     }
 </style>
+}
+
+@{
+    ViewBag.Title = "Съобщения";
 }
 
 <div class="col-6">

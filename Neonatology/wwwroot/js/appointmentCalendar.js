@@ -1,5 +1,6 @@
 ﻿var calendar;
 document.addEventListener('DOMContentLoaded', async function () {
+    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     calendar = await generateCalendar();
 
     calendar.render();
@@ -7,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     async function generateCalendar() {
         const calendarEl = document.getElementById('calendar');
         let calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridWeek',
+            initialView: isMobile ? 'dayGridDay' : 'dayGridWeek',
             slotDuration: '00:05:00',
             firstDay: 1,
             allDaySlot: false,
