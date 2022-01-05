@@ -4,6 +4,6 @@
 
     public interface IPaymentService
     {
-        Task CreatePaymentSession(string sessionId, string paymentId);
+        Task CreatePaymentSession(string sessionId, string paymentId, string toStripeAccountId);
     }
 }

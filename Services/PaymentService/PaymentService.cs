@@ -9,9 +9,9 @@
     {
         private readonly NeonatologyDbContext data;
 
-        public PaymentService(NeonatologyDbContext dbContext)
+        public PaymentService(NeonatologyDbContext data)
         {
-            this.data = dbContext;
+            this.data = data;
         }
 
         public async Task CreatePaymentSession(string sessionId, string paymentId, string toStripeAccountId)

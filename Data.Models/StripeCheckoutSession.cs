@@ -4,7 +4,7 @@
 
     public class StripeCheckoutSession
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; set; }
 
         public string PaymentId { get; set; }
 
