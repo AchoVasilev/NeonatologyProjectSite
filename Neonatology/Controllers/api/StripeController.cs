@@ -4,28 +4,34 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Options;
 
     using Services.PaymentService;
 
     using Stripe;
     using Stripe.Checkout;
 
+    using ViewModels.Stripe;
+
     [ApiController]
     [Route("[controller]")]
     public class StripeController : ControllerBase
     {
         //https://dashboard.stripe.com/test/webhooks/create?endpoint_location=hosted
-        private const string secret = "whsec_eL22wrsBMNRkdm3OehalSdaFWThFT83m";
         private readonly IPaymentService paymentService;
+        private readonly IOptions<StripeSettings> settings;
 
-        public StripeController(IPaymentService paymentService)
+        public StripeController(IPaymentService paymentService, IOptions<StripeSettings> settings)
         {
             this.paymentService = paymentService;
+            this.settings = settings;
         }
 
         [HttpPost]
         public async Task<IActionResult> Index()
         {
+            string secret = this.settings.Value.AccountSecret;
+
             var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
 
             try
@@ -49,7 +55,7 @@
             }
             catch (StripeException e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
         }
 
