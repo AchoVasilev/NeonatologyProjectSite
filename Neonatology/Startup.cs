@@ -24,7 +24,6 @@ namespace Neonatology
     using Services.AppointmentCauseService;
     using Services.AppointmentService;
     using Services.CityService;
-    using Services.DateTimeParser;
     using Services.DoctorService;
     using Services.EmailSenderService;
     using Services.ImageService;
@@ -89,7 +88,6 @@ namespace Neonatology
             services
                 .AddTransient<IAppointmentService, AppointmentService>()
                 .AddTransient<IPatientService, PatientService>()
-                .AddTransient<IDateTimeParserService, DateTimeParserService>()
                 .AddTransient<IDoctorService, DoctorService>()
                 .AddTransient<ICityService, CityService>()
                 .AddTransient<IRatingService, RatingService>()

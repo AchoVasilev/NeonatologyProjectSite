@@ -99,6 +99,7 @@
 
     async function editSlot(ev, info) {
         const hourType = document.getElementById('hourType').value;
+        const text = document.getElementById('textId').value;
 
         if (hourType == 'Свободен') {
             $('#modal').modal('hide');
@@ -108,11 +109,12 @@
         const eventId = info.event.id;
         const params = {
             id: eventId,
+            text: text,
             status: hourType
         };
 
         try {
-            const response = await fetch('/calendar/' + eventId, {
+            const response = await fetch('/doctorCalendar/' + eventId, {
                 method: 'Put',
                 headers: {
                     'Content-Type': 'application/json',
@@ -163,7 +165,7 @@
         };
         
         try {
-            const response = await fetch('/calendar/generate', {
+            const response = await fetch('/doctorCalendar/generate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -191,7 +193,7 @@
 
     async function attachEvents() {
         let events = [];
-        const response = await fetch('/calendar', {
+        const response = await fetch('/doctorCalendar', {
             method: 'Get'
         });
 
@@ -222,7 +224,7 @@
     }
 
     async function getSlots() {
-        const response = await fetch('/calendar/getSlots')
+        const response = await fetch('/doctorCalendar/getSlots')
 
         const slots = await response.json();
 

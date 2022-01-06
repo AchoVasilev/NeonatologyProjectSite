@@ -11,10 +11,6 @@
     {
         Task<ICollection<AppointmentViewModel>> GetAllAppointments();
 
-        Task<ICollection<CreateAppointmentModel>> GetAllDoctorAppointmentsById(string doctorId);
-
-        Task<ICollection<AppointmentViewModel>> GetUserAppointments(string patientId);
-
         Task<ICollection<AppointmentViewModel>> GetPastUserAppointments(string patientId);
 
         Task<ICollection<AppointmentViewModel>> GetUpcomingUserAppointments(string patientId);

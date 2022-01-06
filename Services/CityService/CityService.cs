@@ -1,6 +1,7 @@
 ﻿namespace Services.CityService
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using AutoMapper;
@@ -26,6 +27,7 @@
         public async Task<ICollection<CityFormModel>> GetAllCities()
             => await this.data.Cities
                          .ProjectTo<CityFormModel>(this.mapper.ConfigurationProvider)
+                         .OrderBy(x => x.Name)
                          .ToListAsync();
     }
 }

@@ -1,4 +1,6 @@
-﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+﻿@using ViewModels.Slot
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+@model SlotEditModel
 
 @{
     var requestToken = Antiforgery.GetAndStoreTokens(Context).RequestToken;
@@ -36,17 +38,19 @@
             <div class="modal-body">
                 <p id="pDetails"></p>
                 <label class="my-1 mr-2">Редактирай час</label>
-                <select id="hourType" class="custom-select">
+                <select asp-for="Status" id="hourType" class="custom-select">
                     <option value="Свободен" selected>Свободен</option>
                     <option value="Зает">Зает</option>
                 </select>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary hvr-grow" data-dismiss="modal">Затвори</button>
-                <button id="saveBtn" class="btn btn-success hvr-grow">Запази</button>
-            </div>
+                <input asp-for="Text" class="form-control" id="textId" placeholder="@Model.Text" />
+                <span asp-validation-for="Text" class="text-danger"></span>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary hvr-grow" data-dismiss="modal">Затвори</button>
+            <button id="saveBtn" class="btn btn-success hvr-grow">Запази</button>
         </div>
     </div>
+</div>
 </div>
 
 <div class="modal" id="doctorModal" tabindex="-1" role="dialog">
@@ -161,5 +165,5 @@
 </div>
 
 @section Scripts {
-    <script src="/js/doctorCalendar.js" asp-append-version="true"></script>
+<script src="/js/doctorCalendar.js" asp-append-version="true"></script>
 }
