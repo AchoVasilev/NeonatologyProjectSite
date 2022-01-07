@@ -10,5 +10,7 @@
         Task<ICollection<OfferViewModel>> GetAllAsync();
 
         Task<int> GetOnlineConsultationId();
+
+        Task<OfferViewModel> GetOnlineConsultationModelAsync();
     }
 }

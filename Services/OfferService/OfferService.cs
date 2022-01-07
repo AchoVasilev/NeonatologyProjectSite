@@ -36,5 +36,11 @@
                         .Where(x => x.Name == onlineConsultationName && x.IsDeleted == false)
                         .Select(x => x.Id)
                         .FirstOrDefaultAsync();
+
+        public async Task<OfferViewModel> GetOnlineConsultationModelAsync() 
+            => await this.data.OfferedServices
+                        .Where(x => x.Name == onlineConsultationName && x.IsDeleted == false)
+                        .ProjectTo<OfferViewModel>(this.mapper.ConfigurationProvider)
+                        .FirstOrDefaultAsync();
     }
 }

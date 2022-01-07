@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using Services.OfferService;
     using Services.PaymentService;
 
     using Stripe.Checkout;
@@ -15,10 +16,12 @@
     public class CheckoutController : BaseController
     {
         private readonly IPaymentService paymentService;
+        private readonly IOfferService offerService;
 
-        public CheckoutController(IPaymentService paymentService)
+        public CheckoutController(IPaymentService paymentService, IOfferService offerService)
         {
             this.paymentService = paymentService;
+            this.offerService = offerService;
         }
 
         public IActionResult Index()
@@ -29,6 +32,8 @@
         [HttpPost]
         public async Task<ActionResult> CreateCheckoutSession()
         {
+            var consultation = await this.offerService.GetOnlineConsultationModelAsync();
+
             var options = new SessionCreateOptions
             {
                 CustomerEmail = this.User.FindFirst(ClaimTypes.Email).Value,
@@ -38,11 +43,11 @@
                     {
                         PriceData = new SessionLineItemPriceDataOptions
                         {
-                            UnitAmount = 3000,
+                            UnitAmount = (long)(consultation.Price * 100),
                             Currency = "bgn",
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
-                                Name = "Онлайн консултация",
+                                Name = consultation.Name,
                                 Images = new List<string>
                                 {
                                     "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1641585449/pediamed/onlineConsultation_vyvebl.jpg"

@@ -36,6 +36,7 @@
             await SeedSpecializations(data);
             await SeedOfferedServices(data);
             await SeedAppointmentCause(data);
+            await SeedNotificationTypes(data);
 
             return app;
         }
@@ -240,6 +241,23 @@
                     throw new Exception(string.Join(Environment.NewLine, result.Errors.Select(e => e.Description)));
                 }
             }
+        }
+
+        private static async Task SeedNotificationTypes(NeonatologyDbContext data)
+        {
+            if (await data.NotificationTypes.AnyAsync())
+            {
+                return;
+            }
+
+            var notificationTypes = new List<NotificationType>
+            {
+                new NotificationType() {Name = "Message"},
+                new NotificationType() {Name = "Banned Profile"}
+            };
+
+            await data.NotificationTypes.AddRangeAsync(notificationTypes);
+            await data.SaveChangesAsync();
         }
     }
 }

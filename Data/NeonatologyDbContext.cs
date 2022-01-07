@@ -44,6 +44,10 @@
 
         public DbSet<Payment> Payments { get; set; }
 
+        public DbSet<Notification> Notifications { get; set; }
+
+        public DbSet<NotificationType> NotificationTypes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
