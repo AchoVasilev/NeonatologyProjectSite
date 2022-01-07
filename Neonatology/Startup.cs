@@ -30,6 +30,7 @@ namespace Neonatology
     using Services.MessageService;
     using Services.OfferService;
     using Services.PatientService;
+    using Services.PaymentService;
     using Services.RatingService;
     using Services.SlotService;
     using Services.SpecializationService;
@@ -98,6 +99,7 @@ namespace Neonatology
                 .AddTransient<IMessageService, MessageService>()
                 .AddTransient<IUserService, UserService>()
                 .AddTransient<IAppointmentCauseService, AppointmentCauseService>()
+                .AddTransient<IPaymentService, PaymentService>()
                 .AddTransient<ReCaptchaService>();
 
             //Configure ReCAPTCHA
@@ -105,6 +107,7 @@ namespace Neonatology
 
             //Configure Stripe
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+            StripeConfiguration.ApiKey = Configuration["Stripe:SecretKey"];
 
             //Configure SMTP MailKit
             services.AddTransient<IEmailSender, MailKitSender>();

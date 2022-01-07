@@ -7,5 +7,7 @@
         public ChatUserViewModel User { get; set; }
 
         public IEnumerable<ChatMessageWithUserViewModel> Messages { get; set; }
+
+        public bool CanChat { get; set; }
     }
 }

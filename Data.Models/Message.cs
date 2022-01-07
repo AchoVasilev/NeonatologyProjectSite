@@ -1,6 +1,6 @@
 ﻿namespace Data.Models
 {
-using System;
+    using System;
 
     using Data.Common.Models;
 

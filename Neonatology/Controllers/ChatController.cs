@@ -8,6 +8,8 @@
 
     using Services.DoctorService;
     using Services.MessageService;
+    using Services.PatientService;
+    using Services.PaymentService;
     using Services.UserService;
 
     using ViewModels.Chat;
@@ -17,12 +19,21 @@
         private readonly IMessageService messageService;
         private readonly IUserService userService;
         private readonly IDoctorService doctorService;
+        private readonly IPaymentService paymentService;
+        private readonly IPatientService patientService;
 
-        public ChatController(IMessageService messageService, IUserService userService, IDoctorService doctorService)
+        public ChatController(
+            IMessageService messageService,
+            IUserService userService,
+            IDoctorService doctorService,
+            IPaymentService paymentService, 
+            IPatientService patientService)
         {
             this.messageService = messageService;
             this.userService = userService;
             this.doctorService = doctorService;
+            this.paymentService = paymentService;
+            this.patientService = patientService;
         }
 
         public async Task<IActionResult> All()
@@ -57,11 +68,15 @@
         public async Task<IActionResult> WithUser(string id)
         {
             var currentUserId = this.User.GetId();
+            var isDoctor = await this.doctorService.UserIsDoctor(currentUserId);
+            var patientId = await this.patientService.GetPatientIdByUserIdAsync(currentUserId);
+            var hasPaid = await this.paymentService.PatientHasPaid(patientId);
 
             var viewModel = new ChatWithUserViewModel
             {
                 User = await this.userService.GetChatUserById(id),
-                Messages = await this.messageService.GetAllWithUserAsync(currentUserId, id)
+                Messages = await this.messageService.GetAllWithUserAsync(currentUserId, id),
+                CanChat = hasPaid || isDoctor ? true : false
             };
 
             return View(viewModel);

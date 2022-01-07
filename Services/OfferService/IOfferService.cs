@@ -8,5 +8,7 @@
     public interface IOfferService
     {
         Task<ICollection<OfferViewModel>> GetAllAsync();
+
+        Task<int> GetOnlineConsultationId();
     }
 }

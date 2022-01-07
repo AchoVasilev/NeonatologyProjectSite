@@ -3,13 +3,14 @@
     ViewBag.Title = $"Разговор с {Model.User.FullName}";
 }
 @section head{
-    <style type="text/css">
-        body {
-            background: rgb(255,255,255);
-            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 36%, rgba(23,162,184,1) 100%);
-        }
-    </style>
+<style type="text/css">
+    body {
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 36%, rgba(23,162,184,1) 100%);
+    }
+</style>
 }
+
 <div class="container jumbotron-opacity-chat">
     <div class="row no-gutters">
         <div class="col-md-12">
@@ -34,20 +35,24 @@
             </div>
             <div id="whoIsTyping"></div>
             <div class="form-control-plaintext">
-                <div id="addMessageForm">
-                    <div class="form-group">
-                        <textarea id="messageInput" class="form-control" placeholder="Напиши съобщение..."></textarea>
-                    </div>
-                    <div class="row">
-                        <div class="col-auto ml-auto">
-                            <button id="sendButton" class="btn btn-primary hvr-grow">Изпрати</button>
+                @if (Model.CanChat)
+                {
+                    <div id="addMessageForm">
+                        <div class="form-group">
+                            <textarea id="messageInput" class="form-control" placeholder="Напиши съобщение..."></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto ml-auto">
+                                <button id="sendButton" class="btn btn-primary hvr-grow">Изпрати</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
+
             </div>
         </div>
     </div>
 </div>
 @section Scripts {
-    <script src="~/js/chat.js" asp-append-version="true"></script>
+<script src="~/js/chat.js" asp-append-version="true"></script>
 }

@@ -9,5 +9,7 @@
         public string FullName { get; set; }
 
         public string CreatedOn { get; set; }
+
+        public bool CanChat { get; set; }
     }
 }

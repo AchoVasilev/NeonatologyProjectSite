@@ -6,11 +6,14 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
 
+    using Services.DoctorService;
+    using Services.OfferService;
     using Services.PaymentService;
 
     using Stripe;
     using Stripe.Checkout;
 
+    using ViewModels.Payment;
     using ViewModels.Stripe;
 
     [ApiController]
@@ -20,11 +23,19 @@
         //https://dashboard.stripe.com/test/webhooks/create?endpoint_location=hosted
         private readonly IPaymentService paymentService;
         private readonly IOptions<StripeSettings> settings;
+        private readonly IDoctorService doctorService;
+        private readonly IOfferService offerService;
 
-        public StripeController(IPaymentService paymentService, IOptions<StripeSettings> settings)
+        public StripeController(
+            IPaymentService paymentService,
+            IOptions<StripeSettings> settings,
+            IDoctorService doctorService,
+            IOfferService offerService)
         {
             this.paymentService = paymentService;
             this.settings = settings;
+            this.doctorService = doctorService;
+            this.offerService = offerService;
         }
 
         [HttpPost]
@@ -46,9 +57,9 @@
                 if (stripeEvent.Type == Events.CheckoutSessionCompleted)
                 {
                     var session = stripeEvent.Data.Object as Session;
-
+                    
                     // Fulfill the purchase...
-                    this.FulfillOrder(session);
+                    await this.FulfillOrder(session);
                 }
 
                 return Ok();
@@ -59,9 +70,15 @@
             }
         }
 
-        private void FulfillOrder(Session session)
+        private async Task FulfillOrder(Session session)
         {
-            // TODO: fill me in
+            var model = new CreatePaymentModel();
+
+            model.SenderId = session.CustomerId;
+            model.RecepientId = await this.doctorService.GetDoctorId();
+            model.OfferedServiceId = await this.offerService.GetOnlineConsultationId();
+
+            await this.paymentService.CreatePayment(model);
         }
     }
 }
