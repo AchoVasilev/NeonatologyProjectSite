@@ -87,5 +87,10 @@
             public const string PasswordName = "Парола";
             public const string RepeatPasswordName = "Повтори парола";
         }
+
+        public static class NotificationConstants
+        {
+            public const int MaxChatNotificationsPerUser = 5;
+        }
     }
 }

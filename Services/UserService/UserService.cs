@@ -8,6 +8,7 @@
     using AutoMapper.QueryableExtensions;
 
     using Data;
+    using Data.Models;
 
     using Microsoft.EntityFrameworkCore;
 
@@ -40,5 +41,10 @@
                         .Where(x => x.DoctorId == doctorId && x.IsDeleted == false)
                         .Select(x => x.Id)
                         .FirstOrDefaultAsync();
+
+        public async Task<ApplicationUser> GetUserByIdAsync(string id)
+            => await this.data.ApplicationUsers
+                         .Where(x => x.Id == id && x.IsDeleted == false)
+                         .FirstOrDefaultAsync();
     }
 }

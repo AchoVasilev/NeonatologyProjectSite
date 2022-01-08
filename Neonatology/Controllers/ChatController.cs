@@ -76,7 +76,7 @@
             {
                 User = await this.userService.GetChatUserById(id),
                 Messages = await this.messageService.GetAllWithUserAsync(currentUserId, id),
-                CanChat = hasPaid || isDoctor ? true : false
+                CanChat = hasPaid || isDoctor
             };
 
             return View(viewModel);

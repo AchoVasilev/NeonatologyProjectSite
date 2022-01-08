@@ -28,6 +28,7 @@ namespace Neonatology
     using Services.EmailSenderService;
     using Services.ImageService;
     using Services.MessageService;
+    using Services.NotificationService;
     using Services.OfferService;
     using Services.PatientService;
     using Services.PaymentService;
@@ -100,6 +101,7 @@ namespace Neonatology
                 .AddTransient<IUserService, UserService>()
                 .AddTransient<IAppointmentCauseService, AppointmentCauseService>()
                 .AddTransient<IPaymentService, PaymentService>()
+                .AddTransient<INotificationService, NotificationService>()
                 .AddTransient<ReCaptchaService>();
 
             //Configure ReCAPTCHA
@@ -181,6 +183,7 @@ namespace Neonatology
                 endpoints.MapRazorPages();
 
                 endpoints.MapHub<ChatHub>("/chat");
+                endpoints.MapHub<NotificationHub>("/notificationHub");
             });
         }
     }

@@ -12,6 +12,8 @@
     using Data;
     using Data.Models;
 
+    using Ganss.XSS;
+
     using Microsoft.EntityFrameworkCore;
 
     using ViewModels.Chat;
@@ -29,9 +31,10 @@
 
         public async Task CreateMessageAsync(string content, string senderId, string receiverId)
         {
+            var sanitizer = new HtmlSanitizer();
             var message = new Message
             {
-                Content = content,
+                Content = sanitizer.Sanitize(content.Trim()),
                 SenderId = senderId,
                 ReceiverId = receiverId,
             };

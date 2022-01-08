@@ -14,10 +14,6 @@
         public string Id { get; init; } = Guid.NewGuid().ToString();
 
         [Required]
-        [MaxLength(DefaultMaxLength)]
-        public string TargetUsername { get; set; }
-
-        [Required]
         public string Link { get; set; }
 
         [Required]
@@ -38,9 +34,12 @@
 
         public NotificationType NotificationType { get; set; }
 
-        [ForeignKey(nameof(ApplicationUser))]
-        public string UserId { get; set; }
+        public string SenderId { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
+        public virtual ApplicationUser Sender { get; set; }
+
+        public string ReceiverId { get; set; }
+
+        public virtual ApplicationUser Receiver { get; set; }
     }
 }

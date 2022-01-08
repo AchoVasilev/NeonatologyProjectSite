@@ -54,6 +54,7 @@ $("#sendButton").click(function () {
 connection.start().catch(function (err) {
     return console.error(err.toString());
 });
+
 function escapeHtml(unsafe) {
     return unsafe
         .replace(':)', "🙂")
