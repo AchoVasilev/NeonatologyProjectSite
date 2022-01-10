@@ -1,131 +1,505 @@
-﻿@model ChatWithUserViewModel
-@{
-    ViewBag.Title = $"Разговор с {Model.User.FullName}";
-}
-@section head{
-<style type="text/css">
+﻿@model PrivateChatViewModel
+
+<style>
     body {
-        background: rgb(255,255,255);
-        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 36%, rgba(23,162,184,1) 100%);
+        background-color: #f4f7f6;
+        margin-top: 20px;
     }
-</style>
-}
 
-<div class="container jumbotron-opacity-chat">
-    <div class="row no-gutters">
-        <div class="col-md-12">
-            <h2 class=" text-center">
-                @ViewBag.Title
-            </h2>
+    .card {
+        background: #fff;
+        transition: .5s;
+        border: 0;
+        margin-bottom: 30px;
+        border-radius: .55rem;
+        position: relative;
+        width: 100%;
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+    }
 
-            <hr />
+    .chat-app .people-list {
+        width: 280px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 20px;
+        z-index: 7
+    }
 
-            <div id="messagesList" class="messages">
-                @foreach (var message in Model.Messages)
-                {
-                    <div class="card">
-                        <h4 class="@(Model.User.Id == message.SenderId ? "text-left" : "text-right")">@message.FullName</h4>
-                        <div class="container">
-                            <p class="card-text @(Model.User.Id == message.SenderId ? "text-left" : "text-right")">@message.Content</p>
-                            <span class="time-date @(Model.User.Id == message.SenderId ? "text-left" : "text-right")">@message.CreatedOn</span>
-                        </div>
-                    </div>
+    .chat-app .chat {
+        margin-left: 280px;
+        border-left: 1px solid #eaeaea
+    }
+
+    .people-list {
+        -moz-transition: .5s;
+        -o-transition: .5s;
+        -webkit-transition: .5s;
+        transition: .5s
+    }
+
+        .people-list .chat-list li {
+            padding: 10px 15px;
+            list-style: none;
+            border-radius: 3px
+        }
+
+            .people-list .chat-list li:hover {
+                background: #efefef;
+                cursor: pointer
+            }
+
+            .people-list .chat-list li.active {
+                background: #efefef
+            }
+
+            .people-list .chat-list li .name {
+                font-size: 15px
+            }
+
+        .people-list .chat-list img {
+            width: 45px;
+            border-radius: 50%
+        }
+
+        .people-list img {
+            float: left;
+            border-radius: 50%
+        }
+
+        .people-list .about {
+            float: left;
+            padding-left: 8px
+        }
+
+        .people-list .status {
+            color: #999;
+            font-size: 13px
+        }
+
+    .chat .chat-header {
+        padding: 15px 20px;
+        border-bottom: 2px solid #f4f7f6
+    }
+
+        .chat .chat-header img {
+            float: left;
+            border-radius: 40px;
+            width: 40px
+        }
+
+        .chat .chat-header .chat-about {
+            float: left;
+            padding-left: 10px
+        }
+
+    .chat .chat-history {
+        padding: 20px;
+        border-bottom: 2px solid #fff
+    }
+
+        .chat .chat-history ul {
+            padding: 0
+        }
+
+            .chat .chat-history ul li {
+                list-style: none;
+                margin-bottom: 30px
+            }
+
+                .chat .chat-history ul li:last-child {
+                    margin-bottom: 0px
                 }
 
-            </div>
-            <div id="whoIsTyping"></div>
-            <div class="form-control-plaintext">
-                @if (Model.CanChat)
-                {
-                    <div id="addMessageForm">
-                        <div class="form-group">
-                            <textarea id="messageInput" class="form-control" placeholder="Напиши съобщение..."></textarea>
-                        </div>
-                        <div class="row">
-                            <div class="col-auto ml-auto">
-                                <button id="sendButton" class="btn btn-primary hvr-grow">Изпрати</button>
+        .chat .chat-history .message-data {
+            margin-bottom: 15px
+        }
+
+            .chat .chat-history .message-data img {
+                border-radius: 40px;
+                width: 40px
+            }
+
+        .chat .chat-history .message-data-time {
+            color: #434651;
+            padding-left: 6px
+        }
+
+        .chat .chat-history .message {
+            color: #444;
+            padding: 18px 20px;
+            line-height: 26px;
+            font-size: 16px;
+            border-radius: 7px;
+            display: inline-block;
+            position: relative
+        }
+
+            .chat .chat-history .message:after {
+                bottom: 100%;
+                left: 7%;
+                border: solid transparent;
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+                border-bottom-color: #fff;
+                border-width: 10px;
+                margin-left: -10px
+            }
+
+        .chat .chat-history .my-message {
+            background: #efefef
+        }
+
+            .chat .chat-history .my-message:after {
+                bottom: 100%;
+                left: 30px;
+                border: solid transparent;
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+                border-bottom-color: #efefef;
+                border-width: 10px;
+                margin-left: -10px
+            }
+
+        .chat .chat-history .other-message {
+            background: #e8f1f3;
+            text-align: right
+        }
+
+            .chat .chat-history .other-message:after {
+                border-bottom-color: #e8f1f3;
+                left: 93%
+            }
+
+    .chat .chat-message {
+        padding: 20px
+    }
+
+    .online,
+    .offline,
+    .me {
+        margin-right: 2px;
+        font-size: 8px;
+        vertical-align: middle
+    }
+
+    .online {
+        color: #86c541
+    }
+
+    .offline {
+        color: #e47297
+    }
+
+    .me {
+        color: #1d8ecd
+    }
+
+    .float-right {
+        float: right
+    }
+
+    .clearfix:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0
+    }
+
+    @@media only screen and (max-width: 767px) {
+        .chat-app .people-list {
+            height: 465px;
+            width: 100%;
+            overflow-x: auto;
+            background: #fff;
+            left: -400px;
+            display: none
+        }
+
+            .chat-app .people-list.open {
+                left: 0
+            }
+
+        .chat-app .chat {
+            margin: 0
+        }
+
+            .chat-app .chat .chat-header {
+                border-radius: 0.55rem 0.55rem 0 0
+            }
+
+        .chat-app .chat-history {
+            height: 300px;
+            overflow-x: auto
+        }
+    }
+
+    @@media only screen and (min-width: 768px) and (max-width: 992px) {
+        .chat-app .chat-list {
+            height: 650px;
+            overflow-x: auto
+        }
+
+        .chat-app .chat-history {
+            height: 600px;
+            overflow-x: auto
+        }
+    }
+
+    @@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
+        .chat-app .chat-list {
+            height: 480px;
+            overflow-x: auto
+        }
+
+        .chat-app .chat-history {
+            height: calc(100vh - 350px);
+            overflow-x: auto
+        }
+    }
+
+    input[type="file"] {
+    display: none;
+}
+</style>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-lg-12">
+            <div class="chat">
+                <div class="chat-header clearfix">
+                    <h3 id="group-name" style="text-align:center" hidden>@Model.GroupName</h3>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                                <img src="~/img/NoAvatarProfileImage.png" alt="avatar">
+                            </a>
+                            <div class="chat-about">
+                                <h6 class="m-b-0" id="receiver-fullname">@Model.ReceiverFullName</h6>
+                                <h3 id="receiver" style="text-align:center" hidden>@Model.ReceiverEmail</h3>
+                                <small>Last seen: 2 hours ago</small>
                             </div>
                         </div>
+                        <div class="col-lg-6 hidden-sm text-right">
+                            <h6 class="m-b-0" id="sender-fullname">@Model.SenderFullName</h6>
+                            <h3 id="sender" style="text-align:center" hidden>@Model.SenderEmail</h3>
+                            <label class="btn btn-outline-secondary" for="upload-image" style="cursor:pointer"><i class="fa fa-camera"></i></label>
+                            <input accept=".jpg, .jpeg, .png" type="file" multiple id="upload-image" class="btn btn-outline-secondary">
+                            <label class="btn btn-outline-primary" for="upload-file" style="cursor:pointer"><i class="fa fa-paperclip"></i></label>
+                            <input accept=".zip, .rar, .docx, .xlsx, application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf" type="file" multiple id="upload-file">
+                        </div>
                     </div>
-                }
-
+                </div>
+                <div class="chat-history">
+                    <ul class="m-b-0" id="message-list">
+                        @if (Model.ChatMessages != null && Model.ChatMessages.Count > 0)
+                        {
+                            @foreach (var message in Model.ChatMessages)
+                            {
+                                @if (message.Receiver.Id == Model.ToUser.Id)
+                                {
+                                    <li class="clearfix" id="@message.Id">
+                                        <div class="message-data">
+                                            <span class="message-data-time">@message.CreatedOn</span>
+                                            <img src="~/img/NoAvatarProfileImage.png" alt="avatar">
+                                        </div>
+                                        <div class="message my-message">@Html.Raw(message.Content)</div>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="clearfix" id="@message.Id">
+                                        <div class="message-data text-right">
+                                            <span class="message-data-time">@message.CreatedOn</span>
+                                            <img src="~/img/NoAvatarProfileImage.png" alt="avatar">
+                                        </div>
+                                        <div class="message other-message float-right">@Html.Raw(message.Content)</div>
+                                    </li>
+                                }
+                            }
+                        }
+                    </ul>
+                    <input id="messagesSkipCount" type="hidden" value="@this.Model.ChatMessages.Count" />
+                </div>
+                <div class="chat-message clearfix">
+                    <div class="input-group mb-0">
+                        <input id="chat-text" type="text" class="form-control" placeholder="Напиши съобщение...">
+                        <div class="input-group-prepend">
+                            <button type="submit" id="send-button" class="btn btn-secondary"><i class="fa fa-send"></i></button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-@section Scripts {
- <script>
-     $('#messagesList')[0].scrollTop = $('#messagesList')[0].scrollHeight;
-$('#messageInput').on('keypress',
-    function (e) {
-        if (e.which === 13 && !e.shiftKey) {
-            e.preventDefault();
-            $('#sendButton').click();
-        }
-    });
- //$("#messageInput").on('change keyup copy paste cut',
- //   function () {
- //       if (!this.value) {
- //           connection.invoke("WhoIsTyping", '');
- //       } else {
- //           connection.invoke("WhoIsTyping", '@User.Identity?.Name');
- //       }
- //   });
-        var connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chat")
-    .build();
-//connection.on("SayWhoIsTyping",
-//    function(name) {
-//        if (name === null || name === "") {
-//            $("#whoIsTyping").html('');
-//        } else {
-//            var whoIsTypingInfo = `<em>&nbsp;&nbsp;${name} is typing...</em>`;
-//            $("#whoIsTyping").html(whoIsTypingInfo);
-//        }
-//    });
-connection.on("ReceiveMessage",
-    function (message) {
-        location.reload(); // this is the easier way because otherwise i would have to write new js methods with group logic
-    });
-//            function (message) {
-//                var date = new Date();
-//                date.setMonth(date.getMonth() + 1);
-//                var timeOfDay = date.getHours() < 12 ? 'AM' : 'PM';
-//                var hours = date.getHours() > 12 ? date.getHours()-12 : date.getHours();
-//                var chatInfo = `
-//<div class="card">
-//    <h4>${message.senderUserName}</h4>
-//        <div class="container ">
-//            <p class="card-text">${escapeHtml(message.content)}</p>
-//        <span class="time-date">${date.getDate() + '/' + (date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth()) + '/' + date.getFullYear() + ' ' + hours + ':' + (date.getMinutes() < 10 ? `0${date.getMinutes()}` :date.getMinutes())  + timeOfDay}</span>
-//        </div>
-//</div>`;
-//                $("#messagesList").append(chatInfo);
-//                $('#messagesList')[0].scrollTop = $('#messagesList')[0].scrollHeight;
-//            });
-$("#sendButton").click(function () {
-    var message = $.trim($('#messageInput').val());
-    $('#messageInput').val('');
-    connection.invoke("SendMessage", escapeHtml(message), '@Model.User.Id');
-});
-connection.start().catch(function (err) {
-    return console.error(err.toString());
-});
 
-function escapeHtml(unsafe) {
-    return unsafe
-        .replace(':)', "🙂")
-        .replace(':(', "🙁")
-        .replace(';)', "😉")
-        .replace(':*', "😘")
-        .replace(/<3/g, "❤")
-        .replace(/:D/g, "😀")
-        .replace(/:P/g, "😜")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
- </script>
+@section Scripts{
+<script type="text/javascript">
+        "use strict";
+
+        var connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chatHub")
+        .configureLogging(signalR.LogLevel.Debug)
+        .build();
+
+        const sendButton = document.getElementById('send-button');
+        //Disable send button until connection is established
+        sendButton.disabled = true;
+
+        connection.on("ReceiveMessage", function (user, message, image = '') {
+            var msg = message;
+            let dateTime = new Date();
+            let formattedDate = dateTime.toLocaleString('bg-BG');
+                //`${dateTime.getDate()}-${(dateTime.getMonth() + 1)}-${dateTime.getFullYear()} ${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
+
+            var li = document.createElement("li");
+
+            li.classList.add("clearfix");
+            li.innerHTML = `<div class="message-data">
+                                            <span class="message-data-time">${formattedDate}</span>
+                                            <img src="~/img/NoAvatarProfileImage.png" alt="avatar">
+                                        </div>
+                            <div class="message my-message">${msg}</div>`;
+
+            document.getElementById("message-list").appendChild(li);
+            //updateScroll();
+            let oldCount = parseInt(document.getElementById("messagesSkipCount").value)
+            document.getElementById("messagesSkipCount").value = oldCount + 1;
+        });
+
+        connection.on('SendMessage', function (user, message, image = '') {
+            var msg = message;
+            let dateTime = new Date()
+            let formattedDate = dateTime.toLocaleString('bg-BG');
+                //`${dateTime.getDate()}-${(dateTime.getMonth() + 1)}-${dateTime.getFullYear()} ${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
+
+            var li = document.createElement("li");
+
+            li.classList.add("clearfix");
+            li.innerHTML = `<div class="message-data text-right">
+                                            <span class="message-data-time">${formattedDate}</span>
+                                            <img src="~/img/NoAvatarProfileImage.png" alt="avatar">
+                            </div>
+                            <div class="message other-message float-right">${msg}</div>`;
+
+            document.getElementById("message-list").appendChild(li);
+            //updateScroll(); 
+            let oldCount = parseInt(document.getElementById("messagesSkipCount").value)
+            document.getElementById("messagesSkipCount").value = oldCount + 1;
+        });
+
+        connection.start().then(function () {
+            sendButton.disabled = false;
+            var toUser = document.getElementById('receiver-fullname').textContent;
+            var fromUser = document.getElementById('sender-fullname').textContent;
+            var group = document.getElementById('group-name').textContent;
+
+            connection.invoke('AddToGroup', `${group}`, toUser, fromUser).catch(function (err) {
+                return console.error(err.message.toString());
+            });
+
+            connection.invoke('UpdateMessageNotifications', toUser, fromUser).catch(function (err) {
+                return console.error(err.toString());
+            });
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        sendButton.addEventListener('click', function (event) {
+            let toUser = document.getElementById("receiver").textContent;
+            let fromUser = document.getElementById("sender").textContent;
+            let message = document.getElementById("chat-text").value;
+            let group = document.getElementById("group-name").textContent;
+            let images = document.getElementById("upload-image").files;
+            let files = document.getElementById("upload-file").files;
+            let data = new FormData();
+
+            for (var i = 0; i < images.length; i++) {
+                data.append('files', images[i]);
+            }
+
+            for (var i = 0; i < files.length; i++) {
+                data.append('files', files[i]);
+            }
+
+            if (message && images.length == 0 && files.length == 0) {
+                connection.invoke('SendMessage', fromUser, toUser, message, group).catch(function (err) {
+                    return console.error(err.toString());
+                });
+
+                connection.invoke('ReceiveMessage', fromUser, message, group).catch(function (err) {
+                    return console.error(err.toString());
+                });
+
+                document.getElementById("chat-text").value = "";
+            } else {
+                data.append('toUsername', toUser);
+                data.append('fromUsername', fromUser);
+                data.append('group', group);
+                data.append('message', message);
+
+                if (images.length > 0 || files.length > 0) {
+                    
+                    $.ajax({
+                        url: `/PrivateChat/With/${toUser}/Group/${group}/SendFiles`,
+                        processData: false,
+                        contentType: false,
+                        type: "POST",
+                        data: data,
+                        success: function (result) {
+                            if (result.haveImages) {
+                                document.getElementById("upload-image").disabled = false;
+                            }
+
+                            if (result.haveFiles) {
+                                document.getElementById("upload-file").disabled = false;
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err.statusText);
+                        }
+                    });
+
+                    document.getElementById("upload-image").value = "";
+                    document.getElementById("upload-file").value = "";
+                }
+            }
+
+            document.getElementById("chat-text").innerHTML = "";
+            $('#chat-text').css('padding-left', '10px');
+            event.preventDefault();
+        });
+
+        //function updateInputScroller() {
+        //    let scroller = document.getElementById("messageInput");
+        //    scroller.scrollTop = scroller.scrollHeight;
+        //}
+
+        //function zoomChatImage(imageUrl) {
+        //    document.querySelector(".modalChatImage").style.display = "block";
+        //    document.querySelector("#image-content").src = imageUrl;
+        //}
+
+        //function closeChatZoomedImage() {
+        //    document.querySelector(".modalChatImage").style.display = "none";
+        //}
+
+        //function updateScroll() {
+        //if (document.getElementById("scrollBottomButton").style.visibility != "visible") {
+        //    let element = document.getElementById("demo-chat-body");
+        //    element.scrollTop = element.scrollHeight;
+        //    }
+        //}
+</script>
 }

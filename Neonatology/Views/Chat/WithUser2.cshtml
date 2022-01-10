@@ -1,0 +1,184 @@
+﻿@model ChatWithUserViewModel
+
+@{
+    ViewBag.Title = $"Разговор с {Model.User.FullName}";
+}
+
+@section head{
+<style type="text/css">
+    body {
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 36%, rgba(23,162,184,1) 100%);
+    }
+</style>
+}
+
+<div class="container jumbotron-opacity-chat">
+    <div class="row no-gutters">
+        <div class="col-md-12">
+            <h2 class=" text-center">
+                @ViewBag.Title
+            </h2>
+
+            <hr />
+
+            <div id="messagesList" class="messages">
+                @foreach (var message in Model.Messages)
+                {
+                    <div class="card-sm">
+                        <h5 class="@(Model.User.Id == message.SenderId ? "text-left" : "text-right")">@message.FullName</h5>
+                        <div class="container">
+                            <p class="card-text @(Model.User.Id == message.SenderId ? "text-left" : "text-right")">@message.Content</p>
+                            <span class="time-date @(Model.User.Id == message.SenderId ? "text-left" : "text-right")">@message.CreatedOn</span>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="form-control-plaintext">
+                @if (Model.CanChat)
+                {
+                    <div class="panel-chat-footer">
+                        <div id="addMessageForm">
+                            <div class="form-group">
+                                <textarea id="messageInput" class="form-control" placeholder="Напиши съобщение..."></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-auto ml-auto">
+                                    <button id="sendButton" class="btn btn-primary hvr-grow">Изпрати</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="chat-action-icon" id="imageButton">
+                                    <i class="far fa-images"></i>
+                                    <span class="input-image-box">
+                                        <input accept=".jpg, .jpeg, .png" type="file" multiple id="uploadImage">
+                                    </span>
+                                </div>
+                                <div id="imageSpinner"></div>
+                                <div class="chat-action-icon" id="fileButton">
+                                    <i class="fas fa-paperclip"></i>
+                                    <span class="input-file-box">
+                                        <input accept=".zip, .rar, .docx, .xlsx, application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf" type="file" multiple id="uploadFile">
+                                    </span>
+                                </div>
+                                <div id="fileSpinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+@*<script src="~/js/chat.js"></script>*@
+<script>
+    $('#messagesList')[0].scrollTop = $('#messagesList')[0].scrollHeight;
+
+    $('#messageInput').on('keypress',
+        function (e) {
+            if (e.which === 13 && !e.shiftKey) {
+                e.preventDefault();
+                $('#sendButton').click();
+            }
+        });
+
+    var connection = new signalR.HubConnectionBuilder()
+        .withUrl('/chat')
+        .build();
+
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    connection.on('ReceiveMessage',
+        function (message) {
+            location.reload();
+        });
+
+    document.getElementById('sendButton').addEventListener('click', function (event) {
+
+        let message = document.getElementById('messageInput').value;
+        let images = document.getElementById('uploadImage').files;
+        let files = document.getElementById('uploadFile').files;
+        let data = new FormData();
+
+        for (var i = 0; i < images.length; i++) {
+            data.append('files', images[i]);
+        }
+
+        for (var i = 0; i < files.length; i++) {
+            data.append('files', files[i]);
+        }
+
+        if (message && images.length == 0 && files.length == 0) {
+            connection.invoke('SendMessage', message, '@Model.User.Id').catch(function (err) {
+                return console.error(err.toString());
+            });
+
+            connection.invoke('ReceiveMessage', message, '@Model.User.Id').catch(function (err) {
+                return console.error(err.toString());
+            });
+
+            document.getElementById('messageInput').value = '';
+        } else {
+            data.append('message', message);
+
+            if (images.length > 0 || files.length > 0) {
+                if (images.length > 0) {
+                    document.getElementById("imageSpinner").style.display = "block";
+                    document.querySelector("#imageButton i").classList = "";
+                    document.querySelector("#imageButton i").classList.add("fas", "fa-cloud-upload-alt");
+                    document.getElementById("uploadImage").disabled = true;
+                }
+
+                if (files.length > 0) {
+                    document.getElementById("fileSpinner").style.display = "block";
+                    document.querySelector("#fileButton i").classList = "";
+                    document.querySelector("#fileButton i").classList.add("fas", "fa-file-upload");
+                    document.getElementById("uploadFile").disabled = true;
+                }
+
+                $.ajax({
+                    url: `/PrivateChat/With/${toUser}/Group/${group}/SendFiles`,
+                    processData: false,
+                    contentType: false,
+                    type: "POST",
+                    data: data,
+                    success: function (result) {
+                        if (result.haveImages) {
+                            document.getElementById("imageSpinner").style.display = "none";
+                            document.querySelector("#imageButton i").classList = "";
+                            document.querySelector("#imageButton i").classList.add("far", "fa-images");
+                            let imageBadge = document.querySelector(".select-image-badge");
+                            imageBadge.style.boxShadow = "";
+                            imageBadge.style.animation = "";
+                            imageBadge.textContent = "0";
+                            document.getElementById("uploadImage").disabled = false;
+                        }
+
+                        if (result.haveFiles) {
+                            document.getElementById("fileSpinner").style.display = "none";
+                            document.querySelector("#fileButton i").classList = "";
+                            document.querySelector("#fileButton i").classList.add("fas", "fa-paperclip");
+                            let fileBadge = document.querySelector(".select-file-badge");
+                            fileBadge.style.boxShadow = "";
+                            fileBadge.style.animation = "";
+                            fileBadge.textContent = "0";
+                            document.getElementById("uploadFile").disabled = false;
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err.statusText);
+                    }
+                });
+
+                document.getElementById("uploadImage").value = "";
+                document.getElementById("uploadFile").value = "";
+            }
+        }
+        event.preventDefault();
+    });
+</script>
+}

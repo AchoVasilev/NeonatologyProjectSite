@@ -31,8 +31,12 @@
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; } = new HashSet<IdentityUserLogin<string>>();
 
-        public virtual ICollection<Message> SentMessages { get; set; } = new List<Message>();
+        public virtual ICollection<Message> SentMessages { get; set; } = new HashSet<Message>();
 
-        public virtual ICollection<Message> ReceivedMessages { get; set; } = new List<Message>();
+        public virtual ICollection<Message> ReceivedMessages { get; set; } = new HashSet<Message>();
+
+        public ICollection<UserGroup> UserGroups { get; set; } = new HashSet<UserGroup>();
+
+        public virtual ICollection<ChatImage> ChatImages { get; set; } = new HashSet<ChatImage>();
     }
 }

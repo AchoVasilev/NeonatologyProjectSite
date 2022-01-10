@@ -48,6 +48,12 @@
 
         public DbSet<NotificationType> NotificationTypes { get; set; }
 
+        public DbSet<Group> Groups { get; set; }
+
+        public DbSet<ChatImage> ChatImages { get; set; }
+
+        public DbSet<UserGroup> UserGroups { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
@@ -65,6 +71,7 @@
             var entityTypes = builder.Model.GetEntityTypes().ToList();
             var foreignKeys = entityTypes
                     .SelectMany(e => e.GetForeignKeys().Where(f => f.DeleteBehavior == DeleteBehavior.Cascade));
+
             foreach (var foreignKey in foreignKeys)
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;

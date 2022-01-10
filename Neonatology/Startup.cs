@@ -23,11 +23,11 @@ namespace Neonatology
     using Services;
     using Services.AppointmentCauseService;
     using Services.AppointmentService;
+    using Services.ChatService;
     using Services.CityService;
     using Services.DoctorService;
     using Services.EmailSenderService;
     using Services.ImageService;
-    using Services.MessageService;
     using Services.NotificationService;
     using Services.OfferService;
     using Services.PatientService;
@@ -97,7 +97,7 @@ namespace Neonatology
                 .AddTransient<ISpecializationService, SpecializationService>()
                 .AddTransient<ISlotService, SlotService>()
                 .AddTransient<IOfferService, OfferService>()
-                .AddTransient<IMessageService, MessageService>()
+                .AddTransient<IChatService, ChatService>()
                 .AddTransient<IUserService, UserService>()
                 .AddTransient<IAppointmentCauseService, AppointmentCauseService>()
                 .AddTransient<IPaymentService, PaymentService>()
@@ -182,7 +182,7 @@ namespace Neonatology
 
                 endpoints.MapRazorPages();
 
-                endpoints.MapHub<ChatHub>("/chat");
+                endpoints.MapHub<ChatHub>("/chatHub");
                 endpoints.MapHub<NotificationHub>("/notificationHub");
             });
         }

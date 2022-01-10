@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - @Common.GlobalConstants.SystemName</title>
+    <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/fonts/css/font-awesome.css" />
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" />
@@ -11,6 +12,9 @@
     @await this.RenderSectionAsync("Styles", required: false)
 </head>
 <body>
+    <audio id="notificationAudio">
+        <source id="targetAudio" src="~/NotificationSound1.mp3" type="audio/mpeg">
+    </audio>
     @RenderSection("head", required: false)
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -57,10 +61,55 @@
             Всички права запазени &copy; 2021 - @DateTime.UtcNow.Year - @Common.GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика за поверителност</a>
         </div>
     </footer>
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a asp-area="" asp-controller="Notification" asp-action="Index" class="stickyIcon float">
+            <span class="fa-stack fa-3x" id="notificationCount" data-count="0">
+                <i class="fa fa-circle fa-stack-2x" id="bellBackground"></i>
+                <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    }
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
+    @*<script type="text/javascript" src="~/js~/js/notification.js"></script>*@
+
+    <script type="text/javascript">
+            "use strict"
+
+        let notificationConnection = new signalR.HubConnectionBuilder().withUrl("/notificationHub").build();
+
+        notificationConnection.start().then(function () {
+            if (!sessionStorage.getItem("isFirstNotificationSound")) {
+                sessionStorage.setItem("isFirstNotificationSound", true);
+            } else {
+                sessionStorage.setItem("isFirstNotificationSound", false);
+            }
+
+            let isFirstNotificationSound = sessionStorage.getItem("isFirstNotificationSound") == "true" ? true : false;
+            notificationConnection.invoke("GetUserNotificationCount", isFirstNotificationSound).catch(function (err) {
+                return console.error(err.toString());
+            });
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        notificationConnection.on("ReceiveNotification", function (count, isFirstNotificationSound) {
+            const notificationCountElement = document.getElementById("notificationCount");
+            notificationCountElement.dataset.count = count;
+
+            if (count > 0) {
+                if (isFirstNotificationSound) {
+                    document.querySelector("audio").load();
+                    document.querySelector("audio").play();
+                }
+            }
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

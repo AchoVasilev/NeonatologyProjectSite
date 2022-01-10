@@ -5,6 +5,8 @@ using Common;
 
     using global::Data.Models;
 
+    using Org.BouncyCastle.Math.EC.Rfc7748;
+
     using ViewModels.Appointments;
     using ViewModels.Chat;
     using ViewModels.City;
@@ -70,6 +72,10 @@ using Common;
                     opt.MapFrom(y => y.Doctor.FirstName != null ?
                     "Д-р " + y.Doctor.FirstName + " " + y.Doctor.LastName :
                     y.Patient.FirstName + " " + y.Patient.LastName);
+                })
+                .ForMember(x => x.Email, opt =>
+                {
+                    opt.MapFrom(y => y.Doctor.Email);
                 });
 
             this.CreateMap<Message, ChatMessageWithUserViewModel>()

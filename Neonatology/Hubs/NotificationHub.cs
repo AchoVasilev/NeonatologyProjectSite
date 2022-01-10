@@ -2,11 +2,13 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.SignalR;
 
     using Services.NotificationService;
     using Services.UserService;
 
+    [Authorize]
     public class NotificationHub : Hub
     {
         private readonly IUserService userService;
@@ -20,12 +22,12 @@
 
         public async Task GetUserNotificationCount(bool isFirstNotificationSound)
         {
-            var username = this.Context.User.Identity.Name;
+            var userId = this.Context.UserIdentifier;
 
-            if (username != null)
+            if (userId != null)
             {
-                var targetUser = await this.userService.GetUserByUsernameAsync(username);
-                var notificationsCount = await this.notificationService.GetUserNotificationsCount(username);
+                var targetUser = await this.userService.GetUserByIdAsync(userId);
+                var notificationsCount = await this.notificationService.GetUserNotificationsCount(userId);
 
                 await this.Clients.User(targetUser.Id).SendAsync("ReceiveNotification", notificationsCount, isFirstNotificationSound);
             }

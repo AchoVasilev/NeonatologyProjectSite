@@ -32,6 +32,8 @@
         public const int CityId = 582;
 
         public const string SuccessfulApointmentEmailMsgSubject = "Записване на час при д-р Петрова";
+        public const string ChatGroupNameSeparator = "->";
+        public const int MessagesCountPerScroll = 10;
 
         public static class DateTimeFormats
         {

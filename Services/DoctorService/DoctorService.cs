@@ -32,9 +32,15 @@
             this.cloudinary = cloudinary;
         }
 
-        public async Task<DoctorProfileViewModel> GetDoctorById(string userId)
+        public async Task<DoctorProfileViewModel> GetDoctorById(string doctorId)
             => await this.data.Doctors
-            .Where(x => x.Id == userId)
+            .Where(x => x.Id == doctorId)
+            .ProjectTo<DoctorProfileViewModel>(this.mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync();
+
+        public async Task<DoctorProfileViewModel> GetDoctorByUserId(string userId)
+            => await this.data.Doctors
+            .Where(x => x.UserId == userId)
             .ProjectTo<DoctorProfileViewModel>(this.mapper.ConfigurationProvider)
             .FirstOrDefaultAsync();
 
@@ -58,6 +64,12 @@
             => await this.data.Doctors
                     .Select(x => x.Id)
                     .FirstOrDefaultAsync();
+
+        public async Task<string> GetDoctorEmail(string doctorId)
+            => await this.data.Doctors
+                         .Where(x => x.Id == doctorId)
+                         .Select(x => x.Email)
+                         .FirstOrDefaultAsync();
 
         public async Task<bool> EditDoctorAsync(DoctorEditFormModel model)
         {

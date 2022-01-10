@@ -1,38 +1,45 @@
 ﻿namespace Neonatology.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
-    using Infrastructure;
+    using Common;
 
+    using Data.Models;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
+    using Services.ChatService;
     using Services.DoctorService;
-    using Services.MessageService;
     using Services.PatientService;
-    using Services.PaymentService;
     using Services.UserService;
 
     using ViewModels.Chat;
+    using ViewModels.Patient;
 
+    [Authorize]
     public class ChatController : BaseController
     {
-        private readonly IMessageService messageService;
-        private readonly IUserService userService;
+        private readonly IChatService chatService;
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly IDoctorService doctorService;
-        private readonly IPaymentService paymentService;
+        private readonly IUserService userService;
         private readonly IPatientService patientService;
 
         public ChatController(
-            IMessageService messageService,
-            IUserService userService,
+            IChatService chatService,
+            UserManager<ApplicationUser> userManager,
             IDoctorService doctorService,
-            IPaymentService paymentService, 
+            IUserService userService,
             IPatientService patientService)
         {
-            this.messageService = messageService;
-            this.userService = userService;
+            this.chatService = chatService;
+            this.userManager = userManager;
             this.doctorService = doctorService;
-            this.paymentService = paymentService;
+            this.userService = userService;
             this.patientService = patientService;
         }
 
@@ -41,45 +48,69 @@
             var doctorId = await this.doctorService.GetDoctorId();
             var model = new ChatUserViewModel
             {
-                Id = await this.userService.GetUserIdByDoctorIdAsync(doctorId)
+                Id = await this.userService.GetUserIdByDoctorIdAsync(doctorId),
+                Email = await this.doctorService.GetDoctorEmail(doctorId)
             };
 
             return View(model);
         }
 
-        public async Task<IActionResult> SendMessage()
+        public async Task<IActionResult> WithUser(string username, string group)
         {
-            var viewModel = new ChatSendMessageInputModel
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var groupUsers = new List<string>() { currentUser.Email, username };
+            var targetGroupName = group ?? string.Join(GlobalConstants.ChatGroupNameSeparator, groupUsers.OrderBy(x => x));
+
+            var receiver = await this.userManager.FindByNameAsync(username);
+            var doctorReceiver = await this.doctorService.GetDoctorByUserId(receiver.Id);
+            var patientReceiver = await this.patientService.GetPatientByUserIdAsync(receiver.Id);
+
+            var sender = await this.userManager.GetUserAsync(this.HttpContext.User);
+            var doctorSender = await this.doctorService.GetDoctorByUserId(sender.Id);
+            var patientSender = await this.patientService.GetPatientByUserIdAsync(sender.Id);
+
+            var receiverFullName = GetFullName(doctorReceiver, patientReceiver);
+
+            var senderFullName = GetFullName(doctorSender, patientSender);
+
+            var messages = await this.chatService.ExtractAllMessages(targetGroupName);
+            var model = new PrivateChatViewModel
             {
-                Users = await this.userService.GetAllChatUsers()
+                FromUser = sender,
+                ToUser = receiver,
+                ChatMessages = messages,
+                GroupName = targetGroupName,
+                ReceiverFullName = receiverFullName,
+                SenderFullName = senderFullName,
+                ReceiverEmail = receiver.Email,
+                SenderEmail = sender.Email
             };
 
-            return View(viewModel);
+            return this.View(model);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> SendMessage(ChatSendMessageInputModel model)
+        [HttpGet]
+        [Route("[controller]/With/{username?}/Group/{group?}/LoadMoreMessages/{messagesSkipCount?}")]
+        public async Task<IActionResult> LoadMoreMessages(string username, string group, int? messagesSkipCount)
         {
-            await this.messageService.CreateMessageAsync(model.Message, this.User.GetId(), model.ReceiverId);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            return RedirectToAction(nameof(WithUser), new { id = model.ReceiverId });
-        }
-
-        public async Task<IActionResult> WithUser(string id)
-        {
-            var currentUserId = this.User.GetId();
-            var isDoctor = await this.doctorService.UserIsDoctor(currentUserId);
-            var patientId = await this.patientService.GetPatientIdByUserIdAsync(currentUserId);
-            var hasPaid = await this.paymentService.PatientHasPaid(patientId);
-
-            var viewModel = new ChatWithUserViewModel
+            if (messagesSkipCount == null)
             {
-                User = await this.userService.GetChatUserById(id),
-                Messages = await this.messageService.GetAllWithUserAsync(currentUserId, id),
-                CanChat = hasPaid || isDoctor
-            };
+                messagesSkipCount = 0;
+            }
 
-            return View(viewModel);
+            ICollection<LoadMoreMessagesViewModel> data = await this.chatService
+                .LoadMoreMessages(group, (int)messagesSkipCount, currentUser);
+
+            return new JsonResult(data);
+        }
+
+        private static string GetFullName(ViewModels.Doctor.DoctorProfileViewModel doctor, PatientViewModel patient)
+        {
+            return doctor != null ?
+                            $"Д-р {doctor.FullName}" :
+                            $"{patient.FirstName} {patient.LastName}";
         }
     }
 }

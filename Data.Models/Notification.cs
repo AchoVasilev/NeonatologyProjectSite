@@ -7,8 +7,6 @@
     using Data.Common.Models;
     using Data.Models.Enums;
 
-    using static Data.Common.DataConstants.Constants;
-
     public class Notification : BaseModel<string>
     {
         public string Id { get; init; } = Guid.NewGuid().ToString();

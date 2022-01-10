@@ -6,14 +6,14 @@
 
     using Microsoft.AspNetCore.Mvc;
 
-    using Services.MessageService;
+    using Services.ChatService;
 
     [ViewComponent(Name = "ChatConversations")]
     public class ChatConversationsViewComponent : ViewComponent
     {
-        private readonly IMessageService messageService;
+        private readonly IChatService messageService;
 
-        public ChatConversationsViewComponent(IMessageService messageService)
+        public ChatConversationsViewComponent(IChatService messageService)
         {
             this.messageService = messageService;
         }
@@ -21,15 +21,16 @@
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var currentUserId = UserClaimsPrincipal.GetId();
-            var converstations = await this.messageService.GetAllMessages(currentUserId);
+            string converstations = null;//await this.messageService.GetAllMessages(currentUserId);
 
-            foreach (var user in converstations)
-            {
-                user.LastMessage = await this.messageService.GetLastMessage(currentUserId, user.Id);
-                user.LastMessageActivity = await this.messageService.GetLastActivityAsync(currentUserId, user.Id);
-            }
+            //foreach (var user in converstations)
+            //{
+            //    user.LastMessage = await this.messageService.GetLastMessage(currentUserId, user.Id);
+            //    user.LastMessageActivity = await this.messageService.GetLastActivityAsync(currentUserId, user.Id);
+            //}
 
             return View(converstations);
+
         }
     }
 }
