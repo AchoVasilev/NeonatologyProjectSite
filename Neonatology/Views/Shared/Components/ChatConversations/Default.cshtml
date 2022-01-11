@@ -2,20 +2,26 @@
 <div class="container col-6 row">
     @if (Model.Any())
     {
-        foreach (var conversation in Model)
-        {
-            <div class="jumbotron-opacity-chat">
-                <div class="container row table-bordered rounded-top rounded-bottom ">
-                    <h4 class="col-md-4">Разговор с: </h4>
-                    <a class="col-md-8 text-right" asp-controller="Chat" asp-action="WithUser" asp-route-id="@conversation.Id"><h4>@conversation.FullName</h4></a>
-                    <div class="text-body container-fluid col-md-12">
+        <div class="card-deck">
+            @foreach (var conversation in Model)
+            {
+                <div class="card">
+                    <img class="card-img-top" src="~/img/NoAvatarProfileImage.png" alt="Avatar">
+                    <div class="card-body">
+                   <a asp-controller="Chat"
+                        asp-action="WithUser"
+                        asp-route-username="@conversation.UserName"
+                        asp-route-group="@conversation.GroupName">
+                            <h5 class="card-title">Разговор с: @conversation.FullName</h5>
+                        </a>
                         <p class="card-text">Последно съобщение: @conversation.LastMessage</p>
-                        <span class="time-date">Последна активност: @conversation.LastMessageActivity</span>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Последна активност: @conversation.LastMessageActivity</small>
                     </div>
                 </div>
-                <br />
-            </div>
-        }
+            }
+        </div>
     }
     else
     {

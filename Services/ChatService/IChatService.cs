@@ -15,6 +15,16 @@
 
         Task<ICollection<Message>> ExtractAllMessages(string group);
 
-        Task<ICollection<LoadMoreMessagesViewModel>> LoadMoreMessages(string group, int messagesSkipCount, ApplicationUser currentUser);
+        Task<ICollection<LoadMoreMessagesViewModel>> LoadMoreMessages(string group, int messagesSkipCount, ApplicationUser currentUser, string username);
+
+        Task<ICollection<ChatConversationsViewModel>> GetAllMessages(string userId);
+
+        Task<string> GetLastMessage(string currentUserId, string userId);
+
+        Task<string> GetLastActivityAsync(string currentUserId, string userId);
+
+        Task<string> GetGroupId(string currentUserId, string userId);
+
+        Task<string> GetGroupName(string groupId);
     }
 }

@@ -27,15 +27,15 @@
             this.notificationHub = notificationHub;
         }
 
-        public async Task AddToGroup(string groupName, string receiverName, string senderName)
+        public async Task AddToGroup(string groupName, string receiverName, string senderName, string senderFullName)
         {
             await this.Groups.AddToGroupAsync(this.Context.ConnectionId, groupName);
             await this.chatService.AddUserToGroup(groupName, senderName, receiverName);
 
-            await this.Clients.Group(groupName).SendAsync("ReceiveMessage", senderName, $"{senderName} се присъдени към група {groupName}");
+            await this.Clients.Group(groupName).SendAsync("ReceiveMessage", senderFullName, $"{senderFullName} се присъдени към група {groupName}");
         }
 
-        public async Task SendMessage(string senderUsername, string receiverUsername, string message, string group)
+        public async Task SendMessage(string senderUsername, string receiverUsername, string message, string group, string senderFullName)
         {
             if (string.IsNullOrWhiteSpace(message))
             {
@@ -47,7 +47,7 @@
                 .SendMessageToUser(senderUsername, receiverUsername, message, group);
 
             await this.Clients.User(receiverId)
-                .SendAsync("ReceiveMessage", senderUsername, new HtmlSanitizer().Sanitize(message.Trim()));
+                .SendAsync("ReceiveMessage", senderFullName, new HtmlSanitizer().Sanitize(message.Trim()));
 
             var notificationId = await this.notificationService
                 .AddMessageNotification(message, receiverId, senderId);
@@ -66,10 +66,10 @@
             //    .SendAsync("VisualizeNotification", notification);
         }
 
-        public async Task ReceiveMessage(string senderUsername, string message, string group)
+        public async Task ReceiveMessage(string senderUsername, string message, string group, string senderFullName)
         {
             var senderId = this.Context.UserIdentifier;
-            await this.Clients.User(senderId).SendAsync("SendMessage", senderUsername, new HtmlSanitizer().Sanitize(message.Trim()));
+            await this.Clients.User(senderId).SendAsync("SendMessage", senderFullName, new HtmlSanitizer().Sanitize(message.Trim()));
         }
 
         public async Task UpdateMessageNotifications(string fromUsername, string username)

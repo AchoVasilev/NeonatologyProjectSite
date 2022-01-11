@@ -1,11 +1,10 @@
 ﻿namespace Neonatology.MappingProfile
 {
     using AutoMapper;
-using Common;
+
+    using Common;
 
     using global::Data.Models;
-
-    using Org.BouncyCastle.Math.EC.Rfc7748;
 
     using ViewModels.Appointments;
     using ViewModels.Chat;
@@ -73,7 +72,7 @@ using Common;
                     "Д-р " + y.Doctor.FirstName + " " + y.Doctor.LastName :
                     y.Patient.FirstName + " " + y.Patient.LastName);
                 })
-                .ForMember(x => x.Email, opt =>
+                .ForMember(x => x.DoctorEmail, opt =>
                 {
                     opt.MapFrom(y => y.Doctor.Email);
                 });

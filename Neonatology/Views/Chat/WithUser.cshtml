@@ -2,295 +2,89 @@
 
 <style>
     body {
-        background-color: #f4f7f6;
         margin-top: 20px;
     }
 
-    .card {
-        background: #fff;
-        transition: .5s;
-        border: 0;
-        margin-bottom: 30px;
-        border-radius: .55rem;
-        position: relative;
-        width: 100%;
-        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+    .img-circle {
+        border-radius: 50%
     }
 
-    .chat-app .people-list {
-        width: 280px;
-        position: absolute;
-        left: 0;
-        top: 0;
-        padding: 20px;
-        z-index: 7
+    .img-sm {
+        width: 46px;
+        height: 46px;
     }
 
-    .chat-app .chat {
-        margin-left: 280px;
-        border-left: 1px solid #eaeaea
+    .chat-online {
+        color: #34ce57
     }
 
-    .people-list {
-        -moz-transition: .5s;
-        -o-transition: .5s;
-        -webkit-transition: .5s;
-        transition: .5s
+    .chat-offline {
+        color: #e4606d
     }
 
-        .people-list .chat-list li {
-            padding: 10px 15px;
-            list-style: none;
-            border-radius: 3px
-        }
-
-            .people-list .chat-list li:hover {
-                background: #efefef;
-                cursor: pointer
-            }
-
-            .people-list .chat-list li.active {
-                background: #efefef
-            }
-
-            .people-list .chat-list li .name {
-                font-size: 15px
-            }
-
-        .people-list .chat-list img {
-            width: 45px;
-            border-radius: 50%
-        }
-
-        .people-list img {
-            float: left;
-            border-radius: 50%
-        }
-
-        .people-list .about {
-            float: left;
-            padding-left: 8px
-        }
-
-        .people-list .status {
-            color: #999;
-            font-size: 13px
-        }
-
-    .chat .chat-header {
-        padding: 15px 20px;
-        border-bottom: 2px solid #f4f7f6
+    .chat-messages {
+        display: flex;
+        flex-direction: column;
+        max-height: 800px;
+        overflow-y: scroll
     }
 
-        .chat .chat-header img {
-            float: left;
-            border-radius: 40px;
-            width: 40px
-        }
-
-        .chat .chat-header .chat-about {
-            float: left;
-            padding-left: 10px
-        }
-
-    .chat .chat-history {
-        padding: 20px;
-        border-bottom: 2px solid #fff
+    .chat-message-left,
+    .chat-message-right {
+        display: flex;
+        flex-shrink: 0
     }
 
-        .chat .chat-history ul {
-            padding: 0
-        }
-
-            .chat .chat-history ul li {
-                list-style: none;
-                margin-bottom: 30px
-            }
-
-                .chat .chat-history ul li:last-child {
-                    margin-bottom: 0px
-                }
-
-        .chat .chat-history .message-data {
-            margin-bottom: 15px
-        }
-
-            .chat .chat-history .message-data img {
-                border-radius: 40px;
-                width: 40px
-            }
-
-        .chat .chat-history .message-data-time {
-            color: #434651;
-            padding-left: 6px
-        }
-
-        .chat .chat-history .message {
-            color: #444;
-            padding: 18px 20px;
-            line-height: 26px;
-            font-size: 16px;
-            border-radius: 7px;
-            display: inline-block;
-            position: relative
-        }
-
-            .chat .chat-history .message:after {
-                bottom: 100%;
-                left: 7%;
-                border: solid transparent;
-                content: " ";
-                height: 0;
-                width: 0;
-                position: absolute;
-                pointer-events: none;
-                border-bottom-color: #fff;
-                border-width: 10px;
-                margin-left: -10px
-            }
-
-        .chat .chat-history .my-message {
-            background: #efefef
-        }
-
-            .chat .chat-history .my-message:after {
-                bottom: 100%;
-                left: 30px;
-                border: solid transparent;
-                content: " ";
-                height: 0;
-                width: 0;
-                position: absolute;
-                pointer-events: none;
-                border-bottom-color: #efefef;
-                border-width: 10px;
-                margin-left: -10px
-            }
-
-        .chat .chat-history .other-message {
-            background: #e8f1f3;
-            text-align: right
-        }
-
-            .chat .chat-history .other-message:after {
-                border-bottom-color: #e8f1f3;
-                left: 93%
-            }
-
-    .chat .chat-message {
-        padding: 20px
+    .chat-message-left {
+        margin-right: auto
     }
 
-    .online,
-    .offline,
-    .me {
-        margin-right: 2px;
-        font-size: 8px;
-        vertical-align: middle
+    .chat-message-right {
+        flex-direction: row-reverse;
+        margin-left: auto
     }
 
-    .online {
-        color: #86c541
+    .py-3 {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
     }
 
-    .offline {
-        color: #e47297
+    .px-4 {
+        padding-right: 1.5rem !important;
+        padding-left: 1.5rem !important;
     }
 
-    .me {
-        color: #1d8ecd
+    .flex-grow-0 {
+        flex-grow: 0 !important;
     }
 
-    .float-right {
-        float: right
-    }
-
-    .clearfix:after {
-        visibility: hidden;
-        display: block;
-        font-size: 0;
-        content: " ";
-        clear: both;
-        height: 0
-    }
-
-    @@media only screen and (max-width: 767px) {
-        .chat-app .people-list {
-            height: 465px;
-            width: 100%;
-            overflow-x: auto;
-            background: #fff;
-            left: -400px;
-            display: none
-        }
-
-            .chat-app .people-list.open {
-                left: 0
-            }
-
-        .chat-app .chat {
-            margin: 0
-        }
-
-            .chat-app .chat .chat-header {
-                border-radius: 0.55rem 0.55rem 0 0
-            }
-
-        .chat-app .chat-history {
-            height: 300px;
-            overflow-x: auto
-        }
-    }
-
-    @@media only screen and (min-width: 768px) and (max-width: 992px) {
-        .chat-app .chat-list {
-            height: 650px;
-            overflow-x: auto
-        }
-
-        .chat-app .chat-history {
-            height: 600px;
-            overflow-x: auto
-        }
-    }
-
-    @@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
-        .chat-app .chat-list {
-            height: 480px;
-            overflow-x: auto
-        }
-
-        .chat-app .chat-history {
-            height: calc(100vh - 350px);
-            overflow-x: auto
-        }
+    .border-top {
+        border-top: 1px solid #dee2e6 !important;
     }
 
     input[type="file"] {
-    display: none;
-}
+        display: none;
+    }
 </style>
 
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<div class="container p-0">
 
-<div class="container">
-    <div class="row clearfix">
-        <div class="col-lg-12">
-            <div class="chat">
-                <div class="chat-header clearfix">
+    <h1 class="h3 mb-3">Messages</h1>
+
+    <div class="card">
+        <div class="row g-0">
+            <div class="container-fluid">
+                <div class="py-2 px-4 border-bottom d-none d-lg-block">
                     <h3 id="group-name" style="text-align:center" hidden>@Model.GroupName</h3>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                <img src="~/img/NoAvatarProfileImage.png" alt="avatar">
-                            </a>
-                            <div class="chat-about">
-                                <h6 class="m-b-0" id="receiver-fullname">@Model.ReceiverFullName</h6>
-                                <h3 id="receiver" style="text-align:center" hidden>@Model.ReceiverEmail</h3>
-                                <small>Last seen: 2 hours ago</small>
-                            </div>
+                    <div class="d-flex align-items-center py-1">
+                        <div class="position-relative">
+                            <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="avatar">
                         </div>
-                        <div class="col-lg-6 hidden-sm text-right">
+                        <div class="flex-grow-1 pl-3">
+                            <strong id="receiver-fullname">@Model.ReceiverFullName</strong>
+                            <h3 id="receiver" style="text-align:center" hidden>@Model.ReceiverEmail</h3>
+                        </div>
+                        <div>
                             <h6 class="m-b-0" id="sender-fullname">@Model.SenderFullName</h6>
                             <h3 id="sender" style="text-align:center" hidden>@Model.SenderEmail</h3>
                             <label class="btn btn-outline-secondary" for="upload-image" style="cursor:pointer"><i class="fa fa-camera"></i></label>
@@ -300,43 +94,53 @@
                         </div>
                     </div>
                 </div>
-                <div class="chat-history">
-                    <ul class="m-b-0" id="message-list">
-                        @if (Model.ChatMessages != null && Model.ChatMessages.Count > 0)
-                        {
-                            @foreach (var message in Model.ChatMessages)
+
+                <div class="position-relative">
+                    <div onclick="scrollChatToBottom()" class="back-to-bottom-chat-body" id="scrollBottomButton">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="chat-messages p-4" id="chat-body">
+                        <ul class="list-unstyled media-block" id="message-list">
+                            @if (Model.ChatMessages != null && Model.ChatMessages.Count > 0)
                             {
-                                @if (message.Receiver.Id == Model.ToUser.Id)
+                                @foreach (var message in Model.ChatMessages)
                                 {
-                                    <li class="clearfix" id="@message.Id">
-                                        <div class="message-data">
-                                            <span class="message-data-time">@message.CreatedOn</span>
-                                            <img src="~/img/NoAvatarProfileImage.png" alt="avatar">
-                                        </div>
-                                        <div class="message my-message">@Html.Raw(message.Content)</div>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li class="clearfix" id="@message.Id">
-                                        <div class="message-data text-right">
-                                            <span class="message-data-time">@message.CreatedOn</span>
-                                            <img src="~/img/NoAvatarProfileImage.png" alt="avatar">
-                                        </div>
-                                        <div class="message other-message float-right">@Html.Raw(message.Content)</div>
-                                    </li>
+                                    @if (message.Receiver.Id == Model.ToUser.Id && Model.FromUser.Id != message.Sender.Id)
+                                    {
+                                        <li class="chat-message-left pb-4" id="@message.Id">
+                                            <div>
+                                                <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="Avatar">
+                                                <div class="text-muted small text-nowrap mt-2">@message.CreatedOn</div>
+                                            </div>
+                                            <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                                <div class="font-weight-bold mb-1">@Model.ReceiverFullName</div>
+                                                @Html.Raw(message.Content)
+                                            </div>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="chat-message-right pb-4" id="@message.Id">
+                                            <div>
+                                                <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="Avatar">
+                                                <div class="text-muted small text-nowrap mt-2">@message.CreatedOn</div>
+                                            </div>
+                                            <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                                <div class="font-weight-bold mb-1">@Model.SenderFullName</div>
+                                                @Html.Raw(message.Content)
+                                            </div>
+                                        </li>
+                                    }
                                 }
                             }
-                        }
-                    </ul>
-                    <input id="messagesSkipCount" type="hidden" value="@this.Model.ChatMessages.Count" />
+                        </ul>
+                        <input id="messagesSkipCount" type="hidden" value="@this.Model.ChatMessages.Count" />
+                    </div>
                 </div>
-                <div class="chat-message clearfix">
-                    <div class="input-group mb-0">
-                        <input id="chat-text" type="text" class="form-control" placeholder="Напиши съобщение...">
-                        <div class="input-group-prepend">
-                            <button type="submit" id="send-button" class="btn btn-secondary"><i class="fa fa-send"></i></button>
-                        </div>
+                <div class="flex-grow-0 py-3 px-4 border-top">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="chat-text" placeholder="Напиши съобщение..">
+                        <button class="btn btn-primary hvr-grow" id="send-button">Изпрати</button>
                     </div>
                 </div>
             </div>
@@ -346,160 +150,253 @@
 
 @section Scripts{
 <script type="text/javascript">
-        "use strict";
+    'use strict';
 
-        var connection = new signalR.HubConnectionBuilder()
-        .withUrl("/chatHub")
-        .configureLogging(signalR.LogLevel.Debug)
-        .build();
+    var connection = new signalR.HubConnectionBuilder()
+    .withUrl('/chatHub')
+    .configureLogging(signalR.LogLevel.Debug)
+    .build();
 
-        const sendButton = document.getElementById('send-button');
-        //Disable send button until connection is established
-        sendButton.disabled = true;
+    const sendButton = document.getElementById('send-button');
+    //Disable send button until connection is established
+    sendButton.disabled = true;
 
-        connection.on("ReceiveMessage", function (user, message, image = '') {
-            var msg = message;
-            let dateTime = new Date();
-            let formattedDate = dateTime.toLocaleString('bg-BG');
-                //`${dateTime.getDate()}-${(dateTime.getMonth() + 1)}-${dateTime.getFullYear()} ${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
+    connection.on('ReceiveMessage', function (user, message, userFullName, image = '') {
+        var msg = message;
+        let dateTime = new Date();
+        let formattedDate = dateTime.toLocaleString('bg-BG');
 
-            var li = document.createElement("li");
+        var li = document.createElement('li');
 
-            li.classList.add("clearfix");
-            li.innerHTML = `<div class="message-data">
-                                            <span class="message-data-time">${formattedDate}</span>
-                                            <img src="~/img/NoAvatarProfileImage.png" alt="avatar">
-                                        </div>
-                            <div class="message my-message">${msg}</div>`;
+        li.classList.add('chat-message-left', 'pb-4');
+        li.innerHTML = `<div>
+                               <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="Avatar">
+                               <div class="text-muted small text-nowrap mt-2">${formattedDate}</div>
+                                            </div>
+                               <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                               <div class="font-weight-bold mb-1">${user}</div>
+                               ${msg}
+                        </div>`;
 
-            document.getElementById("message-list").appendChild(li);
-            //updateScroll();
-            let oldCount = parseInt(document.getElementById("messagesSkipCount").value)
-            document.getElementById("messagesSkipCount").value = oldCount + 1;
+        document.getElementById('message-list').appendChild(li);
+
+        updateScroll();
+        let oldCount = parseInt(document.getElementById('messagesSkipCount').value)
+        document.getElementById('messagesSkipCount').value = oldCount + 1;
+    });
+
+    connection.on('SendMessage', function (user, message, userFullName, image = '') {
+        var msg = message;
+        let dateTime = new Date()
+        let formattedDate = dateTime.toLocaleString('bg-BG');
+
+        var li = document.createElement("li");
+
+        li.classList.add('chat-message-right', 'pb-4');
+        li.innerHTML = `<div>
+                               <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="Avatar">
+                               <div class="text-muted small text-nowrap mt-2">${formattedDate}</div>
+                                            </div>
+                               <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                               <div class="font-weight-bold mb-1">${user}</div>
+                               ${msg}
+                        </div>`;
+
+        document.getElementById('message-list').appendChild(li);
+
+        updateScroll();
+        let oldCount = parseInt(document.getElementById('messagesSkipCount').value)
+        document.getElementById('messagesSkipCount').value = oldCount + 1;
+    });
+
+    connection.start().then(function () {
+        sendButton.disabled = false;
+        var toUser = document.getElementById('receiver').textContent;
+        var fromUser = document.getElementById('sender').textContent;
+        var senderFullName = document.getElementById('sender-fullname').textContent;
+        var group = document.getElementById('group-name').textContent;
+
+        connection.invoke('AddToGroup', `${group}`, toUser, fromUser, senderFullName).catch(function (err) {
+            return console.error(err.message.toString());
         });
 
-        connection.on('SendMessage', function (user, message, image = '') {
-            var msg = message;
-            let dateTime = new Date()
-            let formattedDate = dateTime.toLocaleString('bg-BG');
-                //`${dateTime.getDate()}-${(dateTime.getMonth() + 1)}-${dateTime.getFullYear()} ${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
-
-            var li = document.createElement("li");
-
-            li.classList.add("clearfix");
-            li.innerHTML = `<div class="message-data text-right">
-                                            <span class="message-data-time">${formattedDate}</span>
-                                            <img src="~/img/NoAvatarProfileImage.png" alt="avatar">
-                            </div>
-                            <div class="message other-message float-right">${msg}</div>`;
-
-            document.getElementById("message-list").appendChild(li);
-            //updateScroll(); 
-            let oldCount = parseInt(document.getElementById("messagesSkipCount").value)
-            document.getElementById("messagesSkipCount").value = oldCount + 1;
-        });
-
-        connection.start().then(function () {
-            sendButton.disabled = false;
-            var toUser = document.getElementById('receiver-fullname').textContent;
-            var fromUser = document.getElementById('sender-fullname').textContent;
-            var group = document.getElementById('group-name').textContent;
-
-            connection.invoke('AddToGroup', `${group}`, toUser, fromUser).catch(function (err) {
-                return console.error(err.message.toString());
-            });
-
-            connection.invoke('UpdateMessageNotifications', toUser, fromUser).catch(function (err) {
-                return console.error(err.toString());
-            });
-        }).catch(function (err) {
+        connection.invoke('UpdateMessageNotifications', toUser, fromUser).catch(function (err) {
             return console.error(err.toString());
         });
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
 
-        sendButton.addEventListener('click', function (event) {
-            let toUser = document.getElementById("receiver").textContent;
-            let fromUser = document.getElementById("sender").textContent;
-            let message = document.getElementById("chat-text").value;
-            let group = document.getElementById("group-name").textContent;
-            let images = document.getElementById("upload-image").files;
-            let files = document.getElementById("upload-file").files;
-            let data = new FormData();
+    sendButton.addEventListener('click', function (event) {
+        let toUser = document.getElementById('receiver').textContent;
+        let fromUser = document.getElementById('sender').textContent;
+        let senderFullName = document.getElementById('sender-fullname').textContent;
+        let message = document.getElementById('chat-text').value;
+        let group = document.getElementById('group-name').textContent;
+        let images = document.getElementById('upload-image').files;
+        let files = document.getElementById('upload-file').files;
+        let data = new FormData();
 
-            for (var i = 0; i < images.length; i++) {
-                data.append('files', images[i]);
-            }
+        for (var i = 0; i < images.length; i++) {
+            data.append('files', images[i]);
+        }
 
-            for (var i = 0; i < files.length; i++) {
-                data.append('files', files[i]);
-            }
+        for (var i = 0; i < files.length; i++) {
+            data.append('files', files[i]);
+        }
 
-            if (message && images.length == 0 && files.length == 0) {
-                connection.invoke('SendMessage', fromUser, toUser, message, group).catch(function (err) {
-                    return console.error(err.toString());
+        if (message && images.length == 0 && files.length == 0) {
+            connection.invoke('SendMessage', fromUser, toUser, message, group, senderFullName).catch(function (err) {
+                return console.error(err.toString());
+            });
+
+            connection.invoke('ReceiveMessage', fromUser, message, group, senderFullName).catch(function (err) {
+                return console.error(err.toString());
+            });
+
+            document.getElementById('chat-text').value = '';
+        } else {
+            data.append('toUsername', toUser);
+            data.append('fromUsername', fromUser);
+            data.append('group', group);
+            data.append('message', message);
+
+            if (images.length > 0 || files.length > 0) {
+
+                $.ajax({
+                    url: `/Chat/With/${toUser}/Group/${group}/SendFiles`,
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    data: data,
+                    success: function (result) {
+                        if (result.haveImages) {
+                            document.getElementById('upload-image').disabled = false;
+                        }
+
+                        if (result.haveFiles) {
+                            document.getElementById('upload-file').disabled = false;
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err.statusText);
+                    }
                 });
 
-                connection.invoke('ReceiveMessage', fromUser, message, group).catch(function (err) {
-                    return console.error(err.toString());
-                });
+                document.getElementById('upload-image').value = '';
+                document.getElementById('upload-file').value = '';
+            }
+        }
 
-                document.getElementById("chat-text").value = "";
-            } else {
-                data.append('toUsername', toUser);
-                data.append('fromUsername', fromUser);
-                data.append('group', group);
-                data.append('message', message);
+        document.getElementById('chat-text').innerHTML = '';
+        $('#chat-text').css('padding-left', '10px');
+        event.preventDefault();
+        console.log('here');
+    });
 
-                if (images.length > 0 || files.length > 0) {
-                    
+    function updateInputScroller() {
+        let scroller = document.getElementById('chat-text');
+        scroller.scrollTop = scroller.scrollHeight;
+    }
+
+    function updateScroll() {
+    if (document.getElementById('scrollBottomButton').style.visibility != "visible") {
+        let element = document.getElementById('chat-body');
+        element.scrollTop = element.scrollHeight;
+        }
+    }
+</script>
+
+<script>
+        $(document).ready(function () {
+        $('#chat-body').scroll(function () {
+            let scrollHeight = document.getElementById('chat-body').scrollHeight;
+            let scrollDistanceToTop = document.getElementById('chat-body').scrollTop;
+            let chatBoyHeight = document.getElementById('chat-body').offsetHeight;
+            let distanceToBottom = scrollHeight - scrollDistanceToTop - chatBoyHeight;
+
+            if (distanceToBottom > 400) {
+                document.getElementById('scrollBottomButton').style.visibility = 'visible';
+            } else if (distanceToBottom >= 0 && distanceToBottom <= 100) {
+                document.getElementById('scrollBottomButton').style.visibility = 'hidden';
+            }
+
+            if ($('#chat-body').scrollTop() == 0) {
+                let messagesSkipCount = document.getElementById('messagesSkipCount').value;
+                let username = document.getElementById('receiver').textContent;
+                let usernameFullname = document.getElementById('receiver-fullname').textContent;
+                let group = document.getElementById('group-name').textContent;
+
+                if (messagesSkipCount && username && group) {
                     $.ajax({
-                        url: `/PrivateChat/With/${toUser}/Group/${group}/SendFiles`,
-                        processData: false,
-                        contentType: false,
-                        type: "POST",
-                        data: data,
-                        success: function (result) {
-                            if (result.haveImages) {
-                                document.getElementById("upload-image").disabled = false;
-                            }
+                        type: 'GET',
+                        url: `/Chat/With/${username}/Group/${group}/LoadMoreMessages/${messagesSkipCount}`,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: {
+                            'username': usernameFullname,
+                            'group': group,
+                            'messagesSkipCount': messagesSkipCount
+                        },
+                        headers: {
+                            RequestVerificationToken:
+                                $('input:hidden[name="__RequestVerificationToken"]').val()
+                        },
+                        success: function (data) {
+                            if (data.length > 0) {
+                                let oldCount = parseInt(document.getElementById('messagesSkipCount').value)
+                                document.getElementById('messagesSkipCount').value = oldCount + data.length;
+                                let oldScrollHeight = document.getElementById('chat-body').scrollHeight;
 
-                            if (result.haveFiles) {
-                                document.getElementById("upload-file").disabled = false;
+                                for (var message of data) {
+                                    let newMessage = document.createElement("li");
+                                    newMessage.id = message.id;
+                                    if (message.fromUsername == message.currentUsername) {
+                                    newMessage.classList.add('chat-message-right', 'pb-4');
+                                        newMessage.innerHTML += `
+                                        <div>
+                                            <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="Avatar">
+                                            <div class="text-muted small text-nowrap mt-2">${message.sendedOn}</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">${message.fromUsername}</div>
+                                            ${message.content}
+                                        </div>`;
+                                    } else {
+                                        newMessage.classList.add('chat-message-left', 'pb-4');
+                                        newMessage.innerHTML += `
+                                           <div>
+                                              <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="Avatar">
+                                              <div class="text-muted small text-nowrap mt-2">${message.sendedOn}</div>
+                                            </div>
+                                            <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                                <div class="font-weight-bold mb-1">${message.fromUsername}</div>
+                                                ${message.content}
+                                            </div>`;
+                                    }
+
+                                    let firstMessage = document.getElementById('message-list').firstChild;
+                                    document.getElementById('message-list').insertBefore(newMessage, firstMessage);
+                                }
+
+                                let scroll = document.getElementById('chat-body');
+                                let newScrollTop = scroll.scrollHeight - oldScrollHeight;
+                                scroll.scrollTop = newScrollTop;
                             }
                         },
-                        error: function (err) {
-                            console.log(err.statusText);
+                        error: function (msg) {
+                            console.error(msg);
                         }
                     });
-
-                    document.getElementById("upload-image").value = "";
-                    document.getElementById("upload-file").value = "";
                 }
             }
-
-            document.getElementById("chat-text").innerHTML = "";
-            $('#chat-text').css('padding-left', '10px');
-            event.preventDefault();
         });
+    });
 
-        //function updateInputScroller() {
-        //    let scroller = document.getElementById("messageInput");
-        //    scroller.scrollTop = scroller.scrollHeight;
-        //}
-
-        //function zoomChatImage(imageUrl) {
-        //    document.querySelector(".modalChatImage").style.display = "block";
-        //    document.querySelector("#image-content").src = imageUrl;
-        //}
-
-        //function closeChatZoomedImage() {
-        //    document.querySelector(".modalChatImage").style.display = "none";
-        //}
-
-        //function updateScroll() {
-        //if (document.getElementById("scrollBottomButton").style.visibility != "visible") {
-        //    let element = document.getElementById("demo-chat-body");
-        //    element.scrollTop = element.scrollHeight;
-        //    }
-        //}
+    function scrollChatToBottom() {
+        $('#chat-body').animate({
+            scrollTop: document.getElementById('chat-body').scrollHeight
+        }, 800);
+    }
 </script>
 }
