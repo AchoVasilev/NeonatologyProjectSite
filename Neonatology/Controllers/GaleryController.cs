@@ -1,5 +1,6 @@
 ﻿namespace Neonatology.Controllers
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using CloudinaryDotNet;
@@ -7,29 +8,32 @@
     using Infrastructure;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     using Services.DoctorService;
-    using Services.ImageService;
+    using Services.FileService;
 
     using ViewModels.Galery;
 
+    using static Common.GlobalConstants.FileConstants;
+
     public class GaleryController : BaseController
     {
-        private readonly IImageService imageService;
-        private readonly Cloudinary cloudinary;
+        private readonly IFileService fileService;
         private readonly IDoctorService doctorService;
+        private readonly Cloudinary cloudinary;
 
-        public GaleryController(IImageService imageService, Cloudinary cloudinary, IDoctorService doctorService)
+        public GaleryController(IFileService fileService, IDoctorService doctorService, Cloudinary cloudinary)
         {
-            this.imageService = imageService;
-            this.cloudinary = cloudinary;
+            this.fileService = fileService;
             this.doctorService = doctorService;
+            this.cloudinary = cloudinary;
         }
 
         public async Task<IActionResult> All()
         {
-            var model = await this.imageService.GetGaleryImagesAsync();
+            var model = await this.fileService.GetGaleryImagesAsync();
 
             return View(model);
         }
@@ -46,9 +50,33 @@
                 return Unauthorized();
             }
 
-            await this.imageService.UploadImages(cloudinary, model.Images);
+            foreach (var image in model.Images)
+            {
+                var result = await this.fileService.UploadImage(cloudinary, image, DefaultFolderName);
+
+                if (result != null)
+                {
+                    await this.fileService.AddImageToDatabase(result);
+                }
+            }
 
             return RedirectToAction(nameof(All), "Galery", new { area = "" });
+        }
+
+        public IActionResult Chat()
+        {
+            return View(new UploadImageModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Chat(UploadImageModel model)
+        {
+            foreach (var item in model.Images)
+            {
+                var result = await this.fileService.UploadFile(cloudinary, item, ChatFolderName);
+            }
+
+            return View();
         }
     }
 }

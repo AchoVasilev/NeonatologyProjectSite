@@ -1,11 +1,16 @@
 ﻿namespace Services.ChatService
 {
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+
+    using CloudinaryDotNet;
 
     using Common;
 
@@ -14,21 +19,30 @@
 
     using Ganss.XSS;
 
+    using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
+
+    using Services.FileService;
+    using Services.FileService.FileServiceModels;
 
     using ViewModels.Chat;
 
-    using static Common.GlobalConstants;
+    using static Common.GlobalConstants.FileConstants;
+    using static Common.GlobalConstants.ChatConstants;
 
     public class ChatService : IChatService
     {
         private readonly NeonatologyDbContext data;
         private readonly IMapper mapper;
+        private readonly IFileService imageService;
+        private readonly Cloudinary cloudinary;
 
-        public ChatService(NeonatologyDbContext data, IMapper mapper)
+        public ChatService(NeonatologyDbContext data, IMapper mapper, IFileService imageService, Cloudinary cloudinary)
         {
             this.data = data;
             this.mapper = mapper;
+            this.imageService = imageService;
+            this.cloudinary = cloudinary;
         }
 
         public async Task<string> SendMessageToUser(string senderName, string receiverName, string message, string groupName)
@@ -98,7 +112,7 @@
                 var messages = this.data.Messages
                     .Where(x => x.GroupId == targetGroup.Id)
                     .OrderByDescending(x => x.CreatedOn)
-                    .Take(GlobalConstants.MessagesCountPerScroll)
+                    .Take(MessagesCountPerScroll)
                     .OrderBy(x => x.CreatedOn)
                     .ToList();
 
@@ -129,7 +143,7 @@
                     .Where(x => x.GroupId == targetGroup.Id)
                     .OrderByDescending(x => x.CreatedOn)
                     .Skip(messagesSkipCount)
-                    .Take(GlobalConstants.MessagesCountPerScroll)
+                    .Take(MessagesCountPerScroll)
                     .ToList();
 
                 foreach (var message in messages)
@@ -234,5 +248,167 @@
 
         //    return true;
         //}
+
+        public async Task<SendFilesResponseViewModel> SendMessageWitFilesToUser(IList<IFormFile> files, string group, string toUsername, string fromUsername, string message)
+        {
+            var toUser = this.data.Users.FirstOrDefault(x => x.UserName == toUsername);
+            var toId = toUser.Id;
+
+            var fromUser = this.data.Users.FirstOrDefault(x => x.UserName == fromUsername);
+            var fromId = fromUser.Id;
+
+            await this.DeleteOldMessage(group);
+
+            var newMessage = new Message
+            {
+                Sender = fromUser,
+                Group = this.data.Groups.FirstOrDefault(x => x.Name.ToLower() == group.ToLower()),
+                Receiver = toUser,
+            };
+
+            StringBuilder messageContent = new StringBuilder();
+
+            if (message != null)
+            {
+                messageContent.AppendLine($"{new HtmlSanitizer().Sanitize(message.Trim())}<hr style=\"margin-bottom: 8px !important;\" />");
+            }
+
+            StringBuilder imagesContent = new StringBuilder();
+            StringBuilder filesContent = new StringBuilder();
+
+            var imagesCount = files
+                .Where(x => x.ContentType
+                    .Contains("image", StringComparison.CurrentCultureIgnoreCase))
+                .Count();
+
+            var result = new SendFilesResponseViewModel();
+
+            if (imagesCount > 0)
+            {
+                result.HaveImages = true;
+            }
+
+            var filesCount = files
+                .Where(x => !x.ContentType
+                    .Contains("image", StringComparison.CurrentCultureIgnoreCase))
+                .Count();
+
+            if (filesCount > 0)
+            {
+                result.HaveFiles = true;
+            }
+
+            foreach (var file in files)
+            {
+                var chatFile = new ChatImage
+                {
+                    MessageId = newMessage.Id,
+                    GroupId = this.data.Groups.FirstOrDefault(x => x.Name.ToLower() == group.ToLower()).Id,
+                };
+
+                IFileServiceModel fileModel;
+
+                if (file.ContentType.Contains("image", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    fileModel = await this.imageService.UploadImage(
+                                this.cloudinary,
+                                file,
+                                ChatFolderName);
+
+                    chatFile.Name = string.Format(ChatFileName, chatFile.Id);
+
+                    imagesContent.AppendLine($"<span onclick=\"zoomChatImage('{fileModel.Uri}')\"><img src=\"{fileModel.Uri}\" style=\"margin-right: 10px; width: 27px; height: 35px; margin-top: 5px;\"></span>");
+                }
+                else
+                {
+                    var fileExtension = Path.GetExtension(file.FileName);
+
+                    fileModel = await imageService.UploadFile(
+                                this.cloudinary,
+                                file,
+                                ChatFolderName);
+
+                    chatFile.Name = string.Format(ChatFileName, $"{chatFile.Id}{fileExtension}");
+
+                    string[] sizes = { "B", "KB", "MB", "GB", "TB" };
+                    double fileLength = file.Length;
+                    int order = 0;
+                    while (fileLength >= 1024 && order < sizes.Length - 1)
+                    {
+                        order++;
+                        fileLength /= 1024;
+                    }
+
+                    string fileSize = string.Format("{0:0.##} {1}", fileLength, sizes[order]);
+
+                    filesContent.AppendLine($"<p><a href=\"{fileModel.Uri}\"><i class=\"fas fa-download\"></i> {file.FileName} - ({fileSize})</a></p>");
+                }
+
+                chatFile.Url = fileModel.Uri;
+                newMessage.ChatImages.Add(chatFile);
+            }
+
+            if (imagesContent.Length == 0)
+            {
+                messageContent.AppendLine(filesContent.ToString().Trim());
+            }
+            else
+            {
+                messageContent.AppendLine(imagesContent.ToString().Trim());
+
+                if (filesContent.Length != 0)
+                {
+                    messageContent.AppendLine("<hr style=\"margin-bottom: 8px !important;\" />");
+                    messageContent.AppendLine(filesContent.ToString().Trim());
+                }
+            }
+
+            newMessage.Content = messageContent.ToString().Trim();
+            result.MessageContent = newMessage.Content;
+
+            this.data.Messages.Add(newMessage);
+            await this.data.SaveChangesAsync();
+
+            result.SenderId = fromId;
+            result.ReceiverId = toId;
+
+            return result;
+        }
+
+        private async Task DeleteOldMessage(string group)
+        {
+            var targetGroup = await this.data.Groups.FirstOrDefaultAsync(x => x.Name.ToLower() == group.ToLower());
+
+            if (targetGroup != null)
+            {
+                var messages = this.data.Messages
+                    .Where(x => x.GroupId == targetGroup.Id)
+                    .OrderBy(x => x.CreatedOn)
+                    .ToList();
+
+                if (messages.Count > SavedChatMessagesCount)
+                {
+                    var oldMessages = messages.Take(messages.Count - SavedChatMessagesCount);
+
+                    foreach (var oldMessageId in oldMessages.Select(x => x.Id).ToList())
+                    {
+                        var oldImages = this.data.ChatImages.Where(x => x.MessageId == oldMessageId).ToList();
+
+                        foreach (var oldImage in oldImages)
+                        {
+                            await this.imageService.DeleteFile(
+                                        this.cloudinary,
+                                        oldImage.Name,
+                                        ChatFolderName);
+                        }
+
+                        this.data.ChatImages.RemoveRange(oldImages);
+                    }
+
+                    this.data.Messages.RemoveRange(oldMessages);
+                    await this.data.SaveChangesAsync();
+                }
+            }
+        }
     }
 }

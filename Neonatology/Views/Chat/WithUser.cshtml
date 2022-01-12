@@ -1,75 +1,16 @@
 ﻿@model PrivateChatViewModel
 
-<style>
-    body {
-        margin-top: 20px;
-    }
+@section Styles{
+<link rel="stylesheet" href="~/chat/css/chat.css" />
+}
 
-    .img-circle {
-        border-radius: 50%
-    }
-
-    .img-sm {
-        width: 46px;
-        height: 46px;
-    }
-
-    .chat-online {
-        color: #34ce57
-    }
-
-    .chat-offline {
-        color: #e4606d
-    }
-
-    .chat-messages {
-        display: flex;
-        flex-direction: column;
-        max-height: 800px;
-        overflow-y: scroll
-    }
-
-    .chat-message-left,
-    .chat-message-right {
-        display: flex;
-        flex-shrink: 0
-    }
-
-    .chat-message-left {
-        margin-right: auto
-    }
-
-    .chat-message-right {
-        flex-direction: row-reverse;
-        margin-left: auto
-    }
-
-    .py-3 {
-        padding-top: 1rem !important;
-        padding-bottom: 1rem !important;
-    }
-
-    .px-4 {
-        padding-right: 1.5rem !important;
-        padding-left: 1.5rem !important;
-    }
-
-    .flex-grow-0 {
-        flex-grow: 0 !important;
-    }
-
-    .border-top {
-        border-top: 1px solid #dee2e6 !important;
-    }
-
-    input[type="file"] {
-        display: none;
-    }
-</style>
+@{
+    ViewData["Title"] = $"Чат с {Model.ReceiverFullName}";
+}
 
 <div class="container p-0">
 
-    <h1 class="h3 mb-3">Messages</h1>
+    <h1 class="h3 mb-3 text-center">@ViewData["Title"]</h1>
 
     <div class="card">
         <div class="row g-0">
@@ -83,21 +24,25 @@
                         <div class="flex-grow-1 pl-3">
                             <strong id="receiver-fullname">@Model.ReceiverFullName</strong>
                             <h3 id="receiver" style="text-align:center" hidden>@Model.ReceiverEmail</h3>
+                            <h6 class="m-b-0" id="sender-fullname" hidden>@Model.SenderFullName</h6>
+                            <h3 id="sender" style="text-align:center" hidden>@Model.SenderEmail</h3>
                         </div>
                         <div>
-                            <h6 class="m-b-0" id="sender-fullname">@Model.SenderFullName</h6>
-                            <h3 id="sender" style="text-align:center" hidden>@Model.SenderEmail</h3>
-                            <label class="btn btn-outline-secondary" for="upload-image" style="cursor:pointer"><i class="fa fa-camera"></i></label>
+                            <label class="btn btn-outline-secondary" for="upload-image" style="cursor:pointer" id="image-button">
+                                <i class="fa fa-camera"></i>
+                            </label>
                             <input accept=".jpg, .jpeg, .png" type="file" multiple id="upload-image" class="btn btn-outline-secondary">
-                            <label class="btn btn-outline-primary" for="upload-file" style="cursor:pointer"><i class="fa fa-paperclip"></i></label>
-                            <input accept=".zip, .rar, .docx, .xlsx, application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf" type="file" multiple id="upload-file">
+                            <label class="btn btn-outline-primary" for="upload-file" style="cursor:pointer" id="file-button">
+                                <i class="fa fa-paperclip"></i>
+                            </label>
+                            <input type="file" multiple id="upload-file" accept=".zip, .rar, .docx, .xlsx, application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf" >
                         </div>
                     </div>
                 </div>
 
                 <div class="position-relative">
                     <div onclick="scrollChatToBottom()" class="back-to-bottom-chat-body" id="scrollBottomButton">
-                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-chevron-circle-down"></i>
                     </div>
                     <div class="chat-messages p-4" id="chat-body">
                         <ul class="list-unstyled media-block" id="message-list">
@@ -148,13 +93,20 @@
     </div>
 </div>
 
+<div class="modalChatImage">
+    <div class="imageModalContent">
+        <i onclick="closeChatZoomedImage()" class="fas fa-window-close closeImage"></i>
+    </div>
+    <img id="image-content" class="imageModalContent" src="">
+    <div class="myCaption"></div>
+</div>
+
 @section Scripts{
 <script type="text/javascript">
     'use strict';
 
     var connection = new signalR.HubConnectionBuilder()
     .withUrl('/chatHub')
-    .configureLogging(signalR.LogLevel.Debug)
     .build();
 
     const sendButton = document.getElementById('send-button');
@@ -172,8 +124,8 @@
         li.innerHTML = `<div>
                                <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="Avatar">
                                <div class="text-muted small text-nowrap mt-2">${formattedDate}</div>
-                                            </div>
-                               <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                         </div>
+                         <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                <div class="font-weight-bold mb-1">${user}</div>
                                ${msg}
                         </div>`;
@@ -196,8 +148,8 @@
         li.innerHTML = `<div>
                                <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="Avatar">
                                <div class="text-muted small text-nowrap mt-2">${formattedDate}</div>
-                                            </div>
-                               <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                        </div>
+                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                <div class="font-weight-bold mb-1">${user}</div>
                                ${msg}
                         </div>`;
@@ -273,6 +225,8 @@
                         if (result.haveImages) {
                             document.getElementById('upload-image').disabled = false;
                         }
+                        console.log(result);
+                        console.log(result.toString());
 
                         if (result.haveFiles) {
                             document.getElementById('upload-file').disabled = false;
@@ -299,10 +253,19 @@
     }
 
     function updateScroll() {
-    if (document.getElementById('scrollBottomButton').style.visibility != "visible") {
-        let element = document.getElementById('chat-body');
-        element.scrollTop = element.scrollHeight;
+        if (document.getElementById('scrollBottomButton').style.visibility != "visible") {
+            let element = document.getElementById('chat-body');
+            element.scrollTop = element.scrollHeight;
         }
+    }
+
+    function zoomChatImage(imageUrl) {
+        document.querySelector(".modalChatImage").style.display = "block";
+        document.querySelector("#image-content").src = imageUrl;
+    }
+
+    function closeChatZoomedImage() {
+        document.querySelector(".modalChatImage").style.display = "none";
     }
 </script>
 
@@ -401,4 +364,153 @@
         }, 800);
     }
 </script>
+
+@*<script type="text/javascript">
+    $("#file-button i").click(function () {
+        $("#upload-file").trigger('click');
+    });
+    const errorMsg = "Файлът е прекалено голям!";
+
+    $('#upload-file').on('change', function () {
+        const fileExtensions = ["TXT", "TEXT", "DOCX", "DOC", "PDF", "PPT", "XLS", "XLSX", "ZIP", "RAR"];
+        let files = document.getElementById("upload-file").files;
+        const dtFiles = new DataTransfer();
+        const dtImages = new DataTransfer();
+
+        for (let file of files) {
+            let fileExtension = file.name.split('.').pop();
+            if (fileExtensions.includes(fileExtension.toUpperCase())) {
+                let sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+                if (sizeInMB > 15) {
+                    notify(errorMsg);
+                    continue;
+                }
+
+                dtFiles.items.add(file);
+            } else {
+                let sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+                if (sizeInMB > 15) {
+                    notify(errorMsg);
+                    continue;
+                }
+
+                dtImages.items.add(file);
+            }
+        }
+
+        document.getElementById("upload-file").files = dtFiles.files;
+        let filesCount = document.getElementById("upload-file").files.length;
+
+        if (dtImages.items.length > 0) {
+            transferImages(dtImages);
+        }
+    });
+
+    function transferFiles(dtFiles) {
+        const fileExtensions = ["TXT", "TEXT", "DOCX", "DOC", "PDF", "PPT", "XLS", "XLSX", "ZIP", "RAR"];
+        let files = document.getElementById("upload-file").files;
+        const dt = new DataTransfer();
+
+        for (let file of files) {
+            let fileExtension = file.name.split('.').pop();
+            if (fileExtensions.includes(fileExtension.toUpperCase())) {
+                dt.items.add(file);
+            }
+        }
+
+        for (let file of dtFiles.files) {
+            let fileExtension = file.name.split('.').pop();
+            let isFileExist = [...files].some(x => x.name == file.name);
+            if (fileExtensions.includes(fileExtension.toUpperCase()) && !isFileExist) {
+                dt.items.add(file);
+            }
+        }
+
+        document.getElementById("upload-file").files = dt.files;
+        let filesCount = document.getElementById("upload-file").files.length;
+    }
+
+            function notify(msg) {
+                const element = document.getElementById('errorBox');
+                const output = element.querySelector('span');
+                output.textContent = msg;
+                element.style.display = 'block';
+
+                setTimeout(() => element.style.display = 'none', 3000);
+            }
+</script>
+
+<script type="text/javascript">
+    $("#image-button i").click(function () {
+        $("#upload-image").trigger('click');
+    });
+    const errorImgMsg = "Файлът е прекалено голям!";
+
+    $('#upload-image').on('change', function () {
+        const imageExtensions = ["JPG", "PNG", "JPEG"];
+        let files = document.getElementById("upload-image").files;
+        const dtImages = new DataTransfer();
+        const dtFiles = new DataTransfer();
+
+        for (let file of files) {
+            let fileExtension = file.name.split('.').pop();
+            if (imageExtensions.includes(fileExtension.toUpperCase())) {
+                let sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+                if (sizeInMB > 15) {
+                    notify(errorImgMsg);
+                    continue;
+                }
+
+                dtImages.items.add(file);
+            } else {
+                let sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+                if (sizeInMB > 15) {
+                    notify(errorImgMsg);
+                    continue;
+                }
+
+                dtFiles.items.add(file);
+            }
+        }
+
+        document.getElementById("upload-image").files = dtImages.files;
+        let filesCount = document.getElementById("upload-image").files.length;
+
+        if (dtFiles.items.length > 0) {
+            transferFiles(dtFiles);
+        }
+    });
+
+    function transferImages(dtImages) {
+        const imageExtensions = ["JPG", "PNG", "JPEG"];
+        let images = document.getElementById("upload-image").files;
+        const dt = new DataTransfer();
+
+        for (let image of images) {
+            let fileExtension = image.name.split('.').pop();
+            if (imageExtensions.includes(fileExtension.toUpperCase())) {
+                dt.items.add(image);
+            }
+        }
+
+        for (let image of dtImages.files) {
+            let fileExtension = image.name.split('.').pop();
+            let isFileExist = [...images].some(x => x.name == image.name);
+            if (imageExtensions.includes(fileExtension.toUpperCase()) && !isFileExist) {
+                dt.items.add(image);
+            }
+        }
+
+        document.getElementById("upload-image").files = dt.files;
+    }
+
+        function notify(msg) {
+            const element = document.getElementById('errorBox');
+            const output = element.querySelector('span');
+            output.textContent = msg;
+            element.style.display = 'block';
+
+            setTimeout(() => element.style.display = 'none', 3000);
+        }
+</script>*@
 }

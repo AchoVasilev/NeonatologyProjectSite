@@ -2,6 +2,10 @@
 @inject UserManager<ApplicationUser> UserManager
 @model UploadImageModel
 
+@{
+    ViewData["Title"] = "Галерия";
+}
+
 @if (SignInManager.IsSignedIn(User) &&
 User.IsInRole(Common.GlobalConstants.DoctorRoleName) ||
 User.IsInRole(Common.GlobalConstants.AdministratorRoleName))
@@ -16,7 +20,7 @@ User.IsInRole(Common.GlobalConstants.AdministratorRoleName))
     </form>
 }
 
-<h1 class="text-center">Галерия</h1>
+<h1 class="text-center">@ViewData["Title"]</h1>
 
 <hr />
 

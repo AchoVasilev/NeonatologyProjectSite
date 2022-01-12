@@ -14,13 +14,13 @@ using System;
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
-        public DateTime ModifiedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
 
-        public DateTime DeletedOn { get; set; }
+        public DateTime? DeletedOn { get; set; }
 
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
-        public bool IsConfirmed { get; set; }
+        public bool? IsConfirmed { get; set; }
 
         public int Number { get; set; }
 

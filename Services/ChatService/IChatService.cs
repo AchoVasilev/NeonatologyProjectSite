@@ -5,6 +5,8 @@
 
     using Data.Models;
 
+    using Microsoft.AspNetCore.Http;
+
     using ViewModels.Chat;
 
     public interface IChatService
@@ -12,6 +14,8 @@
         Task AddUserToGroup(string groupName, string senderName, string receiverName);
 
         Task<string> SendMessageToUser(string senderName, string receiverName, string message, string groupName);
+
+        Task<SendFilesResponseViewModel> SendMessageWitFilesToUser(IList<IFormFile> files, string group, string toUsername, string fromUsername, string message);
 
         Task<ICollection<Message>> ExtractAllMessages(string group);
 

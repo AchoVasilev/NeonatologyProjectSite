@@ -32,8 +32,6 @@
         public const int CityId = 582;
 
         public const string SuccessfulApointmentEmailMsgSubject = "Записване на час при д-р Петрова";
-        public const string ChatGroupNameSeparator = "->";
-        public const int MessagesCountPerScroll = 10;
 
         public static class DateTimeFormats
         {
@@ -93,6 +91,20 @@
         public static class NotificationConstants
         {
             public const int MaxChatNotificationsPerUser = 5;
+        }
+
+        public static class FileConstants
+        {
+            public const string DefaultFolderName = "pediamed";
+            public const string ChatFolderName = "pediamedChat";
+            public const string ChatFileName = "{0}-ChatFile";
+        }
+
+        public static class ChatConstants
+        {
+            public const int SavedChatMessagesCount = 200;
+            public const string ChatGroupNameSeparator = "->";
+            public const int MessagesCountPerScroll = 10;
         }
     }
 }

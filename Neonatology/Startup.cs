@@ -27,7 +27,7 @@ namespace Neonatology
     using Services.CityService;
     using Services.DoctorService;
     using Services.EmailSenderService;
-    using Services.ImageService;
+    using Services.FileService;
     using Services.NotificationService;
     using Services.OfferService;
     using Services.PatientService;
@@ -93,7 +93,7 @@ namespace Neonatology
                 .AddTransient<IDoctorService, DoctorService>()
                 .AddTransient<ICityService, CityService>()
                 .AddTransient<IRatingService, RatingService>()
-                .AddTransient<IImageService, ImageService>()
+                .AddTransient<IFileService, Services.FileService.FileService>()
                 .AddTransient<ISpecializationService, SpecializationService>()
                 .AddTransient<ISlotService, SlotService>()
                 .AddTransient<IOfferService, OfferService>()

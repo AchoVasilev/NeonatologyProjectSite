@@ -139,8 +139,6 @@
             var contentWithoutTags =
                 Regex.Replace(notification.Text, "<.*?>", string.Empty);
 
-            var model = new NotificationViewModel();
-
             return new NotificationViewModel
             {
                 Id = notification.Id,

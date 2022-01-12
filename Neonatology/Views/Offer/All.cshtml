@@ -1,6 +1,7 @@
 ﻿@model ICollection<OfferViewModel>
 @{
-   var i = 1;
+    var i = 1;
+    ViewBag.Title = "Нашите услуги";
 }
 
 @if (this.TempData.ContainsKey("Message"))
@@ -20,7 +21,7 @@
 }
 
 <div class="container jumbotron-opacity">
-    <h1 class="text-center">Моите часове</h1>
+    <h1 class="text-center">@ViewBag.Title</h1>
 
     <hr />
 

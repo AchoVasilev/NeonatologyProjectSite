@@ -10,21 +10,24 @@
     using CloudinaryDotNet;
 
     using Data;
+    using Data.Models;
 
     using Microsoft.EntityFrameworkCore;
 
-    using Services.ImageService;
+    using Services.FileService;
 
     using ViewModels.Doctor;
+
+    using static Common.GlobalConstants.FileConstants;
 
     public class DoctorService : IDoctorService
     {
         private readonly NeonatologyDbContext data;
-        private readonly IImageService imageService;
+        private readonly IFileService imageService;
         private readonly IMapper mapper;
         private readonly Cloudinary cloudinary;
 
-        public DoctorService(NeonatologyDbContext data, IMapper mapper, IImageService imageService, Cloudinary cloudinary)
+        public DoctorService(NeonatologyDbContext data, IMapper mapper, IFileService imageService, Cloudinary cloudinary)
         {
             this.data = data;
             this.mapper = mapper;
@@ -74,8 +77,13 @@
         public async Task<bool> EditDoctorAsync(DoctorEditFormModel model)
         {
             var doctor = await this.data.Doctors.FindAsync(model.Id);
-
             if (doctor == null)
+            {
+                return false;
+            }
+
+            var result = await this.imageService.UploadImage(cloudinary, model.Picture, DefaultFolderName);
+            if (result == null)
             {
                 return false;
             }
@@ -84,7 +92,6 @@
             doctor.LastName = model.LastName;
             doctor.PhoneNumber = model.PhoneNumber;
             doctor.YearsOfExperience = model.YearsOfExperience;
-            doctor.Image.RemoteImageUrl = model.ImageUrl;
             doctor.Age = model.Age;
             doctor.Biography = model.Biography;
             doctor.CityId = model.CityId;
@@ -92,7 +99,13 @@
             doctor.Image.IsDeleted = true;
             doctor.Image.DeletedOn = DateTime.UtcNow;
 
-            await this.imageService.UploadImage(cloudinary, model.Picture, doctor);
+            doctor.Image = new Image
+            {
+                Extension = result.Extension,
+                Url = result.Uri,
+                RemoteImageUrl = model.ImageUrl
+            };
+
             await this.data.SaveChangesAsync();
 
             return true;

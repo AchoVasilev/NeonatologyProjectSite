@@ -26,24 +26,24 @@
         }
 
         public async Task<IEnumerable<ChatUserViewModel>> GetAllChatUsers()
-            => await this.data.ApplicationUsers
+            => await this.data.Users
                     .ProjectTo<ChatUserViewModel>(this.mapper.ConfigurationProvider)
                     .ToListAsync();
 
         public async Task<ChatUserViewModel> GetChatUserById(string id)
-            => await this.data.ApplicationUsers
+            => await this.data.Users
                         .Where(x => x.Id == id && x.IsDeleted == false)
                         .ProjectTo<ChatUserViewModel>(this.mapper.ConfigurationProvider)
                         .FirstOrDefaultAsync();
 
         public async Task<string> GetUserIdByDoctorIdAsync(string doctorId)
-            => await this.data.ApplicationUsers
+            => await this.data.Users
                         .Where(x => x.DoctorId == doctorId && x.IsDeleted == false)
                         .Select(x => x.Id)
                         .FirstOrDefaultAsync();
 
         public async Task<ApplicationUser> GetUserByIdAsync(string id)
-            => await this.data.ApplicationUsers
+            => await this.data.Users
                          .Where(x => x.Id == id && x.IsDeleted == false)
                          .FirstOrDefaultAsync();
     }

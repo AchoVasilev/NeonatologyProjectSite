@@ -9,8 +9,12 @@
     using Data.Models;
 
     using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SignalR;
+
+    using Neonatology.Hubs;
 
     using Services.ChatService;
     using Services.DoctorService;
@@ -20,6 +24,8 @@
     using ViewModels.Chat;
     using ViewModels.Patient;
 
+    using static Common.GlobalConstants.ChatConstants;
+
     [Authorize]
     public class ChatController : BaseController
     {
@@ -28,19 +34,22 @@
         private readonly IDoctorService doctorService;
         private readonly IUserService userService;
         private readonly IPatientService patientService;
+        private readonly IHubContext<ChatHub> chatHub;
 
         public ChatController(
             IChatService chatService,
             UserManager<ApplicationUser> userManager,
             IDoctorService doctorService,
             IUserService userService,
-            IPatientService patientService)
+            IPatientService patientService, 
+            IHubContext<ChatHub> chatHub)
         {
             this.chatService = chatService;
             this.userManager = userManager;
             this.doctorService = doctorService;
             this.userService = userService;
             this.patientService = patientService;
+            this.chatHub = chatHub;
         }
 
         public async Task<IActionResult> All()
@@ -62,7 +71,7 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var groupUsers = new List<string>() { currentUser.Email, username };
-            var targetGroupName = group ?? string.Join(GlobalConstants.ChatGroupNameSeparator, groupUsers.OrderBy(x => x));
+            var targetGroupName = group ?? string.Join(ChatGroupNameSeparator, groupUsers.OrderBy(x => x));
 
             var receiver = await this.userManager.FindByNameAsync(username);
             var doctorReceiver = await this.doctorService.GetDoctorByUserId(receiver.Id);
@@ -90,6 +99,35 @@
             };
 
             return this.View(model);
+        }
+
+        [HttpPost]
+        [Route("Chat/With/{toUsername?}/Group/{group?}/SendFiles")]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> SendFiles(IList<IFormFile> files, string group, string toUsername, string fromUsername, string message)
+        {
+            //var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            //if (!isAvailableToChat)
+            //{
+            //    this.TempData["Error"] = ErrorMessages.NotAbleToChat;
+            //    return this.RedirectToAction("Index", "Profile", new { Username = toUsername });
+            //}
+
+            var result = await this.chatService
+                .SendMessageWitFilesToUser(files, group, toUsername, fromUsername, message);
+
+            await this.chatHub
+                .Clients
+                .User(result.ReceiverId)
+                .SendAsync("ReceiveMessage", fromUsername, result.MessageContent);
+
+            await this.chatHub
+                .Clients
+                .User(result.SenderId)
+                .SendAsync("SendMessage", fromUsername, result.MessageContent);
+
+            return new JsonResult(new { result.HaveFiles, result.HaveImages });
         }
 
         [HttpGet]

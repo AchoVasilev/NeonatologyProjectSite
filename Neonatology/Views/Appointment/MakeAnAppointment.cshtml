@@ -4,6 +4,9 @@
 @{
     var requestToken = Antiforgery.GetAndStoreTokens(Context).RequestToken;
     var causes = Model.AppointmentCauses.Select(x => new SelectListItem(x.Name, x.Id.ToString())).ToList();
+    var userIsDoctor = this.User.IsInRole(DoctorRoleName);
+
+    ViewData["Title"] = "Запази час";
 }
 
 @section head{
@@ -21,13 +24,10 @@
 </style>
 }
 
-@{
-    var userIsDoctor = this.User.IsInRole(DoctorRoleName);
-}
-
 <input id="RequestVerificationToken" type="hidden" value="@requestToken" />
 <input id="doctorId" type="hidden" value="@Model.DoctorId" />
 
+<h1 class="text-center">@ViewData["Title"]</h1>
 <div id="calendar"></div>
 
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

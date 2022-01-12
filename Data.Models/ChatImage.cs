@@ -22,5 +22,9 @@
         public int MessageId { get; set; }
 
         public Message Message { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

@@ -4,6 +4,9 @@
 
 @{
     var requestToken = Antiforgery.GetAndStoreTokens(Context).RequestToken;
+    var userIsDoctor = this.User.IsInRole(DoctorRoleName);
+
+    ViewData["Title"] = "Календар";
 }
 
 @section head{
@@ -21,12 +24,9 @@
 </style>
 }
 
-@{
-    var userIsDoctor = this.User.IsInRole(DoctorRoleName);
-}
-
 <input id="RequestVerificationToken" type="hidden" value="@requestToken" />
 
+<h1 class="text-center">@ViewData["Title"]</h1>
 <div id="calendar"></div>
 
 <div class="modal" id="modal" tabindex="-1" role="dialog">
