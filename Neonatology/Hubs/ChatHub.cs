@@ -50,7 +50,7 @@
                 .SendAsync("ReceiveMessage", senderFullName, new HtmlSanitizer().Sanitize(message.Trim()));
 
             var notificationId = await this.notificationService
-                .AddMessageNotification(message, receiverId, senderId);
+                .AddMessageNotification(message, senderUsername, receiverUsername);
 
             var count = await this.notificationService
                 .GetUserNotificationsCount(receiverId);
@@ -60,10 +60,10 @@
                 .User(receiverId)
                 .SendAsync("ReceiveNotification", count, true);
 
-            //var notification = await this.notificationService.GetNotificationById(notificationId);
+            var notification = await this.notificationService.GetNotificationById(notificationId);
 
-            //await this.notificationHub.Clients.User(receiverId)
-            //    .SendAsync("VisualizeNotification", notification);
+            await this.notificationHub.Clients.User(receiverId)
+                .SendAsync("VisualizeNotification", notification);
         }
 
         public async Task ReceiveMessage(string senderUsername, string message, string group, string senderFullName)

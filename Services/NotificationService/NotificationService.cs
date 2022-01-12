@@ -22,15 +22,13 @@
     public class NotificationService : INotificationService
     {
         private readonly NeonatologyDbContext data;
-        private readonly IUserService userService;
 
         private const string url = "/Chat/WithUser/{0}";
         private const string notificationType = "Message";
 
-        public NotificationService(NeonatologyDbContext data, IUserService userService)
+        public NotificationService(NeonatologyDbContext data)
         {
             this.data = data;
-            this.userService = userService;
         }
 
         public async Task<int> GetUserNotificationsCount(string receiverId)
@@ -40,27 +38,31 @@
                          x.IsDeleted == false)
                          .CountAsync();
 
-        public async Task<string> AddMessageNotification(string message, string receiverId, string senderId)
+        public async Task<string> AddMessageNotification(string message, string receiverUsername, string senderUsername)
         {
             var notificationTypeId = await this.data.NotificationTypes
                 .Where(x => x.Name == notificationType)
                 .Select(x => x.Id)
                 .FirstOrDefaultAsync();
 
+            var sender = await this.data.Users.FirstOrDefaultAsync(x => x.UserName == senderUsername);
+            var receiver = await this.data.Users.FirstOrDefaultAsync(x => x.UserName == receiverUsername);
+
             var notification = new Notification
             {
-                SenderId = senderId,
-                ReceiverId = receiverId,
+                Sender = sender,
+                Receiver = receiver,
                 NotificationStatus = NotificationStatus.Unread,
-                Link = string.Format(url, receiverId),
+                Link = string.Format(url, receiverUsername),
                 Text = new HtmlSanitizer().Sanitize(message.Trim()),
                 NotificationTypeId = notificationTypeId,
             };
 
             var receiverNotifications = await this.data.Notifications
                 .Where(x => x.NotificationTypeId == notificationTypeId &&
-                x.ReceiverId == receiverId &&
-                x.SenderId == senderId)
+                x.ReceiverId == receiver.Id &&
+                x.SenderId == sender.Id &&
+                x.IsDeleted == false)
                 .OrderByDescending(x => x.CreatedOn)
                 .ToListAsync();
 
@@ -124,8 +126,8 @@
         {
             var notification = await this.data.Notifications.FirstOrDefaultAsync(x => x.Id == id);
 
-            var receiver = await this.userService.GetUserByIdAsync(notification.ReceiverId);
-            var sender = await this.userService.GetUserByIdAsync(notification.SenderId);
+            var receiver = await this.data.Users.FirstOrDefaultAsync(x => x.Id == notification.ReceiverId);
+            var sender = await this.data.Users.FirstOrDefaultAsync(x => x.Id == notification.SenderId);
 
             var item = ParseNotificationViewModel(notification, sender, receiver);
 
@@ -137,11 +139,13 @@
             var contentWithoutTags =
                 Regex.Replace(notification.Text, "<.*?>", string.Empty);
 
+            var model = new NotificationViewModel();
+
             return new NotificationViewModel
             {
                 Id = notification.Id,
-                CreatedOn = notification.CreatedOn.ToLocalTime().ToString("dd-MMMM-yyyy HH:mm tt"),
-                Heading = this.GetNotificationHeading(notification.NotificationType.Name, sender, notification.Link),
+                CreatedOn = notification.CreatedOn.ToLocalTime().ToString("dd-MM-yyyy HH:mm"),
+                Heading = this.GetNotificationHeading(notificationType, sender, notification.Link),
                 Status = notification.NotificationStatus,
                 Text = contentWithoutTags.Length < 487 ?
                                 contentWithoutTags :

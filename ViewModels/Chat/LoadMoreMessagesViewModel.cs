@@ -11,5 +11,7 @@
         public string CurrentUsername { get; set; }
 
         public string FromUsername { get; set; }
+
+        public string ReceiverUsername { get; set; }
     }
 }

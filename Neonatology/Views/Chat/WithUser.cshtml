@@ -291,7 +291,6 @@
         document.getElementById('chat-text').innerHTML = '';
         $('#chat-text').css('padding-left', '10px');
         event.preventDefault();
-        console.log('here');
     });
 
     function updateInputScroller() {
@@ -324,7 +323,8 @@
             if ($('#chat-body').scrollTop() == 0) {
                 let messagesSkipCount = document.getElementById('messagesSkipCount').value;
                 let username = document.getElementById('receiver').textContent;
-                let usernameFullname = document.getElementById('receiver-fullname').textContent;
+                let receiverFullname = document.getElementById('receiver-fullname').textContent;
+                let senderFullname = document.getElementById('sender-fullname').textContent;
                 let group = document.getElementById('group-name').textContent;
 
                 if (messagesSkipCount && username && group) {
@@ -334,9 +334,11 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         data: {
-                            'username': usernameFullname,
+                            'username': username,
                             'group': group,
-                            'messagesSkipCount': messagesSkipCount
+                            'messagesSkipCount': messagesSkipCount,
+                            receiverFullname,
+                            senderFullname
                         },
                         headers: {
                             RequestVerificationToken:
@@ -370,7 +372,7 @@
                                               <div class="text-muted small text-nowrap mt-2">${message.sendedOn}</div>
                                             </div>
                                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                                                <div class="font-weight-bold mb-1">${message.fromUsername}</div>
+                                                <div class="font-weight-bold mb-1">${message.receiverUsername}</div>
                                                 ${message.content}
                                             </div>`;
                                     }

@@ -117,7 +117,7 @@
             return new List<Message>();
         }
 
-        public async Task<ICollection<LoadMoreMessagesViewModel>> LoadMoreMessages(string group, int messagesSkipCount, ApplicationUser currentUser, string username)
+        public async Task<ICollection<LoadMoreMessagesViewModel>> LoadMoreMessages(string group, int messagesSkipCount, ApplicationUser currentUser, string receiverFullname, string senderFullname)
         {
             var result = new List<LoadMoreMessagesViewModel>();
 
@@ -139,13 +139,14 @@
                         Id = message.Id,
                         Content = message.Content,
                         SendedOn = message.CreatedOn.ToLocalTime().ToString("dd/mm/yyyy hh:mm:ss tt"),
-                        CurrentUsername = username,
+                        CurrentUsername = currentUser.UserName,
                     };
 
                     var messageFromUser = await this.data.Users
                         .FirstOrDefaultAsync(x => x.Id == message.SenderId);
 
-                    currentMessageModel.FromUsername = messageFromUser.UserName;
+                    currentMessageModel.FromUsername = senderFullname;
+                    currentMessageModel.ReceiverUsername = receiverFullname;
 
                     result.Add(currentMessageModel);
                 }

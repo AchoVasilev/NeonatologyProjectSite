@@ -94,7 +94,7 @@
 
         [HttpGet]
         [Route("[controller]/With/{username?}/Group/{group?}/LoadMoreMessages/{messagesSkipCount?}")]
-        public async Task<IActionResult> LoadMoreMessages(string username, string group, int? messagesSkipCount)
+        public async Task<IActionResult> LoadMoreMessages(string username, string group, int? messagesSkipCount, string receiverFullname, string senderFullname)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
@@ -104,7 +104,7 @@
             }
 
             var data = await this.chatService
-                .LoadMoreMessages(group, (int)messagesSkipCount, currentUser, username);
+                .LoadMoreMessages(group, (int)messagesSkipCount, currentUser, receiverFullname, senderFullname);
 
             return new JsonResult(data);
         }

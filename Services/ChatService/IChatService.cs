@@ -15,7 +15,7 @@
 
         Task<ICollection<Message>> ExtractAllMessages(string group);
 
-        Task<ICollection<LoadMoreMessagesViewModel>> LoadMoreMessages(string group, int messagesSkipCount, ApplicationUser currentUser, string username);
+        Task<ICollection<LoadMoreMessagesViewModel>> LoadMoreMessages(string group, int messagesSkipCount, ApplicationUser currentUser, string receiverFullname, string senderFullname);
 
         Task<ICollection<ChatConversationsViewModel>> GetAllMessages(string userId);
 
