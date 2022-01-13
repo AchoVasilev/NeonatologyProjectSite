@@ -1,41 +1,37 @@
 ﻿$(document).ready(function () {
-    $("#messageInput").on('input', function () {
-        $('#messageInput').css('padding-left', '30px');
-        if (document.getElementById('messageInput').innerHTML) {
-            $('#messageInput').css('padding-left', '30px');
-            document.getElementById("quickRepliesAddBadge").style.visibility = "visible";
-        } else {
-            $('#messageInput').css('padding-left', '10px');
-            document.getElementById("quickRepliesAddBadge").style.visibility = "hidden";
-        }
-    });
-
-    $("#demo-chat-body").scroll(function () {
-        let scrollHeight = document.getElementById("demo-chat-body").scrollHeight;
-        let scrollDistanceToTop = document.getElementById("demo-chat-body").scrollTop;
-        let chatBoyHeight = document.getElementById("demo-chat-body").offsetHeight;
+    $('#chat-body').scroll(function () {
+        const chatBody = document.getElementById('chat-body');
+        const scrollBottomButton = document.getElementById('scrollBottomButton');
+        let scrollHeight = chatBody.scrollHeight;
+        let scrollDistanceToTop = chatBody.scrollTop;
+        let chatBoyHeight = chatBody.offsetHeight;
         let distanceToBottom = scrollHeight - scrollDistanceToTop - chatBoyHeight;
 
         if (distanceToBottom > 400) {
-            document.getElementById("scrollBottomButton").style.visibility = "visible";
+            scrollBottomButton.style.visibility = 'visible';
         } else if (distanceToBottom >= 0 && distanceToBottom <= 100) {
-            document.getElementById("scrollBottomButton").style.visibility = "hidden";
+            scrollBottomButton.style.visibility = 'hidden';
         }
-        if ($("#demo-chat-body").scrollTop() == 0) {
-            let messagesSkipCount = document.getElementById("messagesSkipCount").value;
-            let username = document.getElementById("toUser").textContent;
-            let group = document.getElementById("groupName").textContent;
+
+        if ($(chatBody).scrollTop() == 0) {
+            let messagesSkipCount = document.getElementById('messagesSkipCount').value;
+            let username = document.getElementById('receiver').textContent;
+            let receiverFullname = document.getElementById('receiver-fullname').textContent;
+            let senderFullname = document.getElementById('sender-fullname').textContent;
+            let group = document.getElementById('group-name').textContent;
 
             if (messagesSkipCount && username && group) {
                 $.ajax({
-                    type: "GET",
-                    url: `/PrivateChat/With/${username}/Group/${group}/LoadMoreMessages/${messagesSkipCount}`,
+                    type: 'GET',
+                    url: `/Chat/With/${username}/Group/${group}/LoadMoreMessages/${messagesSkipCount}`,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     data: {
                         'username': username,
                         'group': group,
-                        'messagesSkipCount': messagesSkipCount
+                        'messagesSkipCount': messagesSkipCount,
+                        receiverFullname,
+                        senderFullname
                     },
                     headers: {
                         RequestVerificationToken:
@@ -43,51 +39,45 @@
                     },
                     success: function (data) {
                         if (data.length > 0) {
-                            let oldCount = parseInt(document.getElementById("messagesSkipCount").value)
-                            document.getElementById("messagesSkipCount").value = oldCount + data.length;
-                            let oldScrollHeight = document.getElementById("demo-chat-body").scrollHeight;
+                            const messagesSkipCount = document.getElementById('messagesSkipCount');
+                            let oldCount = parseInt(messagesSkipCount.value);
+                            messagesSkipCount.value = oldCount + data.length;
+                            let oldScrollHeight = chatBody.scrollHeight;
 
                             for (var message of data) {
                                 let newMessage = document.createElement("li");
-                                newMessage.classList.add(["mar-btm"]);
                                 newMessage.id = message.id;
+
                                 if (message.fromUsername == message.currentUsername) {
+                                    newMessage.classList.add('chat-message-right', 'pb-4');
                                     newMessage.innerHTML += `
-                                            <div class="media-right">
-                                                <img src=${message.fromImageUrl} class="img-circle img-sm" alt="Profile Picture">
-                                            </div>
-                                            <div class="media-body pad-hor speech-right">
-                                                <div class="speech">
-                                                    <a href="/Profile/${message.fromUsername}" class="media-heading">${message.fromUsername}</a>
-                                                    <p>${message.content}</p>
-                                                    <p class="speech-time">
-                                                        <i class="fa fa-clock-o fa-fw"></i> ${message.sendedOn}
-                                                    </p>
-                                                </div>
-                                            </div>`;
+                                        <div>
+                                            <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="Avatar">
+                                            <div class="text-muted small text-nowrap mt-2">${message.sendedOn}</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">${message.fromUsername}</div>
+                                            ${message.content}
+                                        </div>`;
                                 } else {
+                                    newMessage.classList.add('chat-message-left', 'pb-4');
                                     newMessage.innerHTML += `
-                                            <div class="media-left">
-                                                <img src=${message.fromImageUrl} class="img-circle img-sm" alt="Profile Picture">
+                                           <div>
+                                              <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="Avatar">
+                                              <div class="text-muted small text-nowrap mt-2">${message.sendedOn}</div>
                                             </div>
-                                            <div class="media-body pad-hor">
-                                                <div class="speech">
-                                                    <a href="/Profile/${message.fromUsername}" class="media-heading">${message.fromUsername}</a>
-                                                    <p>${message.content}</p>
-                                                    <p class="speech-time">
-                                                        <i class="fa fa-clock-o fa-fw"></i> ${message.sendedOn}
-                                                    </p>
-                                                </div>
-                                            </div>`
+                                            <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                                <div class="font-weight-bold mb-1">${message.receiverUsername}</div>
+                                                ${message.content}
+                                            </div>`;
                                 }
 
-                                let firstMessage = document.getElementById("messagesList").firstChild;
-                                document.getElementById("messagesList").insertBefore(newMessage, firstMessage);
+                                let firstMessage = document.getElementById('message-list').firstChild;
+                                document.getElementById('message-list').insertBefore(newMessage, firstMessage);
                             }
 
-                            let scroll = document.getElementById("demo-chat-body");
-                            let newScrollTop = scroll.scrollHeight - oldScrollHeight;
-                            scroll.scrollTop = newScrollTop;
+                            let newScrollTop = chatBody.scrollHeight - oldScrollHeight;
+                            chatBody.scrollTop = newScrollTop;
                         }
                     },
                     error: function (msg) {
@@ -100,7 +90,7 @@
 });
 
 function scrollChatToBottom() {
-    $("#demo-chat-body").animate({
-        scrollTop: document.getElementById("demo-chat-body").scrollHeight
+    $('#chat-body').animate({
+        scrollTop: document.getElementById('chat-body').scrollHeight
     }, 800);
 }

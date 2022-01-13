@@ -76,7 +76,7 @@ input[type="file"] {
     display: none;
 }
 
-.select-image-badge {
+span.select-image-badge {
     height: 17px;
     width: 17px;
     background-color: green;
@@ -84,7 +84,7 @@ input[type="file"] {
     display: inline-block;
     position: absolute;
     top: 14px;
-    left: 130px;
+    right: 68px;
     text-align: center;
     font-size: 10px;
     line-height: 17.5px;
@@ -92,15 +92,15 @@ input[type="file"] {
     font-weight: bold;
 }
 
-.select-file-badge {
+span.select-file-badge {
     height: 17px;
     width: 17px;
     background-color: deepskyblue;
     border-radius: 50%;
     display: inline-block;
     position: absolute;
-    top: 14px;
-    left: 160px;
+    top: 13px;
+    right: 25px;
     text-align: center;
     font-size: 10px;
     line-height: 17.5px;
@@ -122,6 +122,55 @@ input[type="file"] {
     100% {
         transform: scale(0.95);
         box-shadow: 0 0 0 0 rgba(51, 217, 178, 0);
+    }
+}
+
+div#imageSpinner {
+    display: none;
+    border: 2px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 2px solid #3498db;
+    width: 19px;
+    height: 19px;
+    position: absolute;
+    right: 25px;
+    top: 13px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+div#fileSpinner {
+    display: none;
+    border: 2px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 2px solid #B6290B;
+    width: 19px;
+    height: 19px;
+    position: absolute;
+    right: 25px;
+    top: 13px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
     }
 }
 

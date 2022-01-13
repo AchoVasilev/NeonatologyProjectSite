@@ -85,22 +85,27 @@
                 return BadRequest(new { message = AppointmentBeforeNowErrorMsg });
             }
 
-            await this.slotService.DeleteSlotById(id);
+            if (await this.patientService.PatientExists(model.Email))
+            {
+                return BadRequest(new { message = PatientIsRegistered });
+            }
 
             var result = await this.appointmentService.AddAsync(model.DoctorId, model);
-
             if (result == false)
             {
                 return BadRequest(new { message = TakenDateMsg });
             }
 
-            var emailMsg = string.Format(AppointmentMakeEmailMsg, model.Start.ToLocalTime().Hour, model.Start.ToString("dd/MM/yyyy"));
+            await this.slotService.DeleteSlotById(id);
 
+            var emailMsg = string
+                .Format(AppointmentMakeEmailMsg, model.Start.ToLocalTime().Hour, model.Start.ToString("dd/MM/yyyy"));
             await this.emailSender.SendEmailAsync(model.Email, SuccessfulApointmentEmailMsgSubject, emailMsg);
 
             return Ok(new
             {
-                message = string.Format(SuccessfullAppointment, model.Start.ToString("dd/MM/yyyy"), model.Start.ToLocalTime().Hour),
+                message = string
+                    .Format(SuccessfullAppointment, model.Start.ToString("dd/MM/yyyy"), model.Start.ToLocalTime().Hour),
             });
         }
 

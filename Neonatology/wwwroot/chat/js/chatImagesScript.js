@@ -1,10 +1,13 @@
-﻿$("#imageButton i").click(function () {
-    $("#uploadImage").trigger('click');
+﻿$("#image-button i").click(function () {
+    $("#upload-image").trigger('click');
 });
 
-$('#uploadImage').on('change', function () {
+const errorImgMsg = "Файлът е прекалено голям!";
+
+const imageUpload = document.getElementById('upload-image');
+$(imageUpload).on('change', function () {
     const imageExtensions = ["JPG", "PNG", "JPEG"];
-    let files = document.getElementById("uploadImage").files;
+    let files = imageUpload.files;
     const dtImages = new DataTransfer();
     const dtFiles = new DataTransfer();
 
@@ -13,6 +16,7 @@ $('#uploadImage').on('change', function () {
         if (imageExtensions.includes(fileExtension.toUpperCase())) {
             let sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
             if (sizeInMB > 15) {
+                notify(msg)
                 continue;
             }
 
@@ -20,6 +24,7 @@ $('#uploadImage').on('change', function () {
         } else {
             let sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
             if (sizeInMB > 15) {
+                notify(msg)
                 continue;
             }
 
@@ -27,9 +32,9 @@ $('#uploadImage').on('change', function () {
         }
     }
 
-    document.getElementById("uploadImage").files = dtImages.files;
-    let filesCount = document.getElementById("uploadImage").files.length;
-    let badge = document.querySelector(".select-image-badge");
+    imageUpload.files = dtImages.files;
+    let filesCount = imageUpload.files.length;
+    let badge = document.querySelector("span.select-image-badge");
     badge.innerText = filesCount;
 
     if (filesCount > 0) {
@@ -47,7 +52,7 @@ $('#uploadImage').on('change', function () {
 
 function transferImages(dtImages) {
     const imageExtensions = ["JPG", "PNG", "JPEG"];
-    let images = document.getElementById("uploadImage").files;
+    let images = imageUpload.files;
     const dt = new DataTransfer();
 
     for (let image of images) {
@@ -65,9 +70,9 @@ function transferImages(dtImages) {
         }
     }
 
-    document.getElementById("uploadImage").files = dt.files;
-    let imagesCount = document.getElementById("uploadImage").files.length;
-    let badge = document.querySelector(".select-image-badge");
+    imageUpload.files = dt.files;
+    let imagesCount = imageUpload.files.length;
+    let badge = document.querySelector("span.select-image-badge");
     badge.innerText = imagesCount;
 
     if (imagesCount > 0) {

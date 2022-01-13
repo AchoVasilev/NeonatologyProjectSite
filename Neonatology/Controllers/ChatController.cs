@@ -103,7 +103,6 @@ using Microsoft.AspNetCore.Http;
 
         [HttpPost]
         [Route("Chat/With/{toUsername?}/Group/{group?}/SendFiles")]
-        [IgnoreAntiforgeryToken]
         public async Task<IActionResult> SendFiles(IList<IFormFile> files, string group, string toUsername, string fromUsername, string message)
         {
             //var currentUser = await this.userManager.GetUserAsync(this.User);

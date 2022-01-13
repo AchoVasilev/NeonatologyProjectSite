@@ -10,6 +10,8 @@
 
         Task<string> GetPatientIdByUserIdAsync(string userId);
 
+        Task<bool> PatientExists(string email);
+
         Task<PatientViewModel> GetPatientByUserIdAsync(string userId);
 
         Task<bool> EditPatientAsync(string patientId, CreatePatientFormModel model);

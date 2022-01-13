@@ -62,21 +62,5 @@
 
             return RedirectToAction(nameof(All), "Galery", new { area = "" });
         }
-
-        public IActionResult Chat()
-        {
-            return View(new UploadImageModel());
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Chat(UploadImageModel model)
-        {
-            foreach (var item in model.Images)
-            {
-                var result = await this.fileService.UploadFile(cloudinary, item, ChatFolderName);
-            }
-
-            return View();
-        }
     }
 }

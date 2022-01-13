@@ -58,6 +58,10 @@
                   .ProjectTo<PatientViewModel>(this.mapper.ConfigurationProvider)
                   .FirstOrDefaultAsync();
 
+        public async Task<bool> PatientExists(string email)
+            => await this.data.Users
+                        .AnyAsync(x => x.UserName == email);
+
         public async Task<bool> EditPatientAsync(string patientId, CreatePatientFormModel model)
         {
             var patient = await this.data.Patients

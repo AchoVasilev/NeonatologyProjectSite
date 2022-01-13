@@ -1,10 +1,13 @@
-﻿$("#fileButton i").click(function () {
-    $("#uploadFile").trigger('click');
+﻿$("#file-button i").click(function () {
+    $("#upload-file").trigger('click');
 });
 
-$('#uploadFile').on('change', function () {
+const errorMsg = "Файлът е прекалено голям!";
+
+const fileUpload = document.getElementById('upload-file');
+$(fileUpload).on('change', function () {
     const fileExtensions = ["TXT", "TEXT", "DOCX", "DOC", "PDF", "PPT", "XLS", "XLSX", "ZIP", "RAR"];
-    let files = document.getElementById("uploadFile").files;
+    let files = fileUpload.files;
     const dtFiles = new DataTransfer();
     const dtImages = new DataTransfer();
 
@@ -13,6 +16,7 @@ $('#uploadFile').on('change', function () {
         if (fileExtensions.includes(fileExtension.toUpperCase())) {
             let sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
             if (sizeInMB > 15) {
+                notify(errorMsg)
                 continue;
             }
 
@@ -20,6 +24,7 @@ $('#uploadFile').on('change', function () {
         } else {
             let sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
             if (sizeInMB > 15) {
+                notify(errorMsg)
                 continue;
             }
 
@@ -27,9 +32,9 @@ $('#uploadFile').on('change', function () {
         }
     }
 
-    document.getElementById("uploadFile").files = dtFiles.files;
-    let filesCount = document.getElementById("uploadFile").files.length;
-    let badge = document.querySelector(".select-file-badge");
+    fileUpload.files = dtFiles.files;
+    let filesCount = fileUpload.files.length;
+    let badge = document.querySelector("span.select-file-badge");
     badge.innerText = filesCount;
 
     if (filesCount > 0) {
@@ -47,7 +52,7 @@ $('#uploadFile').on('change', function () {
 
 function transferFiles(dtFiles) {
     const fileExtensions = ["TXT", "TEXT", "DOCX", "DOC", "PDF", "PPT", "XLS", "XLSX", "ZIP", "RAR"];
-    let files = document.getElementById("uploadFile").files;
+    let files = fileUpload.files;
     const dt = new DataTransfer();
 
     for (let file of files) {
@@ -65,9 +70,9 @@ function transferFiles(dtFiles) {
         }
     }
 
-    document.getElementById("uploadFile").files = dt.files;
-    let filesCount = document.getElementById("uploadFile").files.length;
-    let badge = document.querySelector(".select-file-badge");
+    fileUpload.files = dt.files;
+    let filesCount = fileUpload.files.length;
+    let badge = document.querySelector("span.select-file-badge");
     badge.innerText = filesCount;
 
     if (filesCount > 0) {
