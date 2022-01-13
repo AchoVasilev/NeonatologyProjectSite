@@ -163,7 +163,7 @@
         {
             var delParams = new DeletionParams($"{folderName}/{name}");
 
-            cloudinary.Destroy(delParams);
+            await cloudinary.DestroyAsync(delParams);
         }
     }
 }

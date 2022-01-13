@@ -67,6 +67,7 @@
 
             public const string UnsuccessfulDoctorEditMsg = "Нещо се обърка, опитайте пак";
             public const string AppointmentCauseWrongId = "Такъв преглед не съществува!";
+            public const string PatientIsRegistered = "Моля, използвайте платформата, за да си запишете час.";
         }
 
         public static class AccountConstants
@@ -96,7 +97,7 @@
         public static class FileConstants
         {
             public const string DefaultFolderName = "pediamed";
-            public const string ChatFolderName = "pediamedChat";
+            public const string ChatFolderName = $"{DefaultFolderName}/pediamedChat";
             public const string ChatFileName = "{0}-ChatFile";
         }
 
