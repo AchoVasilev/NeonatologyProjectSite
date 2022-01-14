@@ -11,10 +11,12 @@
     using Services.DoctorService;
 
     using ViewModels.Doctor;
+    using ViewModels.Slot;
 
     using static Common.GlobalConstants;
     using static Common.GlobalConstants.Messages;
 
+    [Authorize(Roles = DoctorRoleName)]
     public class DoctorController : BaseController
     {
         private readonly IDoctorService doctorService;
@@ -26,14 +28,15 @@
             this.cityService = cityService;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Profile()
         {
-            var viewModel = await this.doctorService.GetDoctorById(DoctorId);
+            var doctorId = await this.doctorService.GetDoctorId();
+            var viewModel = await this.doctorService.GetDoctorById(doctorId);
 
             return View(viewModel);
         }
 
-        [Authorize(Roles = DoctorRoleName)]
         public async Task<IActionResult> Edit()
         {
             var userId = this.User.GetId();
@@ -65,7 +68,6 @@
             return View(model);
         }
 
-        [Authorize(Roles = DoctorRoleName)]
         [HttpPost]
         public async Task<IActionResult> Edit(DoctorEditFormModel model)
         {
@@ -85,10 +87,9 @@
             return RedirectToAction(nameof(Profile));
         }
 
-        [Authorize(Roles = DoctorRoleName)]
         public IActionResult Calendar()
         {
-            return View();
+            return View(new SlotEditModel());
         }
     }
 }

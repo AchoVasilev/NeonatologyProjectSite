@@ -1,9 +1,11 @@
 ﻿namespace Data.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     public class StripeCheckoutSession
     {
+        [Key]
         public string Id { get; set; }
 
         public string PaymentId { get; set; }

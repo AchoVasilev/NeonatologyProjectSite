@@ -2,12 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using Data.Common.Models;
 
     public class Message : BaseModel<int>
     {
+        [Key]
         public int Id { get; init; }
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;

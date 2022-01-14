@@ -10,6 +10,7 @@ using System;
 
     public class Rating : BaseModel<int>
     {
+        [Key]
         public int Id { get; init; }
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
@@ -20,7 +21,7 @@ using System;
 
         public bool IsDeleted { get; set; } = false;
 
-        public bool? IsConfirmed { get; set; }
+        public bool? IsConfirmed { get; set; } = false;
 
         public int Number { get; set; }
 

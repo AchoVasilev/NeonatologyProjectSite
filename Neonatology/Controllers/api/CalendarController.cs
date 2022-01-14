@@ -72,7 +72,7 @@
 
         [AllowAnonymous]
         [HttpPost("makeAppointment/{id}")]
-        public async Task<IActionResult> MakeAnAppointment(CreateAppointmentModel model, int id)
+        public async Task<IActionResult> MakeAnAppointment(CreateAppointmentModel model, string id)
         {
             var cause = this.appointmentCauseService.GetAppointmentCauseByIdAsync(model.AppointmentCauseId);
             if (cause == null)
@@ -96,7 +96,7 @@
                 return BadRequest(new { message = TakenDateMsg });
             }
 
-            await this.slotService.DeleteSlotById(id);
+            await this.slotService.DeleteSlotById(int.Parse(id));
 
             var emailMsg = string
                 .Format(AppointmentMakeEmailMsg, model.Start.ToLocalTime().Hour, model.Start.ToString("dd/MM/yyyy"));
@@ -111,9 +111,9 @@
 
         [Authorize(Roles = PatientRoleName)]
         [HttpPost("makePatientAppointment/{id}")]
-        public async Task<IActionResult> MakePatientAppointment(PatientAppointmentCreateModel model, int id)
+        public async Task<IActionResult> MakePatientAppointment(PatientAppointmentCreateModel model, string id)
         {
-            var cause = this.appointmentCauseService.GetAppointmentCauseByIdAsync(model.AppointmentCauseId);
+            var cause = await this.appointmentCauseService.GetAppointmentCauseByIdAsync(model.AppointmentCauseId);
             if (cause == null)
             {
                 return BadRequest(new { message = AppointmentCauseWrongId });
@@ -131,7 +131,7 @@
                 return BadRequest(new { response = AppointmentBeforeNowErrorMsg });
             }
 
-            await this.slotService.DeleteSlotById(id);
+            await this.slotService.DeleteSlotById(int.Parse(id));
 
             if (result == false)
             {

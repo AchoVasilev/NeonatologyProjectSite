@@ -1,12 +1,14 @@
 ﻿namespace Data.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using Data.Models.Enums;
 
     public class Payment
     {
+        [Key]
         public string Id { get; init; } = Guid.NewGuid().ToString();
 
         public PaymentStatus PaymentStatus { get; set; }
@@ -25,6 +27,7 @@
 
         public Patient Patient { get; set; }
 
+        [ForeignKey(nameof(OfferedService))]
         public int OfferedServiceId { get; set; }
 
         public OfferedService OfferedService { get; set; }

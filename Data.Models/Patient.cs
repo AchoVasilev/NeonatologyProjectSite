@@ -11,11 +11,8 @@
 
     public class Patient : BaseModel<string>
     {
-        public Patient()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
-        public string Id { get; init; }
+        [Key]
+        public string Id { get; init; } = Guid.NewGuid().ToString();
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 

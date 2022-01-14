@@ -10,6 +10,7 @@
 
     public class Appointment : BaseModel<int>
     {
+        [Key]
         public int Id { get; init; }
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
@@ -51,7 +52,7 @@
 
         public virtual AppointmentCause AppointmentCause { get; set; }
 
-        public bool IsRated { get; set; }
+        public bool IsRated { get; set; } = false;
 
         [ForeignKey(nameof(Rating))]
         public int? RatingId { get; set; }

@@ -9,6 +9,7 @@ using System;
 
     public class Feedback : BaseModel<int>
     {
+        [Key]
         public int Id { get; init; }
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;

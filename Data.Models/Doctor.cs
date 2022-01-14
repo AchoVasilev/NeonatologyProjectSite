@@ -11,12 +11,8 @@
 
     public class Doctor : BaseModel<string>
     {
-        public Doctor()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
-
-        public string Id { get; init; }
+        [Key]
+        public string Id { get; init; } = Guid.NewGuid().ToString();
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
@@ -60,6 +56,9 @@
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
+
+        [ForeignKey(nameof(Image))]
+        public string ImageId { get; set; }
 
         public virtual Image Image { get; set; }
 

@@ -6,6 +6,7 @@
 
     public class ChatImage
     {
+        [Key]
         public string Id { get; init; } = Guid.NewGuid().ToString();
 
         [MaxLength(60)]

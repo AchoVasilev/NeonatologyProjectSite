@@ -1,14 +1,16 @@
 ﻿namespace Data.Models
 {
-using System;
+    using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using Data.Common.Models;
+
     using static Data.Common.DataConstants.Constants;
 
     public class Specialization : BaseModel<int>
     {
+        [Key]
         public int Id { get; init; }
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;

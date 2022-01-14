@@ -7,6 +7,7 @@
 
     public class OfferedService : BaseModel<int>
     {
+        [Key]
         public int Id { get; init; }
 
         [Required]

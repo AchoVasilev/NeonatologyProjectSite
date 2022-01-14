@@ -37,6 +37,7 @@
             await SeedOfferedServices(data);
             await SeedAppointmentCause(data);
             await SeedNotificationTypes(data);
+            await SeedGaleryImages(data);
 
             return app;
         }
@@ -87,13 +88,15 @@
                 Description = "Дял от медицината, който се занимава с проследяване на физическото и нервно-психическото развитие на детския организъм, диагностика и лечения на детски заболявания."
             });
 
+            var doctor = await data.Doctors.FirstAsync();
             foreach (var specializationDto in specializations)
             {
                 var specialization = new Specialization()
                 {
                     Name = specializationDto.Name,
                     Description = specializationDto.Description,
-                    DoctorId = "9858f28d-b5dd-451b-9015-148704acf2b8"
+                    DoctorId = doctor.Id,
+                    Doctor = doctor
                 };
 
                 await data.AddAsync(specialization);
@@ -119,6 +122,7 @@
 
             await roleManager.CreateAsync(identityRole);
 
+            var city = await data.Cities.Where(x => x.Name == "Плевен").FirstOrDefaultAsync();
             var doctor = new ApplicationUser()
             {
                 Email = DoctorEmail,
@@ -132,11 +136,15 @@
                     Address = Address,
                     Age = DoctorAge,
                     Biography = Biography,
-                    CityId = 582,
+                    CityId = city.Id,
+                    City = city,
                     YearsOfExperience = YearsOfExperience,
                     Email = DoctorEmail
                 }
             };
+
+            await data.Doctors.AddAsync(doctor.Doctor);
+            await data.SaveChangesAsync();
 
             var image = new Image()
             {
@@ -148,6 +156,7 @@
 
             await userManager.CreateAsync(doctor, DoctorPassword);
             await userManager.AddToRoleAsync(doctor, identityRole.Name);
+            await data.SaveChangesAsync();
         }
 
         private static async Task SeedOfferedServices(NeonatologyDbContext data)
@@ -253,10 +262,35 @@
             var notificationTypes = new List<NotificationType>
             {
                 new NotificationType() {Name = "Message"},
-                new NotificationType() {Name = "Banned Profile"}
+                new NotificationType() {Name = "Banned Profile"},
+                new NotificationType() {Name = "Paid"}
             };
 
             await data.NotificationTypes.AddRangeAsync(notificationTypes);
+            await data.SaveChangesAsync();
+        }
+
+        private static async Task SeedGaleryImages(NeonatologyDbContext data)
+        {
+            if (data.Images.Count() > 2)
+            {
+                return;
+            }
+
+            var images = new List<Image>
+            {
+                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085032/pediamed/IMG-fd628ff6ab68f73643fd7b0cf41868ab-V.jpg.jpg"},
+                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085031/pediamed/IMG-f1c897a19a277fb5f6b3adc1c1668e8e-V.jpg.jpg"},
+                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085031/pediamed/IMG-e415d77485530c8a65dd356e3fe820e9-V.jpg.jpg"},
+                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085030/pediamed/IMG-b93856f2c12b1dcaa36a80c8b886cd30-V.jpg.jpg"},
+                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085030/pediamed/IMG-ab0a5b033ee8cf53def9e937f6d2baf6-V.jpg.jpg"},
+                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085029/pediamed/IMG-4817c65b81006eea5c2815837337f8ed-V.jpg.jpg"},
+                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085029/pediamed/IMG-73d4aaf2edbfbd86e3bc8b6b44c1dfa2-V.jpg.jpg"},
+                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085028/pediamed/IMG-9add7b0ba788ced6c9f6186f01dce2ba-V.jpg.jpg"},
+                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085027/pediamed/IMG-3d4d5a079b4f712fd53ce9ad097faf24-V.jpg.jpg"},
+            };
+
+            await data.Images.AddRangeAsync(images);
             await data.SaveChangesAsync();
         }
     }

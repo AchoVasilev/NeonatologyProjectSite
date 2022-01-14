@@ -2,12 +2,15 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using Data.Common.Models;
 
     using static Data.Common.DataConstants.Constants;
+
     public class AppointmentCause : BaseModel<int>
     {
+        [Key]
         public int Id { get; init ; }
 
         [Required]
@@ -22,7 +25,8 @@
 
         public bool IsDeleted { get; set; } = false;
 
-        public int AppointmentId { get; set; }
+        [ForeignKey(nameof(Appointment))]
+        public int? AppointmentId { get; set; }
 
         public Appointment Appointment { get; set; }
     }

@@ -10,8 +10,6 @@
         public const string AdministratorEmail = "angavasilev@gmail.com";
         public const string AdministratorPassword = "administrator123";
 
-        public const string DoctorId = "9858f28d-b5dd-451b-9015-148704acf2b8";
-        public const string UserDoctorId = "b530acf5-8ae7-46ed-af15-6ec8534051aa";
         public const string DoctorRoleName = "Doctor";
         public const string DoctorEmail = "dr.p.petrova@abv.bg";
         public const string DoctorPassword = "ASDASD";
@@ -29,7 +27,6 @@
             "От 2016 г. до 2017 г. практикува в ДКЦ Авис Медика Плевен и Отделение по Неонатология към МБАЛ Авис Медика. " +
             "От 2017 г. работи в Отделение по неонатология УМБАЛ Георги Странски ЕАД - Гр. Плевен. " +
             "Към момента има и самостоятелни практики като педиатър в Плевен и Габрово.";
-        public const int CityId = 582;
 
         public const string SuccessfulApointmentEmailMsgSubject = "Записване на час при д-р Петрова";
 

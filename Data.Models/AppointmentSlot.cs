@@ -9,6 +9,7 @@
 
     public class AppointmentSlot : BaseModel<int>
     {
+        [Key]
         public int Id { get; init; }
 
         [MaxLength(DefaultMaxLength)]

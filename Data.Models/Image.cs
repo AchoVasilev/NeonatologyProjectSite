@@ -1,17 +1,15 @@
 ﻿namespace Data.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using Data.Common.Models;
 
     public class Image : BaseModel<string>
     {
-        public Image()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
-        public string Id { get; init; }
+        [Key]
+        public string Id { get; init; } = Guid.NewGuid().ToString();
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 

@@ -169,7 +169,7 @@
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.getElementById("RequestVerificationToken").value
+                    'X-CSRF-TOKEN': document.getElementById('RequestVerificationToken').value
                 },
                 body: JSON.stringify(params)
             });
