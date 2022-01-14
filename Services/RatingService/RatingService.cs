@@ -1,9 +1,12 @@
 ﻿namespace Services.RatingService
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Data;
     using Data.Models;
+
+    using Microsoft.EntityFrameworkCore;
 
     using Services.AppointmentService;
 
@@ -41,6 +44,42 @@
             appointment.Rating = rating;
 
             await this.data.Ratings.AddAsync(rating);
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> ApproveRating(int appointmentId)
+        {
+            var rating = await this.data.Ratings
+                .Where(x => x.AppointmentId == appointmentId && x.IsDeleted == false && x.IsConfirmed == false)
+                .FirstOrDefaultAsync();
+
+            if (rating == null)
+            {
+                return false;
+            }
+
+            rating.IsConfirmed = true;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> DeleteRating(int appointmentId)
+        {
+            var rating = await this.data.Ratings
+                .Where(x => x.AppointmentId == appointmentId && x.IsDeleted == false && x.IsConfirmed == false)
+                .FirstOrDefaultAsync();
+
+            if (rating == null)
+            {
+                return false;
+            }
+
+            rating.IsDeleted = true;
+
             await this.data.SaveChangesAsync();
 
             return true;

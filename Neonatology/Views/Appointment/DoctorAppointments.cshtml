@@ -56,7 +56,7 @@
                         <td>@appointment.PatientPhone</td>
                         <td>гр. @appointment.Address</td>
                         <td>@appointment.ChildFirstName</td>
-                        <td>@appointment.AppointmentCause</td>
+                        <td>@appointment.AppointmentCauseName</td>
                     </tr>
                 }
             </tbody>
@@ -89,7 +89,7 @@
                         <td>@appointment.PatientPhone</td>
                         <td>гр. @appointment.Address</td>
                         <td>@appointment.ChildFirstName</td>
-                        <td>@appointment.AppointmentCause</td>
+                        <td>@appointment.AppointmentCauseName</td>
                         <td>
                             @if (appointment.Rating != null)
                             {
@@ -100,6 +100,13 @@
                                         <label for="star@i"></label>
                                     }
                                 </div>
+
+                                <a class="btn btn-primary @(appointment.IsConfirmed ? string.Empty : "visible")"
+                       asp-controller="Rating" asp-action="Approve" asp-route-id="@appointment.Id">Одобри</a>
+
+                                <a class="btn btn-danger @(appointment.IsConfirmed ? string.Empty : "visible")"
+                       asp-controller="Rating" asp-action="Delete" asp-route-id="@appointment.Id"
+                       data-toggle="modal" data-target="#modalDelete">Изтрий</a>
                             }
 
                             @if (appointment.Rating == null)
@@ -111,8 +118,36 @@
                             @(appointment.RatingComment ?? "")
                         </td>
                     </tr>
+
+                    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalDeleteLabel">Потвърдете изтриването</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        Потвърждавате ли изтриването?
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Затвори</button>
+                                    <a asp-controller="Rating" asp-action="Delete" asp-route-id="@appointment.Id" class="btn btn-danger">Изтрий</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 }
             </tbody>
         </table>
     }
 </div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $('modalDelete').modal('')
+    </script>
+}

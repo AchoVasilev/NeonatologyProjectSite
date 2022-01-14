@@ -63,7 +63,7 @@
                         <td><a asp-area="" asp-controller="Doctor" asp-action="Profile">@appointment.DoctorName</a></td>
                         <td>гр. @appointment.Address</td>
                         <td>@appointment.ChildFirstName</td>
-                        <td>@appointment.AppointmentCause</td>
+                        <td>@appointment.AppointmentCauseName</td>
                     </tr>
                 }
             </tbody>
@@ -93,7 +93,7 @@
                         <td><a asp-area="" asp-controller="Doctor" asp-action="Profile">@appointment.DoctorName</a></td>
                         <td>гр. @appointment.Address</td>
                         <td>@appointment.ChildFirstName</td>
-                        <td>@appointment.AppointmentCause</td>
+                        <td>@appointment.AppointmentCauseName</td>
                         <td>
                             <a class="btn btn-outline-info btn-sm hvr-grow 
                             @(appointment.IsRated ? "disabled" : string.Empty)"

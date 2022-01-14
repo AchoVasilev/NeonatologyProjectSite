@@ -35,8 +35,8 @@
 
                 var slot = new AppointmentSlot()
                 {
-                    Start = slotStart,
-                    End = slotEnd
+                    Start = slotStart.ToLocalTime(),
+                    End = slotEnd.ToLocalTime()
                 };
 
                 slots.Add(slot);

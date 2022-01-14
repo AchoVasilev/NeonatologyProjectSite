@@ -18,7 +18,7 @@
 
         public string ChildFirstName { get; set; }
 
-        public string AppointmentCause { get; set; }
+        public string AppointmentCauseName { get; set; }
 
         public string DoctorName { get; set; }
 

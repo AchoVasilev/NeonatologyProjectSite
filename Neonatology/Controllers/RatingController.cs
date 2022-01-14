@@ -96,5 +96,31 @@
 
             return RedirectToAction("MyAppointments", "Appointment", new { area = "" });
         }
+
+        public async Task<IActionResult> Approve(int appointmentId)
+        {
+            var isApproved = await this.ratingService.ApproveRating(appointmentId);
+
+            if (isApproved == false)
+            {
+                this.TempData["Message"] = ErrorApprovingRating;
+            }
+
+            this.TempData["Message"] = SuccessfullyApprovedRating;
+            return RedirectToAction("DoctorAppointments", "Appointment", new { area = "" });
+        }
+
+        public async Task<IActionResult> Delete(int appointmentId)
+        {
+            var isApproved = await this.ratingService.DeleteRating(appointmentId);
+
+            if (isApproved == false)
+            {
+                this.TempData["Message"] = ErrorApprovingRating;
+            }
+
+            this.TempData["Message"] = SuccessfullyApprovedRating;
+            return RedirectToAction("DoctorAppointments", "Appointment", new { area = "" });
+        }
     }
 }

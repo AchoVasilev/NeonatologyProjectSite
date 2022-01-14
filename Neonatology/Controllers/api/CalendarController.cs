@@ -80,7 +80,7 @@
                 return BadRequest(new { message = AppointmentCauseWrongId });
             }
             
-            if (model.Start.Date < DateTime.Now.Date)
+            if (model.Start.Date < DateTime.Now.Date && model.Start.Hour < DateTime.Now.Hour)
             {
                 return BadRequest(new { message = AppointmentBeforeNowErrorMsg });
             }
@@ -126,7 +126,7 @@
             model.PatientId = patientId;
             var result = await this.appointmentService.AddAsync(model.DoctorId, model);
 
-            if (model.Start.Date < DateTime.Now.Date)
+            if (model.Start.Date < DateTime.Now.Date && model.Start.Hour < DateTime.Now.Hour)
             {
                 return BadRequest(new { response = AppointmentBeforeNowErrorMsg });
             }
@@ -138,13 +138,15 @@
                 return BadRequest(new { message = TakenDateMsg });
             }
 
-            var emailMsg = string.Format(AppointmentMakeEmailMsg, model.Start.Hour.ToString("hh/mm"), model.Start.ToString("dd/MM/yyyy"));
+            var emailMsg = string
+                .Format(AppointmentMakeEmailMsg, model.Start.ToLocalTime().Hour, model.Start.ToString("dd/MM/yyyy"));
 
             await this.emailSender.SendEmailAsync(userEmail, SuccessfulApointmentEmailMsgSubject, emailMsg);
 
             return Ok(new
             {
-                message = string.Format(SuccessfullAppointment, model.Start.ToString("dd/MM/yyyy"), model.Start.Hour.ToString("hh/mm")),
+                message = string
+                    .Format(SuccessfullAppointment, model.Start.ToString("dd/MM/yyyy"), model.Start.ToLocalTime().Hour),
             });
         }
     }
