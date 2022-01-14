@@ -14,6 +14,7 @@
 
     using ViewModels.Galery;
 
+    using static Common.GlobalConstants;
     using static Common.GlobalConstants.FileConstants;
 
     public class GaleryController : BaseController
@@ -36,7 +37,8 @@
             return View(model);
         }
 
-        [Authorize]
+        [Authorize(Roles = DoctorRoleName)]
+        [Authorize(Roles = AdministratorRoleName)]
         [HttpPost]
         public async Task<IActionResult> All(UploadImageModel model)
         {

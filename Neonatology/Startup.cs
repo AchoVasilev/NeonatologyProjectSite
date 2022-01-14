@@ -32,6 +32,7 @@ namespace Neonatology
     using Services.OfferService;
     using Services.PatientService;
     using Services.PaymentService;
+    using Services.ProfileService;
     using Services.RatingService;
     using Services.SlotService;
     using Services.SpecializationService;
@@ -102,6 +103,7 @@ namespace Neonatology
                 .AddTransient<IAppointmentCauseService, AppointmentCauseService>()
                 .AddTransient<IPaymentService, PaymentService>()
                 .AddTransient<INotificationService, NotificationService>()
+                .AddTransient<IProfileService, ProfileService>()
                 .AddTransient<ReCaptchaService>();
 
             //Configure ReCAPTCHA

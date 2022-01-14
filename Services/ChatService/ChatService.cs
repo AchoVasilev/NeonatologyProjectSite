@@ -194,8 +194,8 @@
         public async Task<string> GetLastMessage(string currentUserId, string userId)
             => await this.data.Messages
                         .Where(m => m.IsDeleted == false &&
-                        ((m.ReceiverId == currentUserId && m.SenderId == userId) ||
-                        m.ReceiverId == userId && m.SenderId == currentUserId))
+                                    ((m.ReceiverId == currentUserId && m.SenderId == userId) ||
+                                    m.ReceiverId == userId && m.SenderId == currentUserId))
                         .OrderByDescending(x => x.CreatedOn)
                         .Select(x => x.Content)
                         .FirstOrDefaultAsync();
@@ -264,15 +264,15 @@
                 Receiver = toUser,
             };
 
-            StringBuilder messageContent = new StringBuilder();
+            var messageContent = new StringBuilder();
 
             if (message != null)
             {
                 messageContent.AppendLine($"{new HtmlSanitizer().Sanitize(message.Trim())}<hr style=\"margin-bottom: 8px !important;\" />");
             }
 
-            StringBuilder imagesContent = new StringBuilder();
-            StringBuilder filesContent = new StringBuilder();
+            var imagesContent = new StringBuilder();
+            var filesContent = new StringBuilder();
 
             var imagesCount = files
                 .Where(x => x.ContentType
