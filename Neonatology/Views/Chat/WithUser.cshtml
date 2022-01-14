@@ -54,7 +54,7 @@
                             {
                                 @foreach (var message in Model.ChatMessages)
                                 {
-                                    @if (message.Receiver.Id == Model.ToUser.Id && Model.FromUser.Id != message.Sender.Id)
+                                    @if (message.Receiver.Id == Model.CurrentUser.Id && Model.CurrentUser.Id != message.Sender.Id)
                                     {
                                         <li class="chat-message-left pb-4" id="@message.Id">
                                             <div>

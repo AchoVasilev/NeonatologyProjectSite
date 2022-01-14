@@ -6,7 +6,7 @@
 
     public class PrivateChatViewModel
     {
-        public ApplicationUser FromUser { get; set; }
+        public ApplicationUser CurrentUser { get; set; }
 
         public ApplicationUser ToUser { get; set; }
 

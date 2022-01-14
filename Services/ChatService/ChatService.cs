@@ -12,8 +12,6 @@
 
     using CloudinaryDotNet;
 
-    using Common;
-
     using Data;
     using Data.Models;
 

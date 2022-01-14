@@ -1,11 +1,8 @@
 ﻿namespace Services.FileService
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using CloudinaryDotNet;
-
-    using Data.Models;
 
     using Microsoft.AspNetCore.Http;
 

@@ -1,6 +1,5 @@
 ﻿namespace Neonatology.Controllers
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using CloudinaryDotNet;
@@ -8,7 +7,6 @@
     using Infrastructure;
 
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     using Services.DoctorService;

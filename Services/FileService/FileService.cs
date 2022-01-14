@@ -7,14 +7,10 @@
     using CloudinaryDotNet.Actions;
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Http;
-    using Data.Models;
-    using System.Collections.Generic;
     using Data;
     using ViewModels.Galery;
     using Microsoft.EntityFrameworkCore;
     using Services.FileService.FileServiceModels;
-    using static System.Net.Mime.MediaTypeNames;
-    using Org.BouncyCastle.Asn1.IsisMtt.X509;
 
     public class FileService : IFileService
     {

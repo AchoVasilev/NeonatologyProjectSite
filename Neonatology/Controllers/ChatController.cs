@@ -4,12 +4,10 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Common;
-
     using Data.Models;
 
     using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
@@ -88,7 +86,7 @@ using Microsoft.AspNetCore.Http;
             var messages = await this.chatService.ExtractAllMessages(targetGroupName);
             var model = new PrivateChatViewModel
             {
-                FromUser = sender,
+                CurrentUser = sender,
                 ToUser = receiver,
                 ChatMessages = messages,
                 GroupName = targetGroupName,

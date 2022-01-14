@@ -13,8 +13,6 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using Services.UserService;
-
     using ViewModels.Notification;
 
     using static Common.GlobalConstants.NotificationConstants;
