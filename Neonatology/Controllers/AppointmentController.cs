@@ -100,5 +100,13 @@
 
             return View(model);
         }
+
+        [Authorize(Roles = DoctorRoleName)]
+        public async Task<IActionResult> TodaysAppointments()
+        {
+            var appointments = await this.appointmentService.GetTodaysAppointments(this.User.GetId());
+
+            return View(appointments);
+        }
     }
 }

@@ -1,0 +1,60 @@
+﻿@model ICollection<AppointmentViewModel>
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success" id="locationMessage">@this.TempData["Message"]</div>
+}
+
+@{
+    ViewData["Title"] = "Днешните часове";
+}
+
+@section Styles{
+    <style type="text/css" media="print">
+        body {visibility:hidden;}
+        .print {visibility:visible;}
+    </style>
+}
+    <button class="btn btn-info" onclick="window.print(); return false"><i class="fas fa-print">Разпечатай</i></button>
+<div class="container jumbotron-opacity print">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+
+    <hr />
+
+    @if (!Model.Any())
+    {
+        <h3 style="margin-top:2%">
+            Все още нямате записани часове
+        </h3>
+    }
+    else
+    {
+        <h2>Предстоящи за днес (@Model.Count())</h2>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Дата и час</th>
+                    <th scope="col">Имена на пациент</th>
+                    <th scope="col">Тел. номер</th>
+                    <th scope="col">Адрес</th>
+                    <th scope="col">Дете</th>
+                    <th scope="col">Вид преглед</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var appointment in Model)
+                {
+                    <tr>
+                        <th scope="row">@appointment.DateTime</th>
+                        <td>@appointment.PatientFirstName @appointment.PatientLastName</td>
+                        <td>@appointment.PatientPhone</td>
+                        <td>гр. @appointment.Address</td>
+                        <td>@appointment.ChildFirstName</td>
+                        <td>@appointment.AppointmentCauseName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

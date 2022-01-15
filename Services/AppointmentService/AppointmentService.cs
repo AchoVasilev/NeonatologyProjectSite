@@ -143,5 +143,13 @@
             => await this.data.Appointments
                         .Where(x => x.Id == id && x.IsDeleted == false)
                         .FirstOrDefaultAsync();
+
+        public async Task<ICollection<AppointmentViewModel>> GetTodaysAppointments(string id)
+            => await this.data.Appointments
+                .Where(x => x.Doctor.UserId == id &&
+                        x.DateTime.Date == DateTime.UtcNow.Date &&
+                        x.IsDeleted == false)
+                .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
+                .ToListAsync();
     }
 }

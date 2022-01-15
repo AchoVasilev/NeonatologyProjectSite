@@ -150,40 +150,5 @@
                             $"Д-р {doctor.FullName}" :
                             $"{patient.FirstName} {patient.LastName}";
         }
-
-        //[Route("Chat/With/{username?}/Group/{group?}")]
-        //public async Task<IActionResult> Chat(string username, string group)
-        //{
-        //    var currentUser = await this.userManager.GetUserAsync(this.User);
-        //    var groupUsers = new List<string>() { currentUser.Email, username };
-        //    var targetGroupName = group ?? string.Join(GlobalConstants.ChatGroupNameSeparator, groupUsers.OrderBy(x => x));
-
-        //    var receiver = await this.userManager.FindByNameAsync(username);
-        //    var doctorReceiver = await this.doctorService.GetDoctorByUserId(receiver.Id);
-        //    var patientReceiver = await this.patientService.GetPatientByUserIdAsync(receiver.Id);
-
-        //    var sender = await this.userManager.GetUserAsync(this.HttpContext.User);
-        //    var doctorSender = await this.doctorService.GetDoctorByUserId(sender.Id);
-        //    var patientSender = await this.patientService.GetPatientByUserIdAsync(sender.Id);
-
-        //    var receiverFullName = GetFullName(doctorReceiver, patientReceiver);
-
-        //    var senderFullName = GetFullName(doctorSender, patientSender);
-
-        //    var messages = await this.chatService.ExtractAllMessages(targetGroupName);
-        //    var model = new PrivateChatViewModel
-        //    {
-        //        FromUser = sender,
-        //        ToUser = receiver,
-        //        ChatMessages = messages,
-        //        GroupName = targetGroupName,
-        //        ReceiverFullName = receiverFullName,
-        //        SenderFullName = senderFullName,
-        //        ReceiverEmail = receiver.Email,
-        //        SenderEmail = sender.Email
-        //    };
-
-        //    return this.View(model);
-        //}
     }
 }
