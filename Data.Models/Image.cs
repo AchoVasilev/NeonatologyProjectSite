@@ -29,5 +29,10 @@
         public string DoctorId { get; set; }
 
         public virtual Doctor Doctor { get; set; }
+
+        [ForeignKey(nameof(Patient))]
+        public string PatientId { get; set; }
+
+        public virtual Patient Patient { get; set; }
     }
 }

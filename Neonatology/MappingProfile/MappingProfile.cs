@@ -13,6 +13,7 @@
     using ViewModels.Galery;
     using ViewModels.Offer;
     using ViewModels.Patient;
+    using ViewModels.Profile;
     using ViewModels.Slot;
 
     public class MappingProfile : Profile
@@ -108,6 +109,8 @@
                     opt.MapFrom(m => m.Sender.Doctor.FirstName != null
                         ? "Д-р " + m.Sender.Doctor.FirstName + " " + m.Sender.Doctor.LastName
                         : m.Sender.Patient.FirstName + " " + m.Sender.Patient.LastName));
+
+            this.CreateMap<Patient, ProfileViewModel>();
         }
     }
 }

@@ -1,12 +1,11 @@
 ﻿namespace Services.ProfileService
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
+
+    using ViewModels.Profile;
 
     public interface IProfileService
     {
+        Task<ProfileViewModel> GetPatientData(string userId);
     }
 }

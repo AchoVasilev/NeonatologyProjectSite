@@ -4,9 +4,6 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item">
-            <a class="nav-link text-dark hvr-grow" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Акаунт</a>
-        </li>
         if (User.IsInRole(Common.GlobalConstants.AdministratorRoleName))
         {
             <div class="dropdown show">
@@ -21,6 +18,9 @@
 
         if (User.IsInRole(Common.GlobalConstants.DoctorRoleName))
         {
+            <li class="nav-item">
+                <a class="nav-link text-dark hvr-grow" asp-area="" asp-controller="Doctor" asp-page="Profile">Акаунт</a>
+            </li>
             <div class="dropdown show">
                 <button class="btn dropdown-toggle hvr-grow" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Доктор
@@ -35,6 +35,9 @@
         }
         if (User.IsInRole(Common.GlobalConstants.PatientRoleName))
         {
+            <li class="nav-item">
+                <a class="nav-link text-dark hvr-grow" asp-area="" asp-controller="Profile" asp-action="Index">Акаунт</a>
+            </li>
             <div class="dropdown show">
                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Пациент

@@ -30,6 +30,7 @@
         [MaxLength(DefaultMaxLength)]
         public string LastName { get; set; }
 
+        [Required]
         [MaxLength(DefaultMaxLength)]
         public string Phone { get; set; }
 
@@ -37,6 +38,19 @@
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
+
+        [ForeignKey(nameof(Image))]
+        public string ImageId { get; set; }
+
+        public virtual Image Image { get; set; }
+
+        [MaxLength(AddressMaxLength)]
+        public string Address { get; set; }
+
+        [ForeignKey(nameof(City))]
+        public int? CityId { get; set; }
+
+        public virtual City City { get; set; }
 
         public virtual ICollection<Rating> Ratings { get; set; } = new HashSet<Rating>();
 

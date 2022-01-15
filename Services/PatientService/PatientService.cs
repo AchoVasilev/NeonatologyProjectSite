@@ -36,7 +36,11 @@
                 UserId = userId,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Phone = model.PhoneNumber
+                Phone = model.PhoneNumber,
+                Image = new Image()
+                {
+                    Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1642237596/pediamed/NoAvatarProfileImage_xjdrj9.png"
+                }
             };
 
             user.Patient = patient;

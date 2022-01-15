@@ -22,5 +22,7 @@
         [Required(ErrorMessage = RequiredFieldErrorMsg)]
         [Phone]
         public string PhoneNumber { get; set; }
+
+        public string UserEmail { get; set; }
     }
 }
