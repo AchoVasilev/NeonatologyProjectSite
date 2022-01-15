@@ -8,5 +8,7 @@
     public interface ICityService
     {
         Task<ICollection<CityFormModel>> GetAllCities();
+
+        Task<int> GetCityIdByName(string cityName);
     }
 }

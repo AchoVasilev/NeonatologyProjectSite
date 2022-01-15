@@ -97,8 +97,7 @@
             return RedirectToAction("MyAppointments", "Appointment", new { area = "" });
         }
 
-        [Authorize(Roles = DoctorRoleName)]
-        [Authorize(Roles = AdministratorRoleName)]
+        [Authorize(Roles = $"{DoctorRoleName}, {AdministratorRoleName}")]
         public async Task<IActionResult> Approve(int appointmentId)
         {
             var isApproved = await this.ratingService.ApproveRating(appointmentId);
@@ -112,8 +111,7 @@
             return RedirectToAction("DoctorAppointments", "Appointment", new { area = "" });
         }
 
-        [Authorize(Roles = DoctorRoleName)]
-        [Authorize(Roles = AdministratorRoleName)]
+        [Authorize(Roles = $"{DoctorRoleName}, {AdministratorRoleName}")]
         public async Task<IActionResult> Delete(int appointmentId)
         {
             var isApproved = await this.ratingService.DeleteRating(appointmentId);

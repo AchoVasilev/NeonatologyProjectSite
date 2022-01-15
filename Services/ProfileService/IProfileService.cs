@@ -7,5 +7,7 @@
     public interface IProfileService
     {
         Task<ProfileViewModel> GetPatientData(string userId);
+
+        Task<bool> EditProfileAsync(EditProfileFormModel model);
     }
 }

@@ -80,7 +80,7 @@
 
             if (isEdited == false)
             {
-                this.TempData["Message"] = UnsuccessfulDoctorEditMsg;
+                this.TempData["Message"] = UnsuccessfulEditMsg;
                 return View(model);
             }
 

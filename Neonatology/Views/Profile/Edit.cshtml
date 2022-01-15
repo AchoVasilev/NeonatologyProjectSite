@@ -1,42 +1,117 @@
-﻿@model ProfileViewModel
+﻿@model EditProfileFormModel
 
 @{
-    ViewBag.Title = "Моят профил";
+    ViewBag.Title = "Променете своята информация";
 }
 
-<div class="container rounded bg-white mt-5 mb-5">
-    <div class="row">
-        <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="@Model.ImageUrl"><span class="font-weight-bold">@Model.FirstName</span><span class="text-black-50">@Model.UserEmail</span><span> </span></div>
+@section head{
+<style type="text/css">
+    body {
+        background-image: url('/img/editForm.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+</style>
+}
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-danger" id="locationMessage">@this.TempData["Message"]</div>
+}
+
+<div class="container jumbotron-opacity">
+    <h1 class="text-center">@ViewBag.Title</h1>
+    <hr />
+    <form id="profileForm" method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="form-group">
+            <input asp-for="Id" value="@Model.Id" type="hidden" />
         </div>
-        <div class="col-md-5 border-right">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">@ViewBag.Title</h4>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">@Model.FirstName</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
-                    <div class="col-md-6"><label class="labels">@Model.LastName</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">@Model.Phone</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
-                    <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
-                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
-                    <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value=""></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
-                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
-                </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
-            </div>
+        <div class="form-group">
+            <input asp-for="ImageUrl" value="@Model.ImageUrl" type="hidden" />
         </div>
-        <div class="col-md-4">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br>
-                <div class="col-md-12"><label class="labels">Experience in Designing</label><input type="text" class="form-control" placeholder="experience" value=""></div> <br>
-                <div class="col-md-12"><label class="labels">Additional Details</label><input type="text" class="form-control" placeholder="additional details" value=""></div>
+        <div class="form-group">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control" placeholder="@Model.FirstName" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control" placeholder="@Model.LastName" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Picture" class="btn btn-secondary">Качи снимка</label>
+            <input type="file" asp-for="Picture" accept=".jpg, .jpeg, .png" class="form-control" placeholder="Качи снимка.." />
+            <span asp-validation-for="Picture" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PhoneNumber"></label>
+            <input asp-for="PhoneNumber" class="form-control" placeholder="@Model.PhoneNumber" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" placeholder="@Model.Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CityId"></label>
+            <select asp-for="CityId" class="form-control">
+                @foreach (var city in Model.Cities)
+                {
+                    <option value="@city.Id">@city.Name</option>
+                }
+            </select>
+            <span asp-validation-for="CityId" class="small text-danger"></span>
+        </div>
+    </form>
+    <div class="col-md-4">
+        <div class="p-3 py-5">
+            <a class="col-md-12 btn btn-warning hvr-grow"
+               asp-area="Identity"
+               asp-page="/Account/Manage/ChangePassword">Промени парола</a> <br>
+            <a class="col-md-12 btn btn-primary hvr-grow"
+               asp-area="Identity"
+               asp-page="/Account/Manage/PersonalData">Лични данни</a>
+        </div>
+    </div>
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <a type="button" class="btn btn-danger hvr-grow" data-dismiss="modal"
+           asp-area=""
+           asp-controller="Home"
+           asp-action="Index">
+            Затвори
+        </a>
+        <input class="btn btn-primary hvr-grow" type="submit" data-toggle="modal" data-target="#modalEdit" value="Запази промени" />
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modalEdit" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Потвърди промяна</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Сигурни ли сте, че желаете да запазите промените?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger hvr-grow" data-dismiss="modal">Затвори</button>
+                    <button type="button" class="btn btn-primary hvr-grow" onclick="profileForm.submit()">Запази промени</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+}

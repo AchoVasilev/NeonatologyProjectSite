@@ -67,7 +67,7 @@
 
             public const string PatientProfileIsNotFinishedMsg = "За да си запазите час, трябва да си довършите профила";
 
-            public const string UnsuccessfulDoctorEditMsg = "Нещо се обърка, опитайте пак";
+            public const string UnsuccessfulEditMsg = "Нещо се обърка, опитайте пак";
             public const string AppointmentCauseWrongId = "Такъв преглед не съществува!";
             public const string PatientIsRegistered = "Моля, използвайте платформата, за да си запишете час.";
         }
@@ -99,6 +99,7 @@
         public static class FileConstants
         {
             public const string DefaultFolderName = "pediamed";
+            public const string ProfileFolderName = $"{DefaultFolderName}/userProfiles";
             public const string ChatFolderName = $"{DefaultFolderName}/pediamedChat";
             public const string ChatFileName = "{0}-ChatFile";
         }

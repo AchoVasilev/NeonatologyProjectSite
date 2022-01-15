@@ -44,6 +44,7 @@
             };
 
             user.Patient = patient;
+            user.PhoneNumber = model.PhoneNumber;
 
             await this.data.Patients.AddAsync(patient);
 

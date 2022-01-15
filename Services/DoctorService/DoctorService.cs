@@ -23,15 +23,15 @@
     public class DoctorService : IDoctorService
     {
         private readonly NeonatologyDbContext data;
-        private readonly IFileService imageService;
+        private readonly IFileService fileService;
         private readonly IMapper mapper;
         private readonly Cloudinary cloudinary;
 
-        public DoctorService(NeonatologyDbContext data, IMapper mapper, IFileService imageService, Cloudinary cloudinary)
+        public DoctorService(NeonatologyDbContext data, IMapper mapper, IFileService fileService, Cloudinary cloudinary)
         {
             this.data = data;
             this.mapper = mapper;
-            this.imageService = imageService;
+            this.fileService = fileService;
             this.cloudinary = cloudinary;
         }
 
@@ -82,7 +82,7 @@
                 return false;
             }
 
-            var result = await this.imageService.UploadImage(cloudinary, model.Picture, DefaultFolderName);
+            var result = await this.fileService.UploadImage(cloudinary, model.Picture, DefaultFolderName);
             if (result == null)
             {
                 return false;

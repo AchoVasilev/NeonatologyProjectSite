@@ -29,5 +29,11 @@
                          .ProjectTo<CityFormModel>(this.mapper.ConfigurationProvider)
                          .OrderBy(x => x.Name)
                          .ToListAsync();
+
+        public async Task<int> GetCityIdByName(string cityName)
+            => await this.data.Cities
+                        .Where(x => x.Name == cityName)
+                        .Select(x => x.Id)
+                        .FirstOrDefaultAsync();
     }
 }
