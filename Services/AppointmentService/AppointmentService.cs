@@ -73,8 +73,8 @@
                     .Where(x => x.DateTime.Date >= DateTime.UtcNow.Date)
                     .Select(x => new TakenAppointmentsViewModel()
                     {
-                        Start = x.DateTime.ToLocalTime(),
-                        End = x.End.ToLocalTime(),
+                        Start = x.DateTime,
+                        End = x.End,
                         Status = "Зает"
                     })
                     .ToListAsync();
@@ -147,7 +147,7 @@
         public async Task<ICollection<AppointmentViewModel>> GetTodaysAppointments(string id)
             => await this.data.Appointments
                 .Where(x => x.Doctor.UserId == id &&
-                        x.DateTime.Date == DateTime.UtcNow.Date &&
+                        x.DateTime.Date == DateTime.Now.Date &&
                         x.IsDeleted == false)
                 .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();

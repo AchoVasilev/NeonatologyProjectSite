@@ -12,6 +12,8 @@
 
         Task<ICollection<SlotViewModel>> GetSlots();
 
+        Task<ICollection<SlotViewModel>> GetPatientSlots();
+
         Task<bool> EditSlot(int id, string status);
 
         Task<int> DeleteSlotById(int id);

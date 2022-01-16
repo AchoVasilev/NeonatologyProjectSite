@@ -56,6 +56,14 @@
                         .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
 
+        public async Task<ICollection<SlotViewModel>> GetPatientSlots()
+            => await this.data.AppointmentSlots
+            .Where(x => x.IsDeleted == false &&
+                    x.Start >= DateTime.UtcNow.AddDays(-5) && 
+                    x.End <= DateTime.UtcNow.AddDays(20))
+            .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
+            .ToListAsync();
+
         public async Task<int> DeleteSlotById(int id)
         {
             var slot = await this.data.AppointmentSlots

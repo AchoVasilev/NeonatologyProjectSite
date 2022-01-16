@@ -139,13 +139,13 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             const obj = await response.json();
             notify(obj.message);
+
+            calendar.render();
+            setTimeout(() => window.location = '/appointment/myappointments', 3000);
         } catch (err) {
             notify(err.message);
             throw err;
         }
-
-        calendar.refetchEvents();
-        setTimeout(() => window.location = '/appointment/myappointments', 3000);
     }
 
     async function attachEvents() {

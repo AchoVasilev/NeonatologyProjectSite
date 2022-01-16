@@ -21,15 +21,7 @@
         public MappingProfile()
         {
             this.CreateMap<AppointmentCause, AppointmentCauseViewModel>();
-            this.CreateMap<Appointment, CreateAppointmentModel>()
-                .ForMember(x => x.Start, opt =>
-                {
-                    opt.MapFrom(y => y.DateTime.ToLocalTime());
-                })
-                .ForMember(x => x.End, opt =>
-                {
-                    opt.MapFrom(y => y.End.ToLocalTime());
-                });
+            this.CreateMap<Appointment, CreateAppointmentModel>();
             this.CreateMap<Appointment, AppointmentViewModel>()
                 .ForMember(x => x.DoctorName, opt =>
                 {
@@ -42,14 +34,6 @@
                 .ForMember(x => x.Rating, opt =>
                 {
                     opt.MapFrom(d => d.Rating.Number);
-                })
-                .ForMember(x => x.DateTime, opt =>
-                {
-                    opt.MapFrom(y => y.DateTime.ToLocalTime());
-                })
-                .ForMember(x => x.End, opt =>
-                {
-                    opt.MapFrom(y => y.End.ToLocalTime());
                 });
 
             this.CreateMap<Doctor, DoctorProfileViewModel>()
@@ -68,15 +52,7 @@
 
             this.CreateMap<Patient, PatientViewModel>();
 
-            this.CreateMap<AppointmentSlot, SlotViewModel>()
-                .ForMember(x => x.Start, opt =>
-                {
-                    opt.MapFrom(y => y.Start.ToLocalTime());
-                })
-                .ForMember(x => x.End, opt =>
-                {
-                    opt.MapFrom(y => y.End.ToLocalTime());
-                });
+            this.CreateMap<AppointmentSlot, SlotViewModel>();
 
             this.CreateMap<OfferedService, OfferViewModel>();
 

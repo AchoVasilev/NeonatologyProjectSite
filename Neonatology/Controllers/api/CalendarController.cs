@@ -49,9 +49,7 @@
         [HttpGet("getSlots")]
         public async Task<JsonResult> GetCalendarSlots()
         {
-            var slots = await this.slotService.GetSlots();
-            slots = slots.Where(x => x.Start >= DateTime.UtcNow.AddDays(-5) && x.End <= DateTime.UtcNow.AddDays(20))
-                .ToList();
+            var slots = await this.slotService.GetPatientSlots();
             
             return new JsonResult(slots);
         }
@@ -99,13 +97,13 @@
             await this.slotService.DeleteSlotById(int.Parse(id));
 
             var emailMsg = string
-                .Format(AppointmentMakeEmailMsg, model.Start.ToLocalTime().Hour, model.Start.ToString("dd/MM/yyyy"));
+                .Format(AppointmentMakeEmailMsg, model.Start.ToString("HH:mm"), model.Start.ToString("dd/MM/yyyy"));
             await this.emailSender.SendEmailAsync(model.Email, SuccessfulApointmentEmailMsgSubject, emailMsg);
 
             return Ok(new
             {
                 message = string
-                    .Format(SuccessfullAppointment, model.Start.ToString("dd/MM/yyyy"), model.Start.ToLocalTime().Hour),
+                    .Format(SuccessfullAppointment, model.Start.ToString("dd/MM/yyyy"), model.Start.ToString("HH:mm")),
             });
         }
 
@@ -119,6 +117,11 @@
                 return BadRequest(new { message = AppointmentCauseWrongId });
             }
 
+            if (model.Start.Date < DateTime.Now.Date && model.Start.Hour < DateTime.Now.Hour)
+            {
+                return BadRequest(new { message = AppointmentBeforeNowErrorMsg });
+            }
+
             var userId = this.User.GetId();
             var userEmail = this.User.FindFirst(ClaimTypes.Email).Value;
             var patientId = await this.patientService.GetPatientIdByUserIdAsync(userId);
@@ -126,27 +129,22 @@
             model.PatientId = patientId;
             var result = await this.appointmentService.AddAsync(model.DoctorId, model);
 
-            if (model.Start.Date < DateTime.Now.Date && model.Start.Hour < DateTime.Now.Hour)
-            {
-                return BadRequest(new { response = AppointmentBeforeNowErrorMsg });
-            }
-
-            await this.slotService.DeleteSlotById(int.Parse(id));
-
             if (result == false)
             {
                 return BadRequest(new { message = TakenDateMsg });
             }
 
+            await this.slotService.DeleteSlotById(int.Parse(id));
+
             var emailMsg = string
-                .Format(AppointmentMakeEmailMsg, model.Start.ToLocalTime().Hour, model.Start.ToString("dd/MM/yyyy"));
+                .Format(AppointmentMakeEmailMsg, model.Start.ToString("HH:mm"), model.Start.ToString("dd/MM/yyyy"));
 
             await this.emailSender.SendEmailAsync(userEmail, SuccessfulApointmentEmailMsgSubject, emailMsg);
 
             return Ok(new
             {
                 message = string
-                    .Format(SuccessfullAppointment, model.Start.ToString("dd/MM/yyyy"), model.Start.ToLocalTime().Hour),
+                    .Format(SuccessfullAppointment, model.Start.ToString("dd/MM/yyyy"), model.Start.ToString("HH:mm")),
             });
         }
     }

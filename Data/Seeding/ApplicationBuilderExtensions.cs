@@ -143,6 +143,10 @@
                 }
             };
 
+            await userManager.CreateAsync(doctor, DoctorPassword);
+            await userManager.AddToRoleAsync(doctor, identityRole.Name);
+
+            doctor.Doctor.UserId = doctor.Id;
             await data.Doctors.AddAsync(doctor.Doctor);
             await data.SaveChangesAsync();
 
@@ -154,8 +158,6 @@
 
             doctor.Doctor.Image = image;
 
-            await userManager.CreateAsync(doctor, DoctorPassword);
-            await userManager.AddToRoleAsync(doctor, identityRole.Name);
             await data.SaveChangesAsync();
         }
 

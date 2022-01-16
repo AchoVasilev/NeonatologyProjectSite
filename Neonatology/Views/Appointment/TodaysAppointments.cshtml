@@ -11,50 +11,71 @@
 
 @section Styles{
     <style type="text/css" media="print">
-        body {visibility:hidden;}
-        .print {visibility:visible;}
+        body {
+            visibility: hidden;
+        }
+
+        .print {
+            visibility: visible;
+        }
     </style>
 }
-    <button class="btn btn-info" onclick="window.print(); return false"><i class="fas fa-print">Разпечатай</i></button>
-<div class="container jumbotron-opacity print">
-    <h1 class="text-center">@ViewData["Title"]</h1>
 
-    <hr />
+<button class="btn btn-info" onclick="window.print(); return false"><i class="fas fa-print">Разпечатай</i></button>
+<h1 class="text-center print">@($"{ViewData["Title"]} - {DateTime.Now.Date.ToString("dd/MM/yyyy")}")</h1>
 
-    @if (!Model.Any())
-    {
-        <h3 style="margin-top:2%">
-            Все още нямате записани часове
-        </h3>
-    }
-    else
-    {
-        <h2>Предстоящи за днес (@Model.Count())</h2>
+<hr />
 
-        <table class="table table-bordered table-striped">
-            <thead class="thead-light">
+@if (!Model.Any())
+{
+    <h3 style="margin-top:2%">
+        Все още нямате записани часове
+    </h3>
+}
+else
+{
+    <h2>Предстоящи за днес (@Model.Count())</h2>
+
+    <table class="display print" id="table-id" style="width:100%">
+        <thead>
+            <tr>
+                <th>Дата и час</th>
+                <th>Имена на пациент</th>
+                <th>Адрес</th>
+                <th>Дете</th>
+                <th>Вид преглед</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var appointment in Model)
+            {
                 <tr>
-                    <th scope="col">Дата и час</th>
-                    <th scope="col">Имена на пациент</th>
-                    <th scope="col">Тел. номер</th>
-                    <th scope="col">Адрес</th>
-                    <th scope="col">Дете</th>
-                    <th scope="col">Вид преглед</th>
+                    <td>@appointment.DateTime</td>
+                    <td>@appointment.PatientFirstName @appointment.PatientLastName</td>
+                    <td>гр. @appointment.Address</td>
+                    <td>@appointment.ChildFirstName</td>
+                    <td>@appointment.AppointmentCauseName</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var appointment in Model)
-                {
-                    <tr>
-                        <th scope="row">@appointment.DateTime</th>
-                        <td>@appointment.PatientFirstName @appointment.PatientLastName</td>
-                        <td>@appointment.PatientPhone</td>
-                        <td>гр. @appointment.Address</td>
-                        <td>@appointment.ChildFirstName</td>
-                        <td>@appointment.AppointmentCauseName</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-</div>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Дата и час</th>
+                <th>Имена на пациент</th>
+                <th>Адрес</th>
+                <th>Дете</th>
+                <th>Вид преглед</th>
+            </tr>
+        </tfoot>
+    </table>
+}
+
+@section Scripts{
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table-id').DataTable();
+        });
+    </script>
+}
