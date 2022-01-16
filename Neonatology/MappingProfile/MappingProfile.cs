@@ -10,11 +10,14 @@
     using ViewModels.Chat;
     using ViewModels.City;
     using ViewModels.Doctor;
+    using ViewModels.Feedback;
     using ViewModels.Galery;
     using ViewModels.Offer;
     using ViewModels.Patient;
     using ViewModels.Profile;
     using ViewModels.Slot;
+
+    using static Common.GlobalConstants.DateTimeFormats;
 
     public class MappingProfile : Profile
     {
@@ -87,6 +90,10 @@
                         : m.Sender.Patient.FirstName + " " + m.Sender.Patient.LastName));
 
             this.CreateMap<Patient, ProfileViewModel>();
+
+            this.CreateMap<Feedback, FeedbackViewModel>()
+                .ForMember(x => x.CreatedOn, opt =>
+                    opt.MapFrom(x => x.CreatedOn.ToLocalTime().ToString(DateTimeFormat)));
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace Neonatology.Controllers.api
 {
     using System;
-    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -20,6 +19,7 @@
 
     using static Common.GlobalConstants;
     using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.DateTimeFormats;
 
     [ApiController]
     [Route("[controller]")]
@@ -97,13 +97,13 @@
             await this.slotService.DeleteSlotById(int.Parse(id));
 
             var emailMsg = string
-                .Format(AppointmentMakeEmailMsg, model.Start.ToString("HH:mm"), model.Start.ToString("dd/MM/yyyy"));
+                .Format(AppointmentMakeEmailMsg, model.Start.ToString(TimeFormat), model.Start.ToString(DateFormat));
             await this.emailSender.SendEmailAsync(model.Email, SuccessfulApointmentEmailMsgSubject, emailMsg);
 
             return Ok(new
             {
                 message = string
-                    .Format(SuccessfullAppointment, model.Start.ToString("dd/MM/yyyy"), model.Start.ToString("HH:mm")),
+                    .Format(SuccessfullAppointment, model.Start.ToString(DateFormat), model.Start.ToString(TimeFormat)),
             });
         }
 
@@ -137,14 +137,14 @@
             await this.slotService.DeleteSlotById(int.Parse(id));
 
             var emailMsg = string
-                .Format(AppointmentMakeEmailMsg, model.Start.ToString("HH:mm"), model.Start.ToString("dd/MM/yyyy"));
+                .Format(AppointmentMakeEmailMsg, model.Start.ToString(TimeFormat), model.Start.ToString(DateFormat));
 
             await this.emailSender.SendEmailAsync(userEmail, SuccessfulApointmentEmailMsgSubject, emailMsg);
 
             return Ok(new
             {
                 message = string
-                    .Format(SuccessfullAppointment, model.Start.ToString("dd/MM/yyyy"), model.Start.ToString("HH:mm")),
+                    .Format(SuccessfullAppointment, model.Start.ToString(DateFormat), model.Start.ToString(TimeFormat)),
             });
         }
     }

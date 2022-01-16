@@ -27,6 +27,7 @@ namespace Neonatology
     using Services.CityService;
     using Services.DoctorService;
     using Services.EmailSenderService;
+    using Services.FeedbackService;
     using Services.FileService;
     using Services.NotificationService;
     using Services.OfferService;
@@ -104,6 +105,7 @@ namespace Neonatology
                 .AddTransient<IPaymentService, PaymentService>()
                 .AddTransient<INotificationService, NotificationService>()
                 .AddTransient<IProfileService, ProfileService>()
+                .AddTransient<IFeedbackService, FeedbackService>()
                 .AddTransient<ReCaptchaService>();
 
             //Configure ReCAPTCHA

@@ -51,7 +51,7 @@
             public const string SuccessfullyDeletedRating = "Успешно изтрихте оценката";
 
             public const string RequiredFieldErrorMsg = "Полето е задължително.";
-            public const string LengthErrorMsg = "Полето трябва да е между {0} {1} символа.";
+            public const string LengthErrorMsg = "Полето трябва да е между {0} и {1} символа.";
             public const string PasswordLengthErrorMsg = "Паролата трябва да е между {0} {1} символа.";
             public const string PasswordsNotMatchErrorMsg = "Паролите не съвпадат";
 
@@ -70,6 +70,8 @@
             public const string UnsuccessfulEditMsg = "Нещо се обърка, опитайте пак";
             public const string AppointmentCauseWrongId = "Такъв преглед не съществува!";
             public const string PatientIsRegistered = "Моля, използвайте платформата, за да си запишете час.";
+
+            public const string SuccessfulFeedbackSent = "Успешно изпратихте вашето съобщение. Ще получите отговор на и-мейла си.";
         }
 
         public static class AccountConstants

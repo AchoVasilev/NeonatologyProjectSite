@@ -10,10 +10,8 @@
     {
         private readonly IOfferService offerService;
 
-        public OfferController(IOfferService offerService)
-        {
-            this.offerService = offerService;
-        }
+        public OfferController(IOfferService offerService) 
+            => this.offerService = offerService;
 
         public async Task<IActionResult> All()
         {

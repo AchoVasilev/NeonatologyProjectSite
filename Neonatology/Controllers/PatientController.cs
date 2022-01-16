@@ -18,10 +18,8 @@
     {
         private readonly IPatientService patientService;
 
-        public PatientController(IPatientService patientService)
-        {
-            this.patientService = patientService;
-        }
+        public PatientController(IPatientService patientService) 
+            => this.patientService = patientService;
 
         public IActionResult Finish() 
             => View(new CreatePatientFormModel());

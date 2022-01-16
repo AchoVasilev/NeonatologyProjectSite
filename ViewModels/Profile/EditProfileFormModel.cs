@@ -35,6 +35,7 @@
 
         public string ImageUrl { get; set; }
 
+        [EmailAddress]
         public string Email { get; set; }
 
         public IFormFile Picture { get; set; }

@@ -62,7 +62,9 @@
 
     <footer class="footer bg-info">
         <div class="container-fluid">
-            Всички права запазени &copy; 2021 - @DateTime.UtcNow.Year - @Common.GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика за поверителност</a>
+            Всички права запазени &copy; 2021 - @DateTime.UtcNow.Year - @Common.GlobalConstants.SystemName - 
+            <a asp-area="" asp-controller="Home" asp-action="Privacy" style="color:white;">Политика за поверителност</a>
+            <a asp-area="" asp-controller="Feedback" asp-action="Send" style="color:black;">Свържете се с нас</a>
         </div>
     </footer>
 
@@ -76,7 +78,6 @@
         </a>
     }
 
-    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/errorNotify.js" asp-append-version="true"></script>

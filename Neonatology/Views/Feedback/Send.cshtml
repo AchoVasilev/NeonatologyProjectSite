@@ -1,0 +1,43 @@
+﻿@model FeedbackInputModel
+
+@{
+    ViewData["Title"] = "Свържете се с нас";
+}
+
+@section Styles{
+    <link type="text/css" href="~/css/contactForm.css" />
+}
+
+<div class="container contact-form">
+    <div class="contact-image">
+        <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact" />
+    </div>
+    <form method="post">
+        <h3>@ViewData["Title"]</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <input asp-for="Type" type="text" name="txtEmail" class="form-control" placeholder="Заглавие *" value="" />
+                </div>
+                <div class="form-group">
+                    <input asp-for="FirstName" type="text" name="txtName" class="form-control" placeholder="Име *" value="" />
+                </div>
+                <div class="form-group">
+                    <input asp-for="LastName" type="text" name="txtName" class="form-control" placeholder="Фамилия *" value="" />
+                </div>
+                <div class="form-group">
+                    <input asp-for="Email" type="text" name="txtEmail" class="form-control" placeholder="И-мейл *" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="btnSubmit" class="btn btn-primary hvr-grow" value="Изпрати" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <textarea asp-for="Comment" name="txtMsg" class="form-control" placeholder="Вашето съобщение *" style="width: 100%; height: 150px;"></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
