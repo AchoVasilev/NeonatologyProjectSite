@@ -20,5 +20,10 @@
             var model = await this.galeryService.GetGaleryImages();
             return View(model);
         }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            return RedirectToAction(nameof(All));
+        }
     }
 }

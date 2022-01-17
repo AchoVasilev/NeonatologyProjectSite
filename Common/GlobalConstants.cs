@@ -48,7 +48,7 @@
             public const string SuccessfulRating = "Вие дадохте оценка {0}";
             public const string ErrorApprovingRating = "Възникна грешка с одобряването, опитайте пак";
             public const string SuccessfullyApprovedRating = "Одобрихте успешно оценката";
-            public const string ErrorDeletingRating = "Възникна грешка с изтриването, опитайте пак";
+            public const string ErrorDeleting = "Възникна грешка с изтриването, опитайте пак";
             public const string SuccessfullyDeletedRating = "Успешно изтрихте оценката";
 
             public const string RequiredFieldErrorMsg = "Полето е задължително.";

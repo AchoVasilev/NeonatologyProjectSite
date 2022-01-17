@@ -4,9 +4,15 @@
 <link rel="stylesheet" href="~/adminLte/plugins/ekko-lightbox/ekko-lightbox.css" />
 }
 
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-danger">@this.TempData["Message"]</div>
+}
+
 @{
     ViewBag.Title = "Всички снимки от галерията";
 }
+
 
 <div class="col-12">
     <div class="card card-primary">
