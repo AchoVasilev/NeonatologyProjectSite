@@ -18,6 +18,7 @@ namespace Neonatology
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
+    using Neonatology.Areas.Administration.Services;
     using Neonatology.Hubs;
 
     using Services;
@@ -106,6 +107,7 @@ namespace Neonatology
                 .AddTransient<INotificationService, NotificationService>()
                 .AddTransient<IProfileService, ProfileService>()
                 .AddTransient<IFeedbackService, FeedbackService>()
+                .AddTransient<IGaleryService, GaleryService>()
                 .AddTransient<ReCaptchaService>();
 
             //Configure ReCAPTCHA

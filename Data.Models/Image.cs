@@ -19,6 +19,8 @@
 
         public bool IsDeleted { get; set; } = false;
 
+        public bool? AddedByAdmin { get; set; } = false;
+
         public string RemoteImageUrl { get; set; }
 
         public string Url { get; set; }

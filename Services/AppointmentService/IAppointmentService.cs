@@ -30,5 +30,7 @@
         Task<Appointment> GetAppointmentByIdAsync(int id);
 
         Task<ICollection<AppointmentViewModel>> GetTodaysAppointments(string id);
+
+        Task<int> GetTotalAppointmentsCount();
     }
 }

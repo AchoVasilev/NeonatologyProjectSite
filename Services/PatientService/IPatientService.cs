@@ -15,5 +15,9 @@
         Task<PatientViewModel> GetPatientByUserIdAsync(string userId);
 
         Task<bool> EditPatientAsync(string patientId, CreatePatientFormModel model);
+
+        Task<int> GetPatientsCount();
+
+        Task<int> GetLastThisMonthsRegisteredCount();
     }
 }

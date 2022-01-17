@@ -11,5 +11,7 @@
         Task<bool> ApproveRating(int appointmentId);
 
         Task<bool> DeleteRating(int appointmentId);
+
+        Task<int> GetRatingsCount();
     }
 }

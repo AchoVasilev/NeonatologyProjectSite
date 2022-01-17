@@ -4,10 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="~/adminLte/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="~/adminLte/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="~/adminLte/plugins/chart.js/chart.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" />
+    @await RenderSectionAsync("Styles", required: false)
 
     <title>@Common.GlobalConstants.SystemAdministrationName</title>
 </head>
@@ -29,64 +31,6 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Brad Diesel
-                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">Call me whenever you can...</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        John Pierce
-                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">I got your message bro</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">The subject goes here</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                    </div>
-                </li>
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -156,33 +100,48 @@
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Starter Pages
+                                    Всички страници
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a asp-area="Administration" asp-controller="User" asp-action="All" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Active Page</p>
+                                        <p>Потребители</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a asp-area="Administration" asp-controller="Rating" asp-action="All" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Inactive Page</p>
+                                        <p>Всички оценки</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Administration" asp-controller="Galery" asp-action="All" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Галерия</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Administration" asp-controller="Offer" asp-action="All" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Всички услуги</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Administration" asp-controller="Appointment" asp-action="All" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Всички записани часове</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Administration" asp-controller="Feedbacks" asp-action="All" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Всички обратни връзки</p>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Simple Link
-                                    <span class="right badge badge-danger">New</span>
-                                </p>
-                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -193,42 +152,22 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">Starter Page</h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Starter Page</li>
-                            </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
-            <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
                     @RenderBody()
-                </div><!-- /.container-fluid -->
+                </div>
             </div>
-            <!-- /.content -->
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+                <div class="p-3">
+                    <h5>Title</h5>
+                    <p>Sidebar content</p>
+                </div>
+            </aside>
+            <!-- /.control-sidebar -->
+            <!-- Main Footer -->
         </div>
-        <!-- /.content-wrapper -->
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-            <div class="p-3">
-                <h5>Title</h5>
-                <p>Sidebar content</p>
-            </div>
-        </aside>
-        <!-- /.control-sidebar -->
-        <!-- Main Footer -->
         <footer class="main-footer">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
@@ -237,12 +176,12 @@
             <!-- Default to the left -->
             <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
         </footer>
-    </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/adminLte/plugins/chart.js/Chart.min.js"></script>
-    <script src="~/adminLte/dist/js/adminlte.min.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/adminLte/dist/js/adminlte.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

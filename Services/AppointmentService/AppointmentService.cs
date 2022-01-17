@@ -29,6 +29,7 @@
         public async Task<ICollection<AppointmentViewModel>> GetAllAppointments()
             => await this.data.Appointments
                         .Where(x => x.IsDeleted == false)
+                        .OrderByDescending(x => x.DateTime)
                         .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
 
@@ -151,5 +152,9 @@
                         x.IsDeleted == false)
                 .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
+
+        public async Task<int> GetTotalAppointmentsCount()
+            => await this.data.Appointments.CountAsync();
+
     }
 }

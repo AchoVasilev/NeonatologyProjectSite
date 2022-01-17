@@ -39,7 +39,7 @@
                 Phone = model.PhoneNumber,
                 Image = new Image()
                 {
-                    Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1642237596/pediamed/NoAvatarProfileImage_xjdrj9.png"
+                    Url = "/images/NoAvatarProfileImage.png"
                 }
             };
 
@@ -86,5 +86,15 @@
 
             return true;
         }
+
+        public async Task<int> GetPatientsCount() 
+            => await this.data.Patients
+                        .Where(x => x.IsDeleted == false)
+                        .CountAsync();
+
+        public async Task<int> GetLastThisMonthsRegisteredCount()
+            => await this.data.Patients
+                        .Where(x => x.IsDeleted == false && x.CreatedOn.Month == DateTime.Now.Month)
+                        .CountAsync();
     }
 }

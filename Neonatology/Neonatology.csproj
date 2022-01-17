@@ -32,9 +32,4 @@
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Administration\Data\" />
-    <Folder Include="Areas\Administration\Models\" />
-  </ItemGroup>
-
 </Project>

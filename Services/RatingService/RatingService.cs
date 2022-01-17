@@ -84,5 +84,8 @@
 
             return true;
         }
+
+        public async Task<int> GetRatingsCount()
+            => await this.data.Ratings.CountAsync();
     }
 }
