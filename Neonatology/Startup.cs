@@ -153,7 +153,6 @@ namespace Neonatology
             if (env.IsDevelopment())
             {
                 //app.UseExceptionHandler("/Home/Error");
-
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
             }

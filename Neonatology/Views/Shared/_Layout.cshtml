@@ -19,7 +19,7 @@
     <audio id="notificationAudio">
         <source id="targetAudio" src="~/NotificationSound1.mp3" type="audio/mpeg">
     </audio>
-    @RenderSection("head", required: false)
+    @await RenderSectionAsync("head", required: false)
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">

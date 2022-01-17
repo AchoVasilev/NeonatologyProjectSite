@@ -234,6 +234,11 @@
                 EmailConfirmed = true
             };
 
+            if (await userManager.IsInRoleAsync(adminUser, identityRole.Name))
+            {
+                return;
+            }
+
             await userManager.CreateAsync(adminUser, adminPassword);
             await userManager.AddToRoleAsync(adminUser, identityRole.Name);
         }

@@ -3,6 +3,8 @@
     using System.Diagnostics;
     using System.Threading.Tasks;
 
+    using Infrastructure;
+
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
@@ -24,6 +26,11 @@
 
         public async Task<IActionResult> Index()
         {
+            if (this.User.IsAdmin())
+            {
+                return RedirectToAction("Index", "Home", new { Area = "Administration" });
+            }
+
             var model = new HomeViewModel()
             {
                 DoctorId = await this.doctorService.GetDoctorId()

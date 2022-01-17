@@ -3,11 +3,12 @@
     public static class GlobalConstants
     {
         public const string SystemName = "Педиамед";
+        public const string SystemAdministrationName = "Педиамед Администрация";
 
         public const string PatientRoleName = "Patient";
 
         public const string AdministratorRoleName = "Administrator";
-        public const string AdministratorEmail = "angavasilev@gmail.com";
+        public const string AdministratorEmail = "pediamedbg@gmail.com";
         public const string AdministratorPassword = "administrator123";
 
         public const string DoctorRoleName = "Doctor";
