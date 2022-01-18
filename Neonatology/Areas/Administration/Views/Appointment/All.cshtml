@@ -12,79 +12,89 @@
 <div class="card-header">
     <h3 class="card-title">@ViewBag.Title (@Model.Count())</h3>
 </div>
-<table id="table-id" style="width:100%">
-    <thead>
-        <tr>
-            <th>Име</th>
-            <th>Фамилия</th>
-            <th>Име на дете</th>
-            <th>Причина за преглед</th>
-            <th>Телефон</th>
-            <th>Начален час</th>
-            <th>Краен час</th>
-            <th>Оценка</th>
-            <th>Възможни действия</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var appointment in Model)
-        {
+
+@if (!Model.Any())
+{
+    <h3 style="margin-top:2%">
+        Няма записани часове
+    </h3>
+}
+else
+{
+    <table id="table-id" style="width:100%">
+        <thead>
             <tr>
-                <td>@appointment.PatientFirstName</td>
-                <td>@appointment.PatientLastName</td>
-                <td>@appointment.ChildFirstName</td>
-                <td>@appointment.AppointmentCauseName</td>
-                <td>@appointment.PatientPhone</td>
-                <td>@appointment.DateTime</td>
-                <td>@appointment.End</td>
-                <td>@(appointment.Rating == null ? "Няма оценка" : appointment.Rating)</td>
-                <td>
-                    <a asp-area="Administration" asp-controller="Appointment"
+                <th>Име</th>
+                <th>Фамилия</th>
+                <th>Име на дете</th>
+                <th>Причина за преглед</th>
+                <th>Телефон</th>
+                <th>Начален час</th>
+                <th>Краен час</th>
+                <th>Оценка</th>
+                <th>Възможни действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var appointment in Model)
+            {
+                <tr>
+                    <td>@appointment.PatientFirstName</td>
+                    <td>@appointment.PatientLastName</td>
+                    <td>@appointment.ChildFirstName</td>
+                    <td>@appointment.AppointmentCauseName</td>
+                    <td>@appointment.PatientPhone</td>
+                    <td>@appointment.DateTime</td>
+                    <td>@appointment.End</td>
+                    <td>@(appointment.Rating == null ? "Няма оценка" : appointment.Rating)</td>
+                    <td>
+                        <a asp-area="Administration" asp-controller="Appointment"
                    asp-action="Information"
                    asp-route-id="@appointment.Id"
                    class="btn btn-primary">Данни за часа</a>
-                    <a asp-area="Administration" asp-controller="Appointment" asp-action="Delete" asp-route-id="@appointment.Id"
+                        <a asp-area="Administration" asp-controller="Appointment" asp-action="Delete" asp-route-id="@appointment.Id"
                    data-toggle="modal" data-target="#modalDelete" class="btn btn-danger">Изтрий</a>
 
-                    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalDeleteLabel">Потвърди изтриването</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>
-                                        Потвърждавате ли промените?
-                                    </p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Затвори</button>
-                                    <a asp-area="Administration" asp-controller="Appointment" asp-action="Delete" asp-route-id="@appointment.Id" class="btn btn-danger">Изтрий</a>
+                        <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalDeleteLabel">Потвърди изтриването</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            Потвърждавате ли промените?
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Затвори</button>
+                                        <a asp-area="Administration" asp-controller="Appointment" asp-action="Delete" asp-route-id="@appointment.Id" class="btn btn-danger">Изтрий</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </td>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Име</th>
+                <th>Фамилия</th>
+                <th>Име на дете</th>
+                <th>Причина за преглед</th>
+                <th>Телефон</th>
+                <th>Начален час</th>
+                <th>Краен час</th>
+                <th>Оценка</th>
+                <th>Възможни действия</th>
             </tr>
-        }
-    </tbody>
-    <tfoot>
-        <tr>
-            <th>Име</th>
-            <th>Фамилия</th>
-            <th>Име на дете</th>
-            <th>Причина за преглед</th>
-            <th>Телефон</th>
-            <th>Начален час</th>
-            <th>Краен час</th>
-            <th>Оценка</th>
-            <th>Възможни действия</th>
-        </tr>
-    </tfoot>
-</table>
+        </tfoot>
+    </table>
+}
 
 @section Scripts{
 <script>
