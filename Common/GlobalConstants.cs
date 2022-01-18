@@ -79,6 +79,7 @@
             public const string SuccessfulFeedbackSent = "Успешно изпратихте вашето съобщение. Ще получите отговор на и-мейла си.";
             public const string SuccessfulDeleteMsg = "Изтриването беше успешно.";
             public const string SuccessfulAddedItemMsg = "Успешно добавихте нови данни";
+            public const string SuccessfulSendEmailMsg = "Успешно изпратихте и-мейл";
         }
 
         public static class AccountConstants
