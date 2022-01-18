@@ -143,6 +143,9 @@
         public async Task<Appointment> GetAppointmentByIdAsync(int id)
             => await this.data.Appointments
                         .Where(x => x.Id == id && x.IsDeleted == false)
+                        .Include(x => x.AppointmentCause)
+                        .Include(x => x.Patient)
+                        .Include(x => x.Rating)
                         .FirstOrDefaultAsync();
 
         public async Task<ICollection<AppointmentViewModel>> GetTodaysAppointments(string id)
@@ -156,5 +159,21 @@
         public async Task<int> GetTotalAppointmentsCount()
             => await this.data.Appointments.CountAsync();
 
+        public async Task<bool> DeleteAppointment(int appointmentId)
+        {
+            var appointment = await this.data.Appointments
+                .FirstOrDefaultAsync(x => x.Id == appointmentId && x.IsDeleted == false);
+
+            if (appointment == null)
+            {
+                return false;
+            }
+
+            appointment.IsDeleted = true;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

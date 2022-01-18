@@ -8,6 +8,7 @@
 
     using Services.PatientService.Models;
 
+    using ViewModels.Administration.Appointment;
     using ViewModels.Administration.Galery;
     using ViewModels.Administration.Rating;
     using ViewModels.Administration.User;
@@ -114,6 +115,8 @@
             this.CreateMap<Rating, RatingViewModel>()
                 .ForMember(x => x.CreatedOn, opt =>
                     opt.MapFrom(y => y.CreatedOn.ToLocalTime()));
+
+            this.CreateMap<Appointment, AdminAppointmentViewModel>();
         }
     }
 }

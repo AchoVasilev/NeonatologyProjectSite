@@ -50,7 +50,7 @@
                 return RedirectToAction(nameof(All));
             }
 
-            this.TempData["Message"] = SuccessfulDelete;
+            this.TempData["Message"] = SuccessfulDeleteMsg;
             return RedirectToAction(nameof(All));
         }
 

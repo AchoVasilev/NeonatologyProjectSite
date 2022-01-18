@@ -32,5 +32,7 @@
         Task<ICollection<AppointmentViewModel>> GetTodaysAppointments(string id);
 
         Task<int> GetTotalAppointmentsCount();
+
+        Task<bool> DeleteAppointment(int appointmentId);
     }
 }

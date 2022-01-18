@@ -65,7 +65,9 @@
             public const string AppointmentBeforeNowErrorMsg = "Не можете да си запишете час за минала дата";
 
             public const string IvalidEmailErrorMsg = "Моля въведете валиден и-мейл адрес";
+
             public const string AppointmentMakeEmailMsg = "Успешно си записахте час. Вашият час е от {0} часа на {1}";
+            public const string AppointmentDoesntExistErrorMsg = "Час с номер {0} не съществува";
 
             public const string PatientProfileIsNotFinishedMsg = "За да си запазите час, трябва да си довършите профила";
 
@@ -74,7 +76,7 @@
             public const string PatientIsRegistered = "Моля, използвайте платформата, за да си запишете час.";
 
             public const string SuccessfulFeedbackSent = "Успешно изпратихте вашето съобщение. Ще получите отговор на и-мейла си.";
-            public const string SuccessfulDelete = "Изтриването беше успешно.";
+            public const string SuccessfulDeleteMsg = "Изтриването беше успешно.";
         }
 
         public static class AccountConstants
