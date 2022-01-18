@@ -147,16 +147,11 @@
             await userManager.AddToRoleAsync(doctor, identityRole.Name);
 
             doctor.Doctor.UserId = doctor.Id;
-            await data.Doctors.AddAsync(doctor.Doctor);
-            await data.SaveChangesAsync();
 
-            var image = new Image()
+            doctor.Doctor.Image = new Image()
             {
-                Doctor = doctor.Doctor,
                 RemoteImageUrl = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1639079041/264612402_286215640113581_1185377196531358262_n_putyw3.jpg"
             };
-
-            doctor.Doctor.Image = image;
 
             await data.SaveChangesAsync();
         }
