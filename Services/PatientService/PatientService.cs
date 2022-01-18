@@ -44,7 +44,9 @@
                 Phone = model.PhoneNumber,
                 Image = new Image()
                 {
-                    Url = NoProfilePicUrl
+                    Url = NoProfilePicUrl,
+                    Name = "NoAvatarProfileImage.png",
+                    Extension = "png"
                 }
             };
 

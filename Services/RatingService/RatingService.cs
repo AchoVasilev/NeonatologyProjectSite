@@ -1,7 +1,11 @@
 ﻿namespace Services.RatingService
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     using Data;
     using Data.Models;
@@ -10,17 +14,20 @@
 
     using Services.AppointmentService;
 
+    using ViewModels.Administration.Rating;
     using ViewModels.Rating;
 
     public class RatingService : IRatingService
     {
         private readonly NeonatologyDbContext data;
         private readonly IAppointmentService appointmentService;
+        private readonly IMapper mapper;
 
-        public RatingService(NeonatologyDbContext data, IAppointmentService appointmentService)
+        public RatingService(NeonatologyDbContext data, IAppointmentService appointmentService, IMapper mapper)
         {
             this.data = data;
             this.appointmentService = appointmentService;
+            this.mapper = mapper;
         }
 
         public async Task<bool> AddAsync(CreateRatingFormModel model)
@@ -87,5 +94,11 @@
 
         public async Task<int> GetRatingsCount()
             => await this.data.Ratings.CountAsync();
+
+        public async Task<ICollection<RatingViewModel>> GetRatings()
+            => await this.data.Ratings
+                        .Where(x => x.IsDeleted == false)
+                        .ProjectTo<RatingViewModel>(this.mapper.ConfigurationProvider)
+                        .ToListAsync();
     }
 }

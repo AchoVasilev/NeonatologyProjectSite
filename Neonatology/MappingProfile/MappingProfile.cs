@@ -6,11 +6,11 @@
 
     using global::Data.Models;
 
-    using Neonatology.Areas.Administration.ViewModels.Galery;
-    using Neonatology.Areas.Administration.ViewModels.User;
-
     using Services.PatientService.Models;
 
+    using ViewModels.Administration.Galery;
+    using ViewModels.Administration.Rating;
+    using ViewModels.Administration.User;
     using ViewModels.Appointments;
     using ViewModels.Chat;
     using ViewModels.City;
@@ -110,6 +110,10 @@
                     opt.MapFrom(y => y.CreatedOn.ToLocalTime()));
 
             this.CreateMap<PatientServiceModel, UserViewModel>();
+
+            this.CreateMap<Rating, RatingViewModel>()
+                .ForMember(x => x.CreatedOn, opt =>
+                    opt.MapFrom(y => y.CreatedOn.ToLocalTime()));
         }
     }
 }

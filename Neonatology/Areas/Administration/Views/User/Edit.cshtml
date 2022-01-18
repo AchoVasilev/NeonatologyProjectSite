@@ -12,6 +12,10 @@
         background-position: center;
         background-size: cover;
     }
+
+    input[type="file"] {
+        display: none;
+    }
 </style>
 }
 
@@ -68,21 +72,11 @@
             <span asp-validation-for="CityId" class="small text-danger"></span>
         </div>
     </form>
-    <div class="col-md-4">
-        <div class="p-3 py-5">
-            <a class="col-md-12 btn btn-warning hvr-grow"
-               asp-area="Identity"
-               asp-page="/Account/Manage/ChangePassword">Промени парола</a> <br>
-            <a class="col-md-12 btn btn-primary hvr-grow"
-               asp-area="Identity"
-               asp-page="/Account/Manage/PersonalData">Лични данни</a>
-        </div>
-    </div>
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <a type="button" class="btn btn-danger hvr-grow" data-dismiss="modal"
-           asp-area=""
-           asp-controller="Home"
-           asp-action="Index">
+           asp-area="Administration"
+           asp-controller="User"
+           asp-action="All">
             Затвори
         </a>
         <input class="btn btn-primary hvr-grow" type="submit" data-toggle="modal" data-target="#modalEdit" value="Запази промени" />
@@ -113,5 +107,5 @@
 </div>
 
 @section Scripts{
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
 }

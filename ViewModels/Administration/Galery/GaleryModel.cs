@@ -1,4 +1,4 @@
-﻿namespace Neonatology.Areas.Administration.ViewModels.Galery
+﻿namespace ViewModels.Administration.Galery
 {
     using System.Collections.Generic;
     using System.ComponentModel;

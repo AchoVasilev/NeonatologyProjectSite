@@ -15,7 +15,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using Neonatology.Areas.Administration.ViewModels.Galery;
+    using ViewModels.Administration.Galery;
     using static Common.GlobalConstants.FileConstants;
 
     public class GaleryService : IGaleryService

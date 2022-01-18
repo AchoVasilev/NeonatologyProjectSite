@@ -12,7 +12,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Neonatology.Areas.Administration.Services;
-    using Neonatology.Areas.Administration.ViewModels.Galery;
+    using ViewModels.Administration.Galery;
 
     using static Common.GlobalConstants.Messages;
     using static Common.GlobalConstants.FileConstants;

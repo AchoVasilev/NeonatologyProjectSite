@@ -15,6 +15,8 @@
     {
         public string Id { get; set; }
 
+        public string UserId { get; set; }
+
         [Display(Name = Name)]
         [Required(ErrorMessage = RequiredFieldErrorMsg)]
         [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]

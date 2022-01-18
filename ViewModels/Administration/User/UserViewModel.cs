@@ -1,4 +1,4 @@
-﻿namespace Neonatology.Areas.Administration.ViewModels.User
+﻿namespace ViewModels.Administration.User
 {
     using System;
 

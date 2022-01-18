@@ -1,7 +1,9 @@
 ﻿namespace Services.RatingService
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using ViewModels.Administration.Rating;
     using ViewModels.Rating;
 
     public interface IRatingService
@@ -13,5 +15,7 @@
         Task<bool> DeleteRating(int appointmentId);
 
         Task<int> GetRatingsCount();
+
+        Task<ICollection<RatingViewModel>> GetRatings();
     }
 }

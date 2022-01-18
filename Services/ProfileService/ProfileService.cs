@@ -47,35 +47,40 @@
 
         public async Task<bool> EditProfileAsync(EditProfileFormModel model)
         {
-            var patient = await this.data.Users.FindAsync(model.Id);
+            var patient = await this.data.Users
+                .Where(x => x.PatientId == model.Id)
+                .Include(x => x.Patient.Image)
+                .FirstOrDefaultAsync();
 
             if (patient == null)
             {
                 return false;
             }
 
-            var result = await this.fileService.UploadImage(this.cloudinary, model.Picture, ProfileFolderName);
-            if (result == null)
+            if (model.Picture != null)
             {
-                return false;
-            }
+                var result = await this.fileService.UploadImage(this.cloudinary, model.Picture, ProfileFolderName);
+                if (result == null)
+                {
+                    return false;
+                }
 
-            await this.fileService.DeleteFile(this.cloudinary, patient.Patient.Image.Name, ProfileFolderName);
+                await this.fileService.DeleteFile(this.cloudinary, patient.Patient.Image.Name, ProfileFolderName);
+                patient.Patient.Image.IsDeleted = true;
+                patient.Patient.Image.DeletedOn = DateTime.UtcNow;
+
+                patient.Patient.Image = new Image
+                {
+                    Extension = result.Extension,
+                    Url = result.Uri,
+                };
+            }
 
             patient.Patient.FirstName = model.FirstName;
             patient.Patient.LastName = model.LastName;
             patient.Patient.Phone = model.PhoneNumber;
             patient.Patient.CityId = model.CityId;
             patient.Patient.ModifiedOn = DateTime.UtcNow;
-
-            patient.Patient.Image.IsDeleted = true;
-            patient.Patient.Image.DeletedOn = DateTime.UtcNow;
-
-            patient.Patient.Image = new Image
-            {
-                Extension = result.Extension,
-                Url = result.Uri,
-            };
 
             patient.Email = model.Email;
             patient.PhoneNumber = model.PhoneNumber;

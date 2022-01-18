@@ -8,7 +8,7 @@
 
     using Microsoft.AspNetCore.Mvc;
 
-    using Neonatology.Areas.Administration.ViewModels.Home;
+    using ViewModels.Administration.Home;
 
     public class HomeController : BaseController
     {

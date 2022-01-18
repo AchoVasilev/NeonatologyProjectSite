@@ -1,0 +1,95 @@
+﻿@model ICollection<RatingViewModel>
+
+@{
+    ViewData["Title"] = "Всички оценки";
+}
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-danger">@this.TempData["Message"]</div>
+}
+
+<h1 style="text-align:center">@ViewData["Title"]</h1>
+
+@if (!Model.Any())
+{
+    <h3 style="margin-top:2%">
+        Все още няма оценени часове
+    </h3>
+}
+else
+{
+    <h2>Общ брой оценки (@Model.Count())</h2>
+
+    <table class="display print" id="table-id" style="width:100%">
+        <thead>
+            <tr>
+                <th>Идент. номер</th>
+                <th>Оценка</th>
+                <th>Коментар</th>
+                <th>Дата на създаване</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rating in Model)
+            {
+                <tr>
+                    <td>@rating.Id</td>
+                    <td>@rating.Number</td>
+                    <td>@rating.Comment</td>
+                    <td>@rating.CreatedOn</td>
+                    <td>
+                        <a asp-area="Administration" asp-controller="Appointment"
+                         asp-action="Information"
+                         asp-route-id="@rating.AppointmentId"
+                        class="btn btn-primary">Данни за часа</a>
+                        <a asp-area="Administration" asp-controller="Rating" asp-action="Approve" asp-route-id="@rating.AppointmentId"
+                        class="btn @(rating.IsConfirmed == true ? "btn-primary disabled" : "btn-warning")">@(rating.IsConfirmed == true ? "Одобрено" : "Одобри")</a>
+                        <a asp-area="Administration" asp-controller="Rating" asp-action="Delete" asp-route-id="@rating.AppointmentId"
+                        data-toggle="modal" data-target="#modalDelete" class="btn btn-danger">Изтрий</a>
+
+                <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalDeleteLabel">Потвърди изтриването</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    Потвърждавате ли промените?
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Затвори</button>
+                                <a asp-area="Administration" asp-controller="Rating" asp-action="Delete" asp-route-id="@rating.Id" class="btn btn-danger">Изтрий</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Идент. номер</th>
+                <th>Оценка</th>
+                <th>Коментар</th>
+                <th>Дата на създаване</th>
+                <th>Действия</th>
+            </tr>
+        </tfoot>
+    </table>
+}
+
+@section Scripts{
+<script>
+    $(document).ready(function () {
+        $('#table-id').DataTable();
+    });
+</script>
+}

@@ -1,8 +1,8 @@
-﻿namespace Neonatology.Areas.Administration.ViewModels.Home
+﻿namespace ViewModels.Administration.Home
 {
     using System.Collections.Generic;
 
-    using global::ViewModels.Appointments;
+    using ViewModels.Appointments;
 
     public class IndexViewModel
     {
