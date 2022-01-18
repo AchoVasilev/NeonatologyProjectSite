@@ -1,7 +1,12 @@
-﻿@model ICollection<GaleryViewModel>
+﻿@model GaleryModel
 
 @section Styles{
 <link rel="stylesheet" href="~/adminLte/plugins/ekko-lightbox/ekko-lightbox.css" />
+<style type="text/css">
+    input[type="file"] {
+        display: none;
+    }
+</style>
 }
 
 @if (this.TempData.ContainsKey("Message"))
@@ -13,15 +18,21 @@
     ViewBag.Title = "Всички снимки от галерията";
 }
 
-
 <div class="col-12">
     <div class="card card-primary">
         <div class="card-header">
             <h4 class="card-title">@ViewBag.Title</h4>
+            <form method="post" enctype="multipart/form-data" asp-area="Administration" asp-controller="Galery" asp-action="Add">
+                <div class="row-sm">
+                    <label class="btn btn-sm btn-warning" asp-for="Images"></label>
+                    <input asp-for="Images" class="form-control" accept=".jpg, .jpeg, .png" type="file" />
+                    <span asp-validation-for="Images" class="text-danger"></span>
+                </div>
+            </form>
         </div>
         <div class="card-body">
             <div class="row">
-                @foreach (var image in Model)
+                @foreach (var image in Model.GaleryImages)
                 {
                     <div class="col-sm-4">
                         <a href="@image.Url" data-toggle="lightbox" data-title="@image.Id" data-gallery="gallery">
@@ -32,6 +43,7 @@
                        asp-action="Delete"
                        asp-route-id="@image.Id"
                        data-toggle="modal" data-target="#modalDelete" class="btn btn-danger">Изтрий</a>
+                       <span class="float-right text-muted text-sm">@image.CreatedOn</span>
                     </div>
 
                     <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">

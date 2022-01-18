@@ -73,6 +73,7 @@
             public const string PatientIsRegistered = "Моля, използвайте платформата, за да си запишете час.";
 
             public const string SuccessfulFeedbackSent = "Успешно изпратихте вашето съобщение. Ще получите отговор на и-мейла си.";
+            public const string SuccessfulDelete = "Изтриването беше успешно.";
         }
 
         public static class AccountConstants
@@ -105,6 +106,7 @@
             public const string ProfileFolderName = $"{DefaultFolderName}/userProfiles";
             public const string ChatFolderName = $"{DefaultFolderName}/pediamedChat";
             public const string ChatFileName = "{0}-ChatFile";
+            public const string NoProfilePicUrl = "/images/NoAvatarProfileImage.png";
         }
 
         public static class ChatConstants

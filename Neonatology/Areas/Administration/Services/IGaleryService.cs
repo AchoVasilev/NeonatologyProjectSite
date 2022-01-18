@@ -8,5 +8,7 @@
     public interface IGaleryService
     {
         Task<ICollection<GaleryViewModel>> GetGaleryImages();
+
+        Task<bool> Delete(string id);
     }
 }

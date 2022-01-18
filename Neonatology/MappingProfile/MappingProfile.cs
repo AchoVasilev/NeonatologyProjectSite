@@ -7,6 +7,9 @@
     using global::Data.Models;
 
     using Neonatology.Areas.Administration.ViewModels.Galery;
+    using Neonatology.Areas.Administration.ViewModels.User;
+
+    using Services.PatientService.Models;
 
     using ViewModels.Appointments;
     using ViewModels.Chat;
@@ -97,9 +100,16 @@
                 .ForMember(x => x.CreatedOn, opt =>
                     opt.MapFrom(x => x.CreatedOn.ToLocalTime().ToString(DateTimeFormat)));
 
+            //Administration
             this.CreateMap<Image, GaleryViewModel>()
                 .ForMember(x => x.CreatedOn, opt =>
                     opt.MapFrom(y => y.CreatedOn.ToLocalTime()));
+
+            this.CreateMap<Patient, PatientServiceModel>()
+                .ForMember(x => x.CreatedOn, opt =>
+                    opt.MapFrom(y => y.CreatedOn.ToLocalTime()));
+
+            this.CreateMap<PatientServiceModel, UserViewModel>();
         }
     }
 }

@@ -286,15 +286,60 @@
 
             var images = new List<Image>
             {
-                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085032/pediamed/IMG-fd628ff6ab68f73643fd7b0cf41868ab-V.jpg.jpg"},
-                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085031/pediamed/IMG-f1c897a19a277fb5f6b3adc1c1668e8e-V.jpg.jpg"},
-                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085031/pediamed/IMG-e415d77485530c8a65dd356e3fe820e9-V.jpg.jpg"},
-                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085030/pediamed/IMG-b93856f2c12b1dcaa36a80c8b886cd30-V.jpg.jpg"},
-                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085030/pediamed/IMG-ab0a5b033ee8cf53def9e937f6d2baf6-V.jpg.jpg"},
-                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085029/pediamed/IMG-4817c65b81006eea5c2815837337f8ed-V.jpg.jpg"},
-                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085029/pediamed/IMG-73d4aaf2edbfbd86e3bc8b6b44c1dfa2-V.jpg.jpg"},
-                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085028/pediamed/IMG-9add7b0ba788ced6c9f6186f01dce2ba-V.jpg.jpg"},
-                new Image() {Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085027/pediamed/IMG-3d4d5a079b4f712fd53ce9ad097faf24-V.jpg.jpg"},
+                new Image()
+                {
+                    Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085032/pediamed/IMG-fd628ff6ab68f73643fd7b0cf41868ab-V.jpg.jpg",
+                    Name = "IMG-fd628ff6ab68f73643fd7b0cf41868ab-V.jpg.jpg",
+                    Extension = "jpg"
+                },
+                new Image()
+                {
+                    Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085031/pediamed/IMG-f1c897a19a277fb5f6b3adc1c1668e8e-V.jpg.jpg",
+                    Name = "IMG-f1c897a19a277fb5f6b3adc1c1668e8e-V.jpg.jpg",
+                    Extension = "jpg"
+                },
+                new Image() 
+                {
+                    Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085031/pediamed/IMG-e415d77485530c8a65dd356e3fe820e9-V.jpg.jpg",
+                Name = "IMG-e415d77485530c8a65dd356e3fe820e9-V.jpg.jpg",
+                    Extension = "jpg"
+                },
+                new Image() 
+                {
+                    Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085030/pediamed/IMG-b93856f2c12b1dcaa36a80c8b886cd30-V.jpg.jpg",
+                Name = "IMG-b93856f2c12b1dcaa36a80c8b886cd30-V.jpg.jpg",
+                    Extension = "jpg"
+                },
+                new Image() 
+                {
+                    Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085030/pediamed/IMG-ab0a5b033ee8cf53def9e937f6d2baf6-V.jpg.jpg",
+                    Name = "IMG-ab0a5b033ee8cf53def9e937f6d2baf6-V.jpg.jpg",
+                    Extension = "jpg"
+                },
+                new Image() 
+                {
+                    Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085029/pediamed/IMG-4817c65b81006eea5c2815837337f8ed-V.jpg.jpg",
+                    Name = "IMG-4817c65b81006eea5c2815837337f8ed-V.jpg.jpg",
+                    Extension = "jpg"
+                },
+                new Image() 
+                {
+                    Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085029/pediamed/IMG-73d4aaf2edbfbd86e3bc8b6b44c1dfa2-V.jpg.jpg" ,
+                    Name = "IMG-73d4aaf2edbfbd86e3bc8b6b44c1dfa2-V.jpg.jpg",
+                    Extension = "jpg"
+                },
+                new Image() 
+                {
+                    Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085028/pediamed/IMG-9add7b0ba788ced6c9f6186f01dce2ba-V.jpg.jpg" ,
+                    Name = "IMG-9add7b0ba788ced6c9f6186f01dce2ba-V.jpg.jpg",
+                    Extension = "jpg"
+                },
+                new Image() 
+                {
+                    Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1640085027/pediamed/IMG-3d4d5a079b4f712fd53ce9ad097faf24-V.jpg.jpg",
+                    Name = "IMG-3d4d5a079b4f712fd53ce9ad097faf24-V.jpg.jpg",
+                    Extension = "jpg"
+                },
             };
 
             await data.Images.AddRangeAsync(images);

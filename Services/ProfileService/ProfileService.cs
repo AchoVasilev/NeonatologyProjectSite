@@ -54,11 +54,13 @@
                 return false;
             }
 
-            var result = await this.fileService.UploadImage(cloudinary, model.Picture, ProfileFolderName);
+            var result = await this.fileService.UploadImage(this.cloudinary, model.Picture, ProfileFolderName);
             if (result == null)
             {
                 return false;
             }
+
+            await this.fileService.DeleteFile(this.cloudinary, patient.Patient.Image.Name, ProfileFolderName);
 
             patient.Patient.FirstName = model.FirstName;
             patient.Patient.LastName = model.LastName;

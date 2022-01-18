@@ -7,21 +7,30 @@
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
+    using CloudinaryDotNet;
+
     using Data;
+
+    using global::Services.FileService;
 
     using Microsoft.EntityFrameworkCore;
 
     using Neonatology.Areas.Administration.ViewModels.Galery;
+    using static Common.GlobalConstants.FileConstants;
 
     public class GaleryService : IGaleryService
     {
         private readonly NeonatologyDbContext data;
         private readonly IMapper mapper;
+        private readonly IFileService fileService;
+        private readonly Cloudinary cloudinary;
 
-        public GaleryService(NeonatologyDbContext data, IMapper mapper)
+        public GaleryService(NeonatologyDbContext data, IMapper mapper, IFileService fileService, Cloudinary cloudinary)
         {
             this.data = data;
             this.mapper = mapper;
+            this.fileService = fileService;
+            this.cloudinary = cloudinary;
         }
 
         public async Task<ICollection<GaleryViewModel>> GetGaleryImages()
@@ -30,5 +39,24 @@
                 .OrderByDescending(x => x.CreatedOn)
                 .ProjectTo<GaleryViewModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
+
+        public async Task<bool> Delete(string id)
+        {
+            var image = await this.data.Images
+                .Where(x => x.Id == id && x.IsDeleted == false)
+                .FirstOrDefaultAsync();
+
+            if (image == null)
+            {
+                return false;
+            }
+
+            image.IsDeleted = true;
+            await this.fileService.DeleteFile(this.cloudinary, image.Name, DefaultFolderName);
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

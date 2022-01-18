@@ -1,6 +1,7 @@
 ﻿namespace Services.PatientService
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -12,7 +13,11 @@
 
     using Microsoft.EntityFrameworkCore;
 
+    using Services.PatientService.Models;
+
     using ViewModels.Patient;
+
+    using static Common.GlobalConstants.FileConstants;
 
     public class PatientService : IPatientService
     {
@@ -39,7 +44,7 @@
                 Phone = model.PhoneNumber,
                 Image = new Image()
                 {
-                    Url = "/images/NoAvatarProfileImage.png"
+                    Url = NoProfilePicUrl
                 }
             };
 
@@ -96,5 +101,11 @@
             => await this.data.Patients
                         .Where(x => x.IsDeleted == false && x.CreatedOn.Month == DateTime.Now.Month)
                         .CountAsync();
+
+        public async Task<ICollection<PatientServiceModel>> GetAllPatients()
+            => await this.data.Patients
+                        .Where(x => x.IsDeleted == false)
+                        .ProjectTo<PatientServiceModel>(this.mapper.ConfigurationProvider)
+                        .ToListAsync();
     }
 }

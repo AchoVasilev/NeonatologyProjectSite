@@ -1,0 +1,77 @@
+﻿@model ICollection<UserViewModel>
+
+@{
+    ViewBag.Title = "Потребители";
+}
+<h3 class="mt-4 mb-4">@ViewBag.Title</h3>
+
+<div class="row">
+    @foreach (var user in Model)
+    {
+        <div class="col-md-4">
+            <div class="card card-widget widget-user-2">
+                <div class="widget-user-header bg-warning">
+                    <div class="widget-user-image">
+                        <img class="img-circle elevation-2" src="@user.ImageUrl" alt="User Avatar">
+                    </div>
+                    <h3 class="widget-user-username">@user.FirstName @user.LastName</h3>
+                    <h5 class="widget-user-desc">@user.UserUserName</h5>
+                </div>
+                <div class="card-footer p-0">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            Телефон <span class="float-right badge bg-primary">@user.Phone</span>
+                        </li>
+                        <li class="nav-item">
+                            Град <span class="float-right badge bg-info">@user.CityName</span>
+
+                        </li>
+                        <li class="nav-item">
+                            Регистриран на <span class="float-right badge bg-success">@user.CreatedOn</span>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="Administration"
+                           asp-controller="User"
+                           asp-action="Edit"
+                           asp-route-id="@user.UserId" class="btn btn-warning">
+                                Промени профил
+                            </a>
+                            <span class="float-right btn btn-danger">
+                                <a asp-area="Administration"
+                               asp-controller="User"
+                               asp-action="Delete"
+                               asp-route-id="@user.UserId"
+                               data-toggle="modal" data-target="#modalDelete" class="btn btn-danger">
+                                    Изтрий
+                                </a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalDeleteLabel">Потвърди изтриването</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Потвърждавате ли изтриването?
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Затвори</button>
+                        <a asp-area="Administration" asp-controller="User" asp-action="Delete" asp-route-id="@user.UserId" class="btn btn-danger">Изтрий</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

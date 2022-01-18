@@ -1,6 +1,9 @@
 ﻿namespace Services.PatientService
 {
-    using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+    using Services.PatientService.Models;
 
     using ViewModels.Patient;
 
@@ -19,5 +22,7 @@
         Task<int> GetPatientsCount();
 
         Task<int> GetLastThisMonthsRegisteredCount();
+
+        Task<ICollection<PatientServiceModel>> GetAllPatients();
     }
 }
