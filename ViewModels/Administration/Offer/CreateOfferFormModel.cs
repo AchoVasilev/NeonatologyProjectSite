@@ -1,11 +1,9 @@
-﻿namespace ViewModels.Offer
+﻿namespace ViewModels.Administration.Offer
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class OfferViewModel
+    public class CreateOfferFormModel
     {
-        public int Id { get; init; }
-
         [Required]
         public string Name { get; set; }
 

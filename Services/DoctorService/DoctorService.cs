@@ -106,6 +106,8 @@
                 RemoteImageUrl = model.ImageUrl
             };
 
+            doctor.ModifiedOn = DateTime.UtcNow;
+            
             await this.data.SaveChangesAsync();
 
             return true;

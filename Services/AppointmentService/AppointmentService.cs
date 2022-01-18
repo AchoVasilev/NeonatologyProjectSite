@@ -170,7 +170,7 @@
             }
 
             appointment.IsDeleted = true;
-
+            appointment.DeletedOn = DateTime.UtcNow;
             await this.data.SaveChangesAsync();
 
             return true;

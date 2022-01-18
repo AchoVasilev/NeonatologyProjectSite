@@ -1,5 +1,6 @@
 ﻿namespace Neonatology.Areas.Administration.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -52,6 +53,7 @@
             }
 
             image.IsDeleted = true;
+            image.DeletedOn = DateTime.UtcNow;
             await this.fileService.DeleteFile(this.cloudinary, image.Name, DefaultFolderName);
 
             await this.data.SaveChangesAsync();

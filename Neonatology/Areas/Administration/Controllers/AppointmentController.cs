@@ -1,6 +1,5 @@
 ﻿namespace Neonatology.Areas.Administration.Controllers
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using AutoMapper;
@@ -10,7 +9,6 @@
     using Microsoft.AspNetCore.Mvc;
 
     using ViewModels.Administration.Appointment;
-    using ViewModels.Appointments;
 
     using static Common.GlobalConstants.Messages;
 
@@ -52,7 +50,7 @@
             var result = await this.appointmentService.DeleteAppointment(id);
             if (result == false)
             {
-                this.TempData["Message"] = ErrorDeleting;
+                this.TempData["Message"] = ErrorDeletingMsg;
                 return RedirectToAction(nameof(All));
             }
 

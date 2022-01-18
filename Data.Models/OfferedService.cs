@@ -5,6 +5,8 @@
 
     using Data.Common.Models;
 
+    using Microsoft.EntityFrameworkCore;
+
     public class OfferedService : BaseModel<int>
     {
         [Key]
@@ -13,6 +15,7 @@
         [Required]
         public string Name { get; set; }
 
+        [Precision(14, 2)]
         public decimal Price { get; set; }
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;

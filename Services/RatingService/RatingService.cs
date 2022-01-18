@@ -1,5 +1,6 @@
 ﻿namespace Services.RatingService
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -86,7 +87,7 @@
             }
 
             rating.IsDeleted = true;
-
+            rating.DeletedOn = DateTime.UtcNow;
             await this.data.SaveChangesAsync();
 
             return true;

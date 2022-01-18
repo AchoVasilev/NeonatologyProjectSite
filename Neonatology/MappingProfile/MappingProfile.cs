@@ -10,6 +10,7 @@
 
     using ViewModels.Administration.Appointment;
     using ViewModels.Administration.Galery;
+using ViewModels.Administration.Offer;
     using ViewModels.Administration.Rating;
     using ViewModels.Administration.User;
     using ViewModels.Appointments;
@@ -117,6 +118,7 @@
                     opt.MapFrom(y => y.CreatedOn.ToLocalTime()));
 
             this.CreateMap<Appointment, AdminAppointmentViewModel>();
+            this.CreateMap<OfferedService, EditOfferFormModel>();
         }
     }
 }

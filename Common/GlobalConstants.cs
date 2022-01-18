@@ -50,7 +50,8 @@
             public const string SuccessfullyApprovedRating = "Одобрихте успешно оценката";
             public const string SuccessfullyDeletedRating = "Успешно изтрихте оценката";
 
-            public const string ErrorDeleting = "Възникна грешка с изтриването, опитайте пак";
+            public const string ErrorDeletingMsg = "Възникна грешка с изтриването, опитайте пак";
+            public const string SuccessfulEditMsg = "Промените са успешно записани";
 
             public const string RequiredFieldErrorMsg = "Полето е задължително.";
             public const string LengthErrorMsg = "Полето трябва да е между {0} и {1} символа.";
@@ -77,6 +78,7 @@
 
             public const string SuccessfulFeedbackSent = "Успешно изпратихте вашето съобщение. Ще получите отговор на и-мейла си.";
             public const string SuccessfulDeleteMsg = "Изтриването беше успешно.";
+            public const string SuccessfulAddedItemMsg = "Успешно добавихте нови данни";
         }
 
         public static class AccountConstants

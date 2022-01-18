@@ -1,10 +1,10 @@
-﻿namespace ViewModels.Offer
+﻿namespace ViewModels.Administration.Offer
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class OfferViewModel
+    public class EditOfferFormModel
     {
-        public int Id { get; init; }
+        public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }

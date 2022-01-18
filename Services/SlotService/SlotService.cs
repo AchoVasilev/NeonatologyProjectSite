@@ -70,6 +70,7 @@
                                 .FindAsync(id);
 
             slot.IsDeleted = true;
+            slot.DeletedOn = DateTime.UtcNow;
             await this.data.SaveChangesAsync();
 
             return slot.Id;

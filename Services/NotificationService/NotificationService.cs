@@ -111,6 +111,7 @@
             if (notification != null)
             {
                 notification.NotificationStatus = (NotificationStatus)Enum.Parse(typeof(NotificationStatus), newStatus);
+                notification.ModifiedOn = DateTime.UtcNow;
                 this.data.Notifications.Update(notification);
                 await this.data.SaveChangesAsync();
 

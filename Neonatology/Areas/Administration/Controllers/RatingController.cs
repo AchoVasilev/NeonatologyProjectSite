@@ -42,7 +42,7 @@
             var isDeleted = await this.ratingService.DeleteRating(id);
             if (isDeleted == false)
             {
-                this.TempData["Message"] = ErrorDeleting;
+                this.TempData["Message"] = ErrorDeletingMsg;
                 return RedirectToAction(nameof(All), "Rating", new { area = "Administration" });
             }
 

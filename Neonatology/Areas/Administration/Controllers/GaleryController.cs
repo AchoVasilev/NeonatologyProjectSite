@@ -46,7 +46,7 @@
 
             if (result == false)
             {
-                this.TempData["Message"] = ErrorDeleting;
+                this.TempData["Message"] = ErrorDeletingMsg;
                 return RedirectToAction(nameof(All));
             }
 
