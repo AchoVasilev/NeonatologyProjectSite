@@ -5,6 +5,7 @@
     using Infrastructure;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
 
     using Services.PatientService;
@@ -17,11 +18,15 @@
     public class PatientController : BaseController
     {
         private readonly IPatientService patientService;
+        private readonly IWebHostEnvironment environment;
 
-        public PatientController(IPatientService patientService) 
-            => this.patientService = patientService;
+        public PatientController(IPatientService patientService, IWebHostEnvironment environment)
+        {
+            this.patientService = patientService;
+            this.environment = environment;
+        }
 
-        public IActionResult Finish() 
+        public IActionResult Finish()
             => View(new CreatePatientFormModel());
 
         [HttpPost]
@@ -45,7 +50,7 @@
                 }
             }
 
-            await this.patientService.CreatePatientAsync(model, userId);
+            await this.patientService.CreatePatientAsync(model, userId, $"{this.environment.WebRootPath}");
 
             return RedirectToAction("MyAppointments", "Appointment", new { area = "" });
         }

@@ -14,10 +14,8 @@
         [Required]
         public string Heading { get; set; }
 
-        [Required]
         public NotificationStatus Status { get; set; }
 
-        [Required]
         public ICollection<string> AllStatuses { get; set; } = new HashSet<string>();
 
         public string TargetFirstName { get; set; }
@@ -34,5 +32,7 @@
         [Required]
         [MaxLength(DescriptionMaxLength)]
         public string Text { get; set; }
+
+        public string ImageUrl { get; set; }
     }
 }

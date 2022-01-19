@@ -27,7 +27,7 @@
             if (userId != null)
             {
                 var targetUser = await this.userService.GetUserByIdAsync(userId);
-                var notificationsCount = await this.notificationService.GetUserNotificationsCount(userId);
+                var notificationsCount = await this.notificationService.GetUserNotificationsCount(targetUser.UserName);
 
                 await this.Clients.User(targetUser.Id).SendAsync("ReceiveNotification", notificationsCount, isFirstNotificationSound);
             }

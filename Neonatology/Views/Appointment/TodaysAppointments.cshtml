@@ -22,7 +22,7 @@
 }
 
 <button class="btn btn-info" onclick="window.print(); return false"><i class="fas fa-print">Разпечатай</i></button>
-<h1 class="text-center print">@($"{ViewData["Title"]} - {DateTime.Now.Date.ToString("dd/MM/yyyy")}")</h1>
+<h1 class="text-center print">@($"{ViewData["Title"]} - {DateTime.Now.Date.ToString(DateFormat)}")</h1>
 
 <hr />
 

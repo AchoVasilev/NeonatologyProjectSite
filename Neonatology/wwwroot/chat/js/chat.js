@@ -137,7 +137,7 @@ sendButton.addEventListener('click', function (event) {
                 type: 'POST',
                 data: data,
                 headers: {
-                    RequestVerificationToken:
+                    'X-CSRF-TOKEN':
                         $('input:hidden[name="__RequestVerificationToken"]').val()
                 },
                 success: function (result) {

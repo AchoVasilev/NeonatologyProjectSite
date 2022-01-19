@@ -104,6 +104,7 @@
         public static class NotificationConstants
         {
             public const int MaxChatNotificationsPerUser = 5;
+            public const int NotificationOnClick = 5;
         }
 
         public static class FileConstants
@@ -112,7 +113,7 @@
             public const string ProfileFolderName = $"{DefaultFolderName}/userProfiles";
             public const string ChatFolderName = $"{DefaultFolderName}/pediamedChat";
             public const string ChatFileName = "{0}-ChatFile";
-            public const string NoProfilePicUrl = "/images/NoAvatarProfileImage.png";
+            public const string NoProfilePicUrl = @"\img\NoAvatarProfileImage.png";
         }
 
         public static class ChatConstants

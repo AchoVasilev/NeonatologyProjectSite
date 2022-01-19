@@ -30,7 +30,7 @@
             this.mapper = mapper;
         }
 
-        public async Task CreatePatientAsync(CreatePatientFormModel model, string userId)
+        public async Task CreatePatientAsync(CreatePatientFormModel model, string userId, string webRootPath)
         {
             var user = await this.data.Users
                 .Where(x => x.Id == userId)
@@ -42,14 +42,16 @@
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Phone = model.PhoneNumber,
-                Image = new Image()
-                {
-                    Url = NoProfilePicUrl,
-                    Name = "NoAvatarProfileImage.png",
-                    Extension = "png"
-                }
             };
 
+            var image = new Image()
+            {
+                Url = webRootPath + NoProfilePicUrl,
+                Name = "NoAvatarProfileImage.png",
+                Extension = "png"
+            };
+
+            patient.Image = image;
             user.Patient = patient;
             user.PhoneNumber = model.PhoneNumber;
 

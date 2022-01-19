@@ -2,8 +2,8 @@
 {
     public enum NotificationStatus
     {
-        Read = 1,
-        Unread = 2,
-        Pinned = 3,
+        Прочетено = 1,
+        Непрочетено = 2,
+        Запазено = 3,
     }
 }

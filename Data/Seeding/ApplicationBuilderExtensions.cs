@@ -264,8 +264,9 @@
             var notificationTypes = new List<NotificationType>
             {
                 new NotificationType() {Name = "Message"},
-                new NotificationType() {Name = "Banned Profile"},
-                new NotificationType() {Name = "Paid"}
+                new NotificationType() {Name = "Banned"},
+                new NotificationType() {Name = "Paid"},
+                new NotificationType() {Name = "Feedback"},
             };
 
             await data.NotificationTypes.AddRangeAsync(notificationTypes);

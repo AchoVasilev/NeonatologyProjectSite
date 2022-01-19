@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
     public interface IPatientService
     {
-        Task CreatePatientAsync(CreatePatientFormModel model, string userId);
+        Task CreatePatientAsync(CreatePatientFormModel model, string userId, string webRootPath);
 
         Task<string> GetPatientIdByUserIdAsync(string userId);
 

@@ -27,6 +27,7 @@
 
     using static Common.GlobalConstants.FileConstants;
     using static Common.GlobalConstants.ChatConstants;
+    using static Common.GlobalConstants.DateTimeFormats;
 
     public class ChatService : IChatService
     {
@@ -150,7 +151,7 @@
                     {
                         Id = message.Id,
                         Content = message.Content,
-                        SendedOn = message.CreatedOn.ToLocalTime().ToString("dd/mm/yyyy hh:mm:ss tt"),
+                        SendedOn = message.CreatedOn.ToLocalTime().ToString(DateTimeFormat),
                         CurrentUsername = currentUser.UserName,
                     };
 
