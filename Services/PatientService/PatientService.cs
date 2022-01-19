@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -44,9 +45,11 @@
                 Phone = model.PhoneNumber,
             };
 
+            var url = Path.GetRelativePath(webRootPath, NoProfilePicUrl);
+            url = url.Replace('\\', '/');
             var image = new Image()
             {
-                Url = webRootPath + NoProfilePicUrl,
+                Url = url,
                 Name = "NoAvatarProfileImage.png",
                 Extension = "png"
             };
