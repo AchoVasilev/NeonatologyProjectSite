@@ -67,7 +67,7 @@ connection.start().then(function () {
         return console.error(err.message.toString());
     });
 
-    connection.invoke('UpdateMessageNotifications', toUser, fromUser).catch(function (err) {
+    connection.invoke('UpdateMessageNotifications', fromUser, toUser).catch(function (err) {
         return console.error(err.toString());
     });
 }).catch(function (err) {

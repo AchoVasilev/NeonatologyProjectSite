@@ -54,58 +54,58 @@ notificationConnection.on("VisualizeNotification", function (notification) {
     }
 });
 
-//function createNotification(notification) {
-//    let newNotification = document.createElement("div");
-//    newNotification.id = notification.id;
+function createNotification(notification) {
+    let newNotification = document.createElement("div");
+    newNotification.id = notification.id;
 
-//    let allStatuses = "";
+    let allStatuses = "";
 
-//    for (var status of notification.allStatuses) {
-//        allStatuses += `<a onclick="updateStatus('${status}', '${notification.id}')">${status}</a>`;
-//    }
+    for (var status of notification.allStatuses) {
+        allStatuses += `<a onclick="updateStatus('${status}', '${notification.id}')">${status}</a>`;
+    }
 
-//    newNotification.innerHTML =
-//        `<div class="ts-testimonial-content">
-//                        <img src="${notification.imageUrl}" alt="avatar">
-//                        <h4 class="ts-testimonial-text userNotificationsHeading">
-//                            <span>
-//                                <a class="deleteNotificationIcon" onclick="deleteNotification('${notification.id}')">
-//                                    <i class="fas fa-trash-alt"></i>
-//                                </a>
-//                            </span>
-//                            <span>
-//                                ${notification.heading}
-//                            </span>
-//                        </h4>
-//                        <div class="ts-testimonial-text dropdownNotification">
-//                            <button class="dropbtnNotification">
-//                                <i class="fas fa-chevron-down notificationArrow"></i>
-//                            </button>
-//                            <div class="dropdown-content-notification">
-//                                ${allStatuses}
-//                            </div>
-//                            <span>Status: </span>
-//                            <b>
-//                                <span id="${notification.id}orderStatus" style="color: red; text-transform: uppercase">
-//                                   ${notification.allStatuses[notification.status - 1]}
-//                                </span>
-//                            </b>
-//                        </div>
-//                        <p class="ts-testimonial-text">
-//                            ${notification.text}
-//                        </p>
+    newNotification.innerHTML =
+        `<div class="ts-testimonial-content">
+                        <img src="${notification.imageUrl}" alt="avatar">
+                        <h4 class="ts-testimonial-text userNotificationsHeading">
+                            <span>
+                                <a class="deleteNotificationIcon" onclick="deleteNotification('${notification.id}')">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </span>
+                            <span>
+                                ${notification.heading}
+                            </span>
+                        </h4>
+                        <div class="ts-testimonial-text dropdownNotification">
+                            <button class="dropbtnNotification">
+                                <i class="fas fa-chevron-down notificationArrow"></i>
+                            </button>
+                            <div class="dropdown-content-notification">
+                                ${allStatuses}
+                            </div>
+                            <span>Status: </span>
+                            <b>
+                                <span id="${notification.id}orderStatus" style="color: red; text-transform: uppercase">
+                                   ${notification.allStatuses[notification.status - 1]}
+                                </span>
+                            </b>
+                        </div>
+                        <p class="ts-testimonial-text">
+                            ${notification.text}
+                        </p>
 
-//                        <div class="ts-testimonial-author">
-//                            <h3 class="name userNotificationsHeading">
-//                                <a href="/Profile/${notification.targetUsername}">
-//                                    ${notification.targetFirstName} ${notification.targetLastName}
-//                                </a>
-//                                <span>
-//                                    ${notification.createdOn}
-//                                </span>
-//                            </h3>
-//                        </div>
-//                    </div>`;
+                        <div class="ts-testimonial-author">
+                            <h3 class="name userNotificationsHeading">
+                                <a href="/Profile/${notification.targetUsername}">
+                                    ${notification.targetFirstName} ${notification.targetLastName}
+                                </a>
+                                <span>
+                                    ${notification.createdOn}
+                                </span>
+                            </h3>
+                        </div>
+                    </div>`;
 
-//    return newNotification;
-//}
+    return newNotification;
+}

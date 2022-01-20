@@ -22,7 +22,7 @@
     {
         private readonly NeonatologyDbContext data;
 
-        private const string url = "/Chat/WithUser/{0}";
+        private const string url = "/Chat/With/{0}/Group/{1}";
         private const string notificationType = "Message";
 
         public NotificationService(NeonatologyDbContext data)
@@ -37,7 +37,7 @@
                          x.IsDeleted == false)
                          .CountAsync();
 
-        public async Task<string> AddMessageNotification(string message, string receiverUsername, string senderUsername)
+        public async Task<string> AddMessageNotification(string message, string receiverUsername, string senderUsername, string group)
         {
             var notificationTypeId = await this.data.NotificationTypes
                 .Where(x => x.Name == notificationType)
@@ -52,7 +52,7 @@
                 Sender = sender,
                 Receiver = receiver,
                 NotificationStatus = NotificationStatus.Непрочетено,
-                Link = string.Format(url, receiverUsername),
+                Link = string.Format(url, senderUsername, group),
                 Text = new HtmlSanitizer().Sanitize(message.Trim()),
                 NotificationTypeId = notificationTypeId,
             };
@@ -211,17 +211,17 @@
             {
                 case "Message":
                     message =
-                        $"<a href=\"/Profile/{user.UserName}\" style=\"text-decoration: underline\">{user.UserName}</a> ви изпрати ново <a href=\"{link}\" style=\"text-decoration: underline\">съобщение</a>.";
+                        $"<a href=\"/Profile/{user.Id}\" style=\"text-decoration: underline\">{user.UserName}</a> ви изпрати ново <a href=\"{link}\" style=\"text-decoration: underline\">съобщение</a>.";
                     break;
 
                 case "RateProfile":
                     message =
-                        $"<a href=\"/Profile/{user.UserName}\" style=\"text-decoration: underline\">{user.UserName}</a> оцени вашия <a href=\"{link}\" style=\"text-decoration: underline\">профил</a>.";
+                        $"<a href=\"/Profile/{user.Id}\" style=\"text-decoration: underline\">{user.UserName}</a> оцени вашия <a href=\"{link}\" style=\"text-decoration: underline\">профил</a>.";
                     break;
 
                 case "Banned Profile":
                     message =
-                        $"<a href=\"/Profile/{user.UserName}\" style=\"text-decoration: underline\">{user.UserName}</a> банна <a href=\"{link}\" style=\"text-decoration: underline\">вашия профил</a>.";
+                        $"<a href=\"/Profile/{user.Id}\" style=\"text-decoration: underline\">{user.UserName}</a> банна <a href=\"{link}\" style=\"text-decoration: underline\">вашия профил</a>.";
                     break;
 
                 default:

@@ -1,11 +1,16 @@
 ﻿namespace Neonatology.Hubs
 {
+    using System.Linq;
     using System.Threading.Tasks;
+
+    using Data.Models;
 
     using Ganss.XSS;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.SignalR;
+    using Microsoft.EntityFrameworkCore;
 
     using Services.ChatService;
     using Services.NotificationService;
@@ -16,15 +21,18 @@
         private readonly IChatService chatService;
         private readonly INotificationService notificationService;
         private readonly IHubContext<NotificationHub> notificationHub;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public ChatHub(
             IChatService chatService,
             INotificationService notificationService,
-            IHubContext<NotificationHub> notificationHub)
+            IHubContext<NotificationHub> notificationHub, 
+            UserManager<ApplicationUser> userManager)
         {
             this.chatService = chatService;
             this.notificationService = notificationService;
             this.notificationHub = notificationHub;
+            this.userManager = userManager;
         }
 
         public async Task AddToGroup(string groupName, string receiverName, string senderName, string senderFullName)
@@ -42,7 +50,6 @@
                 return;
             }
 
-            var senderId = this.Context.UserIdentifier;
             var receiverId = await this.chatService
                 .SendMessageToUser(senderUsername, receiverUsername, message, group);
 
@@ -50,7 +57,7 @@
                 .SendAsync("ReceiveMessage", senderFullName, new HtmlSanitizer().Sanitize(message.Trim()));
 
             var notificationId = await this.notificationService
-                .AddMessageNotification(message, senderUsername, receiverUsername);
+                .AddMessageNotification(message, receiverUsername, senderUsername, group);
 
             var count = await this.notificationService
                 .GetUserNotificationsCount(receiverId);
@@ -68,8 +75,8 @@
 
         public async Task ReceiveMessage(string senderUsername, string message, string group, string senderFullName)
         {
-            var senderId = this.Context.UserIdentifier;
-            await this.Clients.User(senderId).SendAsync("SendMessage", senderFullName, new HtmlSanitizer().Sanitize(message.Trim()));
+            var user = await this.userManager.Users.FirstOrDefaultAsync(x => x.UserName == senderUsername);
+            await this.Clients.User(user.Id).SendAsync("SendMessage", senderUsername, new HtmlSanitizer().Sanitize(message.Trim()));
         }
 
         public async Task UpdateMessageNotifications(string fromUsername, string username)
@@ -82,7 +89,7 @@
                 await this.notificationHub
                     .Clients
                     .User(toId)
-                    .SendAsync("ReceiveNotification", count, true);
+                    .SendAsync("ReceiveNotification", count, false);
             }
         }
     }

@@ -2,7 +2,7 @@
 
 @{
     string username = this.User.Identity.Name;
-    ViewData["Title"] = $"{username} известия";
+    ViewData["Title"] = $"{username} - известия";
     var colors = new Dictionary<string, string>()
     {
         { NotificationStatus.Прочетено.ToString(), "green" },
@@ -36,6 +36,8 @@
     }
 </style>
 }
+
+<h1 class="text-center">@ViewData["Title"]</h1>
 @if (!Model.Notifications.Any())
 {
     <h3 style="margin-top:2%">
@@ -49,7 +51,7 @@ else
             <div class="col-lg-12 center">
                 <div class="box shadow-sm rounded bg-white mb-3">
                     <div class="box-title border-bottom p-3">
-                        <h6 class="m-0">Вашите известия</h6>
+                        <h6 class="m-0">Всички известия</h6>
                     </div>
 
                     <div class="box-body p-0" id="all-user-notifications">

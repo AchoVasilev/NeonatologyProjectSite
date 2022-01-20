@@ -8,7 +8,7 @@
     {
         Task<int> GetUserNotificationsCount(string receiverUsername);
 
-        Task<string> AddMessageNotification(string message, string receiverUsername, string senderUsername);
+        Task<string> AddMessageNotification(string message, string receiverUsername, string senderUsername, string group);
 
         Task<string> UpdateMessageNotifications(string senderUsername, string receiverUsername);
 
