@@ -1,19 +1,15 @@
 ﻿namespace Neonatology.Hubs
 {
-    using System.Linq;
     using System.Threading.Tasks;
-
-    using Data.Models;
 
     using Ganss.XSS;
 
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.SignalR;
-    using Microsoft.EntityFrameworkCore;
 
     using Services.ChatService;
     using Services.NotificationService;
+    using Services.UserService;
 
     [Authorize]
     public class ChatHub : Hub
@@ -21,18 +17,18 @@
         private readonly IChatService chatService;
         private readonly INotificationService notificationService;
         private readonly IHubContext<NotificationHub> notificationHub;
-        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IUserService userService;
 
         public ChatHub(
             IChatService chatService,
             INotificationService notificationService,
             IHubContext<NotificationHub> notificationHub, 
-            UserManager<ApplicationUser> userManager)
+            IUserService userService)
         {
             this.chatService = chatService;
             this.notificationService = notificationService;
             this.notificationHub = notificationHub;
-            this.userManager = userManager;
+            this.userService = userService;
         }
 
         public async Task AddToGroup(string groupName, string receiverName, string senderName, string senderFullName)
@@ -52,9 +48,10 @@
 
             var receiverId = await this.chatService
                 .SendMessageToUser(senderUsername, receiverUsername, message, group);
+            var sender = await this.userService.FindByUserNameAsync(senderUsername);
 
             await this.Clients.User(receiverId)
-                .SendAsync("ReceiveMessage", senderFullName, new HtmlSanitizer().Sanitize(message.Trim()));
+                .SendAsync("ReceiveMessage", senderFullName, new HtmlSanitizer().Sanitize(message.Trim()), sender.Image.Url);
 
             var notificationId = await this.notificationService
                 .AddMessageNotification(message, receiverUsername, senderUsername, group);
@@ -75,8 +72,8 @@
 
         public async Task ReceiveMessage(string senderUsername, string message, string group, string senderFullName)
         {
-            var user = await this.userManager.Users.FirstOrDefaultAsync(x => x.UserName == senderUsername);
-            await this.Clients.User(user.Id).SendAsync("SendMessage", senderUsername, new HtmlSanitizer().Sanitize(message.Trim()));
+            var user = await this.userService.FindByUserNameAsync(senderUsername);
+            await this.Clients.User(user.Id).SendAsync("SendMessage", senderUsername, new HtmlSanitizer().Sanitize(message.Trim()), user.Image.Url);
         }
 
         public async Task UpdateMessageNotifications(string fromUsername, string receiverUsername)

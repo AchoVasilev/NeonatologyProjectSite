@@ -7,8 +7,6 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using static Data.Common.DataConstants.Constants;
-
     public class OfferedService : BaseModel<int>
     {
         [Key]

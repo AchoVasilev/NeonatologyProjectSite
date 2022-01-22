@@ -147,7 +147,10 @@
             var notification = await this.data.Notifications.FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted == false);
 
             var receiver = await this.data.Users.FirstOrDefaultAsync(x => x.Id == notification.ReceiverId);
-            var sender = await this.data.Users.FirstOrDefaultAsync(x => x.Id == notification.SenderId);
+            var sender = await this.data.Users
+                .Where(x => x.Id == notification.SenderId)
+                .Include(x => x.Image)
+                .FirstOrDefaultAsync();
 
             var item = ParseNotificationViewModel(notification, sender, receiver);
 
@@ -168,7 +171,9 @@
             foreach (var userNotification in userNotifications)
             {
                 var sender = await this.data.Users
-                    .FirstOrDefaultAsync(x => x.Id == userNotification.SenderId);
+                    .Where(x => x.Id == userNotification.SenderId)
+                    .Include(x => x.Image)
+                    .FirstOrDefaultAsync();
 
                 var receiver = await this.data.Users
                     .FirstOrDefaultAsync(x => x.Id == userNotification.ReceiverId);
@@ -199,6 +204,7 @@
                                 contentWithoutTags :
                                 $"{contentWithoutTags[..487]}...",
                 TargetUsername = receiver.UserName,
+                ImageUrl = sender.Image.Url,
                 AllStatuses = Enum.GetValues(typeof(NotificationStatus)).Cast<NotificationStatus>().Select(x => x.ToString()).ToList(),
             };
         }

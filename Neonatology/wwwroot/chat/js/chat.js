@@ -8,7 +8,7 @@ const sendButton = document.getElementById('send-button');
 //Disable send button until connection is established
 sendButton.disabled = true;
 
-connection.on('ReceiveMessage', function (user, message, userFullName, image = '') {
+connection.on('ReceiveMessage', function (user, message, image) {
     var msg = message;
     let dateTime = new Date();
     let formattedDate = dateTime.toLocaleString('bg-BG');
@@ -17,7 +17,7 @@ connection.on('ReceiveMessage', function (user, message, userFullName, image = '
 
     li.classList.add('chat-message-left', 'pb-4');
     li.innerHTML = `<div>
-                               <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="Avatar">
+                               <img src="${image}" class="rounded-circle mr-1 img-sm" alt="Avatar">
                                <div class="text-muted small text-nowrap mt-2">${formattedDate}</div>
                          </div>
                          <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
@@ -32,7 +32,7 @@ connection.on('ReceiveMessage', function (user, message, userFullName, image = '
     document.getElementById('messagesSkipCount').value = oldCount + 1;
 });
 
-connection.on('SendMessage', function (user, message, userFullName, image = '') {
+connection.on('SendMessage', function (user, message, image) {
     var msg = message;
     let dateTime = new Date()
     let formattedDate = dateTime.toLocaleString('bg-BG');
@@ -41,7 +41,7 @@ connection.on('SendMessage', function (user, message, userFullName, image = '') 
 
     li.classList.add('chat-message-right', 'pb-4');
     li.innerHTML = `<div>
-                               <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="Avatar">
+                               <img src="${image}" class="rounded-circle mr-1 img-sm" alt="Avatar">
                                <div class="text-muted small text-nowrap mt-2">${formattedDate}</div>
                         </div>
                         <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
