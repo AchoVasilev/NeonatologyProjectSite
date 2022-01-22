@@ -96,7 +96,7 @@
 
                 foreach (var notification in notifications)
                 {
-                    await this.EditStatus(receiver.Id, NotificationStatus.Непрочетено.ToString(), notification.Id);
+                    await this.EditStatus(receiver.Id, NotificationStatus.Прочетено.ToString(), notification.Id);
                 }
 
                 return receiver.Id;
@@ -224,6 +224,10 @@
                         $"<a href=\"/Profile/{user.Id}\" style=\"text-decoration: underline\">{user.UserName}</a> банна <a href=\"{link}\" style=\"text-decoration: underline\">вашия профил</a>.";
                     break;
 
+                case "Paid":
+                    message =
+                        $"<a href=\"/Profile/{user.Id}\" style=\"text-decoration: underline\">{user.UserName}</a> заплати <a href=\"{link}\" style=\"text-decoration: underline\">за консултация</a>.";
+                    break;
                 default:
                     break;
             }

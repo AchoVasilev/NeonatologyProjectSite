@@ -1,9 +1,10 @@
 ﻿namespace Neonatology.Areas.Identity.Pages.Account
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    using Services;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using global::Data.Models;
@@ -13,7 +14,6 @@
     using Microsoft.Extensions.Logging;
     using static Common.GlobalConstants.Messages;
     using static Common.GlobalConstants.AccountConstants;
-    using Services;
 
     [AllowAnonymous]
     public class RegisterModel : PageModel
@@ -27,7 +27,7 @@
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            RoleManager<ApplicationRole> roleManager, 
+            RoleManager<ApplicationRole> roleManager,
             ReCaptchaService reCaptchaService)
         {
             this.userManager = userManager;
@@ -87,13 +87,6 @@
 
             if (ModelState.IsValid)
             {
-                var identityRole = new ApplicationRole()
-                {
-                    Name = Common.GlobalConstants.PatientRoleName
-                };
-
-                await roleManager.CreateAsync(identityRole);
-
                 var user = new ApplicationUser
                 {
                     UserName = Input.Email,
@@ -107,7 +100,7 @@
                 {
                     logger.LogInformation("User created a new account with password.");
 
-                    await userManager.AddToRoleAsync(user, identityRole.Name);
+                    await userManager.AddToRoleAsync(user, Common.GlobalConstants.PatientRoleName);
 
                     await signInManager.SignInAsync(user, isPersistent: false);
 

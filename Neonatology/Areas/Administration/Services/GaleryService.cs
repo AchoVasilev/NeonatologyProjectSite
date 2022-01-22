@@ -36,7 +36,7 @@
 
         public async Task<ICollection<GaleryViewModel>> GetGaleryImages()
             => await this.data.Images
-                .Where(x => string.IsNullOrWhiteSpace(x.DoctorId) && x.IsDeleted == false)
+                .Where(x => string.IsNullOrWhiteSpace(x.UserId) && x.IsDeleted == false)
                 .OrderByDescending(x => x.CreatedOn)
                 .ProjectTo<GaleryViewModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();

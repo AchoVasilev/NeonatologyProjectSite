@@ -62,7 +62,7 @@
 
     <footer class="footer bg-info">
         <div class="container-fluid">
-            Всички права запазени &copy; 2021 - @DateTime.UtcNow.Year - @Common.GlobalConstants.SystemName - 
+            Всички права запазени &copy; 2021 - @DateTime.UtcNow.Year - @Common.GlobalConstants.SystemName -
             <a asp-area="" asp-controller="Home" asp-action="Privacy" style="color:white;">Политика за поверителност</a>
             <a asp-area="" asp-controller="Feedback" asp-action="Send" style="color:black;">Свържете се с нас</a>
         </div>
@@ -82,40 +82,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/errorNotify.js" asp-append-version="true"></script>
     <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
-    @*<script type="text/javascript" src="~/js/notification.js"></script>*@
-
-    <script type="text/javascript">
-            "use strict"
-
-        let notificationConnection = new signalR.HubConnectionBuilder().withUrl("/notificationHub").build();
-
-        notificationConnection.start().then(function () {
-            if (!sessionStorage.getItem("isFirstNotificationSound")) {
-                sessionStorage.setItem("isFirstNotificationSound", true);
-            } else {
-                sessionStorage.setItem("isFirstNotificationSound", false);
-            }
-
-            let isFirstNotificationSound = sessionStorage.getItem("isFirstNotificationSound") == "true" ? true : false;
-            notificationConnection.invoke("GetUserNotificationCount", isFirstNotificationSound).catch(function (err) {
-                return console.error(err.toString());
-            });
-        }).catch(function (err) {
-            return console.error(err.toString());
-        });
-
-        notificationConnection.on("ReceiveNotification", function (count, isFirstNotificationSound) {
-            const notificationCountElement = document.getElementById("notificationCount");
-            notificationCountElement.dataset.count = count;
-
-            if (count > 0) {
-                if (isFirstNotificationSound) {
-                    document.querySelector("audio").load();
-                    document.querySelector("audio").play();
-                }
-            }
-        });
-    </script>
+    <script type="text/javascript" src="~/js/notification.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

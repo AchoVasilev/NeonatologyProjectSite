@@ -47,14 +47,13 @@
 
             var url = Path.GetRelativePath(webRootPath, NoProfilePicUrl);
             url = url.Replace('\\', '/');
-            var image = new Image()
+
+            user.Image = new Image()
             {
                 Url = url,
                 Name = "NoAvatarProfileImage.png",
                 Extension = "png"
             };
-
-            patient.Image = image;
             user.Patient = patient;
             user.PhoneNumber = model.PhoneNumber;
 

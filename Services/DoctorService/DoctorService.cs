@@ -76,7 +76,7 @@
 
         public async Task<bool> EditDoctorAsync(DoctorEditFormModel model)
         {
-            var doctor = await this.data.Doctors.FindAsync(model.Id);
+            var doctor = await this.data.Doctors.FirstOrDefaultAsync(x => x.Id == model.Id);
             if (doctor == null)
             {
                 return false;
@@ -96,14 +96,14 @@
             doctor.Biography = model.Biography;
             doctor.CityId = model.CityId;
 
-            doctor.Image.IsDeleted = true;
-            doctor.Image.DeletedOn = DateTime.UtcNow;
+            doctor.User.Image.IsDeleted = true;
+            doctor.User.Image.DeletedOn = DateTime.UtcNow;
 
-            doctor.Image = new Image
+            doctor.User.Image = new Image
             {
                 Extension = result.Extension,
                 Url = result.Uri,
-                RemoteImageUrl = model.ImageUrl
+                RemoteImageUrl = model.UserImageUrl
             };
 
             doctor.ModifiedOn = DateTime.UtcNow;

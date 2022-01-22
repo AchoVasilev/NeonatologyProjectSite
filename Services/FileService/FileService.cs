@@ -142,8 +142,7 @@
         public async Task<UploadImageModel> GetGaleryImagesAsync()
         {
             var images = await data.Images
-                .Where(x => string.IsNullOrWhiteSpace(x.DoctorId) && 
-                string.IsNullOrWhiteSpace(x.PatientId) &&
+                .Where(x => string.IsNullOrWhiteSpace(x.UserId) &&
                 x.IsDeleted == false)
                 .ToListAsync();
 

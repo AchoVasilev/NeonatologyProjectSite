@@ -15,7 +15,7 @@
                     <h3 id="group-name" style="text-align:center" hidden>@Model.GroupName</h3>
                     <div class="d-flex align-items-center py-1">
                         <div class="position-relative">
-                            <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="avatar">
+                            <img src="@Model.ToUser.Image.Url" class="rounded-circle mr-1 img-sm" alt="avatar">
                         </div>
                         <div class="flex-grow-1 pl-3">
                             <strong id="receiver-fullname">@Model.ReceiverFullName</strong>
@@ -58,7 +58,7 @@
                                     {
                                         <li class="chat-message-left pb-4" id="@message.Id">
                                             <div>
-                                                <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="Avatar">
+                                                <img src="@Model.ToUser.Image.Url" class="rounded-circle mr-1 img-sm" alt="Avatar">
                                                 <div class="text-muted small text-nowrap mt-2">@message.CreatedOn</div>
                                             </div>
                                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
@@ -71,7 +71,7 @@
                                     {
                                         <li class="chat-message-right pb-4" id="@message.Id">
                                             <div>
-                                                <img src="~/img/NoAvatarProfileImage.png" class="rounded-circle mr-1 img-sm" alt="Avatar">
+                                                <img src="@Model.CurrentUser.Image.Url" class="rounded-circle mr-1 img-sm" alt="Avatar">
                                                 <div class="text-muted small text-nowrap mt-2">@message.CreatedOn</div>
                                             </div>
                                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">

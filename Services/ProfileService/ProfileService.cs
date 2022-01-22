@@ -49,7 +49,7 @@
         {
             var patient = await this.data.Users
                 .Where(x => x.PatientId == model.Id)
-                .Include(x => x.Patient.Image)
+                .Include(x => x.Image)
                 .FirstOrDefaultAsync();
 
             if (patient == null)
@@ -65,11 +65,11 @@
                     return false;
                 }
 
-                await this.fileService.DeleteFile(this.cloudinary, patient.Patient.Image.Name, ProfileFolderName);
-                patient.Patient.Image.IsDeleted = true;
-                patient.Patient.Image.DeletedOn = DateTime.UtcNow;
+                await this.fileService.DeleteFile(this.cloudinary, patient.Image.Name, ProfileFolderName);
+                patient.Image.IsDeleted = true;
+                patient.Image.DeletedOn = DateTime.UtcNow;
 
-                patient.Patient.Image = new Image
+                patient.Image = new Image
                 {
                     Extension = result.Extension,
                     Url = result.Uri,

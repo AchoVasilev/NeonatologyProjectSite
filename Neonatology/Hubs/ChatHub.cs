@@ -40,7 +40,7 @@
             await this.Groups.AddToGroupAsync(this.Context.ConnectionId, groupName);
             await this.chatService.AddUserToGroup(groupName, senderName, receiverName);
 
-            await this.Clients.Group(groupName).SendAsync("ReceiveMessage", senderFullName, $"{senderFullName} се присъдени към група {groupName}");
+            await this.Clients.Group(groupName).SendAsync("ReceiveMessage", senderName, $"{senderFullName} се присъдени към група {groupName}");
         }
 
         public async Task SendMessage(string senderUsername, string receiverUsername, string message, string group, string senderFullName)
@@ -79,13 +79,13 @@
             await this.Clients.User(user.Id).SendAsync("SendMessage", senderUsername, new HtmlSanitizer().Sanitize(message.Trim()));
         }
 
-        public async Task UpdateMessageNotifications(string fromUsername, string username)
+        public async Task UpdateMessageNotifications(string fromUsername, string receiverUsername)
         {
-            var toId = await this.notificationService.UpdateMessageNotifications(fromUsername, username);
+            var toId = await this.notificationService.UpdateMessageNotifications(fromUsername, receiverUsername);
 
             if (toId != string.Empty)
             {
-                var count = await this.notificationService.GetUserNotificationsCount(username);
+                var count = await this.notificationService.GetUserNotificationsCount(receiverUsername);
                 await this.notificationHub
                     .Clients
                     .User(toId)

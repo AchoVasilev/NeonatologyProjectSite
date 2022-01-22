@@ -59,7 +59,7 @@
                 Address = doctorInfo.Address,
                 Age = doctorInfo.Age,
                 Biography = doctorInfo.Biography,
-                ImageUrl = doctorInfo.ImageUrl,
+                UserImageUrl = doctorInfo.UserImageUrl,
                 Email = doctorInfo.Email,
                 YearsOfExperience = doctorInfo.YearsOfExperience,
                 Cities = await this.cityService.GetAllCities()

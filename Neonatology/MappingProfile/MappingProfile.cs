@@ -47,9 +47,9 @@
                 });
 
             this.CreateMap<Doctor, DoctorProfileViewModel>()
-                .ForMember(x => x.ImageUrl, opt =>
+                .ForMember(x => x.UserImageUrl, opt =>
                 {
-                    opt.MapFrom(d => d.Image.Url ?? d.Image.RemoteImageUrl);
+                    opt.MapFrom(d => d.User.Image.Url ?? d.User.Image.RemoteImageUrl);
                 })
                 .ForMember(x => x.FullName, opt =>
                 {

@@ -56,7 +56,7 @@
                 FirstName = patientData.FirstName,
                 LastName = patientData.LastName,
                 PhoneNumber = patientData.Phone,
-                ImageUrl = patientData.ImageUrl,
+                UserImageUrl = patientData.UserImageUrl,
                 Email = patientData.UserEmail,
                 CityId = cityId,
                 Cities = await this.cityService.GetAllCities()

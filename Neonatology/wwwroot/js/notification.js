@@ -8,6 +8,7 @@ notificationConnection.start().then(function () {
     } else {
         sessionStorage.setItem("isFirstNotificationSound", false);
     }
+
     let isFirstNotificationSound = sessionStorage.getItem("isFirstNotificationSound") == "true" ? true : false;
     notificationConnection.invoke("GetUserNotificationCount", isFirstNotificationSound).catch(function (err) {
         return console.error(err.toString());
@@ -16,28 +17,20 @@ notificationConnection.start().then(function () {
     return console.error(err.toString());
 });
 
-notificationConnection.on("ReceiveNotification", function (count, isFirstNotificaitonSound) {
-    document.getElementById("notificationCount").dataset.count = count;
-    let title = document.querySelector("head title");
-    let bracketIndex = title.innerText.indexOf(")");
-    let newTitle = "";
+notificationConnection.on("ReceiveNotification", function (count, isFirstNotificationSound) {
+    const notificationCountElement = document.getElementById("notificationCount");
+    notificationCountElement.dataset.count = count;
 
     if (count > 0) {
-        if (isFirstNotificaitonSound) {
+        if (isFirstNotificationSound) {
             document.querySelector("audio").load();
             document.querySelector("audio").play();
         }
-
-        newTitle = `(${count}) ${title.innerText.substring(bracketIndex + 1, title.innerText.length)}`;
-    } else {
-        newTitle = `${title.innerText.substring(bracketIndex + 1, title.innerText.length)}`;
     }
-
-    title.innerText = newTitle;
 });
 
 notificationConnection.on("VisualizeNotification", function (notification) {
-    let div = document.getElementById("allUserNotifications");
+    let div = document.getElementById("all-user-notifications");
 
     if (div) {
         let newNotification = createNotification(notification);
@@ -55,57 +48,47 @@ notificationConnection.on("VisualizeNotification", function (notification) {
 });
 
 function createNotification(notification) {
-    let newNotification = document.createElement("div");
+    let newNotification = document.createElement('div');
+    newNotification.classList.add('p-3', 'd-flex', 'align-items-center', 'bg-light', 'border-bottom', 'osahan-post-header');
     newNotification.id = notification.id;
 
-    let allStatuses = "";
+    let allStatuses = '';
 
     for (var status of notification.allStatuses) {
         allStatuses += `<a onclick="updateStatus('${status}', '${notification.id}')">${status}</a>`;
     }
 
     newNotification.innerHTML =
-        `<div class="ts-testimonial-content">
-                        <img src="${notification.imageUrl}" alt="avatar">
-                        <h4 class="ts-testimonial-text userNotificationsHeading">
-                            <span>
-                                <a class="deleteNotificationIcon" onclick="deleteNotification('${notification.id}')">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </span>
-                            <span>
-                                ${notification.heading}
-                            </span>
-                        </h4>
-                        <div class="ts-testimonial-text dropdownNotification">
-                            <button class="dropbtnNotification">
-                                <i class="fas fa-chevron-down notificationArrow"></i>
-                            </button>
-                            <div class="dropdown-content-notification">
-                                ${allStatuses}
-                            </div>
-                            <span>Status: </span>
-                            <b>
-                                <span id="${notification.id}orderStatus" style="color: red; text-transform: uppercase">
-                                   ${notification.allStatuses[notification.status - 1]}
-                                </span>
-                            </b>
-                        </div>
-                        <p class="ts-testimonial-text">
-                            ${notification.text}
-                        </p>
-
-                        <div class="ts-testimonial-author">
-                            <h3 class="name userNotificationsHeading">
-                                <a href="/Profile/${notification.targetUsername}">
-                                    ${notification.targetFirstName} ${notification.targetLastName}
-                                </a>
-                                <span>
-                                    ${notification.createdOn}
-                                </span>
-                            </h3>
-                        </div>
-                    </div>`;
+        `<div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle" src="${notification.ImageUrl}" alt="avatar" />
+                                        </div>
+                                        <div class="font-weight-bold mr-3">
+                                            <span>
+                                                <a class="mdi mdi-delete" onclick="deleteNotification('${notification.Id}')">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </a>
+                                            </span>
+                                            <div class="text-truncate">${notification.Heading}</div>
+                                            <div class="small">${notification.Text}</div>
+                                        </div>
+                                        <span class="ml-auto mb-auto">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-light btn-sm rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    ${allStatuses}
+                                                    <span class="dropdown-item">Статус: </span>
+                                                    <b>
+                                                        <span id="${notification.Id}orderStatus" style="color: red; text-transform: uppercase; text-align: center">
+                                                            ${notification.allStatuses[notification.status - 1]}
+                                                        </span>
+                                                    </b>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="text-right text-muted pt-1">${notification.CreatedOn}</div>
+                                        </span>`;
 
     return newNotification;
 }

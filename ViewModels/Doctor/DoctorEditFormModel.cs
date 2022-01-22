@@ -24,7 +24,7 @@
         public string LastName { get; set; }
 
         [Display(Name = PictureLinkName)]
-        public string ImageUrl { get; set; }
+        public string UserImageUrl { get; set; }
 
         [Required(ErrorMessage = RequiredFieldErrorMsg)]
         [Display(Name = AgeName)]

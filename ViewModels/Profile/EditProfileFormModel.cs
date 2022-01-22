@@ -35,7 +35,7 @@
         [Display(Name = CityName)]
         public int CityId { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string UserImageUrl { get; set; }
 
         [EmailAddress]
         public string Email { get; set; }

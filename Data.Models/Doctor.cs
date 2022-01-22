@@ -57,11 +57,6 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        [ForeignKey(nameof(Image))]
-        public string ImageId { get; set; }
-
-        public virtual Image Image { get; set; }
-
         public virtual ICollection<Rating> Ratings { get; set; } = new HashSet<Rating>();
 
         public virtual ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();

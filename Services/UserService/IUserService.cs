@@ -16,5 +16,7 @@
         Task<string> GetUserIdByDoctorIdAsync(string doctorId);
 
         Task<ApplicationUser> GetUserByIdAsync(string id);
+
+        Task<ApplicationUser> FindByUserNameAsync(string username);
     }
 }

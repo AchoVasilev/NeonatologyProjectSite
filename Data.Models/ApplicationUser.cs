@@ -25,6 +25,11 @@
 
         public DateTime? DeletedOn { get; set; }
 
+        [ForeignKey(nameof(Image))]
+        public string ImageId { get; set; }
+
+        public virtual Image Image { get; set; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; } = new HashSet<IdentityUserRole<string>>();
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; } = new HashSet<IdentityUserClaim<string>>();

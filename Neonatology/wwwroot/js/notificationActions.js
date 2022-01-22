@@ -2,20 +2,20 @@
 
 function updateStatus(newStatus, id) {
     let colors = {
-        "Read": "green",
-        "Unread": "red",
-        "Pinned": "blue"
+        'Прочетено': 'green',
+        'Непрочетено': 'red',
+        'Запазено': 'blue'
     };
 
     $.ajax({
-        type: "POST",
-        url: `/UserNotifications/Notification/EditStatus`,
+        type: 'POST',
+        url: `/Notification/EditStatus`,
         data: {
             'newStatus': newStatus,
             'id': id
         },
         headers: {
-            RequestVerificationToken:
+            'X-CSRF-TOKEN':
                 $('input:hidden[name="__RequestVerificationToken"]').val()
         },
         success: function (data) {
@@ -32,19 +32,19 @@ function updateStatus(newStatus, id) {
 
 function deleteNotification(id) {
     $.ajax({
-        type: "POST",
-        url: `/UserNotifications/Notification/DeleteNotification`,
+        type: 'POST',
+        url: `/Notification/DeleteNotification`,
         data: {
             'id': id
         },
         headers: {
-            RequestVerificationToken:
+            'X-CSRF-TOKEN':
                 $('input:hidden[name="__RequestVerificationToken"]').val()
         },
         success: function (data) {
             if (data) {
                 let notification = document.getElementById(id);
-                document.getElementById(`allUserNotifications`).removeChild(notification);
+                document.getElementById(`all-user-notifications`).removeChild(notification);
                 loadMoreNotifications(1, true);
             }
         },
@@ -55,68 +55,58 @@ function deleteNotification(id) {
 }
 
 function createNotification(notification) {
-    let newNotification = document.createElement("div");
+    let newNotification = document.createElement('div');
+    newNotification.classList.add('p-3', 'd-flex', 'align-items-center', 'bg-light', 'border-bottom', 'osahan-post-header');
     newNotification.id = notification.id;
 
-    let allStatuses = "";
+    let allStatuses = '';
 
     for (var status of notification.allStatuses) {
         allStatuses += `<a onclick="updateStatus('${status}', '${notification.id}')">${status}</a>`;
     }
 
     newNotification.innerHTML =
-        `<div class="ts-testimonial-content">
-                        <img src="${notification.imageUrl}" alt="avatar">
-                        <h4 class="ts-testimonial-text userNotificationsHeading">
-                            <span>
-                                <a class="deleteNotificationIcon" onclick="deleteNotification('${notification.id}')">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </span>
-                            <span>
-                                ${notification.heading}
-                            </span>
-                        </h4>
-                        <div class="ts-testimonial-text dropdownNotification">
-                            <button class="dropbtnNotification">
-                                <i class="fas fa-chevron-down notificationArrow"></i>
-                            </button>
-                            <div class="dropdown-content-notification">
-                                ${allStatuses}
-                            </div>
-                            <span>Status: </span>
-                            <b>
-                                <span id="${notification.id}orderStatus" style="color: red; text-transform: uppercase">
-                                   ${notification.allStatuses[notification.status - 1]}
-                                </span>
-                            </b>
-                        </div>
-                        <p class="ts-testimonial-text">
-                            ${notification.text}
-                        </p>
-
-                        <div class="ts-testimonial-author">
-                            <h3 class="name userNotificationsHeading">
-                                <a href="/Profile/${notification.targetUsername}">
-                                    ${notification.targetFirstName} ${notification.targetLastName}
-                                </a>
-                                <span>
-                                    ${notification.createdOn}
-                                </span>
-                            </h3>
-                        </div>
-                    </div>`;
+        `<div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="${notification.ImageUrl}" alt="avatar" />
+                                </div>
+                                <div class="font-weight-bold mr-3">
+                                    <span>
+                                        <a class="mdi mdi-delete" onclick="deleteNotification('${notification.Id}')">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </span>
+                                    <div class="text-truncate">${notification.Heading}</div>
+                                    <div class="small">${notification.Text}</div>
+                                </div>
+                                <span class="ml-auto mb-auto">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-light btn-sm rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            ${allStatuses}
+                                            <span class="dropdown-item">Статус: </span>
+                                            <b>
+                                                <span id="${notification.Id}orderStatus" style="color: red; text-transform: uppercase; text-align: center">
+                                                    ${notification.allStatuses[notification.status - 1]}
+                                                </span>
+                                            </b>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="text-right text-muted pt-1">${notification.CreatedOn}</div>
+                                </span>`;
 
     return newNotification;
 }
 
 function loadMoreNotifications(take, isForDeleted) {
-    let skip = document.getElementById("allUserNotifications").children.length;
-    let div = document.getElementById("allUserNotifications");
+    let skip = document.getElementById("all-user-notifications").children.length;
+    let div = document.getElementById("all-user-notifications");
 
     $.ajax({
         type: "GET",
-        url: `/UserNotifications/Notification/GetMoreNotitification`,
+        url: `/Notification/GetMoreNotitifications`,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: {
@@ -148,7 +138,7 @@ function loadMoreNotifications(take, isForDeleted) {
 }
 
 function hideNotifications(maxCount) {
-    let div = document.getElementById("allUserNotifications");
+    let div = document.getElementById("all-user-notifications");
 
     for (var i = 0; i < Math.min(maxCount, div.children.length % maxCount + div.children.length / maxCount); i++) {
         div.removeChild(div.lastChild);

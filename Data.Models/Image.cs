@@ -27,14 +27,9 @@
 
         public string Extension { get; set; }
 
-        [ForeignKey(nameof(Doctor))]
-        public string DoctorId { get; set; }
+        [ForeignKey(nameof(User))]
+        public string UserId { get; set; }
 
-        public virtual Doctor Doctor { get; set; }
-
-        [ForeignKey(nameof(Patient))]
-        public string PatientId { get; set; }
-
-        public virtual Patient Patient { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

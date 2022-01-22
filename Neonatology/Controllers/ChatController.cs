@@ -6,6 +6,8 @@
 
     using Data.Models;
 
+    using Infrastructure;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
@@ -28,7 +30,6 @@
     public class ChatController : BaseController
     {
         private readonly IChatService chatService;
-        private readonly UserManager<ApplicationUser> userManager;
         private readonly IDoctorService doctorService;
         private readonly IUserService userService;
         private readonly IPatientService patientService;
@@ -36,14 +37,12 @@
 
         public ChatController(
             IChatService chatService,
-            UserManager<ApplicationUser> userManager,
             IDoctorService doctorService,
             IUserService userService,
             IPatientService patientService, 
             IHubContext<ChatHub> chatHub)
         {
             this.chatService = chatService;
-            this.userManager = userManager;
             this.doctorService = doctorService;
             this.userService = userService;
             this.patientService = patientService;
@@ -67,15 +66,15 @@
         [Route("Chat/With/{username?}/Group/{group?}")]
         public async Task<IActionResult> WithUser(string username, string group)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await this.userService.GetUserByIdAsync(this.User.GetId());
             var groupUsers = new List<string>() { currentUser.Email, username };
             var targetGroupName = group ?? string.Join(ChatGroupNameSeparator, groupUsers.OrderBy(x => x));
 
-            var receiver = await this.userManager.FindByNameAsync(username);
+            var receiver = await this.userService.FindByUserNameAsync(username);
             var doctorReceiver = await this.doctorService.GetDoctorByUserId(receiver.Id);
             var patientReceiver = await this.patientService.GetPatientByUserIdAsync(receiver.Id);
 
-            var sender = await this.userManager.GetUserAsync(this.HttpContext.User);
+            var sender = await this.userService.GetUserByIdAsync(this.HttpContext.User.GetId());
             var doctorSender = await this.doctorService.GetDoctorByUserId(sender.Id);
             var patientSender = await this.patientService.GetPatientByUserIdAsync(sender.Id);
 
@@ -131,7 +130,7 @@
         [Route("[controller]/With/{username?}/Group/{group?}/LoadMoreMessages/{messagesSkipCount?}")]
         public async Task<IActionResult> LoadMoreMessages(string username, string group, int? messagesSkipCount, string receiverFullname, string senderFullname)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await this.userService.GetUserByIdAsync(this.User.GetId());
 
             if (messagesSkipCount == null)
             {

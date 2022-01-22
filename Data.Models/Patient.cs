@@ -39,11 +39,6 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        [ForeignKey(nameof(Image))]
-        public string ImageId { get; set; }
-
-        public virtual Image Image { get; set; }
-
         [MaxLength(AddressMaxLength)]
         public string Address { get; set; }
 

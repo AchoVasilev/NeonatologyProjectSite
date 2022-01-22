@@ -12,7 +12,7 @@
 
         public string LastName { get; init; }
 
-        public string ImageUrl { get; init; }
+        public string UserImageUrl { get; init; }
 
         public string Phone { get; init; }
 
