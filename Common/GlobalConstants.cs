@@ -30,6 +30,7 @@
             "Към момента има и самостоятелни практики като педиатър в Плевен и Габрово.";
 
         public const string SuccessfulApointmentEmailMsgSubject = "Записване на час при д-р Петрова";
+        public const int ItemsPerPage = 10;
 
         public static class DateTimeFormats
         {

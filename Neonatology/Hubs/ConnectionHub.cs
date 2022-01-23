@@ -1,12 +1,13 @@
 ﻿namespace Neonatology.Hubs
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.SignalR;
-    using System.Linq;
+
     using SignalRCoreWebRTC.Models;
 
     [Authorize]
@@ -15,12 +16,14 @@
         private readonly List<User> Users;
         private readonly List<UserCall> UserCalls;
         private readonly List<CallOffer> CallOffers;
+        private readonly IHubContext<ChatHub> chatHubContext;
 
-        public ConnectionHub(List<User> users, List<UserCall> userCalls, List<CallOffer> callOffers)
+        public ConnectionHub(List<User> users, List<UserCall> userCalls, List<CallOffer> callOffers, IHubContext<ChatHub> chatHubContext)
         {
             Users = users;
             UserCalls = userCalls;
             CallOffers = callOffers;
+            this.chatHubContext = chatHubContext;
         }
 
         public async Task Join(string username)
@@ -50,7 +53,7 @@
             await base.OnDisconnectedAsync(exception);
         }
 
-        public async Task CallUser(User targetConnectionId)
+        public async Task CallUser(User targetConnectionId, string group)
         {
             var callingUser = Users.SingleOrDefault(u => u.ConnectionId == Context.ConnectionId);
             var targetUser = Users.SingleOrDefault(u => u.ConnectionId == targetConnectionId.ConnectionId);
@@ -59,6 +62,11 @@
             if (targetUser == null)
             {
                 // If not, let the caller know
+                await this.chatHubContext
+                    .Clients
+                    .Group(group)
+                    .SendAsync("ReceiveMessage", callingUser.Username, $"Пропуснахте обаждане от {callingUser.Username}.");
+
                 await Clients.Caller.CallDeclined(targetConnectionId, "Потребителят е напуснал.");
                 return;
             }
@@ -66,6 +74,11 @@
             // And that they aren't already in a call
             if (GetUserCall(targetUser.ConnectionId) != null)
             {
+                await this.chatHubContext
+                    .Clients
+                    .Group(group)
+                    .SendAsync("ReceiveMessage", callingUser.Username, $"Пропуснахте обаждане от {callingUser.Username}.");
+
                 await Clients.Caller.CallDeclined(targetConnectionId, string.Format("{0} провежда разговор.", targetUser.Username));
                 return;
             }
@@ -81,7 +94,7 @@
             });
         }
 
-        public async Task AnswerCall(bool acceptCall, User targetConnectionId)
+        public async Task AnswerCall(bool acceptCall, User targetConnectionId, string group)
         {
             var callingUser = Users.SingleOrDefault(u => u.ConnectionId == Context.ConnectionId);
             var targetUser = Users.SingleOrDefault(u => u.ConnectionId == targetConnectionId.ConnectionId);
@@ -96,6 +109,11 @@
             // Make sure the original caller has not left the page yet
             if (targetUser == null)
             {
+                await this.chatHubContext
+                    .Clients
+                    .Group(group)
+                    .SendAsync("ReceiveMessage", callingUser.Username, $"Пропуснахте обаждане от {callingUser.Username}.");
+
                 await Clients.Caller.CallEnded(targetConnectionId, "Потребителят напусна.");
                 return;
             }
@@ -197,8 +215,6 @@
             }
         }
 
-        #region Private Helpers
-
         private async Task SendUserListUpdate()
         {
             Users.ForEach(u => u.InCall = GetUserCall(u.ConnectionId) != null);
@@ -209,18 +225,23 @@
         {
             var matchingCall =
                 UserCalls.SingleOrDefault(uc => uc.Users.SingleOrDefault(u => u.ConnectionId == connectionId) != null);
+
             return matchingCall;
         }
-
-        #endregion
     }
+
     public interface IConnectionHub
     {
         Task UpdateUserList(List<User> userList);
+
         Task CallAccepted(User acceptingUser);
+
         Task CallDeclined(User decliningUser, string reason);
+
         Task IncomingCall(User callingUser);
+
         Task ReceiveSignal(User signalingUser, string signal);
+
         Task CallEnded(User signalingUser, string signal);
     }
 }

@@ -21,7 +21,7 @@
 
         Task<ICollection<LoadMoreMessagesViewModel>> LoadMoreMessages(string group, int messagesSkipCount, ApplicationUser currentUser, string receiverFullname, string senderFullname);
 
-        Task<ICollection<ChatConversationsViewModel>> GetAllMessages(string userId);
+        Task<ICollection<ChatConversationsViewModel>> GetAllMessages(string userId, int page, int itemsPerPage);
 
         Task<string> GetLastMessage(string currentUserId, string userId);
 

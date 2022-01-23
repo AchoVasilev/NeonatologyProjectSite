@@ -74,6 +74,10 @@
                     opt.MapFrom(y => y.Doctor.FirstName != null ?
                     "Д-р " + y.Doctor.FirstName + " " + y.Doctor.LastName :
                     y.Patient.FirstName + " " + y.Patient.LastName);
+                })
+                .ForMember(x => x.UserImageUrl, opt =>
+                {
+                    opt.MapFrom(y => y.Image.Url);
                 });
 
             this.CreateMap<ApplicationUser, ChatUserViewModel>()

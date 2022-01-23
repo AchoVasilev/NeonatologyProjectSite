@@ -8,6 +8,7 @@ var closeBtn = document.getElementById('close');
 closeBtn.style.display = 'none';
 var callBtn = document.getElementById('call');
 callBtn.style.display = 'block';
+var group = document.getElementById('group-name').textContent;
 
 $(document).ready(function () {
 
@@ -34,7 +35,7 @@ $(document).ready(function () {
         // Then make sure we aren't calling ourselves.
         if (sender.textContent != receiver.textContent) {
             // Initiate a call
-            wsconn.invoke('callUser', { "connectionId": receiver.dataset.cid });
+            wsconn.invoke('callUser', { "connectionId": receiver.dataset.cid }, group);
 
             // UI in calling mode
             $('#users').attr('data-mode', 'calling');
@@ -275,7 +276,7 @@ wsconn.on('incomingCall', (callingUser) => {
     alertify.confirm(callingUser.username + ' Ви звъни.  Желаете ли да проведете разговор?', function (e) {
         if (e) {
             // I want to chat
-            wsconn.invoke('AnswerCall', true, callingUser).catch(err => console.log(err));
+            wsconn.invoke('AnswerCall', true, callingUser, group).catch(err => console.log(err));
 
             // So lets go into call mode on the UI
             $('#users').attr('data-mode', 'incall');
@@ -285,7 +286,7 @@ wsconn.on('incomingCall', (callingUser) => {
             callBtn.style.display = 'none';
         } else {
             // Go away, I don't want to chat with you
-            wsconn.invoke('AnswerCall', false, callingUser).catch(err => console.log(err));
+            wsconn.invoke('AnswerCall', false, callingUser, group).catch(err => console.log(err));
             closeBtn.style.display = 'none';
             callBtn.style.display = 'block';
         }

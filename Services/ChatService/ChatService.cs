@@ -168,24 +168,30 @@
             return result;
         }
 
-        public async Task<ICollection<ChatConversationsViewModel>> GetAllMessages(string userId)
+        public async Task<ICollection<ChatConversationsViewModel>> GetAllMessages(string userId, int page, int itemsPerPage)
         {
             var sentMessages = this.data.Messages
                 .Where(x => x.IsDeleted == false && (x.SenderId == userId || x.ReceiverId == userId))
                 .OrderByDescending(x => x.CreatedOn)
+                .Include(x => x.Sender.Image)
                 .Select(x => x.Sender)
                 .AsQueryable();
 
             var receivedMessages = this.data.Messages
                 .Where(x => x.IsDeleted == false && (x.SenderId == userId || x.ReceiverId == userId))
                 .OrderByDescending(x => x.CreatedOn)
+                .Include(x => x.Receiver.Image)
                 .Select(x => x.Receiver)
                 .AsQueryable();
 
             var concatMessages = await sentMessages
                 .Concat(receivedMessages)
                 .Where(x => x.Id != userId)
+                .Include(x => x.Image)
                 .Distinct()
+                .OrderBy(d => d.Id)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
                 .ProjectTo<ChatConversationsViewModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 

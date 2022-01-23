@@ -8,6 +8,8 @@
 
         public string UserName { get; set; }
 
+        public string UserImageUrl { get; set; }
+
         public string LastMessage { get; set; }
 
         public string LastMessageActivity { get; set; }

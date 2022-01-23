@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+using System.Text.RegularExpressions;
     using System.Threading.Tasks;
 
     using Infrastructure;
@@ -21,6 +22,7 @@
     using ViewModels.Chat;
     using ViewModels.Patient;
 
+    using static Common.GlobalConstants;
     using static Common.GlobalConstants.ChatConstants;
 
     [Authorize]
@@ -46,15 +48,36 @@
             this.chatHub = chatHub;
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery]int page)
         {
             var doctorId = await this.doctorService.GetDoctorId();
             var doctorEmail = await this.doctorService.GetDoctorEmail(doctorId);
+            var currentUserId = this.User.GetId();
+            var converstations = await this.chatService.GetAllMessages(currentUserId, page, ItemsPerPage);
+
+            foreach (var user in converstations)
+            {
+                var lastMessage = await this.chatService.GetLastMessage(currentUserId, user.Id);
+                var contentWithoutTags = Regex.Replace(lastMessage, "<.*?>", string.Empty);
+
+                user.LastMessage = contentWithoutTags.Length < 487 ?
+                                contentWithoutTags :
+                                $"{contentWithoutTags.Substring(0, 487)}...";
+
+                user.LastMessageActivity = await this.chatService.GetLastActivityAsync(currentUserId, user.Id);
+
+                var groupId = await this.chatService.GetGroupId(currentUserId, user.Id);
+                user.GroupName = await this.chatService.GetGroupName(groupId);
+            }
 
             var model = new ChatUserViewModel
             {
                 Id = await this.userService.GetUserIdByDoctorIdAsync(doctorId),
-                DoctorEmail = doctorEmail
+                DoctorEmail = doctorEmail,
+                ChatModels = converstations,
+                PageNumber = page,
+                ItemsPerPage = ItemsPerPage,
+                ItemCount = converstations.Count()
             };
 
             return View(model);

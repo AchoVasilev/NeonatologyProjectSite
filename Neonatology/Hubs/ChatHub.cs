@@ -22,7 +22,7 @@
         public ChatHub(
             IChatService chatService,
             INotificationService notificationService,
-            IHubContext<NotificationHub> notificationHub, 
+            IHubContext<NotificationHub> notificationHub,
             IUserService userService)
         {
             this.chatService = chatService;
@@ -36,7 +36,7 @@
             await this.Groups.AddToGroupAsync(this.Context.ConnectionId, groupName);
             await this.chatService.AddUserToGroup(groupName, senderName, receiverName);
 
-            await this.Clients.Group(groupName).SendAsync("ReceiveMessage", senderName, $"{senderFullName} се присъдени към група {groupName}");
+            await this.Clients.Group(groupName).SendAsync("ReceiveMessage", senderName, $"{senderFullName} се присъдени към чат групата.");
         }
 
         public async Task SendMessage(string senderUsername, string receiverUsername, string message, string group, string senderFullName)

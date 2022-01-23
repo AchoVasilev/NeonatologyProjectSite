@@ -91,6 +91,7 @@ using SignalRCoreWebRTC.Models;
             services.AddControllers();
             services.AddSignalR();
             services.AddAutoMapper(typeof(Startup));
+
             services.AddSingleton<List<User>>();
             services.AddSingleton<List<UserCall>>();
             services.AddSingleton<List<CallOffer>>();
