@@ -72,6 +72,15 @@
       "provider": "unpkg",
       "library": "@microsoft/signalr@6.0.1",
       "destination": "wwwroot/lib/microsoft/signalr/"
+    },
+    {
+      "library": "adapterjs@0.15.4",
+      "destination": "wwwroot/lib/adapter/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "alertifyjs@1.13.1",
+      "destination": "wwwroot/lib/alertifyjs/"
     }
   ]
 }

@@ -1,6 +1,7 @@
 namespace Neonatology
 {
     using System;
+    using System.Collections.Generic;
 
     using CloudinaryDotNet;
 
@@ -39,6 +40,7 @@ namespace Neonatology
     using Services.SlotService;
     using Services.SpecializationService;
     using Services.UserService;
+using SignalRCoreWebRTC.Models;
 
     using Stripe;
 
@@ -89,7 +91,10 @@ namespace Neonatology
             services.AddControllers();
             services.AddSignalR();
             services.AddAutoMapper(typeof(Startup));
-
+            services.AddSingleton<List<User>>();
+            services.AddSingleton<List<UserCall>>();
+            services.AddSingleton<List<CallOffer>>();
+            
             services
                 .AddTransient<IAppointmentService, AppointmentService>()
                 .AddTransient<IPatientService, PatientService>()
@@ -189,6 +194,7 @@ namespace Neonatology
 
                 endpoints.MapHub<ChatHub>("/chatHub");
                 endpoints.MapHub<NotificationHub>("/notificationHub");
+                endpoints.MapHub<ConnectionHub>("/connectionHub");
             });
         }
     }

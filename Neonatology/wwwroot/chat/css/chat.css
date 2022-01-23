@@ -83,7 +83,7 @@ span.select-image-badge {
     border-radius: 50%;
     display: inline-block;
     position: absolute;
-    top: 14px;
+    top: 58px;
     right: 68px;
     text-align: center;
     font-size: 10px;
@@ -99,7 +99,7 @@ span.select-file-badge {
     border-radius: 50%;
     display: inline-block;
     position: absolute;
-    top: 13px;
+    top: 58px;
     right: 25px;
     text-align: center;
     font-size: 10px;

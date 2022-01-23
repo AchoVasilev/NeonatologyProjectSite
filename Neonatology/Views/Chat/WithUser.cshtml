@@ -4,6 +4,20 @@
     ViewData["Title"] = $"Чат с {Model.ReceiverFullName}";
 }
 
+@section Styles{
+<link href="~/lib/alertifyjs/build/css/alertify.min.css" rel="stylesheet" />
+<link href="~/lib/alertifyjs/build/css/themes/default.min.css" rel="stylesheet" />
+<link href="~/chatVoice/css/Custom.css" rel="stylesheet" />
+}
+<div class="card card-body bg-light actions" id="actions">
+    <div id="callstatus" class="status">В изчакване</div>
+    <button class="btn btn-danger hangup">Затвори</button>
+    <div class="span6">
+        <h4>Partner</h4>
+        <audio class="audio partner" autoplay="" controls=""></audio>
+    </div>
+</div>
+
 <div class="container p-0">
 
     <h1 class="h3 mb-3 text-center">@ViewData["Title"]</h1>
@@ -19,11 +33,17 @@
                         </div>
                         <div class="flex-grow-1 pl-3">
                             <strong id="receiver-fullname">@Model.ReceiverFullName</strong>
-                            <h3 id="receiver" style="text-align:center" hidden>@Model.ReceiverEmail</h3>
-                            <h6 class="m-b-0" id="sender-fullname" hidden>@Model.SenderFullName</h6>
-                            <h3 id="sender" style="text-align:center" hidden>@Model.SenderEmail</h3>
+                            <ul id="users" data-mode="idle">
+                                <li data-cid="" id="receiver" style="text-align:center" hidden>@Model.ReceiverEmail</li>
+                                <li data-cid="" class="user" id="receiverEmail" style="text-align:center" hidden>@Model.ReceiverEmail</li>
+                                <li class="m-b-0" id="sender-fullname" hidden>@Model.SenderFullName</li>
+                                <li data-cid="" id="sender" style="text-align:center" hidden>@Model.SenderEmail</li>
+                                <li data-cid="" class="user" id="senderEmail" style="text-align:center" hidden>@Model.SenderEmail</li>
+                            </ul>
                         </div>
                         <div>
+                            <label type="button" id="close" class="btn btn-outline-danger"><i class="fas fa-phone-slash"></i></label>
+                            <label type="button" id="call" class="btn btn-outline-secondary"><i class="fas fa-microphone"></i></label>
                             <label class="btn btn-outline-secondary" for="upload-image" style="cursor:pointer" id="image-button">
                                 <i class="fa fa-camera"></i>
                             </label>
@@ -106,8 +126,9 @@
 </div>
 
 @section Scripts{
-    <script type="text/javascript" src="~/chat/js/chat.js"></script>
-    <script type="text/javascript" src="~/chat/js/chatImagesScript.js"></script>
-    <script type="text/javascript" src="~/chat/js/chatFilesScript.js"></script>
-    <script type="text/javascript" src="~/chat/js/chatPerformanceScript.js"></script>
+<script type="text/javascript" src="~/chat/js/chat.js"></script>
+<script type="text/javascript" src="~/chat/js/chatImagesScript.js"></script>
+<script type="text/javascript" src="~/chat/js/chatFilesScript.js"></script>
+<script type="text/javascript" src="~/chat/js/chatPerformanceScript.js"></script>
+<script type="text/javascript" src="~/chatVoice/js/connectionHub.js"></script>
 }

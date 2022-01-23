@@ -78,11 +78,16 @@
         </a>
     }
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/errorNotify.js" asp-append-version="true"></script>
-    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="~/js/errorNotify.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/microsoft/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/notification.js"></script>
+    <script type="text/javascript" src="~/lib/alertifyjs/build/alertify.min.js"></script>
+    <script type="text/javascript" src="~/chatVoice/js/utilsRTC.js"></script>
+    <script type="text/javascript" src="~/chatVoice/js/constWebRTC.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/adapterjs/0.15.5/adapter.min.js"></script>
+@*    <script type="text/javascript" src="~/chatVoice/js/connectionHub.js"></script>*@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

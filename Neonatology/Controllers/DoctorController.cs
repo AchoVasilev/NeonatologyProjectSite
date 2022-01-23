@@ -40,12 +40,6 @@
         public async Task<IActionResult> Edit()
         {
             var userId = this.User.GetId();
-            var userIsDoctor = await this.doctorService.UserIsDoctor(userId);
-           
-            if (!userIsDoctor)
-            {
-                return new StatusCodeResult(404);
-            }
 
             var doctorId = await this.doctorService.GetDoctorIdByUserId(userId);
             var doctorInfo = await this.doctorService.GetDoctorById(doctorId);
