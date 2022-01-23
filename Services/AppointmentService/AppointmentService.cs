@@ -71,7 +71,7 @@
 
         public async Task<ICollection<TakenAppointmentsViewModel>> GetTakenAppointmentSlots()
             => await this.data.Appointments
-                    .Where(x => x.DateTime.Date >= DateTime.UtcNow.Date)
+                    .Where(x => x.DateTime.Date >= DateTime.UtcNow.Date && x.IsDeleted == false)
                     .Select(x => new TakenAppointmentsViewModel()
                     {
                         Start = x.DateTime,
