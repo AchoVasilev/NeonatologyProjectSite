@@ -40,7 +40,8 @@ namespace Neonatology
     using Services.SlotService;
     using Services.SpecializationService;
     using Services.UserService;
-using SignalRCoreWebRTC.Models;
+
+    using SignalRCoreWebRTC.Models;
 
     using Stripe;
 
@@ -95,7 +96,7 @@ using SignalRCoreWebRTC.Models;
             services.AddSingleton<List<User>>();
             services.AddSingleton<List<UserCall>>();
             services.AddSingleton<List<CallOffer>>();
-            
+
             services
                 .AddTransient<IAppointmentService, AppointmentService>()
                 .AddTransient<IPatientService, PatientService>()

@@ -45,7 +45,17 @@
       "ProjectGuid": "4e32bcad-c865-421a-9432-a7b6ddabb1d7",
       "DisplayName": "Services",
       "ColorIndex": 7
+    },
+    "0adfc890-0b9c-4871-a5dc-ae4335526af4": {
+      "ProjectGuid": "0adfc890-0b9c-4871-a5dc-ae4335526af4",
+      "DisplayName": "Tests",
+      "ColorIndex": 8
+    },
+    "3f08dedf-a1d3-45bd-af35-4042c024cc0b": {
+      "ProjectGuid": "3f08dedf-a1d3-45bd-af35-4042c024cc0b",
+      "DisplayName": "Test",
+      "ColorIndex": 9
     }
   },
-  "NextColorIndex": 8
+  "NextColorIndex": 10
 }
