@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bVwP2xr1PXrhTw3YrkA076yAo6EbdANxVXvlI1OKbQzOvhUlDHn8vpgWHf8E9U4yX+a2qm91Tu927E255szLOQ==",
+  "dgSpecHash": "9OQyREqV1H11Erl4vO8UlBBJ7tEK0qmldLorv9UegLbReWU1HwgYow/dhEE0NKHrnde2mDya5KoLWqJGXgpQ3A==",
   "success": true,
   "projectFilePath": "C:\\Users\\defie\\source\\repos\\Neonatology\\Test\\Test.csproj",
   "expectedPackageFiles": [
@@ -127,6 +127,8 @@
     "C:\\Users\\defie\\.nuget\\packages\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\defie\\.nuget\\packages\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\defie\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\defie\\.nuget\\packages\\selenium.webdriver\\4.1.0\\selenium.webdriver.4.1.0.nupkg.sha512",
+    "C:\\Users\\defie\\.nuget\\packages\\selenium.webdriver.chromedriver\\97.0.4692.7100\\selenium.webdriver.chromedriver.97.0.4692.7100.nupkg.sha512",
     "C:\\Users\\defie\\.nuget\\packages\\stripe.net\\39.83.0\\stripe.net.39.83.0.nupkg.sha512",
     "C:\\Users\\defie\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\defie\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
