@@ -8,7 +8,8 @@ This is a project, created for a doctor and her personal needs. There is an impl
 - Cloudinary
 - Google SMTP service and MailKit
 - FullCalendar IO
-- SignalR
+- SignalR for notifications and chatting
+- RPC for voice calls over chat
 - Stripe
 - Bootstrap and Font awesome
 - Automapper
