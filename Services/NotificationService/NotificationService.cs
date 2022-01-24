@@ -15,8 +15,8 @@
 
     using ViewModels.Notification;
 
-    using static Common.GlobalConstants.NotificationConstants;
     using static Common.GlobalConstants.DateTimeFormats;
+    using static Common.GlobalConstants.NotificationConstants;
 
     public class NotificationService : INotificationService
     {

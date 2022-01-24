@@ -4,13 +4,18 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-    using CloudinaryDotNet.Actions;
+
     using CloudinaryDotNet;
-    using Microsoft.AspNetCore.Http;
+    using CloudinaryDotNet.Actions;
+
     using Data;
-    using ViewModels.Galery;
+
+    using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
+
     using Services.FileService.FileServiceModels;
+
+    using ViewModels.Galery;
 
     public class FileService : IFileService
     {

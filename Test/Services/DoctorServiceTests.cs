@@ -6,13 +6,9 @@
 
     using global::Services.DoctorService;
 
-    using Microsoft.EntityFrameworkCore;
-
     using NuGet.ContentModel;
 
     using Test.Mocks;
-
-    using ViewModels.Doctor;
 
     using Xunit;
 

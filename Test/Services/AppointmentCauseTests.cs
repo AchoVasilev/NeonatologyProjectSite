@@ -7,8 +7,6 @@
 
     using global::Services.AppointmentCauseService;
 
-    using NuGet.DependencyResolver;
-
     using Test.Mocks;
 
     using ViewModels.Appointments;
