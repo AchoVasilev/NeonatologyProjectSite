@@ -81,7 +81,7 @@
         public async Task<bool> EditPatientAsync(string patientId, CreatePatientFormModel model)
         {
             var patient = await this.data.Patients
-                                .FirstOrDefaultAsync(x => x.Id == patientId && x.IsDeleted == false);
+                .FirstOrDefaultAsync(x => x.Id == patientId && x.IsDeleted == false);
 
             if (patient == null)
             {
@@ -105,7 +105,8 @@
 
         public async Task<int> GetLastThisMonthsRegisteredCount()
             => await this.data.Patients
-                        .Where(x => x.IsDeleted == false && x.CreatedOn.Month == DateTime.Now.Month)
+                        .Where(x => x.IsDeleted == false && 
+                                x.CreatedOn.Month == DateTime.Now.Month)
                         .CountAsync();
 
         public async Task<ICollection<PatientServiceModel>> GetAllPatients()
