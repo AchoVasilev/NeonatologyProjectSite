@@ -78,7 +78,9 @@
         public async Task<bool> DeleteRating(int appointmentId)
         {
             var rating = await this.data.Ratings
-                .Where(x => x.AppointmentId == appointmentId && x.IsDeleted == false && x.IsConfirmed == false)
+                .Where(x => x.AppointmentId == appointmentId && 
+                        x.IsDeleted == false && 
+                        x.IsConfirmed == false)
                 .FirstOrDefaultAsync();
 
             if (rating == null)

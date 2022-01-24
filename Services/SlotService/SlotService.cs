@@ -39,6 +39,11 @@
                     End = slotEnd.ToLocalTime()
                 };
 
+                if (await this.SlotExists(slot.Start, slot.End))
+                {
+                    continue;
+                }
+
                 slots.Add(slot);
             }
 
@@ -91,6 +96,21 @@
             await this.data.SaveChangesAsync();
 
             return true;
+        }
+
+        private async Task<bool> SlotExists(DateTime start, DateTime end)
+        {
+            var result = await this.data.AppointmentSlots
+                .FirstOrDefaultAsync(x => x.Start == start && 
+                                    x.End == end &&
+                                    x.IsDeleted == false);
+
+            if (result != null)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
