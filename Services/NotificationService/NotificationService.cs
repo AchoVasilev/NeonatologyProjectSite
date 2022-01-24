@@ -71,7 +71,11 @@
                     .Skip(MaxChatNotificationsPerUser - 1)
                     .ToList();
 
-                receiverNotifications.ForEach(x => x.IsDeleted = true);
+                receiverNotifications.ForEach(x =>
+                {
+                    x.IsDeleted = true;
+                    x.DeletedOn = DateTime.UtcNow;
+                });
             }
 
             await this.data.Notifications.AddAsync(notification);
@@ -108,7 +112,9 @@
         public async Task<bool> EditStatus(string receiverId, string newStatus, string id)
         {
             var notification = await this.data.Notifications
-                .FirstOrDefaultAsync(x => x.Id == id && x.ReceiverId == receiverId);
+                .FirstOrDefaultAsync(x => x.Id == id && 
+                                    x.ReceiverId == receiverId && 
+                                    x.IsDeleted == false);
 
             if (notification != null)
             {
@@ -144,9 +150,12 @@
 
         public async Task<NotificationViewModel> GetNotificationById(string id)
         {
-            var notification = await this.data.Notifications.FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted == false);
+            var notification = await this.data.Notifications
+                .FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted == false);
 
-            var receiver = await this.data.Users.FirstOrDefaultAsync(x => x.Id == notification.ReceiverId);
+            var receiver = await this.data.Users
+                .FirstOrDefaultAsync(x => x.Id == notification.ReceiverId);
+
             var sender = await this.data.Users
                 .Where(x => x.Id == notification.SenderId)
                 .Include(x => x.Image)

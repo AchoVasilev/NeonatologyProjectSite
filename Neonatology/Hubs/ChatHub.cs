@@ -57,7 +57,7 @@
                 .AddMessageNotification(message, receiverUsername, senderUsername, group);
 
             var count = await this.notificationService
-                .GetUserNotificationsCount(receiverId);
+                .GetUserNotificationsCount(receiverUsername);
 
             await this.notificationHub
                 .Clients
