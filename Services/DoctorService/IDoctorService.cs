@@ -14,8 +14,6 @@
 
         Task<string> GetDoctorIdByAppointmentId(int appointmentId);
 
-        Task<bool> UserIsDoctor(string userId);
-
         Task<string> GetDoctorId();
 
         Task<bool> EditDoctorAsync(DoctorEditFormModel model);

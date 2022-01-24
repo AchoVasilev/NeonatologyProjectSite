@@ -26,6 +26,7 @@
 
         public async Task<ICollection<CityFormModel>> GetAllCities()
             => await this.data.Cities
+                         .Where(x => x.IsDeleted == false)
                          .ProjectTo<CityFormModel>(this.mapper.ConfigurationProvider)
                          .OrderBy(x => x.Name)
                          .ToListAsync();

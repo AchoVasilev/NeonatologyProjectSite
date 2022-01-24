@@ -37,15 +37,15 @@
 
         public async Task<DoctorProfileViewModel> GetDoctorById(string doctorId)
             => await this.data.Doctors
-            .Where(x => x.Id == doctorId)
-            .ProjectTo<DoctorProfileViewModel>(this.mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync();
+                .Where(x => x.Id == doctorId)
+                .ProjectTo<DoctorProfileViewModel>(this.mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
 
         public async Task<DoctorProfileViewModel> GetDoctorByUserId(string userId)
             => await this.data.Doctors
-            .Where(x => x.UserId == userId)
-            .ProjectTo<DoctorProfileViewModel>(this.mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync();
+                .Where(x => x.UserId == userId)
+                .ProjectTo<DoctorProfileViewModel>(this.mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
 
         public async Task<string> GetDoctorIdByUserId(string userId)
             => await this.data.Users
@@ -58,10 +58,6 @@
                         .Where(x => x.Id == appointmentId && x.IsDeleted == false)
                         .Select(x => x.DoctorId)
                         .FirstOrDefaultAsync();
-
-        public async Task<bool> UserIsDoctor(string userId)
-            => await this.data.Users
-                          .AnyAsync(x => x.Id == userId && x.DoctorId != null);
 
         public async Task<string> GetDoctorId()
             => await this.data.Doctors
@@ -82,7 +78,7 @@
                 return false;
             }
 
-            var result = await this.fileService.UploadImage(cloudinary, model.Picture, DefaultFolderName);
+            var result = await this.fileService.UploadImage(this.cloudinary, model.Picture, DefaultFolderName);
             if (result == null)
             {
                 return false;

@@ -47,11 +47,16 @@
         public async Task<string> SendMessageToUser(string senderName, string receiverName, string message, string groupName)
         {
             var receiver = await this.data.Users
-                .Where(x => x.UserName == receiverName)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(x => x.UserName == receiverName && x.IsDeleted == false);
 
             var sender = await this.data.Users
-                .FirstOrDefaultAsync(x => x.UserName == senderName);
+                .FirstOrDefaultAsync(x => x.UserName == senderName && x.IsDeleted == false);
+
+            if (receiver is null || sender is null)
+            {
+                return null;
+            }
+
             var group = await this.data.Groups
                 .FirstOrDefaultAsync(x => x.Name.ToLower() == groupName.ToLower());
 
@@ -71,9 +76,12 @@
 
         public async Task AddUserToGroup(string groupName, string senderName, string receiverName)
         {
-            var sender = await this.data.Users.FirstOrDefaultAsync(x => x.UserName == senderName);
-            var receiver = await this.data.Users.FirstOrDefaultAsync(x => x.UserName == receiverName);
-            var targetGroup = await this.data.Groups.FirstOrDefaultAsync(x => x.Name.ToLower() == groupName.ToLower());
+            var sender = await this.data.Users
+                .FirstOrDefaultAsync(x => x.UserName == senderName);
+            var receiver = await this.data.Users
+                .FirstOrDefaultAsync(x => x.UserName == receiverName);
+            var targetGroup = await this.data.Groups
+                .FirstOrDefaultAsync(x => x.Name.ToLower() == groupName.ToLower());
 
             if (targetGroup == null)
             {
@@ -109,7 +117,7 @@
             if (targetGroup != null)
             {
                 var messages = this.data.Messages
-                    .Where(x => x.GroupId == targetGroup.Id)
+                    .Where(x => x.GroupId == targetGroup.Id && x.IsDeleted == false)
                     .OrderByDescending(x => x.CreatedOn)
                     .Take(MessagesCountPerScroll)
                     .OrderBy(x => x.CreatedOn)
@@ -139,7 +147,7 @@
             if (targetGroup != null)
             {
                 var messages = this.data.Messages
-                    .Where(x => x.GroupId == targetGroup.Id)
+                    .Where(x => x.GroupId == targetGroup.Id && x.IsDeleted == false)
                     .OrderByDescending(x => x.CreatedOn)
                     .Skip(messagesSkipCount)
                     .Take(MessagesCountPerScroll)
@@ -219,8 +227,8 @@
         public async Task<string> GetGroupId(string currentUserId, string userId)
             => await this.data.Messages
                         .Where(m => !m.IsDeleted &&
-                                        ((m.ReceiverId == currentUserId && m.SenderId == userId) ||
-                                         (m.ReceiverId == userId && m.SenderId == currentUserId)))
+                                   ((m.ReceiverId == currentUserId && m.SenderId == userId) ||
+                                    (m.ReceiverId == userId && m.SenderId == currentUserId)))
                         .Select(x => x.GroupId)
                         .FirstOrDefaultAsync();
 
@@ -395,9 +403,9 @@
                 {
                     var oldMessages = messages.Take(messages.Count - SavedChatMessagesCount);
 
-                    foreach (var oldMessageId in oldMessages.Select(x => x.Id).ToList())
+                    foreach (var oldMessage in oldMessages)
                     {
-                        var oldImages = this.data.ChatImages.Where(x => x.MessageId == oldMessageId).ToList();
+                        var oldImages = this.data.ChatImages.Where(x => x.MessageId == oldMessage.Id).ToList();
 
                         foreach (var oldImage in oldImages)
                         {
@@ -405,12 +413,15 @@
                                         this.cloudinary,
                                         oldImage.Name,
                                         ChatFolderName);
+
+                            oldImage.IsDeleted = true;
+                            oldImage.DeletedOn = DateTime.UtcNow;
                         }
 
-                        this.data.ChatImages.RemoveRange(oldImages);
+                        oldMessage.IsDeleted = true;
+                        oldMessage.DeletedOn = DateTime.UtcNow;
                     }
 
-                    this.data.Messages.RemoveRange(oldMessages);
                     await this.data.SaveChangesAsync();
                 }
             }
