@@ -83,7 +83,10 @@
         public async Task<bool> AddAsync(string doctorId, CreateAppointmentModel model)
         {
             var doctorAppointment = await this.data.Doctors
-                .FirstOrDefaultAsync(x => x.Id == doctorId && x.Appointments.Any(a => a.DateTime == model.Start));
+                .FirstOrDefaultAsync(x => x.Id == doctorId && x.Appointments.Any(a => a.DateTime.Year == model.Start.Year &&
+                a.DateTime.Day == model.Start.Day &&
+                a.DateTime.Hour == model.Start.Hour &&
+                a.DateTime.Minute == model.Start.Minute));
 
             if (doctorAppointment != null)
             {
@@ -111,7 +114,10 @@
         public async Task<bool> AddAsync(string doctorId, PatientAppointmentCreateModel model)
         {
             var doctorAppointment = await this.data.Doctors
-                .FirstOrDefaultAsync(x => x.Id == doctorId && x.Appointments.Any(a => a.DateTime == model.Start));
+                .FirstOrDefaultAsync(x => x.Id == doctorId && x.Appointments.Any(a => a.DateTime.Year == model.Start.Year &&
+                a.DateTime.Day == model.Start.Day &&
+                a.DateTime.Hour == model.Start.Hour &&
+                a.DateTime.Minute == model.Start.Minute));
 
             if (doctorAppointment != null)
             {
@@ -136,7 +142,9 @@
 
         public async Task<AppointmentViewModel> GetUserAppointmentAsync(string userId, int appointmentId)
             => await this.data.Appointments
-                        .Where(x => x.Patient.UserId == userId && x.Id == appointmentId)
+                        .Where(x => x.Patient.UserId == userId && 
+                        x.Id == appointmentId && 
+                        x.IsDeleted == false)
                         .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                         .FirstOrDefaultAsync();
 
@@ -148,9 +156,9 @@
                         .Include(x => x.Rating)
                         .FirstOrDefaultAsync();
 
-        public async Task<ICollection<AppointmentViewModel>> GetTodaysAppointments(string id)
+        public async Task<ICollection<AppointmentViewModel>> GetTodaysAppointments(string doctorUserId)
             => await this.data.Appointments
-                .Where(x => x.Doctor.UserId == id &&
+                .Where(x => x.Doctor.UserId == doctorUserId &&
                         x.DateTime.Date == DateTime.Now.Date &&
                         x.IsDeleted == false)
                 .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
