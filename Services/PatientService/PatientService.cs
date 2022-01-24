@@ -98,7 +98,7 @@
             return true;
         }
 
-        public async Task<int> GetPatientsCount() 
+        public async Task<int> GetPatientsCount()
             => await this.data.Patients
                         .Where(x => x.IsDeleted == false)
                         .CountAsync();

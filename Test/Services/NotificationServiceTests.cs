@@ -11,11 +11,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using NuGet.ContentModel;
-
     using Test.Mocks;
-
-    using ViewModels.Notification;
 
     using Xunit;
 
