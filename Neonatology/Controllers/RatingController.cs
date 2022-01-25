@@ -24,6 +24,7 @@
         private readonly IDoctorService doctorService;
         private readonly IPatientService patientService;
         private readonly IRatingService ratingService;
+
         public RatingController(
             IAppointmentService appointmentService,
             IDoctorService doctorService,
@@ -59,7 +60,7 @@
             var userId = this.User.GetId();
             var appointment = await this.appointmentService.GetUserAppointmentAsync(userId, model.AppointmentId);
 
-            if (appointment == null)
+            if (appointment is null)
             {
                 return new StatusCodeResult(404);
             }
@@ -67,17 +68,17 @@
             if (appointment.IsRated)
             {
                 this.TempData["Message"] = RatedAppointment;
-                return RedirectToAction("MyAppointments", "Appointment");
+                return RedirectToAction("MyAppointments", "Appointment", new { area = "" });
             }
 
             var doctorId = await this.doctorService.GetDoctorIdByAppointmentId(model.AppointmentId);
-            if (doctorId == null)
+            if (doctorId is null)
             {
                 return new StatusCodeResult(404);
             }
 
             var patientId = await this.patientService.GetPatientIdByUserIdAsync(userId);
-            if (patientId == null)
+            if (patientId is null)
             {
                 return new StatusCodeResult(404);
             }
@@ -89,7 +90,8 @@
 
             if (isRated == false)
             {
-                return new StatusCodeResult(404);
+                this.TempData["Message"] = ErrorRatingAppointmentMsg;
+                return RedirectToAction("MyAppointments", "Appointment", new { area = "" });
             }
 
             this.TempData["Message"] = string.Format(SuccessfulRating, model.Number);
@@ -101,27 +103,53 @@
         public async Task<IActionResult> Approve(int appointmentId)
         {
             var isApproved = await this.ratingService.ApproveRating(appointmentId);
+            var userIsAdmin = this.User.IsAdmin();
 
             if (isApproved == false)
-            {
+            { 
                 this.TempData["Message"] = ErrorApprovingRating;
+
+                if (userIsAdmin)
+                {
+                    return RedirectToAction("All", "Appointment", new { area = "Administration" });
+                }
+
+                return RedirectToAction("DoctorAppointments", "Appointment", new { area = "" });
             }
 
             this.TempData["Message"] = SuccessfullyApprovedRating;
+
+            if (userIsAdmin)
+            {
+                return RedirectToAction("All", "Appointment", new { area = "Administration" });
+            }
+
             return RedirectToAction("DoctorAppointments", "Appointment", new { area = "" });
         }
 
         [Authorize(Roles = $"{DoctorRoleName}, {AdministratorRoleName}")]
         public async Task<IActionResult> Delete(int appointmentId)
         {
-            var isApproved = await this.ratingService.DeleteRating(appointmentId);
+            var isDeleted = await this.ratingService.DeleteRating(appointmentId);
+            var userIsAdmin = this.User.IsAdmin();
 
-            if (isApproved == false)
+            if (isDeleted == false)
             {
                 this.TempData["Message"] = ErrorApprovingRating;
+                if (userIsAdmin)
+                {
+                    return RedirectToAction("All", "Appointment", new { area = "Administration" });
+                }
+
+                return RedirectToAction("DoctorAppointments", "Appointment", new { area = "" });
             }
 
             this.TempData["Message"] = SuccessfullyApprovedRating;
+            if (userIsAdmin)
+            {
+                return RedirectToAction("All", "Appointment", new { area = "Administration" });
+            }
+
             return RedirectToAction("DoctorAppointments", "Appointment", new { area = "" });
         }
     }

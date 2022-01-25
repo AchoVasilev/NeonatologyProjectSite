@@ -47,6 +47,7 @@
 
             public const string RatedAppointment = "Вече сте дали своята оценка";
             public const string SuccessfulRating = "Вие дадохте оценка {0}";
+            public const string ErrorRatingAppointmentMsg = "Възникна грешка с оценяването, опитайте пак";
             public const string ErrorApprovingRating = "Възникна грешка с одобряването, опитайте пак";
             public const string SuccessfullyApprovedRating = "Одобрихте успешно оценката";
             public const string SuccessfullyDeletedRating = "Успешно изтрихте оценката";
