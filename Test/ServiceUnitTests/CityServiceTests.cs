@@ -174,5 +174,45 @@
 
             Assert.Equal(1, result);
         }
+
+        [Fact]
+        public async Task GetCityByIdShouldReturnCorrectModel()
+        {
+            var dataMock = DatabaseMock.Instance;
+            var mapperMock = MapperMock.Instance;
+
+            var cities = new List<City>()
+            {
+                new City
+                {
+                    Id = 1,
+                    Name = "Pleven"
+                },
+                new City
+                {
+                    Id = 2,
+                    Name = "Kaspichan"
+                },
+                new City
+                {
+                    Id = 3,
+                    Name = "Sofia"
+                },
+                new City
+                {
+                    Id = 4,
+                    Name = "Plovdiv"
+                }
+            };
+
+            await dataMock.Cities.AddRangeAsync(cities);
+            await dataMock.SaveChangesAsync();
+
+            var service = new CityService(dataMock, mapperMock);
+            var result = await service.GetCityById(1);
+
+            Assert.Equal(1, result.Id);
+            Assert.IsType<CityFormModel>(result);
+        }
     }
 }

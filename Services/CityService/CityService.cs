@@ -36,5 +36,11 @@
                         .Where(x => x.Name == cityName)
                         .Select(x => x.Id)
                         .FirstOrDefaultAsync();
+
+        public async Task<CityFormModel> GetCityById(int id)
+            => await this.data.Cities
+                        .Where(x => x.Id == id && x.IsDeleted == false)
+                        .ProjectTo<CityFormModel>(this.mapper.ConfigurationProvider)
+                        .FirstOrDefaultAsync();
     }
 }

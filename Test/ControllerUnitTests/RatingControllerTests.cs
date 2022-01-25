@@ -15,7 +15,6 @@
     using Services.AppointmentService;
     using Services.DoctorService;
     using Services.PatientService;
-    using Services.PaymentService;
     using Services.RatingService;
 
     using Test.Helpers;

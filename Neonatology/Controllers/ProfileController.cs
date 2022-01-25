@@ -34,12 +34,11 @@
             return View(model);
         }
 
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(string userId)
         {
-            var userId = this.User.GetId();
             var patientData = await this.profileService.GetPatientData(userId);
 
-            if (patientData == null || id != patientData.Id)
+            if (patientData is null)
             {
                 return new StatusCodeResult(404);
             }
@@ -63,6 +62,13 @@
         [HttpPost]
         public async Task<IActionResult> Edit(EditProfileFormModel model)
         {
+            var city = this.cityService.GetCityById(model.CityId);
+
+            if (city is null)
+            {
+                ModelState.AddModelError("cityId", "City with this id does not exist");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -79,6 +85,7 @@
             return RedirectToAction(nameof(Index));
         }
 
+        [AllowAnonymous]
         public IActionResult AllUsers()
         {
             return View();

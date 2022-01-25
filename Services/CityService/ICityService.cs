@@ -10,5 +10,7 @@
         Task<ICollection<CityFormModel>> GetAllCities();
 
         Task<int> GetCityIdByName(string cityName);
+
+        Task<CityFormModel> GetCityById(int id);
     }
 }

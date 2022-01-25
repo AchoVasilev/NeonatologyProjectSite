@@ -6,8 +6,6 @@
 
     using global::Services.DoctorService;
 
-    using NuGet.ContentModel;
-
     using Test.Mocks;
 
     using Xunit;
