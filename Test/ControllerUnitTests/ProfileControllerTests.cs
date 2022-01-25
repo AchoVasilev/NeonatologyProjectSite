@@ -2,7 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
@@ -22,6 +23,16 @@ using Microsoft.AspNetCore.Http;
 
     public class ProfileControllerTests
     {
+        [Fact]
+        public void ProfileControllerShouldHaveAuthorizeAttribute()
+        {
+            var controller = new ProfileController(null, null);
+            var actualAttribute = controller.GetType()
+                .GetCustomAttributes(typeof(AuthorizeAttribute), true);
+
+            Assert.Equal(typeof(AuthorizeAttribute), actualAttribute[0].GetType());
+        }
+
         [Fact]
         public async Task IndexShouldReturnViewWithCorrectModel()
         {
@@ -78,7 +89,7 @@ using Microsoft.AspNetCore.Http;
         [Fact]
         public async Task EditShouldReturnRedirectToActionToIndexIfSuccessful()
         {
-            var model = new EditProfileFormModel() { CityId = 1};
+            var model = new EditProfileFormModel() { CityId = 1 };
             var profileService = new Mock<IProfileService>();
             profileService.Setup(x => x.EditProfileAsync(model))
                 .ReturnsAsync(true);

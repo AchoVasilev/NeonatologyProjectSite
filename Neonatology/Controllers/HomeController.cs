@@ -15,12 +15,10 @@
 
     public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> logger;
         private readonly IDoctorService doctorService;
 
-        public HomeController(ILogger<HomeController> logger, IDoctorService doctorService)
+        public HomeController(IDoctorService doctorService)
         {
-            this.logger = logger;
             this.doctorService = doctorService;
         }
 

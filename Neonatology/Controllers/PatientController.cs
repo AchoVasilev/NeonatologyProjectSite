@@ -12,9 +12,7 @@
 
     using ViewModels.Patient;
 
-    using static Common.GlobalConstants;
-
-    [Authorize(Roles = PatientRoleName)]
+    [Authorize]
     public class PatientController : BaseController
     {
         private readonly IPatientService patientService;
@@ -38,17 +36,6 @@
             }
 
             var userId = this.User.GetId();
-            var patientId = await this.patientService.GetPatientIdByUserIdAsync(userId);
-
-            if (string.IsNullOrWhiteSpace(patientId) == false)
-            {
-                var isEdited = await this.patientService.EditPatientAsync(patientId, model);
-
-                if (isEdited)
-                {
-                    return RedirectToAction("MyAppointments", "Appointment", new { area = "" });
-                }
-            }
 
             await this.patientService.CreatePatientAsync(model, userId, $"{this.environment.WebRootPath}");
 

@@ -57,7 +57,6 @@
 
         [HttpPost]
         [Route("/Notification/DeleteNotification")]
-        [IgnoreAntiforgeryToken]
         public async Task<bool> DeleteNotification(string id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
