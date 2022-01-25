@@ -27,7 +27,10 @@
             var serviceProvider = scopedServices.ServiceProvider;
             var data = serviceProvider.GetRequiredService<NeonatologyDbContext>();
 
-            data.Database.Migrate();
+            if (data.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
+            {
+                data.Database.Migrate();
+            }
 
             await SeedCitiesAsync(data);
             await SeedAdministratorAsync(serviceProvider);

@@ -1,0 +1,10 @@
+{
+  "Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\defie\\source\\repos\\Neonatology\\Common",
+  "Data.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\defie\\source\\repos\\Neonatology\\Data.Common",
+  "Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\defie\\source\\repos\\Neonatology\\Data",
+  "Data.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\defie\\source\\repos\\Neonatology\\Data.Models",
+  "Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\defie\\source\\repos\\Neonatology\\Infrastructure",
+  "Neonatology, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\defie\\source\\repos\\Neonatology\\Neonatology",
+  "Services, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\defie\\source\\repos\\Neonatology\\Services",
+  "ViewModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\defie\\source\\repos\\Neonatology\\ViewModels"
+}
