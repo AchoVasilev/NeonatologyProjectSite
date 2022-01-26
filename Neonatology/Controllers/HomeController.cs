@@ -6,7 +6,6 @@
     using Infrastructure;
 
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Logging;
 
     using Services.DoctorService;
 
@@ -22,6 +21,8 @@
             this.doctorService = doctorService;
         }
 
+        [Route("/")]
+        [Route("/Index")]
         public async Task<IActionResult> Index()
         {
             if (this.User.IsAdmin())

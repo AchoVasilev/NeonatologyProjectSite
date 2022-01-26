@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-using System.Text.RegularExpressions;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
 
     using Infrastructure;
@@ -38,7 +38,7 @@ using System.Text.RegularExpressions;
             IChatService chatService,
             IDoctorService doctorService,
             IUserService userService,
-            IPatientService patientService, 
+            IPatientService patientService,
             IHubContext<ChatHub> chatHub)
         {
             this.chatService = chatService;
@@ -48,7 +48,7 @@ using System.Text.RegularExpressions;
             this.chatHub = chatHub;
         }
 
-        public async Task<IActionResult> All([FromQuery]int page)
+        public async Task<IActionResult> All([FromQuery] int page)
         {
             var doctorId = await this.doctorService.GetDoctorId();
             var doctorEmail = await this.doctorService.GetDoctorEmail(doctorId);
@@ -77,7 +77,7 @@ using System.Text.RegularExpressions;
                 ChatModels = converstations,
                 PageNumber = page,
                 ItemsPerPage = ItemsPerPage,
-                ItemCount = converstations.Count()
+                ItemCount = converstations.Count
             };
 
             return View(model);

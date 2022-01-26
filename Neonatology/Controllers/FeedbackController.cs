@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using Services.FeedbackService;
@@ -35,8 +36,14 @@
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize]
         public async Task<IActionResult> MyFeedbacks(string email)
         {
+            if (this.User.Identity.Name != email)
+            {
+                return StatusCode(404);
+            }
+
             var feedbacks = await this.feedbackService.GetUserFeedbacks(email);
 
             return View(feedbacks);
