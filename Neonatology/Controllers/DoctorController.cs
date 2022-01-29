@@ -2,8 +2,6 @@
 {
     using System.Threading.Tasks;
 
-    using Infrastructure;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -39,9 +37,7 @@
 
         public async Task<IActionResult> Edit()
         {
-            var userId = this.User.GetId();
-
-            var doctorId = await this.doctorService.GetDoctorIdByUserId(userId);
+            var doctorId = await this.doctorService.GetDoctorId();
             var doctorInfo = await this.doctorService.GetDoctorById(doctorId);
 
             var model = new DoctorEditFormModel()
@@ -56,7 +52,8 @@
                 UserImageUrl = doctorInfo.UserImageUrl,
                 Email = doctorInfo.Email,
                 YearsOfExperience = doctorInfo.YearsOfExperience,
-                Cities = await this.cityService.GetAllCities()
+                Cities = await this.cityService.GetAllCities(),
+                CityId = await this.cityService.GetCityIdByName(doctorInfo.CityName)
             };
 
             return View(model);

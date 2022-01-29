@@ -10,19 +10,19 @@
 
     public class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
-        private readonly IList<Claim> _claims;
+        private readonly IList<Claim> claims;
 
         public TestAuthHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, 
             ILoggerFactory logger, 
             UrlEncoder encoder, 
             ISystemClock clock, TestClaimsProvider claimsProvider) : base(options, logger, encoder, clock)
         {
-            _claims = claimsProvider.Claims;
+            claims = claimsProvider.Claims;
         }
 
         protected override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            var identity = new ClaimsIdentity(_claims, "Test");
+            var identity = new ClaimsIdentity(claims, "Test");
             var principal = new ClaimsPrincipal(identity);
             var ticket = new AuthenticationTicket(principal, "Test");
 

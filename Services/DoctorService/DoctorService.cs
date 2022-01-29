@@ -78,10 +78,23 @@
                 return false;
             }
 
-            var result = await this.fileService.UploadImage(this.cloudinary, model.Picture, DefaultFolderName);
-            if (result == null)
+            if (model.Picture != null)
             {
-                return false;
+                var result = await this.fileService.UploadImage(this.cloudinary, model.Picture, DefaultFolderName);
+                if (result == null)
+                {
+                    return false;
+                }
+
+                doctor.User.Image.IsDeleted = true;
+                doctor.User.Image.DeletedOn = DateTime.UtcNow;
+
+                doctor.User.Image = new Image
+                {
+                    Extension = result.Extension,
+                    Url = result.Uri,
+                    RemoteImageUrl = model.UserImageUrl
+                };
             }
 
             doctor.FirstName = model.FirstName;
@@ -91,16 +104,6 @@
             doctor.Age = model.Age;
             doctor.Biography = model.Biography;
             doctor.CityId = model.CityId;
-
-            doctor.User.Image.IsDeleted = true;
-            doctor.User.Image.DeletedOn = DateTime.UtcNow;
-
-            doctor.User.Image = new Image
-            {
-                Extension = result.Extension,
-                Url = result.Uri,
-                RemoteImageUrl = model.UserImageUrl
-            };
 
             doctor.ModifiedOn = DateTime.UtcNow;
             

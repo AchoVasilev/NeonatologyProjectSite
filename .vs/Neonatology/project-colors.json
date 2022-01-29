@@ -55,7 +55,12 @@
       "ProjectGuid": "3f08dedf-a1d3-45bd-af35-4042c024cc0b",
       "DisplayName": "Test",
       "ColorIndex": 9
+    },
+    "b366f351-9cf5-4b1b-b9e7-8d8f0015f855": {
+      "ProjectGuid": "b366f351-9cf5-4b1b-b9e7-8d8f0015f855",
+      "DisplayName": "IntegrationTests",
+      "ColorIndex": 10
     }
   },
-  "NextColorIndex": 10
+  "NextColorIndex": 11
 }

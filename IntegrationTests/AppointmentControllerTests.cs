@@ -3,6 +3,8 @@
     using System.Net;
     using System.Threading.Tasks;
 
+    using IntegrationTests.Helpers;
+
     using Microsoft.AspNetCore.Mvc.Testing;
 
     using Neonatology;
@@ -46,18 +48,18 @@
             Assert.Contains("/Identity/Account/Login", response.Headers.Location.OriginalString);
         }
 
-        //[Fact]
-        //public async Task MakePatientAppointmentShouldReturnCorrectHeadersAndSuccess()
-        //{
-        //    var factory = new WebApplicationFactory<Startup>();
-        //    var provider = TestClaimsProvider.WithUserClaims();
-        //    var client = factory.CreateClientWithTestAuth(provider);
+        [Fact]
+        public async Task MakePatientAppointmentShouldReturnCorrectHeadersAndSuccess()
+        {
+            var factory = new WebApplicationFactory<Startup>();
+            var provider = TestClaimsProvider.WithUserClaims();
+            var client = factory.CreateClientWithTestAuth(provider);
 
-        //    var response = await client.GetAsync("/Appointment/MakePatientAppointment");
-        //    var html = await response.Content.ReadAsStringAsync();
+            var response = await client.GetAsync("/Appointment/MakePatientAppointment");
+            var html = await response.Content.ReadAsStringAsync();
 
-        //    Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        //    Assert.Contains("Запази час", html);
-        //}
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Contains("Запази час", html);
+        }
     }
 }

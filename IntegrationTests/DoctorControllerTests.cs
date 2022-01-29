@@ -33,7 +33,7 @@
             var client = factory.CreateClient(
                 new WebApplicationFactoryClientOptions
                 {
-                    AllowAutoRedirect = false
+                    AllowAutoRedirect = false, 
                 });
 
             var response = await client.GetAsync(url);
