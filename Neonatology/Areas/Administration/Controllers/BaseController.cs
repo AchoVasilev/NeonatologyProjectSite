@@ -5,7 +5,7 @@
 
     using static Common.GlobalConstants;
 
-    [Area("Administration")]
+    [Area(("Administration"))]
     [Authorize(Roles = AdministratorRoleName)]
     public class BaseController : Controller
     {

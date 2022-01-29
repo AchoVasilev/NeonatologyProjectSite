@@ -13,8 +13,6 @@
     using Services.CityService;
     using Services.DoctorService;
 
-    using Stripe.BillingPortal;
-
     using Test.Helpers;
 
     using ViewModels.City;

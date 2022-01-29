@@ -30,4 +30,8 @@
     <ProjectReference Include="..\Neonatology\Neonatology.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AdministrationArea\Services\" />
+  </ItemGroup>
+
 </Project>
