@@ -28,6 +28,9 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a asp-area="Administration" asp-controller="Home" asp-action="Index" class="nav-link">Начало</a>
                 </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="/hangfire" class="nav-link">Hangfire</a>
+                </li>
             </ul>
 
             <!-- Right navbar links -->
@@ -59,7 +62,7 @@
                         <span class="d-block" style="color: white">@this.User.Identity.Name</span>
                     </div>
                 </div>
-                    <partial name="_LoginPartial" />
+                <partial name="_LoginPartial" />
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">

@@ -4,10 +4,14 @@ namespace Neonatology
     using System.Collections.Generic;
 
     using CloudinaryDotNet;
+using Common;
 
     using Data;
     using Data.Models;
     using Data.Seeding;
+using Hangfire;
+    using Hangfire.Dashboard;
+    using Hangfire.SqlServer;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -70,6 +74,11 @@ namespace Neonatology
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
             })
                 .AddEntityFrameworkStores<NeonatologyDbContext>();
+
+            services.AddDbContext<NeonatologyDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddControllersWithViews(configure =>
             {
@@ -144,11 +153,6 @@ namespace Neonatology
                 options.SenderName = this.Configuration["SmtpSettings:SenderName"];
             });
 
-            services.AddDbContext<NeonatologyDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
-
             //Configure Cloudinary
             var cloud = this.Configuration["Cloudinary:CloudifyName"];
             var apiKey = this.Configuration["Cloudinary:ApiKey"];
@@ -156,6 +160,22 @@ namespace Neonatology
             var cloudinaryAccount = new CloudinaryDotNet.Account(cloud, apiKey, apiSecret);
             var cloudinary = new Cloudinary(cloudinaryAccount);
             services.AddSingleton(cloudinary);
+
+            //Configure Hangfire
+            services.AddHangfire(configuration =>
+            configuration.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+            .UseSimpleAssemblyNameTypeSerializer()
+            .UseRecommendedSerializerSettings()
+            .UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection"), new SqlServerStorageOptions
+            {
+                CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                QueuePollInterval = TimeSpan.Zero,
+                UseRecommendedIsolationLevel = true,
+                DisableGlobalLocks = true
+            }));
+
+            services.AddHangfireServer();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -190,6 +210,10 @@ namespace Neonatology
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseHangfireDashboard(
+                "/hangfire",
+                new DashboardOptions { Authorization = new[] { new HangfireAuthorizationFilter() } });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -206,6 +230,16 @@ namespace Neonatology
                 endpoints.MapHub<NotificationHub>("/notificationHub");
                 endpoints.MapHub<ConnectionHub>("/connectionHub");
             });
+        }
+
+        private class HangfireAuthorizationFilter : IDashboardAuthorizationFilter
+        {
+            public bool Authorize(DashboardContext context)
+            {
+                var httpContext = context.GetHttpContext();
+
+                return httpContext.User.IsInRole(GlobalConstants.AdministratorRoleName);
+            }
         }
     }
 }
