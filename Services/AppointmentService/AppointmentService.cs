@@ -33,12 +33,6 @@
                         .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
 
-        //public async Task<ICollection<AppointmentViewModel>> GetUserAppointments(string patientId)
-        //    => await this.data.Appointments
-        //            .Where(x => x.PatientId == patientId && x.IsDeleted == false)
-        //            .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
-        //            .ToListAsync();
-
         public async Task<ICollection<AppointmentViewModel>> GetUpcomingUserAppointments(string patientId)
             => await this.data.Appointments
                         .Where(x => x.PatientId == patientId && x.IsDeleted == false && x.DateTime.Date > DateTime.UtcNow.Date)
@@ -62,12 +56,6 @@
                         .Where(x => x.DoctorId == doctorId && x.IsDeleted == false && x.DateTime.Date <= DateTime.UtcNow.Date)
                         .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
-
-        //public async Task<ICollection<CreateAppointmentModel>> GetAllDoctorAppointmentsById(string doctorId)
-        //    => await this.data.Appointments
-        //                .Where(x => x.DoctorId == doctorId && x.IsDeleted == false)
-        //                .ProjectTo<CreateAppointmentModel>(this.mapper.ConfigurationProvider)
-        //                .ToListAsync();
 
         public async Task<ICollection<TakenAppointmentsViewModel>> GetTakenAppointmentSlots()
             => await this.data.Appointments
