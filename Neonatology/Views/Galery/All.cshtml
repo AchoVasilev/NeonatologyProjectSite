@@ -7,7 +7,7 @@
 }
 
 @if (SignInManager.IsSignedIn(User) &&
-User.IsInRole(Common.GlobalConstants.DoctorRoleName) ||
+User.IsInRole(DoctorConstants.DoctorRoleName) ||
 User.IsInRole(Common.GlobalConstants.AdministratorRoleName))
 {
     <form method="post" enctype="multipart/form-data">

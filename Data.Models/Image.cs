@@ -8,16 +8,10 @@
 
     public class Image : BaseModel<string>
     {
-        [Key]
-        public string Id { get; init; } = Guid.NewGuid().ToString();
-
-        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
-
-        public DateTime? ModifiedOn { get; set; }
-
-        public DateTime? DeletedOn { get; set; }
-
-        public bool IsDeleted { get; set; } = false;
+        public Image()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
 
         public string RemoteImageUrl { get; set; }
 

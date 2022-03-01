@@ -4,7 +4,7 @@
 @{
     var requestToken = Antiforgery.GetAndStoreTokens(Context).RequestToken;
     var causes = Model.AppointmentCauses.Select(x => new SelectListItem(x.Name, x.Id.ToString())).ToList();
-    var userIsDoctor = this.User.IsInRole(DoctorRoleName);
+    var userIsDoctor = this.User.IsInRole(DoctorConstants.DoctorRoleName);
     ViewData["Title"] = "Запази час";
 }
 

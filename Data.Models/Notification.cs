@@ -9,22 +9,16 @@
 
     public class Notification : BaseModel<string>
     {
-        [Key]
-        public string Id { get; init; } = Guid.NewGuid().ToString();
+        public Notification()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
 
         [Required]
         public string Link { get; set; }
 
         [Required]
         public string Text { get; set; }
-
-        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
-
-        public DateTime? ModifiedOn { get; set; }
-
-        public DateTime? DeletedOn { get; set; }
-
-        public bool IsDeleted { get; set; } = false;
 
         public NotificationStatus NotificationStatus { get; set; }
 

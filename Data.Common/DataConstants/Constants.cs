@@ -9,5 +9,8 @@
         public const int CommentMaxLength = 150;
         public const int RatingMin = 1;
         public const int RatingMax = 5;
+
+        public const int AddressRangeMinLength = 1;
+        public const int AddressRangeMaxLength = 999;
     }
 }

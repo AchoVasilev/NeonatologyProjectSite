@@ -13,7 +13,7 @@
     using ViewModels.Profile;
 
     using static Common.GlobalConstants;
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
 
     [Authorize(Roles = $"{PatientRoleName}, {AdministratorRoleName}")]
     public class ProfileController : BaseController

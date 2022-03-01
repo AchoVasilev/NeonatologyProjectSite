@@ -11,16 +11,10 @@
 
     public class Doctor : BaseModel<string>
     {
-        [Key]
-        public string Id { get; init; } = Guid.NewGuid().ToString();
-
-        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
-
-        public DateTime? ModifiedOn { get; set; }
-
-        public DateTime? DeletedOn { get; set; }
-
-        public bool IsDeleted { get; set; } = false;
+        public Doctor()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
 
         [Required]
         [MaxLength(DefaultMaxLength)]
@@ -39,18 +33,12 @@
 
         public string Email { get; set; }
 
-        [Required]
-        [MaxLength(AddressMaxLength)]
-        public string Address { get; set; }
-
         [MaxLength(DescriptionMaxLength)]
         public string Biography { get; set; }
 
-        [ForeignKey(nameof(City))]
-        public int CityId { get; set; }
-        public virtual City City { get; set; }
-
         public virtual ICollection<Specialization> Specializations { get; set; } = new HashSet<Specialization>();
+
+        public virtual ICollection<Address> Addresses { get; set; } = new HashSet<Address>();
 
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }

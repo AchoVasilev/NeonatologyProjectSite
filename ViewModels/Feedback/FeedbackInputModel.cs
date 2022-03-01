@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
     using static Data.Common.DataConstants.Constants;
     public class FeedbackInputModel
     {

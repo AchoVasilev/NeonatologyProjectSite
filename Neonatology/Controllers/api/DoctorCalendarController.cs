@@ -9,12 +9,12 @@ using System;
     using ViewModels.Slot;
 
     using static Common.GlobalConstants;
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
     using Services.AppointmentService;
     using Services.SlotService;
 
     [ApiController]
-    [Authorize(Roles = DoctorRoleName)]
+    [Authorize(Roles = DoctorConstants.DoctorRoleName)]
     [Route("[controller]")]
     public class DoctorCalendarController : ControllerBase
     {
@@ -27,7 +27,6 @@ using System;
             this.slotService = slotService;
         }
 
-        [Authorize(Roles = DoctorRoleName)]
         [HttpGet]
         public async Task<JsonResult> GetDoctorAppointments()
         {
@@ -42,7 +41,6 @@ using System;
             return new JsonResult(result);
         }
 
-        [Authorize(Roles = DoctorRoleName)]
         [HttpPost("generate")]
         public async Task<IActionResult> GenerateSlots([FromBody] SlotInputModel model)
         {

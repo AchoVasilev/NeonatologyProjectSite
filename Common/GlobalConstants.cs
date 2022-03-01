@@ -11,26 +11,42 @@
         public const string AdministratorEmail = "pediamedbg@gmail.com";
         public const string AdministratorPassword = "administrator123";
 
-        public const string DoctorRoleName = "Doctor";
-        public const string DoctorEmail = "dr.p.petrova@abv.bg";
-        public const string DoctorPassword = "ASDASD";
-        public const string DoctorFirstName = "Павлина";
-        public const string DoctorLastName = "Петрова";
-        public const string DoctorPhone = "0878787342";
-        public const int DoctorAge = 48;
-        public const int YearsOfExperience = 25;
-        public const string Address = "ул. Стефан Караджа 49";
-        public const string Biography = "Д-р Павлина Петрова Михова е специалист педиатър и неонатолог в Плевен и Габрово с над 20 години опит. " +
-            "Квалифициран специалист е в областта на трансфонтанелната и абдоминалната ехография, води детска консултация, провежда имунизации спрямо имунизациония календар на България, както и препоръчителни ваксинации." +
-            "От 1998 г. до 2003 г. д-р Петрова работи като педиатър в Център за спешна медицинска помощ Габрово. " +
-            "От 2003 г. до 2005 г. е ординатор в Отделение по Неонатология към УМБАЛ Георги Странски - Плевен. " +
-            "От 2005 г. до 2012 г. е ординатор в Отделение по Неонатология към МБАЛ Д-р Тота Венкова - Габрово. " +
-            "От 2016 г. до 2017 г. практикува в ДКЦ Авис Медика Плевен и Отделение по Неонатология към МБАЛ Авис Медика. " +
-            "От 2017 г. работи в Отделение по неонатология УМБАЛ Георги Странски ЕАД - Гр. Плевен. " +
-            "Към момента има и самостоятелни практики като педиатър в Плевен и Габрово.";
-
         public const string SuccessfulApointmentEmailMsgSubject = "Записване на час при д-р Петрова";
         public const int ItemsPerPage = 10;
+
+        public static class DoctorConstants
+        {
+            public const string DoctorRoleName = "Doctor";
+            public const string DoctorEmail = "dr.p.petrova@abv.bg";
+            public const string DoctorPassword = "ASDASD";
+            public const string DoctorFirstName = "Павлина";
+            public const string DoctorLastName = "Петрова";
+            public const string DoctorPhone = "0878787342";
+
+            public const int DoctorAge = 48;
+            public const int YearsOfExperience = 25;
+
+            public const string PlevenCityName = "Плевен";
+            public const string PlevenAddress = "ул. Стефан Караджа 49";
+
+            public const string GabrovoCityName = "Габрово";
+            public const string GabrovoAddress = "Медицински център Хипократ, площад Белорусия 2";
+
+            public const string Biography = "Д-р Павлина Петрова Михова е специалист педиатър и неонатолог в Плевен и Габрово с над 20 години опит. " +
+                "Квалифициран специалист е в областта на трансфонтанелната и абдоминалната ехография, води детска консултация, провежда имунизации спрямо имунизациония календар на България, както и препоръчителни ваксинации." +
+                "От 1998 г. до 2003 г. д-р Петрова работи като педиатър в Център за спешна медицинска помощ Габрово. " +
+                "От 2003 г. до 2005 г. е ординатор в Отделение по Неонатология към УМБАЛ Георги Странски - Плевен. " +
+                "От 2005 г. до 2012 г. е ординатор в Отделение по Неонатология към МБАЛ Д-р Тота Венкова - Габрово. " +
+                "От 2016 г. до 2017 г. практикува в ДКЦ Авис Медика Плевен и Отделение по Неонатология към МБАЛ Авис Медика. " +
+                "От 2017 г. работи в Отделение по неонатология УМБАЛ Георги Странски ЕАД - Гр. Плевен. " +
+                "Към момента има и самостоятелни практики като педиатър в Плевен и Габрово.";
+
+            public const string NeonatologySpecializationName = "Неонатология";
+            public const string NeonatologySpecializationDescription = "Подспециалност на детските болести, която се занимава с медицински грижи за новородените, по-специално болните или недоносените.";
+
+            public const string ChildSicknessName = "Детски болести";
+            public const string ChildSicknessDescription = "Дял от медицината, който се занимава с проследяване на физическото и нервно-психическото развитие на детския организъм, диагностика и лечения на детски заболявания.";
+        }
 
         public static class DateTimeFormats
         {
@@ -41,7 +57,7 @@
             public const string DateTimeFormat = "dd/MM/yyyy HH:mm";
         }
 
-        public static class Messages
+        public static class MessageConstants
         {
             public const string SuccessfullAppointment = "Успешно си записахте час за {0} от {1} часа. Може да проверите Вашия и-мейл";
 

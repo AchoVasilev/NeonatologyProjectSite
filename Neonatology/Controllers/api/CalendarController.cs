@@ -18,7 +18,7 @@
     using ViewModels.Appointments;
 
     using static Common.GlobalConstants;
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
     using static Common.GlobalConstants.DateTimeFormats;
 
     [ApiController]

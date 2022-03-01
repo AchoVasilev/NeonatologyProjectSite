@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
 
+    using ViewModels.Address;
+
     public class DoctorProfileViewModel
     {
         public string Id { get; set; }
@@ -18,11 +20,9 @@
 
         public string Email { get; set; }
 
-        public string Address { get; set; }
-
         public string Biography { get; set; }
 
-        public string CityName { get; set; }
+        public ICollection<AddressFormModel> Addresses { get; set; }
 
         public ICollection<SpecializationFormModel> Specializations { get; set; }
     }

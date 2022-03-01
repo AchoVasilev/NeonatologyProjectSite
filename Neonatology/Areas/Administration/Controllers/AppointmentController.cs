@@ -10,7 +10,7 @@
 
     using ViewModels.Administration.Appointment;
 
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
 
     public class AppointmentController : BaseController
     {

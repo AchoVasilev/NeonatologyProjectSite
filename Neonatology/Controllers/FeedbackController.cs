@@ -9,7 +9,7 @@
 
     using ViewModels.Feedback;
 
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
 
     public class FeedbackController : BaseController
     {

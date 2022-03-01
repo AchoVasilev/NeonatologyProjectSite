@@ -6,7 +6,7 @@
 
     using Microsoft.AspNetCore.Mvc;
 
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
 
     public class RatingController : BaseController
     {

@@ -52,6 +52,8 @@
 
         public DbSet<UserGroup> UserGroups { get; set; }
 
+        public DbSet<Address> Addresses { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder

@@ -64,11 +64,11 @@
             var doctor = new DoctorProfileViewModel()
             {
                 Id = "1",
-                Address = "Pleven str",
+                //TODO: Address = "Pleven str",
                 Age = 30,
                 Biography = "asdasdasdasdasdasd",
                 Email = "gosho@abv.bg",
-                CityName = "Pleven",
+                //TODO: CityName = "Pleven",
                 FullName = "Gosho Peshev",
                 PhoneNumber = "098788998",
                 UserImageUrl = "asdasdasd",
@@ -104,11 +104,11 @@
             var service = new Mock<IDoctorService>();
             var model = new DoctorEditFormModel()
             {
-                Address = "Pleven",
+                //TODO: Address = "Pleven",
                 Age = 30,
                 Biography = "asdasdasda",
                 Cities = new List<CityFormModel>(),
-                CityId = 5,
+                //TODO: CityId = 5,
                 Email = "gosho@abv.bg",
                 FirstName = "Pesho",
                 LastName = "Peshev",

@@ -4,10 +4,14 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class ChatImage
+    using Data.Common.Models;
+
+    public class ChatImage : BaseModel<string>
     {
-        [Key]
-        public string Id { get; init; } = Guid.NewGuid().ToString();
+        public ChatImage()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
 
         [MaxLength(60)]
         public string Name { get; set; }
@@ -23,9 +27,5 @@
         public int MessageId { get; set; }
 
         public Message Message { get; set; }
-
-        public bool IsDeleted { get; set; } = false;
-
-        public DateTime? DeletedOn { get; set; }
     }
 }

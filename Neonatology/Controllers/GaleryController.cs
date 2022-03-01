@@ -37,7 +37,7 @@
             return View(model);
         }
 
-        [Authorize(Roles = DoctorRoleName)]
+        [Authorize(Roles = DoctorConstants.DoctorRoleName)]
         [Authorize(Roles = AdministratorRoleName)]
         [HttpPost]
         public async Task<IActionResult> All(UploadImageModel model)

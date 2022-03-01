@@ -16,12 +16,8 @@
 
         public string Phone { get; init; }
 
-        public string Address { get; init; }
-
         public string CityName { get; init; }
 
         public string UserEmail { get; init; }
-
-        public DateTime CreatedOn { get; init; }
     }
 }

@@ -116,7 +116,7 @@ namespace Neonatology.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Имейлът и паролата не съвпадат.");
                     return Page();
                 }
             }

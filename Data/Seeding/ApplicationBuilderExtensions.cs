@@ -81,14 +81,14 @@
             var specializations = new List<SpecializationDto>();
             specializations.Add(new SpecializationDto
             {
-                Name = "Неонатология",
-                Description = "Подспециалност на детските болести, която се занимава с медицински грижи за новородените, по-специално болните или недоносените.",
+                Name = DoctorConstants.NeonatologySpecializationName,
+                Description = DoctorConstants.NeonatologySpecializationDescription,
             });
 
             specializations.Add(new SpecializationDto
             {
-                Name = "Детски болести",
-                Description = "Дял от медицината, който се занимава с проследяване на физическото и нервно-психическото развитие на детския организъм, диагностика и лечения на детски заболявания."
+                Name = DoctorConstants.ChildSicknessName,
+                Description = DoctorConstants.ChildSicknessDescription
             });
 
             var doctor = await data.Doctors.FirstAsync();
@@ -120,33 +120,47 @@
 
             var identityRole = new ApplicationRole()
             {
-                Name = DoctorRoleName
+                Name = DoctorConstants.DoctorRoleName
             };
 
             await roleManager.CreateAsync(identityRole);
 
-            var city = await data.Cities.Where(x => x.Name == "Плевен").FirstOrDefaultAsync();
-            var doctor = new ApplicationUser()
+            var plevenCity = await data.Cities.Where(x => x.Name == DoctorConstants.PlevenCityName).FirstOrDefaultAsync();
+            var gabrovoCity = await data.Cities.Where(x => x.Name == DoctorConstants.GabrovoCityName).FirstOrDefaultAsync();
+
+            var addresses = new List<Address>
             {
-                Email = DoctorEmail,
-                UserName = DoctorEmail,
-                EmailConfirmed = true,
-                Doctor = new Doctor
+                new Address
                 {
-                    FirstName = DoctorFirstName,
-                    LastName = DoctorLastName,
-                    PhoneNumber = DoctorPhone,
-                    Address = Address,
-                    Age = DoctorAge,
-                    Biography = Biography,
-                    CityId = city.Id,
-                    City = city,
-                    YearsOfExperience = YearsOfExperience,
-                    Email = DoctorEmail
+                    CityId = plevenCity.Id,
+                    StreetName = DoctorConstants.PlevenAddress,
+                },
+                new Address
+                {
+                    CityId = gabrovoCity.Id,
+                    StreetName = DoctorConstants.GabrovoAddress,
                 }
             };
 
-            await userManager.CreateAsync(doctor, DoctorPassword);
+            var doctor = new ApplicationUser()
+            {
+                Email = DoctorConstants.DoctorEmail,
+                UserName = DoctorConstants.DoctorEmail,
+                EmailConfirmed = true,
+                Doctor = new Doctor
+                {
+                    FirstName = DoctorConstants.DoctorFirstName,
+                    LastName = DoctorConstants.DoctorLastName,
+                    PhoneNumber = DoctorConstants.DoctorPhone,
+                    Age = DoctorConstants.DoctorAge,
+                    Biography = DoctorConstants.Biography,
+                    YearsOfExperience = DoctorConstants.YearsOfExperience,
+                    Email = DoctorConstants.DoctorEmail,
+                    Addresses = addresses
+                }
+            };
+
+            await userManager.CreateAsync(doctor, DoctorConstants.DoctorPassword);
             await userManager.AddToRoleAsync(doctor, identityRole.Name);
 
             doctor.Doctor.UserId = doctor.Id;

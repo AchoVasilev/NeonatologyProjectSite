@@ -8,7 +8,7 @@
 
     using ViewModels.Administration.Offer;
 
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
 
     public class OfferController : BaseController
     {

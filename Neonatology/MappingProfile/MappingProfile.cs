@@ -8,6 +8,7 @@
 
     using Services.PatientService.Models;
 
+    using ViewModels.Address;
     using ViewModels.Administration.Appointment;
     using ViewModels.Administration.Galery;
     using ViewModels.Administration.Offer;
@@ -37,10 +38,10 @@
                 {
                     opt.MapFrom(d => string.Join(' ', d.Doctor.FirstName, d.Doctor.LastName));
                 })
-                .ForMember(x => x.Address, opt =>
-                {
-                    opt.MapFrom(d => string.Join(", ", d.Doctor.City.Name, d.Doctor.Address));
-                })
+                //.ForMember(x => x.Address, opt =>
+                //{
+                //    opt.MapFrom(d => string.Join(", ", d.Doctor.City.Name, d.Doctor.Address));
+                //})
                 .ForMember(x => x.Rating, opt =>
                 {
                     opt.MapFrom(d => d.Rating.Number);
@@ -55,6 +56,10 @@
                 {
                     opt.MapFrom(d => string.Join(' ', d.FirstName, d.LastName));
                 });
+
+            this.CreateMap<Address, EditAddressFormModel>();
+
+            this.CreateMap<Address, AddressFormModel>();
 
             this.CreateMap<Specialization, SpecializationFormModel>();
 

@@ -1,5 +1,6 @@
 ﻿namespace Test.ServiceUnitTests
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using Data.Models;
@@ -17,6 +18,18 @@
         {
             var dataMock = DatabaseMock.Instance;
             var mapperMock = MapperMock.Instance;
+            var addresses = new List<Address>
+            {
+                new Address
+                {
+                    City = new City
+                    {
+                        Name = "Pleven"
+                    },
+
+                    StreetName = "Kaspichan Str"
+                }
+            };
 
             var user = new ApplicationUser()
             {
@@ -27,7 +40,7 @@
                     FirstName = "Gosho",
                     LastName = "Goshev",
                     Age = 27,
-                    Address = "Kaspichan Street",
+                    Addresses = addresses,
                 },
                 Image = new Image()
                 {
@@ -51,6 +64,18 @@
         {
             var dataMock = DatabaseMock.Instance;
             var mapperMock = MapperMock.Instance;
+            var addresses = new List<Address>
+            {
+                new Address
+                {
+                    City = new City
+                    {
+                        Name = "Pleven"
+                    },
+
+                    StreetName = "Kaspichan Str"
+                }
+            };
 
             var user = new ApplicationUser()
             {
@@ -61,7 +86,7 @@
                     FirstName = "Gosho",
                     LastName = "Goshev",
                     Age = 27,
-                    Address = "Kaspichan Street",
+                    Addresses = addresses,
                 },
                 Image = new Image()
                 {
@@ -98,6 +123,18 @@
         {
             var dataMock = DatabaseMock.Instance;
             var mapperMock = MapperMock.Instance;
+            var addresses = new List<Address>
+            {
+                new Address
+                {
+                    City = new City
+                    {
+                        Name = "Pleven"
+                    },
+
+                    StreetName = "Kaspichan Str"
+                }
+            };
 
             var user = new ApplicationUser()
             {
@@ -108,7 +145,7 @@
                     FirstName = "Gosho",
                     LastName = "Goshev",
                     Age = 27,
-                    Address = "Kaspichan Street",
+                    Addresses = addresses,
                 },
                 Image = new Image()
                 {
@@ -130,6 +167,18 @@
         {
             var dataMock = DatabaseMock.Instance;
             var mapperMock = MapperMock.Instance;
+            var addresses = new List<Address>
+            {
+                new Address
+                {
+                    City = new City
+                    {
+                        Name = "Pleven"
+                    },
+
+                    StreetName = "Kaspichan Str"
+                }
+            };
 
             var user = new ApplicationUser()
             {
@@ -140,7 +189,7 @@
                     FirstName = "Gosho",
                     LastName = "Goshev",
                     Age = 27,
-                    Address = "Kaspichan Street",
+                    Addresses = addresses,
                     Email = "gosho@gosho.bg"
                 },
                 Image = new Image()

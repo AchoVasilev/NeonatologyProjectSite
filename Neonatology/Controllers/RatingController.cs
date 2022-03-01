@@ -15,7 +15,7 @@
     using ViewModels.Rating;
 
     using static Common.GlobalConstants;
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
 
     [Authorize]
     public class RatingController : BaseController
@@ -99,7 +99,7 @@
             return RedirectToAction("MyAppointments", "Appointment", new { area = "" });
         }
 
-        [Authorize(Roles = $"{DoctorRoleName}, {AdministratorRoleName}")]
+        [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
         public async Task<IActionResult> Approve(int appointmentId)
         {
             var isApproved = await this.ratingService.ApproveRating(appointmentId);
@@ -127,7 +127,7 @@
             return RedirectToAction("DoctorAppointments", "Appointment", new { area = "" });
         }
 
-        [Authorize(Roles = $"{DoctorRoleName}, {AdministratorRoleName}")]
+        [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
         public async Task<IActionResult> Delete(int appointmentId)
         {
             var isDeleted = await this.ratingService.DeleteRating(appointmentId);

@@ -12,7 +12,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.Extensions.Logging;
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
     using static Common.GlobalConstants.AccountConstants;
 
     [AllowAnonymous]

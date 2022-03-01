@@ -1,6 +1,7 @@
 ﻿namespace Services.DoctorService
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -16,6 +17,7 @@
 
     using Services.FileService;
 
+    using ViewModels.Address;
     using ViewModels.Doctor;
 
     using static Common.GlobalConstants.FileConstants;
@@ -70,6 +72,12 @@
                          .Select(x => x.Email)
                          .FirstOrDefaultAsync();
 
+        public async Task<ICollection<EditAddressFormModel>> GetDoctorAddressesById(string doctorId)
+            => await this.data.Addresses
+                .Where(x => x.DoctorId == doctorId && x.IsDeleted == false)
+                .ProjectTo<EditAddressFormModel>(this.mapper.ConfigurationProvider)
+                .ToListAsync();
+
         public async Task<bool> EditDoctorAsync(DoctorEditFormModel model)
         {
             var doctor = await this.data.Doctors.FirstOrDefaultAsync(x => x.Id == model.Id);
@@ -103,7 +111,7 @@
             doctor.YearsOfExperience = model.YearsOfExperience;
             doctor.Age = model.Age;
             doctor.Biography = model.Biography;
-            doctor.CityId = model.CityId;
+            //TODO: doctor.CityId = model.CityId;
 
             doctor.ModifiedOn = DateTime.UtcNow;
             

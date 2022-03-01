@@ -3,11 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
     using static Common.GlobalConstants.AccountConstants;
     using static Data.Common.DataConstants.Constants;
     using ViewModels.City;
     using Microsoft.AspNetCore.Http;
+    using ViewModels.Address;
 
     public class DoctorEditFormModel
     {
@@ -43,21 +44,15 @@
         [Display(Name = EmailName)]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = RequiredFieldErrorMsg)]
-        [Display(Name = AddressName)]
-        [StringLength(AddressMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-        public string Address { get; set; }
-
         [StringLength(DescriptionMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
         [Display(Name = BiographyName)]
         public string Biography { get; set; }
 
-        [Display(Name = CityName)]
-        public int CityId { get; set; }
-
         public IFormFile Picture { get; set; }
 
         public DateTime ModifiedOn { get; set; } = DateTime.UtcNow;
+
+        public ICollection<EditAddressFormModel> Addresses { get; set; }
 
         public ICollection<CityFormModel> Cities { get; set; }
     }

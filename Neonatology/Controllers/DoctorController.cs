@@ -12,9 +12,9 @@
     using ViewModels.Slot;
 
     using static Common.GlobalConstants;
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
 
-    [Authorize(Roles = DoctorRoleName)]
+    [Authorize(Roles = DoctorConstants.DoctorRoleName)]
     public class DoctorController : BaseController
     {
         private readonly IDoctorService doctorService;
@@ -46,14 +46,13 @@
                 FirstName = doctorInfo.FullName.Split(' ')[0],
                 LastName = doctorInfo.FullName.Split(' ')[1],
                 PhoneNumber = doctorInfo.PhoneNumber,
-                Address = doctorInfo.Address,
                 Age = doctorInfo.Age,
                 Biography = doctorInfo.Biography,
                 UserImageUrl = doctorInfo.UserImageUrl,
                 Email = doctorInfo.Email,
                 YearsOfExperience = doctorInfo.YearsOfExperience,
                 Cities = await this.cityService.GetAllCities(),
-                CityId = await this.cityService.GetCityIdByName(doctorInfo.CityName)
+                Addresses = await this.doctorService.GetDoctorAddressesById(doctorInfo.Id)
             };
 
             return View(model);

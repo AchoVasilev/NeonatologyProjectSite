@@ -14,7 +14,7 @@
     using Neonatology.Areas.Administration.Services;
     using ViewModels.Administration.Galery;
 
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
     using static Common.GlobalConstants.FileConstants;
 
     public class GaleryController : BaseController

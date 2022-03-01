@@ -17,7 +17,7 @@ namespace Neonatology.Areas.Identity.Pages.Account
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
     using static Common.GlobalConstants.AccountConstants;
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
 
     public class ForgotPasswordModel : PageModel
     {

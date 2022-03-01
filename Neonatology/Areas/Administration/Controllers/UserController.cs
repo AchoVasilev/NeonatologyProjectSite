@@ -14,7 +14,7 @@
 
     using ViewModels.Administration.User;
 
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
 
     public class UserController : BaseController
     {

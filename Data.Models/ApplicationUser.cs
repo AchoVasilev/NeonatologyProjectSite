@@ -40,7 +40,7 @@
 
         public virtual ICollection<Message> ReceivedMessages { get; set; } = new HashSet<Message>();
 
-        public ICollection<UserGroup> UserGroups { get; set; } = new HashSet<UserGroup>();
+        public virtual ICollection<UserGroup> UserGroups { get; set; } = new HashSet<UserGroup>();
 
         public virtual ICollection<ChatImage> ChatImages { get; set; } = new HashSet<ChatImage>();
     }

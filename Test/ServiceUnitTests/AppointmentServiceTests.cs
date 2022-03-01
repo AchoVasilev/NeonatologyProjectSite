@@ -520,8 +520,7 @@
                 Id = "pat",
                 FirstName = "Evlogi",
                 LastName = "Manev",
-                PhoneNumber = "098787862",
-                Address = "Kaspichan str"
+                PhoneNumber = "098787862"
             };
 
             var causes = new List<AppointmentCause>()
@@ -580,8 +579,7 @@
                 Id = "pat",
                 FirstName = "Evlogi",
                 LastName = "Manev",
-                PhoneNumber = "098787862",
-                Address = "Kaspichan str"
+                PhoneNumber = "098787862"
             };
 
             var causes = new List<AppointmentCause>()
@@ -641,8 +639,7 @@
                 Id = "pat",
                 FirstName = "Evlogi",
                 LastName = "Manev",
-                PhoneNumber = "098787862",
-                Address = "Kaspichan str"
+                PhoneNumber = "098787862"
             };
 
             var causes = new List<AppointmentCause>()
@@ -701,8 +698,7 @@
                 Id = "pat",
                 FirstName = "Evlogi",
                 LastName = "Manev",
-                PhoneNumber = "098787862",
-                Address = "Kaspichan str"
+                PhoneNumber = "098787862"
             };
 
             var causes = new List<AppointmentCause>()
@@ -761,8 +757,7 @@
                 Id = "pat",
                 FirstName = "Evlogi",
                 LastName = "Manev",
-                PhoneNumber = "098787862",
-                Address = "Kaspichan str"
+                PhoneNumber = "098787862"
             };
 
             var causes = new List<AppointmentCause>()
@@ -822,8 +817,7 @@
                 Id = "pat",
                 FirstName = "Evlogi",
                 LastName = "Manev",
-                PhoneNumber = "098787862",
-                Address = "Kaspichan str"
+                PhoneNumber = "098787862"
             };
 
             var causes = new List<AppointmentCause>()
@@ -1118,8 +1112,7 @@
                 Id = "pat",
                 FirstName = "Evlogi",
                 LastName = "Manev",
-                PhoneNumber = "098787862",
-                Address = "Kaspichan str"
+                PhoneNumber = "098787862"
             };
 
             var causes = new List<AppointmentCause>()
@@ -1164,8 +1157,7 @@
                 Id = "pat",
                 FirstName = "Evlogi",
                 LastName = "Manev",
-                PhoneNumber = "098787862",
-                Address = "Kaspichan str"
+                PhoneNumber = "098787862"
             };
 
             var causes = new List<AppointmentCause>()
@@ -1222,8 +1214,7 @@
                 Id = "pat",
                 FirstName = "Evlogi",
                 LastName = "Manev",
-                PhoneNumber = "098787862",
-                Address = "Kaspichan str"
+                PhoneNumber = "098787862"
             };
 
             var causes = new List<AppointmentCause>()
@@ -1265,7 +1256,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 PhoneNumber = "098787862",
-                Address = "Kaspichan str"
             };
 
             var causes = new List<AppointmentCause>()
@@ -1319,7 +1309,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 Phone = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -1383,7 +1372,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 Phone = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -1447,7 +1435,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 Phone = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -1510,7 +1497,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 Phone = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -1573,7 +1559,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 Phone = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -1637,7 +1622,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 Phone = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -1702,7 +1686,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 Phone = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -1766,7 +1749,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 Phone = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -1829,7 +1811,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 Phone = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -1893,7 +1874,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 PhoneNumber = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -1954,7 +1934,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 PhoneNumber = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -2015,7 +1994,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 PhoneNumber = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -2077,7 +2055,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 PhoneNumber = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -2137,7 +2114,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 PhoneNumber = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -2197,7 +2173,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 PhoneNumber = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -2260,7 +2235,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 PhoneNumber = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -2326,7 +2300,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 PhoneNumber = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 
@@ -2389,7 +2362,6 @@
                 FirstName = "Evlogi",
                 LastName = "Manev",
                 PhoneNumber = "098787862",
-                Address = "Kaspichan str",
                 UserId = "patpat"
             };
 

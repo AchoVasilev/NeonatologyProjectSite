@@ -15,7 +15,7 @@
     using ViewModels.Appointments;
 
     using static Common.GlobalConstants;
-    using static Common.GlobalConstants.Messages;
+    using static Common.GlobalConstants.MessageConstants;
 
     public class AppointmentController : BaseController
     {
@@ -86,7 +86,7 @@
             return View(model);
         }
 
-        [Authorize(Roles = DoctorRoleName)]
+        [Authorize(Roles = DoctorConstants.DoctorRoleName)]
         public async Task<IActionResult> DoctorAppointments()
         {
             var userId = this.User.GetId();
@@ -101,7 +101,7 @@
             return View(model);
         }
 
-        [Authorize(Roles = DoctorRoleName)]
+        [Authorize(Roles = DoctorConstants.DoctorRoleName)]
         public async Task<IActionResult> TodaysAppointments()
         {
             var appointments = await this.appointmentService.GetTodaysAppointments(this.User.GetId());

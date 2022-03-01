@@ -11,16 +11,10 @@
 
     public class Patient : BaseModel<string>
     {
-        [Key]
-        public string Id { get; init; } = Guid.NewGuid().ToString();
-
-        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
-
-        public DateTime? ModifiedOn { get; set; }
-
-        public DateTime? DeletedOn { get; set; }
-
-        public bool IsDeleted { get; set; } = false;
+        public Patient()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
 
         [Required]
         [MaxLength(DefaultMaxLength)]
@@ -39,13 +33,10 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        [MaxLength(AddressMaxLength)]
-        public string Address { get; set; }
-
         [ForeignKey(nameof(City))]
         public int? CityId { get; set; }
 
-        public virtual City City { get; set; }
+        public City City { get; set; }
 
         public virtual ICollection<Rating> Ratings { get; set; } = new HashSet<Rating>();
 

@@ -28,7 +28,7 @@
         <hr class="my-4">
         @if (SignInManager.IsSignedIn(User))
         {
-            @if (User.IsInRole(Common.GlobalConstants.DoctorRoleName))
+            @if (User.IsInRole(DoctorConstants.DoctorRoleName))
             {
                 <p class="lead">
                     <a class="btn btn-primary btn-lg hvr-grow" asp-area=""
