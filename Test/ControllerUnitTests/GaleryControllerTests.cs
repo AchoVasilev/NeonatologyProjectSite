@@ -20,11 +20,11 @@
         public async Task AllShouldReturnViewAndCorrectModel()
         {
             var service = new Mock<IFileService>();
-            service.Setup(x => x.GetGaleryImagesAsync())
+            service.Setup(x => x.GetGaleryImagesAsync(1, 9))
                 .ReturnsAsync(new UploadImageModel());
 
-            var controller = new GaleryController(service.Object, null, null);
-            var result = await controller.All();
+            var controller = new GalleryController(service.Object, null, null);
+            var result = await controller.All(1);
 
             var route = Assert.IsType<ViewResult>(result);
             Assert.IsType<UploadImageModel>(route.Model);

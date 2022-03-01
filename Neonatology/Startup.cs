@@ -131,7 +131,7 @@ using Hangfire;
                 .AddTransient<INotificationService, NotificationService>()
                 .AddTransient<IProfileService, ProfileService>()
                 .AddTransient<IFeedbackService, FeedbackService>()
-                .AddTransient<IGaleryService, GaleryService>()
+                .AddTransient<IGalleryService, GalleryService>()
                 .AddTransient<ReCaptchaService>();
 
             //Configure ReCAPTCHA

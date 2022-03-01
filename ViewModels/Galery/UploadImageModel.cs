@@ -3,9 +3,11 @@
     using System.Collections.Generic;
     using System.ComponentModel;
 
+    using Common;
+
     using Microsoft.AspNetCore.Http;
 
-    public class UploadImageModel
+    public class UploadImageModel : PagingModel
     {
         private const string ImagesName = "Снимки";
 

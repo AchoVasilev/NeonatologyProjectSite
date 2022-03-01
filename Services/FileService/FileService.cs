@@ -144,11 +144,14 @@
             await data.SaveChangesAsync();
         }
 
-        public async Task<UploadImageModel> GetGaleryImagesAsync()
+        public async Task<UploadImageModel> GetGaleryImagesAsync(int page, int itemsPerPage)
         {
             var images = await data.Images
                 .Where(x => string.IsNullOrWhiteSpace(x.UserId) &&
                 x.IsDeleted == false)
+                .OrderBy(x => x.CreatedOn)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
                 .ToListAsync();
 
             var model = new UploadImageModel();
