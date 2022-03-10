@@ -47,5 +47,10 @@
         public int? RatingId { get; set; }
 
         public virtual Rating Rating { get; set; }
+
+        [ForeignKey(nameof(Address))]
+        public int AddressId { get; set; }
+
+        public virtual Address Address { get; set; }
     }
 }

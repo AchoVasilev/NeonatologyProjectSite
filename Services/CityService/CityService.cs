@@ -11,6 +11,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
+    using ViewModels.Address;
     using ViewModels.City;
 
     public class CityService : ICityService
@@ -42,5 +43,11 @@
                         .Where(x => x.Id == id && x.IsDeleted == false)
                         .ProjectTo<CityFormModel>(this.mapper.ConfigurationProvider)
                         .FirstOrDefaultAsync();
+
+        public async Task<ICollection<AddressFormModel>> GetDoctorAddressesByDoctorId(string doctorId)
+            => await this.data.Addresses
+                        .Where(x => x.DoctorId == doctorId)
+                        .ProjectTo<AddressFormModel>(this.mapper.ConfigurationProvider)
+                        .ToListAsync();
     }
 }

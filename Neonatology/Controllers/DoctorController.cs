@@ -77,9 +77,13 @@
             return RedirectToAction(nameof(Profile));
         }
 
-        public IActionResult Calendar()
+        public async Task<IActionResult> Calendar()
         {
-            return View(new SlotEditModel());
+            var doctorId = await this.doctorService.GetDoctorId();
+            return View(new SlotEditModel()
+            {
+                Cities = await this.cityService.GetDoctorAddressesByDoctorId(doctorId)
+            });
         }
     }
 }

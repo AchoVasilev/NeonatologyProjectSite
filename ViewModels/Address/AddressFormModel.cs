@@ -8,6 +8,8 @@
 
     public class AddressFormModel
     {
+        public int Id { get; set; }
+
         [MaxLength(AddressMaxLength)]
         public string StreetName { get; set; }
 

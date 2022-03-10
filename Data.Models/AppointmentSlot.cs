@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using Data.Common.Models;
 
@@ -17,5 +18,10 @@
         public DateTime End { get; set; }
 
         public string Status { get; set; } = "Свободен";
+
+        [ForeignKey(nameof(Address))]
+        public int AddressId { get; set; }
+
+        public virtual Address Address { get; set; }
     }
 }
