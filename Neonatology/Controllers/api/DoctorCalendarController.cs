@@ -27,10 +27,24 @@ using System;
             this.slotService = slotService;
         }
 
-        [HttpGet]
-        public async Task<JsonResult> GetDoctorAppointments()
+        [HttpGet("gabrovo")]
+        public async Task<JsonResult> GetDoctorGabrovoAppointments()
         {
-            var result = await this.appointmentService.GetAllAppointments();
+            var result = await this.appointmentService.GetPlevenAppointments();
+
+            foreach (var res in result)
+            {
+                res.DateTime = res.DateTime.ToLocalTime();
+                res.End = res.DateTime.ToLocalTime();
+            }
+
+            return new JsonResult(result);
+        }
+
+        [HttpGet("pleven")]
+        public async Task<JsonResult> GetDoctorPlevenAppointments()
+        {
+            var result = await this.appointmentService.GetPlevenAppointments();
 
             foreach (var res in result)
             {
@@ -54,15 +68,24 @@ using System;
                 return BadRequest(new { response = StartDateIsAfterEndDateMsg });
             }
 
-            var result = await this.slotService.GenerateSlots(model.Start.ToLocalTime(), model.End.ToLocalTime(), model.SlotDurationMinutes);
+            var result = await this.slotService
+                .GenerateSlots(model.Start.ToLocalTime(), model.End.ToLocalTime(), model.SlotDurationMinutes, model.AddressId);
 
             return new JsonResult(result);
         }
 
-        [HttpGet("getSlots")]
-        public async Task<JsonResult> GetCalendarSlots()
+        [HttpGet("getSlots/gabrovo")]
+        public async Task<JsonResult> GetCalendarGabrovoSlots()
         {
-            var slots = await this.slotService.GetSlots();
+            var slots = await this.slotService.GetGabrovoSlots();
+
+            return new JsonResult(slots);
+        }
+
+        [HttpGet("getSlots/pleven")]
+        public async Task<JsonResult> GetCalendarPlevenSlots()
+        {
+            var slots = await this.slotService.GetPlevenSlots();
 
             return new JsonResult(slots);
         }

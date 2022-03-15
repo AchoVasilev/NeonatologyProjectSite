@@ -15,6 +15,8 @@
 
     using ViewModels.Appointments;
 
+    using static Common.GlobalConstants.DoctorConstants;
+
     public class AppointmentService : IAppointmentService
     {
         private readonly NeonatologyDbContext data;
@@ -29,6 +31,20 @@
         public async Task<ICollection<AppointmentViewModel>> GetAllAppointments()
             => await this.data.Appointments
                         .Where(x => x.IsDeleted == false)
+                        .OrderByDescending(x => x.DateTime)
+                        .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
+                        .ToListAsync();
+
+        public async Task<ICollection<AppointmentViewModel>> GetGabrovoAppointments()
+            => await this.data.Appointments
+                        .Where(x => x.IsDeleted == false && x.Address.City.Name == GabrovoCityName)
+                        .OrderByDescending(x => x.DateTime)
+                        .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
+                        .ToListAsync();
+
+        public async Task<ICollection<AppointmentViewModel>> GetPlevenAppointments()
+            => await this.data.Appointments
+                        .Where(x => x.IsDeleted == false && x.Address.City.Name == PlevenCityName)
                         .OrderByDescending(x => x.DateTime)
                         .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();

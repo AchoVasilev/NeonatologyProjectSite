@@ -1,14 +1,12 @@
 ﻿document.addEventListener('DOMContentLoaded', async function () {
     let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    let events = await attachEvents();
 
-    let calendar = generateCalendar(events);
-
+    let calendar = generateCalendar();
     calendar.render();
 
-    function generateCalendar(events) {
+    function generateCalendar() {
         const calendarEl = document.getElementById('calendar');
-        let calendar = new FullCalendar.Calendar(calendarEl, {
+        let newCalendar = new FullCalendar.Calendar(calendarEl, {
             initialView: isMobile ? 'dayGridDay' : 'dayGridWeek',
             slotDuration: '00:05:00',
             firstDay: 1,
@@ -30,10 +28,61 @@
             headerToolbar: {
                 center: 'title',
                 end: 'prev,next today',
-                start: '',
+                start: 'plevenButton gabrovoButton',
             },
             buttonText: {
                 today: 'днес',
+            },
+            customButtons: {
+                plevenButton: {
+                    text: 'Плевен',
+                    click: async function (event) {
+                        let sourceToRemove = calendar.getEventSourceById(2);
+                        if (sourceToRemove) {
+                            sourceToRemove.remove();
+                        }
+
+                        let sourceToAdd = calendar.getEventSourceById(1);
+                        if (!sourceToAdd) {
+                            calendar.addEventSource({
+                                id: 1, events: async function (info, successCallback, failureCallback) {
+                                    return await loadEvents('/pleven');
+                                }
+                            });
+
+                            calendar.refetchEvents();
+                        }
+
+                        event.target.disabled = true;
+                        const gabrovoBtn = document.querySelector('.fc-gabrovoButton-button');
+                        gabrovoBtn.disabled = false;
+                    }
+                },
+                gabrovoButton: {
+                    text: 'Габрово',
+                    id: 'gabrovoBtn',
+                    click: async function (event, element) {
+                        let sourceToRemove = calendar.getEventSourceById(1);
+                        if (sourceToRemove) {
+                            sourceToRemove.remove();
+                        }
+
+                        let sourceToAdd = calendar.getEventSourceById(2);
+                        if (!sourceToAdd) {
+                            calendar.addEventSource({
+                                id: 2, events: async function (info, successCallback, failureCallback) {
+                                    return await loadEvents('/gabrovo');
+                                }
+                            });
+
+                            calendar.refetchEvents()
+                        }
+
+                        event.target.disabled = true;
+                        const plevenBtn = document.querySelector('.fc-plevenButton-button');
+                        plevenBtn.disabled = false;
+                    }
+                }
             },
             bootstrapFontAwesome: {
                 prev: 'fas fa-arrow-circle-left',
@@ -47,7 +96,17 @@
                 startTime: '09:00',
                 endTime: '14:00'
             },
-            events: events,
+            eventSources: [
+                {
+                    id: 1,
+                    events: async function (info, successCallback, failureCallback) {
+                        return await loadEvents('/pleven');
+                    }
+                }
+            ],
+            //events: async function (info, successCallback, failureCallback) {
+            //   return await attachEvents();
+            //},
             eventTimeFormat: {
                 hour: '2-digit',
                 minute: '2-digit',
@@ -94,7 +153,7 @@
             }
         });
 
-        return calendar;
+        return newCalendar;
     }
 
     async function editSlot(ev, info) {
@@ -135,7 +194,6 @@
         $('#modal').modal('hide');
 
         calendar.refetchEvents();
-        setTimeout(() => location.reload(), 3000);
     }
 
     async function saveChanges(ev, date) {
@@ -157,13 +215,15 @@
         endDate.setMinutes(endDate.getMinutes() + endMinutes);
 
         const scale = document.getElementById('minutes').value;
+        const addressId = document.getElementById('address-id').value;
 
         const params = {
             start: startDate,
             end: endDate,
-            slotDurationMinutes: Number(scale)
+            slotDurationMinutes: Number(scale),
+            addressId
         };
-        
+
         try {
             const response = await fetch('/doctorCalendar/generate', {
                 method: 'POST',
@@ -187,18 +247,16 @@
         $('#doctorModal').modal('hide');
 
         calendar.refetchEvents();
-
-        setTimeout(() => location.reload(), 3000);
     }
 
-    async function attachEvents() {
+    async function attachEvents(url) {
         let events = [];
-        const response = await fetch('/doctorCalendar', {
+        const response = await fetch('/doctorCalendar' + url, {
             method: 'Get'
         });
 
         var eventObjs = await response.json();
-
+     
         Object.values(eventObjs).forEach(x => {
             events.push({
                 id: x.id,
@@ -206,28 +264,36 @@
                 start: x.dateTime,
                 end: x.end,
                 allDay: false,
+                addressCityName: x.addressCityName
             });
         });
 
-        let slots = await getSlots();
+        let slots = await getSlots(url);
 
         Object.values(slots).forEach(x => {
             events.push({
                 id: x.id,
                 title: x.status,
                 start: x.start,
-                end: x.end
+                end: x.end,
+                addressCityName: x.addressCityName
             });
         });
 
         return events;
     }
 
-    async function getSlots() {
-        const response = await fetch('/doctorCalendar/getSlots')
+    async function getSlots(url) {
+        const response = await fetch('/doctorCalendar/getSlots' + url)
 
         const slots = await response.json();
 
         return slots;
+    }
+
+    async function loadEvents(url) {
+        let allEvents = await attachEvents(url);
+        
+        return allEvents;
     }
 });

@@ -8,9 +8,11 @@
 
     public interface ISlotService
     {
-        Task<ICollection<SlotViewModel>> GenerateSlots(DateTime start, DateTime end, int slotDurationMinutes);
+        Task<ICollection<SlotViewModel>> GenerateSlots(DateTime start, DateTime end, int slotDurationMinutes, int addressId);
 
-        Task<ICollection<SlotViewModel>> GetSlots();
+        Task<ICollection<SlotViewModel>> GetGabrovoSlots();
+
+        Task<ICollection<SlotViewModel>> GetPlevenSlots();
 
         Task<ICollection<SlotViewModel>> GetPatientSlots();
 

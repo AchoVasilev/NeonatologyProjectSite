@@ -9,5 +9,7 @@
         public DateTime End { get; set; }
 
         public int SlotDurationMinutes { get; set; }
+
+        public int AddressId { get; set; }
     }
 }

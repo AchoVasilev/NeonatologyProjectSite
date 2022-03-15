@@ -11,6 +11,10 @@
     {
         Task<ICollection<AppointmentViewModel>> GetAllAppointments();
 
+        Task<ICollection<AppointmentViewModel>> GetGabrovoAppointments();
+
+        Task<ICollection<AppointmentViewModel>> GetPlevenAppointments();
+
         Task<ICollection<AppointmentViewModel>> GetPastUserAppointments(string patientId);
 
         Task<ICollection<AppointmentViewModel>> GetUpcomingUserAppointments(string patientId);

@@ -157,7 +157,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label class="my-1 mr-2">Град</label>
-                                    <select asp-for="@Model.AddressId" class="form-control">
+                                    <select asp-for="@Model.AddressId" id="address-id" class="form-control">
                                         @foreach (var city in Model.Cities)
                                         {
                                             <option value="@city.Id">@city.City.Name</option>

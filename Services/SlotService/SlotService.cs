@@ -14,6 +14,7 @@
     using Microsoft.EntityFrameworkCore;
 
     using ViewModels.Slot;
+    using static Common.GlobalConstants.DoctorConstants;
 
     public class SlotService : ISlotService
     {
@@ -25,7 +26,7 @@
             this.mapper = mapper;
         }
 
-        public async Task<ICollection<SlotViewModel>> GenerateSlots(DateTime start, DateTime end, int slotDurationMinutes)
+        public async Task<ICollection<SlotViewModel>> GenerateSlots(DateTime start, DateTime end, int slotDurationMinutes, int addressId)
         {
             var slots = new List<AppointmentSlot>();
 
@@ -36,7 +37,8 @@
                 var slot = new AppointmentSlot()
                 {
                     Start = slotStart.ToLocalTime(),
-                    End = slotEnd.ToLocalTime()
+                    End = slotEnd.ToLocalTime(),
+                    AddressId = addressId,
                 };
 
                 if (await this.SlotExists(slot.Start, slot.End))
@@ -55,9 +57,15 @@
             return slotsModel;
         }
 
-        public async Task<ICollection<SlotViewModel>> GetSlots()
+        public async Task<ICollection<SlotViewModel>> GetGabrovoSlots()
             => await this.data.AppointmentSlots
-                        .Where(x => x.IsDeleted == false)
+                        .Where(x => x.IsDeleted == false && x.Address.City.Name == GabrovoCityName)
+                        .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
+                        .ToListAsync();
+
+        public async Task<ICollection<SlotViewModel>> GetPlevenSlots()
+            => await this.data.AppointmentSlots
+                        .Where(x => x.IsDeleted == false && x.Address.City.Name == PlevenCityName)
                         .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
 
