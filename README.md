@@ -16,3 +16,4 @@ This is a project, created for a doctor and her personal needs. There is an impl
 - Automapper
 - Admin LTE 3 for administration panel
 - XUnit and Moq for tests
+- Hangfire
