@@ -14,7 +14,9 @@
 
         Task<ICollection<SlotViewModel>> GetPlevenSlots();
 
-        Task<ICollection<SlotViewModel>> GetPatientSlots();
+        Task<ICollection<SlotViewModel>> GetFreePlevenSlots();
+
+        Task<ICollection<SlotViewModel>> GetFreeGabrovoSlots();
 
         Task<bool> EditSlot(int id, string status);
 

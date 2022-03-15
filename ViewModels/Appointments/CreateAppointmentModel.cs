@@ -37,6 +37,8 @@
 
         public int AppointmentCauseId { get; set; }
 
+        public int AddressId { get; set; }
+
         public ICollection<AppointmentCauseViewModel> AppointmentCauses { get; set; }
     }
 }

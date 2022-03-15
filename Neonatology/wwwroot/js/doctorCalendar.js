@@ -60,8 +60,7 @@
                 },
                 gabrovoButton: {
                     text: 'Габрово',
-                    id: 'gabrovoBtn',
-                    click: async function (event, element) {
+                    click: async function (event) {
                         let sourceToRemove = calendar.getEventSourceById(1);
                         if (sourceToRemove) {
                             sourceToRemove.remove();

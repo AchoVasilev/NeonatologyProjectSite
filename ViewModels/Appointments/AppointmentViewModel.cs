@@ -2,6 +2,8 @@
 {
     using System;
 
+    using ViewModels.Address;
+
     public class AppointmentViewModel
     {
         public int Id { get; set; }
@@ -28,7 +30,7 @@
 
         public string RatingComment { get; set; }
 
-        public string Address { get; set; }
+        public AddressFormModel Address { get; set; }
 
         public bool IsConfirmed { get; set; }
     }

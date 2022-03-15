@@ -106,7 +106,8 @@
                 ChildFirstName = model.ChildFirstName,
                 PhoneNumber = model.PhoneNumber,
                 DoctorId = doctorId,
-                AppointmentCauseId = model.AppointmentCauseId
+                AppointmentCauseId = model.AppointmentCauseId,
+                AddressId = model.AddressId
             };
 
             await this.data.Appointments.AddAsync(appointment);
@@ -135,7 +136,8 @@
                 DoctorId = doctorId,
                 PatientId = model.PatientId,
                 ChildFirstName = model.ChildFirstName,
-                AppointmentCauseId = model.AppointmentCauseId
+                AppointmentCauseId = model.AppointmentCauseId,
+                AddressId = model.AddressId
             };
 
             await this.data.Appointments.AddAsync(appointment);

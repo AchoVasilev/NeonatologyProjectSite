@@ -5,7 +5,7 @@
 
     using static Data.Common.DataConstants.Constants;
     using static Common.GlobalConstants.MessageConstants;
-using System.Collections.Generic;
+    using System.Collections.Generic;
 
     public class PatientAppointmentCreateModel
     {
@@ -22,6 +22,8 @@ using System.Collections.Generic;
         public string PatientId { get; set; }
 
         public int AppointmentCauseId { get; set; }
+
+        public int AddressId { get; set; }
 
         public ICollection<AppointmentCauseViewModel> AppointmentCauses { get; set; }
     }

@@ -10,6 +10,7 @@
 
     using Data;
     using Data.Models;
+    using Data.Models.Enums;
 
     using Microsoft.EntityFrameworkCore;
 
@@ -69,11 +70,23 @@
                         .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
 
-        public async Task<ICollection<SlotViewModel>> GetPatientSlots()
+        public async Task<ICollection<SlotViewModel>> GetFreePlevenSlots()
             => await this.data.AppointmentSlots
             .Where(x => x.IsDeleted == false &&
-                    x.Start >= DateTime.UtcNow.AddDays(-5) && 
-                    x.End <= DateTime.UtcNow.AddDays(20))
+                    x.Address.City.Name == PlevenCityName &&
+                    x.Start >= DateTime.UtcNow &&
+                    x.End <= DateTime.UtcNow.AddDays(20) &&
+                    x.Status == SlotStatus.Свободен.ToString())
+            .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
+            .ToListAsync();
+
+        public async Task<ICollection<SlotViewModel>> GetFreeGabrovoSlots()
+            => await this.data.AppointmentSlots
+            .Where(x => x.IsDeleted == false &&
+                    x.Address.City.Name == GabrovoCityName &&
+                    x.Start >= DateTime.UtcNow &&
+                    x.End <= DateTime.UtcNow.AddDays(20) &&
+                    x.Status == SlotStatus.Свободен.ToString())
             .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
             .ToListAsync();
 

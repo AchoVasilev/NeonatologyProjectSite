@@ -1,7 +1,6 @@
-﻿var calendar;
-document.addEventListener('DOMContentLoaded', async function () {
+﻿var calendar; document.addEventListener('DOMContentLoaded', async function () {
     let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    calendar = await generateCalendar();
+    let calendar = await generateCalendar();
 
     calendar.render();
 
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             headerToolbar: {
                 center: 'title',
                 end: 'prev,next today',
-                start: '',
+                start: 'plevenButton gabrovoButton',
             },
             buttonText: {
                 today: 'днес',
@@ -25,6 +24,56 @@ document.addEventListener('DOMContentLoaded', async function () {
             bootstrapFontAwesome: {
                 prev: 'fas fa-arrow-circle-left',
                 next: 'fas fa-arrow-circle-right'
+            },
+            customButtons: {
+                plevenButton: {
+                    text: 'Плевен',
+                    click: async function (event) {
+                        let sourceToRemove = calendar.getEventSourceById(2);
+                        if (sourceToRemove) {
+                            sourceToRemove.remove();
+                        }
+
+                        let sourceToAdd = calendar.getEventSourceById(1);
+                        if (!sourceToAdd) {
+                            calendar.addEventSource({
+                                id: 1, events: async function (info, successCallback, failureCallback) {
+                                    return await getSlots('/pleven');
+                                }
+                            });
+
+                            calendar.refetchEvents();
+                        }
+
+                        event.target.disabled = true;
+                        const gabrovoBtn = document.querySelector('.fc-gabrovoButton-button');
+                        gabrovoBtn.disabled = false;
+                    }
+                },
+                gabrovoButton: {
+                    text: 'Габрово',
+                    click: async function (event) {
+                        let sourceToRemove = calendar.getEventSourceById(1);
+                        if (sourceToRemove) {
+                            sourceToRemove.remove();
+                        }
+
+                        let sourceToAdd = calendar.getEventSourceById(2);
+                        if (!sourceToAdd) {
+                            calendar.addEventSource({
+                                id: 2, events: async function (info, successCallback, failureCallback) {
+                                    return await getSlots('/gabrovo');
+                                }
+                            });
+
+                            calendar.refetchEvents()
+                        }
+
+                        event.target.disabled = true;
+                        const plevenBtn = document.querySelector('.fc-plevenButton-button');
+                        plevenBtn.disabled = false;
+                    }
+                }
             },
             locale: 'bg',
             slotMinTime: '08:00',
@@ -36,11 +85,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             },
             eventSources: [{
                 id: 1,
-                events: await attachEvents(),
-            },
-            {
-                id: 2,
-                events: await getSlots()
+                events: await getSlots('/pleven'),
             }],
             eventTimeFormat: {
                 hour: '2-digit',
@@ -51,47 +96,17 @@ document.addEventListener('DOMContentLoaded', async function () {
             eventColor: '#378006',
             eventDisplay: 'block',
             eventClick: function (info) {
-                let startStr = new Date(info.event.startStr).toLocaleTimeString('bg-BG');
-                let endStr = new Date(info.event.endStr).toLocaleTimeString('bg-BG');
+                let startStr = new Date(info.event.startStr).toLocaleTimeString('bg-BG', { hour: '2-digit', minute: '2-digit' });
+                let endStr = new Date(info.event.endStr).toLocaleTimeString('bg-BG', { hour: '2-digit', minute: '2-digit' });
                 let dateStr = new Date(info.event.startStr).toLocaleDateString('bg-BG');
 
                 const headerSpan = document.getElementById('title');
-                headerSpan.textContent = info.event.title + ': ' + startStr + '-' + endStr + ' ' + dateStr;
+                headerSpan.textContent = `${info.event.extendedProps.addressCityName} ${info.event.title}: ${startStr} - ${endStr} ${dateStr}`;
 
-                if (info.event.title == 'Зает') {
-                    const smallHeaderSpan = document.getElementById('eventTitle');
-                    smallHeaderSpan.textContent = info.event.title;
-                    const details = document.getElementById('pDetails');
+                const form = document.getElementById('form');
+                form.addEventListener('submit', ev => onSubmit(ev, info));
 
-                    const description = document.createElement('div');
-                    const pStartElement = document.createElement('p');
-                    const strongStartEl = document.createElement('strong');
-
-                    const h4Element = document.createElement('h4');
-                    h4Element.textContent = 'Дата:' + ' ' + dateStr;
-
-                    strongStartEl.textContent = 'Начален час:' + ' ' + startStr;
-
-                    const pEndElement = document.createElement('p');
-                    const strongEndEl = document.createElement('strong');
-                    strongEndEl.textContent = 'Краен час:' + ' ' + endStr;
-
-                    pStartElement.appendChild(strongStartEl);
-                    pEndElement.appendChild(strongEndEl);
-
-                    description.appendChild(h4Element);
-                    description.appendChild(pStartElement);
-                    description.appendChild(pEndElement);
-
-                    $(details).empty().html(description);
-
-                    $('#smallModal').modal();
-                } else {
-                    const form = document.getElementById('form');
-                    form.addEventListener('submit', ev => onSubmit(ev, info));
-
-                    $('#modal').modal();
-                }
+                $('#modal').modal();
             }
         });
 
@@ -127,7 +142,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             childFirstName,
             appointmentCauseId,
             phoneNumber,
-            email
+            email,
+            addressId: info.event.extendedProps.addressId
         };
 
         try {
@@ -154,32 +170,10 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
 
         calendar.refetchEvents();
-        setTimeout(() => location.reload(), 3000);
     }
 
-    async function attachEvents() {
-        let events = [];
-        const response = await fetch('/calendar/appointments', {
-            method: 'Get'
-        });
-
-        var eventObjs = await response.json();
-
-        Object.values(eventObjs).forEach(x => {
-            events.push({
-                id: x.id,
-                title: x.status,
-                start: x.start,
-                end: x.end,
-                allDay: false,
-            });
-        });
-
-        return events;
-    }
-
-    async function getSlots() {
-        const response = await fetch('/calendar/getSlots')
+    async function getSlots(url) {
+        const response = await fetch('/calendar/getSlots' + url)
 
         const slots = await response.json();
 
@@ -190,7 +184,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 id: x.id,
                 title: x.status,
                 start: x.start,
-                end: x.end
+                end: x.end,
+                addressCityName: x.addressCityName,
+                addressId: x.addressId
             });
         });
 
