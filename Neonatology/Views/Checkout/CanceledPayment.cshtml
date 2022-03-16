@@ -1,23 +1,14 @@
-﻿<!DOCTYPE html>
-
-<html>
-
-<head>
-
-  <title>Checkout canceled</title>
-
-  <link rel="stylesheet" href="style.css">
-
-</head>
-
-<body>
-
-  <section>
-
-    <p>Forgot to add something to your cart? Shop around then come back to pay!</p>
-
-  </section>
-
-</body>
-
-</html>
+﻿<section class="jumbotron text-center mt-4">
+	<div class="container">
+		<div class="support-out-icon"><span><i class="fas fa-times-circle"></i></span></div>
+		<h1>Плащането е неуспешно.</h1>
+		<p class="lead text-muted">Не успяхте да заплатите.
+		</p>
+		<p>
+			<a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-info my-2 mr-2">
+				<i class="fas fa-home"></i> Откажи</a>
+			<a asp-area="" asp-controller="Checkout" asp-action="Index" class="btn btn-primary my-2">
+				<i class="fas fa-store-alt"></i> Опитай пак</a>
+		</p>
+	</div>
+</section>

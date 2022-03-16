@@ -42,3 +42,9 @@
     position: sticky;
     bottom: 50px
 }
+
+.footer-footy {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}

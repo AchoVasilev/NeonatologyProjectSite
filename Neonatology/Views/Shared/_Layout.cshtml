@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="~css/profile.css" />
     <link rel="stylesheet" href="~css/allusers.css" />
     <link rel="stylesheet" href="~/chat/css/chat.css" />
-    <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/fonts/css/font-awesome.css" />
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
     @await this.RenderSectionAsync("Styles", required: false)
 </head>
 <body>
@@ -60,12 +60,25 @@
         </main>
     </div>
 
-    <footer class="footer bg-info">
-        <div class="container-fluid">
-            Всички права запазени &copy; 2021 - @DateTime.UtcNow.Year - @Common.GlobalConstants.SystemName -
-            <a asp-area="" asp-controller="Home" asp-action="Privacy" style="color:white;">Политика за поверителност</a>
-            <a asp-area="" asp-controller="Feedback" asp-action="Send" style="color:black;">Свържете се с нас</a>
-        </div>
+    <footer class="footer-footy bg-info" style="bottom: 0;position: absolute;width: 100%;padding: 10px 0px;">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link px-2 text-white">Начало</a>
+                </li>
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Home" asp-action="Privacy" class="nav-link px-2 text-white">Политика за поверителност</a>
+            </li>
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Profile" asp-action="Index" class="nav-link px-2 text-white">Профил</a>
+                </li>
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Offer" asp-action="All"  class="nav-link px-2 text-white">Нашите услуги</a>
+                </li>
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Feedback" asp-action="Send" class="nav-link px-2 text-white">Свържете се с нас</a>
+                </li>
+        </ul>
+        <p class="text-center">&copy; 2021 - @DateTime.UtcNow.Year - @Common.GlobalConstants.SystemName</p>
     </footer>
 
     @if (SignInManager.IsSignedIn(User))
@@ -87,7 +100,7 @@
     <script type="text/javascript" src="~/chatVoice/js/utilsRTC.js"></script>
     <script type="text/javascript" src="~/chatVoice/js/constWebRTC.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/adapterjs/0.15.5/adapter.min.js"></script>
-@*    <script type="text/javascript" src="~/chatVoice/js/connectionHub.js"></script>*@
+    @*    <script type="text/javascript" src="~/chatVoice/js/connectionHub.js"></script>*@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

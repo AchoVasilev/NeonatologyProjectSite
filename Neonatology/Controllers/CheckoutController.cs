@@ -24,9 +24,10 @@
             this.offerService = offerService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = await this.offerService.GetOnlineConsultationModelAsync();
+            return View(model);
         }
 
         [HttpPost]
@@ -80,10 +81,8 @@
             return new StatusCodeResult(303);
         }
 
-        public IActionResult SuccessfulPayment()
-        {
-            return View();
-        }
+        public IActionResult SuccessfulPayment() 
+            => View();
 
         public IActionResult CanceledPayment()
             => View();

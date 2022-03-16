@@ -91,7 +91,7 @@
                     <tr>
                         <th scope="row">@appointment.DateTime</th>
                         <td><a asp-area="" asp-controller="Doctor" asp-action="Profile">@appointment.DoctorName</a></td>
-                        <td>гр. @appointment.Address</td>
+                        <td>гр. @appointment.Address.City.Name, @appointment.Address.StreetName</td>
                         <td>@appointment.ChildFirstName</td>
                         <td>@appointment.AppointmentCauseName</td>
                         <td>
