@@ -108,6 +108,18 @@ span.select-file-badge {
     font-weight: bold;
 }
 
+@media only screen and (max-width: 768px) {
+    div span.select-file-badge {
+        top: 46px;
+        right: 13px;
+    }
+
+    div span.select-image-badge {
+        top: 47px;
+        right: 57px;
+    }
+}
+
 @keyframes pulse-green {
     0% {
         transform: scale(0.95);
@@ -262,7 +274,7 @@ div#fileSpinner {
     }
 
 /* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 100%) {
+@media screen and (max-width: 100%) {
     .imageModalContent {
         width: 100%;
     }

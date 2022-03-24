@@ -49,9 +49,7 @@
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Дата и час</th>
-                    <th scope="col">Доктор</th>
                     <th scope="col">Адрес</th>
-                    <th scope="col">Дете</th>
                     <th scope="col">Вид преглед</th>
                 </tr>
             </thead>
@@ -60,9 +58,7 @@
                 {
                     <tr>
                         <th scope="row">@appointment.DateTime</th>
-                        <td><a asp-area="" asp-controller="Doctor" asp-action="Profile">@appointment.DoctorName</a></td>
                         <td>гр. @appointment.Address.City.Name, @appointment.Address.StreetName</td>
-                        <td>@appointment.ChildFirstName</td>
                         <td>@appointment.AppointmentCauseName</td>
                     </tr>
                 }
@@ -78,9 +74,7 @@
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Дата и час</th>
-                    <th scope="col">Доктор</th>
                     <th scope="col">Адрес</th>
-                    <th scope="col">Дете</th>
                     <th scope="col">Вид преглед</th>
                     <th scope="col">Оцени</th>
                 </tr>
@@ -90,9 +84,7 @@
                 {
                     <tr>
                         <th scope="row">@appointment.DateTime</th>
-                        <td><a asp-area="" asp-controller="Doctor" asp-action="Profile">@appointment.DoctorName</a></td>
                         <td>гр. @appointment.Address.City.Name, @appointment.Address.StreetName</td>
-                        <td>@appointment.ChildFirstName</td>
                         <td>@appointment.AppointmentCauseName</td>
                         <td>
                             <a class="btn btn-outline-info btn-sm hvr-grow 

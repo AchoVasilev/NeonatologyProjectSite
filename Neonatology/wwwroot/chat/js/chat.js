@@ -17,8 +17,7 @@ connection.on('ReceiveMessage', function (user, message, image) {
 
     li.classList.add('chat-message-left', 'pb-4');
     li.innerHTML = `<div>
-                               <img src="${image}" class="rounded-circle mr-1 img-sm" alt="Avatar">
-                               <div class="text-muted small text-nowrap mt-2">${formattedDate}</div>
+                               <img src="${image}" class="rounded-circle mr-1 img-sm" alt="">
                          </div>
                          <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                <div class="font-weight-bold mb-1">${user}</div>
@@ -41,8 +40,7 @@ connection.on('SendMessage', function (user, message, image) {
 
     li.classList.add('chat-message-right', 'pb-4');
     li.innerHTML = `<div>
-                               <img src="${image}" class="rounded-circle mr-1 img-sm" alt="Avatar">
-                               <div class="text-muted small text-nowrap mt-2">${formattedDate}</div>
+                               <img src="${image}" class="rounded-circle mr-1 img-sm" alt="">
                         </div>
                         <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                <div class="font-weight-bold mb-1">${user}</div>

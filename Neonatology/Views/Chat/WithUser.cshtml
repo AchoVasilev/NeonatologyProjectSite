@@ -25,14 +25,15 @@
     <div class="card">
         <div class="row g-0">
             <div class="container-fluid">
-                <div class="py-2 px-4 border-bottom d-none d-lg-block">
+                <div class="py-2 px-4 border-bottom d-sm-block d-lg-block">
                     <h3 id="group-name" style="text-align:center" hidden>@Model.GroupName</h3>
-                    <div class="d-flex align-items-center py-1">
-                        <div class="position-relative">
+                    <div class="d-flex d-none align-items-center py-1">
+                        <div class="position-relative d-none d-lg-block">
                             <img src="@Model.ToUser.Image.Url" class="rounded-circle mr-1 img-sm" alt="avatar">
                         </div>
-                        <div class="flex-grow-1 pl-3">
-                            <strong id="receiver-fullname">@Model.ReceiverFullName</strong>
+
+                        <div class="flex-grow-1 pl-3" style="display: flex; justify-content:space-between">
+                            <strong id="receiver-fullname" class="d-none d-lg-block">@Model.ReceiverFullName</strong>
                             <ul id="users" data-mode="idle">
                                 <li data-cid="" id="receiver" style="text-align:center" hidden>@Model.ReceiverEmail</li>
                                 <li data-cid="" class="user" id="receiverEmail" style="text-align:center" hidden>@Model.ReceiverEmail</li>
@@ -40,8 +41,7 @@
                                 <li data-cid="" id="sender" style="text-align:center" hidden>@Model.SenderEmail</li>
                                 <li data-cid="" class="user" id="senderEmail" style="text-align:center" hidden>@Model.SenderEmail</li>
                             </ul>
-                        </div>
-                        <div>
+                            <div>
                             <label type="button" id="close" class="btn btn-outline-danger"><i class="fas fa-phone-slash"></i></label>
                             <label type="button" id="call" class="btn btn-outline-secondary"><i class="fas fa-microphone"></i></label>
                             <label class="btn btn-outline-secondary" for="upload-image" style="cursor:pointer" id="image-button">
@@ -61,6 +61,8 @@
                             </span>
                             <div id="fileSpinner"></div>
                         </div>
+                        </div>
+                        
                     </div>
                 </div>
 
@@ -79,7 +81,6 @@
                                         <li class="chat-message-left pb-4" id="@message.Id">
                                             <div>
                                                 <img src="@Model.ToUser.Image.Url" class="rounded-circle mr-1 img-sm" alt="Avatar">
-                                                <div class="text-muted small text-nowrap mt-2">@message.CreatedOn</div>
                                             </div>
                                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
                                                 <div class="font-weight-bold mb-1">@Model.ReceiverFullName</div>
@@ -92,7 +93,6 @@
                                         <li class="chat-message-right pb-4" id="@message.Id">
                                             <div>
                                                 <img src="@Model.CurrentUser.Image.Url" class="rounded-circle mr-1 img-sm" alt="Avatar">
-                                                <div class="text-muted small text-nowrap mt-2">@message.CreatedOn</div>
                                             </div>
                                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                                 <div class="font-weight-bold mb-1">@Model.SenderFullName</div>
