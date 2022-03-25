@@ -24,5 +24,7 @@
         [Required(ErrorMessage = RequiredFieldErrorMsg)]
         [Phone]
         public string Phone { get; set; }
+
+        public bool HasPaid { get; set; }
     }
 }

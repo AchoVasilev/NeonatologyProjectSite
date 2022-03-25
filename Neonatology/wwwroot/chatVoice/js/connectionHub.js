@@ -10,6 +10,8 @@ var callBtn = document.getElementById('call');
 callBtn.style.display = 'block';
 var group = document.getElementById('group-name').textContent;
 
+alertify.set('notifier', 'position', 'top-center');
+
 $(document).ready(function () {
 
     wsconn.start()
@@ -258,6 +260,7 @@ wsconn.on('callAccepted', (acceptingUser) => {
     $("#callstatus").text('In Call');
     closeBtn.style.display = 'block';
     callBtn.style.display = 'none';
+    alertify.success('Вие сте в разговор.');
 });
 
 // Hub Callback: Call Declined
@@ -316,7 +319,7 @@ wsconn.on('callEnded', (signalingUser, signal) => {
 const setUsername = (username) => {
     wsconn.invoke('Join', username)
         .catch((err) => {
-            alertify.alert('<h4>Проблем с връзката</h4> Не успяхме да ви свържем със сървъра.<br/><br/>Error: ' + JSON.stringify(err));
+            alertify.alert('<h4>Проблем с връзката</h4> Не успяхме да ви свържем със сървъра.<br/><br/>');
         });
 
     initializeUserMedia();
@@ -324,7 +327,7 @@ const setUsername = (username) => {
 
 const errorHandler = (error) => {
     if (error.message)
-        alertify.alert('<h4>Error Occurred</h4></br>Error Info: ' + JSON.stringify(error.message));
+        alertify.error('<h4>Възникна грешка</h4></br>Не сте включили микрофона си');
     else
-        alertify.alert('<h4>Error Occurred</h4></br>Error Info: ' + JSON.stringify(error));
+        alertify.error('<h4>Възникна грешка</h4></br>Не сте включили микрофона си');
 };

@@ -1,12 +1,12 @@
 ﻿namespace Neonatology.Controllers.api
 {
+    using System;
     using System.IO;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
 
-    using Services.DoctorService;
     using Services.OfferService;
     using Services.PaymentService;
 
@@ -23,18 +23,15 @@
         //https://dashboard.stripe.com/test/webhooks/create?endpoint_location=hosted
         private readonly IPaymentService paymentService;
         private readonly IOptions<StripeSettings> settings;
-        private readonly IDoctorService doctorService;
         private readonly IOfferService offerService;
 
         public StripeController(
             IPaymentService paymentService,
             IOptions<StripeSettings> settings,
-            IDoctorService doctorService,
             IOfferService offerService)
         {
             this.paymentService = paymentService;
             this.settings = settings;
-            this.doctorService = doctorService;
             this.offerService = offerService;
         }
 
@@ -42,7 +39,6 @@
         public async Task<IActionResult> Index()
         {
             string secret = this.settings.Value.AccountSecret;
-
             var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
 
             try
@@ -57,7 +53,7 @@
                 if (stripeEvent.Type == Events.CheckoutSessionCompleted)
                 {
                     var session = stripeEvent.Data.Object as Session;
-                    
+
                     // Fulfill the purchase...
                     await this.FulfillOrder(session);
                 }
@@ -66,17 +62,22 @@
             }
             catch (StripeException e)
             {
-                return BadRequest(e.Message);
+                return BadRequest();
             }
         }
 
         private async Task FulfillOrder(Session session)
         {
-            var model = new CreatePaymentModel();
-
-            model.SenderId = session.CustomerId;
-            model.RecepientId = await this.doctorService.GetDoctorId();
-            model.OfferedServiceId = await this.offerService.GetOnlineConsultationId();
+            var model = new CreatePaymentModel()
+            {
+                CustomerEmail = session.CustomerEmail,
+                Charge = session.AmountTotal,
+                PaymentStatus = session.PaymentStatus,
+                Status = session.Status,
+                SessionId = session.Id,
+                CustomerId = session.CustomerId,
+                OfferedServiceId = await this.offerService.GetOnlineConsultationId()
+            };
 
             await this.paymentService.CreatePayment(model);
         }

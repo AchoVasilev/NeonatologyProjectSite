@@ -115,6 +115,15 @@
                 SenderEmail = sender.Email
             };
 
+            if (patientSender != null)
+            {
+                if (patientSender.Id == currentUser.PatientId && !patientSender.HasPaid)
+                {
+                    model.HasPaid = false;
+                    return View(model);
+                }
+            }
+
             return this.View(model);
         }
 

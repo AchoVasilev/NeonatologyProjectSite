@@ -38,7 +38,11 @@
 
         public City City { get; set; }
 
+        public bool HasPaid { get; set; } = false;
+
         public virtual ICollection<Rating> Ratings { get; set; } = new HashSet<Rating>();
+
+        public virtual ICollection<Payment> Payments { get; set; } = new HashSet<Payment>();
 
         public virtual ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
     }

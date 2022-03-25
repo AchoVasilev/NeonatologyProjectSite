@@ -2,6 +2,7 @@
 {
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Data.Models;
 
     using Services.PatientService.Models;
 
@@ -23,6 +24,10 @@ using System.Threading.Tasks;
 
         Task<int> GetLastThisMonthsRegisteredCount();
 
+        Task<Patient> GetPatientById(string patientId);
+
         Task<ICollection<PatientServiceModel>> GetAllPatients();
+
+        Task<string> GetPatientIdByEmail(string email);
     }
 }

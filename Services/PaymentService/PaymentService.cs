@@ -1,5 +1,6 @@
 ﻿namespace Services.PaymentService
 {
+    using System;
     using System.Threading.Tasks;
 
     using Data;
@@ -7,15 +8,19 @@
 
     using Microsoft.EntityFrameworkCore;
 
+    using Services.PatientService;
+
     using ViewModels.Payment;
 
     public class PaymentService : IPaymentService
     {
         private readonly NeonatologyDbContext data;
+        private readonly IPatientService patientService;
 
-        public PaymentService(NeonatologyDbContext data)
+        public PaymentService(NeonatologyDbContext data, IPatientService patientService)
         {
             this.data = data;
+            this.patientService = patientService;
         }
 
         public async Task CreateChekoutSession(string sessionId, string paymentId, string toStripeAccountId)
@@ -33,12 +38,21 @@
 
         public async Task<string> CreatePayment(CreatePaymentModel model)
         {
-            var payment = new Payment();
+            var payment = new Payment()
+            {
+                OfferedServiceId = model.OfferedServiceId,
+                SenderId = await this.patientService.GetPatientIdByEmail(model.CustomerEmail),
+                PaymentStatus = model.PaymentStatus,
+                Status = model.Status,
+                Charge = model.Charge,
+                CustomerEmail = model.CustomerEmail,
+                CustomerId = model.CustomerId,
+                SessionId = model.SessionId
+            };
 
-            payment.OfferedServiceId = model.OfferedServiceId;
-            payment.RecepientId = model.RecepientId;
-            payment.SenderId = model.SenderId;
-            payment.PaymentStatus = Data.Models.Enums.PaymentStatus.Complete;
+            var patient = await this.patientService.GetPatientById(payment.SenderId);
+            patient.HasPaid = true;
+            patient.ModifiedOn = DateTime.UtcNow;
 
             await this.data.Payments.AddAsync(payment);
             await this.data.SaveChangesAsync();

@@ -78,6 +78,10 @@
             => await this.data.Users
                         .AnyAsync(x => x.UserName == email);
 
+        public async Task<Patient> GetPatientById(string patientId)
+              => await this.data.Patients
+                      .FirstOrDefaultAsync(x => x.Id == patientId);
+
         public async Task<bool> EditPatientAsync(string patientId, CreatePatientFormModel model)
         {
             var patient = await this.data.Patients
@@ -114,5 +118,11 @@
                         .Where(x => x.IsDeleted == false)
                         .ProjectTo<PatientServiceModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
+
+        public async Task<string> GetPatientIdByEmail(string email)
+            => await this.data.Users
+                        .Where(x => x.Email == email)
+                        .Select(x => x.PatientId)
+                        .FirstOrDefaultAsync();
     }
 }

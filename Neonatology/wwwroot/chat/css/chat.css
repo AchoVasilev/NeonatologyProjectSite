@@ -108,13 +108,13 @@ span.select-file-badge {
     font-weight: bold;
 }
 
-@media only screen and (max-width: 768px) {
-    div span.select-file-badge {
+@media all and (max-width: 768px) {
+    div#icons span.select-file-badge {
         top: 46px;
         right: 13px;
     }
 
-    div span.select-image-badge {
+    div#icons span.select-image-badge {
         top: 47px;
         right: 57px;
     }

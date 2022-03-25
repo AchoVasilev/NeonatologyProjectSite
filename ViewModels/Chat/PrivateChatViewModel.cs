@@ -20,6 +20,8 @@
 
         public string GroupName { get; set; }
 
+        public bool HasPaid { get; set; } = true;
+
         public ICollection<Message> ChatMessages { get; set; } = new HashSet<Message>();
     }
 }

@@ -41,28 +41,31 @@
                                 <li data-cid="" id="sender" style="text-align:center" hidden>@Model.SenderEmail</li>
                                 <li data-cid="" class="user" id="senderEmail" style="text-align:center" hidden>@Model.SenderEmail</li>
                             </ul>
-                            <div>
-                            <label type="button" id="close" class="btn btn-outline-danger"><i class="fas fa-phone-slash"></i></label>
-                            <label type="button" id="call" class="btn btn-outline-secondary"><i class="fas fa-microphone"></i></label>
-                            <label class="btn btn-outline-secondary" for="upload-image" style="cursor:pointer" id="image-button">
-                                <i class="fa fa-camera"></i>
-                            </label>
-                            <input accept=".jpg, .jpeg, .png" type="file" multiple id="upload-image" class="btn btn-outline-secondary">
-                            <span class="select-image-badge">
-                                0
-                            </span>
-                            <div id="imageSpinner"></div>
-                            <label class="btn btn-outline-primary" for="upload-file" style="cursor:pointer" id="file-button">
-                                <i class="fa fa-paperclip"></i>
-                            </label>
-                            <input type="file" multiple id="upload-file" accept=".zip, .rar, .docx, .xlsx, application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf">
-                            <span class="select-file-badge">
-                                0
-                            </span>
-                            <div id="fileSpinner"></div>
+                            @if (Model.HasPaid)
+                            {
+                                <div id="icons">
+                                    <label type="button" id="close" class="btn btn-outline-danger"><i class="fas fa-phone-slash"></i></label>
+                                    <label type="button" id="call" class="btn btn-outline-secondary"><i class="fas fa-microphone"></i></label>
+                                    <label class="btn btn-outline-secondary" for="upload-image" style="cursor:pointer" id="image-button">
+                                        <i class="fa fa-camera"></i>
+                                    </label>
+                                    <input accept=".jpg, .jpeg, .png" type="file" multiple id="upload-image" class="btn btn-outline-secondary">
+                                    <span class="select-image-badge">
+                                        0
+                                    </span>
+                                    <div id="imageSpinner"></div>
+                                    <label class="btn btn-outline-primary" for="upload-file" style="cursor:pointer" id="file-button">
+                                        <i class="fa fa-paperclip"></i>
+                                    </label>
+                                    <input type="file" multiple id="upload-file" accept=".zip, .rar, .docx, .xlsx, application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf">
+                                    <span class="select-file-badge">
+                                        0
+                                    </span>
+                                    <div id="fileSpinner"></div>
+                                </div>
+                            }
                         </div>
-                        </div>
-                        
+
                     </div>
                 </div>
 
@@ -106,12 +109,15 @@
                         <input id="messagesSkipCount" type="hidden" value="@this.Model.ChatMessages.Count" />
                     </div>
                 </div>
-                <div class="flex-grow-0 py-3 px-4 border-top">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="chat-text" placeholder="Напиши съобщение..">
-                        <button class="btn btn-primary hvr-grow" id="send-button">Изпрати</button>
+                @if (Model.HasPaid)
+                {
+                    <div class="flex-grow-0 py-3 px-4 border-top">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="chat-text" placeholder="Напиши съобщение..">
+                            <button class="btn btn-primary hvr-grow" id="send-button">Изпрати</button>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         </div>
     </div>

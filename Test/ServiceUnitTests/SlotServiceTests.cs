@@ -25,7 +25,7 @@
             var startDate = new DateTime(2022, 01, 25, 10, 0, 0);
             var endDate = new DateTime(2022, 01, 25, 11, 0, 0);
 
-            var result = await service.GenerateSlots(startDate, endDate, 10);
+            var result = await service.GenerateSlots(startDate, endDate, 10, 5);
 
             Assert.NotNull(result);
             Assert.Equal(6, result.Count);
@@ -41,7 +41,7 @@
             var startDate = new DateTime(2022, 01, 25, 10, 0, 0);
             var endDate = new DateTime(2022, 01, 25, 11, 0, 0);
 
-            var result = await service.GenerateSlots(startDate, endDate, 10);
+            var result = await service.GenerateSlots(startDate, endDate, 10, 5);
 
             Assert.NotNull(result);
             Assert.IsAssignableFrom<ICollection<SlotViewModel>>(result);
@@ -57,7 +57,7 @@
             var startDate = new DateTime(2022, 01, 25, 10, 0, 0);
             var endDate = new DateTime(2022, 01, 25, 11, 0, 0);
 
-            var result = await service.GenerateSlots(startDate, endDate, 10);
+            var result = await service.GenerateSlots(startDate, endDate, 10, 5);
 
             Assert.Equal(6, dataMock.AppointmentSlots.Count());
         }
