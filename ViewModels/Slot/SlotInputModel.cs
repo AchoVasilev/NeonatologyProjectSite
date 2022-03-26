@@ -4,9 +4,9 @@
 
     public class SlotInputModel
     {
-        public DateTime Start { get; set; }
+        public string StartDate { get; set; }
 
-        public DateTime End { get; set; }
+        public string EndDate { get; set; }
 
         public int SlotDurationMinutes { get; set; }
 

@@ -4,6 +4,8 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using Hangfire;
+
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
 
@@ -79,7 +81,11 @@
                 OfferedServiceId = await this.offerService.GetOnlineConsultationId()
             };
 
-            await this.paymentService.CreatePayment(model);
+            var patientId = await this.paymentService.CreatePayment(model);
+
+            BackgroundJob.Schedule(
+                () => this.paymentService.ChangePaymentStatus(patientId),
+                TimeSpan.FromDays(1));
         }
     }
 }

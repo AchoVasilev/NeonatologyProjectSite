@@ -1,7 +1,7 @@
 ﻿namespace Neonatology.Controllers.api
 {
-using System.Threading.Tasks;
-using System;
+    using System.Threading.Tasks;
+    using System;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -12,6 +12,7 @@ using System;
     using static Common.GlobalConstants.MessageConstants;
     using Services.AppointmentService;
     using Services.SlotService;
+    using System.Globalization;
 
     [ApiController]
     [Authorize(Roles = DoctorConstants.DoctorRoleName)]
@@ -34,8 +35,8 @@ using System;
 
             foreach (var res in result)
             {
-                res.DateTime = res.DateTime.ToLocalTime();
-                res.End = res.DateTime.ToLocalTime();
+                res.DateTime = res.DateTime;
+                res.End = res.DateTime;
             }
 
             return new JsonResult(result);
@@ -48,8 +49,8 @@ using System;
 
             foreach (var res in result)
             {
-                res.DateTime = res.DateTime.ToLocalTime();
-                res.End = res.DateTime.ToLocalTime();
+                res.DateTime = res.DateTime;
+                res.End = res.DateTime;
             }
 
             return new JsonResult(result);
@@ -58,18 +59,21 @@ using System;
         [HttpPost("generate")]
         public async Task<IActionResult> GenerateSlots([FromBody] SlotInputModel model)
         {
-            if (model.Start.Date < DateTime.Now.Date)
+            var startDate = DateTime.Parse(model.StartDate);
+            var endDate = DateTime.Parse(model.EndDate);
+
+            if (startDate.Date < DateTime.Now.Date)
             {
                 return BadRequest(new { response = DateBeforeNowErrorMsg });
             }
 
-            if (model.Start >= model.End)
+            if (startDate >= endDate)
             {
                 return BadRequest(new { response = StartDateIsAfterEndDateMsg });
             }
 
             var result = await this.slotService
-                .GenerateSlots(model.Start.ToLocalTime(), model.End.ToLocalTime(), model.SlotDurationMinutes, model.AddressId);
+                .GenerateSlots(startDate, endDate, model.SlotDurationMinutes, model.AddressId);
 
             return new JsonResult(result);
         }

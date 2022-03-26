@@ -159,7 +159,7 @@
                     {
                         Id = message.Id,
                         Content = message.Content,
-                        SendedOn = message.CreatedOn.ToLocalTime().ToString(DateTimeFormat),
+                        SendedOn = message.CreatedOn.ToString(DateTimeFormat),
                         CurrentUsername = currentUser.UserName,
                     };
 
@@ -221,7 +221,7 @@
                                         ((m.ReceiverId == currentUserId && m.SenderId == userId) ||
                                          (m.ReceiverId == userId && m.SenderId == currentUserId)))
                             .OrderByDescending(m => m.CreatedOn)
-                            .Select(m => m.CreatedOn.ToLocalTime().ToString())
+                            .Select(m => m.CreatedOn.ToString(DateTimeFormat))
                             .FirstOrDefaultAsync();
 
         public async Task<string> GetGroupId(string currentUserId, string userId)

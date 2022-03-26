@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAESIOZFrr6UCgCGub42SVcAAAAAACAAAAAAAQZgAAAAEAACAAAADI9P+NubDVRC/3Be3tjQDaEjyb0bFLg+YtR0eB8zKsAgAAAAAOgAAAAAIAACAAAAAPCs/Gmg7Io+somOK4KnYr/HvcZ+DFawNEGT2Z7cw4CCAAAAAO0z4My3mjC6hcFkxTqxN4KWFHHCPrL6QEoJgiQgQzJEAAAAABnszhBT8ClIBXXzwyjkn6fsWJmVd1+FRabCqB7zYT13x9yeLOrWNiCaqq17Uu3nbKQc1xZMq+aNjc59oL8hUF</EncryptedPassword>
+    <History>True|2022-03-26T14:33:16.0280158Z;True|2022-03-26T16:21:37.7891274+02:00;True|2022-03-26T16:05:25.7003303+02:00;True|2022-03-26T13:33:06.1691201+02:00;True|2022-03-26T12:14:33.8327511+02:00;True|2022-03-26T12:07:25.9110068+02:00;True|2022-03-26T11:58:37.6711823+02:00;True|2022-03-26T11:45:47.8476860+02:00;False|2022-03-26T11:26:12.4093727+02:00;False|2022-03-26T11:16:31.3916771+02:00;False|2022-03-26T11:12:35.9068702+02:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=SQL5107.site4now.net%3bInitial Catalog=db_a84b0e_pediamed%3bUser Id=db_a84b0e_pediamed_admin%3bPassword=AchoVasilev92</Value>
+    </DestinationConnectionStrings>
+    <DestinationConnectionStrings Include="LocalConnection">
+      <Value>Data Source=SQL5107.site4now.net%3bInitial Catalog=db_a84b0e_pediamed%3bUser Id=db_a84b0e_pediamed_admin%3bPassword=AchoVasilev92</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="Data.NeonatologyDbContext">
+      <Value>Data Source=SQL5107.site4now.net%3bInitial Catalog=db_a84b0e_pediamed%3bUser Id=db_a84b0e_pediamed_admin%3bPassword=AchoVasilev92</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

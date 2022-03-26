@@ -61,7 +61,24 @@
         }
 
         public async Task<bool> PatientHasPaid(string patientId)
-            => await this.data.Payments
-                         .AnyAsync(x => x.SenderId == patientId);
+            => await this.data.Patients
+                         .AnyAsync(x => x.Id == patientId && x.HasPaid);
+
+        public async Task<bool> ChangePaymentStatus(string patientId)
+        {
+            var patient = await this.patientService.GetPatientById(patientId);
+
+            if (patient is null)
+            {
+                return false;
+            }
+
+            patient.HasPaid = false;
+            patient.ModifiedOn = DateTime.UtcNow;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

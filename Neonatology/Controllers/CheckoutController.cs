@@ -27,6 +27,7 @@
         public async Task<IActionResult> Index()
         {
             var model = await this.offerService.GetOnlineConsultationModelAsync();
+
             return View(model);
         }
 

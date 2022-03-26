@@ -109,16 +109,16 @@
 
             this.CreateMap<Feedback, FeedbackViewModel>()
                 .ForMember(x => x.CreatedOn, opt =>
-                    opt.MapFrom(x => x.CreatedOn.ToLocalTime().ToString(DateTimeFormat)));
+                    opt.MapFrom(x => x.CreatedOn.ToString(DateTimeFormat)));
 
             //Administration
             this.CreateMap<Image, GaleryViewModel>()
                 .ForMember(x => x.CreatedOn, opt =>
-                    opt.MapFrom(y => y.CreatedOn.ToLocalTime()));
+                    opt.MapFrom(y => y.CreatedOn));
 
             this.CreateMap<Patient, PatientServiceModel>()
                 .ForMember(x => x.CreatedOn, opt =>
-                    opt.MapFrom(y => y.CreatedOn.ToLocalTime()));
+                    opt.MapFrom(y => y.CreatedOn));
 
             this.CreateMap<PatientServiceModel, UserViewModel>();
 

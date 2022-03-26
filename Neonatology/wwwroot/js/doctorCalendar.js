@@ -196,29 +196,19 @@
     }
 
     async function saveChanges(ev, date) {
-        const startDate = new Date(date);
-        const endDate = new Date(date);
-
         const startTime = document.getElementById('start').value;
-        const startHour = startTime.split(':')[0];
-        const startMinutes = startTime.split(':')[1];
-
         const endTime = document.getElementById('end').value;
-        const endHour = endTime.split(':')[0];
-        const endMinutes = endTime.split(':')[1];
 
-        startDate.setHours(startDate.getHours() + startHour);
-        startDate.setMinutes(startDate.getMinutes() + startMinutes);
-
-        endDate.setHours(endDate.getHours() + endHour);
-        endDate.setMinutes(endDate.getMinutes() + endMinutes);
+        const month = date.getMonth() + 1;
+        const startStr = date.getDate() + '/' + month + '/' + date.getFullYear() + ' ' + startTime;
+        const endStr = date.getDate() + '/' + month + '/' + date.getFullYear() + ' ' + endTime;
 
         const scale = document.getElementById('minutes').value;
         const addressId = document.getElementById('address-id').value;
 
         const params = {
-            start: startDate,
-            end: endDate,
+            startDate: startStr,
+            endDate: endStr,
             slotDurationMinutes: Number(scale),
             addressId
         };

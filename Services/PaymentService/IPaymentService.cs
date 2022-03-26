@@ -1,7 +1,8 @@
 ﻿namespace Services.PaymentService
 {
     using System.Threading.Tasks;
-using ViewModels.Payment;
+
+    using ViewModels.Payment;
 
     public interface IPaymentService
     {
@@ -10,5 +11,7 @@ using ViewModels.Payment;
         Task<string> CreatePayment(CreatePaymentModel model);
 
         Task<bool> PatientHasPaid(string patientId);
+
+        Task<bool> ChangePaymentStatus(string patientId);
     }
 }

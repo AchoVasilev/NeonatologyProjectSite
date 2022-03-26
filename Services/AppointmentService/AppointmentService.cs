@@ -99,8 +99,8 @@
 
             var appointment = new Appointment()
             {
-                DateTime = model.Start.ToLocalTime(),
-                End = model.End.ToLocalTime(),
+                DateTime = model.Start,
+                End = model.End,
                 ParentFirstName = model.ParentFirstName,
                 ParentLastName = model.ParentLastName,
                 ChildFirstName = model.ChildFirstName,

@@ -2,6 +2,7 @@ namespace Neonatology
 {
     using System;
     using System.Collections.Generic;
+using System.Globalization;
 
     using CloudinaryDotNet;
 
@@ -19,6 +20,7 @@ namespace Neonatology
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity.UI.Services;
+    using Microsoft.AspNetCore.Localization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -72,7 +74,7 @@ namespace Neonatology
                 options.Password.RequireLowercase = false;
                 options.Password.RequireDigit = false;
                 options.Password.RequiredUniqueChars = 0;
-                options.Lockout.MaxFailedAccessAttempts = 3;
+                options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
             })
                 .AddEntityFrameworkStores<NeonatologyDbContext>();
@@ -184,6 +186,14 @@ namespace Neonatology
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             StripeConfiguration.ApiKey = this.Configuration.GetSection("Stripe")["SecretKey"];
+
+            var supportedCultures = new[] { new CultureInfo("bg-BG") };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("bg-BG"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
 
             app.PrepareDatabase()
                 .GetAwaiter()

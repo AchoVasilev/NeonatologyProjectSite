@@ -37,12 +37,12 @@
 
                 var slot = new AppointmentSlot()
                 {
-                    Start = slotStart.ToLocalTime(),
-                    End = slotEnd.ToLocalTime(),
+                    Start = slotStart,
+                    End = slotEnd,
                     AddressId = addressId,
                 };
 
-                if (await this.SlotExists(slot.Start, slot.End))
+                if (await this.SlotExists(slot.Start, slot.End, slot.AddressId))
                 {
                     continue;
                 }
@@ -50,10 +50,10 @@
                 slots.Add(slot);
             }
 
+            var slotsModel = this.mapper.Map<ICollection<SlotViewModel>>(slots);
+
             await this.data.AppointmentSlots.AddRangeAsync(slots);
             await this.data.SaveChangesAsync();
-
-            var slotsModel = this.mapper.Map<ICollection<SlotViewModel>>(slots);
 
             return slotsModel;
         }
@@ -119,11 +119,12 @@
             return true;
         }
 
-        private async Task<bool> SlotExists(DateTime start, DateTime end)
+        private async Task<bool> SlotExists(DateTime start, DateTime end, int addressId)
         {
             var result = await this.data.AppointmentSlots
                 .FirstOrDefaultAsync(x => x.Start == start && 
                                     x.End == end &&
+                                    x.AddressId == addressId &&
                                     x.IsDeleted == false);
 
             if (result != null)

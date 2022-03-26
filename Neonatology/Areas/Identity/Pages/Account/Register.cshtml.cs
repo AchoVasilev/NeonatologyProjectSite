@@ -76,15 +76,6 @@
         {
             ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            var recaptchaResponse = this.reCaptchaService.ValidateResponse(Input.Token);
-
-            if (recaptchaResponse.Result.Success == false && recaptchaResponse.Result.Score <= 0.5)
-            {
-                this.ModelState.AddModelError(string.Empty, "Не преминахте проверката!");
-
-                return this.Page();
-            }
-
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser

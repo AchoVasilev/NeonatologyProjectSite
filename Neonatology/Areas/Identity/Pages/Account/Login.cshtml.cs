@@ -84,15 +84,6 @@ namespace Neonatology.Areas.Identity.Pages.Account
 
             ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            var recaptchaResponse = this.reCaptchaService.ValidateResponse(Input.Token);
-
-            if (recaptchaResponse.Result.Success == false && recaptchaResponse.Result.Score <= 0.5)
-            {
-                this.ModelState.AddModelError(string.Empty, "Възможно е да използвате фалшив акаунт!");
-
-                return this.Page();
-            }
-
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout

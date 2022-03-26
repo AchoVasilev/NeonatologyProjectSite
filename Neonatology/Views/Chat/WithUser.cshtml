@@ -1,7 +1,7 @@
 ﻿@model PrivateChatViewModel
 
 @{
-    ViewData["Title"] = $"Чат с {Model.ReceiverFullName}";
+    ViewData["Title"] = $"Разговор с {Model.ReceiverFullName}";
 }
 
 @section Styles{
@@ -62,6 +62,14 @@
                                         0
                                     </span>
                                     <div id="fileSpinner"></div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-6">
+                                    <a class="btn btn-success" asp-area="" asp-controller="Checkout" asp-action="Index">
+                                        Заяви онлайн консултация
+                                    </a>
                                 </div>
                             }
                         </div>
