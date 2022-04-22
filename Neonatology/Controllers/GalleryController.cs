@@ -19,7 +19,7 @@
 
     public class GalleryController : BaseController
     {
-        private const int GaleryItemsPerPage = 9;
+        private const int GaleryItemsPerPage = 8;
         private readonly IFileService fileService;
         private readonly IDoctorService doctorService;
         private readonly Cloudinary cloudinary;

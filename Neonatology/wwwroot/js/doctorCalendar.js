@@ -1,5 +1,6 @@
 ﻿document.addEventListener('DOMContentLoaded', async function () {
     let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    alertify.set('notifier', 'position', 'top-center');
 
     let calendar = generateCalendar();
     calendar.render();
@@ -186,7 +187,7 @@
                 throw new Error(error.response);
             }
         } catch (err) {
-            notify(err.message);
+            alertify.error(err.message);
             throw err;
         }
 
@@ -229,7 +230,7 @@
             }
         } catch (err) {
             $('#doctorModal').modal('hide');
-            notify(err.message);
+            alertify.error(err.message);
             throw err;
         }
 

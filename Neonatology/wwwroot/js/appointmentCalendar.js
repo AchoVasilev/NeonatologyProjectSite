@@ -1,5 +1,7 @@
 ﻿var calendar; document.addEventListener('DOMContentLoaded', async function () {
     let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    alertify.set('notifier', 'position', 'top-center');
+
     let calendar = await generateCalendar();
 
     calendar.render();
@@ -116,7 +118,6 @@
     async function onSubmit(ev, info) {
         ev.preventDefault();
 
-        $('#modal').modal('hide');
         const form = new FormData(ev.target);
         const parentFirstName = form.get('ParentFirstName').trim();
         const parentLastName = form.get('ParentLastName').trim();
@@ -127,16 +128,23 @@
         const doctorId = document.getElementById('doctorId').value;
 
         if (parentFirstName == '' || parentLastName == '' || childFirstName == '' || phoneNumber == '') {
-            return notify("Всички полета са задължителни");
+            return alertify.error("Всички полета са задължителни");
         }
 
+        const saveBtn = document.getElementById('saveBtn');
+        saveBtn.disabled = true;
+        $('#modal').modal('hide');
+
         const start = info.event.start;
+        const month = start.getMonth() + 1;
+        const startDate = start.getDate() + '/' + month + '/' + start.getFullYear() + ' ' + start.toLocaleTimeString();
         const end = info.event.end;
+        const endDate = end.getDate() + '/' + month + '/' + end.getFullYear() + ' ' + end.toLocaleTimeString();
 
         const data = {
             doctorId,
-            start,
-            end,
+            start: startDate,
+            end: endDate,
             parentFirstName,
             parentLastName,
             childFirstName,
@@ -162,14 +170,18 @@
             }
 
             const obj = await response.json();
-            notify(obj.message);
+            ev.target.reset();
+            alertify.success(obj.message);
         } catch (err) {
-            console.log(err.message)
-            notify(err.message);
+            alertify.error(err.message);
             throw err;
         }
 
         calendar.refetchEvents();
+        saveBtn.disabled = false;
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000)
     }
 
     async function getSlots(url) {

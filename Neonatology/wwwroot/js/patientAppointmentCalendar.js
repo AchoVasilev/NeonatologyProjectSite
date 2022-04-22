@@ -1,5 +1,8 @@
 ﻿document.addEventListener('DOMContentLoaded', async function () {
     let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    alertify.set('notifier', 'position', 'top-center');
+
     let calendar = await generateCalendar();
 
     calendar.render();
@@ -124,7 +127,7 @@
         const doctorId = document.getElementById('doctorId').value;
 
         if (childFirstName == '') {
-            return notify("Всички полета са задължителни");
+            return alertify.error("Всички полета са задължителни");
         }
 
         const start = info.event.start;
@@ -155,12 +158,12 @@
             }
 
             const obj = await response.json();
-            notify(obj.message);
+            alertify.error(obj.message);
 
             calendar.render();
             setTimeout(() => window.location = '/appointment/myappointments', 2000);
         } catch (err) {
-            notify(err.message);
+            alertify.error(err.message);
             throw err;
         }
     }

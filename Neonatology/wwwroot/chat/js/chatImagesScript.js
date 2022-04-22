@@ -3,6 +3,7 @@
 });
 
 const errorImgMsg = "Файлът е прекалено голям!";
+alertify.set('notifier', 'position', 'top-center');
 
 const imageUpload = document.getElementById('upload-image');
 $(imageUpload).on('change', function () {
@@ -16,7 +17,7 @@ $(imageUpload).on('change', function () {
         if (imageExtensions.includes(fileExtension.toUpperCase())) {
             let sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
             if (sizeInMB > 15) {
-                notify(msg)
+                alertify.error(msg)
                 continue;
             }
 
@@ -24,7 +25,7 @@ $(imageUpload).on('change', function () {
         } else {
             let sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
             if (sizeInMB > 15) {
-                notify(msg)
+                alertify.error(msg)
                 continue;
             }
 

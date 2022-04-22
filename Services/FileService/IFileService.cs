@@ -1,5 +1,6 @@
 ﻿namespace Services.FileService
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using CloudinaryDotNet;
@@ -20,6 +21,6 @@
 
         Task AddImageToDatabase(IFileServiceModel model);
 
-        Task<UploadImageModel> GetGaleryImagesAsync(int page, int itemsPerPage);
+        Task<GalleryViewModel> GetGaleryImagesAsync(int page, int itemsPerPage);
     }
 }

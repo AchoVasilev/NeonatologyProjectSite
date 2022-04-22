@@ -1,6 +1,5 @@
 ﻿namespace ViewModels.Appointments
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
 
     using static Data.Common.DataConstants.Constants;
@@ -9,9 +8,9 @@
 
     public class CreateAppointmentModel
     {
-        public DateTime Start { get; set; }
+        public string Start { get; set; }
 
-        public DateTime End { get; set; }
+        public string End { get; set; }
 
         [Required(ErrorMessage = RequiredFieldErrorMsg)]
         [EmailAddress(ErrorMessage = IvalidEmailErrorMsg)]

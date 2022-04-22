@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - @Common.GlobalConstants.SystemName</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="~css/profile.css" />
-    <link rel="stylesheet" href="~css/allusers.css" />
+    <link rel="stylesheet" href="~/css/profile.css" />
+    <link rel="stylesheet" href="~/css/allusers.css" />
     <link rel="stylesheet" href="~/chat/css/chat.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/fonts/css/font-awesome.css" />
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/alertifyjs/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="~/lib/alertifyjs/build/css/alertify.rtl.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     @await this.RenderSectionAsync("Styles", required: false)
 </head>
-<body>
+<body style="margin-bottom: 0">
     <audio id="notificationAudio">
         <source id="targetAudio" src="~/NotificationSound1.mp3" type="audio/mpeg">
     </audio>
@@ -47,40 +49,31 @@
             </div>
         </nav>
     </header>
-    <div class="container-fluid">
-        <!-- Notifications -->
-        <section id="notifications">
-            <div id="errorBox" class="notification">
-                <span>MESSAGE</span>
-            </div>
-        </section>
+    <main role="main" class="pb-5 py-5">
         <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        @RenderBody()
+    </main>
 
-    <footer class="footer-footy bg-info" style="bottom: 0;position: absolute;width: 100%;padding: 8px 0px;">
-        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+    <footer class="footer bg-info" style="padding: 8px 0px;">
+        <ul class="nav justify-content-center border-bottom pb-2 mb-2">
             <li class="nav-item">
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link px-2 text-white">Начало</a>
-                </li>
+            </li>
             <li class="nav-item">
                 <a asp-area="" asp-controller="Home" asp-action="Privacy" class="nav-link px-2 text-white">Политика за поверителност</a>
             </li>
             <li class="nav-item">
                 <a asp-area="" asp-controller="Profile" asp-action="Index" class="nav-link px-2 text-white">Профил</a>
-                </li>
+            </li>
             <li class="nav-item">
-                <a asp-area="" asp-controller="Offer" asp-action="All"  class="nav-link px-2 text-white">Нашите услуги</a>
-                </li>
+                <a asp-area="" asp-controller="Offer" asp-action="All" class="nav-link px-2 text-white">Нашите услуги</a>
+            </li>
             <li class="nav-item">
                 <a asp-area="" asp-controller="Feedback" asp-action="Send" class="nav-link px-2 text-white">Свържете се с нас</a>
-                </li>
+            </li>
         </ul>
         <p class="text-center">&copy; 2021 - @DateTime.UtcNow.Year - @Common.GlobalConstants.SystemName</p>
     </footer>
-
     @if (SignInManager.IsSignedIn(User))
     {
         <a asp-area="" asp-controller="Notification" asp-action="Index" class="stickyIcon float">
@@ -93,10 +86,9 @@
 
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="~/js/errorNotify.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/alertifyjs/build/alertify.min.js"></script>
     <script type="text/javascript" src="~/lib/microsoft/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/notification.js"></script>
-    <script type="text/javascript" src="~/lib/alertifyjs/build/alertify.min.js"></script>
     <script type="text/javascript" src="~/chatVoice/js/utilsRTC.js"></script>
     <script type="text/javascript" src="~/chatVoice/js/constWebRTC.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/adapterjs/0.15.5/adapter.min.js"></script>

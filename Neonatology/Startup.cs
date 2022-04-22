@@ -81,7 +81,7 @@ using System.Globalization;
 
             services.AddDbContext<NeonatologyDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("LocalConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddControllersWithViews(configure =>
@@ -105,7 +105,7 @@ using System.Globalization;
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.MinimumSameSitePolicy = SameSiteMode.Strict;
             });
 
             services.AddSingleton(Configuration);
@@ -170,7 +170,7 @@ using System.Globalization;
             configuration.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
             .UseSimpleAssemblyNameTypeSerializer()
             .UseRecommendedSerializerSettings()
-            .UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection"), new SqlServerStorageOptions
+            .UseSqlServerStorage(Configuration.GetConnectionString("LocalConnection"), new SqlServerStorageOptions
             {
                 CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
                 SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),

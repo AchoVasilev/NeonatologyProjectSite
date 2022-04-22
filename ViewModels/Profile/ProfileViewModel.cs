@@ -1,7 +1,5 @@
 ﻿namespace ViewModels.Profile
 {
-    using System;
-
     public class ProfileViewModel
     {
         public string Id { get; init; }

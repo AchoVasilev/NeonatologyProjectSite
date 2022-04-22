@@ -1,9 +1,13 @@
 ﻿namespace Services.FileService
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
@@ -20,10 +24,12 @@
     public class FileService : IFileService
     {
         private readonly NeonatologyDbContext data;
+        private readonly IMapper mapper;
 
-        public FileService(NeonatologyDbContext data)
+        public FileService(NeonatologyDbContext data, IMapper mapper)
         {
             this.data = data;
+            this.mapper = mapper;
         }
 
         public async Task<IFileServiceModel> UploadImage(Cloudinary cloudinary, IFormFile image, string folderName)
@@ -144,9 +150,9 @@
             await data.SaveChangesAsync();
         }
 
-        public async Task<UploadImageModel> GetGaleryImagesAsync(int page, int itemsPerPage)
+        public async Task<GalleryViewModel> GetGaleryImagesAsync(int page, int itemsPerPage)
         {
-            var images = await data.Images
+            var images = await this.data.Images
                 .Where(x => string.IsNullOrWhiteSpace(x.UserId) &&
                 x.IsDeleted == false)
                 .OrderBy(x => x.CreatedOn)
@@ -154,14 +160,23 @@
                 .Take(itemsPerPage)
                 .ToListAsync();
 
-            var model = new UploadImageModel();
+            var count = await this.data.Images
+                .Where(x => string.IsNullOrWhiteSpace(x.UserId) && x.IsDeleted == false)
+                .CountAsync();
 
-            foreach (var image in images)
+            var viewModel = new GalleryViewModel
             {
-                model.Urls.Add(image.Url);
+                ItemCount = count,
+                ItemsPerPage = itemsPerPage,
+                PageNumber = page
+            };
+
+            foreach (var url in images)
+            {
+                viewModel.ImageUrls.Add(url.Url);
             }
 
-            return model;
+            return viewModel;
         }
 
         public async Task DeleteFile(Cloudinary cloudinary, string name, string folderName)

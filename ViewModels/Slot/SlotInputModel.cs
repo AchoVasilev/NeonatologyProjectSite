@@ -1,7 +1,5 @@
 ﻿namespace ViewModels.Slot
 {
-    using System;
-
     public class SlotInputModel
     {
         public string StartDate { get; set; }

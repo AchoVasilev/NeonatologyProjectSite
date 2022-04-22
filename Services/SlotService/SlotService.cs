@@ -93,10 +93,16 @@
         public async Task<int> DeleteSlotById(int id)
         {
             var slot = await this.data.AppointmentSlots
-                                .FindAsync(id);
+                                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (slot is null)
+            {
+                return 0;
+            }
 
             slot.IsDeleted = true;
             slot.DeletedOn = DateTime.UtcNow;
+
             await this.data.SaveChangesAsync();
 
             return slot.Id;

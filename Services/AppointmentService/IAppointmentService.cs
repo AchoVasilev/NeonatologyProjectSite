@@ -1,5 +1,6 @@
 ﻿namespace Services.AppointmentService
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -25,7 +26,7 @@
 
         Task<ICollection<TakenAppointmentsViewModel>> GetTakenAppointmentSlots();
 
-        Task<bool> AddAsync(string doctorId, CreateAppointmentModel model);
+        Task<bool> AddAsync(string doctorId, CreateAppointmentModel model, DateTime startDate, DateTime endDate);
 
         Task<bool> AddAsync(string doctorId, PatientAppointmentCreateModel model);
 

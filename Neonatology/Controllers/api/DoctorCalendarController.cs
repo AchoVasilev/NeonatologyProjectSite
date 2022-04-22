@@ -12,7 +12,6 @@
     using static Common.GlobalConstants.MessageConstants;
     using Services.AppointmentService;
     using Services.SlotService;
-    using System.Globalization;
 
     [ApiController]
     [Authorize(Roles = DoctorConstants.DoctorRoleName)]

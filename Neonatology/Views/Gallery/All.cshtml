@@ -1,30 +1,17 @@
 ﻿@inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-@model UploadImageModel
+@model GalleryViewModel
 
 @{
     ViewData["Title"] = "Галерия";
 }
 
-@if (SignInManager.IsSignedIn(User) &&
-User.IsInRole(DoctorConstants.DoctorRoleName) ||
-User.IsInRole(Common.GlobalConstants.AdministratorRoleName))
-{
-    <form method="post" enctype="multipart/form-data">
-        <div class="row-sm">
-            <label asp-for="Images">Качи снимки</label>
-            <input asp-for="Images" class="form-control" />
-            <span asp-validation-for="Images" class="text-danger"></span>
-        </div>
-        <button type="submit" class="btn btn-primary hvr-grow">Качи снимки</button>
-    </form>
-}
-<div class="container-fluid">
+<div class="container-fluid pb-4 mb-4">
     <h1 class="text-center">@ViewData["Title"]</h1>
 
     <hr />
 
-    @if (Model.Urls.Count == 0)
+    @if (Model.ImageUrls.Count == 0)
     {
         <h3 style="margin-top:2%">
             Все още няма добавени снимки
@@ -33,47 +20,48 @@ User.IsInRole(Common.GlobalConstants.AdministratorRoleName))
     else
     {
         <div class="row">
-            @for (int i = 0; i < Model.Urls.Count; i++)
+            @foreach(var url in Model.ImageUrls)
             {
-                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                    <img src="@Model.Urls[i]" class="w-100 shadow-1-strong rounded mb-4" alt="children" />
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <img src="@url"
+                 class="w-100 shadow-1-strong rounded mb-4" alt="children" />
                 </div>
             }
-            <div class="row">
-                <div class="col-12 text-center mt-4 mt-sm-5">
-                    <ul class="pagination justify-content-center mb-0">
-                        <li class="page-item @(!Model.HasPreviousPage ? "disabled" : string.Empty)">
-                            <a class="page-link" asp-area="" asp-controller="Gallery" asp-action="All" asp-route-page="@Model.PreviousPageNumber">Назад</a>
-                        </li>
-                        @for (int i = Model.PageNumber - 2; i < Model.PageNumber; i++)
+        </div>
+        <div class="row pb-4 mb-4">
+            <div class="col-12 text-center mt-4 mt-sm-5 pb-4 mb-4">
+                <ul class="pagination justify-content-center mb-4">
+                    <li class="page-item @(!Model.HasPreviousPage ? "disabled" : string.Empty)">
+                        <a class="page-link" asp-area="" asp-controller="Gallery" asp-action="All" asp-route-page="@Model.PreviousPageNumber">Назад</a>
+                    </li>
+                    @for (int i = Model.PageNumber - 2; i < Model.PageNumber; i++)
+                    {
+                        if (i > 0)
                         {
-                            if (i > 0)
-                            {
-                                <li class="page-item">
-                                    <a class="page-link" asp-area="" asp-controller="Gallery" asp-action="All" asp-route-page="@i">@i</a>
-                                </li>
-                            }
+                            <li class="page-item">
+                                <a class="page-link" asp-area="" asp-controller="Gallery" asp-action="All" asp-route-page="@i">@i</a>
+                            </li>
                         }
-                        <li class="page-item active">
-                            <span class="page-link">
-                                @Model.PageNumber
-                                <span class="sr-only">(текуща стр.)</span>
-                            </span>
-                        </li>
-                        @for (int i = Model.PageNumber + 1; i <= Model.PageNumber + 2; i++)
+                    }
+                    <li class="page-item active">
+                        <span class="page-link">
+                            @Model.PageNumber
+                            <span class="sr-only">(текуща стр.)</span>
+                        </span>
+                    </li>
+                    @for (int i = Model.PageNumber + 1; i <= Model.PageNumber + 2; i++)
+                    {
+                        if (i <= Model.PagesCount)
                         {
-                            if (i <= Model.PagesCount)
-                            {
-                                <li class="page-item">
-                                    <a class="page-link" asp-area="" asp-controller="Gallery" asp-action="All" asp-route-page="@i">@i</a>
-                                </li>
-                            }
+                            <li class="page-item">
+                                <a class="page-link" asp-area="" asp-controller="Gallery" asp-action="All" asp-route-page="@i">@i</a>
+                            </li>
                         }
-                        <li class="page-item @(!Model.HasNextPage ? "disabled" : string.Empty)">
-                            <a class="page-link" asp-area="" asp-controller="Gallery" asp-action="All" asp-route-page="@Model.NextPageNumber">Следваща</a>
-                        </li>
-                    </ul>
-                </div>
+                    }
+                    <li class="page-item @(!Model.HasNextPage ? "disabled" : string.Empty)">
+                        <a class="page-link" asp-area="" asp-controller="Gallery" asp-action="All" asp-route-page="@Model.NextPageNumber">Следваща</a>
+                    </li>
+                </ul>
             </div>
         </div>
     }
