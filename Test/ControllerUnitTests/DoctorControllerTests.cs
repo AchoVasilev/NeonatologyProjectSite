@@ -129,13 +129,15 @@
         }
 
         [Fact]
-        public void CalendarShouldReturnViewAndModel()
+        public async Task CalendarShouldReturnViewAndModel()
         {
             // Arrange
-            var controller = new DoctorController(null, null);
+            var doctorService = new Mock<IDoctorService>();
+            var cityService = new Mock<ICityService>();
+            var controller = new DoctorController(doctorService.Object, cityService.Object);
 
             // Act
-            var result = controller.Calendar();
+            var result = await controller.Calendar();
 
             // Assert
             var route = Assert.IsType<ViewResult>(result);

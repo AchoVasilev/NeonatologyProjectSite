@@ -55,7 +55,7 @@
         public void GaleryAllReturnsView()
         {
             this.driver.Navigate()
-               .GoToUrl(Url + "Galery/All");
+               .GoToUrl(Url + "Gallery/All?page=1");
 
             Assert.Equal("Галерия - Педиамед", this.driver.Title);
             Assert.Contains("Галерия", this.driver.PageSource);

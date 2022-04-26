@@ -1135,12 +1135,12 @@
                 PhoneNumber = "098785623",
                 DoctorId = "pat",
                 Email = "gosho@abv.bg",
-                Start = DateTime.UtcNow.AddDays(5),
-                End = DateTime.UtcNow.AddDays(5).AddMinutes(10)
+                Start = "23.04.2022 15:33",
+                End = "28.04.2022 15:43"
             };
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.AddAsync(doctor.Id, model);
+            var result = await service.AddAsync(doctor.Id, model, DateTime.UtcNow, DateTime.UtcNow.AddDays(1));
 
             Assert.True(result);
             Assert.Equal(1, dataMock.Appointments.Count());
@@ -1175,8 +1175,8 @@
                 ParentLastName = "Vanev",
                 PhoneNumber = "098785623",
                 DoctorId = "pat",
-                DateTime = new DateTime(2022, 01, 29, 08, 30, 00),
-                End = DateTime.UtcNow.AddDays(5).AddMinutes(10)
+                DateTime = DateTime.Parse("29.01.2022 08:30"),
+                End = DateTime.Parse("03.02.2022 08:40")
             };
 
             await dataMock.AppointmentCauses.AddRangeAsync(causes);
@@ -1193,12 +1193,12 @@
                 PhoneNumber = "098785623",
                 DoctorId = "pat",
                 Email = "gosho@abv.bg",
-                Start = new DateTime(2022, 01, 29, 08, 30, 00),
-                End = DateTime.UtcNow.AddDays(5).AddMinutes(10)
+                Start = "29.01.2022 08:30",
+                End = "03.02.2022 08:40"
             };
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.AddAsync(doctor.Id, model);
+            var result = await service.AddAsync(doctor.Id, model, DateTime.Parse("29.01.2022 08:30"), DateTime.Parse("30.01.2022 08:30"));
 
             Assert.False(result);
         }

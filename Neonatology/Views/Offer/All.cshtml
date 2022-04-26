@@ -20,7 +20,8 @@
 </style>
 }
 
-<div class="container jumbotron-opacity">
+<div class="container jumbotron-opacity pb-4 mb-4">
+    <div class="pb-4 mb-4">
     <h1 class="text-center">@ViewBag.Title</h1>
 
     <hr />
@@ -34,7 +35,8 @@
     }
     else
     {
-        <table class="table table-bordered table-striped">
+        <div class="mb-4 pb-4">
+        <table class="table table-bordered table-striped pb-4 mb-4">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">&#8470;</th>
@@ -42,7 +44,7 @@
                     <th scope="col">Цена (лв.)</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="pb-4 mb-4">
                 @foreach (var offer in Model)
                 {
                     <tr>
@@ -55,5 +57,7 @@
                 }
             </tbody>
         </table>
+        </div>
     }
+    </div>
 </div>

@@ -60,21 +60,5 @@
             Assert.Equal("Index", route.ActionName);
             Assert.Equal("Home", route.ControllerName);
         }
-
-        [Fact]
-        public async Task MyFeedbacksShouldReturnViewWithModel()
-        {
-            var feedbacks = new List<FeedbackViewModel>();
-            var serviceMock = new Mock<IFeedbackService>();
-            serviceMock.Setup(x => x.GetUserFeedbacks("gosho@abv.bg"))
-                .ReturnsAsync(feedbacks);
-
-            var controller = new FeedbackController(serviceMock.Object);
-            var result = await controller.MyFeedbacks("gosho@abv.bg");
-
-            var route = Assert.IsType<ViewResult>(result);
-
-            Assert.IsAssignableFrom<ICollection<FeedbackViewModel>>(route.Model);
-        }
     }
 }
