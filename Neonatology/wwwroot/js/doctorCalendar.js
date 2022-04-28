@@ -21,10 +21,10 @@
                 title.textContent = dateText;
 
                 const newDate = new Date(date);
-                const saveBtn = document.getElementById('save');
-                saveBtn.addEventListener('click', e => saveChanges(e, newDate));
 
                 $('#doctorModal').modal();
+                const slotForm = document.getElementById('slotsForm');
+                slotForm.addEventListener('submit', e => saveChanges(e, newDate, slotForm), false);
             },
             headerToolbar: {
                 center: 'title',
@@ -51,7 +51,6 @@
                                 }
                             });
 
-                            calendar.refetchEvents();
                         }
 
                         event.target.disabled = true;
@@ -75,7 +74,6 @@
                                 }
                             });
 
-                            calendar.refetchEvents()
                         }
 
                         event.target.disabled = true;
@@ -196,21 +194,22 @@
         calendar.refetchEvents();
     }
 
-    async function saveChanges(ev, date) {
-        const startTime = document.getElementById('start').value;
-        const endTime = document.getElementById('end').value;
+    async function saveChanges(ev, date, slotForm) {
+        ev.preventDefault();
+        const form = new FormData(slotForm);
+        const slotDurationMinutes = form.get('interval');
+        const addressId = form.get('address-id');
+        const endHour = form.get('endHour');
+        const startHour = form.get('startHour');
 
         const month = date.getMonth() + 1;
-        const startStr = date.getDate() + '/' + month + '/' + date.getFullYear() + ' ' + startTime;
-        const endStr = date.getDate() + '/' + month + '/' + date.getFullYear() + ' ' + endTime;
-
-        const scale = document.getElementById('minutes').value;
-        const addressId = document.getElementById('address-id').value;
+        const startStr = date.getDate() + '/' + month + '/' + date.getFullYear() + ' ' + startHour;
+        const endStr = date.getDate() + '/' + month + '/' + date.getFullYear() + ' ' + endHour;
 
         const params = {
             startDate: startStr,
             endDate: endStr,
-            slotDurationMinutes: Number(scale),
+            slotDurationMinutes: Number(slotDurationMinutes),
             addressId
         };
 

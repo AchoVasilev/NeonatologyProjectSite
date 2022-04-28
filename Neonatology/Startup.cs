@@ -2,7 +2,7 @@ namespace Neonatology
 {
     using System;
     using System.Collections.Generic;
-using System.Globalization;
+    using System.Globalization;
 
     using CloudinaryDotNet;
 
@@ -105,7 +105,7 @@ using System.Globalization;
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.Strict;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             services.AddSingleton(Configuration);
@@ -215,9 +215,9 @@ using System.Globalization;
             app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
 
             app.UseRouting();
-            app.UseCookiePolicy();
 
             app.UseAuthentication();
             app.UseAuthorization();

@@ -8,7 +8,7 @@
 
     public interface ISlotService
     {
-        Task<ICollection<SlotViewModel>> GenerateSlots(DateTime start, DateTime end, int slotDurationMinutes, int addressId);
+        Task<bool> GenerateSlots(DateTime start, DateTime end, int slotDurationMinutes, int addressId);
 
         Task<ICollection<SlotViewModel>> GetGabrovoSlots();
 

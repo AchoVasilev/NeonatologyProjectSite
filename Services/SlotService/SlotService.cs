@@ -27,7 +27,7 @@
             this.mapper = mapper;
         }
 
-        public async Task<ICollection<SlotViewModel>> GenerateSlots(DateTime start, DateTime end, int slotDurationMinutes, int addressId)
+        public async Task<bool> GenerateSlots(DateTime start, DateTime end, int slotDurationMinutes, int addressId)
         {
             var slots = new List<AppointmentSlot>();
 
@@ -50,12 +50,15 @@
                 slots.Add(slot);
             }
 
-            var slotsModel = this.mapper.Map<ICollection<SlotViewModel>>(slots);
+            if (slots.Count == 0)
+            {
+                return false;
+            }
 
             await this.data.AppointmentSlots.AddRangeAsync(slots);
             await this.data.SaveChangesAsync();
 
-            return slotsModel;
+            return true;
         }
 
         public async Task<ICollection<SlotViewModel>> GetGabrovoSlots()

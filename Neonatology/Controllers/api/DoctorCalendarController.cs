@@ -30,7 +30,7 @@
         [HttpGet("gabrovo")]
         public async Task<JsonResult> GetDoctorGabrovoAppointments()
         {
-            var result = await this.appointmentService.GetPlevenAppointments();
+            var result = await this.appointmentService.GetGabrovoAppointments();
 
             foreach (var res in result)
             {

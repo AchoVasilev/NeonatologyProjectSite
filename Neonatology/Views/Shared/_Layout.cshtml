@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - @Common.GlobalConstants.SystemName</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="~/css/profile.css" />
-    <link rel="stylesheet" href="~/css/allusers.css" />
-    <link rel="stylesheet" href="~/chat/css/chat.css" />
+    <link rel="stylesheet" href="~/css/profile.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/allusers.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/chat/css/chat.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/fonts/css/font-awesome.css" />
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" />
     <link rel="stylesheet" href="~/lib/alertifyjs/build/css/alertify.min.css" />
     <link rel="stylesheet" href="~/lib/alertifyjs/build/css/alertify.rtl.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
     @await this.RenderSectionAsync("Styles", required: false)
 </head>
 <body style="margin-bottom: 0">
@@ -88,9 +88,9 @@
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="~/lib/alertifyjs/build/alertify.min.js"></script>
     <script type="text/javascript" src="~/lib/microsoft/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/notification.js"></script>
-    <script type="text/javascript" src="~/chatVoice/js/utilsRTC.js"></script>
-    <script type="text/javascript" src="~/chatVoice/js/constWebRTC.js"></script>
+    <script type="text/javascript" src="~/js/notification.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/chatVoice/js/utilsRTC.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/chatVoice/js/constWebRTC.js" asp-append-version="true"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/adapterjs/0.15.5/adapter.min.js"></script>
     @*    <script type="text/javascript" src="~/chatVoice/js/connectionHub.js"></script>*@
     @await RenderSectionAsync("Scripts", required: false)

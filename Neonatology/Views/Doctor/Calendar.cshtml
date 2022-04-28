@@ -55,10 +55,10 @@
     </div>
 </div>
 
-<div class="modal" id="doctorModal" tabindex="-1" role="dialog">
+<div class="modal" id="doctorModal" method='post' tabindex="-1" role="dialog">
     <div class="container-fluid">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <form class="modal-content" id="slotsForm">
                 <div class="modal-header">
                     <h5 asp-for="Date" id="doctorTitle" class="modal-title"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -71,7 +71,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label class="my-1 mr-2">Начален час</label>
-                                <select id="start" class="custom-select">
+                                <select id="start" class="custom-select" name="startHour">
                                     <option selected>Избери час</option>
                                     <option value="08:00">08:00</option>
                                     <option value="08:30">08:30</option>
@@ -104,7 +104,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label class="my-1 mr-2">Краен час</label>
-                                <select id="end" class="custom-select">
+                                <select id="end" class="custom-select" name="endHour">
                                     <option selected>Избери час</option>
                                     <option value="08:00">08:00</option>
                                     <option value="08:30">08:30</option>
@@ -137,7 +137,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label class="my-1 mr-2">По</label>
-                                <select id="minutes" class="custom-select">
+                                <select id="minutes" class="custom-select" name="interval">
                                     <option selected>Избери минути</option>
                                     <option value="10">10 минути</option>
                                     <option value="15">15 минути</option>
@@ -159,7 +159,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label class="my-1 mr-2">Град</label>
-                                    <select asp-for="@Model.AddressId" id="address-id" class="form-control">
+                                    <select asp-for="@Model.AddressId" id="address-id" name="address-id" class="form-control">
                                         @foreach (var city in Model.Cities)
                                         {
                                             <option value="@city.Id">@city.City.Name</option>
@@ -173,9 +173,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary hvr-grow" data-dismiss="modal">Затвори</button>
-                    <button id="save" class="btn btn-success hvr-grow">Запази</button>
+                    <input id="save" type="submit" class="btn btn-success hvr-grow" value="Запази"/>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
