@@ -54,49 +54,88 @@
                         .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
 
-        public async Task<ICollection<AppointmentViewModel>> GetUpcomingUserAppointments(string patientId)
+        public async Task<AllAppointmentsViewModel> GetUpcomingUserAppointments(string patientId, int itemsPerPage, int page)
         {
             var appointments = await this.data.Appointments
-                                   .Where(x => x.PatientId == patientId 
-                                   && x.IsDeleted == false && x.DateTime.Date > DateTime.UtcNow.Date)
+                                   .Where(x => x.PatientId == patientId && x.IsDeleted == false && x.DateTime.Date >= DateTime.UtcNow.Date)
+                                   .OrderBy(x => x.DateTime)
+                                   .Skip((page - 1) * itemsPerPage)
+                                   .Take(itemsPerPage)
+                                   .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                                    .ToListAsync();
 
-            var result = this.mapper.Map<ICollection<AppointmentViewModel>>(appointments);
+            var model = new AllAppointmentsViewModel
+            {
+                Appointments = appointments,
+                ItemCount = appointments.Count,
+                ItemsPerPage = itemsPerPage,
+                PageNumber = page
+            };
 
-            return result;
+            return model;
         }
 
-        public async Task<ICollection<AppointmentViewModel>> GetPastUserAppointments(string patientId)
+        public async Task<AllAppointmentsViewModel> GetPastUserAppointments(string patientId, int itemsPerPage, int page)
         {
             var appointments = await this.data.Appointments
-                                   .Where(x => x.PatientId == patientId && x.IsDeleted == false && x.DateTime.Date <= DateTime.UtcNow.Date)
+                                   .Where(x => x.PatientId == patientId && x.IsDeleted == false && x.DateTime.Date < DateTime.UtcNow.Date)
+                                   .OrderBy(x => x.DateTime)
+                                   .Skip((page - 1) * itemsPerPage)
+                                   .Take(itemsPerPage)
+                                   .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                                    .ToListAsync();
 
-            var result = this.mapper.Map<ICollection<AppointmentViewModel>>(appointments);
+            var model = new AllAppointmentsViewModel
+            {
+                Appointments = appointments,
+                ItemCount = appointments.Count,
+                ItemsPerPage = itemsPerPage,
+                PageNumber = page
+            };
 
-            return result;
+            return model;
         }
 
-        public async Task<ICollection<AppointmentViewModel>> GetUpcomingDoctorAppointments(string doctorId)
+        public async Task<AllAppointmentsViewModel> GetUpcomingDoctorAppointments(string doctorId, int itemsPerPage, int page)
         {
             var appointments = await this.data.Appointments
-                                   .Where(x => x.DoctorId == doctorId && x.IsDeleted == false && x.DateTime.Date > DateTime.UtcNow.Date)
+                                   .Where(x => x.DoctorId == doctorId && x.IsDeleted == false && x.DateTime.Date >= DateTime.UtcNow.Date)
+                                   .OrderBy(x => x.DateTime)
+                                   .Skip((page - 1) * itemsPerPage)
+                                   .Take(itemsPerPage)
+                                   .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                                    .ToListAsync();
 
-            var result = this.mapper.Map<ICollection<AppointmentViewModel>>(appointments);
+            var model = new AllAppointmentsViewModel
+            {
+                Appointments = appointments,
+                ItemCount = appointments.Count,
+                ItemsPerPage = itemsPerPage,
+                PageNumber = page
+            };
 
-            return result;
+            return model;
         }
 
-        public async Task<ICollection<AppointmentViewModel>> GetPastDoctorAppointments(string doctorId)
+        public async Task<AllAppointmentsViewModel> GetPastDoctorAppointments(string doctorId, int itemsPerPage, int page)
         {
             var appointments = await this.data.Appointments
-                                   .Where(x => x.DoctorId == doctorId && x.IsDeleted == false && x.DateTime.Date <= DateTime.UtcNow.Date)
+                                   .Where(x => x.DoctorId == doctorId && x.IsDeleted == false && x.DateTime.Date < DateTime.UtcNow.Date)
+                                   .OrderBy(x => x.DateTime)
+                                   .Skip((page - 1) * itemsPerPage)
+                                   .Take(itemsPerPage)
+                                   .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                                    .ToListAsync();
 
-            var result = this.mapper.Map<ICollection<AppointmentViewModel>>(appointments);
+            var model = new AllAppointmentsViewModel
+            {
+                Appointments = appointments,
+                ItemCount = appointments.Count,
+                ItemsPerPage = itemsPerPage,
+                PageNumber = page
+            };
 
-            return result;
+            return model;
         }
 
         public async Task<ICollection<TakenAppointmentsViewModel>> GetTakenAppointmentSlots()
@@ -155,6 +194,14 @@
                 return false;
             }
 
+            var patient = await this.data.Patients
+                .FirstOrDefaultAsync(x => x.Id == model.PatientId);
+
+            if (patient == null)
+            {
+                return false;
+            }
+
             var appointment = new Appointment()
             {
                 DateTime = model.Start.ToLocalTime(),
@@ -163,7 +210,10 @@
                 PatientId = model.PatientId,
                 ChildFirstName = model.ChildFirstName,
                 AppointmentCauseId = model.AppointmentCauseId,
-                AddressId = model.AddressId
+                AddressId = model.AddressId,
+                ParentFirstName = patient.FirstName,
+                ParentLastName = patient.LastName,
+                PhoneNumber = patient.Phone,
             };
 
             await this.data.Appointments.AddAsync(appointment);
@@ -199,15 +249,14 @@
                            .Where(x => x.Doctor.UserId == doctorUserId &&
                                    x.DateTime.Date == DateTime.Now.Date &&
                                    x.IsDeleted == false)
+                           .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                            .ToListAsync();
 
-            var result = this.mapper.Map<ICollection<AppointmentViewModel>>(appointments);
-
-            return result;
+            return appointments;
         }
 
         public async Task<int> GetTotalAppointmentsCount()
-            => await this.data.Appointments.CountAsync();
+            => await this.data.Appointments.CountAsync(x => x.IsDeleted == false);
 
         public async Task<bool> DeleteAppointment(int appointmentId)
         {

@@ -4,18 +4,20 @@
 
     public class SlotViewModel
     {
-        public int Id { get; set; }
+        public int Id { get; init; }
 
-        public DateTime Start { get; set; }
+        public DateTime Start { get; init; }
 
-        public DateTime End { get; set; }
+        public DateTime End { get; init; }
 
-        public string Status { get; set; }
+        public string Status { get; init; }
 
-        public int AddressId { get; set; }
+        public string Text { get; init; }
 
-        public string AddressCityName { get; set; }
+        public int AddressId { get; init; }
 
-        public int AddressCityId { get; set; }
+        public string AddressCityName { get; init; }
+
+        public int AddressCityId { get; init; }
     }
 }

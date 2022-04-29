@@ -3,8 +3,6 @@
     using System.Net;
     using System.Threading.Tasks;
 
-    using IntegrationTests.Helpers;
-
     using Microsoft.AspNetCore.Mvc.Testing;
 
     using Neonatology;

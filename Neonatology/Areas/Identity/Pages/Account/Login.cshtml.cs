@@ -19,6 +19,8 @@ namespace Neonatology.Areas.Identity.Pages.Account
 
     using Services;
 
+    using static Common.GlobalConstants;
+
     public class LoginModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> signInManager;
@@ -44,12 +46,12 @@ namespace Neonatology.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = MessageConstants.RequiredFieldErrorMsg)]
             [Display(Name = "И-мейл")]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = MessageConstants.RequiredFieldErrorMsg)]
             [Display(Name = "Парола")]
             [DataType(DataType.Password)]
             public string Password { get; set; }

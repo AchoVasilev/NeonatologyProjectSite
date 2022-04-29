@@ -20,20 +20,18 @@
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly RoleManager<ApplicationRole> roleManager;
         private readonly ILogger<RegisterModel> logger;
         private readonly ReCaptchaService reCaptchaService;
+
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            RoleManager<ApplicationRole> roleManager,
             ReCaptchaService reCaptchaService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
-            this.roleManager = roleManager;
             this.reCaptchaService = reCaptchaService;
         }
 

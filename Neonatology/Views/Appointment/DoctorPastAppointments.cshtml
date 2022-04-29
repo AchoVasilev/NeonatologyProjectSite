@@ -6,7 +6,7 @@
 }
 
 @{
-    ViewData["Title"] = "Моите часове";
+    ViewData["Title"] = "Минали часове";
 }
 
 @section head{
@@ -21,52 +21,19 @@
 }
 
 <div class="container jumbotron-opacity">
-    <h1 class="text-center">@ViewData["Title"]</h1>
+    <h1 class="text-center">@ViewData["Title"] @(Model.Appointments.Count > 0 ? "(" + (Model.Appointments.Count) + ")" : "")</h1>
 
     <hr />
 
-    @if (!Model.Upcoming.Any() && !Model.Past.Any())
+    @if (Model.Appointments.Count == 0)
     {
         <h3 style="margin-top:2%">
-            Все още нямате записани часове
+            Все още нямате минали часове
         </h3>
     }
 
-    @if (@Model.Upcoming.Any())
+    @if (@Model.Appointments.Count > 0)
     {
-        <h2>Предстоящи (@Model.Upcoming.Count())</h2>
-
-        <table class="table table-bordered table-striped">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">Дата и час</th>
-                    <th scope="col">Имена на пациент</th>
-                    <th scope="col">Тел. номер</th>
-                    <th scope="col">Адрес</th>
-                    <th scope="col">Дете</th>
-                    <th scope="col">Вид преглед</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var appointment in Model.Upcoming)
-                {
-                    <tr>
-                        <th scope="row">@appointment.DateTime</th>
-                        <td>@appointment.PatientFirstName @appointment.PatientLastName</td>
-                        <td>@appointment.PatientPhone</td>
-                        <td>гр. @appointment.Address.City.Name, @appointment.Address.StreetName</td>
-                        <td>@appointment.ChildFirstName</td>
-                        <td>@appointment.AppointmentCauseName</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-
-    @if (@Model.Past.Any())
-    {
-        <h2>Минали (@Model.Past.Count())</h2>
-
         <table class="table table-bordered table-striped">
             <thead class="thead-light">
                 <tr>
@@ -81,12 +48,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var appointment in Model.Past)
+                @foreach (var appointment in Model.Appointments)
                 {
                     <tr>
                         <th scope="row">@appointment.DateTime</th>
-                        <td>@appointment.PatientFirstName @appointment.PatientLastName</td>
-                        <td>@appointment.PatientPhone</td>
+                        <td>@appointment.ParentFirstName @appointment.ParentLastName</td>
+                        <td>@appointment.PhoneNumber</td>
                         <td>гр. @appointment.Address.City.Name, @appointment.Address.StreetName</td>
                         <td>@appointment.ChildFirstName</td>
                         <td>@appointment.AppointmentCauseName</td>
@@ -143,6 +110,43 @@
                 }
             </tbody>
         </table>
+
+        <div class="row pb-4 mb-4">
+            <div class="col-12 text-center mt-4 mt-sm-5 pb-4 mb-4">
+                <ul class="pagination justify-content-center mb-4">
+                    <li class="page-item @(!Model.HasPreviousPage ? "disabled" : string.Empty)">
+                        <a class="page-link" asp-area="" asp-controller="Appointment" asp-action="DoctorUpcomingAppointments" asp-route-page="@Model.PreviousPageNumber">Назад</a>
+                    </li>
+                    @for (int i = Model.PageNumber - 2; i < Model.PageNumber; i++)
+                    {
+                        if (i > 0)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-area="" asp-controller="Appointment" asp-action="DoctorUpcomingAppointments" asp-route-page="@i">@i</a>
+                            </li>
+                        }
+                    }
+                    <li class="page-item active">
+                        <span class="page-link">
+                            @Model.PageNumber
+                            <span class="sr-only">(текуща стр.)</span>
+                        </span>
+                    </li>
+                    @for (int i = Model.PageNumber + 1; i <= Model.PageNumber + 2; i++)
+                    {
+                        if (i <= Model.PagesCount)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-area="" asp-controller="Appointment" asp-action="DoctorUpcomingAppointments" asp-route-page="@i">@i</a>
+                            </li>
+                        }
+                    }
+                    <li class="page-item @(!Model.HasNextPage ? "disabled" : string.Empty)">
+                        <a class="page-link" asp-area="" asp-controller="Appointment" asp-action="DoctorUpcomingAppointments" asp-route-page="@Model.NextPageNumber">Следваща</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     }
 </div>
 

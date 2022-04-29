@@ -36,17 +36,6 @@
       ]
     },
     {
-      "library": "font-awesome@4.7.0",
-      "destination": "wwwroot/lib/fonts",
-      "files": [
-        "css/font-awesome.css",
-        "css/font-awesome.css.map",
-        "css/font-awesome.min.css",
-        "fonts/fontawesome-webfont.woff",
-        "fonts/fontawesome-webfont.woff2"
-      ]
-    },
-    {
       "library": "fullcalendar@5.10.1",
       "destination": "wwwroot/lib/fullcallendar",
       "files": [

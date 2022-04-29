@@ -92,9 +92,9 @@ else
             {
                 <tr>
                     <td>@appointment.DateTime</td>
-                    <td>@appointment.PatientFirstName @appointment.PatientLastName</td>
-                    <td>@appointment.PatientPhone</td>
-                    <td>гр. @appointment.Address</td>
+                    <td>@appointment.ParentFirstName @appointment.ParentLastName</td>
+                    <td>@appointment.PhoneNumber</td>
+                    <td>гр. @appointment.Address.City.Name, @appointment.Address.StreetName</td>
                     <td>@appointment.ChildFirstName</td>
                     <td>@appointment.AppointmentCauseName</td>
                 </tr>

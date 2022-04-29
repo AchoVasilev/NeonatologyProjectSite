@@ -18,7 +18,7 @@
 
         Task<ICollection<SlotViewModel>> GetFreeGabrovoSlots();
 
-        Task<bool> EditSlot(int id, string status);
+        Task<bool> EditSlot(int id, string status, string text);
 
         Task<int> DeleteSlotById(int id);
     }

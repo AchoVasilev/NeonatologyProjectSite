@@ -12,11 +12,11 @@
 
         public DateTime End { get; set; }
 
-        public string PatientFirstName { get; set; }
+        public string ParentFirstName { get; set; }
 
-        public string PatientLastName { get; set; }
+        public string ParentLastName { get; set; }
 
-        public string PatientPhone { get; set; }
+        public string PhoneNumber { get; set; }
 
         public string ChildFirstName { get; set; }
 

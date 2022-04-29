@@ -43,8 +43,6 @@
                                     return await getSlots('/pleven');
                                 }
                             });
-
-                            calendar.refetchEvents();
                         }
 
                         event.target.disabled = true;
@@ -67,8 +65,6 @@
                                     return await getSlots('/gabrovo');
                                 }
                             });
-
-                            calendar.refetchEvents()
                         }
 
                         event.target.disabled = true;

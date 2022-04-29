@@ -32,12 +32,6 @@
         {
             var result = await this.appointmentService.GetGabrovoAppointments();
 
-            foreach (var res in result)
-            {
-                res.DateTime = res.DateTime;
-                res.End = res.DateTime;
-            }
-
             return new JsonResult(result);
         }
 
@@ -45,12 +39,6 @@
         public async Task<JsonResult> GetDoctorPlevenAppointments()
         {
             var result = await this.appointmentService.GetPlevenAppointments();
-
-            foreach (var res in result)
-            {
-                res.DateTime = res.DateTime;
-                res.End = res.DateTime;
-            }
 
             return new JsonResult(result);
         }
@@ -96,7 +84,7 @@
         [HttpPut("{id}")]
         public async Task<IActionResult> EditSlot(SlotEditModel model)
         {
-            var isEdited = await this.slotService.EditSlot(model.Id, model.Status);
+            var isEdited = await this.slotService.EditSlot(model.Id, model.Status, model.Text);
 
             if (isEdited == false)
             {

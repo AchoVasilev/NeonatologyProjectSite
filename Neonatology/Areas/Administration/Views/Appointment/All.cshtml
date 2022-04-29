@@ -39,11 +39,11 @@ else
             @foreach (var appointment in Model)
             {
                 <tr>
-                    <td>@appointment.PatientFirstName</td>
-                    <td>@appointment.PatientLastName</td>
+                    <td>@appointment.ParentFirstName</td>
+                    <td>@appointment.ParentLastName</td>
                     <td>@appointment.ChildFirstName</td>
                     <td>@appointment.AppointmentCauseName</td>
-                    <td>@appointment.PatientPhone</td>
+                    <td>@appointment.PhoneNumber</td>
                     <td>@appointment.DateTime</td>
                     <td>@appointment.End</td>
                     <td>@(appointment.Rating == null ? "Няма оценка" : appointment.Rating)</td>

@@ -72,31 +72,45 @@
         }
 
         [Authorize(Roles = PatientRoleName)]
-        public async Task<IActionResult> MyAppointments()
+        public async Task<IActionResult> MyUpcomingAppointments([FromQuery] int page)
         {
             var userId = this.User.GetId();
             var patientId = await this.patientService.GetPatientIdByUserIdAsync(userId);
 
-            var model = new AllAppointmentsViewModel()
-            {
-                Upcoming = await this.appointmentService.GetUpcomingUserAppointments(patientId),
-                Past = await this.appointmentService.GetPastUserAppointments(patientId)
-            };
+            var model = await this.appointmentService.GetUpcomingUserAppointments(patientId, ItemsPerPage, page);
+
+            return View(model);
+        }
+
+        [Authorize(Roles = PatientRoleName)]
+        public async Task<IActionResult> MyPastAppointments([FromQuery] int page)
+        {
+            var userId = this.User.GetId();
+            var patientId = await this.patientService.GetPatientIdByUserIdAsync(userId);
+
+            var model = await this.appointmentService.GetPastUserAppointments(patientId, ItemsPerPage, page);
 
             return View(model);
         }
 
         [Authorize(Roles = DoctorConstants.DoctorRoleName)]
-        public async Task<IActionResult> DoctorAppointments()
+        public async Task<IActionResult> DoctorUpcomingAppointments([FromQuery] int page)
         {
             var userId = this.User.GetId();
             var doctorId = await this.doctorService.GetDoctorIdByUserId(userId);
 
-            var model = new AllAppointmentsViewModel()
-            {
-                Upcoming = await this.appointmentService.GetUpcomingDoctorAppointments(doctorId),
-                Past = await this.appointmentService.GetPastDoctorAppointments(doctorId)
-            };
+            var model = await this.appointmentService.GetUpcomingDoctorAppointments(doctorId, ItemsPerPage, page);
+
+            return View(model);
+        }
+
+        [Authorize(Roles = DoctorConstants.DoctorRoleName)]
+        public async Task<IActionResult> DoctorPastAppointments([FromQuery] int page)
+        {
+            var userId = this.User.GetId();
+            var doctorId = await this.doctorService.GetDoctorIdByUserId(userId);
+
+            var model = await this.appointmentService.GetPastDoctorAppointments(doctorId, ItemsPerPage, page);
 
             return View(model);
         }

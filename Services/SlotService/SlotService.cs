@@ -111,7 +111,7 @@
             return slot.Id;
         }
 
-        public async Task<bool> EditSlot(int id, string status)
+        public async Task<bool> EditSlot(int id, string status, string text)
         {
             var slot = await this.data.AppointmentSlots
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -122,6 +122,7 @@
             }
 
             slot.Status = status;
+            slot.Text = text;
 
             await this.data.SaveChangesAsync();
 

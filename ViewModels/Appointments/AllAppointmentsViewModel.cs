@@ -2,10 +2,10 @@
 {
     using System.Collections.Generic;
 
-    public class AllAppointmentsViewModel
-    {
-        public ICollection<AppointmentViewModel> Upcoming { get; set; }
+    using Common;
 
-        public ICollection<AppointmentViewModel> Past { get; set; }
+    public class AllAppointmentsViewModel : PagingModel
+    {
+        public ICollection<AppointmentViewModel> Appointments { get; set; }
     }
 }

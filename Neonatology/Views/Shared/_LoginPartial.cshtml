@@ -28,7 +28,8 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" asp-area="" asp-controller="Doctor" asp-action="Edit">Промени профил</a>
                     <a class="dropdown-item" asp-area="" asp-controller="Doctor" asp-action="Calendar">Календар</a>
-                    <a class="dropdown-item" asp-area="" asp-controller="Appointment" asp-action="DoctorAppointments">Запазени часове</a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Appointment" asp-action="DoctorUpcomingAppointments" asp-route-page=1>Запазени часове</a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Appointment" asp-action="DoctorPastAppointments" asp-route-page=1>Минали часове</a>
                     <a class="dropdown-item" asp-area="" asp-controller="Chat" asp-action="All" asp-route-page="1">Съобщения</a>
                 </div>
             </div>

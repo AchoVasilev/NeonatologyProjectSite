@@ -181,11 +181,16 @@
             });
 
             if (response.ok != true) {
+
                 const error = await response.json();
+
+                if (response.status == 400) {
+                    alertify.error(err.message);
+                }
+
                 throw new Error(error.response);
             }
         } catch (err) {
-            alertify.error(err.message);
             throw err;
         }
 
@@ -229,7 +234,11 @@
             }
         } catch (err) {
             $('#doctorModal').modal('hide');
-            alertify.error(err.message);
+
+            if (err.status == 400) {
+                alertify.error(err.message);
+            }
+
             throw err;
         }
 
@@ -245,11 +254,11 @@
         });
 
         var eventObjs = await response.json();
-     
+
         Object.values(eventObjs).forEach(x => {
             events.push({
                 id: x.id,
-                title: x.childFirstName + ' ' + x.appointmentCause,
+                title: x.childFirstName + ' ' + x.appointmentCauseName,
                 start: x.dateTime,
                 end: x.end,
                 allDay: false,
@@ -262,7 +271,7 @@
         Object.values(slots).forEach(x => {
             events.push({
                 id: x.id,
-                title: x.status,
+                title: `${x.status} ${x.text ? x.text : ''}`,
                 start: x.start,
                 end: x.end,
                 addressCityName: x.addressCityName
@@ -282,7 +291,7 @@
 
     async function loadEvents(url) {
         let allEvents = await attachEvents(url);
-        
+
         return allEvents;
     }
 });

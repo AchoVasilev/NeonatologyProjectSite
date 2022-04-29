@@ -16,13 +16,13 @@
 
         Task<ICollection<AppointmentViewModel>> GetPlevenAppointments();
 
-        Task<ICollection<AppointmentViewModel>> GetPastUserAppointments(string patientId);
+        Task<AllAppointmentsViewModel> GetUpcomingUserAppointments(string patientId, int itemsPerPage, int page);
 
-        Task<ICollection<AppointmentViewModel>> GetUpcomingUserAppointments(string patientId);
+        Task<AllAppointmentsViewModel> GetPastUserAppointments(string patientId, int itemsPerPage, int page);
 
-        Task<ICollection<AppointmentViewModel>> GetUpcomingDoctorAppointments(string doctorId);
+        Task<AllAppointmentsViewModel> GetUpcomingDoctorAppointments(string doctorId, int itemsPerPage, int page);
 
-        Task<ICollection<AppointmentViewModel>> GetPastDoctorAppointments(string doctorId);
+        Task<AllAppointmentsViewModel> GetPastDoctorAppointments(string doctorId, int itemsPerPage, int page);
 
         Task<ICollection<TakenAppointmentsViewModel>> GetTakenAppointmentSlots();
 
