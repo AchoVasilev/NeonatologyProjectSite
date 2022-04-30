@@ -5,6 +5,7 @@
     let calendar = generateCalendar();
     calendar.render();
 
+    let newDate = new Date();
     function generateCalendar() {
         const calendarEl = document.getElementById('calendar');
         let newCalendar = new FullCalendar.Calendar(calendarEl, {
@@ -16,15 +17,15 @@
             themeSystem: 'bootstrap',
             navLinks: true,
             navLinkDayClick: function (date, jsEvent) {
+                jsEvent.stopImmediatePropagation();
+                jsEvent.preventDefault();
                 const dateText = jsEvent.target.textContent;
                 const title = document.getElementById('doctorTitle');
                 title.textContent = dateText;
 
-                const newDate = new Date(date);
+                newDate = new Date(date);
 
                 $('#doctorModal').modal();
-                const slotForm = document.getElementById('slotsForm');
-                slotForm.addEventListener('submit', e => saveChanges(e, newDate, slotForm), false);
             },
             headerToolbar: {
                 center: 'title',
@@ -50,7 +51,6 @@
                                     return await loadEvents('/pleven');
                                 }
                             });
-
                         }
 
                         event.target.disabled = true;
@@ -155,11 +155,14 @@
     }
 
     async function editSlot(ev, info) {
+        addSpinner(ev.target);
         const hourType = document.getElementById('hourType').value;
         const text = document.getElementById('textId').value;
 
         if (hourType == 'Свободен') {
             $('#modal').modal('hide');
+            removeSpinner(ev.target);
+
             return;
         }
 
@@ -197,10 +200,16 @@
         $('#modal').modal('hide');
 
         calendar.refetchEvents();
+        removeSpinner(ev.target);
     }
+
+    const slotForm = document.getElementById('slotsForm');
+    slotForm.addEventListener('submit', e => saveChanges(e, newDate, slotForm));
 
     async function saveChanges(ev, date, slotForm) {
         ev.preventDefault();
+        const btn = document.getElementById('save');
+        addSpinner(btn);
         const form = new FormData(slotForm);
         const slotDurationMinutes = form.get('interval');
         const addressId = form.get('address-id');
@@ -232,6 +241,9 @@
                 const error = await response.json();
                 throw new Error(error.response);
             }
+
+            slotForm.reset();
+            alertify.success('Успешно генерирахте часове!');
         } catch (err) {
             $('#doctorModal').modal('hide');
 
@@ -245,6 +257,21 @@
         $('#doctorModal').modal('hide');
 
         calendar.refetchEvents();
+        removeSpinner(btn);
+    }
+
+    function addSpinner(btn) {
+        btn.disabled = true;
+        const spinner = document.createElement('span');
+        spinner.id = 'spinner';
+        spinner.classList.add('spinner-border', 'spinner-border-sm');
+        btn.appendChild(spinner);
+    }
+
+    function removeSpinner(btn) {
+        btn.disabled = false;
+        const spinner = document.getElementById('spinner');
+        btn.removeChild(spinner);
     }
 
     async function attachEvents(url) {

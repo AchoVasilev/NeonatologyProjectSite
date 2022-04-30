@@ -12,8 +12,10 @@
     public class AppointmentControllerTests
     { 
         [Theory]
-        [InlineData("/Appointment/MyAppointments")]
-        [InlineData("/Appointment/DoctorAppointments")]
+        [InlineData("/Appointment/MyPastAppointments")]
+        [InlineData("/Appointment/MyUpcomingAppointments")]
+        [InlineData("/Appointment/DoctorPastAppointments")]
+        [InlineData("/Appointment/DoctorUpcomingAppointments")]
         [InlineData("/Appointment/TodaysAppointments")]
         [InlineData("/Appointment/MakePatientAppointment")]
         public async Task AuthorizeOverTheseMethodsShouldReturnRedirectStatusCodeIfUserIsAnnonymous(string url)

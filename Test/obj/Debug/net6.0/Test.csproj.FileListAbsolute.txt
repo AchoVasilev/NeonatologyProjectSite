@@ -15,12 +15,9 @@ C:\Users\defie\source\repos\Neonatology\Test\bin\Debug\net6.0\xunit.runner.repor
 C:\Users\defie\source\repos\Neonatology\Test\bin\Debug\net6.0\xunit.runner.utility.netcoreapp10.dll
 C:\Users\defie\source\repos\Neonatology\Test\bin\Debug\net6.0\wwwroot\img\admin.png
 C:\Users\defie\source\repos\Neonatology\Test\bin\Debug\net6.0\wwwroot\img\appointment.jpg
-C:\Users\defie\source\repos\Neonatology\Test\bin\Debug\net6.0\wwwroot\img\edit.png
-C:\Users\defie\source\repos\Neonatology\Test\bin\Debug\net6.0\wwwroot\img\editForm.png
 C:\Users\defie\source\repos\Neonatology\Test\bin\Debug\net6.0\wwwroot\img\error.jpg
 C:\Users\defie\source\repos\Neonatology\Test\bin\Debug\net6.0\wwwroot\img\feedback.jpg
 C:\Users\defie\source\repos\Neonatology\Test\bin\Debug\net6.0\wwwroot\img\homepage.jpg
-C:\Users\defie\source\repos\Neonatology\Test\bin\Debug\net6.0\wwwroot\img\logo.png
 C:\Users\defie\source\repos\Neonatology\Test\bin\Debug\net6.0\wwwroot\img\myAppointments.jpg
 C:\Users\defie\source\repos\Neonatology\Test\bin\Debug\net6.0\wwwroot\img\NoAvatarProfileImage.png
 C:\Users\defie\source\repos\Neonatology\Test\bin\Debug\net6.0\wwwroot\img\onlineConsultation.jpg

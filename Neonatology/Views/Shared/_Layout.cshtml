@@ -5,18 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - @Common.GlobalConstants.SystemName</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="~/css/profile.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/profile.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/allusers.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/chat/css/chat.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/chat/css/chat.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" />
     <link rel="stylesheet" href="~/lib/alertifyjs/build/css/alertify.min.css" />
     <link rel="stylesheet" href="~/lib/alertifyjs/build/css/alertify.rtl.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link href='~/lib/fullcallendar/main.min.css' rel='stylesheet' />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
     @await this.RenderSectionAsync("Styles", required: false)
 </head>
 <body style="margin-bottom: 0">
+    <div class="preloader">
+            <div class="loader">
+                <div class="loader-outter"></div>
+                <div class="loader-inner"></div>
+
+                <div class="indicator">
+                    <svg width="16px" height="12px">
+                        <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                        <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    </svg>
+                </div>
+            </div>
+        </div>
     <audio id="notificationAudio">
         <source id="targetAudio" src="~/NotificationSound1.mp3" type="audio/mpeg">
     </audio>
@@ -86,10 +100,12 @@
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="~/lib/alertifyjs/build/alertify.min.js"></script>
+    <script src='~/lib/fullcallendar/main.min.js'></script>
     <script type="text/javascript" src="~/lib/microsoft/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/notification.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/chatVoice/js/utilsRTC.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/chatVoice/js/constWebRTC.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/adapterjs/0.15.5/adapter.min.js"></script>
     @*    <script type="text/javascript" src="~/chatVoice/js/connectionHub.js"></script>*@
     @await RenderSectionAsync("Scripts", required: false)

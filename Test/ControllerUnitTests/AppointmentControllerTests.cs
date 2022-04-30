@@ -126,47 +126,68 @@
         }
 
         [Fact]
-        public void MyAppointmentsShouldHaveAuthorizeAttribute()
+        public void MyUpcomingAppointmentsShouldHaveAuthorizeAttribute()
         {
             var controller = new AppointmentController(null, null, null, null);
 
             var actualAttribute = controller.GetType()
-                .GetMethod("MyAppointments")
+                .GetMethod("MyUpcomingAppointments")
                 .GetCustomAttributes(typeof(AuthorizeAttribute), true);
 
             Assert.Equal(typeof(AuthorizeAttribute), actualAttribute[0].GetType());
         }
 
         [Fact]
-        public async Task MyAppointmentsShouldReturnViewWithModel()
+        public void MyPastAppointmentsShouldHaveAuthorizeAttribute()
+        {
+            var controller = new AppointmentController(null, null, null, null);
+
+            var actualAttribute = controller.GetType()
+                .GetMethod("MyPastAppointments")
+                .GetCustomAttributes(typeof(AuthorizeAttribute), true);
+
+            Assert.Equal(typeof(AuthorizeAttribute), actualAttribute[0].GetType());
+        }
+
+        [Fact]
+        public async Task MyUpcomingAppointmentsShouldReturnViewWithModel()
         {
             var patientService = new Mock<IPatientService>();
             patientService.Setup(x => x.GetPatientIdByUserIdAsync("1"))
                 .ReturnsAsync("1");
 
-            var appointment = new List<AppointmentViewModel>();
+            var appointment = new AllAppointmentsViewModel();
             var appointmentService = new Mock<IAppointmentService>();
-            appointmentService.Setup(x => x.GetUpcomingUserAppointments("1"))
-                .ReturnsAsync(appointment);
-            appointmentService.Setup(x => x.GetPastUserAppointments("1"))
+            appointmentService.Setup(x => x.GetUpcomingUserAppointments("1", 8, 1))
                 .ReturnsAsync(appointment);
 
             var controller = new AppointmentController(appointmentService.Object, patientService.Object, null, null);
             ControllerExtensions.WithIdentity(controller, "1", "gosho", "Patient");
 
-            var result = await controller.MyAppointments();
+            var result = await controller.MyUpcomingAppointments(1);
 
             var route = Assert.IsType<ViewResult>(result);
-            Assert.IsType<AllAppointmentsViewModel>(route.Model);
         }
 
         [Fact]
-        public void DoctorAppointmentsShouldHaveAuthorizeAttribute()
+        public void DoctorUpcomingAppointmentsShouldHaveAuthorizeAttribute()
         {
             var controller = new AppointmentController(null, null, null, null);
 
             var actualAttribute = controller.GetType()
-                .GetMethod("DoctorAppointments")
+                .GetMethod("DoctorUpcomingAppointments")
+                .GetCustomAttributes(typeof(AuthorizeAttribute), true);
+
+            Assert.Equal(typeof(AuthorizeAttribute), actualAttribute[0].GetType());
+        }
+
+        [Fact]
+        public void DoctorPastAppointmentsShouldHaveAuthorizeAttribute()
+        {
+            var controller = new AppointmentController(null, null, null, null);
+
+            var actualAttribute = controller.GetType()
+                .GetMethod("DoctorPastAppointments")
                 .GetCustomAttributes(typeof(AuthorizeAttribute), true);
 
             Assert.Equal(typeof(AuthorizeAttribute), actualAttribute[0].GetType());
@@ -179,20 +200,26 @@
             doctorService.Setup(x => x.GetDoctorIdByUserId("1"))
                 .ReturnsAsync("1");
 
-            var appointment = new List<AppointmentViewModel>();
+            var appointment = new AllAppointmentsViewModel()
+            {
+                Appointments = new List<AppointmentViewModel>(),
+                ItemCount = 5,
+                ItemsPerPage = 8,
+                PageNumber = 1
+            };
+
             var appointmentService = new Mock<IAppointmentService>();
-            appointmentService.Setup(x => x.GetUpcomingUserAppointments("1"))
+            appointmentService.Setup(x => x.GetUpcomingDoctorAppointments("1", 8, 1))
                 .ReturnsAsync(appointment);
-            appointmentService.Setup(x => x.GetPastUserAppointments("1"))
+            appointmentService.Setup(x => x.GetPastDoctorAppointments("1", 8, 1))
                 .ReturnsAsync(appointment);
 
             var controller = new AppointmentController(appointmentService.Object, null, doctorService.Object, null);
             ControllerExtensions.WithIdentity(controller, "1", "gosho", "Patient");
 
-            var result = await controller.DoctorAppointments();
+            var result = await controller.DoctorUpcomingAppointments(1);
 
             var route = Assert.IsType<ViewResult>(result);
-            Assert.IsType<AllAppointmentsViewModel>(route.Model);
         }
 
         [Fact]

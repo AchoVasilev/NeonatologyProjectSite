@@ -10,9 +10,6 @@
 }
 
 @section head{
-<link href='~/lib/fullcallendar/main.css' rel='stylesheet' />
-<link href='~/lib/fontawesome/css/all.min.css' rel='stylesheet'>
-<script src='~/lib/fullcallendar/main.js'></script>
 
 <style type="text/css">
     body {
@@ -48,8 +45,8 @@
                 <span asp-validation-for="Text" class="text-danger"></span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary hvr-grow" data-dismiss="modal">Затвори</button>
-                <button id="saveBtn" class="btn btn-success hvr-grow">Запази</button>
+                <button type="button" class="btn btn-danger hvr-grow" data-dismiss="modal">Затвори</button>
+                <button id="saveBtn" class="btn btn-primary hvr-grow">Запази</button>
             </div>
         </div>
     </div>
@@ -172,8 +169,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary hvr-grow" data-dismiss="modal">Затвори</button>
-                    <input id="save" type="submit" class="btn btn-success hvr-grow" value="Запази"/>
+                    <button type="button" class="btn btn-danger hvr-grow" data-dismiss="modal">Затвори</button>
+                    <button id="save" type="submit" class="btn btn-primary hvr-grow">Запази</button>
                 </div>
             </form>
         </div>

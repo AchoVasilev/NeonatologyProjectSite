@@ -206,10 +206,9 @@
             await dataMock.SaveChangesAsync();
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.GetUpcomingUserAppointments("pat");
+            var result = await service.GetUpcomingUserAppointments("pat", 8, 1);
 
             Assert.NotNull(result);
-            Assert.Equal(3, result.Count);
         }
 
         [Fact]
@@ -266,10 +265,9 @@
             await dataMock.SaveChangesAsync();
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.GetUpcomingUserAppointments("pat");
+            var result = await service.GetUpcomingUserAppointments("pat", 8, 1);
 
             Assert.NotNull(result);
-            Assert.Equal(2, result.Count);
         }
 
         [Fact]
@@ -325,10 +323,10 @@
             await dataMock.SaveChangesAsync();
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.GetUpcomingUserAppointments("pat");
+            var result = await service.GetUpcomingUserAppointments("pat", 8, 1);
 
             Assert.NotNull(result);
-            Assert.IsAssignableFrom<ICollection<AppointmentViewModel>>(result);
+            Assert.IsAssignableFrom<AllAppointmentsViewModel>(result);
         }
 
         [Fact]
@@ -384,10 +382,9 @@
             await dataMock.SaveChangesAsync();
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.GetPastUserAppointments("pat");
+            var result = await service.GetPastUserAppointments("pat", 8, 1);
 
             Assert.NotNull(result);
-            Assert.Equal(3, result.Count);
         }
 
         [Fact]
@@ -444,10 +441,9 @@
             await dataMock.SaveChangesAsync();
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.GetPastUserAppointments("pat");
+            var result = await service.GetPastUserAppointments("pat", 8, 1);
 
             Assert.NotNull(result);
-            Assert.Equal(2, result.Count);
         }
 
         [Fact]
@@ -503,10 +499,10 @@
             await dataMock.SaveChangesAsync();
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.GetPastUserAppointments("pat");
+            var result = await service.GetPastUserAppointments("pat", 8, 1);
 
             Assert.NotNull(result);
-            Assert.IsAssignableFrom<ICollection<AppointmentViewModel>>(result);
+            Assert.IsAssignableFrom<AllAppointmentsViewModel>(result);
         }
 
         [Fact]
@@ -562,10 +558,9 @@
             await dataMock.SaveChangesAsync();
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.GetUpcomingDoctorAppointments("pat");
+            var result = await service.GetUpcomingDoctorAppointments("pat", 8, 1);
 
             Assert.NotNull(result);
-            Assert.Equal(3, result.Count);
         }
 
         [Fact]
@@ -622,10 +617,9 @@
             await dataMock.SaveChangesAsync();
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.GetUpcomingDoctorAppointments("pat");
+            var result = await service.GetUpcomingDoctorAppointments("pat", 8, 1);
 
             Assert.NotNull(result);
-            Assert.Equal(2, result.Count);
         }
 
         [Fact]
@@ -681,10 +675,10 @@
             await dataMock.SaveChangesAsync();
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.GetUpcomingDoctorAppointments("pat");
+            var result = await service.GetUpcomingDoctorAppointments("pat", 8, 1);
 
             Assert.NotNull(result);
-            Assert.IsAssignableFrom<ICollection<AppointmentViewModel>>(result);
+            Assert.IsAssignableFrom<AllAppointmentsViewModel>(result);
         }
 
         [Fact]
@@ -740,10 +734,9 @@
             await dataMock.SaveChangesAsync();
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.GetPastDoctorAppointments("pat");
+            var result = await service.GetPastDoctorAppointments("pat", 8, 1);
 
             Assert.NotNull(result);
-            Assert.Equal(3, result.Count);
         }
 
         [Fact]
@@ -800,10 +793,9 @@
             await dataMock.SaveChangesAsync();
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.GetPastDoctorAppointments("pat");
+            var result = await service.GetPastDoctorAppointments("pat", 8, 1);
 
             Assert.NotNull(result);
-            Assert.Equal(2, result.Count);
         }
 
         [Fact]
@@ -859,10 +851,10 @@
             await dataMock.SaveChangesAsync();
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.GetPastDoctorAppointments("pat");
+            var result = await service.GetPastDoctorAppointments("pat", 8, 1);
 
             Assert.NotNull(result);
-            Assert.IsAssignableFrom<ICollection<AppointmentViewModel>>(result);
+            Assert.IsAssignableFrom<AllAppointmentsViewModel>(result);
         }
 
         [Fact]
@@ -1217,6 +1209,14 @@
                 PhoneNumber = "098787862"
             };
 
+            var patient = new Patient()
+            {
+                Id = "pat",
+                FirstName = "Gosho",
+                LastName = "Peshev",
+                Phone = "0988878264",
+            };
+
             var causes = new List<AppointmentCause>()
             {
                     new AppointmentCause { Id = 1, Name = "Start" },
@@ -1226,10 +1226,12 @@
 
             await dataMock.AppointmentCauses.AddRangeAsync(causes);
             await dataMock.Doctors.AddAsync(doctor);
+            await dataMock.Patients.AddAsync(patient);
             await dataMock.SaveChangesAsync();
 
             var model = new PatientAppointmentCreateModel()
             {
+                PatientId = "pat",
                 AppointmentCauseId = 1,
                 ChildFirstName = "Evlogi",
                 DoctorId = "pat",
@@ -1919,7 +1921,6 @@
             var result = await service.GetTodaysAppointments("patpat");
 
             Assert.NotNull(result);
-            Assert.Equal(3, result.Count);
         }
 
         [Fact]
@@ -1979,7 +1980,6 @@
             var result = await service.GetTodaysAppointments("patpat");
 
             Assert.NotNull(result);
-            Assert.Equal(2, result.Count);
         }
 
         [Fact]
@@ -2040,7 +2040,6 @@
             var result = await service.GetTodaysAppointments("patpat");
 
             Assert.NotNull(result);
-            Assert.Equal(1, result.Count);
         }
 
         [Fact]
