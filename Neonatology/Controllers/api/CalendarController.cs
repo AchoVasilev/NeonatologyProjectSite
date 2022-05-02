@@ -150,8 +150,15 @@
             var emailMsg = string
                 .Format(MessageConstants.AppointmentMakeEmailMsg, 
                 model.Start.ToString(DateTimeFormats.TimeFormat), model.Start.ToString(DateTimeFormats.DateFormat));
-            
-            await this.emailSender.SendEmailAsync(userEmail, SuccessfulApointmentEmailMsgSubject, emailMsg);
+
+            try
+            {
+                await this.emailSender.SendEmailAsync(userEmail, SuccessfulApointmentEmailMsgSubject, emailMsg);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
             return Ok(new
             {

@@ -3,6 +3,7 @@
     alertify.set('notifier', 'position', 'top-center');
 
     let calendar = await generateCalendar();
+    let eventClickInfo = {};
 
     calendar.render();
 
@@ -100,9 +101,7 @@
 
                 const headerSpan = document.getElementById('title');
                 headerSpan.textContent = `${info.event.extendedProps.addressCityName} ${info.event.title}: ${startStr} - ${endStr} ${dateStr}`;
-
-                const form = document.getElementById('form');
-                form.addEventListener('submit', ev => onSubmit(ev, info));
+                eventClickInfo = info;
 
                 $('#modal').modal();
             }
@@ -111,24 +110,28 @@
         return calendar;
     }
 
+    const form = document.getElementById('form');
+    form.addEventListener('submit', ev => onSubmit(ev, eventClickInfo));
+
     async function onSubmit(ev, info) {
         ev.preventDefault();
+        const saveBtn = document.getElementById('saveBtn');
+        addSpinner(saveBtn);
 
-        const form = new FormData(ev.target);
-        const parentFirstName = form.get('ParentFirstName').trim();
-        const parentLastName = form.get('ParentLastName').trim();
-        const childFirstName = form.get('ChildFirstName').trim();
-        const appointmentCauseId = form.get('AppointmentCauseId');
-        const phoneNumber = form.get('PhoneNumber').trim();
-        const email = form.get('Email').trim();
+        const formData = new FormData(ev.target);
+        const parentFirstName = formData.get('ParentFirstName').trim();
+        const parentLastName = formData.get('ParentLastName').trim();
+        const childFirstName = formData.get('ChildFirstName').trim();
+        const appointmentCauseId = formData.get('AppointmentCauseId');
+        const phoneNumber = formData.get('PhoneNumber').trim();
+        const email = formData.get('Email').trim();
         const doctorId = document.getElementById('doctorId').value;
 
         if (parentFirstName == '' || parentLastName == '' || childFirstName == '' || phoneNumber == '') {
+            removeSpinner(saveBtn);
             return alertify.error("Всички полета са задължителни");
         }
 
-        const saveBtn = document.getElementById('saveBtn');
-        saveBtn.disabled = true;
         $('#modal').modal('hide');
 
         const start = info.event.start;
@@ -169,15 +172,20 @@
             ev.target.reset();
             alertify.success(obj.message);
         } catch (err) {
-            alertify.error(err.message);
+
+            if (err.status == 400) {
+                alertify.error(err.message);
+            }
+
             throw err;
         }
 
         calendar.refetchEvents();
-        saveBtn.disabled = false;
+
+        removeSpinner(saveBtn);
         setTimeout(() => {
-            window.location.reload();
-        }, 3000)
+            window.location = '/index';
+        }, 2000)
     }
 
     async function getSlots(url) {
@@ -199,5 +207,19 @@
         });
 
         return slotsArr;
+    }
+
+    function addSpinner(btn) {
+        btn.disabled = true;
+        const spinner = document.createElement('span');
+        spinner.id = 'spinner';
+        spinner.classList.add('spinner-border', 'spinner-border-sm');
+        btn.appendChild(spinner);
+    }
+
+    function removeSpinner(btn) {
+        btn.disabled = false;
+        const spinner = document.getElementById('spinner');
+        btn.removeChild(spinner);
     }
 });

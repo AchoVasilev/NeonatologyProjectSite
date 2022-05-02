@@ -22,12 +22,10 @@
     public class FileService : IFileService
     {
         private readonly NeonatologyDbContext data;
-        private readonly IMapper mapper;
 
-        public FileService(NeonatologyDbContext data, IMapper mapper)
+        public FileService(NeonatologyDbContext data)
         {
             this.data = data;
-            this.mapper = mapper;
         }
 
         public async Task<IFileServiceModel> UploadImage(Cloudinary cloudinary, IFormFile image, string folderName)
@@ -152,7 +150,7 @@
         {
             var images = await this.data.Images
                 .Where(x => string.IsNullOrWhiteSpace(x.UserId) &&
-                x.IsDeleted == false)
+                x.IsDeleted == false && x.Name != "NoAvatarProfileImage.png")
                 .OrderBy(x => x.CreatedOn)
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)

@@ -1,4 +1,4 @@
-﻿@model ICollection<AppointmentViewModel>
+﻿@model ICollection<SlotViewModel>
 
 @if (this.TempData.ContainsKey("Message"))
 {
@@ -23,7 +23,7 @@
 
 <div class="d-flex justify-content-between">
     <button class="btn btn-info" onclick="window.print(); return false"><i class="fas fa-print">Разпечатай</i></button>
-    <a class="btn btn-info" asp-area="" asp-controller="Slot" asp-action="TodaySlots">Запазени от мен</a>
+    <a class="btn btn-info" asp-area="" asp-controller="Appointment" asp-action="TodaysAppointments">Днешни часове</a>
 </div>
 <h1 class="text-center print">@($"{ViewData["Title"]} - {DateTime.Now.Date.ToString(DateFormat)}")</h1>
 
@@ -45,19 +45,15 @@ else
                 <th>Дата и час</th>
                 <th>Имена на пациент</th>
                 <th>Адрес</th>
-                <th>Дете</th>
-                <th>Вид преглед</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var appointment in Model)
+            @foreach (var slot in Model)
             {
                 <tr>
-                    <td>@appointment.DateTime</td>
-                    <td>@appointment.ParentFirstName @appointment.ParentLastName</td>
-                    <td>гр. @appointment.Address.City.Name, @appointment.Address.StreetName</td>
-                    <td>@appointment.ChildFirstName</td>
-                    <td>@appointment.AppointmentCauseName</td>
+                    <td>@slot.Start - @slot.End</td>
+                    <td>@slot.Text</td>
+                    <td>@slot.AddressCityName</td>
                 </tr>
             }
         </tbody>
@@ -66,8 +62,6 @@ else
                 <th>Дата и час</th>
                 <th>Имена на пациент</th>
                 <th>Адрес</th>
-                <th>Дете</th>
-                <th>Вид преглед</th>
             </tr>
         </tfoot>
     </table>

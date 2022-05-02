@@ -6,6 +6,8 @@
     calendar.render();
 
     let newDate = new Date();
+    let eventClickInfo = {};
+
     function generateCalendar() {
         const calendarEl = document.getElementById('calendar');
         let newCalendar = new FullCalendar.Calendar(calendarEl, {
@@ -143,9 +145,7 @@
                 description.appendChild(pEndElement);
 
                 $(details).empty().html(description);
-
-                const saveBtn = document.getElementById('saveBtn');
-                saveBtn.addEventListener('click', ev => editSlot(ev, info));
+                eventClickInfo = info;
 
                 $('#modal').modal();
             }
@@ -153,6 +153,9 @@
 
         return newCalendar;
     }
+
+    const saveBtn = document.getElementById('saveBtn');
+    saveBtn.addEventListener('click', ev => editSlot(ev, eventClickInfo));
 
     async function editSlot(ev, info) {
         addSpinner(ev.target);

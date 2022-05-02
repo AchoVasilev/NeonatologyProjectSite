@@ -129,6 +129,12 @@
             return true;
         }
 
+        public async Task<ICollection<SlotViewModel>> GetTodaysTakenSlots() 
+            => await this.data.AppointmentSlots
+                .Where(x => x.IsDeleted == false && x.Start.Date == DateTime.UtcNow && x.Status == SlotStatus.Зает.ToString())
+                .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
+                .ToListAsync();
+
         private async Task<bool> SlotExists(DateTime start, DateTime end, int addressId)
         {
             var result = await this.data.AppointmentSlots

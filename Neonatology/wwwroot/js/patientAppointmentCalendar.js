@@ -4,6 +4,7 @@
     alertify.set('notifier', 'position', 'top-center');
 
     let calendar = await generateCalendar();
+    let eventClickInfo = {};
 
     calendar.render();
 
@@ -102,9 +103,7 @@
                 const headerSpan = document.getElementById('title');
                 headerSpan.textContent = `${info.event.extendedProps.addressCityName} ${info.event.title}: ${startStr} - ${endStr} ${dateStr}`;
 
-                console.log(info.event.extendedProps.addressCityName);
-                const form = document.getElementById('form');
-                form.addEventListener('submit', ev => onSubmit(ev, info));
+                eventClickInfo = info;
 
                 $('#modal').modal();
             }
@@ -113,19 +112,26 @@
         return calendar;
     }
 
+    const form = document.getElementById('form');
+    form.addEventListener('submit', ev => onSubmit(ev, eventClickInfo));
+
     async function onSubmit(ev, info) {
         ev.preventDefault();
+        
+        const saveBtn = document.getElementById('saveBtn');
+        addSpinner(saveBtn);
 
-        $('#modal').modal('hide');
-        const form = new FormData(ev.target);
-        const childFirstName = form.get('ChildFirstName').trim();
-        const appointmentCauseId = form.get('AppointmentCauseId');
+        const formData = new FormData(ev.target);
+        const childFirstName = formData.get('ChildFirstName').trim();
+        const appointmentCauseId = formData.get('AppointmentCauseId');
         const doctorId = document.getElementById('doctorId').value;
 
         if (childFirstName == '') {
+            removeSpinner(saveBtn);
             return alertify.error("Всички полета са задължителни");
         }
 
+        $('#modal').modal('hide');
         const start = info.event.start;
         const end = info.event.end;
 
@@ -154,14 +160,22 @@
             }
 
             const obj = await response.json();
-            alertify.error(obj.message);
+            alertify.success(obj.message);
 
-            calendar.render();
-            setTimeout(() => window.location = '/appointment/myappointments', 2000);
+            ev.target.reset();
+
         } catch (err) {
-            alertify.error(err.message);
+            if (err.status == 400) {
+                alertify.error(err.message);
+            }
+
             throw err;
         }
+
+        removeSpinner(saveBtn);
+        setTimeout(() => {
+            window.location = '/appointment/myUpcomingAppointments?page=1'
+        }, 2000);
     }
 
     async function getSlots(url) {
@@ -183,5 +197,19 @@
         });
 
         return slotsArr;
+    }
+
+    function addSpinner(btn) {
+        btn.disabled = true;
+        const spinner = document.createElement('span');
+        spinner.id = 'spinner';
+        spinner.classList.add('spinner-border', 'spinner-border-sm');
+        btn.appendChild(spinner);
+    }
+
+    function removeSpinner(btn) {
+        btn.disabled = false;
+        const spinner = document.getElementById('spinner');
+        btn.removeChild(spinner);
     }
 });

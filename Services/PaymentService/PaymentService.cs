@@ -57,7 +57,7 @@
             await this.data.Payments.AddAsync(payment);
             await this.data.SaveChangesAsync();
 
-            return payment.Id;
+            return patient.Id;
         }
 
         public async Task<bool> PatientHasPaid(string patientId)

@@ -39,7 +39,7 @@
 
             await this.patientService.CreatePatientAsync(model, userId, $"{this.environment.WebRootPath}");
 
-            return RedirectToAction("MyAppointments", "Appointment", new { area = "" });
+            return RedirectToAction("Index", "Home");
         }
     }
 }
