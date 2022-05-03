@@ -8,19 +8,12 @@
     <link rel="stylesheet" type="text/css" href="~/chat/css/allChat.css" />
 }
 
-<div class="col-6">
-    <a class="btn btn-success" asp-area="" asp-controller="Checkout" asp-action="Index">
-        Заяви онлайн консултация
-    </a>
-</div>
-
 <div class="col-md-12">
     <h1 class="text-center">
         @ViewBag.Title
 
         <hr />
     </h1>
-    <div class="row">
         @if (Model.ChatModels.Any())
         {
             <div class="container">
@@ -71,7 +64,7 @@
                                 }
                             }
                             <li class="page-item @(!Model.HasNextPage ? "disabled" : string.Empty)">
-                                <a class="page-link" asp-area="" asp-controller="Doctor" asp-action="All" asp-route-page="@Model.NextPageNumber">Следваща</a>
+                                <a class="page-link" asp-area="" asp-controller="Chat" asp-action="All" asp-route-page="@Model.NextPageNumber">Следваща</a>
                             </li>
                         </ul>
                     </div>
@@ -80,12 +73,11 @@
         }
         else
         {
-            <div class="text-center align-content-center">
-                <p>
+            <div>
+                <h4 class="text-center align-content-center">
                     Нямате съобщения
-                </p>
+                </h4>
             </div>
         }
-    </div>
 </div>
 

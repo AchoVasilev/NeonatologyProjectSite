@@ -14,6 +14,8 @@
 
         public string GroupName { get; set; }
 
+        public bool HasPaid { get; set; }
+
         public IEnumerable<ChatConversationsViewModel> ChatModels { get; set; }
     }
 }

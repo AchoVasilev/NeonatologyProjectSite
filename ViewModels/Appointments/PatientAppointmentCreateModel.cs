@@ -9,9 +9,9 @@
 
     public class PatientAppointmentCreateModel
     {
-        public DateTime Start { get; set; }
+        public string Start { get; set; }
 
-        public DateTime End { get; set; }
+        public string End { get; set; }
 
         [Required(ErrorMessage = RequiredFieldErrorMsg)]
         [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]

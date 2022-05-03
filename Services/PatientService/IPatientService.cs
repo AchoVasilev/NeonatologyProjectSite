@@ -29,5 +29,7 @@ using Data.Models;
         Task<ICollection<PatientServiceModel>> GetAllPatients();
 
         Task<string> GetPatientIdByEmail(string email);
+
+        Task<bool> HasPaid(string userId);
     }
 }

@@ -8,6 +8,8 @@
 
         public string AccountSecret { get; set; }
 
+        public string SigningSecret { get; set; }
+
         public string Price { get; set; }
     }
 }

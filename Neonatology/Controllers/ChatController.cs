@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
+using Data.Models;
 
     using Infrastructure;
 
@@ -50,9 +51,17 @@
 
         public async Task<IActionResult> All([FromQuery] int page)
         {
+            var currentUserId = this.User.GetId();
+            var patientId = this.patientService.GetPatientIdByUserIdAsync(currentUserId);
+
+            if (patientId != null)
+            {
+                return RedirectToAction(nameof(this.Consultation));
+            }
+
             var doctorId = await this.doctorService.GetDoctorId();
             var doctorEmail = await this.doctorService.GetDoctorEmail(doctorId);
-            var currentUserId = this.User.GetId();
+
             var converstations = await this.chatService.GetAllMessages(currentUserId, page, ItemsPerPage);
 
             foreach (var user in converstations)
@@ -78,6 +87,44 @@
                 PageNumber = page,
                 ItemsPerPage = ItemsPerPage,
                 ItemCount = converstations.Count
+            };
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> Consultation()
+        {
+            var page = 1;
+            var currentUserId = this.User.GetId();
+            var converstations = await this.chatService.GetAllMessages(currentUserId, page, ItemsPerPage);
+
+            foreach (var user in converstations)
+            {
+                var lastMessage = await this.chatService.GetLastMessage(currentUserId, user.Id);
+                var contentWithoutTags = Regex.Replace(lastMessage, "<.*?>", string.Empty);
+
+                user.LastMessage = contentWithoutTags.Length < 487 ?
+                                contentWithoutTags :
+                                $"{contentWithoutTags.Substring(0, 487)}...";
+
+                user.LastMessageActivity = await this.chatService.GetLastActivityAsync(currentUserId, user.Id);
+
+                var groupId = await this.chatService.GetGroupId(currentUserId, user.Id);
+                user.GroupName = await this.chatService.GetGroupName(groupId);
+            }
+
+            var doctorId = await this.doctorService.GetDoctorId();
+            var doctorEmail = await this.doctorService.GetDoctorEmail(doctorId);
+
+            var model = new ChatUserViewModel
+            {
+                Id = await this.userService.GetUserIdByDoctorIdAsync(doctorId),
+                DoctorEmail = doctorEmail,
+                ChatModels = converstations,
+                PageNumber = page,
+                ItemsPerPage = ItemsPerPage,
+                ItemCount = converstations.Count,
+                HasPaid = await this.patientService.HasPaid(currentUserId)
             };
 
             return View(model);

@@ -2,14 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.IO;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Hangfire;
 
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
 
@@ -76,8 +74,8 @@
 
             var options = new SessionCreateOptions
             {
-                SuccessUrl = "https://localhost:5001/checkout/successfulpayment?session_id={{CHECKOUT_SESSION_ID}}",
-                CancelUrl = $"https://localhost:5001/checkout/canceledpayment",
+                SuccessUrl = "http://pediamed-001-site1.btempurl.com/checkout/successfulpayment?session_id={{CHECKOUT_SESSION_ID}}",
+                CancelUrl = "http://pediamed-001-site1.btempurl.com/checkout/canceledpayment",
                 Mode = "payment",
                 CustomerEmail = this.User.FindFirst(ClaimTypes.Email).Value,
                 LineItems = new List<SessionLineItemOptions>
@@ -117,8 +115,7 @@
         public async Task<IActionResult> Webhook()
         {
             var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
-            var secret = "whsec_2a178491d19b8786d6d49aec892963897c804f6ae80b67bf86340e846345a071";
-            //var secret = "whsec_oQK0wZ3omBhFMAU4vAO8J9SkswiXgL1I";
+            var secret = this.options.Value.SigningSecret;
             Event stripeEvent;
             try
             {
@@ -138,7 +135,7 @@
 
             if (stripeEvent.Type == "checkout.session.completed")
             {
-                var session = stripeEvent.Data.Object as Stripe.Checkout.Session;
+                var session = stripeEvent.Data.Object as Session;
                 //Console.WriteLine($"Session ID: {session.Id}");
 
                 await this.FulfillOrder(session);

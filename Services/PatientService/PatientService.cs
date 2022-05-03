@@ -82,6 +82,12 @@
               => await this.data.Patients
                       .FirstOrDefaultAsync(x => x.Id == patientId);
 
+        public async Task<bool> HasPaid(string userId)
+            => await this.data.Users
+                    .Where(x => x.Id == userId && x.PatientId != null)
+                    .Select(x => x.Patient.HasPaid)
+                    .FirstOrDefaultAsync();
+
         public async Task<bool> EditPatientAsync(string patientId, CreatePatientFormModel model)
         {
             var patient = await this.data.Patients

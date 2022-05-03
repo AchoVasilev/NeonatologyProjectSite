@@ -122,13 +122,15 @@
         [HttpPost("makePatientAppointment/{id}")]
         public async Task<IActionResult> MakePatientAppointment(PatientAppointmentCreateModel model, string id)
         {
+            var startDate = DateTime.Parse(model.Start);
+            var endDate = DateTime.Parse(model.End);
             var cause = await this.appointmentCauseService.GetAppointmentCauseByIdAsync(model.AppointmentCauseId);
             if (cause == null)
             {
                 return BadRequest(new { message = MessageConstants.AppointmentCauseWrongId });
             }
 
-            if (model.Start.Date < DateTime.Now.Date && model.Start.Hour < DateTime.Now.Hour)
+            if (startDate.Date < DateTime.Now.Date && startDate.Hour < DateTime.Now.Hour)
             {
                 return BadRequest(new { message = MessageConstants.AppointmentBeforeNowErrorMsg });
             }
@@ -138,7 +140,7 @@
             var patientId = await this.patientService.GetPatientIdByUserIdAsync(userId);
 
             model.PatientId = patientId;
-            var result = await this.appointmentService.AddAsync(model.DoctorId, model);
+            var result = await this.appointmentService.AddAsync(model.DoctorId, model, startDate, endDate);
 
             if (result == false)
             {
@@ -149,7 +151,7 @@
 
             var emailMsg = string
                 .Format(MessageConstants.AppointmentMakeEmailMsg, 
-                model.Start.ToString(DateTimeFormats.TimeFormat), model.Start.ToString(DateTimeFormats.DateFormat));
+                startDate.ToString(DateTimeFormats.TimeFormat), startDate.ToString(DateTimeFormats.DateFormat));
 
             try
             {
@@ -164,7 +166,7 @@
             {
                 message = string
                     .Format(MessageConstants.SuccessfullAppointment, 
-                    model.Start.ToString(DateTimeFormats.DateFormat), model.Start.ToString(DateTimeFormats.TimeFormat)),
+                    startDate.ToString(DateTimeFormats.DateFormat), startDate.ToString(DateTimeFormats.TimeFormat)),
             });
         }
     }

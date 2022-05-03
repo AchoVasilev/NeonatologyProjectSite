@@ -133,12 +133,15 @@
 
         $('#modal').modal('hide');
         const start = info.event.start;
+        const month = start.getMonth() + 1;
+        const startDate = start.getDate() + '/' + month + '/' + start.getFullYear() + ' ' + start.toLocaleTimeString();
         const end = info.event.end;
+        const endDate = end.getDate() + '/' + month + '/' + end.getFullYear() + ' ' + end.toLocaleTimeString();
 
         const data = {
             doctorId,
-            start,
-            end,
+            start: startDate,
+            end: endDate,
             childFirstName,
             appointmentCauseId,
             addressId: info.event.extendedProps.addressId
