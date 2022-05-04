@@ -74,6 +74,15 @@
         {
             ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
+            var recaptchaResponse = await this.reCaptchaService.ValidateResponse(this.Input.Token);
+
+            if (recaptchaResponse.Success == false && recaptchaResponse.Score < 0.5)
+            {
+                this.ModelState.AddModelError(string.Empty, FailedRecaptchaMsg);
+
+                return this.Page();
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser

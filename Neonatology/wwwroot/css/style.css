@@ -86,3 +86,7 @@
     .cookie .accept:hover {
         background-color: #30b867;
     }
+
+.footer{
+    line-height: 30px
+}

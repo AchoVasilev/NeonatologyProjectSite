@@ -98,6 +98,8 @@
             public const string SuccessfulDeleteMsg = "Изтриването беше успешно.";
             public const string SuccessfulAddedItemMsg = "Успешно добавихте нови данни";
             public const string SuccessfulSendEmailMsg = "Успешно изпратихте и-мейл";
+
+            public const string FailedRecaptchaMsg = "Възникна проблем, опитайте се да обновите страницата!";
         }
 
         public static class AccountConstants

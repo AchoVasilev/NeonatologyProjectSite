@@ -29,7 +29,7 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="Input.Token" />
+            <input id="input-token" type="hidden" asp-for="Input.Token" />
             <button type="submit" class="btn btn-primary hvr-grow">Регистрация</button>
         </form>
     </div>
@@ -42,7 +42,7 @@
 <script>
     grecaptcha.ready(function() {
       grecaptcha.execute('@this.Configuration["GoogleRecaptchaV3:SiteKey"]', {action: 'submit'}).then(function(token) {
-          $('#Input_Token').val(token);
+          $('#input-token').val(token);
       });
     });
 </script>

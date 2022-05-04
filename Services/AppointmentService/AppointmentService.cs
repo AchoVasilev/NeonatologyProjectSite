@@ -33,11 +33,10 @@
             var apps = await this.data.Appointments
                                    .Where(x => x.IsDeleted == false)
                                    .OrderByDescending(x => x.DateTime)
+                                   .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                                    .ToListAsync();
 
-            var res = this.mapper.Map<ICollection<AppointmentViewModel>>(apps);
-
-            return res;
+            return apps;
         }
 
         public async Task<ICollection<AppointmentViewModel>> GetGabrovoAppointments()
