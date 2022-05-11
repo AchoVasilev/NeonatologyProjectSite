@@ -1,14 +1,10 @@
 ﻿namespace Neonatology.Areas.Administration.Controllers
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using CloudinaryDotNet;
 
     using global::Services.FileService;
-    using global::Services.FileService.FileServiceModels;
-
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     using Neonatology.Areas.Administration.Services;
@@ -16,6 +12,7 @@
 
     using static Common.GlobalConstants.MessageConstants;
     using static Common.GlobalConstants.FileConstants;
+    using ViewModels.Gallery;
 
     public class GalleryController : BaseController
     {
@@ -54,15 +51,27 @@
             return RedirectToAction(nameof(All));
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Add(ICollection<IFormFile> images)
+        public IActionResult Add()
         {
-            var files = new List<IFileServiceModel>();
+            return View(new UploadImageModel());
+        }
 
-            foreach (var image in images)
+        [HttpPost]
+        public async Task<IActionResult> Add(UploadImageModel model)
+        {
+            if (model.Images == null)
             {
-                var file = await this.fileService.UploadImage(cloudinary, image, DefaultFolderName);
-                files.Add(file);
+                return View(new UploadImageModel());
+            }
+
+            foreach (var image in model.Images)
+            {
+                var result = await this.fileService.UploadImage(cloudinary, image, DefaultFolderName);
+
+                if (result != null)
+                {
+                    await this.fileService.AddImageToDatabase(result);
+                }
             }
 
             return RedirectToAction(nameof(All));

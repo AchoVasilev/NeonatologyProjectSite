@@ -19,7 +19,7 @@
     using ViewModels.City;
     using ViewModels.Doctor;
     using ViewModels.Feedback;
-    using ViewModels.Galery;
+    using ViewModels.Gallery;
     using ViewModels.Offer;
     using ViewModels.Patient;
     using ViewModels.Profile;

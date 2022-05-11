@@ -22,13 +22,7 @@
     <div class="card card-primary">
         <div class="card-header">
             <h4 class="card-title">@ViewBag.Title</h4>
-            <form method="post" enctype="multipart/form-data" asp-area="Administration" asp-controller="Gallery" asp-action="Add">
-                <div class="row-sm">
-                    <label class="btn btn-sm btn-warning" asp-for="Images"></label>
-                    <input asp-for="Images" class="form-control" accept=".jpg, .jpeg, .png" type="file" />
-                    <span asp-validation-for="Images" class="text-danger"></span>
-                </div>
-            </form>
+            <a class="btn btn-info" asp-area="Administration" asp-controller="Gallery" asp-action="Add">Добави нови снимки</a>
         </div>
         <div class="card-body">
             <div class="row">

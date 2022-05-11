@@ -4,15 +4,13 @@
 
     using CloudinaryDotNet;
 
-    using Infrastructure;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using Services.DoctorService;
     using Services.FileService;
 
-    using ViewModels.Galery;
+    using ViewModels.Gallery;
 
     using static Common.GlobalConstants;
     using static Common.GlobalConstants.FileConstants;
@@ -38,17 +36,19 @@
             return View(model);
         }
 
-        [Authorize(Roles = DoctorConstants.DoctorRoleName)]
-        [Authorize(Roles = AdministratorRoleName)]
-        [HttpPost]
-        public async Task<IActionResult> All(UploadImageModel model)
+        [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
+        public IActionResult Add()
         {
-            var userId = this.User.GetId();
-            var doctorId = await this.doctorService.GetDoctorIdByUserId(userId);
+            return View(new UploadImageModel());
+        }
 
-            if (string.IsNullOrWhiteSpace(doctorId) == true)
+        [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
+        [HttpPost]
+        public async Task<IActionResult> Add(UploadImageModel model)
+        {
+            if (model.Images == null)
             {
-                return Unauthorized();
+                return View(new UploadImageModel());
             }
 
             foreach (var image in model.Images)
@@ -61,7 +61,7 @@
                 }
             }
 
-            return RedirectToAction(nameof(All), "Galery", new { area = "" });
+            return RedirectToAction(nameof(All), "Gallery", new { area = "", page = 1 });
         }
     }
 }

@@ -8,6 +8,10 @@
 
 <div class="container-fluid pb-4 mb-4">
     <h1 class="text-center">@ViewData["Title"]</h1>
+    @if (User.IsInRole(DoctorConstants.DoctorRoleName))
+    {
+        <a class="btn btn-info" asp-area="" asp-controller="Gallery" asp-action="Add">Добави нови снимки</a>
+    }
 
     <hr />
 

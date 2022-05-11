@@ -81,7 +81,7 @@ namespace Neonatology
 
             services.AddDbContext<NeonatologyDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("LocalConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddControllersWithViews(configure =>

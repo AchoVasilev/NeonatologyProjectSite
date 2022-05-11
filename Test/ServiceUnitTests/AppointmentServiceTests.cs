@@ -32,6 +32,19 @@
                     new AppointmentCause { Id = 3, Name = "Middle" },
             };
 
+            var address = new Address
+            {
+                Id = 1,
+                StreetName = "Kaspichan 49",
+                City = new City
+                {
+                    Name = "Kaspichan",
+                    ZipCode = 1234
+                }
+            };
+
+            await dataMock.Addresses.AddAsync(address);
+
             await dataMock.AppointmentCauses.AddRangeAsync(causes);
             await dataMock.SaveChangesAsync();
 
@@ -39,17 +52,20 @@
             {
                 new Appointment
                 {
-                    AppointmentCauseId = 1
+                    AppointmentCauseId = 1,
+                    AddressId = 1
                 },
 
                 new Appointment
                 {
-                    AppointmentCauseId = 2
+                    AppointmentCauseId = 2,
+                    AddressId = 1
                 },
 
                 new Appointment
                 {
-                    AppointmentCauseId = 3
+                    AppointmentCauseId = 3,
+                    AddressId = 1
                 },
             };
 
@@ -76,6 +92,18 @@
                     new AppointmentCause { Id = 3, Name = "Middle" },
             };
 
+            var address = new Address
+            {
+                Id = 1,
+                StreetName = "Kaspichan 49",
+                City = new City
+                {
+                    Name = "Kaspichan",
+                    ZipCode = 1234
+                }
+            };
+
+            await dataMock.Addresses.AddAsync(address);
             await dataMock.AppointmentCauses.AddRangeAsync(causes);
             await dataMock.SaveChangesAsync();
 
@@ -83,19 +111,22 @@
             {
                 new Appointment
                 {
-                    AppointmentCauseId = 1
+                    AppointmentCauseId = 1,
+                    AddressId = 1
                 },
 
                 new Appointment
                 {
                     AppointmentCauseId = 2,
-                    IsDeleted = true
+                    IsDeleted = true,
+                    AddressId = 1
                 },
 
                 new Appointment
                 {
                     AppointmentCauseId = 3,
-                    IsDeleted = true
+                    IsDeleted = true,
+                    AddressId = 1
                 },
             };
 
@@ -1235,8 +1266,8 @@
                 AppointmentCauseId = 1,
                 ChildFirstName = "Evlogi",
                 DoctorId = "pat",
-                Start = "10.10.2022 15.30",
-                End = "15.10.2022 15.35"
+                Start = "10.10.2022 15:30",
+                End = "15.10.2022 15:35"
             };
 
             var service = new AppointmentService(dataMock, mapperMock);
@@ -1289,8 +1320,8 @@
                 AppointmentCauseId = 1,
                 ChildFirstName = "Evlogi",
                 DoctorId = "pat",
-                Start = "29.01.2022 08.30",
-                End = "29.01.2022 08.40"
+                Start = "29.01.2022 08:30",
+                End = "29.01.2022 08:40"
             };
 
             var service = new AppointmentService(dataMock, mapperMock);

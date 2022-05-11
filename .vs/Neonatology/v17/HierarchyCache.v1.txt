@@ -1,22 +1,290 @@
 ﻿++Solution 'Neonatology' ‎(10 of 10 projects)
 i:{00000000-0000-0000-0000-000000000000}:Neonatology.sln
+++Services
+i:{00000000-0000-0000-0000-000000000000}:Services
+i:{cdc8eea1-0d13-4137-810d-5a569eabd8ad}:Services
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\source\repos\neonatology\test\administrationarea\services\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\services\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\services\bin\debug\net6.0\services.dll
+++Dependencies
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:>4126
+i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:>3579
+i:{cbe66609-3802-431d-b4b6-895658b29053}:>3578
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:>3503
+i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:>3580
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>7771
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:>7770
+i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:>4475
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:>4302
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>10589
+++AppointmentCauseService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\appointmentcauseservice\
+++AppointmentService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\appointmentservice\
+++ChatService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\chatservice\
+++CityService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\cityservice\
+++DoctorService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\doctorservice\
+++EmailSenderService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\emailsenderservice\
+++MailKitEmailSenderOptions.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\emailsenderservice\mailkitemailsenderoptions.cs
+++MailKitSender.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\emailsenderservice\mailkitsender.cs
+++FeedbackService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\feedbackservice\
+++FileService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\fileservice\
+++NotificationService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\notificationservice\
+++OfferService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\offerservice\
+++PatientService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\patientservice\
+++PaymentService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\paymentservice\
+++ProfileService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\profileservice\
+++RatingService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\ratingservice\
+++SlotService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\slotservice\
+++SpecializationService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\specializationservice\
+++UserService
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\userservice\
+++ReCaptchaService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\recaptchaservice.cs
+++Analyzers
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:analyzers
+i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:analyzers
+i:{cbe66609-3802-431d-b4b6-895658b29053}:analyzers
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:analyzers
+i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:analyzers
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:analyzers
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:analyzers
+i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:analyzers
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:analyzers
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:analyzers
+++Frameworks
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:frameworks
+i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:frameworks
+i:{cbe66609-3802-431d-b4b6-895658b29053}:frameworks
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:frameworks
+i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:frameworks
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:frameworks
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:frameworks
+i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:frameworks
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:frameworks
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:frameworks
+++Packages
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:packages
+i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:packages
+i:{cbe66609-3802-431d-b4b6-895658b29053}:packages
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:packages
+i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:packages
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:packages
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:packages
+i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:packages
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:packages
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:packages
+++Projects
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:projects
+i:{cbe66609-3802-431d-b4b6-895658b29053}:projects
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:projects
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:projects
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:projects
+i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:projects
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:projects
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:projects
+++AppointmentCauseService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\appointmentcauseservice\appointmentcauseservice.cs
+++IAppointmentCauseService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\appointmentcauseservice\iappointmentcauseservice.cs
+++AppointmentService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\appointmentservice\appointmentservice.cs
+++IAppointmentService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\appointmentservice\iappointmentservice.cs
+++ChatService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\chatservice\chatservice.cs
+++IChatService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\chatservice\ichatservice.cs
+++CityService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\cityservice\cityservice.cs
+++ICityService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\cityservice\icityservice.cs
+++DoctorService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\doctorservice\doctorservice.cs
+++IDoctorService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\doctorservice\idoctorservice.cs
+++FeedbackService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\feedbackservice\feedbackservice.cs
+++IFeedbackService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\feedbackservice\ifeedbackservice.cs
+++FileServiceModels
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\fileservice\fileservicemodels\
+++FileService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\fileservice\fileservice.cs
+++IFileService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\fileservice\ifileservice.cs
+++INotificationService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\notificationservice\inotificationservice.cs
+++NotificationService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\notificationservice\notificationservice.cs
+++IOfferService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\offerservice\iofferservice.cs
+++OfferService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\offerservice\offerservice.cs
+++Models
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\patientservice\models\
+i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\users\defie\source\repos\neonatology\data.common\models\
+++IPatientService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\patientservice\ipatientservice.cs
+++PatientService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\patientservice\patientservice.cs
+++IPaymentService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\paymentservice\ipaymentservice.cs
+++PaymentService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\paymentservice\paymentservice.cs
+++IProfileService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\profileservice\iprofileservice.cs
+++ProfileService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\profileservice\profileservice.cs
+++IRatingService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\ratingservice\iratingservice.cs
+++RatingService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\ratingservice\ratingservice.cs
+++ISlotService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\slotservice\islotservice.cs
+++SlotService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\slotservice\slotservice.cs
+++ISpecializationService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\specializationservice\ispecializationservice.cs
+++SpecializationService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\specializationservice\specializationservice.cs
+++IUserService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\userservice\iuserservice.cs
+++UserService.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\userservice\userservice.cs
+++Microsoft.AspNetCore.App.Analyzers
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.4\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
+i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.4\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.4\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.4\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.4\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
+++Microsoft.AspNetCore.App.CodeFixes
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.4\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
+i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.4\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.4\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.4\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.4\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
+++Microsoft.CodeAnalysis.CSharp.NetAnalyzers
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+++Microsoft.CodeAnalysis.NetAnalyzers
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+++Microsoft.EntityFrameworkCore.Analyzers
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.3\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
+i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.3\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.3\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
+i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.3\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.3\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.3\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.3\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.3\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
+++Microsoft.Extensions.Logging.Generators
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.4\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.4\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\.nuget\packages\microsoft.extensions.logging.abstractions\6.0.0\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\users\defie\.nuget\packages\microsoft.extensions.logging.abstractions\6.0.0\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.4\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.4\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\.nuget\packages\microsoft.extensions.logging.abstractions\6.0.0\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.4\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+++System.Text.Json.SourceGeneration
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.4\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.4\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.4\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.4\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.4\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.4\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.4\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.4\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.4\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.4\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+++Microsoft.NETCore.App
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\microsoft.netcore.app
+i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:c:\users\defie\source\repos\neonatology\common\microsoft.netcore.app
+i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\microsoft.netcore.app
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\source\repos\neonatology\data.models\microsoft.netcore.app
+i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\users\defie\source\repos\neonatology\data.common\microsoft.netcore.app
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\source\repos\neonatology\test\microsoft.netcore.app
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\users\defie\source\repos\neonatology\integrationtests\microsoft.netcore.app
+i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\users\defie\source\repos\neonatology\infrastructure\microsoft.netcore.app
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\microsoft.netcore.app
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\microsoft.netcore.app
+++AutoMapper.Extensions.Microsoft.DependencyInjection (11.0.0)
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:>10603
+i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:>10699
+i:{cbe66609-3802-431d-b4b6-895658b29053}:>10624
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:>10609
+i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:>10639
+i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:>10690
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:>10679
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>10723
+++CloudinaryDotNet (1.17.0)
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:>10605
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>10736
+++HtmlSanitizer (7.1.488)
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:>10606
+++MailKit (3.1.1)
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:>10604
 ++Data
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\data\data.csproj
 i:{00000000-0000-0000-0000-000000000000}:Data
 i:{d85d7e5c-86c1-4bb5-b16b-548b9be4108e}:Data
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\data\data.csproj
 i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\source\repos\neonatology\data\data.csproj
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\data\data.csproj
-++Dependencies
-i:{cbe66609-3802-431d-b4b6-895658b29053}:>2322
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:>2320
-i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:>2433
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:>2319
-i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:>2321
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>6001
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:>6000
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:>3628
-i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:>2558
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7411
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\data\bin\debug\net6.0\data.dll
+++ViewModels
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\viewmodels\viewmodels.csproj
+i:{2257b7f3-e124-4cdb-a891-f29b8bcc26fc}:ViewModels
+++FileServiceModel.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\fileservice\fileservicemodels\fileservicemodel.cs
+++IFileServiceModel.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\fileservice\fileservicemodels\ifileservicemodel.cs
+++ImageServiceModel.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\fileservice\fileservicemodels\imageservicemodel.cs
+++PatientServiceModel.cs
+i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\patientservice\models\patientservicemodel.cs
+++Common
+i:{00000000-0000-0000-0000-000000000000}:Common
+i:{287cf1f6-5014-4b90-9c77-09062694f7ce}:Common
+i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\common\common.csproj
+i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\users\defie\source\repos\neonatology\common\common.csproj
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\common\bin\debug\net6.0\common.dll
+++GlobalConstants.cs
+i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:c:\users\defie\source\repos\neonatology\common\globalconstants.cs
+++PagingModel.cs
+i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:c:\users\defie\source\repos\neonatology\common\pagingmodel.cs
 ++Datasets
 i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\datasets\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\datasets\
@@ -24,343 +292,43 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology
 i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\
 ++Seeding
 i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\seeding\
-++ApplicationBuilderExtensions.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\seeding\applicationbuilderextensions.cs
 ++NeonatologyDbContext.cs
 i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\neonatologydbcontext.cs
-++Analyzers
-i:{cbe66609-3802-431d-b4b6-895658b29053}:analyzers
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:analyzers
-i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:analyzers
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:analyzers
-i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:analyzers
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:analyzers
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:analyzers
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:analyzers
-i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:analyzers
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:analyzers
-++Frameworks
-i:{cbe66609-3802-431d-b4b6-895658b29053}:frameworks
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:frameworks
-i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:frameworks
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:frameworks
-i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:frameworks
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:frameworks
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:frameworks
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:frameworks
-i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:frameworks
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:frameworks
-++Packages
-i:{cbe66609-3802-431d-b4b6-895658b29053}:packages
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:packages
-i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:packages
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:packages
-i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:packages
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:packages
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:packages
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:packages
-i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:packages
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:packages
-++Projects
-i:{cbe66609-3802-431d-b4b6-895658b29053}:projects
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:projects
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:projects
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:projects
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:projects
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:projects
-i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:projects
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:projects
 ++Cities.json
 i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\datasets\cities.json
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\datasets\cities.json
-++20211206170814_InitialCreate.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211206170814_initialcreate.cs
-++20211209164424_AddFieldsInAppointmentForUnregisteredUser.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211209164424_addfieldsinappointmentforunregistereduser.cs
-++20211210072834_RemovedConfirmFromAppointment.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211210072834_removedconfirmfromappointment.cs
-++20211210075125_AddedAppointmentMaxLengthForPropertiesOfAnonymousUserAndChildFirstNameInPatient.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211210075125_addedappointmentmaxlengthforpropertiesofanonymoususerandchildfirstnameinpatient.cs
-++20211211103730_RemoveAgeAndGenderFromPatient.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211211103730_removeageandgenderfrompatient.cs
-++20211211104044_RemoveMiddleNameFromPatient.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211211104044_removemiddlenamefrompatient.cs
-++20211211104551_RemoveCitiesFromPatient.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211211104551_removecitiesfrompatient.cs
-++20211211105634_RemoveChildNameFromPatient.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211211105634_removechildnamefrompatient.cs
-++20211211153903_AddAppointmentCause.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211211153903_addappointmentcause.cs
-++20211212085058_AddIsConfirmetToRating.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211212085058_addisconfirmettorating.cs
-++20211212092418_ChangeCommentLengthToRating.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211212092418_changecommentlengthtorating.cs
-++20211212153336_ChangeDoctorImagesToImage.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211212153336_changedoctorimagestoimage.cs
-++20211214093743_AddedEndToAppointment.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211214093743_addedendtoappointment.cs
-++20211216154948_AddedAppointmentSlots.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211216154948_addedappointmentslots.cs
-++20211217101228_AddedOfferedServices.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211217101228_addedofferedservices.cs
-++20211217103659_RemovedMaxLength.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211217103659_removedmaxlength.cs
-++20211218191938_ChangedAppointmentSlotStatusToBg.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211218191938_changedappointmentslotstatustobg.cs
-++20211220163048_ImplementedBaseModelForAppointmentSlot.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211220163048_implementedbasemodelforappointmentslot.cs
-++20211229165402_AddAppointmentCauseTable.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211229165402_addappointmentcausetable.cs
-++20220105163940_AddStripeCheckoutSessionModel.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220105163940_addstripecheckoutsessionmodel.cs
-++20220105164700_AddCreatedOnToStripeCheckout.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220105164700_addcreatedontostripecheckout.cs
-++20220105172523_PaymentModel.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220105172523_paymentmodel.cs
-++20220106173427_AddTextToAppointmentSlot.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220106173427_addtexttoappointmentslot.cs
-++20220107212953_AddNotificationTable.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220107212953_addnotificationtable.cs
-++20220108144036_ReworkedNotificationModel.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220108144036_reworkednotificationmodel.cs
-++20220109134837_AddGroupAndChatImage.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220109134837_addgroupandchatimage.cs
-++20220109141027_AddGroupNameToGroup.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220109141027_addgroupnametogroup.cs
-++20220112194451_AddedDeletedToAlmostAllModels.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220112194451_addeddeletedtoalmostallmodels.cs
-++20220114160622_AddedAttributes.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220114160622_addedattributes.cs
-++20220114161445_AddedMoreAttributes.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220114161445_addedmoreattributes.cs
-++20220114163704_AppCauseForeignKeyNullable.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220114163704_appcauseforeignkeynullable.cs
-++20220115071340_AddReferencePatientToImage.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220115071340_addreferencepatienttoimage.cs
-++20220115073323_AddAditionalInfoToPatient.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220115073323_addaditionalinfotopatient.cs
-++20220115082836_AddInfoToPatient.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220115082836_addinfotopatient.cs
-++20220115083146_NullableCityIdPatient.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220115083146_nullablecityidpatient.cs
-++20220117210728_AddAddedbyAdminToImage.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220117210728_addaddedbyadmintoimage.cs
-++20220118055100_RemoveAddbyAdminImage.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220118055100_removeaddbyadminimage.cs
-++20220118075147_AddNameImage.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220118075147_addnameimage.cs
-++20220118182143_AddedMaxLengthAndRangeToOfferServiceModel.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220118182143_addedmaxlengthandrangetoofferservicemodel.cs
-++20220122142305_ChangedReferencesToImageInApplicationUser.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220122142305_changedreferencestoimageinapplicationuser.cs
-++20220301152812_AddAddressAsEntity.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220301152812_addaddressasentity.cs
+++20220502170115_InitialCreate.cs
+i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220502170115_initialcreate.cs
 ++NeonatologyDbContextModelSnapshot.cs
 i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\neonatologydbcontextmodelsnapshot.cs
-++Microsoft.AspNetCore.App.Analyzers
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.2\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.2\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.2\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.2\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.2\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
-++Microsoft.AspNetCore.App.CodeFixes
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.2\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.2\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.2\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.2\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.2\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
-++Microsoft.CodeAnalysis.CSharp.NetAnalyzers
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
-i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
-i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
-i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
-++Microsoft.CodeAnalysis.NetAnalyzers
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
-i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
-i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
-i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
-++Microsoft.EntityFrameworkCore.Analyzers
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.1\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.1\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
-i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.1\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.1\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.1\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.1\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.1\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.1\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
-++Microsoft.Extensions.Logging.Generators
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.2\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\.nuget\packages\microsoft.extensions.logging.abstractions\6.0.0\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
-i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\users\defie\.nuget\packages\microsoft.extensions.logging.abstractions\6.0.0\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.2\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.2\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.2\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\.nuget\packages\microsoft.extensions.logging.abstractions\6.0.0\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.2\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
-++System.Text.Json.SourceGeneration
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.2\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.2\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
-i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.2\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.2\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
-i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.2\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.2\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.2\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.2\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
-i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.2\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.2\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
-++Microsoft.NETCore.App
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\microsoft.netcore.app
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\source\repos\neonatology\data.models\microsoft.netcore.app
-i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\users\defie\source\repos\neonatology\data.common\microsoft.netcore.app
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\microsoft.netcore.app
-i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:c:\users\defie\source\repos\neonatology\common\microsoft.netcore.app
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\source\repos\neonatology\test\microsoft.netcore.app
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\users\defie\source\repos\neonatology\integrationtests\microsoft.netcore.app
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\microsoft.netcore.app
-i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\users\defie\source\repos\neonatology\infrastructure\microsoft.netcore.app
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\microsoft.netcore.app
-++AutoMapper.Extensions.Microsoft.DependencyInjection (11.0.0)
-i:{cbe66609-3802-431d-b4b6-895658b29053}:>7479
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:>7507
-i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:>7571
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:>7493
-i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:>7420
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:>7526
-i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:>7524
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7452
-++Microsoft.AspNetCore.Identity.EntityFrameworkCore (6.0.1)
-i:{cbe66609-3802-431d-b4b6-895658b29053}:>7481
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:>7508
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7457
-++Microsoft.AspNetCore.Identity.UI (6.0.1)
-i:{cbe66609-3802-431d-b4b6-895658b29053}:>7483
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7464
-++Microsoft.EntityFrameworkCore (6.0.1)
-i:{cbe66609-3802-431d-b4b6-895658b29053}:>7477
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:>7506
-i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:>7570
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7450
-++Microsoft.EntityFrameworkCore.SqlServer (6.0.1)
-i:{cbe66609-3802-431d-b4b6-895658b29053}:>7478
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7451
-++Microsoft.EntityFrameworkCore.Tools (6.0.1)
-i:{cbe66609-3802-431d-b4b6-895658b29053}:>7482
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7459
+++ApplicationBuilderExtensions.cs
+i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\seeding\applicationbuilderextensions.cs
+++Microsoft.AspNetCore.Identity.EntityFrameworkCore (6.0.3)
+i:{cbe66609-3802-431d-b4b6-895658b29053}:>10626
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:>10610
+++Microsoft.AspNetCore.Identity.UI (6.0.3)
+i:{cbe66609-3802-431d-b4b6-895658b29053}:>10628
+++Microsoft.EntityFrameworkCore (6.0.3)
+i:{cbe66609-3802-431d-b4b6-895658b29053}:>10622
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:>10608
+i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:>10638
+++Microsoft.EntityFrameworkCore.SqlServer (6.0.3)
+i:{cbe66609-3802-431d-b4b6-895658b29053}:>10623
+++Microsoft.EntityFrameworkCore.Tools (6.0.3)
+i:{cbe66609-3802-431d-b4b6-895658b29053}:>10627
 ++Newtonsoft.Json (13.0.1)
-i:{cbe66609-3802-431d-b4b6-895658b29053}:>7480
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7453
-++Common
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\common\common.csproj
-i:{00000000-0000-0000-0000-000000000000}:Common
-i:{287cf1f6-5014-4b90-9c77-09062694f7ce}:Common
-i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\users\defie\source\repos\neonatology\common\common.csproj
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\common\common.csproj
+i:{cbe66609-3802-431d-b4b6-895658b29053}:>10625
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>10724
 ++Data.Models
 i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data.models\data.models.csproj
 i:{d85d7e5c-86c1-4bb5-b16b-548b9be4108e}:Data.Models
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\data.models\data.models.csproj
-++20211206170814_InitialCreate.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211206170814_initialcreate.designer.cs
-++20211209164424_AddFieldsInAppointmentForUnregisteredUser.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211209164424_addfieldsinappointmentforunregistereduser.designer.cs
-++20211210072834_RemovedConfirmFromAppointment.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211210072834_removedconfirmfromappointment.designer.cs
-++20211210075125_AddedAppointmentMaxLengthForPropertiesOfAnonymousUserAndChildFirstNameInPatient.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211210075125_addedappointmentmaxlengthforpropertiesofanonymoususerandchildfirstnameinpatient.designer.cs
-++20211211103730_RemoveAgeAndGenderFromPatient.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211211103730_removeageandgenderfrompatient.designer.cs
-++20211211104044_RemoveMiddleNameFromPatient.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211211104044_removemiddlenamefrompatient.designer.cs
-++20211211104551_RemoveCitiesFromPatient.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211211104551_removecitiesfrompatient.designer.cs
-++20211211105634_RemoveChildNameFromPatient.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211211105634_removechildnamefrompatient.designer.cs
-++20211211153903_AddAppointmentCause.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211211153903_addappointmentcause.designer.cs
-++20211212085058_AddIsConfirmetToRating.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211212085058_addisconfirmettorating.designer.cs
-++20211212092418_ChangeCommentLengthToRating.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211212092418_changecommentlengthtorating.designer.cs
-++20211212153336_ChangeDoctorImagesToImage.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211212153336_changedoctorimagestoimage.designer.cs
-++20211214093743_AddedEndToAppointment.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211214093743_addedendtoappointment.designer.cs
-++20211216154948_AddedAppointmentSlots.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211216154948_addedappointmentslots.designer.cs
-++20211217101228_AddedOfferedServices.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211217101228_addedofferedservices.designer.cs
-++20211217103659_RemovedMaxLength.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211217103659_removedmaxlength.designer.cs
-++20211218191938_ChangedAppointmentSlotStatusToBg.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211218191938_changedappointmentslotstatustobg.designer.cs
-++20211220163048_ImplementedBaseModelForAppointmentSlot.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211220163048_implementedbasemodelforappointmentslot.designer.cs
-++20211229165402_AddAppointmentCauseTable.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20211229165402_addappointmentcausetable.designer.cs
-++20220105163940_AddStripeCheckoutSessionModel.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220105163940_addstripecheckoutsessionmodel.designer.cs
-++20220105164700_AddCreatedOnToStripeCheckout.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220105164700_addcreatedontostripecheckout.designer.cs
-++20220105172523_PaymentModel.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220105172523_paymentmodel.designer.cs
-++20220106173427_AddTextToAppointmentSlot.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220106173427_addtexttoappointmentslot.designer.cs
-++20220107212953_AddNotificationTable.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220107212953_addnotificationtable.designer.cs
-++20220108144036_ReworkedNotificationModel.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220108144036_reworkednotificationmodel.designer.cs
-++20220109134837_AddGroupAndChatImage.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220109134837_addgroupandchatimage.designer.cs
-++20220109141027_AddGroupNameToGroup.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220109141027_addgroupnametogroup.designer.cs
-++20220112194451_AddedDeletedToAlmostAllModels.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220112194451_addeddeletedtoalmostallmodels.designer.cs
-++20220114160622_AddedAttributes.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220114160622_addedattributes.designer.cs
-++20220114161445_AddedMoreAttributes.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220114161445_addedmoreattributes.designer.cs
-++20220114163704_AppCauseForeignKeyNullable.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220114163704_appcauseforeignkeynullable.designer.cs
-++20220115071340_AddReferencePatientToImage.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220115071340_addreferencepatienttoimage.designer.cs
-++20220115073323_AddAditionalInfoToPatient.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220115073323_addaditionalinfotopatient.designer.cs
-++20220115082836_AddInfoToPatient.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220115082836_addinfotopatient.designer.cs
-++20220115083146_NullableCityIdPatient.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220115083146_nullablecityidpatient.designer.cs
-++20220117210728_AddAddedbyAdminToImage.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220117210728_addaddedbyadmintoimage.designer.cs
-++20220118055100_RemoveAddbyAdminImage.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220118055100_removeaddbyadminimage.designer.cs
-++20220118075147_AddNameImage.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220118075147_addnameimage.designer.cs
-++20220118182143_AddedMaxLengthAndRangeToOfferServiceModel.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220118182143_addedmaxlengthandrangetoofferservicemodel.designer.cs
-++20220122142305_ChangedReferencesToImageInApplicationUser.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220122142305_changedreferencestoimageinapplicationuser.designer.cs
-++20220301152812_AddAddressAsEntity.Designer.cs
-i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220301152812_addaddressasentity.designer.cs
+++20220502170115_InitialCreate.Designer.cs
+i:{cbe66609-3802-431d-b4b6-895658b29053}:c:\users\defie\source\repos\neonatology\data\migrations\20220502170115_initialcreate.designer.cs
 ++Dto
 i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\source\repos\neonatology\data.models\dto\
 ++Enums
 i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\source\repos\neonatology\data.models\enums\
-++NotificationStatus.cs
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\source\repos\neonatology\data.models\enums\notificationstatus.cs
-++PaymentStatus.cs
-i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\source\repos\neonatology\data.models\enums\paymentstatus.cs
 ++Address.cs
 i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\source\repos\neonatology\data.models\address.cs
 ++ApplicationRole.cs
@@ -409,154 +377,20 @@ i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\source\repos\neonatology
 i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\source\repos\neonatology\data.models\dto\citydto.cs
 ++SpecializationDto.cs
 i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\source\repos\neonatology\data.models\dto\specializationdto.cs
+++NotificationStatus.cs
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\source\repos\neonatology\data.models\enums\notificationstatus.cs
+++SlotStatus.cs
+i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\source\repos\neonatology\data.models\enums\slotstatus.cs
 ++Data.Common
 i:{1a162e21-2540-4028-8efe-cdd5ee51dd86}:c:\users\defie\source\repos\neonatology\data.common\data.common.csproj
 i:{d85d7e5c-86c1-4bb5-b16b-548b9be4108e}:Data.Common
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\data.common\data.common.csproj
 ++DataConstants
 i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\users\defie\source\repos\neonatology\data.common\dataconstants\
-++Models
-i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\users\defie\source\repos\neonatology\data.common\models\
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\patientservice\models\
-++BaseModel.cs
-i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\users\defie\source\repos\neonatology\data.common\models\basemodel.cs
 ++Constants.cs
 i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\users\defie\source\repos\neonatology\data.common\dataconstants\constants.cs
-++Services
-i:{00000000-0000-0000-0000-000000000000}:Services
-i:{cdc8eea1-0d13-4137-810d-5a569eabd8ad}:Services
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\source\repos\neonatology\test\administrationarea\services\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\services\services.csproj
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\services\
-++AppointmentCauseService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\appointmentcauseservice\
-++AppointmentService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\appointmentservice\
-++ChatService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\chatservice\
-++CityService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\cityservice\
-++DoctorService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\doctorservice\
-++DoctorService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\doctorservice\doctorservice.cs
-++IDoctorService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\doctorservice\idoctorservice.cs
-++EmailSenderService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\emailsenderservice\
-++FeedbackService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\feedbackservice\
-++FileService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\fileservice\
-++NotificationService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\notificationservice\
-++OfferService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\offerservice\
-++PatientService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\patientservice\
-++PaymentService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\paymentservice\
-++ProfileService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\profileservice\
-++RatingService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\ratingservice\
-++SlotService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\slotservice\
-++SpecializationService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\specializationservice\
-++UserService
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\userservice\
-++ReCaptchaService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\recaptchaservice.cs
-++AppointmentCauseService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\appointmentcauseservice\appointmentcauseservice.cs
-++IAppointmentCauseService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\appointmentcauseservice\iappointmentcauseservice.cs
-++AppointmentService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\appointmentservice\appointmentservice.cs
-++IAppointmentService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\appointmentservice\iappointmentservice.cs
-++ChatService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\chatservice\chatservice.cs
-++IChatService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\chatservice\ichatservice.cs
-++CityService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\cityservice\cityservice.cs
-++ICityService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\cityservice\icityservice.cs
-++MailKitEmailSenderOptions.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\emailsenderservice\mailkitemailsenderoptions.cs
-++MailKitSender.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\emailsenderservice\mailkitsender.cs
-++FeedbackService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\feedbackservice\feedbackservice.cs
-++IFeedbackService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\feedbackservice\ifeedbackservice.cs
-++FileServiceModels
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\fileservice\fileservicemodels\
-++FileService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\fileservice\fileservice.cs
-++IFileService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\fileservice\ifileservice.cs
-++INotificationService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\notificationservice\inotificationservice.cs
-++NotificationService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\notificationservice\notificationservice.cs
-++IOfferService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\offerservice\iofferservice.cs
-++OfferService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\offerservice\offerservice.cs
-++IPatientService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\patientservice\ipatientservice.cs
-++PatientService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\patientservice\patientservice.cs
-++IPaymentService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\paymentservice\ipaymentservice.cs
-++PaymentService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\paymentservice\paymentservice.cs
-++IProfileService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\profileservice\iprofileservice.cs
-++ProfileService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\profileservice\profileservice.cs
-++IRatingService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\ratingservice\iratingservice.cs
-++RatingService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\ratingservice\ratingservice.cs
-++ISlotService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\slotservice\islotservice.cs
-++SlotService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\slotservice\slotservice.cs
-++ISpecializationService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\specializationservice\ispecializationservice.cs
-++SpecializationService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\specializationservice\specializationservice.cs
-++IUserService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\userservice\iuserservice.cs
-++UserService.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\userservice\userservice.cs
-++CloudinaryDotNet (1.17.0)
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:>7495
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7465
-++HtmlSanitizer (7.1.475)
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:>7496
-++MailKit (3.1.0)
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:>7494
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7463
-++ViewModels
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\viewmodels\viewmodels.csproj
-i:{2257b7f3-e124-4cdb-a891-f29b8bcc26fc}:ViewModels
-++FileServiceModel.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\fileservice\fileservicemodels\fileservicemodel.cs
-++IFileServiceModel.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\fileservice\fileservicemodels\ifileservicemodel.cs
-++ImageServiceModel.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\fileservice\fileservicemodels\imageservicemodel.cs
-++PatientServiceModel.cs
-i:{4e32bcad-c865-421a-9432-a7b6ddabb1d7}:c:\users\defie\source\repos\neonatology\services\patientservice\models\patientservicemodel.cs
-++GlobalConstants.cs
-i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:c:\users\defie\source\repos\neonatology\common\globalconstants.cs
-++PagingModel.cs
-i:{ae4ff6ca-9fad-40b7-90e4-e0775217b8ca}:c:\users\defie\source\repos\neonatology\common\pagingmodel.cs
+++BaseModel.cs
+i:{058093c2-772b-4d3b-8fd9-dc4f0ef2dd1e}:c:\users\defie\source\repos\neonatology\data.common\models\basemodel.cs
 ++Tests
 i:{00000000-0000-0000-0000-000000000000}:Tests
 ++Test
@@ -576,8 +410,8 @@ i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\source\repos\neonatology
 i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\source\repos\neonatology\test\serviceunittests\
 ++Controllers
 i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\source\repos\neonatology\test\administrationarea\controllers\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\
 ++AppointmentControllerTests.cs
 i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\source\repos\neonatology\test\controllerunittests\appointmentcontrollertests.cs
 i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\source\repos\neonatology\test\administrationarea\controllers\appointmentcontrollertests.cs
@@ -588,8 +422,6 @@ i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\users\defie\source\repos\neonatology
 ++FeedbackControllerTests.cs
 i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\source\repos\neonatology\test\controllerunittests\feedbackcontrollertests.cs
 i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\source\repos\neonatology\test\administrationarea\controllers\feedbackcontrollertests.cs
-++GaleryControllerTests.cs
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\source\repos\neonatology\test\controllerunittests\galerycontrollertests.cs
 ++NotificationControllerTests.cs
 i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\source\repos\neonatology\test\controllerunittests\notificationcontrollertests.cs
 ++OfferControllerTests.cs
@@ -643,30 +475,30 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\.nuget\packages\microsof
 ++xunit.analyzers
 i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\.nuget\packages\xunit.analyzers\0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll
 i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\users\defie\.nuget\packages\xunit.analyzers\0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll
-++coverlet.collector (3.1.0)
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>7435
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:>7543
-++Microsoft.AspNetCore.Mvc.Testing (6.0.1)
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>7430
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:>7539
-++Microsoft.EntityFrameworkCore.InMemory (6.0.1)
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>7432
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:>7541
-++Microsoft.NET.Test.Sdk (17.0.0)
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>7428
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:>7538
-++Moq (4.16.1)
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>7434
+++coverlet.collector (3.1.2)
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>10668
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:>10651
+++Microsoft.AspNetCore.Mvc.Testing (6.0.3)
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>10663
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:>10647
+++Microsoft.EntityFrameworkCore.InMemory (6.0.3)
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>10665
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:>10649
+++Microsoft.NET.Test.Sdk (17.1.0)
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>10661
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:>10646
+++Moq (4.17.2)
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>10667
 ++Selenium.WebDriver (4.1.0)
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>7427
-++Selenium.WebDriver.ChromeDriver (97.0.4692.7100)
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>7429
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>10660
+++Selenium.WebDriver.ChromeDriver (99.0.4844.5100)
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>10662
 ++xunit (2.4.1)
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>7431
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:>7540
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>10664
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:>10648
 ++xunit.runner.visualstudio (2.4.3)
-i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>7433
-i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:>7542
+i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:>10666
+i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:>10650
 ++Neonatology
 i:{3f08dedf-a1d3-45bd-af35-4042c024cc0b}:c:\users\defie\source\repos\neonatology\neonatology\neonatology.csproj
 i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\users\defie\source\repos\neonatology\neonatology\neonatology.csproj
@@ -685,12 +517,19 @@ i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\users\defie\source\repos\neonatology
 i:{b366f351-9cf5-4b1b-b9e7-8d8f0015f855}:c:\users\defie\source\repos\neonatology\integrationtests\helpers\webapplicationfactoryextensions.cs
 ++Web
 i:{00000000-0000-0000-0000-000000000000}:Web
+++Infrastructure
+i:{2257b7f3-e124-4cdb-a891-f29b8bcc26fc}:Infrastructure
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\infrastructure\infrastructure.csproj
+++CustomAttributes
+i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\users\defie\source\repos\neonatology\infrastructure\customattributes\
+++ClaimsPrincipalExtensions.cs
+i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\users\defie\source\repos\neonatology\infrastructure\claimsprincipalextensions.cs
+++ValidateDateStringAttribute.cs
+i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\users\defie\source\repos\neonatology\infrastructure\customattributes\validatedatestringattribute.cs
+++ValidateTimeStringAttribute.cs
+i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\users\defie\source\repos\neonatology\infrastructure\customattributes\validatetimestringattribute.cs
 ++Address
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\address\
-++AddressFormModel.cs
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\address\addressformmodel.cs
-++EditAddressFormModel.cs
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\address\editaddressformmodel.cs
 ++Administration
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\administration\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\
@@ -701,25 +540,15 @@ i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\chat\
 ++City
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\city\
-++CityFormModel.cs
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\city\cityformmodel.cs
 ++Doctor
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\doctor\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\doctor\
-++DoctorEditFormModel.cs
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\doctor\doctoreditformmodel.cs
-++DoctorProfileViewModel.cs
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\doctor\doctorprofileviewmodel.cs
-++SpecializationFormModel.cs
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\doctor\specializationformmodel.cs
 ++ErrorViewModel
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\errorviewmodel\
-++ErrorViewModel.cs
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\errorviewmodel\errorviewmodel.cs
 ++Feedback
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\feedback\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\feedback\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\feedback\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\feedback\
 ++Galery
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\galery\
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\administration\galery\
@@ -728,45 +557,42 @@ i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology
 ++Home
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\home\
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\administration\home\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\home\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\home\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\home\
 ++Notification
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\notification\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\notification\
 ++Offer
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\offer\
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\administration\offer\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\offer\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\offer\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\offer\
 ++Patient
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\patient\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\patient\
-++CreatePatientFormModel.cs
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\patient\createpatientformmodel.cs
-++PatientViewModel.cs
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\patient\patientviewmodel.cs
 ++Payment
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\payment\
 ++Profile
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\profile\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\profile\
-++EditProfileFormModel.cs
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\profile\editprofileformmodel.cs
-++ProfileViewModel.cs
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\profile\profileviewmodel.cs
 ++Rating
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\rating\
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\administration\rating\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\rating\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\rating\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\rating\
 ++Slot
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\slot\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\slot\
 ++Stripe
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\stripe\
+++AddressFormModel.cs
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\address\addressformmodel.cs
+++EditAddressFormModel.cs
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\address\editaddressformmodel.cs
 ++Appointment
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\administration\appointment\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\appointment\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\appointment\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\appointment\
 ++User
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\administration\user\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\user\
@@ -800,12 +626,24 @@ i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\chat\privatechatviewmodel.cs
 ++SendFilesResponseViewModel.cs
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\chat\sendfilesresponseviewmodel.cs
+++CityFormModel.cs
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\city\cityformmodel.cs
+++DoctorEditFormModel.cs
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\doctor\doctoreditformmodel.cs
+++DoctorProfileViewModel.cs
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\doctor\doctorprofileviewmodel.cs
+++SpecializationFormModel.cs
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\doctor\specializationformmodel.cs
+++ErrorViewModel.cs
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\errorviewmodel\errorviewmodel.cs
 ++FeedbackInputModel.cs
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\feedback\feedbackinputmodel.cs
 ++FeedbackReplyModel.cs
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\feedback\feedbackreplymodel.cs
 ++FeedbackViewModel.cs
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\feedback\feedbackviewmodel.cs
+++GalleryViewModel.cs
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\galery\galleryviewmodel.cs
 ++UploadImageModel.cs
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\galery\uploadimagemodel.cs
 ++RecaptchaData.cs
@@ -822,10 +660,18 @@ i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\notification\notificationviewmodel.cs
 ++OfferViewModel.cs
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\offer\offerviewmodel.cs
+++CreatePatientFormModel.cs
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\patient\createpatientformmodel.cs
+++PatientViewModel.cs
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\patient\patientviewmodel.cs
 ++CreatePaymentModel.cs
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\payment\createpaymentmodel.cs
 ++PaymentViewModel.cs
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\payment\paymentviewmodel.cs
+++EditProfileFormModel.cs
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\profile\editprofileformmodel.cs
+++ProfileViewModel.cs
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\profile\profileviewmodel.cs
 ++CreateRatingFormModel.cs
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\rating\createratingformmodel.cs
 ++SlotEditModel.cs
@@ -836,11 +682,8 @@ i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\slot\slotviewmodel.cs
 ++StripeSettings.cs
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\stripe\stripesettings.cs
-++Microsoft.AspNetCore.Http.Features (5.0.13)
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:>7523
-++Infrastructure
-i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\infrastructure\infrastructure.csproj
-i:{2257b7f3-e124-4cdb-a891-f29b8bcc26fc}:Infrastructure
+++Microsoft.AspNetCore.Http.Features (5.0.15)
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:>10678
 ++AdminAppointmentViewModel.cs
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\administration\appointment\adminappointmentviewmodel.cs
 ++GaleryModel.cs
@@ -857,153 +700,33 @@ i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\administration\rating\ratingviewmodel.cs
 ++UserViewModel.cs
 i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\administration\user\userviewmodel.cs
-++CustomAttributes
-i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\users\defie\source\repos\neonatology\infrastructure\customattributes\
-++ClaimsPrincipalExtensions.cs
-i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\users\defie\source\repos\neonatology\infrastructure\claimsprincipalextensions.cs
-++ValidateDateStringAttribute.cs
-i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\users\defie\source\repos\neonatology\infrastructure\customattributes\validatedatestringattribute.cs
-++ValidateTimeStringAttribute.cs
-i:{c1d6db1d-fbf8-4f80-80a7-28d90aa8dd31}:c:\users\defie\source\repos\neonatology\infrastructure\customattributes\validatetimestringattribute.cs
 ++Connected Services 
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7412
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>10590
+++Application Insights Sdk (Local)
+++Secrets.json (Local)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22692
+++Secrets.json (Local) dependency is detected
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22693
+++SignalR
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22690
+++SQL Server Database (ConnectionStrings:LocalConnection)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22688
+++SQL Server Database dependency with connectionId 'ConnectionStrings:LocalConnection' is detected
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22689
+++SQL Server Express LocalDB (Local) (ConnectionStrings:DefaultConnection)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>10799
 ++Properties
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\properties\
-++wwwroot
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\
-++Areas
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\
-++api
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\api\
-++AppointmentController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\appointmentcontroller.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\appointmentcontroller.cs
-++BaseController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\basecontroller.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\basecontroller.cs
-++ChatController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\chatcontroller.cs
-++CheckoutController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\checkoutcontroller.cs
-++DoctorController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\doctorcontroller.cs
-++FeedbackController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\feedbackcontroller.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\feedbackcontroller.cs
-++GaleryController.cs
-++HomeController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\homecontroller.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\homecontroller.cs
-++NotificationController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\notificationcontroller.cs
-++OfferController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\offercontroller.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\offercontroller.cs
-++PatientController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\patientcontroller.cs
-++ProfileController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\profilecontroller.cs
-++RatingController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\ratingcontroller.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\ratingcontroller.cs
-++Hubs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\hubs\
-++MappingProfile
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\mappingprofile\
-++MappingProfile.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\mappingprofile\mappingprofile.cs
-++Views
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\
-++DoctorAppointments.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\appointment\doctorappointments.cshtml
-++MakeAnAppointment.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\appointment\makeanappointment.cshtml
-++MakePatientAppointment.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\appointment\makepatientappointment.cshtml
-++MyAppointments.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\appointment\myappointments.cshtml
-++TodaysAppointments.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\appointment\todaysappointments.cshtml
-++Checkout
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\checkout\
-++Calendar.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\doctor\calendar.cshtml
-++Edit.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\doctor\edit.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\profile\edit.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\offer\edit.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\user\edit.cshtml
-++Profile.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\doctor\profile.cshtml
-++All.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\chat\all.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\offer\all.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\appointment\all.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\feedback\all.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\offer\all.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\rating\all.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\user\all.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\gallery\all.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\gallery\all.cshtml
-++Index.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\home\index.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\profile\index.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\checkout\index.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\notification\index.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\home\index.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\index.cshtml
-++Privacy.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\home\privacy.cshtml
-++AllUsers.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\profile\allusers.cshtml
-++Shared
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\shared\
-++_CookieConsentPartial.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\_cookieconsentpartial.cshtml
-++_Layout.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\_layout.cshtml
-++_LoginPartial.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\_loginpartial.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\shared\_loginpartial.cshtml
-++_ValidationScriptsPartial.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\_validationscriptspartial.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\_validationscriptspartial.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\shared\_validationscriptspartial.cshtml
-++Error.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\error.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\shared\error.cshtml
-++Error400.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\error400.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\shared\error400.cshtml
-++Error404.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\error404.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\shared\error404.cshtml
-++_ViewImports.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\_viewimports.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\_viewimports.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\_viewimports.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\_viewimports.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\_viewimports.cshtml
-++_ViewStart.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\_viewstart.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\_viewstart.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\_viewstart.cshtml
-++appsettings.json
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\appsettings.json
-++libman.json
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\libman.json
-++Program.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\program.cs
-++Startup.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\startup.cs
-++SQL Server Express LocalDB (Local) (ConnectionStrings:DefaultConnection)
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7624
+++PublishProfiles
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\properties\publishprofiles\
+++Default Settings.pubxml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\properties\publishprofiles\default settings.pubxml
 ++launchSettings.json
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\properties\launchsettings.json
 ++serviceDependencies.json
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\properties\servicedependencies.json
+++wwwroot
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\
 ++adminLte
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\adminlte\
 ++chat
@@ -1011,106 +734,31 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology
 ++chatVoice
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chatvoice\
 ++css
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chatvoice\css\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\css\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chat\css\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chatvoice\css\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\adminlte\dist\css\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\fontawesome\css\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\fonts\css\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\adminlte\plugins\fontawesome-free\css\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\alertifyjs\build\css\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\bootstrap\dist\css\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\datatables\media\css\
-++img
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\
 ++js
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chatvoice\js\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\js\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chat\js\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chatvoice\js\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\adminlte\dist\js\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\alertifyjs\src\js\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\bootstrap\dist\js\
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\datatables\media\js\
-++lib
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\
-++locales
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\locales\
-++favicon.ico
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\favicon.ico
-++NotificationSound1.mp3
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\notificationsound1.mp3
-++Identity
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\
-++CalendarController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\api\calendarcontroller.cs
-++DoctorCalendarController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\api\doctorcalendarcontroller.cs
-++StripeController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\api\stripecontroller.cs
-++ChatHub.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\hubs\chathub.cs
-++ConnectionHub.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\hubs\connectionhub.cs
-++ConnectionModel.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\hubs\connectionmodel.cs
-++NotificationHub.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\hubs\notificationhub.cs
-++WithUser.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\chat\withuser.cshtml
-++CanceledPayment.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\checkout\canceledpayment.cshtml
-++SuccessfulPayment.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\checkout\successfulpayment.cshtml
-++MyFeedbacks.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\feedback\myfeedbacks.cshtml
-++Send.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\feedback\send.cshtml
-++Finish.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\patient\finish.cshtml
-++RateAppointment.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\rating\rateappointment.cshtml
-++appsettings.Development.json
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\appsettings.development.json
-++Microsoft.AspNetCore.Analyzers
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.analyzers.dll
-++Microsoft.AspNetCore.Components.Analyzers
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.components.analyzers.dll
-++Microsoft.AspNetCore.Mvc.Analyzers
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.mvc.analyzers.dll
-++Microsoft.AspNetCore.Razor.SourceGenerator.Tooling.Internal
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk.razor\source-generators\microsoft.aspnetcore.razor.sourcegenerator.tooling.internal.dll
-++Microsoft.NET.Sdk.Razor.SourceGenerators
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\sdk\6.0.200\sdks\microsoft.net.sdk.razor\source-generators\microsoft.net.sdk.razor.sourcegenerators.dll
-++Microsoft.AspNetCore.App
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\microsoft.aspnetcore.app
-++Bootstrap.Datepicker (1.8.0.1)
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7458
-++FontAwesome (4.7.0)
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7466
-++Hangfire.AspNetCore (1.7.28)
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7455
-++Hangfire.Core (1.7.28)
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7462
-++Hangfire.SqlServer (1.7.28)
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7454
-++Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore (6.0.1)
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7456
-++Microsoft.VisualStudio.Web.CodeGeneration.Design (6.0.1)
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7461
-++Moment.js (2.29.1)
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7449
-++Stripe.net (39.89.0)
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>7460
-++serviceDependencies.local.json
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\properties\servicedependencies.local.json
-++dist
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\adminlte\dist\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\bootstrap\dist\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\jquery\dist\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\jquery-validation\dist\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\microsoft\signalr\dist\
-++plugins
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\adminlte\plugins\
+++connectionHub.js
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chatvoice\js\connectionhub.js
+++constWebRTC.js
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chatvoice\js\constwebrtc.js
+++custom.js
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chatvoice\js\custom.js
+++utilsRTC.js
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chatvoice\js\utilsrtc.js
 ++allusers.css
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\css\allusers.css
 ++checkout.css
@@ -1123,24 +771,28 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\css\profile.css
 ++site.css
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\css\site.css
+++site.min.css
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\css\site.min.css
 ++style.css
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\css\style.css
+++img
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\
 ++admin.png
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\admin.png
 ++appointment.jpg
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\appointment.jpg
-++edit.png
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\edit.png
-++editForm.png
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\editform.png
+++edit.jpg
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\edit.jpg
+++editForm.jpg
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\editform.jpg
 ++error.jpg
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\error.jpg
 ++feedback.jpg
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\feedback.jpg
 ++homepage.jpg
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\homepage.jpg
-++logo.png
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\logo.png
+++logo.jpg
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\logo.jpg
 ++myAppointments.jpg
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\myappointments.jpg
 ++NoAvatarProfileImage.png
@@ -1153,6 +805,203 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\patientappointment.jpg
 ++services.jpg
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\services.jpg
+++lib
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\
+++locales
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\locales\
+++favicon.ico
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\favicon.ico
+++NotificationSound1.mp3
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\notificationsound1.mp3
+++Areas
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\
+++AppointmentController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\appointmentcontroller.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\appointmentcontroller.cs
+++BaseController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\basecontroller.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\basecontroller.cs
+++FeedbackController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\feedbackcontroller.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\feedbackcontroller.cs
+++GalleryController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\gallerycontroller.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\gallerycontroller.cs
+++HomeController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\homecontroller.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\homecontroller.cs
+++OfferController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\offercontroller.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\offercontroller.cs
+++RatingController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\ratingcontroller.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\ratingcontroller.cs
+++UserController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\usercontroller.cs
+++Views
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\
+++All.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\appointment\all.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\feedback\all.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\gallery\all.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\offer\all.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\rating\all.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\user\all.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\chat\all.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\gallery\all.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\offer\all.cshtml
+++Information.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\appointment\information.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\feedback\information.cshtml
+++Gallery
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\gallery\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\gallery\
+++Index.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\home\index.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\index.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\checkout\index.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\home\index.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\notification\index.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\profile\index.cshtml
+++Shared
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\shared\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\
+++_ViewImports.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\_viewimports.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\_viewimports.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\_viewimports.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\_viewimports.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\_viewimports.cshtml
+++_ViewStart.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\_viewstart.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\_viewstart.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\_viewstart.cshtml
+++Identity
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\
+++Pages
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\
+++Account
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\
+++Manage
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\
+++_StatusMessage.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\_statusmessage.cshtml
+++ForgotPassword.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\forgotpassword.cshtml
+++ForgotPasswordConfirmation.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\forgotpasswordconfirmation.cshtml
+++Login.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\login.cshtml
+++Login.cshtml.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\login.cshtml.cs
+++Logout.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\logout.cshtml
+++Register.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\register.cshtml
+++Register.cshtml.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\register.cshtml.cs
+++ResetPassword.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\resetpassword.cshtml
+++ResetPasswordConfirmation.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\resetpasswordconfirmation.cshtml
+++_ValidationScriptsPartial.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\_validationscriptspartial.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\_validationscriptspartial.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\shared\_validationscriptspartial.cshtml
+++IdentityHostingStartup.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\identityhostingstartup.cs
+++api
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\api\
+++ChatController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\chatcontroller.cs
+++CheckoutController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\checkoutcontroller.cs
+++ConfigResponse.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\configresponse.cs
+++DoctorController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\doctorcontroller.cs
+++NotificationController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\notificationcontroller.cs
+++PatientController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\patientcontroller.cs
+++ProfileController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\profilecontroller.cs
+++SlotController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\slotcontroller.cs
+++Hubs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\hubs\
+++MappingProfile
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\mappingprofile\
+++Checkout
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\checkout\
+++_CookieConsentPartial.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\_cookieconsentpartial.cshtml
+++_Layout.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\_layout.cshtml
+++_LoginPartial.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\_loginpartial.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\shared\_loginpartial.cshtml
+++Error.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\error.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\shared\error.cshtml
+++Error400.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\error400.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\shared\error400.cshtml
+++Error404.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\shared\error404.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\shared\error404.cshtml
+++appsettings.json
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\appsettings.json
+++appsettings.Development.json
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\appsettings.development.json
+++libman.json
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\libman.json
+++Program.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\program.cs
+++Startup.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\startup.cs
+++Your application is making use of SignalR. For environments that need to scale we strongly recommend adding a dependency on Azure SignalR Service.
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22691
+++Microsoft.AspNetCore.Analyzers
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.analyzers.dll
+++Microsoft.AspNetCore.Components.Analyzers
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.components.analyzers.dll
+++Microsoft.AspNetCore.Mvc.Analyzers
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.mvc.analyzers.dll
+++Microsoft.AspNetCore.Razor.SourceGenerator.Tooling.Internal
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk.razor\source-generators\microsoft.aspnetcore.razor.sourcegenerator.tooling.internal.dll
+++Microsoft.NET.Sdk.Razor.SourceGenerators
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\program files\dotnet\sdk\6.0.202\sdks\microsoft.net.sdk.razor\source-generators\microsoft.net.sdk.razor.sourcegenerators.dll
+++Microsoft.AspNetCore.App
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\microsoft.aspnetcore.app
+++Bootstrap.Datepicker (1.8.0.1)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>10729
+++FontAwesome (4.7.0)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>10737
+++Hangfire.AspNetCore (1.7.28)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>10726
+++Hangfire.Core (1.7.28)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>10733
+++Hangfire.SqlServer (1.7.28)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>10725
+++Microsoft.ApplicationInsights.AspNetCore (2.15.0)
+++Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore (6.0.3)
+++Microsoft.VisualStudio.Web.CodeGeneration.Design (6.0.2)
+++Moment.js (2.29.1)
+++Stripe.net (39.96.0)
+++serviceDependencies.local.json
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\properties\servicedependencies.local.json
+++dist
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\adminlte\dist\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\bootstrap\dist\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\jquery\dist\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\jquery-validation\dist\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\microsoft\signalr\dist\
+++plugins
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\adminlte\plugins\
+++Custom.css
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chatvoice\css\custom.css
 ++appointmentCalendar.js
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\js\appointmentcalendar.js
 ++bootstrap-datepicker.js
@@ -1163,8 +1012,6 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\js\date-picker.js
 ++doctorCalendar.js
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\js\doctorcalendar.js
-++errorNotify.js
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\js\errornotify.js
 ++notification.js
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\js\notification.js
 ++notificationActions.js
@@ -1183,9 +1030,6 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\datatables\
 ++fontawesome
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\fontawesome\
-++fonts
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\fonts\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\fonts\fonts\
 ++fullcallendar
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\fullcallendar\
 ++jquery
@@ -1362,10 +1206,99 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\locales\bootstrap-datepicker.zh-tw.min.js
 ++bootstrap-datepicker-en-CA.min.js
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\locales\bootstrap-datepicker-en-ca.min.js
-++Pages
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\
-++IdentityHostingStartup.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\identityhostingstartup.cs
+++GalleryService.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\services\galleryservice.cs
+++IGalleryService.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\services\igalleryservice.cs
+++Reply.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\feedback\reply.cshtml
+++Add.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\offer\add.cshtml
+++Edit.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\offer\edit.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\user\edit.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\doctor\edit.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\profile\edit.cshtml
+++_AdminLayout.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\shared\_adminlayout.cshtml
+++_ManageNav.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\_managenav.cshtml
+++ChangePassword.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\changepassword.cshtml
+++DeletePersonalData.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\deletepersonaldata.cshtml
+++Email.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\email.cshtml
+++ManageNavPages.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\managenavpages.cs
+++PersonalData.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\personaldata.cshtml
+++SetPassword.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\setpassword.cshtml
+++ForgotPassword.cshtml.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\forgotpassword.cshtml.cs
+++ForgotPasswordConfirmation.cshtml.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\forgotpasswordconfirmation.cshtml.cs
+++Logout.cshtml.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\logout.cshtml.cs
+++ResetPassword.cshtml.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\resetpassword.cshtml.cs
+++ResetPasswordConfirmation.cshtml.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\resetpasswordconfirmation.cshtml.cs
+++CalendarController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\api\calendarcontroller.cs
+++DoctorCalendarController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\api\doctorcalendarcontroller.cs
+++ChatHub.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\hubs\chathub.cs
+++ConnectionHub.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\hubs\connectionhub.cs
+++ConnectionModel.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\hubs\connectionmodel.cs
+++NotificationHub.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\hubs\notificationhub.cs
+++MappingProfile.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\mappingprofile\mappingprofile.cs
+++DoctorPastAppointments.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\appointment\doctorpastappointments.cshtml
+++DoctorUpcomingAppointments.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\appointment\doctorupcomingappointments.cshtml
+++MakeAnAppointment.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\appointment\makeanappointment.cshtml
+++MakePatientAppointment.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\appointment\makepatientappointment.cshtml
+++MyPastAppointments.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\appointment\mypastappointments.cshtml
+++MyUpcomingAppointments.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\appointment\myupcomingappointments.cshtml
+++TodaysAppointments.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\appointment\todaysappointments.cshtml
+++Consultation.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\chat\consultation.cshtml
+++WithUser.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\chat\withuser.cshtml
+++CanceledPayment.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\checkout\canceledpayment.cshtml
+++SuccessfulPayment.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\checkout\successfulpayment.cshtml
+++Calendar.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\doctor\calendar.cshtml
+++Profile.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\doctor\profile.cshtml
+++MyFeedbacks.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\feedback\myfeedbacks.cshtml
+++Send.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\feedback\send.cshtml
+++Privacy.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\home\privacy.cshtml
+++Finish.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\patient\finish.cshtml
+++AllUsers.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\profile\allusers.cshtml
+++RateAppointment.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\rating\rateappointment.cshtml
+++TodaySlots.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\slot\todayslots.cshtml
 ++chart.js
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\adminlte\plugins\chart.js\
 ++ekko-lightbox
@@ -1386,18 +1319,6 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chat\js\chatimagesscript.js
 ++chatPerformanceScript.js
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chat\js\chatperformancescript.js
-++Custom.css
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chatvoice\css\custom.css
-++connectionHub.js
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chatvoice\js\connectionhub.js
-++constWebRTC.js
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chatvoice\js\constwebrtc.js
-++custom.js
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chatvoice\js\custom.js
-++utilsRTC.js
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\chatvoice\js\utilsrtc.js
-++site.min.css
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\css\site.min.css
 ++doctorCalendar.min.js
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\js\doctorcalendar.min.js
 ++site.min.js
@@ -1463,12 +1384,18 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
 ++signalr
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\microsoft\signalr\
-++UserController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\usercontroller.cs
-++GaleryService.cs
-++IGaleryService.cs
-++Account
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\
+++ChangePassword.cshtml.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\changepassword.cshtml.cs
+++DeletePersonalData.cshtml.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\deletepersonaldata.cshtml.cs
+++Email.cshtml.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\email.cshtml.cs
+++Index.cshtml.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\index.cshtml.cs
+++PersonalData.cshtml.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\personaldata.cshtml.cs
+++SetPassword.cshtml.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\setpassword.cshtml.cs
 ++adminlte.min.css
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\adminlte\dist\css\adminlte.min.css
 ++adminlte.min.js
@@ -1565,12 +1492,6 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology
 ++fa-solid-900.woff2
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\fontawesome\webfonts\fa-solid-900.woff2
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\adminlte\plugins\fontawesome-free\webfonts\fa-solid-900.woff2
-++font-awesome.css
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\fonts\css\font-awesome.css
-++fontawesome-webfont.woff
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\fonts\fonts\fontawesome-webfont.woff
-++fontawesome-webfont.woff2
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\fonts\fonts\fontawesome-webfont.woff2
 ++locales-all.min.js
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\fullcallendar\locales-all.min.js
 ++main.min.css
@@ -1585,33 +1506,6 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\jquery-validation\dist\jquery.validate.js
 ++jquery.validate.unobtrusive.min.js
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
-++Information.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\appointment\information.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\feedback\information.cshtml
-++Reply.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\feedback\reply.cshtml
-++Add.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\offer\add.cshtml
-++_AdminLayout.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\shared\_adminlayout.cshtml
-++Manage
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\
-++_StatusMessage.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\_statusmessage.cshtml
-++ForgotPassword.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\forgotpassword.cshtml
-++ForgotPasswordConfirmation.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\forgotpasswordconfirmation.cshtml
-++Login.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\login.cshtml
-++Logout.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\logout.cshtml
-++Register.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\register.cshtml
-++ResetPassword.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\resetpassword.cshtml
-++ResetPasswordConfirmation.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\resetpasswordconfirmation.cshtml
 ++adminlte.min.css.map
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\adminlte\dist\css\adminlte.min.css.map
 ++adminlte.min.js.map
@@ -1716,10 +1610,6 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\datatables\media\css\jquery.datatables.css
 ++jquery.dataTables.js
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\datatables\media\js\jquery.datatables.js
-++font-awesome.css.map
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\fonts\css\font-awesome.css.map
-++font-awesome.min.css
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\fonts\css\font-awesome.min.css
 ++jquery.min.js
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\jquery\dist\jquery.min.js
 ++additional-methods.min.js
@@ -1796,34 +1686,6 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\microsoft\signalr\src\websockettransport.ts
 ++XhrHttpClient.ts
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\microsoft\signalr\src\xhrhttpclient.ts
-++_ManageNav.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\_managenav.cshtml
-++ChangePassword.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\changepassword.cshtml
-++DeletePersonalData.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\deletepersonaldata.cshtml
-++Email.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\email.cshtml
-++ManageNavPages.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\managenavpages.cs
-++PersonalData.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\personaldata.cshtml
-++SetPassword.cshtml
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\setpassword.cshtml
-++ForgotPassword.cshtml.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\forgotpassword.cshtml.cs
-++ForgotPasswordConfirmation.cshtml.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\forgotpasswordconfirmation.cshtml.cs
-++Login.cshtml.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\login.cshtml.cs
-++Logout.cshtml.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\logout.cshtml.cs
-++Register.cshtml.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\register.cshtml.cs
-++ResetPassword.cshtml.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\resetpassword.cshtml.cs
-++ResetPasswordConfirmation.cshtml.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\resetpasswordconfirmation.cshtml.cs
 ++ekko-lightbox.min.js.map
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\adminlte\plugins\ekko-lightbox\ekko-lightbox.min.js.map
 ++getUserMedia.constraints.spec.min.js
@@ -2074,18 +1936,6 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\microsoft\signalr\dist\esm\websockettransport.d.ts
 ++XhrHttpClient.d.ts
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\microsoft\signalr\dist\esm\xhrhttpclient.d.ts
-++ChangePassword.cshtml.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\changepassword.cshtml.cs
-++DeletePersonalData.cshtml.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\deletepersonaldata.cshtml.cs
-++Email.cshtml.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\email.cshtml.cs
-++Index.cshtml.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\index.cshtml.cs
-++PersonalData.cshtml.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\personaldata.cshtml.cs
-++SetPassword.cshtml.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\identity\pages\account\manage\setpassword.cshtml.cs
 ++bootstrap.rtl.css
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\alertifyjs\build\css\themes\bootstrap.rtl.css
 ++default.min.css
@@ -2216,13 +2066,42 @@ i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
 ++signalr.min.js.map
 i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\lib\microsoft\signalr\dist\browser\signalr.min.js.map
-++GalleryController.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\controllers\gallerycontroller.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\gallerycontroller.cs
-++Gallery
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\views\gallery\
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\gallery\
-++GalleryService.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\services\galleryservice.cs
-++IGalleryService.cs
-i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\services\igalleryservice.cs
+++MailKit (3.2.0)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22627
+++Microsoft.ApplicationInsights.AspNetCore (2.20.0)
+++Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore (6.0.4)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22629
+++Microsoft.AspNetCore.Identity.EntityFrameworkCore (6.0.4)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22630
+++Microsoft.AspNetCore.Identity.UI (6.0.4)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22631
+++Microsoft.EntityFrameworkCore (6.0.4)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22632
+++Microsoft.EntityFrameworkCore.SqlServer (6.0.4)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22633
+++Microsoft.EntityFrameworkCore.Tools (6.0.4)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22634
+++Microsoft.VisualStudio.Web.CodeGeneration.Design (6.0.3)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22635
+++Moment.js (2.29.3)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22636
+++Stripe.net (39.108.0)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22637
+++Application Insights
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22694
+++Application Insights dependency is detected
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22695
+++QrController.cs
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\controllers\qrcontroller.cs
+++NewFolder
+++Qr
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\administration\qr\
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\qr\
+++QRCoder (1.4.3)
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:>22701
+++QRCodeModel.cs
+i:{bf515c8b-7cda-4528-9dcb-755489d6e83a}:c:\users\defie\source\repos\neonatology\viewmodels\administration\qr\qrcodemodel.cs
+++CreateQRCode.cshtml
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\areas\administration\views\qr\createqrcode.cshtml
+++qr.png
+i:{7ba7dc60-221d-4302-9e7f-e25efedf0f06}:c:\users\defie\source\repos\neonatology\neonatology\wwwroot\img\qr.png

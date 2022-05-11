@@ -1,7 +1,6 @@
 ﻿namespace ViewModels.Appointments
 {
     using System.ComponentModel.DataAnnotations;
-    using System;
 
     using static Data.Common.DataConstants.Constants;
     using static Common.GlobalConstants.MessageConstants;

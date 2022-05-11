@@ -8,7 +8,7 @@
 
     using Services.FileService.FileServiceModels;
 
-    using ViewModels.Galery;
+    using ViewModels.Gallery;
 
     public interface IFileService
     {

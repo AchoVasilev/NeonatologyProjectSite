@@ -54,8 +54,8 @@
 
             var result = await controller.Finish(model);
             var root = Assert.IsType<RedirectToActionResult>(result);
-            Assert.Equal("MyAppointments", root.ActionName);
-            Assert.Equal("Appointment", root.ControllerName);
+            Assert.Equal("Index", root.ActionName);
+            Assert.Equal("Home", root.ControllerName);
         }
     }
 }
