@@ -2,33 +2,33 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
     using AutoMapper;
-
     using global::Services.CityService;
     using global::Services.PatientService;
     using global::Services.ProfileService;
-    using global::ViewModels.Profile;
-
+    using ViewModels.Profile;
     using Microsoft.AspNetCore.Mvc;
-
     using ViewModels.Administration.User;
-
     using static Common.GlobalConstants.MessageConstants;
+    using Data.Models;
+    using Microsoft.AspNetCore.Identity;
 
     public class UserController : BaseController
     {
-        private readonly IPatientService patientService;
-        private readonly IMapper mapper;
         private readonly ICityService cityService;
+        private readonly IMapper mapper;
+        private readonly IPatientService patientService;
         private readonly IProfileService profileService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public UserController(IPatientService patientService, IMapper mapper, ICityService cityService, IProfileService profileService)
+        public UserController(IPatientService patientService, IMapper mapper, ICityService cityService,
+            IProfileService profileService, UserManager<ApplicationUser> userManager)
         {
             this.patientService = patientService;
             this.mapper = mapper;
             this.cityService = cityService;
             this.profileService = profileService;
+            this.userManager = userManager;
         }
 
         public async Task<IActionResult> All()
@@ -81,6 +81,26 @@
                 model.Cities = await this.cityService.GetAllCities();
 
                 return View(model);
+            }
+
+            return RedirectToAction(nameof(All));
+        }
+
+        public async Task<IActionResult> Delete(string userId)
+        {
+            var user = await this.userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound($"Не успяхме да заредим потребител с номер '{this.userManager.GetUserId(User)}'.");
+            }
+
+            var result = await this.userManager.DeleteAsync(user);
+            var patientIsDeleted = await this.patientService.DeletePatient(userId);
+
+            if (!result.Succeeded || !patientIsDeleted)
+            {
+                this.TempData["Message"] = UnsuccessfulEditMsg;
+                return RedirectToAction(nameof(All));
             }
 
             return RedirectToAction(nameof(All));

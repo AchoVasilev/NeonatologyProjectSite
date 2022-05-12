@@ -68,7 +68,7 @@
             if (appointment.IsRated)
             {
                 this.TempData["Message"] = RatedAppointment;
-                return RedirectToAction("MyAppointments", "Appointment", new { area = "" });
+                return RedirectToAction("MyPastAppointments", "Appointment", new { area = "", page = 1 });
             }
 
             var doctorId = await this.doctorService.GetDoctorIdByAppointmentId(model.AppointmentId);
@@ -91,12 +91,12 @@
             if (isRated == false)
             {
                 this.TempData["Message"] = ErrorRatingAppointmentMsg;
-                return RedirectToAction("MyAppointments", "Appointment", new { area = "" });
+                return RedirectToAction("MyPastAppointments", "Appointment", new { area = "", page = 1 });
             }
 
             this.TempData["Message"] = string.Format(SuccessfulRating, model.Number);
 
-            return RedirectToAction("MyAppointments", "Appointment", new { area = "" });
+            return RedirectToAction("MyPastAppointments", "Appointment", new { area = "", page = 1 });
         }
 
         [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
@@ -114,7 +114,7 @@
                     return RedirectToAction("All", "Appointment", new { area = "Administration" });
                 }
 
-                return RedirectToAction("DoctorAppointments", "Appointment", new { area = "" });
+                return RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
             }
 
             this.TempData["Message"] = SuccessfullyApprovedRating;
@@ -124,7 +124,7 @@
                 return RedirectToAction("All", "Appointment", new { area = "Administration" });
             }
 
-            return RedirectToAction("DoctorAppointments", "Appointment", new { area = "" });
+            return RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
         }
 
         [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
@@ -141,7 +141,7 @@
                     return RedirectToAction("All", "Appointment", new { area = "Administration" });
                 }
 
-                return RedirectToAction("DoctorAppointments", "Appointment", new { area = "" });
+                return RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
             }
 
             this.TempData["Message"] = SuccessfullyApprovedRating;
@@ -150,7 +150,7 @@
                 return RedirectToAction("All", "Appointment", new { area = "Administration" });
             }
 
-            return RedirectToAction("DoctorAppointments", "Appointment", new { area = "" });
+            return RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
         }
     }
 }

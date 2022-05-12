@@ -130,5 +130,22 @@
                         .Where(x => x.Email == email)
                         .Select(x => x.PatientId)
                         .FirstOrDefaultAsync();
+
+        public async Task<bool> DeletePatient(string userId)
+        {
+            var patient = await this.data.Patients
+                .Where(x => x.UserId == userId)
+                .FirstOrDefaultAsync();
+
+            if (patient == null)
+            {
+                return false;
+            }
+
+            patient.IsDeleted = true;
+            await data.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

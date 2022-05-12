@@ -1015,40 +1015,38 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\defie\\.nuget\\packages\\": {}
+    "/home/acho/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\defie\\source\\repos\\Neonatology\\ViewModels\\ViewModels.csproj",
+      "projectUniqueName": "/home/acho/Programming/Neonatology/ViewModels/ViewModels.csproj",
       "projectName": "ViewModels",
-      "projectPath": "C:\\Users\\defie\\source\\repos\\Neonatology\\ViewModels\\ViewModels.csproj",
-      "packagesPath": "C:\\Users\\defie\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\defie\\source\\repos\\Neonatology\\ViewModels\\obj\\",
+      "projectPath": "/home/acho/Programming/Neonatology/ViewModels/ViewModels.csproj",
+      "packagesPath": "/home/acho/.nuget/packages/",
+      "outputPath": "/home/acho/Programming/Neonatology/ViewModels/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\defie\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/acho/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\defie\\source\\repos\\Neonatology\\Data.Common\\Data.Common.csproj": {
-              "projectPath": "C:\\Users\\defie\\source\\repos\\Neonatology\\Data.Common\\Data.Common.csproj"
+            "/home/acho/Programming/Neonatology/Data.Common/Data.Common.csproj": {
+              "projectPath": "/home/acho/Programming/Neonatology/Data.Common/Data.Common.csproj"
             },
-            "C:\\Users\\defie\\source\\repos\\Neonatology\\Data.Models\\Data.Models.csproj": {
-              "projectPath": "C:\\Users\\defie\\source\\repos\\Neonatology\\Data.Models\\Data.Models.csproj"
+            "/home/acho/Programming/Neonatology/Data.Models/Data.Models.csproj": {
+              "projectPath": "/home/acho/Programming/Neonatology/Data.Models/Data.Models.csproj"
             },
-            "C:\\Users\\defie\\source\\repos\\Neonatology\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\defie\\source\\repos\\Neonatology\\Infrastructure\\Infrastructure.csproj"
+            "/home/acho/Programming/Neonatology/Infrastructure/Infrastructure.csproj": {
+              "projectPath": "/home/acho/Programming/Neonatology/Infrastructure/Infrastructure.csproj"
             }
           }
         }
@@ -1087,7 +1085,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.104/RuntimeIdentifierGraph.json"
       }
     }
   }

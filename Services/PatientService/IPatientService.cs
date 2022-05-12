@@ -31,5 +31,7 @@ using Data.Models;
         Task<string> GetPatientIdByEmail(string email);
 
         Task<bool> HasPaid(string userId);
+
+        Task<bool> DeletePatient(string userId);
     }
 }

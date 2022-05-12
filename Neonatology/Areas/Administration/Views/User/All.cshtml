@@ -31,17 +31,17 @@
                         </li>
                         <li class="nav-item">
                             <a asp-area="Administration"
-                           asp-controller="User"
-                           asp-action="Edit"
-                           asp-route-id="@user.UserId" class="btn btn-warning">
+                               asp-controller="User"
+                               asp-action="Edit"
+                               asp-route-id="@user.UserId" class="btn btn-warning">
                                 Промени профил
                             </a>
                             <span class="float-right btn btn-danger">
                                 <a asp-area="Administration"
-                               asp-controller="User"
-                               asp-action="Delete"
-                               asp-route-id="@user.UserId"
-                               data-toggle="modal" data-target="#modalDelete" class="btn btn-danger">
+                                   asp-controller="User"
+                                   asp-action="Delete"
+                                   asp-route-id="@user.UserId"
+                                   data-toggle="modal" data-target="#modalDelete" class="btn btn-danger">
                                     Изтрий
                                 </a>
                             </span>
@@ -67,7 +67,9 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Затвори</button>
-                        <a asp-area="Administration" asp-controller="User" asp-action="Delete" asp-route-id="@user.UserId" class="btn btn-danger">Изтрий</a>
+                        <form action="post" asp-area="Administration" asp-controller="User" asp-action="Delete" asp-route-id="@user.UserId">
+                            <button type="submit" class="btn btn-danger">Изтрий</button>
+                        </form>
                     </div>
                 </div>
             </div>
