@@ -77,8 +77,8 @@
             => await this.data.AppointmentSlots
             .Where(x => x.IsDeleted == false &&
                     x.Address.City.Name == PlevenCityName &&
-                    x.Start >= DateTime.UtcNow &&
-                    x.End <= DateTime.UtcNow.AddDays(20) &&
+                    x.Start.Date >= DateTime.UtcNow.Date &&
+                    x.End <= DateTime.UtcNow.AddDays(20).Date &&
                     x.Status == SlotStatus.Свободен.ToString())
             .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
             .ToListAsync();
@@ -87,8 +87,8 @@
             => await this.data.AppointmentSlots
             .Where(x => x.IsDeleted == false &&
                     x.Address.City.Name == GabrovoCityName &&
-                    x.Start >= DateTime.UtcNow &&
-                    x.End <= DateTime.UtcNow.AddDays(20) &&
+                    x.Start.Date >= DateTime.UtcNow.Date &&
+                    x.End.Date <= DateTime.UtcNow.AddDays(20).Date &&
                     x.Status == SlotStatus.Свободен.ToString())
             .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
             .ToListAsync();
@@ -131,7 +131,9 @@
 
         public async Task<ICollection<SlotViewModel>> GetTodaysTakenSlots() 
             => await this.data.AppointmentSlots
-                .Where(x => x.IsDeleted == false && x.Start.Date == DateTime.UtcNow && x.Status == SlotStatus.Зает.ToString())
+                .Where(x => x.IsDeleted == false && 
+                    x.Start.Date == DateTime.UtcNow.Date && 
+                    x.Status == SlotStatus.Зает.ToString())
                 .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 
