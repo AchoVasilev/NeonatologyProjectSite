@@ -93,7 +93,7 @@
 
             var route = Assert.IsType<RedirectToActionResult>(result);
 
-            Assert.Equal("MyAppointments", route.ActionName);
+            Assert.Equal("MyPastAppointments", route.ActionName);
             Assert.Equal("Appointment", route.ControllerName);
         }
 
@@ -156,7 +156,7 @@
 
             var route = Assert.IsType<RedirectToActionResult>(result);
 
-            Assert.Equal("MyAppointments", route.ActionName);
+            Assert.Equal("MyPastAppointments", route.ActionName);
             Assert.Equal("Appointment", route.ControllerName);
         }
 
@@ -271,7 +271,7 @@
 
             var route = Assert.IsType<RedirectToActionResult>(result);
 
-            Assert.Equal("MyAppointments", route.ActionName);
+            Assert.Equal("MyPastAppointments", route.ActionName);
             Assert.Equal("Appointment", route.ControllerName);
         }
 
@@ -299,7 +299,7 @@
 
             var route = Assert.IsType<RedirectToActionResult>(result);
 
-            Assert.Equal("DoctorAppointments", route.ActionName);
+            Assert.Equal("DoctorPastAppointments", route.ActionName);
             Assert.Equal("Appointment", route.ControllerName);
         }
 
@@ -356,7 +356,7 @@
 
             var route = Assert.IsType<RedirectToActionResult>(result);
 
-            Assert.Equal("DoctorAppointments", route.ActionName);
+            Assert.Equal("DoctorPastAppointments", route.ActionName);
             Assert.Equal("Appointment", route.ControllerName);
         }
 
@@ -413,7 +413,7 @@
 
             var route = Assert.IsType<RedirectToActionResult>(result);
 
-            Assert.Equal("DoctorAppointments", route.ActionName);
+            Assert.Equal("DoctorPastAppointments", route.ActionName);
             Assert.Equal("Appointment", route.ControllerName);
         }
 
@@ -470,7 +470,7 @@
 
             var route = Assert.IsType<RedirectToActionResult>(result);
 
-            Assert.Equal("DoctorAppointments", route.ActionName);
+            Assert.Equal("DoctorPastAppointments", route.ActionName);
             Assert.Equal("Appointment", route.ControllerName);
         }
 

@@ -1024,5 +1024,33 @@
 
             Assert.Null(result);
         }
+
+        [Fact]
+        public async Task SolveFeedbackShouldWorkCorrectly()
+        {
+            var data = DatabaseMock.Instance;
+            var mapper = MapperMock.Instance;
+
+            var feedback = new Feedback()
+            {
+                Id = 1,
+                FirstName = "Gosho",
+                LastName = "Peshev",
+                Email = "gosho@abv.bg",
+                Type = "gosho",
+                Comment = "goshogosho"
+            };
+
+            await data.Feedbacks.AddAsync(feedback);
+            await data.SaveChangesAsync();
+
+            var service = new FeedbackService(data, mapper);
+
+            await service.SolveFeedback(1);
+
+            var res = await data.Feedbacks.FirstOrDefaultAsync(x => x.Id == 1);
+            
+            Assert.True(res.IsSolved);
+        }
     }
 }

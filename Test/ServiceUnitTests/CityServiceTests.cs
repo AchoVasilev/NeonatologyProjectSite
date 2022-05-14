@@ -2,15 +2,10 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
     using Data.Models;
-
     using global::Services.CityService;
-
     using Test.Mocks;
-
     using ViewModels.City;
-
     using Xunit;
 
     public class CityServiceTests
@@ -213,6 +208,43 @@
 
             Assert.Equal(1, result.Id);
             Assert.IsType<CityFormModel>(result);
+        }
+
+        [Fact]
+        public async Task GetDoctorAddressesShouldReturnCorrectCount()
+        {
+            var doctor = new Doctor
+            {
+                Id = "doc",
+                FirstName = "Pesho",
+                LastName = "Peshev",
+                Age = 30,
+                Addresses = new List<Address>()
+                {
+                    new Address()
+                    {
+                        CityId = 1,
+                        City = new City()
+                        {
+                            Name = "Pleven"
+                        },
+                        DoctorId = "doc",
+                        StreetName = "Kaspichan"
+                    }
+                }
+            };
+
+            var dataMock = DatabaseMock.Instance;
+            await dataMock.Doctors.AddAsync(doctor);
+            await dataMock.SaveChangesAsync();
+
+            var mapperMock = MapperMock.Instance;
+            
+            var service = new CityService(dataMock, mapperMock);
+
+            var cities = await service.GetDoctorAddressesByDoctorId("doc");
+            
+            Assert.Equal(1, cities.Count);
         }
     }
 }

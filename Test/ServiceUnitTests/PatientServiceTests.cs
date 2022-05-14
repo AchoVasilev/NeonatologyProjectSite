@@ -1,19 +1,15 @@
-﻿namespace Test.ServiceUnitTests
+﻿using Services.PatientService.Models;
+
+namespace Test.ServiceUnitTests
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
     using Data.Models;
-
     using global::Services.PatientService;
-
     using Microsoft.EntityFrameworkCore;
-
     using Test.Mocks;
-
     using ViewModels.Patient;
-
     using Xunit;
 
     public class PatientServiceTests
@@ -470,6 +466,391 @@
             var result = await service.GetLastThisMonthsRegisteredCount();
 
             Assert.Equal(2, result);
+        }
+
+        [Fact]
+        public async Task GetPatientByIdShouldReturnCorrectPatient()
+        {
+            var dataMock = DatabaseMock.Instance;
+            var mapperMock = MapperMock.Instance;
+
+            var usersList = new List<ApplicationUser>()
+            {
+                new ApplicationUser
+                {
+                    Id = "gosho",
+                    UserName = "gosho@abv.bg",
+                },
+                new ApplicationUser
+                {
+                    Id = "stamat",
+                    UserName = "gosho@abv.bg",
+                },
+                new ApplicationUser
+                {
+                    Id = "mancho",
+                    UserName = "gosho@abv.bg",
+                },
+            };
+
+            var patientsList = new List<Patient>()
+            {
+                new Patient
+                {
+                    Id = "gosho",
+                    FirstName = "Evlogi",
+                    LastName = "Penev",
+                    Phone = "098789987",
+                    UserId = "gosho",
+                },
+                new Patient
+                {
+                    Id = "stamat",
+                    FirstName = "Evlogi",
+                    LastName = "Penev",
+                    Phone = "098789987",
+                    UserId = "stamat",
+                    IsDeleted = true
+                },
+                new Patient
+                {
+                    Id = "mancho",
+                    FirstName = "Evlogi",
+                    LastName = "Penev",
+                    Phone = "098789987",
+                    UserId = "mancho"
+                }
+            };
+
+            await dataMock.Users.AddRangeAsync(usersList);
+            await dataMock.Patients.AddRangeAsync(patientsList);
+
+            await dataMock.SaveChangesAsync();
+
+            var service = new PatientService(dataMock, mapperMock);
+            var patient = await service.GetPatientById("mancho");
+
+            Assert.NotNull(patient);
+            Assert.Equal("Evlogi", patient.FirstName);
+        }
+
+        [Fact]
+        public async Task HasPaidShouldReturnFalseForUser()
+        {
+            var dataMock = DatabaseMock.Instance;
+            var mapperMock = MapperMock.Instance;
+
+            var usersList = new List<ApplicationUser>()
+            {
+                new ApplicationUser
+                {
+                    Id = "gosho",
+                    UserName = "gosho@abv.bg",
+                },
+                new ApplicationUser
+                {
+                    Id = "stamat",
+                    UserName = "gosho@abv.bg",
+                },
+                new ApplicationUser
+                {
+                    Id = "mancho",
+                    UserName = "gosho@abv.bg",
+                },
+            };
+
+            var patientsList = new List<Patient>()
+            {
+                new Patient
+                {
+                    Id = "gosho",
+                    FirstName = "Evlogi",
+                    LastName = "Penev",
+                    Phone = "098789987",
+                    UserId = "gosho",
+                },
+                new Patient
+                {
+                    Id = "stamat",
+                    FirstName = "Evlogi",
+                    LastName = "Penev",
+                    Phone = "098789987",
+                    UserId = "stamat",
+                    IsDeleted = true
+                },
+                new Patient
+                {
+                    Id = "mancho",
+                    FirstName = "Evlogi",
+                    LastName = "Penev",
+                    Phone = "098789987",
+                    UserId = "mancho"
+                }
+            };
+
+            await dataMock.Users.AddRangeAsync(usersList);
+            await dataMock.Patients.AddRangeAsync(patientsList);
+
+            await dataMock.SaveChangesAsync();
+
+            var service = new PatientService(dataMock, mapperMock);
+            var hasPaid = await service.HasPaid("gosho");
+
+            Assert.False(hasPaid);
+        }
+
+        [Fact]
+        public async Task GetAllPatientsShouldReturnCorrectCount()
+        {
+            var dataMock = DatabaseMock.Instance;
+            var mapperMock = MapperMock.Instance;
+
+            var usersList = new List<ApplicationUser>()
+            {
+                new ApplicationUser
+                {
+                    Id = "gosho",
+                    UserName = "gosho@abv.bg",
+                },
+                new ApplicationUser
+                {
+                    Id = "stamat",
+                    UserName = "gosho@abv.bg",
+                },
+                new ApplicationUser
+                {
+                    Id = "mancho",
+                    UserName = "gosho@abv.bg",
+                },
+            };
+
+            var patientsList = new List<Patient>()
+            {
+                new Patient
+                {
+                    Id = "gosho",
+                    FirstName = "Evlogi",
+                    LastName = "Penev",
+                    Phone = "098789987",
+                    UserId = "gosho",
+                },
+                new Patient
+                {
+                    Id = "stamat",
+                    FirstName = "Evlogi",
+                    LastName = "Penev",
+                    Phone = "098789987",
+                    UserId = "stamat",
+                },
+                new Patient
+                {
+                    Id = "mancho",
+                    FirstName = "Evlogi",
+                    LastName = "Penev",
+                    Phone = "098789987",
+                    UserId = "mancho"
+                }
+            };
+
+            await dataMock.Users.AddRangeAsync(usersList);
+            await dataMock.Patients.AddRangeAsync(patientsList);
+
+            await dataMock.SaveChangesAsync();
+
+            var service = new PatientService(dataMock, mapperMock);
+            var result = await service.GetAllPatients();
+
+            Assert.IsAssignableFrom<List<PatientServiceModel>>(result);
+            Assert.Equal(3, result.Count);
+        }
+
+        [Fact]
+        public async Task GetPatientIdByEmailShouldReturnCorrectPatient()
+        {
+            var dataMock = DatabaseMock.Instance;
+            var mapperMock = MapperMock.Instance;
+
+            var usersList = new List<ApplicationUser>()
+            {
+                new ApplicationUser
+                {
+                    Id = "gosho",
+                    UserName = "gosho@abv.bg",
+                    Email = "gosho@abv.bg",
+                    Patient = new Patient
+                    {
+                        Id = "gosho",
+                        FirstName = "Evlogi",
+                        LastName = "Penev",
+                        Phone = "098789987",
+                        UserId = "gosho",
+                    }
+                },
+                new ApplicationUser
+                {
+                    Id = "stamat",
+                    UserName = "gosho@abv.bg",
+                    Email = "evlogi@abv.bg",
+                    Patient = new Patient
+                    {
+                        Id = "stamat",
+                        FirstName = "Evlogi",
+                        LastName = "Penev",
+                        Phone = "098789987",
+                        UserId = "stamat",
+                        IsDeleted = true
+                    }
+                },
+                new ApplicationUser
+                {
+                    Id = "mancho",
+                    UserName = "gosho@abv.bg",
+                    Email = "mancho@abv.bg",
+                    Patient = new Patient
+                    {
+                        Id = "mancho",
+                        FirstName = "Evlogi",
+                        LastName = "Penev",
+                        Phone = "098789987",
+                        UserId = "mancho"
+                    }
+                },
+            };
+
+            await dataMock.Users.AddRangeAsync(usersList);
+
+            await dataMock.SaveChangesAsync();
+
+            var service = new PatientService(dataMock, mapperMock);
+            var patient = await service.GetPatientIdByEmail("gosho@abv.bg");
+
+            Assert.Equal("gosho", patient);
+        }
+
+        [Fact]
+        public async Task DeletePatientShouldReturnTrueIfPatientIsSuccessfullyDeleted()
+        {
+            var dataMock = DatabaseMock.Instance;
+            var mapperMock = MapperMock.Instance;
+
+            var usersList = new List<ApplicationUser>()
+            {
+                new ApplicationUser
+                {
+                    Id = "gosho",
+                    UserName = "gosho@abv.bg",
+                    Email = "gosho@abv.bg",
+                    Patient = new Patient
+                    {
+                        Id = "gosho",
+                        FirstName = "Evlogi",
+                        LastName = "Penev",
+                        Phone = "098789987",
+                        UserId = "gosho",
+                    }
+                },
+                new ApplicationUser
+                {
+                    Id = "stamat",
+                    UserName = "gosho@abv.bg",
+                    Email = "evlogi@abv.bg",
+                    Patient = new Patient
+                    {
+                        Id = "stamat",
+                        FirstName = "Evlogi",
+                        LastName = "Penev",
+                        Phone = "098789987",
+                        UserId = "stamat",
+                        IsDeleted = true
+                    }
+                },
+                new ApplicationUser
+                {
+                    Id = "mancho",
+                    UserName = "gosho@abv.bg",
+                    Email = "mancho@abv.bg",
+                    Patient = new Patient
+                    {
+                        Id = "mancho",
+                        FirstName = "Evlogi",
+                        LastName = "Penev",
+                        Phone = "098789987",
+                        UserId = "mancho"
+                    }
+                },
+            };
+
+            await dataMock.Users.AddRangeAsync(usersList);
+
+            await dataMock.SaveChangesAsync();
+
+            var service = new PatientService(dataMock, mapperMock);
+            var patientIsDeleted = await service.DeletePatient("gosho");
+
+            Assert.True(patientIsDeleted);
+        }
+
+        [Fact]
+        public async Task DeletePatientShouldReturnFalseIfPatientIsNull()
+        {
+            var dataMock = DatabaseMock.Instance;
+            var mapperMock = MapperMock.Instance;
+
+            var usersList = new List<ApplicationUser>()
+            {
+                new ApplicationUser
+                {
+                    Id = "gosho",
+                    UserName = "gosho@abv.bg",
+                    Email = "gosho@abv.bg",
+                    Patient = new Patient
+                    {
+                        Id = "gosho",
+                        FirstName = "Evlogi",
+                        LastName = "Penev",
+                        Phone = "098789987",
+                        UserId = "gosho",
+                    }
+                },
+                new ApplicationUser
+                {
+                    Id = "stamat",
+                    UserName = "gosho@abv.bg",
+                    Email = "evlogi@abv.bg",
+                    Patient = new Patient
+                    {
+                        Id = "stamat",
+                        FirstName = "Evlogi",
+                        LastName = "Penev",
+                        Phone = "098789987",
+                        UserId = "stamat",
+                        IsDeleted = true
+                    }
+                },
+                new ApplicationUser
+                {
+                    Id = "mancho",
+                    UserName = "gosho@abv.bg",
+                    Email = "mancho@abv.bg",
+                    Patient = new Patient
+                    {
+                        Id = "mancho",
+                        FirstName = "Evlogi",
+                        LastName = "Penev",
+                        Phone = "098789987",
+                        UserId = "mancho"
+                    }
+                },
+            };
+
+            await dataMock.Users.AddRangeAsync(usersList);
+
+            await dataMock.SaveChangesAsync();
+
+            var service = new PatientService(dataMock, mapperMock);
+            var patientIsDeleted = await service.DeletePatient("asdasd");
+
+            Assert.False(patientIsDeleted);
         }
     }
 }

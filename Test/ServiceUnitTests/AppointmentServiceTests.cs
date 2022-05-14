@@ -1198,8 +1198,8 @@
                 ParentLastName = "Vanev",
                 PhoneNumber = "098785623",
                 DoctorId = "pat",
-                DateTime = DateTime.Parse("29.01.2022 08:30"),
-                End = DateTime.Parse("03.02.2022 08:40")
+                DateTime = DateTime.ParseExact("29.01.2022 08:30", "dd.MM.yyyy HH:mm", null),
+                End = DateTime.ParseExact("03.02.2022 08:40", "dd.MM.yyyy HH:mm", null)
             };
 
             await dataMock.AppointmentCauses.AddRangeAsync(causes);
@@ -1221,7 +1221,8 @@
             };
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.AddAsync(doctor.Id, model, DateTime.Parse("29.01.2022 08:30"), DateTime.Parse("30.01.2022 08:30"));
+            var result = await service.AddAsync(doctor.Id, model, DateTime.ParseExact(model.Start, "dd.MM.yyyy HH:mm", null),
+            DateTime.ParseExact(model.End, "dd.MM.yyyy HH:mm", null));
 
             Assert.False(result);
         }
@@ -1271,7 +1272,8 @@
             };
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.AddAsync(doctor.Id, model, DateTime.Parse(model.Start), DateTime.Parse(model.End));
+            var result = await service.AddAsync(doctor.Id, model, DateTime.ParseExact(model.Start, "dd.MM.yyyy HH:mm", null),
+            DateTime.ParseExact(model.End, "dd.MM.yyyy HH:mm", null));
 
             Assert.True(result);
             Assert.Equal(1, dataMock.Appointments.Count());
@@ -1325,7 +1327,8 @@
             };
 
             var service = new AppointmentService(dataMock, mapperMock);
-            var result = await service.AddAsync(doctor.Id, model, DateTime.Parse(model.Start), DateTime.Parse(model.End));
+            var result = await service.AddAsync(doctor.Id, model, DateTime.ParseExact(model.Start, "dd.MM.yyyy HH:mm", null),
+             DateTime.ParseExact(model.End, "dd.MM.yyyy HH:mm", null));
 
             Assert.False(result);
         }
