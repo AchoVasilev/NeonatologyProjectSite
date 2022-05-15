@@ -69,7 +69,8 @@
             }
 
             rating.IsConfirmed = true;
-
+            rating.ModifiedOn = DateTime.UtcNow;
+            
             await this.data.SaveChangesAsync();
 
             return true;

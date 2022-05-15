@@ -111,8 +111,7 @@
             doctor.YearsOfExperience = model.YearsOfExperience;
             doctor.Age = model.Age;
             doctor.Biography = model.Biography;
-            //TODO: doctor.CityId = model.CityId;
-
+            
             doctor.ModifiedOn = DateTime.UtcNow;
             
             await this.data.SaveChangesAsync();
