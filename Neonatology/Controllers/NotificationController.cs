@@ -60,7 +60,7 @@
         public async Task<bool> DeleteNotification(string id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            bool isDeleted = await this.notificationService.DeleteNotification(currentUser.Id, id);
+            var isDeleted = await this.notificationService.DeleteNotification(currentUser.Id, id);
 
             await this.ChangeNotificationCounter(isDeleted, currentUser);
 
