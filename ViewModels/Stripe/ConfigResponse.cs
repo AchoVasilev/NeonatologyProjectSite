@@ -1,6 +1,6 @@
-﻿namespace Neonatology.Controllers
+﻿namespace ViewModels.Stripe
 {
-using Newtonsoft.Json;
+    using Newtonsoft.Json;
 
     public class ConfigResponse
     {

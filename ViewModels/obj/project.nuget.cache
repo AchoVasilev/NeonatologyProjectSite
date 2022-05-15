@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "RH7hBSq7T1XzAdhpI1NcSxpZMJr8HlEebW/zLuhVINWV7IIUCcDGUsuzmQTlQhxcy5mr8ENN5wpiqaMkAJ9gqA==",
+  "dgSpecHash": "Huz36CaqFx5uQH11OFAwEK3IYkpoZktLcHZs0BSYR89nXB0rPxxynLq6qkeRK26Vv+QFv65dJQ41IZEZ/kxP+w==",
   "success": true,
   "projectFilePath": "/home/acho/Programming/Neonatology/ViewModels/ViewModels.csproj",
   "expectedPackageFiles": [
@@ -26,6 +26,7 @@
     "/home/acho/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0/microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
     "/home/acho/.nuget/packages/microsoft.extensions.options/6.0.0/microsoft.extensions.options.6.0.0.nupkg.sha512",
     "/home/acho/.nuget/packages/microsoft.extensions.primitives/6.0.0/microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "/home/acho/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
     "/home/acho/.nuget/packages/system.collections.immutable/6.0.0/system.collections.immutable.6.0.0.nupkg.sha512",
     "/home/acho/.nuget/packages/system.diagnostics.diagnosticsource/6.0.0/system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "/home/acho/.nuget/packages/system.io.pipelines/5.0.2/system.io.pipelines.5.0.2.nupkg.sha512",

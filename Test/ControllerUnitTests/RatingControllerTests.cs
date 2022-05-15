@@ -390,7 +390,7 @@
         }
 
         [Fact]
-        public async Task DeleteShouldRedirectToDoctorAppoitmentsIfSuccesful()
+        public async Task DeleteShouldRedirectToDoctorAppointmentsIfSuccessful()
         {
             var ratingService = new Mock<IRatingService>();
             ratingService.Setup(x => x.DeleteRating(1))
@@ -409,7 +409,7 @@
 
             ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Doctor");
 
-            var result = await controller.Approve(1);
+            var result = await controller.Delete(1);
 
             var route = Assert.IsType<RedirectToActionResult>(result);
 
@@ -437,7 +437,7 @@
 
             ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Administrator");
 
-            var result = await controller.Approve(1);
+            var result = await controller.Delete(1);
 
             var route = Assert.IsType<RedirectToActionResult>(result);
 
@@ -447,7 +447,7 @@
         }
 
         [Fact]
-        public async Task DeleteShouldRedirectToDoctorAppoitmentsIfSuccesfulIfRatingIsNotSuccessful()
+        public async Task DeleteShouldRedirectToDoctorAppointmentsIfSuccessfulIfRatingIsNotSuccessful()
         {
             var ratingService = new Mock<IRatingService>();
             ratingService.Setup(x => x.DeleteRating(1))
@@ -466,7 +466,7 @@
 
             ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Doctor");
 
-            var result = await controller.Approve(1);
+            var result = await controller.Delete(1);
 
             var route = Assert.IsType<RedirectToActionResult>(result);
 
@@ -494,7 +494,7 @@
 
             ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Administrator");
 
-            var result = await controller.Approve(1);
+            var result = await controller.Delete(1);
 
             var route = Assert.IsType<RedirectToActionResult>(result);
 

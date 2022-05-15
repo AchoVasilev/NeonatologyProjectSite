@@ -1,7 +1,8 @@
 ﻿namespace Test.ControllerUnitTests
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using Helpers;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -58,6 +59,38 @@
 
             Assert.Equal("Index", route.ActionName);
             Assert.Equal("Home", route.ControllerName);
+        }
+
+        [Fact]
+        public async Task MyFeedbacksShouldReturnViewAndModelWhenSuccessful()
+        {
+            var serviceMock = new Mock<IFeedbackService>();
+
+            var controller = new FeedbackController(serviceMock.Object);
+
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
+            {
+                ["SessionVariable"] = "admin"
+            };
+            
+            controller.TempData = tempData;
+            ControllerExtensions.WithIdentity(controller, "1", "Gosho@gosho.bg", "Patient");
+            
+            var model = new FeedbackInputModel
+            {
+                Comment = "asdasdasd",
+                FirstName = "Gosho",
+                LastName = "Peshev",
+                Email = "Gosho@gosho.bg",
+                Type = "GoshoEpechen"
+            };
+
+            var sentResult = await controller.Send(model);
+
+            var myFeedbacks = await controller.MyFeedbacks("Gosho@gosho.bg");
+
+            var route = Assert.IsType<ViewResult>(myFeedbacks);
         }
     }
 }

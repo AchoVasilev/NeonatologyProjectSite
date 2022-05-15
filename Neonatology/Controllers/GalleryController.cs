@@ -17,21 +17,19 @@
 
     public class GalleryController : BaseController
     {
-        private const int GaleryItemsPerPage = 8;
+        private const int GalleryItemsPerPage = 8;
         private readonly IFileService fileService;
-        private readonly IDoctorService doctorService;
         private readonly Cloudinary cloudinary;
 
-        public GalleryController(IFileService fileService, IDoctorService doctorService, Cloudinary cloudinary)
+        public GalleryController(IFileService fileService, Cloudinary cloudinary)
         {
             this.fileService = fileService;
-            this.doctorService = doctorService;
             this.cloudinary = cloudinary;
         }
 
         public async Task<IActionResult> All([FromQuery] int page)
         {
-            var model = await this.fileService.GetGaleryImagesAsync(page, GaleryItemsPerPage);
+            var model = await this.fileService.GetGaleryImagesAsync(page, GalleryItemsPerPage);
 
             return View(model);
         }
