@@ -106,14 +106,54 @@
 
             var email = new Mock<IEmailSender>();
 
-            var controller = new FeedbackController(service.Object, email.Object);
 
+
+            var controller = new FeedbackController(service.Object, email.Object);
             // Act
             var result = await controller.Reply(5);
 
             // Assert 
             var route = Assert.IsType<ViewResult>(result);
             Assert.IsType<FeedbackReplyModel>(route.Model);
+        }
+
+        [Fact]
+        public async Task ReplyShouldReturnRedirectToAction()
+        {
+            // Arrange
+            var model = new FeedbackReplyModel()
+            {
+                FeedbackId = 1,
+                ReceiverEmail = "mail@abv.bg",
+                Subject = "mailmail",
+                Text = "hello"
+            };
+            
+            var service = new Mock<IFeedbackService>();
+            service.Setup(x => x.SolveFeedback(1))
+                .Returns(Task.CompletedTask);
+
+            var mailSender = new Mock<IEmailSender>();
+            mailSender.Setup(x => x.SendEmailAsync("mail@abv.bg", "mailmail", "hello"))
+                .Returns(Task.CompletedTask);
+            
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
+            {
+                ["SessionVariable"] = "admin"
+            };
+            
+            var controller = new FeedbackController(service.Object, mailSender.Object)
+            {
+                TempData = tempData
+            };
+
+            // Act
+            var result = await controller.Reply(model);
+
+            // Assert 
+            var route = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("All", route.ActionName);
         }
     }
 }

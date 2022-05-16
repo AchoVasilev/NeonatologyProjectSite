@@ -16,13 +16,13 @@
 
     public class GalleryController : BaseController
     {
-        private readonly IGalleryService galeryService;
+        private readonly IGalleryService galleryService;
         private readonly IFileService fileService;
         private readonly Cloudinary cloudinary;
 
-        public GalleryController(IGalleryService galeryService, IFileService fileService, Cloudinary cloudinary)
+        public GalleryController(IGalleryService galleryService, IFileService fileService, Cloudinary cloudinary)
         {
-            this.galeryService = galeryService;
+            this.galleryService = galleryService;
             this.fileService = fileService;
             this.cloudinary = cloudinary;
         }
@@ -31,7 +31,7 @@
         {
             var model = new GaleryModel
             {
-                GaleryImages = await this.galeryService.GetGaleryImages()
+                GaleryImages = await this.galleryService.GetGaleryImages()
             };
 
             return View(model);
@@ -39,7 +39,7 @@
 
         public async Task<IActionResult> Delete(string id)
         {
-            var result = await this.galeryService.Delete(id);
+            var result = await this.galleryService.Delete(id);
 
             if (result == false)
             {
