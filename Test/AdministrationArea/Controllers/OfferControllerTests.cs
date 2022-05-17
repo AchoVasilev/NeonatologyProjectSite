@@ -198,7 +198,7 @@ public class OfferControllerTests
 
         Assert.Equal("All", route.ActionName);
     }
-    
+
     [Fact]
     public async Task EditShouldReturnRedirectToActionAllWhenNotSuccessful()
     {

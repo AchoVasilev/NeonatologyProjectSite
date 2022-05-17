@@ -9,10 +9,8 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
 using Neonatology.Areas.Administration.Controllers;
 using Neonatology.Areas.Administration.Services;
-using Services.AppointmentCauseService;
 using Services.FileService;
 using ViewModels.Administration.Galery;
-using ViewModels.Appointments;
 using ViewModels.Gallery;
 using Xunit;
 

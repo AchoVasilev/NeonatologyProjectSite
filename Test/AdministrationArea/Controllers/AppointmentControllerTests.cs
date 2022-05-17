@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
 
     using Data.Models;
-using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Http;
     using Services.AppointmentService;
 
     using Test.Mocks;
-using ViewModels.Administration.Appointment;
+    using ViewModels.Administration.Appointment;
     using ViewModels.Appointments;
 
     using Xunit;
