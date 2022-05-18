@@ -12,6 +12,8 @@ This is a project, created for a doctor and professional needs. There is an impl
 - Google CAPTCHA v3
 - FullCalendar IO
 - Alertify JS
+- Datatables
+- Bootstrap and font awesome
 - SignalR for notifications and chatting
 - RPC for voice calls over chat
 - Stripe
