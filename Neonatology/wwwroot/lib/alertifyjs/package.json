@@ -23,7 +23,7 @@
   },
   "main": "./build/alertify.js",
   "devDependencies": {
-    "grunt": "1.4.1",
+    "grunt": "1.5.2",
     "grunt-cli": "~0.1",
     "grunt-rtlcss": "1.6.0",
     "autoprefixer" : "x.x.x",
