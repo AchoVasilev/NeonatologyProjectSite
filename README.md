@@ -1,5 +1,5 @@
 # NeonatologyProjectSite - https://pediamedbg.com/
-This is a project, created for a doctor and professional personal needs. There is an implemented functionality for patients to register and make appointments. It is also allowed for non-registered users to make appointments after they have filled the needed data. On successfull appointment they will receive an email with the date and time of their respective appointment. There is also an online chat between registered patients and the doctor.
+This is a project, created for a doctor and professional needs. There is an implemented functionality for patients to register and make appointments. It is also allowed for non-registered users to make appointments after they have filled the needed data. On successfull appointment they will receive an email with the date and time of their respective appointment. There is also an online chat between registered patients and the doctor.
 # Диаграма на базата данни:
 ![dbDiagram](https://user-images.githubusercontent.com/58532362/168985804-df1b9900-adb8-40d0-bece-58d72270b1b2.png)
 
