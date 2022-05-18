@@ -1,6 +1,6 @@
 # NeonatologyProjectSite - https://pediamedbg.com/
 This is a project, created for a doctor and professional needs. There is an implemented functionality for patients to register and make appointments. It is also allowed for non-registered users to make appointments after they have filled the needed data. On successfull appointment they will receive an email with the date and time of their respective appointment. There is also an online chat between registered patients and the doctor.
-# Диаграма на базата данни:
+# Database Diagram
 ![dbDiagram](https://user-images.githubusercontent.com/58532362/168985804-df1b9900-adb8-40d0-bece-58d72270b1b2.png)
 
 # The project uses:
@@ -20,7 +20,9 @@ This is a project, created for a doctor and professional needs. There is an impl
 - XUnit and Moq for tests
 - Hangfire
 
-Как да работите с платформата:
+# Description on how to work with the platform(Bulgarian):
+
+# Как да работите с платформата:
 ![Screenshot from 2022-05-17 16-35-36](https://user-images.githubusercontent.com/58532362/168978654-4d076a33-1f94-42ff-8e85-80e7d7cdd5fd.png)
 
 ### За докторски профил:
