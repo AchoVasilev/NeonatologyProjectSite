@@ -2,6 +2,7 @@ namespace Test.AdministrationArea.Controllers;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using global::Services.FileService;
 using Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
 using Neonatology.Areas.Administration.Controllers;
 using Neonatology.Areas.Administration.Services;
-using Services.FileService;
 using ViewModels.Administration.Galery;
 using ViewModels.Gallery;
 using Xunit;

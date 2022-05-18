@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using Data.Models;
+    using global::Services.AppointmentService;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -11,8 +12,6 @@
     using Moq;
 
     using Neonatology.Areas.Administration.Controllers;
-
-    using Services.AppointmentService;
 
     using Test.Mocks;
     using ViewModels.Administration.Appointment;
