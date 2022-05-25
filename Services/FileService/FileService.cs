@@ -155,7 +155,7 @@
                 .ToListAsync();
 
             var count = await this.data.Images
-                .Where(x => string.IsNullOrWhiteSpace(x.UserId) && x.IsDeleted == false)
+                .Where(x => string.IsNullOrWhiteSpace(x.UserId) && x.IsDeleted == false && x.Name != "NoAvatarProfileImage.png")
                 .CountAsync();
 
             var viewModel = new GalleryViewModel

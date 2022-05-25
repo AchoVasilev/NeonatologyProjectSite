@@ -1399,3 +1399,9 @@ C:/Users/defie/source/repos/Neonatology/IntegrationTests/bin/Debug/net6.0/QRCode
 /home/acho/Programming/Neonatology/IntegrationTests/obj/Debug/net6.0/ref/IntegrationTests.dll
 /home/acho/Programming/Neonatology/IntegrationTests/obj/Debug/net6.0/IntegrationTests.pdb
 /home/acho/Programming/Neonatology/IntegrationTests/obj/Debug/net6.0/IntegrationTests.genruntimeconfig.cache
+/home/acho/Programming/Neonatology/IntegrationTests/bin/Debug/net6.0/refs/Microsoft.AspNetCore.Cryptography.Internal.dll
+/home/acho/Programming/Neonatology/IntegrationTests/bin/Debug/net6.0/refs/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/home/acho/Programming/Neonatology/IntegrationTests/bin/Debug/net6.0/refs/Microsoft.Extensions.FileProviders.Embedded.dll
+/home/acho/Programming/Neonatology/IntegrationTests/bin/Debug/net6.0/refs/Microsoft.Extensions.Identity.Core.dll
+/home/acho/Programming/Neonatology/IntegrationTests/bin/Debug/net6.0/refs/Microsoft.Extensions.Identity.Stores.dll
+/home/acho/Programming/Neonatology/IntegrationTests/bin/Debug/net6.0/refs/System.IO.Pipelines.dll

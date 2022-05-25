@@ -63,7 +63,7 @@
       "destination": "wwwroot/lib/microsoft/signalr/"
     },
     {
-      "library": "adapterjs@0.15.4",
+      "library": "adapterjs@latest",
       "destination": "wwwroot/lib/adapter/"
     },
     {
