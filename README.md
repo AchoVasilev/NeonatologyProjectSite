@@ -22,6 +22,7 @@ This is a project, created for a doctor and professional needs. There is an impl
 - Admin LTE 3 for administration panel
 - XUnit and Moq for tests
 - Hangfire
+- HTML Sanitizer
 
 # Description on how to work with the platform(Bulgarian):
 
