@@ -409,15 +409,15 @@
             },
             "Hangfire.AspNetCore": {
               "target": "Package",
-              "version": "[1.7.28, )"
+              "version": "[1.7.29, )"
             },
             "Hangfire.Core": {
               "target": "Package",
-              "version": "[1.7.28, )"
+              "version": "[1.7.29, )"
             },
             "Hangfire.SqlServer": {
               "target": "Package",
-              "version": "[1.7.28, )"
+              "version": "[1.7.29, )"
             },
             "MailKit": {
               "target": "Package",
@@ -451,7 +451,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[6.0.5, )"
             },
             "Moment.js": {
               "target": "Package",
@@ -467,7 +467,7 @@
             },
             "Stripe.net": {
               "target": "Package",
-              "version": "[39.110.0, )"
+              "version": "[39.114.0, )"
             }
           },
           "imports": [
@@ -620,11 +620,11 @@
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[17.1.0, )"
+              "version": "[17.2.0, )"
             },
             "Moq": {
               "target": "Package",
-              "version": "[4.17.2, )"
+              "version": "[4.18.1, )"
             },
             "Selenium.WebDriver": {
               "target": "Package",
@@ -632,7 +632,7 @@
             },
             "Selenium.WebDriver.ChromeDriver": {
               "target": "Package",
-              "version": "[101.0.4951.4100, )"
+              "version": "[102.0.5005.6100, )"
             },
             "coverlet.collector": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
