@@ -17,12 +17,12 @@
             UrlEncoder encoder, 
             ISystemClock clock, TestClaimsProvider claimsProvider) : base(options, logger, encoder, clock)
         {
-            claims = claimsProvider.Claims;
+            this.claims = claimsProvider.Claims;
         }
 
         protected override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            var identity = new ClaimsIdentity(claims, "Test");
+            var identity = new ClaimsIdentity(this.claims, "Test");
             var principal = new ClaimsPrincipal(identity);
             var ticket = new AuthenticationTicket(principal, "Test");
 

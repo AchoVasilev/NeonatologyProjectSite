@@ -8,7 +8,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using Services.PatientService;
+    using PatientService;
 
     using ViewModels.Payment;
 

@@ -13,7 +13,7 @@
     using Services.CityService;
     using Services.DoctorService;
 
-    using Test.Helpers;
+    using Helpers;
 
     using ViewModels.City;
     using ViewModels.Doctor;

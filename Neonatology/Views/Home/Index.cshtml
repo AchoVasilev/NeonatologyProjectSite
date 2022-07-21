@@ -6,9 +6,9 @@
     ViewBag.Title = "Начало";
 }
 
-@if (this.TempData.ContainsKey("Message"))
+@if (TempData.ContainsKey("Message"))
 {
-    <div class="alert alert-info" id="locationMessage" style="font-size: 20px">@this.TempData["Message"]</div>
+    <div class="alert alert-info" id="locationMessage" style="font-size: 20px">@TempData["Message"]</div>
 }
 
 @section head{
@@ -23,7 +23,7 @@
 }
 <div class="jumbotron jumbotron-fluid jumbotron-opacity">
     <div class="container">
-        <h1 class="display-4">Добре дошли в @Common.GlobalConstants.SystemName</h1>
+        <h1 class="display-4">Добре дошли в @SystemName</h1>
         <p class="lead">Тук можете да запишете вашия час за преглед и да получите консултация</p>
         <hr class="my-4">
         @if (SignInManager.IsSignedIn(User))

@@ -36,7 +36,7 @@
             var models = await this.patientService.GetAllPatients();
             var users = this.mapper.Map<ICollection<UserViewModel>>(models);
 
-            return View(users);
+            return this.View(users);
         }
 
         public async Task<IActionResult> Edit(string id)
@@ -62,15 +62,15 @@
                 Cities = await this.cityService.GetAllCities()
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(EditProfileFormModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
 
             var isEdited = await this.profileService.EditProfileAsync(model);
@@ -80,10 +80,10 @@
                 this.TempData["Message"] = UnsuccessfulEditMsg;
                 model.Cities = await this.cityService.GetAllCities();
 
-                return View(model);
+                return this.View(model);
             }
 
-            return RedirectToAction(nameof(All));
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public async Task<IActionResult> Delete(string userId)
@@ -91,7 +91,7 @@
             var user = await this.userManager.FindByIdAsync(userId);
             if (user == null)
             {
-                return NotFound($"Не успяхме да заредим потребител с номер '{this.userManager.GetUserId(User)}'.");
+                return this.NotFound($"Не успяхме да заредим потребител с номер '{this.userManager.GetUserId(this.User)}'.");
             }
 
             var result = await this.userManager.DeleteAsync(user);
@@ -100,10 +100,10 @@
             if (!result.Succeeded || !patientIsDeleted)
             {
                 this.TempData["Message"] = UnsuccessfulEditMsg;
-                return RedirectToAction(nameof(All));
+                return this.RedirectToAction(nameof(this.All));
             }
 
-            return RedirectToAction(nameof(All));
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

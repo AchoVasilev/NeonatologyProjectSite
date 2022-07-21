@@ -19,21 +19,22 @@
             => this.feedbackService = feedbackService;
 
         public IActionResult Send() 
-            => View(new FeedbackInputModel());
+            =>
+                this.View(new FeedbackInputModel());
 
         [HttpPost]
         public async Task<IActionResult> Send(FeedbackInputModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
 
             await this.feedbackService.CreateFeedback(model);
 
             this.TempData["Message"] = SuccessfulFeedbackSent;
 
-            return RedirectToAction("Index", "Home");
+            return this.RedirectToAction("Index", "Home");
         }
 
         [Authorize]
@@ -41,12 +42,12 @@
         {
             if (this.User.Identity.Name != email)
             {
-                return StatusCode(404);
+                return this.StatusCode(404);
             }
 
             var feedbacks = await this.feedbackService.GetUserFeedbacks(email);
 
-            return View(feedbacks);
+            return this.View(feedbacks);
         }
     }
 }

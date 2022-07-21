@@ -6,9 +6,9 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Data.Models.Dto;
+    using Models.Dto;
 
-    using Data.Models;
+    using Models;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.EntityFrameworkCore;

@@ -6,7 +6,7 @@
 
     using Microsoft.AspNetCore.Http;
 
-    using Services.FileService.FileServiceModels;
+    using FileServiceModels;
 
     using ViewModels.Gallery;
 

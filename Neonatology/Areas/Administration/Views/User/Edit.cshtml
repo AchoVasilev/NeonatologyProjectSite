@@ -19,9 +19,9 @@
 </style>
 }
 
-@if (this.TempData.ContainsKey("Message"))
+@if (TempData.ContainsKey("Message"))
 {
-    <div class="alert alert-danger" id="locationMessage">@this.TempData["Message"]</div>
+    <div class="alert alert-danger" id="locationMessage">@TempData["Message"]</div>
 }
 
 <div class="container jumbotron-opacity">

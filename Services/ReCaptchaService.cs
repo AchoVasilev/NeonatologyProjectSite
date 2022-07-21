@@ -24,7 +24,7 @@
             var data = new RecaptchaData
             {
                 ResponseToken = token,
-                Secret = recaptchaSetting.SecretKey
+                Secret = this.recaptchaSetting.SecretKey
             };
 
             var client = new HttpClient();

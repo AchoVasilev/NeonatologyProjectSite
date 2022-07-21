@@ -13,7 +13,7 @@
 
     using Neonatology.Areas.Administration.Controllers;
 
-    using Test.Mocks;
+    using Mocks;
     using ViewModels.Administration.Appointment;
     using ViewModels.Appointments;
 

@@ -26,7 +26,7 @@
         {
             var model = await this.feedbackService.GetAll();
 
-            return View(model);
+            return this.View(model);
         }
 
         public async Task<IActionResult> Delete(int id)
@@ -35,25 +35,25 @@
             if (result == false)
             {
                 this.TempData["Message"] = ErrorDeletingMsg;
-                return RedirectToAction(nameof(All));
+                return this.RedirectToAction(nameof(this.All));
             }
 
             this.TempData["Message"] = SuccessfulDeleteMsg;
 
-            return RedirectToAction(nameof(All));
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public async Task<IActionResult> Information(int id)
         {
             var model = await this.feedbackService.GetById(id);
 
-            return View(model);
+            return this.View(model);
         }
 
         public async Task<IActionResult> Reply(int id)
         {
             var model = await this.feedbackService.GetById(id);
-            return View(new FeedbackReplyModel
+            return this.View(new FeedbackReplyModel
             {
                 ReceiverFirstName = model.FirstName,
                 ReceiverLastName = model.LastName,
@@ -71,7 +71,7 @@
             await this.emailSender.SendEmailAsync(model.ReceiverEmail, model.Subject, model.Text);
             this.TempData["Message"] = SuccessfulSendEmailMsg;
 
-            return RedirectToAction(nameof(All));
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

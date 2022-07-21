@@ -13,12 +13,13 @@
         private const string Url = "https://localhost:5001/";
 
         public AutomatedUITests()
-            => driver = new ChromeDriver();
+            =>
+                this.driver = new ChromeDriver();
 
         public void Dispose()
         {
-            driver.Quit();
-            driver.Dispose();
+            this.driver.Quit();
+            this.driver.Dispose();
         }
 
         [Fact]

@@ -4,7 +4,7 @@ namespace Test.ServiceUnitTests
     using Xunit;
     using System.Collections.Generic;
     using Data.Models;
-    using Test.Mocks;
+    using Mocks;
     using System.Threading.Tasks;
 
     public class UserServiceTests

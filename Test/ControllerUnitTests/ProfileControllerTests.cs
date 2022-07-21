@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
     using Services.CityService;
     using Services.ProfileService;
 
-    using Test.Helpers;
+    using Helpers;
 
     using ViewModels.City;
     using ViewModels.Profile;

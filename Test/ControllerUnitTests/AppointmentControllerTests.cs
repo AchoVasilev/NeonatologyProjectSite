@@ -17,7 +17,7 @@
     using Services.DoctorService;
     using Services.PatientService;
 
-    using Test.Helpers;
+    using Helpers;
 
     using ViewModels.Appointments;
     using ViewModels.Patient;

@@ -31,7 +31,7 @@
         {
             var model = await this.profileService.GetPatientData(this.User.GetId());
 
-            return View(model);
+            return this.View(model);
         }
 
         public async Task<IActionResult> Edit(string userId)
@@ -56,7 +56,7 @@
                 Cities = await this.cityService.GetAllCities()
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
@@ -66,12 +66,12 @@
 
             if (city is null)
             {
-                ModelState.AddModelError("cityId", "City with this id does not exist");
+                this.ModelState.AddModelError("cityId", "City with this id does not exist");
             }
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
 
             var isEdited = await this.profileService.EditProfileAsync(model);
@@ -79,16 +79,16 @@
             if (isEdited == false)
             {
                 this.TempData["Message"] = UnsuccessfulEditMsg;
-                return View(model);
+                return this.View(model);
             }
 
-            return RedirectToAction(nameof(Index));
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         [AllowAnonymous]
         public IActionResult AllUsers()
         {
-            return View();
+            return this.View();
         }
     }
 }

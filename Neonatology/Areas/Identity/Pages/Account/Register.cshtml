@@ -38,10 +38,10 @@
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />
 
-<script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration["GoogleRecaptchaV3:SiteKey"]"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=@Configuration["GoogleRecaptchaV3:SiteKey"]"></script>
 <script>
     grecaptcha.ready(function() {
-      grecaptcha.execute('@this.Configuration["GoogleRecaptchaV3:SiteKey"]', {action: 'submit'}).then(function(token) {
+      grecaptcha.execute('@Configuration["GoogleRecaptchaV3:SiteKey"]', {action: 'submit'}).then(function(token) {
           $('#input-token').val(token);
       });
     });

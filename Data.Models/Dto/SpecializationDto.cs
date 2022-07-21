@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static Data.Common.DataConstants.Constants;
+    using static Common.DataConstants.Constants;
 
     public class SpecializationDto
     {

@@ -27,7 +27,7 @@
         {
             var model = await this.appointmentService.GetAllAppointments();
 
-            return View(model);
+            return this.View(model);
         }
 
         public async Task<IActionResult> Information(int id)
@@ -37,12 +37,12 @@
             if (appointment == null)
             {
                 this.TempData["Message"] = AppointmentDoesntExistErrorMsg;
-                return RedirectToAction(nameof(All));
+                return this.RedirectToAction(nameof(this.All));
             }
 
             var model = this.mapper.Map<AdminAppointmentViewModel>(appointment);
 
-            return View(model);
+            return this.View(model);
         }
 
         public async Task<IActionResult> Delete(int id)
@@ -51,12 +51,12 @@
             if (result == false)
             {
                 this.TempData["Message"] = ErrorDeletingMsg;
-                return RedirectToAction(nameof(All));
+                return this.RedirectToAction(nameof(this.All));
             }
 
             this.TempData["Message"] = SuccessfulDeleteMsg;
 
-            return RedirectToAction(nameof(All));
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

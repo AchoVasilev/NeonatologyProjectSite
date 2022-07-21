@@ -6,7 +6,7 @@
     {
         public MailKitEmailSenderOptions()
         {
-            HostSecureSocketOptions = SecureSocketOptions.Auto;
+            this.HostSecureSocketOptions = SecureSocketOptions.Auto;
         }
 
         public string HostAddress { get; set; }

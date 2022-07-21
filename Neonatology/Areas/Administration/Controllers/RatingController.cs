@@ -21,7 +21,7 @@
         {
             var result = await this.ratingService.GetRatings();
 
-            return View(result);
+            return this.View(result);
         }
 
         public async Task<IActionResult> Approve(int id)
@@ -30,11 +30,11 @@
             if (isApproved == false)
             {
                 this.TempData["Message"] = ErrorApprovingRating;
-                return RedirectToAction(nameof(All));
+                return this.RedirectToAction(nameof(this.All));
             }
 
             this.TempData["Message"] = SuccessfullyApprovedRating;
-            return RedirectToAction(nameof(All));
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public async Task<IActionResult> Delete(int id)
@@ -43,11 +43,11 @@
             if (isDeleted == false)
             {
                 this.TempData["Message"] = ErrorDeletingMsg;
-                return RedirectToAction(nameof(All), "Rating", new { area = "Administration" });
+                return this.RedirectToAction(nameof(this.All), "Rating", new { area = "Administration" });
             }
 
             this.TempData["Message"] = SuccessfullyDeletedRating;
-            return RedirectToAction(nameof(All), "Rating", new {area = "Administration"});
+            return this.RedirectToAction(nameof(this.All), "Rating", new {area = "Administration"});
         }
     }
 }

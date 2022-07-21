@@ -11,7 +11,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
 
-    using Neonatology.Hubs;
+    using Hubs;
 
     using Services.NotificationService;
 
@@ -41,7 +41,7 @@
 
             var model = await this.notificationService.GetUserNotifications(userName, userId, NotificationOnClick, 0);
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]

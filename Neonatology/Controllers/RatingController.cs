@@ -45,16 +45,16 @@
                 AppointmentId = appointmentId
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [Authorize(Roles = PatientRoleName)]
         [HttpPost]
         public async Task<IActionResult> RateAppointment(CreateRatingFormModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return RedirectToAction(nameof(RateAppointment), new { model.AppointmentId });
+                return this.RedirectToAction(nameof(RateAppointment), new { model.AppointmentId });
             }
 
             var userId = this.User.GetId();
@@ -68,7 +68,7 @@
             if (appointment.IsRated)
             {
                 this.TempData["Message"] = RatedAppointment;
-                return RedirectToAction("MyPastAppointments", "Appointment", new { area = "", page = 1 });
+                return this.RedirectToAction("MyPastAppointments", "Appointment", new { area = "", page = 1 });
             }
 
             var doctorId = await this.doctorService.GetDoctorIdByAppointmentId(model.AppointmentId);
@@ -91,12 +91,12 @@
             if (isRated == false)
             {
                 this.TempData["Message"] = ErrorRatingAppointmentMsg;
-                return RedirectToAction("MyPastAppointments", "Appointment", new { area = "", page = 1 });
+                return this.RedirectToAction("MyPastAppointments", "Appointment", new { area = "", page = 1 });
             }
 
             this.TempData["Message"] = string.Format(SuccessfulRating, model.Number);
 
-            return RedirectToAction("MyPastAppointments", "Appointment", new { area = "", page = 1 });
+            return this.RedirectToAction("MyPastAppointments", "Appointment", new { area = "", page = 1 });
         }
 
         [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
@@ -111,20 +111,20 @@
 
                 if (userIsAdmin)
                 {
-                    return RedirectToAction("All", "Appointment", new { area = "Administration" });
+                    return this.RedirectToAction("All", "Appointment", new { area = "Administration" });
                 }
 
-                return RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
+                return this.RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
             }
 
             this.TempData["Message"] = SuccessfullyApprovedRating;
 
             if (userIsAdmin)
             {
-                return RedirectToAction("All", "Appointment", new { area = "Administration" });
+                return this.RedirectToAction("All", "Appointment", new { area = "Administration" });
             }
 
-            return RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
+            return this.RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
         }
 
         [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
@@ -138,19 +138,19 @@
                 this.TempData["Message"] = ErrorApprovingRating;
                 if (userIsAdmin)
                 {
-                    return RedirectToAction("All", "Appointment", new { area = "Administration" });
+                    return this.RedirectToAction("All", "Appointment", new { area = "Administration" });
                 }
 
-                return RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
+                return this.RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
             }
 
             this.TempData["Message"] = SuccessfullyApprovedRating;
             if (userIsAdmin)
             {
-                return RedirectToAction("All", "Appointment", new { area = "Administration" });
+                return this.RedirectToAction("All", "Appointment", new { area = "Administration" });
             }
 
-            return RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
+            return this.RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
         }
     }
 }

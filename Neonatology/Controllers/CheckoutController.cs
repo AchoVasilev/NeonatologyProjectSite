@@ -39,7 +39,7 @@
         {
             var model = await this.offerService.GetOnlineConsultationModelAsync();
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpGet("config")]
@@ -103,7 +103,7 @@
 
             var service = new SessionService(this.stripeClient);
             var session = await service.CreateAsync(options);
-            Response.Headers.Add("Location", session.Url);
+            this.Response.Headers.Add("Location", session.Url);
 
             await this.paymentService.CreateChekoutSession(session.Id, session.PaymentIntentId, session.ClientReferenceId);
 
@@ -114,14 +114,13 @@
         [IgnoreAntiforgeryToken]
         public async Task<IActionResult> Webhook()
         {
-            var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
+            var json = await new StreamReader(this.HttpContext.Request.Body).ReadToEndAsync();
             var secret = this.options.Value.SigningSecret;
             Event stripeEvent;
             try
             {
                 stripeEvent = EventUtility.ConstructEvent(
-                    json,
-                    Request.Headers["Stripe-Signature"],
+                    json, this.Request.Headers["Stripe-Signature"],
                     secret
                 );
 
@@ -130,7 +129,7 @@
             catch (Exception e)
             {
                 //Console.WriteLine($"Something failed {e}");
-                return BadRequest();
+                return this.BadRequest();
             }
 
             if (stripeEvent.Type == "checkout.session.completed")
@@ -141,14 +140,16 @@
                 await this.FulfillOrder(session);
             }
 
-            return Ok();
+            return this.Ok();
         }
 
         public IActionResult SuccessfulPayment([FromQuery] string sessionId)
-                => View(sessionId);
+                =>
+                    this.View(sessionId);
 
         public IActionResult CanceledPayment()
-            => View();
+            =>
+                this.View();
 
         private async Task FulfillOrder(Session session)
         {

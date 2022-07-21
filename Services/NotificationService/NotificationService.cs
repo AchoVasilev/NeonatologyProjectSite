@@ -161,7 +161,7 @@
                 .Include(x => x.Image)
                 .FirstOrDefaultAsync();
 
-            var item = ParseNotificationViewModel(notification, sender, receiver);
+            var item = this.ParseNotificationViewModel(notification, sender, receiver);
 
             return item;
         }

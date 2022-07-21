@@ -8,7 +8,7 @@
     using Data.Models.Enums;
     using Services.SlotService;
 
-    using Test.Mocks;
+    using Mocks;
 
     using Xunit;
 

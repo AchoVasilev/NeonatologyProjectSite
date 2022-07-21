@@ -2,7 +2,7 @@
 {
     using System;
 
-    using ViewModels.Offer;
+    using Offer;
 
     public class PaymentViewModel
     {

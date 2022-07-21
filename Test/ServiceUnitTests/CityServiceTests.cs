@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Data.Models;
-    using global::Services.CityService;
-    using Test.Mocks;
+    using Services.CityService;
+    using Mocks;
     using ViewModels.City;
     using Xunit;
 

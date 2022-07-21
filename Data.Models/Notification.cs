@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     using Data.Common.Models;
-    using Data.Models.Enums;
+    using Enums;
 
     public class Notification : BaseModel<string>
     {

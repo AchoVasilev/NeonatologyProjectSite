@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using ViewModels.Appointments;
+    using Appointments;
 
     public class IndexViewModel
     {

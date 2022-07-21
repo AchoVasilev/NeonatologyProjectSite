@@ -12,7 +12,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
 
-    using Neonatology.Hubs;
+    using Hubs;
 
     using Services.ChatService;
     using Services.DoctorService;
@@ -55,7 +55,7 @@
 
             if (patientId != null)
             {
-                return RedirectToAction(nameof(this.Consultation));
+                return this.RedirectToAction(nameof(this.Consultation));
             }
 
             var doctorId = await this.doctorService.GetDoctorId();
@@ -88,7 +88,7 @@
                 ItemCount = converstations.Count
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         public async Task<IActionResult> Consultation()
@@ -126,7 +126,7 @@
                 HasPaid = await this.patientService.HasPaid(currentUserId)
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [Route("Chat/With/{username?}/Group/{group?}")]
@@ -166,7 +166,7 @@
                 if (patientSender.Id == currentUser.PatientId && !patientSender.HasPaid)
                 {
                     model.HasPaid = false;
-                    return View(model);
+                    return this.View(model);
                 }
             }
 

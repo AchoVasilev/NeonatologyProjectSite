@@ -5,7 +5,7 @@
 
     using Data.Common.Models;
 
-    using static Data.Common.DataConstants.Constants;
+    using static Common.DataConstants.Constants;
 
     public class Rating : BaseModel<int>
     {

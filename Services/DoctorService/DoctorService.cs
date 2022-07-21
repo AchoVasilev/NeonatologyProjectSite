@@ -15,7 +15,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using Services.FileService;
+    using FileService;
 
     using ViewModels.Address;
     using ViewModels.Doctor;

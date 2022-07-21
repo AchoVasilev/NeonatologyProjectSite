@@ -13,7 +13,7 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
 
-    using Services.FileService.FileServiceModels;
+    using FileServiceModels;
 
     using ViewModels.Gallery;
 
@@ -140,8 +140,8 @@
                 Url = model.Uri
             };
 
-            await data.Images.AddAsync(image);
-            await data.SaveChangesAsync();
+            await this.data.Images.AddAsync(image);
+            await this.data.SaveChangesAsync();
         }
 
         public async Task<GalleryViewModel> GetGaleryImagesAsync(int page, int itemsPerPage)

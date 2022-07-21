@@ -15,7 +15,7 @@
     using Neonatology.Hubs;
     using Services.NotificationService;
 
-    using Test.Helpers;
+    using Helpers;
 
     using ViewModels.Notification;
 

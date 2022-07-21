@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using ViewModels.Address;
+    using Address;
 
     using static Data.Common.DataConstants.Constants;
 

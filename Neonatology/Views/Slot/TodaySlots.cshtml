@@ -1,8 +1,8 @@
 ﻿@model ICollection<SlotViewModel>
 
-@if (this.TempData.ContainsKey("Message"))
+@if (TempData.ContainsKey("Message"))
 {
-    <div class="alert alert-success" id="locationMessage">@this.TempData["Message"]</div>
+    <div class="alert alert-success" id="locationMessage">@TempData["Message"]</div>
 }
 
 @{

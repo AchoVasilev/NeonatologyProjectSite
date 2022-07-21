@@ -27,7 +27,7 @@
         {
             if (this.User.IsAdmin())
             {
-                return RedirectToAction("Index", "Home", new { Area = "Administration" });
+                return this.RedirectToAction("Index", "Home", new { Area = "Administration" });
             }
 
             var model = new HomeViewModel()
@@ -35,30 +35,30 @@
                 DoctorId = await this.doctorService.GetDoctorId()
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [Route("/Home/Error/404")]
         public IActionResult Error404()
         {
-            return View();
+            return this.View();
         }
 
         [Route("/Home/Error/400")]
         public IActionResult Error400()
         {
-            return View();
+            return this.View();
         }
 
         public IActionResult Privacy()
         {
-            return View();
+            return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
     }
 }

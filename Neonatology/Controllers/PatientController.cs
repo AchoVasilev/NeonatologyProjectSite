@@ -25,21 +25,22 @@
         }
 
         public IActionResult Finish()
-            => View(new CreatePatientFormModel());
+            =>
+                this.View(new CreatePatientFormModel());
 
         [HttpPost]
         public async Task<IActionResult> Finish(CreatePatientFormModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
 
             var userId = this.User.GetId();
 
             await this.patientService.CreatePatientAsync(model, userId, $"{this.environment.WebRootPath}");
 
-            return RedirectToAction("Index", "Home");
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }

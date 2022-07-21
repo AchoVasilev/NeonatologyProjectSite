@@ -4,17 +4,17 @@
 
     public class PagingModel
     {
-        public bool HasPreviousPage => PageNumber > 1;
+        public bool HasPreviousPage => this.PageNumber > 1;
 
-        public bool HasNextPage => PageNumber < PagesCount;
+        public bool HasNextPage => this.PageNumber < this.PagesCount;
 
-        public int PreviousPageNumber => PageNumber - 1;
+        public int PreviousPageNumber => this.PageNumber - 1;
 
-        public int NextPageNumber => PageNumber + 1;
+        public int NextPageNumber => this.PageNumber + 1;
 
         public int PageNumber { get; set; }
 
-        public int PagesCount => (int)Math.Ceiling((double)ItemCount / ItemsPerPage);
+        public int PagesCount => (int)Math.Ceiling((double)this.ItemCount / this.ItemsPerPage);
 
         public int ItemCount { get; set; }
 

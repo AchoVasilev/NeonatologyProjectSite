@@ -28,7 +28,7 @@ namespace Neonatology
     using Microsoft.Extensions.Hosting;
 
     using Neonatology.Areas.Administration.Services;
-    using Neonatology.Hubs;
+    using Hubs;
 
     using Services;
     using Services.AppointmentCauseService;
@@ -59,7 +59,7 @@ namespace Neonatology
     public class Startup
     {
         public Startup(IConfiguration configuration)
-            => Configuration = configuration;
+            => this.Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 
@@ -80,8 +80,7 @@ namespace Neonatology
                 .AddEntityFrameworkStores<NeonatologyDbContext>();
 
             services.AddDbContext<NeonatologyDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddControllersWithViews(configure =>
@@ -108,7 +107,7 @@ namespace Neonatology
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddSingleton(Configuration);
+            services.AddSingleton(this.Configuration);
             services.AddRazorPages();
             services.AddControllers();
             services.AddSignalR();
@@ -139,11 +138,11 @@ namespace Neonatology
                 .AddTransient<ReCaptchaService>();
 
             //Configure ReCAPTCHA
-            services.Configure<RecaptchaSetting>(Configuration.GetSection("GoogleRecaptchaV3"));
+            services.Configure<RecaptchaSetting>(this.Configuration.GetSection("GoogleRecaptchaV3"));
 
             //Configure Stripe
-            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
-            StripeConfiguration.ApiKey = Configuration["Stripe:SecretKey"];
+            services.Configure<StripeSettings>(this.Configuration.GetSection("Stripe"));
+            StripeConfiguration.ApiKey = this.Configuration["Stripe:SecretKey"];
 
             //Configure SMTP MailKit
             services.AddTransient<IEmailSender, MailKitSender>();
@@ -170,7 +169,7 @@ namespace Neonatology
             configuration.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
             .UseSimpleAssemblyNameTypeSerializer()
             .UseRecommendedSerializerSettings()
-            .UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection"), new SqlServerStorageOptions
+            .UseSqlServerStorage(this.Configuration.GetConnectionString("DefaultConnection"), new SqlServerStorageOptions
             {
                 CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
                 SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),

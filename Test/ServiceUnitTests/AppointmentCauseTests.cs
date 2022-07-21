@@ -5,9 +5,9 @@
 
     using Data.Models;
 
-    using global::Services.AppointmentCauseService;
+    using Services.AppointmentCauseService;
 
-    using Test.Mocks;
+    using Mocks;
 
     using ViewModels.Appointments;
 

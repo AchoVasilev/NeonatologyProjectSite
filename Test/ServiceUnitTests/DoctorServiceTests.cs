@@ -8,9 +8,9 @@ namespace Test.ServiceUnitTests
 
     using Data.Models;
 
-    using global::Services.DoctorService;
+    using Services.DoctorService;
     using Microsoft.EntityFrameworkCore;
-    using Test.Mocks;
+    using Mocks;
 
     using Xunit;
 

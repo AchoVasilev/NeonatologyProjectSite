@@ -34,7 +34,7 @@
                 AllAppointments = await this.appointmentService.GetAllAppointments()
             };
 
-            return View(model);
+            return this.View(model);
         }
     }
 }

@@ -7,7 +7,7 @@
     using global::Services.FileService;
     using Microsoft.AspNetCore.Mvc;
 
-    using Neonatology.Areas.Administration.Services;
+    using Services;
     using ViewModels.Administration.Galery;
 
     using static Common.GlobalConstants.MessageConstants;
@@ -34,7 +34,7 @@
                 GaleryImages = await this.galleryService.GetGaleryImages()
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         public async Task<IActionResult> Delete(string id)
@@ -44,16 +44,16 @@
             if (result == false)
             {
                 this.TempData["Message"] = ErrorDeletingMsg;
-                return RedirectToAction(nameof(All));
+                return this.RedirectToAction(nameof(this.All));
             }
 
             this.TempData["Message"] = SuccessfulDeleteMsg;
-            return RedirectToAction(nameof(All));
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public IActionResult Add()
         {
-            return View(new UploadImageModel());
+            return this.View(new UploadImageModel());
         }
 
         [HttpPost]
@@ -61,12 +61,12 @@
         {
             if (model.Images == null)
             {
-                return View(new UploadImageModel());
+                return this.View(new UploadImageModel());
             }
 
             foreach (var image in model.Images)
             {
-                var result = await this.fileService.UploadImage(cloudinary, image, DefaultFolderName);
+                var result = await this.fileService.UploadImage(this.cloudinary, image, DefaultFolderName);
 
                 if (result != null)
                 {
@@ -74,7 +74,7 @@
                 }
             }
 
-            return RedirectToAction(nameof(All));
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

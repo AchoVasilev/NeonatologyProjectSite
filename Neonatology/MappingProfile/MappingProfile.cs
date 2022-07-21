@@ -4,7 +4,7 @@
 
     using Common;
 
-    using global::Data.Models;
+    using Data.Models;
 
     using Services.PatientService.Models;
 
@@ -99,7 +99,7 @@
 
             this.CreateMap<Message, ChatMessageWithUserViewModel>()
                 .ForMember(vm => vm.CreatedOn, opt =>
-                    opt.MapFrom(m => m.CreatedOn.AddHours(3).ToString(GlobalConstants.DateTimeFormats.DateTimeFormat)))
+                    opt.MapFrom(m => m.CreatedOn.AddHours(3).ToString(DateTimeFormat)))
                 .ForMember(vm => vm.FullName, opt =>
                     opt.MapFrom(m => m.Sender.Doctor.FirstName != null
                         ? "Д-р " + m.Sender.Doctor.FirstName + " " + m.Sender.Doctor.LastName

@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using ViewModels.City;
+    using City;
 
     using static Data.Common.DataConstants.Constants;
 

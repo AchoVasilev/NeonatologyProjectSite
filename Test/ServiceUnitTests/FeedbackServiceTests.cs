@@ -6,11 +6,11 @@
 
     using Data.Models;
 
-    using global::Services.FeedbackService;
+    using Services.FeedbackService;
 
     using Microsoft.EntityFrameworkCore;
 
-    using Test.Mocks;
+    using Mocks;
 
     using ViewModels.Feedback;
 

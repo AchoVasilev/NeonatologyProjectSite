@@ -51,12 +51,12 @@
 
             if (startDate.Date < DateTime.Now.Date)
             {
-                return BadRequest(new { response = DateBeforeNowErrorMsg });
+                return this.BadRequest(new { response = DateBeforeNowErrorMsg });
             }
 
             if (startDate >= endDate)
             {
-                return BadRequest(new { response = StartDateIsAfterEndDateMsg });
+                return this.BadRequest(new { response = StartDateIsAfterEndDateMsg });
             }
 
             var result = await this.slotService
@@ -88,10 +88,10 @@
 
             if (isEdited == false)
             {
-                return BadRequest(new { message = FailedSlotEditMsg });
+                return this.BadRequest(new { message = FailedSlotEditMsg });
             }
 
-            return Ok(model.Id);
+            return this.Ok(model.Id);
         }
     }
 }

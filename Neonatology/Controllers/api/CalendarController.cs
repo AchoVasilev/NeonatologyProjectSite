@@ -71,29 +71,29 @@
             var cause = await this.appointmentCauseService.GetAppointmentCauseByIdAsync(model.AppointmentCauseId);
             if (cause == null)
             {
-                return BadRequest(new { message = MessageConstants.AppointmentCauseWrongId });
+                return this.BadRequest(new { message = MessageConstants.AppointmentCauseWrongId });
             }
 
             if (startDate.Date < DateTime.Now.Date && startDate.Hour < DateTime.Now.Hour)
             {
-                return BadRequest(new { message = MessageConstants.AppointmentBeforeNowErrorMsg });
+                return this.BadRequest(new { message = MessageConstants.AppointmentBeforeNowErrorMsg });
             }
 
             if (await this.patientService.PatientExists(model.Email))
             {
-                return BadRequest(new { message = MessageConstants.PatientIsRegistered });
+                return this.BadRequest(new { message = MessageConstants.PatientIsRegistered });
             }
 
             var result = await this.appointmentService.AddAsync(model.DoctorId, model, startDate, endDate);
             if (result == false)
             {
-                return BadRequest(new { message = MessageConstants.TakenDateMsg });
+                return this.BadRequest(new { message = MessageConstants.TakenDateMsg });
             }
 
             var slotId = await this.slotService.DeleteSlotById(int.Parse(id));
             if (slotId == 0)
             {
-                return BadRequest(new { message = MessageConstants.TakenDateMsg });
+                return this.BadRequest(new { message = MessageConstants.TakenDateMsg });
             }
 
             var emailMsg = string
@@ -109,7 +109,7 @@
                 Console.WriteLine(e.Message);
             }
 
-            return Ok(new
+            return this.Ok(new
             {
                 message = string
                     .Format(MessageConstants.SuccessfullAppointment,
@@ -127,12 +127,12 @@
             var cause = await this.appointmentCauseService.GetAppointmentCauseByIdAsync(model.AppointmentCauseId);
             if (cause == null)
             {
-                return BadRequest(new { message = MessageConstants.AppointmentCauseWrongId });
+                return this.BadRequest(new { message = MessageConstants.AppointmentCauseWrongId });
             }
 
             if (startDate.Date < DateTime.Now.Date && startDate.Hour < DateTime.Now.Hour)
             {
-                return BadRequest(new { message = MessageConstants.AppointmentBeforeNowErrorMsg });
+                return this.BadRequest(new { message = MessageConstants.AppointmentBeforeNowErrorMsg });
             }
 
             var userId = this.User.GetId();
@@ -144,7 +144,7 @@
 
             if (result == false)
             {
-                return BadRequest(new { message = MessageConstants.TakenDateMsg });
+                return this.BadRequest(new { message = MessageConstants.TakenDateMsg });
             }
 
             await this.slotService.DeleteSlotById(int.Parse(id));
@@ -162,7 +162,7 @@
                 Console.WriteLine(e.Message);
             }
 
-            return Ok(new
+            return this.Ok(new
             {
                 message = string
                     .Format(MessageConstants.SuccessfullAppointment, 

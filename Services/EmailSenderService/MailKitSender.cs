@@ -30,12 +30,12 @@
             // create message
             var email = new MimeMessage
             {
-                Sender = MailboxAddress.Parse(Options.SenderEmail)
+                Sender = MailboxAddress.Parse(this.Options.SenderEmail)
             };
 
-            if (!string.IsNullOrEmpty(Options.SenderName))
+            if (!string.IsNullOrEmpty(this.Options.SenderName))
             {
-                email.Sender.Name = Options.SenderName;
+                email.Sender.Name = this.Options.SenderName;
             }
 
             email.From.Add(email.Sender);
@@ -49,9 +49,9 @@
             // send email
             using (var smtp = new SmtpClient())
             {
-                smtp.Connect(Options.HostAddress, Options.HostPort, SecureSocketOptions.Auto);
+                smtp.Connect(this.Options.HostAddress, this.Options.HostPort, SecureSocketOptions.Auto);
 
-                smtp.Authenticate(Options.HostUsername, Options.HostPassword);
+                smtp.Authenticate(this.Options.HostUsername, this.Options.HostPassword);
 
                 smtp.Send(email);
 

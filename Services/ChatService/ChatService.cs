@@ -20,8 +20,8 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
 
-    using Services.FileService;
-    using Services.FileService.FileServiceModels;
+    using FileService;
+    using FileService.FileServiceModels;
 
     using ViewModels.Chat;
 
@@ -336,7 +336,7 @@
                 {
                     var fileExtension = Path.GetExtension(file.FileName);
 
-                    fileModel = await imageService.UploadFile(
+                    fileModel = await this.imageService.UploadFile(
                                 this.cloudinary,
                                 file,
                                 ChatFolderName);

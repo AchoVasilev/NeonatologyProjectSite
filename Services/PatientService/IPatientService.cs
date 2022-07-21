@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Data.Models;
 
-    using Services.PatientService.Models;
+    using Models;
 
     using ViewModels.Patient;
 

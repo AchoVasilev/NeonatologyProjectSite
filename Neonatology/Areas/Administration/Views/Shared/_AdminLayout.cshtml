@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" />
     @await RenderSectionAsync("Styles", required: false)
 
-    <title>@Common.GlobalConstants.SystemAdministrationName</title>
+    <title>@SystemAdministrationName</title>
 </head>
 <body class="hold-transition sidebar-mini">
     @await RenderSectionAsync("head", required: false)
@@ -62,7 +62,7 @@
                         <img src="~/img/admin.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <span class="d-block" style="color: white">@this.User.Identity.Name</span>
+                        <span class="d-block" style="color: white">@User.Identity.Name</span>
                     </div>
                 </div>
                 <partial name="_LoginPartial" />

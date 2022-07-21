@@ -4,9 +4,9 @@
     ViewData["Title"] = "Всички оценки";
 }
 
-@if (this.TempData.ContainsKey("Message"))
+@if (TempData.ContainsKey("Message"))
 {
-    <div class="alert alert-danger">@this.TempData["Message"]</div>
+    <div class="alert alert-danger">@TempData["Message"]</div>
 }
 
 <h1 style="text-align:center">@ViewData["Title"]</h1>

@@ -5,7 +5,7 @@
 
     using Microsoft.AspNetCore.Http;
 
-    using ViewModels.City;
+    using City;
 
     using static Data.Common.DataConstants.Constants;
     using static Common.GlobalConstants.MessageConstants;

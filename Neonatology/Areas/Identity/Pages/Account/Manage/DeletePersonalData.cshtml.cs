@@ -30,9 +30,9 @@ namespace Neonatology.Areas.Identity.Pages.Account.Manage
             ILogger<DeletePersonalDataModel> logger, 
             NeonatologyDbContext data)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _logger = logger;
+            this._userManager = userManager;
+            this._signInManager = signInManager;
+            this._logger = logger;
             this.data = data;
         }
 
@@ -66,36 +66,36 @@ namespace Neonatology.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnGet()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await this._userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return NotFound($"Не успяхме да заредим потребител с номер '{_userManager.GetUserId(User)}'.");
+                return this.NotFound($"Не успяхме да заредим потребител с номер '{this._userManager.GetUserId(this.User)}'.");
             }
 
-            RequirePassword = await _userManager.HasPasswordAsync(user);
-            return Page();
+            this.RequirePassword = await this._userManager.HasPasswordAsync(user);
+            return this.Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await this._userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return NotFound($"Не успяхме да заредим потребител с номер '{_userManager.GetUserId(User)}'.");
+                return this.NotFound($"Не успяхме да заредим потребител с номер '{this._userManager.GetUserId(this.User)}'.");
             }
 
-            RequirePassword = await _userManager.HasPasswordAsync(user);
-            if (RequirePassword)
+            this.RequirePassword = await this._userManager.HasPasswordAsync(user);
+            if (this.RequirePassword)
             {
-                if (!await _userManager.CheckPasswordAsync(user, Input.Password))
+                if (!await this._userManager.CheckPasswordAsync(user, this.Input.Password))
                 {
-                    ModelState.AddModelError(string.Empty, "Грешна парола");
-                    return Page();
+                    this.ModelState.AddModelError(string.Empty, "Грешна парола");
+                    return this.Page();
                 }
             }
 
-            var result = await _userManager.DeleteAsync(user);
-            var userId = await _userManager.GetUserIdAsync(user);
+            var result = await this._userManager.DeleteAsync(user);
+            var userId = await this._userManager.GetUserIdAsync(user);
             if (!result.Succeeded)
             {
                 throw new InvalidOperationException($"Стана грешка");
@@ -106,13 +106,13 @@ namespace Neonatology.Areas.Identity.Pages.Account.Manage
                 .FirstOrDefaultAsync();
 
             getPatient.IsDeleted = true;
-            await data.SaveChangesAsync();
+            await this.data.SaveChangesAsync();
 
-            await _signInManager.SignOutAsync();
+            await this._signInManager.SignOutAsync();
 
-            _logger.LogInformation("User with ID '{UserId}' deleted themselves.", userId);
+            this._logger.LogInformation("User with ID '{UserId}' deleted themselves.", userId);
 
-            return Redirect("~/");
+            return this.Redirect("~/");
         }
     }
 }

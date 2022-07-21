@@ -1,7 +1,7 @@
 ﻿@model NotificationModel
 
 @{
-    string username = this.User.Identity.Name;
+    string username = User.Identity.Name;
     ViewData["Title"] = $"{username} - известия";
     var colors = new Dictionary<string, string>()
     {

@@ -2,7 +2,7 @@
 {
     using System.Linq;
 
-    using Data.Models;
+    using Models;
 
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;

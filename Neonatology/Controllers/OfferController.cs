@@ -17,7 +17,7 @@
         {
             var services = await this.offerService.GetAllAsync();
 
-            return View(services);
+            return this.View(services);
         }
     }
 }

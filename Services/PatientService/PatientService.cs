@@ -14,7 +14,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using Services.PatientService.Models;
+    using Models;
 
     using ViewModels.Patient;
 
@@ -143,7 +143,7 @@
             }
 
             patient.IsDeleted = true;
-            await data.SaveChangesAsync();
+            await this.data.SaveChangesAsync();
 
             return true;
         }

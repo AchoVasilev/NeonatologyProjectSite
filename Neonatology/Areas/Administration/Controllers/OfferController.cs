@@ -23,7 +23,7 @@
         {
             var services = await this.offerService.GetAllAsync();
 
-            return View(services);
+            return this.View(services);
         }
 
         public async Task<IActionResult> Delete(int id)
@@ -32,16 +32,17 @@
             if (isDeleted == false)
             {
                 this.TempData["Message"] = ErrorDeletingMsg;
-                return RedirectToAction(nameof(All));
+                return this.RedirectToAction(nameof(this.All));
             }
 
             this.TempData["Message"] = SuccessfulDeleteMsg;
 
-            return RedirectToAction(nameof(All));
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public IActionResult Add() 
-            => View(new CreateOfferFormModel());
+            =>
+                this.View(new CreateOfferFormModel());
 
         [HttpPost]
         public async Task<IActionResult> Add(CreateOfferFormModel model)
@@ -50,14 +51,14 @@
 
             this.TempData["Message"] = SuccessfulAddedItemMsg;
 
-            return RedirectToAction(nameof(All));
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public async Task<IActionResult> Edit(int id)
         {
             var model = await this.offerService.GetOffer(id);
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
@@ -67,12 +68,12 @@
             if (isEdited == false)
             {
                 this.TempData["Message"] = ErrorDeletingMsg;
-                return RedirectToAction(nameof(All));
+                return this.RedirectToAction(nameof(this.All));
             }
 
             this.TempData["Message"] = SuccessfulEditMsg;
 
-            return RedirectToAction(nameof(All));
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

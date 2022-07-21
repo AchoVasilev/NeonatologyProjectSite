@@ -17,7 +17,7 @@
     using Services.PatientService;
     using Services.RatingService;
 
-    using Test.Helpers;
+    using Helpers;
 
     using ViewModels.Appointments;
     using ViewModels.Rating;

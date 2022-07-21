@@ -10,12 +10,12 @@
 
         public TestClaimsProvider(IList<Claim> claims)
         {
-            Claims = claims;
+            this.Claims = claims;
         }
 
         public TestClaimsProvider()
         {
-            Claims = new List<Claim>();
+            this.Claims = new List<Claim>();
         }
 
         public static TestClaimsProvider WithAdminClaims()

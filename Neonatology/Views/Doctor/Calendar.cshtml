@@ -3,7 +3,7 @@
 
 @{
     var requestToken = Antiforgery.GetAndStoreTokens(Context).RequestToken;
-    var userIsDoctor = this.User.IsInRole(DoctorConstants.DoctorRoleName);
+    var userIsDoctor = User.IsInRole(DoctorConstants.DoctorRoleName);
 
     ViewData["Title"] = "Календар";
 }

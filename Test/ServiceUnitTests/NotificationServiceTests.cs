@@ -7,11 +7,11 @@
     using Data.Models;
     using Data.Models.Enums;
 
-    using global::Services.NotificationService;
+    using Services.NotificationService;
 
     using Microsoft.EntityFrameworkCore;
 
-    using Test.Mocks;
+    using Mocks;
 
     using Xunit;
 

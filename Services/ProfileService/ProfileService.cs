@@ -14,7 +14,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using Services.FileService;
+    using FileService;
 
     using ViewModels.Profile;
 

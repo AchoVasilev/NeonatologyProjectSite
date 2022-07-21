@@ -45,7 +45,7 @@
                 AppointmentCauses = await this.appointmentCauseService.GetAllCauses()
             };
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         [Authorize(Roles = PatientRoleName)]
@@ -59,7 +59,7 @@
             {
                 this.TempData["Message"] = PatientProfileIsNotFinishedMsg;
 
-                return RedirectToAction("Finish", "Patient", new { area = "" });
+                return this.RedirectToAction("Finish", "Patient", new { area = "" });
             }
 
             var viewModel = new PatientAppointmentCreateModel
@@ -68,7 +68,7 @@
                 AppointmentCauses = await this.appointmentCauseService.GetAllCauses()
             };
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         [Authorize(Roles = PatientRoleName)]
@@ -79,7 +79,7 @@
 
             var model = await this.appointmentService.GetUpcomingUserAppointments(patientId, ItemsPerPage, page);
 
-            return View(model);
+            return this.View(model);
         }
 
         [Authorize(Roles = PatientRoleName)]
@@ -90,7 +90,7 @@
 
             var model = await this.appointmentService.GetPastUserAppointments(patientId, ItemsPerPage, page);
 
-            return View(model);
+            return this.View(model);
         }
 
         [Authorize(Roles = DoctorConstants.DoctorRoleName)]
@@ -101,7 +101,7 @@
 
             var model = await this.appointmentService.GetUpcomingDoctorAppointments(doctorId, ItemsPerPage, page);
 
-            return View(model);
+            return this.View(model);
         }
 
         [Authorize(Roles = DoctorConstants.DoctorRoleName)]
@@ -112,7 +112,7 @@
 
             var model = await this.appointmentService.GetPastDoctorAppointments(doctorId, ItemsPerPage, page);
 
-            return View(model);
+            return this.View(model);
         }
 
         [Authorize(Roles = DoctorConstants.DoctorRoleName)]
@@ -120,7 +120,7 @@
         {
             var appointments = await this.appointmentService.GetTodaysAppointments(this.User.GetId());
 
-            return View(appointments);
+            return this.View(appointments);
         }
     }
 }

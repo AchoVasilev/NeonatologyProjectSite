@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    using static Data.Common.DataConstants.Constants;
+    using static Common.DataConstants.Constants;
 
     public class Address : BaseModel<int>
     {

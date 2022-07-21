@@ -23,7 +23,7 @@
         {
             var takenSlots = await this.slotService.GetTodaysTakenSlots();
 
-            return View(takenSlots);
+            return this.View(takenSlots);
         }
     }
 }

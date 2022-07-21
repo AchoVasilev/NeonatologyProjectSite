@@ -29,10 +29,10 @@
         }
 
         public async Task<ICollection<OfferViewModel>> GetAllAsync()
-            => await data.OfferedServices
+            => await this.data.OfferedServices
                 .Where(x => x.IsDeleted == false)
                 .OrderByDescending(x => x.CreatedOn)
-                .ProjectTo<OfferViewModel>(mapper.ConfigurationProvider)
+                .ProjectTo<OfferViewModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 
         public async Task<int> GetOnlineConsultationId()

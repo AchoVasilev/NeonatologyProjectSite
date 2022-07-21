@@ -6,11 +6,11 @@
 
     using Data.Models;
 
-    using global::Services.ChatService;
+    using Services.ChatService;
 
     using Microsoft.EntityFrameworkCore;
 
-    using Test.Mocks;
+    using Mocks;
 
     using ViewModels.Chat;
 

@@ -12,7 +12,7 @@
 
     using Services.PatientService;
 
-    using Test.Helpers;
+    using Helpers;
 
     using ViewModels.Patient;
 

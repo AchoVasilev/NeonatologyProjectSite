@@ -13,7 +13,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using Services.AppointmentService;
+    using AppointmentService;
 
     using ViewModels.Administration.Rating;
     using ViewModels.Rating;

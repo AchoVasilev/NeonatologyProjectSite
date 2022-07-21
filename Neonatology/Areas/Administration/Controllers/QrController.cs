@@ -15,7 +15,7 @@
         [HttpGet]
         public IActionResult CreateQRCode()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
@@ -30,9 +30,9 @@
 
             byte[] BitmapArray = qrCode.GetGraphic(60);
             var QrUri = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(BitmapArray));
-            ViewBag.QrCodeUri = QrUri;
+            this.ViewBag.QrCodeUri = QrUri;
 
-            return View();
+            return this.View();
         }
     }
 

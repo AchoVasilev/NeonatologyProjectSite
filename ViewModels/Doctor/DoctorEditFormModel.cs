@@ -6,9 +6,9 @@
     using static Common.GlobalConstants.MessageConstants;
     using static Common.GlobalConstants.AccountConstants;
     using static Data.Common.DataConstants.Constants;
-    using ViewModels.City;
+    using City;
     using Microsoft.AspNetCore.Http;
-    using ViewModels.Address;
+    using Address;
 
     public class DoctorEditFormModel
     {

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using ViewModels.Address;
+    using Address;
 
     public class DoctorProfileViewModel
     {

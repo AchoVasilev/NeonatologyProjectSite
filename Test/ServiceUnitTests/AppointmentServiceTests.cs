@@ -7,11 +7,11 @@
 
     using Data.Models;
 
-    using global::Services.AppointmentService;
+    using Services.AppointmentService;
 
     using Microsoft.EntityFrameworkCore;
 
-    using Test.Mocks;
+    using Mocks;
 
     using ViewModels.Appointments;
 

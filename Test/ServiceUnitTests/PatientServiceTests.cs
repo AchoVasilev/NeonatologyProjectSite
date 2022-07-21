@@ -6,9 +6,9 @@ namespace Test.ServiceUnitTests
     using System.Linq;
     using System.Threading.Tasks;
     using Data.Models;
-    using global::Services.PatientService;
+    using Services.PatientService;
     using Microsoft.EntityFrameworkCore;
-    using Test.Mocks;
+    using Mocks;
     using ViewModels.Patient;
     using Xunit;
 

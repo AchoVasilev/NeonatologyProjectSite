@@ -2,7 +2,7 @@
 {
     using System;
 
-    using ViewModels.Address;
+    using Address;
 
     public class AppointmentViewModel
     {

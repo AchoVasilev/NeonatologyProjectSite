@@ -32,7 +32,7 @@
             var doctorId = await this.doctorService.GetDoctorId();
             var viewModel = await this.doctorService.GetDoctorById(doctorId);
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> Edit()
@@ -55,15 +55,15 @@
                 Addresses = await this.doctorService.GetDoctorAddressesById(doctorInfo.Id)
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(DoctorEditFormModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
 
             var isEdited = await this.doctorService.EditDoctorAsync(model);
@@ -71,16 +71,16 @@
             if (isEdited == false)
             {
                 this.TempData["Message"] = UnsuccessfulEditMsg;
-                return View(model);
+                return this.View(model);
             }
 
-            return RedirectToAction(nameof(Profile));
+            return this.RedirectToAction(nameof(this.Profile));
         }
 
         public async Task<IActionResult> Calendar()
         {
             var doctorId = await this.doctorService.GetDoctorId();
-            return View(new SlotEditModel()
+            return this.View(new SlotEditModel()
             {
                 Cities = await this.cityService.GetDoctorAddressesByDoctorId(doctorId)
             });

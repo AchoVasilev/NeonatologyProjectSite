@@ -4,9 +4,9 @@
     ViewBag.Title = "Всички записани часове";
 }
 
-@if (this.TempData.ContainsKey("Message"))
+@if (TempData.ContainsKey("Message"))
 {
-    <div class="alert alert-primary">@this.TempData["Message"]</div>
+    <div class="alert alert-primary">@TempData["Message"]</div>
 }
 
 <div class="card-header">

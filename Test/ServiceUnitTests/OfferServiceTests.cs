@@ -6,11 +6,11 @@
 
     using Data.Models;
 
-    using global::Services.OfferService;
+    using Services.OfferService;
 
     using Microsoft.EntityFrameworkCore;
 
-    using Test.Mocks;
+    using Mocks;
 
     using ViewModels.Administration.Offer;
     using ViewModels.Offer;
