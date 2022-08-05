@@ -1,21 +1,15 @@
-﻿namespace Neonatology.Areas.Administration.Services
+﻿namespace Services.Administration
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
-
     using CloudinaryDotNet;
-
     using Data;
-
-    using global::Services.FileService;
-
     using Microsoft.EntityFrameworkCore;
-
+    using Services.FileService;
     using ViewModels.Administration.Galery;
     using static Common.GlobalConstants.FileConstants;
 

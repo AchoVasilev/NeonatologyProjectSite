@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Data.Models;
-    using Data.Models;
     using Data.Models.Enums;
     using Services.SlotService;
 

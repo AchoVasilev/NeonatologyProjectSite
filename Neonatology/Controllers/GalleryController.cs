@@ -6,8 +6,6 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
-    using Services.DoctorService;
     using Services.FileService;
 
     using ViewModels.Gallery;

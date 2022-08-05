@@ -58,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -120,7 +120,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -190,7 +190,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -281,7 +281,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -309,6 +309,12 @@
             "projectReferences": {
               "/home/acho/Programing/Neonatology/Common/Common.csproj": {
                 "projectPath": "/home/acho/Programing/Neonatology/Common/Common.csproj"
+              },
+              "/home/acho/Programing/Neonatology/Data/Data.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Data/Data.csproj"
+              },
+              "/home/acho/Programing/Neonatology/Services/Services.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Services/Services.csproj"
               }
             }
           }
@@ -326,6 +332,14 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[11.0.0, )"
+            },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.30, )"
+            },
+            "Hangfire.SqlServer": {
+              "target": "Package",
+              "version": "[1.7.30, )"
             }
           },
           "imports": [
@@ -343,7 +357,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -374,6 +388,9 @@
               },
               "/home/acho/Programing/Neonatology/Data/Data.csproj": {
                 "projectPath": "/home/acho/Programing/Neonatology/Data/Data.csproj"
+              },
+              "/home/acho/Programing/Neonatology/Infrastructure/Infrastructure.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Infrastructure/Infrastructure.csproj"
               },
               "/home/acho/Programing/Neonatology/Services/Services.csproj": {
                 "projectPath": "/home/acho/Programing/Neonatology/Services/Services.csproj"
@@ -488,7 +505,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -565,7 +582,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -666,7 +683,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -692,14 +709,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "/home/acho/Programing/Neonatology/Common/Common.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Common/Common.csproj"
+              },
               "/home/acho/Programing/Neonatology/Data.Common/Data.Common.csproj": {
                 "projectPath": "/home/acho/Programing/Neonatology/Data.Common/Data.Common.csproj"
               },
               "/home/acho/Programing/Neonatology/Data.Models/Data.Models.csproj": {
                 "projectPath": "/home/acho/Programing/Neonatology/Data.Models/Data.Models.csproj"
-              },
-              "/home/acho/Programing/Neonatology/Infrastructure/Infrastructure.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Infrastructure/Infrastructure.csproj"
               }
             }
           }
@@ -742,7 +759,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
         }
       }
     }

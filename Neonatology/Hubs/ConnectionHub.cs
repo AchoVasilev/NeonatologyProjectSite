@@ -7,8 +7,7 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.SignalR;
-
-    using SignalRCoreWebRTC.Models;
+    using ViewModels.Hubs;
 
     [Authorize]
     public class ConnectionHub : Hub<IConnectionHub>

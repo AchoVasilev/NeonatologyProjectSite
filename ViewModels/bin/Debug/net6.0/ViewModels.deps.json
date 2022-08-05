@@ -9,9 +9,9 @@
       "ViewModels/1.0.0": {
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
+          "Common": "1.0.0",
           "Data.Common": "1.0.0",
           "Data.Models": "1.0.0",
-          "Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
           "Newtonsoft.Json": "13.0.1"
         },
@@ -307,15 +307,6 @@
         "runtime": {
           "Data.Models.dll": {}
         }
-      },
-      "Infrastructure/1.0.0": {
-        "dependencies": {
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
-          "Common": "1.0.0"
-        },
-        "runtime": {
-          "Infrastructure.dll": {}
-        }
       }
     }
   },
@@ -525,11 +516,6 @@
       "sha512": ""
     },
     "Data.Models/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

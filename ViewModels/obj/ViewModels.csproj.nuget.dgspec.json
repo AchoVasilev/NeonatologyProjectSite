@@ -58,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -120,7 +120,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -190,69 +190,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "/home/acho/Programing/Neonatology/Infrastructure/Infrastructure.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/home/acho/Programing/Neonatology/Infrastructure/Infrastructure.csproj",
-        "projectName": "Infrastructure",
-        "projectPath": "/home/acho/Programing/Neonatology/Infrastructure/Infrastructure.csproj",
-        "packagesPath": "/home/acho/.nuget/packages/",
-        "outputPath": "/home/acho/Programing/Neonatology/Infrastructure/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/home/acho/.nuget/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net6.0"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
-            "projectReferences": {
-              "/home/acho/Programing/Neonatology/Common/Common.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Common/Common.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "dependencies": {
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[11.0.0, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -278,14 +216,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "/home/acho/Programing/Neonatology/Common/Common.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Common/Common.csproj"
+              },
               "/home/acho/Programing/Neonatology/Data.Common/Data.Common.csproj": {
                 "projectPath": "/home/acho/Programing/Neonatology/Data.Common/Data.Common.csproj"
               },
               "/home/acho/Programing/Neonatology/Data.Models/Data.Models.csproj": {
                 "projectPath": "/home/acho/Programing/Neonatology/Data.Models/Data.Models.csproj"
-              },
-              "/home/acho/Programing/Neonatology/Infrastructure/Infrastructure.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Infrastructure/Infrastructure.csproj"
               }
             }
           }
@@ -328,7 +266,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,9 +1,8 @@
-﻿namespace Neonatology.Areas.Administration.Services
+﻿namespace Services.Administration
 {
-    using ViewModels.Administration.Galery;
-
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using ViewModels.Administration.Galery;
 
     public interface IGalleryService
     {

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace SignalRCoreWebRTC.Models
+﻿namespace ViewModels.Hubs
 {
+    using System.Collections.Generic;
+
     public class CallOffer
     {
         public User Caller { get; set; }

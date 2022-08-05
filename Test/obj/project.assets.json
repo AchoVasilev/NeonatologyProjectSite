@@ -4377,7 +4377,11 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
-          "Common": "1.0.0"
+          "Common": "1.0.0",
+          "Data": "1.0.0",
+          "Hangfire.AspNetCore": "1.7.30",
+          "Hangfire.SqlServer": "1.7.30",
+          "Services": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Infrastructure.dll": {}
@@ -4399,6 +4403,7 @@
           "Hangfire.AspNetCore": "1.7.30",
           "Hangfire.Core": "1.7.30",
           "Hangfire.SqlServer": "1.7.30",
+          "Infrastructure": "1.0.0",
           "MailKit": "3.3.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.7",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.7",
@@ -4445,9 +4450,9 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
+          "Common": "1.0.0",
           "Data.Common": "1.0.0",
           "Data.Models": "1.0.0",
-          "Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
           "Newtonsoft.Json": "13.0.1"
         },
@@ -13252,7 +13257,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
       }
     }
   }

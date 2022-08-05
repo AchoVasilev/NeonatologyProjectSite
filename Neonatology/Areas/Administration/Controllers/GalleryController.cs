@@ -6,8 +6,7 @@
 
     using global::Services.FileService;
     using Microsoft.AspNetCore.Mvc;
-
-    using Services;
+    using Services.Administration;
     using ViewModels.Administration.Galery;
 
     using static Common.GlobalConstants.MessageConstants;

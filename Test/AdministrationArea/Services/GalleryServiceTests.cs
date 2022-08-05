@@ -3,7 +3,7 @@ namespace Test.AdministrationArea.Services
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Neonatology.Areas.Administration.Services;
+    using global::Services.Administration;
     using Mocks;
     using ViewModels.Administration.Galery;
     using Xunit;

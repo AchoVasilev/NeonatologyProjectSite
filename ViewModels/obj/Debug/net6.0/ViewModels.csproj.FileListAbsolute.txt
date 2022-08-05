@@ -47,10 +47,8 @@ C:/Users/defie/source/repos/Neonatology/ViewModels/obj/Debug/net6.0/refint/ViewM
 /home/acho/Programing/Neonatology/ViewModels/bin/Debug/net6.0/Common.dll
 /home/acho/Programing/Neonatology/ViewModels/bin/Debug/net6.0/Data.Common.dll
 /home/acho/Programing/Neonatology/ViewModels/bin/Debug/net6.0/Data.Models.dll
-/home/acho/Programing/Neonatology/ViewModels/bin/Debug/net6.0/Infrastructure.dll
 /home/acho/Programing/Neonatology/ViewModels/bin/Debug/net6.0/Data.Common.pdb
 /home/acho/Programing/Neonatology/ViewModels/bin/Debug/net6.0/Data.Models.pdb
-/home/acho/Programing/Neonatology/ViewModels/bin/Debug/net6.0/Infrastructure.pdb
 /home/acho/Programing/Neonatology/ViewModels/bin/Debug/net6.0/Common.pdb
 /home/acho/Programing/Neonatology/ViewModels/obj/Debug/net6.0/ViewModels.csproj.AssemblyReference.cache
 /home/acho/Programing/Neonatology/ViewModels/obj/Debug/net6.0/ViewModels.GeneratedMSBuildEditorConfig.editorconfig

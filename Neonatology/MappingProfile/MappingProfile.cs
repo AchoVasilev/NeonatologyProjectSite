@@ -1,9 +1,6 @@
 ﻿namespace Neonatology.MappingProfile
 {
     using AutoMapper;
-
-    using Common;
-
     using Data.Models;
 
     using Services.PatientService.Models;

@@ -2,18 +2,12 @@
 
 namespace Test.ControllerUnitTests.api
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Moq;
     using Neonatology.Controllers.api;
-    using Services.AppointmentCauseService;
-    using Services.AppointmentService;
-    using Services.PatientService;
     using Services.SlotService;
-    using ViewModels.Appointments;
     using ViewModels.Slot;
     using Xunit;
 
