@@ -28,9 +28,9 @@
 
         public async Task<IActionResult> All()
         {
-            var model = new GaleryModel
+            var model = new GalleryModel
             {
-                GaleryImages = await this.galleryService.GetGaleryImages()
+                GalleryImages = await this.galleryService.GetGalleryImages()
             };
 
             return this.View(model);

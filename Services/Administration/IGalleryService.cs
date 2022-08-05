@@ -6,7 +6,7 @@
 
     public interface IGalleryService
     {
-        Task<ICollection<GaleryViewModel>> GetGaleryImages();
+        Task<ICollection<GalleryViewModel>> GetGalleryImages();
 
         Task<bool> Delete(string id);
     }

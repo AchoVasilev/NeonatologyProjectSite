@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class GaleryViewModel
+    public class GalleryViewModel
     {
         public string Id { get; set; }
 

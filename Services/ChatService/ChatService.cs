@@ -163,8 +163,8 @@
                         CurrentUsername = currentUser.UserName,
                     };
 
-                    var messageFromUser = await this.data.Users
-                        .FirstOrDefaultAsync(x => x.Id == message.SenderId);
+                    // var messageFromUser = await this.data.Users
+                    //     .FirstOrDefaultAsync(x => x.Id == message.SenderId);
 
                     currentMessageModel.FromUsername = senderFullname;
                     currentMessageModel.ReceiverUsername = receiverFullname;

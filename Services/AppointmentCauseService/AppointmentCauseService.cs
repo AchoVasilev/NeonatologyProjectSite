@@ -27,12 +27,14 @@
         public async Task<ICollection<AppointmentCauseViewModel>> GetAllCauses()
             => await this.data.AppointmentCauses
                     .Where(x => x.IsDeleted == false)
+                    .AsNoTracking()
                     .ProjectTo<AppointmentCauseViewModel>(this.mapper.ConfigurationProvider)
                     .ToListAsync();
 
         public async Task<AppointmentCauseViewModel> GetAppointmentCauseByIdAsync(int id)
             => await this.data.AppointmentCauses
                         .Where(x => x.Id == id && x.IsDeleted == false)
+                        .AsNoTracking()
                         .ProjectTo<AppointmentCauseViewModel>(this.mapper.ConfigurationProvider)
                         .FirstOrDefaultAsync();
     }

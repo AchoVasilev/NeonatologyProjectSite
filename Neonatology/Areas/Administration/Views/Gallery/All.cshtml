@@ -1,4 +1,4 @@
-﻿@model GaleryModel
+﻿@model GalleryModel
 
 @section Styles{
 <link rel="stylesheet" href="~/adminLte/plugins/ekko-lightbox/ekko-lightbox.css" />
@@ -26,7 +26,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                @foreach (var image in Model.GaleryImages)
+                @foreach (var image in Model.GalleryImages)
                 {
                     <div class="col-sm-4">
                         <a href="@image.Url" data-toggle="lightbox" data-title="@image.Id" data-gallery="gallery">

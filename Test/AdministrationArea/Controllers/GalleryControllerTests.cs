@@ -13,15 +13,16 @@ using Neonatology.Areas.Administration.Controllers;
 using ViewModels.Administration.Galery;
 using ViewModels.Gallery;
 using Xunit;
+using GalleryViewModel = ViewModels.Administration.Galery.GalleryViewModel;
 
 public class GalleryControllerTests
 {
     [Fact]
     public async Task AllShouldReturnCorrectCountAndViewModel()
     {
-        var images = new List<GaleryViewModel>();
+        var images = new List<GalleryViewModel>();
         var galleryServiceMock = new Mock<IGalleryService>();
-        galleryServiceMock.Setup(x => x.GetGaleryImages())
+        galleryServiceMock.Setup(x => x.GetGalleryImages())
             .ReturnsAsync(images);
         
         var controller = new GalleryController(galleryServiceMock.Object, null, null);
@@ -29,7 +30,7 @@ public class GalleryControllerTests
         var result = await controller.All();
         var route = Assert.IsType<ViewResult>(result);
 
-        Assert.IsType<GaleryModel>(route.Model);
+        Assert.IsType<GalleryModel>(route.Model);
     }
 
     [Fact]

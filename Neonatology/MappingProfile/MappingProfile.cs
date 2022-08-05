@@ -23,6 +23,7 @@
     using ViewModels.Slot;
 
     using static Common.GlobalConstants.DateTimeFormats;
+    using GalleryViewModel = ViewModels.Administration.Galery.GalleryViewModel;
 
     public class MappingProfile : Profile
     {
@@ -109,7 +110,7 @@
                     opt.MapFrom(x => x.CreatedOn.ToString(DateTimeFormat)));
 
             //Administration
-            this.CreateMap<Image, GaleryViewModel>()
+            this.CreateMap<Image, GalleryViewModel>()
                 .ForMember(x => x.CreatedOn, opt =>
                     opt.MapFrom(y => y.CreatedOn));
 

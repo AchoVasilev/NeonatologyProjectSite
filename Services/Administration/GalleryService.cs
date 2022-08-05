@@ -28,11 +28,12 @@
             this.cloudinary = cloudinary;
         }
 
-        public async Task<ICollection<GaleryViewModel>> GetGaleryImages()
+        public async Task<ICollection<GalleryViewModel>> GetGalleryImages()
             => await this.data.Images
                 .Where(x => string.IsNullOrWhiteSpace(x.UserId) && x.IsDeleted == false)
                 .OrderByDescending(x => x.CreatedOn)
-                .ProjectTo<GaleryViewModel>(this.mapper.ConfigurationProvider)
+                .AsNoTracking()
+                .ProjectTo<GalleryViewModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 
         public async Task<bool> Delete(string id)

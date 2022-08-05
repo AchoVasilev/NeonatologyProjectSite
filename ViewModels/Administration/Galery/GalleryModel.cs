@@ -5,13 +5,13 @@
 
     using Microsoft.AspNetCore.Http;
 
-    public class GaleryModel
+    public class GalleryModel
     {
         private const string ImagesName = "Качи снимки";
 
         [DisplayName(ImagesName)]
         public IEnumerable<IFormFile> Images { get; set; }
 
-        public ICollection<GaleryViewModel> GaleryImages { get; set; }
+        public ICollection<GalleryViewModel> GalleryImages { get; set; }
     }
 }

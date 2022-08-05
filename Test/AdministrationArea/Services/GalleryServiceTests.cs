@@ -17,9 +17,9 @@ namespace Test.AdministrationArea.Services
             var mapperMock = MapperMock.Instance;
 
             var service = new GalleryService(dataMock, mapperMock, null, null);
-            var result = await service.GetGaleryImages();
+            var result = await service.GetGalleryImages();
 
-            Assert.IsAssignableFrom<List<GaleryViewModel>>(result);
+            Assert.IsAssignableFrom<List<GalleryViewModel>>(result);
         }
     }
 }

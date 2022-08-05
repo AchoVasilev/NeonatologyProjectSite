@@ -28,21 +28,19 @@
             this.mapper = mapper;
         }
 
-        public async Task<ICollection<AppointmentViewModel>> GetAllAppointments()
-        {
-            var apps = await this.data.Appointments
-                                   .Where(x => x.IsDeleted == false)
-                                   .OrderByDescending(x => x.DateTime)
-                                   .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
-                                   .ToListAsync();
-
-            return apps;
-        }
+        public async Task<ICollection<AppointmentViewModel>> GetAllAppointments() 
+            => await this.data.Appointments
+                .Where(x => x.IsDeleted == false)
+                .OrderByDescending(x => x.DateTime)
+                .AsNoTracking()
+                .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
+                .ToListAsync();
 
         public async Task<ICollection<AppointmentViewModel>> GetGabrovoAppointments()
             => await this.data.Appointments
                         .Where(x => x.IsDeleted == false && x.Address.City.Name == GabrovoCityName)
                         .OrderByDescending(x => x.DateTime)
+                        .AsNoTracking()
                         .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
 
@@ -50,6 +48,7 @@
             => await this.data.Appointments
                         .Where(x => x.IsDeleted == false && x.Address.City.Name == PlevenCityName)
                         .OrderByDescending(x => x.DateTime)
+                        .AsNoTracking()
                         .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
 
@@ -60,6 +59,7 @@
                                    .OrderBy(x => x.DateTime)
                                    .Skip((page - 1) * itemsPerPage)
                                    .Take(itemsPerPage)
+                                   .AsNoTracking()
                                    .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                                    .ToListAsync();
 
@@ -81,6 +81,7 @@
                                    .OrderBy(x => x.DateTime)
                                    .Skip((page - 1) * itemsPerPage)
                                    .Take(itemsPerPage)
+                                   .AsNoTracking()
                                    .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                                    .ToListAsync();
 
@@ -102,6 +103,7 @@
                                    .OrderBy(x => x.DateTime)
                                    .Skip((page - 1) * itemsPerPage)
                                    .Take(itemsPerPage)
+                                   .AsNoTracking()
                                    .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                                    .ToListAsync();
 
@@ -123,6 +125,7 @@
                                    .OrderBy(x => x.DateTime)
                                    .Skip((page - 1) * itemsPerPage)
                                    .Take(itemsPerPage)
+                                   .AsNoTracking()
                                    .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                                    .ToListAsync();
 
@@ -223,13 +226,14 @@
 
         public async Task<AppointmentViewModel> GetUserAppointmentAsync(string userId, int appointmentId)
         {
-            var appontment = await this.data.Appointments
+            var appointment = await this.data.Appointments
                                    .Where(x => x.Patient.UserId == userId &&
                                    x.Id == appointmentId &&
                                    x.IsDeleted == false)
+                                   .AsNoTracking()
                                    .FirstOrDefaultAsync();
 
-            var result = this.mapper.Map<AppointmentViewModel>(appontment);
+            var result = this.mapper.Map<AppointmentViewModel>(appointment);
 
             return result;
         }
@@ -240,6 +244,7 @@
                         .Include(x => x.AppointmentCause)
                         .Include(x => x.Patient)
                         .Include(x => x.Rating)
+                        .AsNoTracking()
                         .FirstOrDefaultAsync();
 
         public async Task<ICollection<AppointmentViewModel>> GetTodaysAppointments(string doctorUserId)
@@ -248,6 +253,7 @@
                            .Where(x => x.Doctor.UserId == doctorUserId &&
                                    x.DateTime.Date == DateTime.Now.Date &&
                                    x.IsDeleted == false)
+                           .AsNoTracking()
                            .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
                            .ToListAsync();
 
