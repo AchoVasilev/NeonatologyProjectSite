@@ -11,11 +11,10 @@
     using Moq;
 
     using Neonatology.Controllers;
-    using Neonatology.Hubs;
     using Services.NotificationService;
 
     using Helpers;
-
+    using Infrastructure.Hubs;
     using ViewModels.Notification;
 
     using Xunit;

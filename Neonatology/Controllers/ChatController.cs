@@ -6,14 +6,11 @@
     using System.Threading.Tasks;
 
     using Infrastructure;
-
+    using Infrastructure.Hubs;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
-
-    using Hubs;
-
     using Services.ChatService;
     using Services.DoctorService;
     using Services.PatientService;

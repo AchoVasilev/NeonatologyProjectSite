@@ -1,12 +1,9 @@
-﻿namespace Neonatology.Hubs
+﻿namespace Infrastructure.Hubs
 {
     using System.Threading.Tasks;
-
     using Ganss.XSS;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.SignalR;
-
     using Services.ChatService;
     using Services.NotificationService;
     using Services.UserService;

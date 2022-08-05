@@ -11,7 +11,6 @@ namespace Neonatology
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Hubs;
     using Infrastructure;
     using Stripe;
     using ViewModels.GoogleRecaptcha;
@@ -94,22 +93,7 @@ namespace Neonatology
                 "/hangfire",
                 new DashboardOptions { Authorization = new[] { new HangfireAuthorizationFilter() } });
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "areas",
-                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-                endpoints.MapRazorPages();
-
-                endpoints.MapHub<ChatHub>("/chatHub");
-                endpoints.MapHub<NotificationHub>("/notificationHub");
-                endpoints.MapHub<ConnectionHub>("/connectionHub");
-            });
+            app.UseMvcWithWithAreas();
         }
 
         private class HangfireAuthorizationFilter : IDashboardAuthorizationFilter

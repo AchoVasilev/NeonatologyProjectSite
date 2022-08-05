@@ -5,14 +5,11 @@
     using Data.Models;
 
     using Infrastructure;
-
+    using Infrastructure.Hubs;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
-
-    using Hubs;
-
     using Services.NotificationService;
 
     using static Common.GlobalConstants.NotificationConstants;
