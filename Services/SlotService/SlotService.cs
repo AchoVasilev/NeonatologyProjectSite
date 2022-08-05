@@ -64,12 +64,14 @@
         public async Task<ICollection<SlotViewModel>> GetGabrovoSlots()
             => await this.data.AppointmentSlots
                         .Where(x => x.IsDeleted == false && x.Address.City.Name == GabrovoCityName)
+                        .AsNoTracking()
                         .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
 
         public async Task<ICollection<SlotViewModel>> GetPlevenSlots()
             => await this.data.AppointmentSlots
                         .Where(x => x.IsDeleted == false && x.Address.City.Name == PlevenCityName)
+                        .AsNoTracking()
                         .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
 
@@ -80,6 +82,7 @@
                     x.Start.Date >= DateTime.UtcNow.Date &&
                     x.End <= DateTime.UtcNow.AddDays(20).Date &&
                     x.Status == SlotStatus.Свободен.ToString())
+            .AsNoTracking()
             .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
             .ToListAsync();
 
@@ -90,6 +93,7 @@
                     x.Start.Date >= DateTime.UtcNow.Date &&
                     x.End.Date <= DateTime.UtcNow.AddDays(20).Date &&
                     x.Status == SlotStatus.Свободен.ToString())
+            .AsNoTracking()
             .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
             .ToListAsync();
 
@@ -134,23 +138,20 @@
                 .Where(x => x.IsDeleted == false && 
                     x.Start.Date == DateTime.UtcNow.Date && 
                     x.Status == SlotStatus.Зает.ToString())
+                .AsNoTracking()
                 .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 
         private async Task<bool> SlotExists(DateTime start, DateTime end, int addressId)
         {
             var result = await this.data.AppointmentSlots
+                .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Start == start && 
                                     x.End == end &&
                                     x.AddressId == addressId &&
                                     x.IsDeleted == false);
 
-            if (result != null)
-            {
-                return true;
-            }
-
-            return false;
+            return result != null;
         }
     }
 }

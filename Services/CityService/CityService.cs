@@ -30,6 +30,7 @@
                          .Where(x => x.IsDeleted == false)
                          .ProjectTo<CityFormModel>(this.mapper.ConfigurationProvider)
                          .OrderBy(x => x.Name)
+                         .AsNoTracking()
                          .ToListAsync();
 
         public async Task<int> GetCityIdByName(string cityName)
@@ -47,6 +48,7 @@
         public async Task<ICollection<AddressFormModel>> GetDoctorAddressesByDoctorId(string doctorId)
             => await this.data.Addresses
                         .Where(x => x.DoctorId == doctorId)
+                        .AsNoTracking()
                         .ProjectTo<AddressFormModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
     }

@@ -23,7 +23,7 @@
             this.patientService = patientService;
         }
 
-        public async Task CreateChekoutSession(string sessionId, string paymentId, string toStripeAccountId)
+        public async Task CreateCheckoutSession(string sessionId, string paymentId, string toStripeAccountId)
         {
             var session = new StripeCheckoutSession
             {

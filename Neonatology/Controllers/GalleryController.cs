@@ -27,7 +27,7 @@
 
         public async Task<IActionResult> All([FromQuery] int page)
         {
-            var model = await this.fileService.GetGaleryImagesAsync(page, GalleryItemsPerPage);
+            var model = await this.fileService.GetGalleryImagesAsync(page, GalleryItemsPerPage);
 
             return this.View(model);
         }

@@ -32,6 +32,7 @@
             => await this.data.OfferedServices
                 .Where(x => x.IsDeleted == false)
                 .OrderByDescending(x => x.CreatedOn)
+                .AsNoTracking()
                 .ProjectTo<OfferViewModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 
@@ -44,6 +45,7 @@
         public async Task<OfferViewModel> GetOnlineConsultationModelAsync() 
             => await this.data.OfferedServices
                         .Where(x => x.Name == onlineConsultationName && x.IsDeleted == false)
+                        .AsNoTracking()
                         .ProjectTo<OfferViewModel>(this.mapper.ConfigurationProvider)
                         .FirstOrDefaultAsync();
 
@@ -81,6 +83,7 @@
         public async Task<EditOfferFormModel> GetOffer(int id)
             => await this.data.OfferedServices
                         .Where(x => x.Id == id && x.IsDeleted == false)
+                        .AsNoTracking()
                         .ProjectTo<EditOfferFormModel>(this.mapper.ConfigurationProvider)
                         .FirstOrDefaultAsync();
 

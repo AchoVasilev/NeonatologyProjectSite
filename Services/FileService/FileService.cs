@@ -42,7 +42,7 @@
                 throw new Exception($"Invalid image extension {extension}");
             }
 
-            string imageName = image.FileName;
+            var imageName = image.FileName;
 
             byte[] destinationImage;
             using (var memoryStream = new MemoryStream())
@@ -144,7 +144,7 @@
             await this.data.SaveChangesAsync();
         }
 
-        public async Task<GalleryViewModel> GetGaleryImagesAsync(int page, int itemsPerPage)
+        public async Task<GalleryViewModel> GetGalleryImagesAsync(int page, int itemsPerPage)
         {
             var images = await this.data.Images
                 .Where(x => string.IsNullOrWhiteSpace(x.UserId) &&
@@ -152,6 +152,7 @@
                 .OrderBy(x => x.CreatedOn)
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)
+                .AsNoTracking()
                 .ToListAsync();
 
             var count = await this.data.Images

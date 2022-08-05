@@ -22,7 +22,7 @@ public class GalleryControllerTests
         var model = new GalleryViewModel();
         
         var fileService = new Mock<IFileService>();
-        fileService.Setup(x => x.GetGaleryImagesAsync(1, 8))
+        fileService.Setup(x => x.GetGalleryImagesAsync(1, 8))
             .ReturnsAsync(model);
 
         var appointmentCauses = new List<AppointmentCauseViewModel>();

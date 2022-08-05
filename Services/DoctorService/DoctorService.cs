@@ -46,6 +46,7 @@
         public async Task<DoctorProfileViewModel> GetDoctorByUserId(string userId)
             => await this.data.Doctors
                 .Where(x => x.UserId == userId)
+                .AsNoTracking()
                 .ProjectTo<DoctorProfileViewModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 

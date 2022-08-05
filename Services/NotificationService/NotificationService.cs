@@ -173,6 +173,7 @@
                 .OrderByDescending(x => x.CreatedOn)
                 .Skip(skip)
                 .Take(notificationCount)
+                .AsNoTracking()
                 .ToListAsync();
 
             var notificationModel = new NotificationModel();
@@ -182,9 +183,11 @@
                 var sender = await this.data.Users
                     .Where(x => x.Id == userNotification.SenderId)
                     .Include(x => x.Image)
+                    .AsNoTracking()
                     .FirstOrDefaultAsync();
 
                 var receiver = await this.data.Users
+                    .AsNoTracking()
                     .FirstOrDefaultAsync(x => x.Id == userNotification.ReceiverId);
 
                 var notificationViewModel = this.ParseNotificationViewModel(userNotification, sender, receiver);
@@ -220,7 +223,7 @@
 
         private string GetNotificationHeading(string notificationTypeName, ApplicationUser user, string link)
         {
-            string message = string.Empty;
+            var message = string.Empty;
 
             switch (notificationTypeName)
             {

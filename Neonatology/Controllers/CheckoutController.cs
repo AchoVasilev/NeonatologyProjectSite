@@ -105,7 +105,7 @@
             var session = await service.CreateAsync(options);
             this.Response.Headers.Add("Location", session.Url);
 
-            await this.paymentService.CreateChekoutSession(session.Id, session.PaymentIntentId, session.ClientReferenceId);
+            await this.paymentService.CreateCheckoutSession(session.Id, session.PaymentIntentId, session.ClientReferenceId);
 
             return new StatusCodeResult(303);
         }

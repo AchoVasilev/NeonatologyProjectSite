@@ -20,6 +20,6 @@
 
         Task AddImageToDatabase(IFileServiceModel model);
 
-        Task<GalleryViewModel> GetGaleryImagesAsync(int page, int itemsPerPage);
+        Task<GalleryViewModel> GetGalleryImagesAsync(int page, int itemsPerPage);
     }
 }

@@ -6,7 +6,7 @@
 
     public interface IPaymentService
     {
-        Task CreateChekoutSession(string sessionId, string paymentId, string toStripeAccountId);
+        Task CreateCheckoutSession(string sessionId, string paymentId, string toStripeAccountId);
 
         Task<string> CreatePayment(CreatePaymentModel model);
 

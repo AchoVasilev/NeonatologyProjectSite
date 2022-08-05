@@ -102,6 +102,7 @@
         public async Task<ICollection<RatingViewModel>> GetRatings()
             => await this.data.Ratings
                         .Where(x => x.IsDeleted == false)
+                        .AsNoTracking()
                         .ProjectTo<RatingViewModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
     }

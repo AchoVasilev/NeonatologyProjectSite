@@ -45,6 +45,7 @@
             => await this.data.Feedbacks
                 .Where(x => x.Email == email && x.IsDeleted == false)
                 .OrderByDescending(x => x.CreatedOn)
+                .AsNoTracking()
                 .ProjectTo<FeedbackViewModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 
@@ -52,6 +53,7 @@
              => await this.data.Feedbacks
                     .Where(x => x.IsDeleted == false)
                     .OrderByDescending(x => x.CreatedOn)
+                    .AsNoTracking()
                     .ProjectTo<FeedbackViewModel>(this.mapper.ConfigurationProvider)
                     .ToListAsync();
 
@@ -77,6 +79,7 @@
         public async Task<FeedbackViewModel> GetById(int id)
             => await this.data.Feedbacks
                 .Where(x => x.Id == id && x.IsDeleted == false)
+                .AsNoTracking()
                 .ProjectTo<FeedbackViewModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 

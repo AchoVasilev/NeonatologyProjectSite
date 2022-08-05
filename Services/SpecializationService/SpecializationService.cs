@@ -27,6 +27,7 @@
         public async Task<ICollection<SpecializationFormModel>> GetAllDoctorSpecializations(string doctorId)
             => await this.data.Specializations
                            .Where(x => x.DoctorId == doctorId)
+                           .AsNoTracking()
                            .ProjectTo<SpecializationFormModel>(this.mapper.ConfigurationProvider)
                            .ToListAsync();
     }

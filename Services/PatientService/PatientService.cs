@@ -71,6 +71,7 @@
         public async Task<PatientViewModel> GetPatientByUserIdAsync(string userId)
             => await this.data.Patients
                   .Where(x => x.UserId == userId && x.IsDeleted == false)
+                  .AsNoTracking()
                   .ProjectTo<PatientViewModel>(this.mapper.ConfigurationProvider)
                   .FirstOrDefaultAsync();
 
@@ -122,6 +123,7 @@
         public async Task<ICollection<PatientServiceModel>> GetAllPatients()
             => await this.data.Patients
                         .Where(x => x.IsDeleted == false)
+                        .AsNoTracking()
                         .ProjectTo<PatientServiceModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
 
