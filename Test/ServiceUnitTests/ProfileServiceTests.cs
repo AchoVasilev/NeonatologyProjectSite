@@ -36,7 +36,7 @@ public class ProfileServiceTests
 
         var service = new PatientService(dataMock, mapperMock);
 
-        await service.CreatePatientAsync(model, "gosho", "rooot");
+        await service.CreatePatient(model, "gosho", "rooot");
         var profileService = new ProfileService(dataMock, null, mapperMock, null);
 
         var patientData = await profileService.GetPatientData("gosho");
@@ -71,7 +71,7 @@ public class ProfileServiceTests
 
         var service = new PatientService(dataMock, mapperMock);
 
-        await service.CreatePatientAsync(model, "gosho", "rooot");
+        await service.CreatePatient(model, "gosho", "rooot");
         var profileService = new ProfileService(dataMock, null, mapperMock, null);
         var patient = dataMock.Patients.First();
 
@@ -114,7 +114,7 @@ public class ProfileServiceTests
 
         var service = new PatientService(dataMock, mapperMock);
 
-        await service.CreatePatientAsync(model, "gosho", "rooot");
+        await service.CreatePatient(model, "gosho", "rooot");
         var profileService = new ProfileService(dataMock, null, mapperMock, null);
         var patient = dataMock.Patients.First();
 

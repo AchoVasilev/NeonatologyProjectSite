@@ -8,7 +8,7 @@
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
-
+    using Common;
     using Data;
     using Data.Models;
 
@@ -19,7 +19,7 @@
     using ViewModels.Patient;
 
     using static Common.GlobalConstants.FileConstants;
-
+    using static Common.GlobalConstants.MessageConstants;
     public class PatientService : IPatientService
     {
         private readonly NeonatologyDbContext data;
@@ -31,7 +31,7 @@
             this.mapper = mapper;
         }
 
-        public async Task CreatePatientAsync(CreatePatientFormModel model, string userId, string webRootPath)
+        public async Task CreatePatient(CreatePatientFormModel model, string userId, string webRootPath)
         {
             var user = await this.data.Users
                 .Where(x => x.Id == userId)
@@ -62,13 +62,27 @@
             await this.data.SaveChangesAsync();
         }
 
-        public async Task<string> GetPatientIdByUserIdAsync(string userId)
+        public async Task<string> GetPatientIdByUserId(string userId)
            => await this.data.Patients
                 .Where(x => x.UserId == userId && x.IsDeleted == false)
                 .Select(x => x.Id)
                 .FirstOrDefaultAsync();
 
-        public async Task<PatientViewModel> GetPatientByUserIdAsync(string userId)
+        public async Task<OperationResult> PatientIsRegistered(string userId)
+        {
+            var patient = await this.GetPatientByUserId(userId);
+
+            if (string.IsNullOrWhiteSpace(patient.FirstName) ||
+                string.IsNullOrWhiteSpace(patient.LastName) ||
+                string.IsNullOrWhiteSpace(patient.Phone))
+            {
+                return PatientProfileIsNotFinishedMsg;
+            }
+
+            return true;
+        }
+
+        public async Task<PatientViewModel> GetPatientByUserId(string userId)
             => await this.data.Patients
                   .Where(x => x.UserId == userId && x.IsDeleted == false)
                   .AsNoTracking()
@@ -89,7 +103,7 @@
                     .Select(x => x.Patient.HasPaid)
                     .FirstOrDefaultAsync();
 
-        public async Task<bool> EditPatientAsync(string patientId, CreatePatientFormModel model)
+        public async Task<bool> EditPatient(string patientId, CreatePatientFormModel model)
         {
             var patient = await this.data.Patients
                 .FirstOrDefaultAsync(x => x.Id == patientId && x.IsDeleted == false);

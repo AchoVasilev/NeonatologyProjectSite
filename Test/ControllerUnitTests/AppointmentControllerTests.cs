@@ -70,7 +70,7 @@
                 Phone = "098889902"
             };
             var patientService = new Mock<IPatientService>();
-            patientService.Setup(x => x.GetPatientByUserIdAsync("1"))
+            patientService.Setup(x => x.GetPatientByUserId("1"))
                 .ReturnsAsync(patientModel);
 
             var doctorService = new Mock<IDoctorService>();
@@ -103,7 +103,7 @@
                 Phone = null
             };
             var patientService = new Mock<IPatientService>();
-            patientService.Setup(x => x.GetPatientByUserIdAsync("1"))
+            patientService.Setup(x => x.GetPatientByUserId("1"))
                 .ReturnsAsync(patientModel);
 
             var httpContext = new DefaultHttpContext();
@@ -153,7 +153,7 @@
         public async Task MyUpcomingAppointmentsShouldReturnViewWithModel()
         {
             var patientService = new Mock<IPatientService>();
-            patientService.Setup(x => x.GetPatientIdByUserIdAsync("1"))
+            patientService.Setup(x => x.GetPatientIdByUserId("1"))
                 .ReturnsAsync("1");
 
             var appointment = new AllAppointmentsViewModel();

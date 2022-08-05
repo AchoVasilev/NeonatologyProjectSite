@@ -38,7 +38,7 @@
 
             var userId = this.User.GetId();
 
-            await this.patientService.CreatePatientAsync(model, userId, $"{this.environment.WebRootPath}");
+            await this.patientService.CreatePatient(model, userId, $"{this.environment.WebRootPath}");
 
             return this.RedirectToAction("Index", "Home");
         }

@@ -59,7 +59,7 @@
 
         public static class MessageConstants
         {
-            public const string SuccessfullAppointment = "Успешно си записахте час за {0} от {1} часа. Може да проверите Вашия и-мейл";
+            public const string SuccessfulAppointment = "Успешно си записахте час за {0} от {1} часа. Може да проверите Вашия и-мейл";
 
             public const string RatedAppointment = "Вече сте дали своята оценка";
             public const string SuccessfulRating = "Вие дадохте оценка {0}";
@@ -83,7 +83,7 @@
             public const string TakenDateMsg = "Съжаляваме, но някой Ви изпревари. Опитайте да запишете друг час.";
             public const string AppointmentBeforeNowErrorMsg = "Не можете да си запишете час за минала дата";
 
-            public const string IvalidEmailErrorMsg = "Моля въведете валиден и-мейл адрес";
+            public const string InvalidEmailErrorMsg = "Моля въведете валиден и-мейл адрес";
 
             public const string AppointmentMakeEmailMsg = "Успешно си записахте час. Вашият час е от {0} часа на {1}";
             public const string AppointmentDoesntExistErrorMsg = "Час с номер {0} не съществува";
@@ -100,6 +100,9 @@
             public const string SuccessfulSendEmailMsg = "Успешно изпратихте и-мейл";
 
             public const string FailedRecaptchaMsg = "Възникна проблем, опитайте се да обновите страницата!";
+
+            public const string UnauthorizedErrorMsg = "Нямате необходимите права за това действие!";
+            public const string UploadFailErrorMsg = "Неуспешно качване на файла, опитайте пак.";
         }
 
         public static class AccountConstants

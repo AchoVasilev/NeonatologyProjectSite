@@ -12,7 +12,6 @@
     using ViewModels.Slot;
 
     using static Common.GlobalConstants;
-    using static Common.GlobalConstants.MessageConstants;
 
     [Authorize(Roles = DoctorConstants.DoctorRoleName)]
     public class DoctorController : BaseController
@@ -66,11 +65,12 @@
                 return this.View(model);
             }
 
-            var isEdited = await this.doctorService.EditDoctorAsync(model);
+            var result = await this.doctorService.EditDoctorAsync(model);
 
-            if (isEdited == false)
+            if (result.Failed)
             {
-                this.TempData["Message"] = UnsuccessfulEditMsg;
+                this.TempData["Message"] = result.Error;
+                
                 return this.View(model);
             }
 

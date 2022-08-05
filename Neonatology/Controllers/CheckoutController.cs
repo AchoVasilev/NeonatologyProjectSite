@@ -74,8 +74,8 @@
 
             var options = new SessionCreateOptions
             {
-                SuccessUrl = "http://pediamed-001-site1.btempurl.com/checkout/successfulpayment?session_id={{CHECKOUT_SESSION_ID}}",
-                CancelUrl = "http://pediamed-001-site1.btempurl.com/checkout/canceledpayment",
+                SuccessUrl = "https://pediamedbg.com/checkout/successfulpayment?session_id={{CHECKOUT_SESSION_ID}}",
+                CancelUrl = "https://pediamedbg.com/checkout/canceledpayment",
                 Mode = "payment",
                 CustomerEmail = this.User.FindFirst(ClaimTypes.Email).Value,
                 LineItems = new List<SessionLineItemOptions>
@@ -128,14 +128,12 @@
             }
             catch (Exception e)
             {
-                //Console.WriteLine($"Something failed {e}");
                 return this.BadRequest();
             }
 
             if (stripeEvent.Type == "checkout.session.completed")
             {
                 var session = stripeEvent.Data.Object as Session;
-                //Console.WriteLine($"Session ID: {session.Id}");
 
                 await this.FulfillOrder(session);
             }

@@ -15,7 +15,7 @@
     using ViewModels.Appointments;
 
     using static Common.GlobalConstants;
-    using static Common.GlobalConstants.MessageConstants;
+    
 
     public class AppointmentController : BaseController
     {
@@ -51,13 +51,11 @@
         [Authorize(Roles = PatientRoleName)]
         public async Task<IActionResult> MakePatientAppointment()
         {
-            var patient = await this.patientService.GetPatientByUserIdAsync(this.User.GetId());
+            var result = await this.patientService.PatientIsRegistered(this.User.GetId());
 
-            if (string.IsNullOrWhiteSpace(patient.FirstName) || 
-                string.IsNullOrWhiteSpace(patient.LastName) || 
-                string.IsNullOrWhiteSpace(patient.Phone))
+            if (result.Failed)
             {
-                this.TempData["Message"] = PatientProfileIsNotFinishedMsg;
+                this.TempData["Message"] = result.Error;
 
                 return this.RedirectToAction("Finish", "Patient", new { area = "" });
             }
@@ -75,7 +73,7 @@
         public async Task<IActionResult> MyUpcomingAppointments([FromQuery] int page)
         {
             var userId = this.User.GetId();
-            var patientId = await this.patientService.GetPatientIdByUserIdAsync(userId);
+            var patientId = await this.patientService.GetPatientIdByUserId(userId);
 
             var model = await this.appointmentService.GetUpcomingUserAppointments(patientId, ItemsPerPage, page);
 
@@ -86,7 +84,7 @@
         public async Task<IActionResult> MyPastAppointments([FromQuery] int page)
         {
             var userId = this.User.GetId();
-            var patientId = await this.patientService.GetPatientIdByUserIdAsync(userId);
+            var patientId = await this.patientService.GetPatientIdByUserId(userId);
 
             var model = await this.appointmentService.GetPastUserAppointments(patientId, ItemsPerPage, page);
 

@@ -13,7 +13,7 @@
         public string End { get; set; }
 
         [Required(ErrorMessage = RequiredFieldErrorMsg)]
-        [EmailAddress(ErrorMessage = IvalidEmailErrorMsg)]
+        [EmailAddress(ErrorMessage = InvalidEmailErrorMsg)]
         public string Email { get; set; }
 
         [Required(ErrorMessage = RequiredFieldErrorMsg)]

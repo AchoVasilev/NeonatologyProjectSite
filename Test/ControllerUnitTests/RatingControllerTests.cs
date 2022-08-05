@@ -69,7 +69,7 @@
                 .ReturnsAsync("doc");
 
             var patientService = new Mock<IPatientService>();
-            patientService.Setup(x => x.GetPatientIdByUserIdAsync("1"))
+            patientService.Setup(x => x.GetPatientIdByUserId("1"))
                 .ReturnsAsync("patient");
 
             var ratingService = new Mock<IRatingService>();
@@ -212,7 +212,7 @@
                 .ReturnsAsync("doc");
 
             var patientService = new Mock<IPatientService>();
-            patientService.Setup(x => x.GetPatientIdByUserIdAsync("1"))
+            patientService.Setup(x => x.GetPatientIdByUserId("1"))
                 .ReturnsAsync(value: null);
 
             var controller = new RatingController(appointmentService.Object, doctorService.Object, patientService.Object, null);
@@ -247,7 +247,7 @@
                 .ReturnsAsync("doc");
 
             var patientService = new Mock<IPatientService>();
-            patientService.Setup(x => x.GetPatientIdByUserIdAsync("1"))
+            patientService.Setup(x => x.GetPatientIdByUserId("1"))
                 .ReturnsAsync("patient");
 
             var ratingService = new Mock<IRatingService>();

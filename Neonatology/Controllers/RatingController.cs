@@ -77,7 +77,7 @@
                 return new StatusCodeResult(404);
             }
 
-            var patientId = await this.patientService.GetPatientIdByUserIdAsync(userId);
+            var patientId = await this.patientService.GetPatientIdByUserId(userId);
             if (patientId is null)
             {
                 return new StatusCodeResult(404);

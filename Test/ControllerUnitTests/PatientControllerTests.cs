@@ -47,7 +47,7 @@
             var model = new CreatePatientFormModel();
             var patientService = new Mock<IPatientService>();
             var environment = new Mock<IWebHostEnvironment>();
-            patientService.Setup(x => x.CreatePatientAsync(model, "1", "root"));
+            patientService.Setup(x => x.CreatePatient(model, "1", "root"));
 
             var controller = new PatientController(patientService.Object, environment.Object);
             ControllerExtensions.WithIdentity(controller, "1", "gosho", "Patient");

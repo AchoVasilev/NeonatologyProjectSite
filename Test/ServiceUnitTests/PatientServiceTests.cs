@@ -38,7 +38,7 @@ namespace Test.ServiceUnitTests
 
             var service = new PatientService(dataMock, mapperMock);
 
-            await service.CreatePatientAsync(model, "gosho", "rooot");
+            await service.CreatePatient(model, "gosho", "rooot");
 
             Assert.Equal(1, dataMock.Patients.Count());
         }
@@ -67,7 +67,7 @@ namespace Test.ServiceUnitTests
 
             var service = new PatientService(dataMock, mapperMock);
 
-            await service.CreatePatientAsync(model, "gosho", "rooot");
+            await service.CreatePatient(model, "gosho", "rooot");
             var res = await dataMock.Patients.FirstOrDefaultAsync(x => x.UserId == "gosho");
 
             Assert.Equal("Evlogi", res.FirstName);
@@ -102,7 +102,7 @@ namespace Test.ServiceUnitTests
             await dataMock.SaveChangesAsync();
 
             var service = new PatientService(dataMock, mapperMock);
-            var result = await service.GetPatientIdByUserIdAsync("gosho");
+            var result = await service.GetPatientIdByUserId("gosho");
 
             Assert.Equal("evlogi", result);
         }
@@ -134,7 +134,7 @@ namespace Test.ServiceUnitTests
             await dataMock.SaveChangesAsync();
 
             var service = new PatientService(dataMock, mapperMock);
-            var result = await service.GetPatientByUserIdAsync("gosho");
+            var result = await service.GetPatientByUserId("gosho");
 
             Assert.NotNull(result);
             Assert.IsType<PatientViewModel>(result);
@@ -208,7 +208,7 @@ namespace Test.ServiceUnitTests
                 PhoneNumber = "098789987"
             };
 
-            var result = await service.EditPatientAsync("evlogi", model);
+            var result = await service.EditPatient("evlogi", model);
 
             Assert.True(result);
         }
@@ -248,7 +248,7 @@ namespace Test.ServiceUnitTests
                 PhoneNumber = "098789987"
             };
 
-            var result = await service.EditPatientAsync("evlogi", model);
+            var result = await service.EditPatient("evlogi", model);
             var editedPatient = await dataMock.Patients
                 .FirstOrDefaultAsync(x => x.Id == "evlogi");
 
@@ -292,7 +292,7 @@ namespace Test.ServiceUnitTests
                 PhoneNumber = "098789987"
             };
 
-            var result = await service.EditPatientAsync("pipi", model);
+            var result = await service.EditPatient("pipi", model);
 
             Assert.False(result);
         }
@@ -333,7 +333,7 @@ namespace Test.ServiceUnitTests
                 PhoneNumber = "098789987"
             };
 
-            var result = await service.EditPatientAsync("evlogi", model);
+            var result = await service.EditPatient("evlogi", model);
 
             Assert.False(result);
         }

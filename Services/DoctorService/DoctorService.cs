@@ -9,7 +9,7 @@
     using AutoMapper.QueryableExtensions;
 
     using CloudinaryDotNet;
-
+    using Common;
     using Data;
     using Data.Models;
 
@@ -21,6 +21,7 @@
     using ViewModels.Doctor;
 
     using static Common.GlobalConstants.FileConstants;
+    using static Common.GlobalConstants.MessageConstants;
 
     public class DoctorService : IDoctorService
     {
@@ -79,20 +80,20 @@
                 .ProjectTo<EditAddressFormModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 
-        public async Task<bool> EditDoctorAsync(DoctorEditFormModel model)
+        public async Task<OperationResult> EditDoctorAsync(DoctorEditFormModel model)
         {
             var doctor = await this.data.Doctors.FirstOrDefaultAsync(x => x.Id == model.Id);
-            if (doctor == null)
+            if (doctor is null)
             {
-                return false;
+                return UnauthorizedErrorMsg;
             }
 
             if (model.Picture != null)
             {
                 var result = await this.fileService.UploadImage(this.cloudinary, model.Picture, DefaultFolderName);
-                if (result == null)
+                if (result is null)
                 {
-                    return false;
+                    return UploadFailErrorMsg;
                 }
 
                 doctor.User.Image.IsDeleted = true;

@@ -48,7 +48,7 @@
         public async Task<IActionResult> All([FromQuery] int page)
         {
             var currentUserId = this.User.GetId();
-            var patientId = this.patientService.GetPatientIdByUserIdAsync(currentUserId);
+            var patientId = this.patientService.GetPatientIdByUserId(currentUserId);
 
             if (patientId != null)
             {
@@ -135,11 +135,11 @@
 
             var receiver = await this.userService.FindByUserNameAsync(username);
             var doctorReceiver = await this.doctorService.GetDoctorByUserId(receiver.Id);
-            var patientReceiver = await this.patientService.GetPatientByUserIdAsync(receiver.Id);
+            var patientReceiver = await this.patientService.GetPatientByUserId(receiver.Id);
 
             var sender = await this.userService.GetUserByIdAsync(this.HttpContext.User.GetId());
             var doctorSender = await this.doctorService.GetDoctorByUserId(sender.Id);
-            var patientSender = await this.patientService.GetPatientByUserIdAsync(sender.Id);
+            var patientSender = await this.patientService.GetPatientByUserId(sender.Id);
 
             var receiverFullName = GetFullName(doctorReceiver, patientReceiver);
 

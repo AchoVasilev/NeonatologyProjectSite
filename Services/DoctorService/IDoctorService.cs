@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using Common;
     using ViewModels.Address;
     using ViewModels.Doctor;
 
@@ -18,7 +18,7 @@
 
         Task<string> GetDoctorId();
 
-        Task<bool> EditDoctorAsync(DoctorEditFormModel model);
+        Task<OperationResult> EditDoctorAsync(DoctorEditFormModel model);
 
         Task<string> GetDoctorEmail(string doctorId);
 

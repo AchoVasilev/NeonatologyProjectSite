@@ -2,6 +2,7 @@
 {
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common;
 using Data.Models;
 
     using Models;
@@ -10,15 +11,17 @@ using Data.Models;
 
     public interface IPatientService
     {
-        Task CreatePatientAsync(CreatePatientFormModel model, string userId, string webRootPath);
+        Task CreatePatient(CreatePatientFormModel model, string userId, string webRootPath);
 
-        Task<string> GetPatientIdByUserIdAsync(string userId);
+        Task<string> GetPatientIdByUserId(string userId);
 
         Task<bool> PatientExists(string email);
 
-        Task<PatientViewModel> GetPatientByUserIdAsync(string userId);
+        Task<PatientViewModel> GetPatientByUserId(string userId);
 
-        Task<bool> EditPatientAsync(string patientId, CreatePatientFormModel model);
+        Task<OperationResult> PatientIsRegistered(string userId);
+
+        Task<bool> EditPatient(string patientId, CreatePatientFormModel model);
 
         Task<int> GetPatientsCount();
 

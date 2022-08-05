@@ -112,7 +112,7 @@
             return this.Ok(new
             {
                 message = string
-                    .Format(MessageConstants.SuccessfullAppointment,
+                    .Format(MessageConstants.SuccessfulAppointment,
                     startDate.ToString(DateTimeFormats.DateFormat), startDate.ToString(DateTimeFormats.TimeFormat)),
                 slotId
             });
@@ -137,7 +137,7 @@
 
             var userId = this.User.GetId();
             var userEmail = this.User.FindFirst(ClaimTypes.Email).Value;
-            var patientId = await this.patientService.GetPatientIdByUserIdAsync(userId);
+            var patientId = await this.patientService.GetPatientIdByUserId(userId);
 
             model.PatientId = patientId;
             var result = await this.appointmentService.AddAsync(model.DoctorId, model, startDate, endDate);
@@ -165,7 +165,7 @@
             return this.Ok(new
             {
                 message = string
-                    .Format(MessageConstants.SuccessfullAppointment, 
+                    .Format(MessageConstants.SuccessfulAppointment, 
                     startDate.ToString(DateTimeFormats.DateFormat), startDate.ToString(DateTimeFormats.TimeFormat)),
             });
         }

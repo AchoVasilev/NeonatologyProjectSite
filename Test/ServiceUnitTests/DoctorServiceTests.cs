@@ -405,7 +405,7 @@ namespace Test.ServiceUnitTests
 
             var result = await service.EditDoctorAsync(model);
             
-            Assert.True(result);
+            Assert.True(result.Succeeded);
 
             var doctor = await dataMock.Doctors.FirstAsync();
             
@@ -465,7 +465,7 @@ namespace Test.ServiceUnitTests
 
             var result = await service.EditDoctorAsync(model);
             
-            Assert.False(result);
+            Assert.True(result.Failed);
         }
     }
 }
