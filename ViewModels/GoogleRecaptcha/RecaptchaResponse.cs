@@ -1,17 +1,16 @@
-﻿namespace ViewModels.GoogleRecaptcha
+﻿namespace ViewModels.GoogleRecaptcha;
+
+using System;
+
+public class RecaptchaResponse
 {
-    using System;
+    public bool Success { get; set; }
 
-    public class RecaptchaResponse
-    {
-        public bool Success { get; set; }
+    public double Score { get; set; }
 
-        public double Score { get; set; }
+    public string Action { get; set; }
 
-        public string Action { get; set; }
+    public DateTime ChallengeTimeStamp { get; set; }
 
-        public DateTime ChallengeTimeStamp { get; set; }
-
-        public string Hostname { get; set; }
-    }
+    public string Hostname { get; set; }
 }

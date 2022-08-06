@@ -1,15 +1,14 @@
-﻿namespace Services.UserService
+﻿namespace Services.UserService;
+
+using System.Threading.Tasks;
+
+using Data.Models;
+
+public interface IUserService
 {
-    using System.Threading.Tasks;
+    Task<string> GetUserIdByDoctorIdAsync(string doctorId);
 
-    using Data.Models;
+    Task<ApplicationUser> GetUserByIdAsync(string id);
 
-    public interface IUserService
-    {
-        Task<string> GetUserIdByDoctorIdAsync(string doctorId);
-
-        Task<ApplicationUser> GetUserByIdAsync(string id);
-
-        Task<ApplicationUser> FindByUserNameAsync(string username);
-    }
+    Task<ApplicationUser> FindByUserNameAsync(string username);
 }

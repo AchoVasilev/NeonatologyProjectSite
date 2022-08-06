@@ -1,30 +1,29 @@
-﻿namespace Data.Models
+﻿namespace Data.Models;
+
+using Data.Common.Models;
+
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+using static Common.DataConstants.Constants;
+
+public class Address : BaseModel<int>
 {
-    using Data.Common.Models;
+    [ForeignKey(nameof(City))]
+    public int CityId { get; set; }
 
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+    public virtual City City { get; set; }
 
-    using static Common.DataConstants.Constants;
+    [MaxLength(AddressMaxLength)]
+    public string StreetName { get; set; }
 
-    public class Address : BaseModel<int>
-    {
-        [ForeignKey(nameof(City))]
-        public int CityId { get; set; }
+    [ForeignKey(nameof(Doctor))]
+    public string DoctorId { get; set; }
 
-        public virtual City City { get; set; }
+    public virtual Doctor Doctor { get; set; }
 
-        [MaxLength(AddressMaxLength)]
-        public string StreetName { get; set; }
+    [ForeignKey(nameof(Patient))]
+    public string PatientId { get; set; }
 
-        [ForeignKey(nameof(Doctor))]
-        public string DoctorId { get; set; }
-
-        public virtual Doctor Doctor { get; set; }
-
-        [ForeignKey(nameof(Patient))]
-        public string PatientId { get; set; }
-
-        public virtual Patient Patient { get; set; }
-    }
+    public virtual Patient Patient { get; set; }
 }

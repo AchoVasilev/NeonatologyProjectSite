@@ -1,27 +1,26 @@
-﻿namespace Services.SlotService
+﻿namespace Services.SlotService;
+
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using ViewModels.Slot;
+
+public interface ISlotService
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+    Task<bool> GenerateSlots(DateTime start, DateTime end, int slotDurationMinutes, int addressId);
 
-    using ViewModels.Slot;
+    Task<ICollection<SlotViewModel>> GetGabrovoSlots();
 
-    public interface ISlotService
-    {
-        Task<bool> GenerateSlots(DateTime start, DateTime end, int slotDurationMinutes, int addressId);
+    Task<ICollection<SlotViewModel>> GetPlevenSlots();
 
-        Task<ICollection<SlotViewModel>> GetGabrovoSlots();
+    Task<ICollection<SlotViewModel>> GetFreePlevenSlots();
 
-        Task<ICollection<SlotViewModel>> GetPlevenSlots();
+    Task<ICollection<SlotViewModel>> GetFreeGabrovoSlots();
 
-        Task<ICollection<SlotViewModel>> GetFreePlevenSlots();
+    Task<ICollection<SlotViewModel>> GetTodaysTakenSlots();
 
-        Task<ICollection<SlotViewModel>> GetFreeGabrovoSlots();
+    Task<bool> EditSlot(int id, string status, string text);
 
-        Task<ICollection<SlotViewModel>> GetTodaysTakenSlots();
-
-        Task<bool> EditSlot(int id, string status, string text);
-
-        Task<int> DeleteSlotById(int id);
-    }
+    Task<int> DeleteSlotById(int id);
 }

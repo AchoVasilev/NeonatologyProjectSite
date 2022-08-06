@@ -1,127 +1,126 @@
-namespace Test.AdministrationArea.Controllers
+namespace Test.AdministrationArea.Controllers;
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using global::Services.RatingService;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Moq;
+using Neonatology.Areas.Administration.Controllers;
+using ViewModels.Administration.Rating;
+using Xunit;
+
+public class RatingControllerTests
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using global::Services.RatingService;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.ViewFeatures;
-    using Moq;
-    using Neonatology.Areas.Administration.Controllers;
-    using ViewModels.Administration.Rating;
-    using Xunit;
-
-    public class RatingControllerTests
+    [Fact]
+    public async Task AllShouldReturnViewWithModel()
     {
-        [Fact]
-        public async Task AllShouldReturnViewWithModel()
+        var service = new Mock<IRatingService>();
+        var model = new List<RatingViewModel>();
+
+        service.Setup(x => x.GetRatings())
+            .ReturnsAsync(model);
+
+        var controller = new RatingController(service.Object);
+
+        var result = await controller.All();
+
+        var route = Assert.IsType<ViewResult>(result);
+        Assert.IsAssignableFrom<List<RatingViewModel>>(route.Model);
+    }
+
+    [Fact]
+    public async Task ApproveShouldReturnRedirectToActionWhenSuccessful()
+    {
+        var service = new Mock<IRatingService>();
+        service.Setup(x => x.ApproveRating(1))
+            .ReturnsAsync(true);
+
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
-            var service = new Mock<IRatingService>();
-            var model = new List<RatingViewModel>();
+            ["SessionVariable"] = "admin"
+        };
 
-            service.Setup(x => x.GetRatings())
-                .ReturnsAsync(model);
-
-            var controller = new RatingController(service.Object);
-
-            var result = await controller.All();
-
-            var route = Assert.IsType<ViewResult>(result);
-            Assert.IsAssignableFrom<List<RatingViewModel>>(route.Model);
-        }
-
-        [Fact]
-        public async Task ApproveShouldReturnRedirectToActionWhenSuccessful()
+        var controller = new RatingController(service.Object)
         {
-            var service = new Mock<IRatingService>();
-            service.Setup(x => x.ApproveRating(1))
-                .ReturnsAsync(true);
+            TempData = tempData
+        };
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
+        var result = await controller.Approve(1);
+        var route = Assert.IsType<RedirectToActionResult>(result);
+        Assert.Equal("All", route.ActionName);
+    }
 
-            var controller = new RatingController(service.Object)
-            {
-                TempData = tempData
-            };
+    [Fact]
+    public async Task ApproveShouldReturnRedirectToActionWhenNotSuccessful()
+    {
+        var service = new Mock<IRatingService>();
+        service.Setup(x => x.ApproveRating(1))
+            .ReturnsAsync(false);
 
-            var result = await controller.Approve(1);
-            var route = Assert.IsType<RedirectToActionResult>(result);
-            Assert.Equal("All", route.ActionName);
-        }
-
-        [Fact]
-        public async Task ApproveShouldReturnRedirectToActionWhenNotSuccessful()
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
-            var service = new Mock<IRatingService>();
-            service.Setup(x => x.ApproveRating(1))
-                .ReturnsAsync(false);
+            ["SessionVariable"] = "admin"
+        };
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
-
-            var controller = new RatingController(service.Object)
-            {
-                TempData = tempData
-            };
-
-            var result = await controller.Approve(1);
-            var route = Assert.IsType<RedirectToActionResult>(result);
-            Assert.Equal("All", route.ActionName);
-        }
-
-        [Fact]
-        public async Task DeleteShouldReturnRedirectToActionWhenSuccessful()
+        var controller = new RatingController(service.Object)
         {
-            var service = new Mock<IRatingService>();
-            service.Setup(x => x.DeleteRating(1))
-                .ReturnsAsync(true);
+            TempData = tempData
+        };
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
+        var result = await controller.Approve(1);
+        var route = Assert.IsType<RedirectToActionResult>(result);
+        Assert.Equal("All", route.ActionName);
+    }
 
-            var controller = new RatingController(service.Object)
-            {
-                TempData = tempData
-            };
+    [Fact]
+    public async Task DeleteShouldReturnRedirectToActionWhenSuccessful()
+    {
+        var service = new Mock<IRatingService>();
+        service.Setup(x => x.DeleteRating(1))
+            .ReturnsAsync(true);
 
-            var result = await controller.Delete(1);
-
-            var route = Assert.IsType<RedirectToActionResult>(result);
-            Assert.Equal("All", route.ActionName);
-        }
-
-        [Fact]
-        public async Task DeleteShouldReturnRedirectToActionWhenNotSuccessful()
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
-            var service = new Mock<IRatingService>();
-            service.Setup(x => x.DeleteRating(1))
-                .ReturnsAsync(false);
+            ["SessionVariable"] = "admin"
+        };
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
+        var controller = new RatingController(service.Object)
+        {
+            TempData = tempData
+        };
 
-            var controller = new RatingController(service.Object)
-            {
-                TempData = tempData
-            };
+        var result = await controller.Delete(1);
 
-            var result = await controller.Delete(1);
+        var route = Assert.IsType<RedirectToActionResult>(result);
+        Assert.Equal("All", route.ActionName);
+    }
 
-            var route = Assert.IsType<RedirectToActionResult>(result);
-            Assert.Equal("All", route.ActionName);
-        }
+    [Fact]
+    public async Task DeleteShouldReturnRedirectToActionWhenNotSuccessful()
+    {
+        var service = new Mock<IRatingService>();
+        service.Setup(x => x.DeleteRating(1))
+            .ReturnsAsync(false);
+
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
+        {
+            ["SessionVariable"] = "admin"
+        };
+
+        var controller = new RatingController(service.Object)
+        {
+            TempData = tempData
+        };
+
+        var result = await controller.Delete(1);
+
+        var route = Assert.IsType<RedirectToActionResult>(result);
+        Assert.Equal("All", route.ActionName);
     }
 }

@@ -1,34 +1,33 @@
-﻿namespace Data.Models
+﻿namespace Data.Models;
+
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+using Data.Common.Models;
+
+using static Common.DataConstants.Constants;
+
+public class Rating : BaseModel<int>
 {
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+    public bool? IsConfirmed { get; set; } = false;
 
-    using Data.Common.Models;
+    public int Number { get; set; }
 
-    using static Common.DataConstants.Constants;
+    [MaxLength(CommentMaxLength)]
+    public string Comment { get; set; }
 
-    public class Rating : BaseModel<int>
-    {
-        public bool? IsConfirmed { get; set; } = false;
+    [ForeignKey(nameof(Appointment))]
+    public int AppointmentId { get; set; }
 
-        public int Number { get; set; }
+    public virtual Appointment Appointment { get; set; }
 
-        [MaxLength(CommentMaxLength)]
-        public string Comment { get; set; }
+    [ForeignKey(nameof(Doctor))]
+    public string DoctorId { get; set; }
 
-        [ForeignKey(nameof(Appointment))]
-        public int AppointmentId { get; set; }
+    public virtual Doctor Doctor { get; set; }
 
-        public virtual Appointment Appointment { get; set; }
+    [ForeignKey(nameof(Patient))]
+    public string PatientId { get; set; }
 
-        [ForeignKey(nameof(Doctor))]
-        public string DoctorId { get; set; }
-
-        public virtual Doctor Doctor { get; set; }
-
-        [ForeignKey(nameof(Patient))]
-        public string PatientId { get; set; }
-
-        public virtual Patient Patient { get; set; }
-    }
+    public virtual Patient Patient { get; set; }
 }

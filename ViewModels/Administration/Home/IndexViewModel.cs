@@ -1,19 +1,18 @@
-﻿namespace ViewModels.Administration.Home
+﻿namespace ViewModels.Administration.Home;
+
+using System.Collections.Generic;
+
+using Appointments;
+
+public class IndexViewModel
 {
-    using System.Collections.Generic;
+    public int TotalPatientsCount { get; set; }
 
-    using Appointments;
+    public int TotalAppointmentsCount { get; set; }
 
-    public class IndexViewModel
-    {
-        public int TotalPatientsCount { get; set; }
+    public int LatestPatientsRegisterCount { get; set; }
 
-        public int TotalAppointmentsCount { get; set; }
+    public int TotalRatingsCount { get; set; }
 
-        public int LatestPatientsRegisterCount { get; set; }
-
-        public int TotalRatingsCount { get; set; }
-
-        public ICollection<AppointmentViewModel> AllAppointments { get; set; }
-    }
+    public ICollection<AppointmentViewModel> AllAppointments { get; set; }
 }

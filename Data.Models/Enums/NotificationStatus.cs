@@ -1,9 +1,8 @@
-﻿namespace Data.Models.Enums
+﻿namespace Data.Models.Enums;
+
+public enum NotificationStatus
 {
-    public enum NotificationStatus
-    {
-        Прочетено = 1,
-        Непрочетено = 2,
-        Запазено = 3,
-    }
+    Прочетено = 1,
+    Непрочетено = 2,
+    Запазено = 3,
 }

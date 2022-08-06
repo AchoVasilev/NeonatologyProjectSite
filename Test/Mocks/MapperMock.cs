@@ -1,22 +1,21 @@
-﻿namespace Test.Mocks
+﻿namespace Test.Mocks;
+
+using AutoMapper;
+
+using Neonatology.MappingProfile;
+
+public static class MapperMock
 {
-    using AutoMapper;
-
-    using Neonatology.MappingProfile;
-
-    public static class MapperMock
+    public static IMapper Instance
     {
-        public static IMapper Instance
+        get
         {
-            get
+            var mapperConfiguration = new MapperConfiguration(config =>
             {
-                var mapperConfiguration = new MapperConfiguration(config =>
-                {
-                    config.AddProfile<MappingProfile>();
-                });
+                config.AddProfile<MappingProfile>();
+            });
 
-                return new Mapper(mapperConfiguration);
-            }
+            return new Mapper(mapperConfiguration);
         }
     }
 }

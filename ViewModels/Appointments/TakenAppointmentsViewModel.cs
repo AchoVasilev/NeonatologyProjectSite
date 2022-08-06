@@ -1,13 +1,12 @@
-﻿namespace ViewModels.Appointments
+﻿namespace ViewModels.Appointments;
+
+using System;
+
+public class TakenAppointmentsViewModel
 {
-    using System;
+    public string Status { get; set; } = "Зает";
 
-    public class TakenAppointmentsViewModel
-    {
-        public string Status { get; set; } = "Зает";
+    public DateTime Start { get; set; }
 
-        public DateTime Start { get; set; }
-
-        public DateTime End { get; set; }
-    }
+    public DateTime End { get; set; }
 }

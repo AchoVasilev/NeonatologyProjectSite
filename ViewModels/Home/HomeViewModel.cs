@@ -1,7 +1,6 @@
-﻿namespace ViewModels.Home
+﻿namespace ViewModels.Home;
+
+public class HomeViewModel
 {
-    public class HomeViewModel
-    {
-        public string DoctorId { get; set; }
-    }
+    public string DoctorId { get; set; }
 }

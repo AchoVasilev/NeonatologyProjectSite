@@ -1,8 +1,7 @@
-﻿namespace Neonatology.Controllers
-{
-    using Microsoft.AspNetCore.Mvc;
+﻿namespace Neonatology.Controllers;
 
-    public abstract class BaseController : Controller
-    {
-    }
+using Microsoft.AspNetCore.Mvc;
+
+public abstract class BaseController : Controller
+{
 }

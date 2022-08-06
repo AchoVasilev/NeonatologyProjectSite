@@ -1,13 +1,12 @@
-﻿namespace ViewModels.Administration.Galery
+﻿namespace ViewModels.Administration.Galery;
+
+using System;
+
+public class GalleryViewModel
 {
-    using System;
+    public string Id { get; set; }
 
-    public class GalleryViewModel
-    {
-        public string Id { get; set; }
+    public string Url { get; set; }
 
-        public string Url { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-    }
+    public DateTime CreatedOn { get; set; }
 }

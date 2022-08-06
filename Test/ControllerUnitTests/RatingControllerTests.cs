@@ -1,506 +1,505 @@
-﻿namespace Test.ControllerUnitTests
+﻿namespace Test.ControllerUnitTests;
+
+using System.Linq;
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+
+using Moq;
+
+using Neonatology.Controllers;
+
+using Services.AppointmentService;
+using Services.DoctorService;
+using Services.PatientService;
+using Services.RatingService;
+
+using Helpers;
+
+using ViewModels.Appointments;
+using ViewModels.Rating;
+
+using Xunit;
+
+public class RatingControllerTests
 {
-    using System.Linq;
-    using System.Threading.Tasks;
-
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.ViewFeatures;
-
-    using Moq;
-
-    using Neonatology.Controllers;
-
-    using Services.AppointmentService;
-    using Services.DoctorService;
-    using Services.PatientService;
-    using Services.RatingService;
-
-    using Helpers;
-
-    using ViewModels.Appointments;
-    using ViewModels.Rating;
-
-    using Xunit;
-
-    public class RatingControllerTests
+    [Fact]
+    public void ControllerShouldHaveAuthorizeAttribute()
     {
-        [Fact]
-        public void ControllerShouldHaveAuthorizeAttribute()
+        var controller = new RatingController(null, null, null, null);
+        var actualAttribute = controller.GetType()
+            .GetCustomAttributes(typeof(AuthorizeAttribute), true);
+
+        Assert.Equal(typeof(AuthorizeAttribute), actualAttribute[0].GetType());
+    }
+
+    [Fact]
+    public void RateAppointmentShouldReturnModelWithView()
+    {
+        var controller = new RatingController(null, null, null, null);
+        ControllerExtensions.WithIdentity(controller, "1", "Gosho", "Patient");
+
+        var result = controller.RateAppointment(1);
+
+        var route = Assert.IsType<ViewResult>(result);
+        Assert.IsType<CreateRatingFormModel>(route.Model);
+    }
+
+    [Fact]
+    public async Task RateAppointmentWithModelShouldReturnRedirectToActionToMyAppointmentsWhenSuccessful()
+    {
+        var model = new CreateRatingFormModel
         {
-            var controller = new RatingController(null, null, null, null);
-            var actualAttribute = controller.GetType()
-                .GetCustomAttributes(typeof(AuthorizeAttribute), true);
+            AppointmentId = 1,
+            Comment = "goshogoshogosho",
+            DoctorId = "doc",
+            Number = 5,
+            PatientId = "patient"
+        };
 
-            Assert.Equal(typeof(AuthorizeAttribute), actualAttribute[0].GetType());
-        }
+        var appointmentService = new Mock<IAppointmentService>();
+        appointmentService.Setup(x => x.GetUserAppointmentAsync("1", model.AppointmentId))
+            .ReturnsAsync(new AppointmentViewModel() { IsRated = false });
 
-        [Fact]
-        public void RateAppointmentShouldReturnModelWithView()
+        var doctorService = new Mock<IDoctorService>();
+        doctorService.Setup(x => x.GetDoctorIdByAppointmentId(model.AppointmentId))
+            .ReturnsAsync("doc");
+
+        var patientService = new Mock<IPatientService>();
+        patientService.Setup(x => x.GetPatientIdByUserId("1"))
+            .ReturnsAsync("patient");
+
+        var ratingService = new Mock<IRatingService>();
+        ratingService.Setup(x => x.AddAsync(model))
+            .ReturnsAsync(true);
+
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
-            var controller = new RatingController(null, null, null, null);
-            ControllerExtensions.WithIdentity(controller, "1", "Gosho", "Patient");
+            ["SessionVariable"] = "admin"
+        };
 
-            var result = controller.RateAppointment(1);
-
-            var route = Assert.IsType<ViewResult>(result);
-            Assert.IsType<CreateRatingFormModel>(route.Model);
-        }
-
-        [Fact]
-        public async Task RateAppointmentWithModelShouldReturnRedirectToActionToMyAppointmentsWhenSuccessful()
+        var controller = new RatingController(appointmentService.Object, doctorService.Object, patientService.Object, ratingService.Object)
         {
-            var model = new CreateRatingFormModel
-            {
-                AppointmentId = 1,
-                Comment = "goshogoshogosho",
-                DoctorId = "doc",
-                Number = 5,
-                PatientId = "patient"
-            };
+            TempData = tempData
+        };
 
-            var appointmentService = new Mock<IAppointmentService>();
-            appointmentService.Setup(x => x.GetUserAppointmentAsync("1", model.AppointmentId))
-                .ReturnsAsync(new AppointmentViewModel() { IsRated = false });
+        ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
 
-            var doctorService = new Mock<IDoctorService>();
-            doctorService.Setup(x => x.GetDoctorIdByAppointmentId(model.AppointmentId))
-                .ReturnsAsync("doc");
+        var result = await controller.RateAppointment(model);
 
-            var patientService = new Mock<IPatientService>();
-            patientService.Setup(x => x.GetPatientIdByUserId("1"))
-                .ReturnsAsync("patient");
+        var route = Assert.IsType<RedirectToActionResult>(result);
 
-            var ratingService = new Mock<IRatingService>();
-            ratingService.Setup(x => x.AddAsync(model))
-                .ReturnsAsync(true);
+        Assert.Equal("MyPastAppointments", route.ActionName);
+        Assert.Equal("Appointment", route.ControllerName);
+    }
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
-
-            var controller = new RatingController(appointmentService.Object, doctorService.Object, patientService.Object, ratingService.Object)
-            {
-                TempData = tempData
-            };
-
-            ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
-
-            var result = await controller.RateAppointment(model);
-
-            var route = Assert.IsType<RedirectToActionResult>(result);
-
-            Assert.Equal("MyPastAppointments", route.ActionName);
-            Assert.Equal("Appointment", route.ControllerName);
-        }
-
-        [Fact]
-        public async Task RateAppointmentShouldReturnStatusCode404IfAppointmentIsNull()
+    [Fact]
+    public async Task RateAppointmentShouldReturnStatusCode404IfAppointmentIsNull()
+    {
+        var model = new CreateRatingFormModel
         {
-            var model = new CreateRatingFormModel
-            {
-                AppointmentId = 1,
-                Comment = "goshogoshogosho",
-                DoctorId = "doc",
-                Number = 5,
-                PatientId = "patient"
-            };
+            AppointmentId = 1,
+            Comment = "goshogoshogosho",
+            DoctorId = "doc",
+            Number = 5,
+            PatientId = "patient"
+        };
 
-            var appointmentService = new Mock<IAppointmentService>();
-            appointmentService.Setup(x => x.GetUserAppointmentAsync("1", model.AppointmentId))
-                    .ReturnsAsync(value: null);
+        var appointmentService = new Mock<IAppointmentService>();
+        appointmentService.Setup(x => x.GetUserAppointmentAsync("1", model.AppointmentId))
+            .ReturnsAsync(value: null);
 
-            var controller = new RatingController(appointmentService.Object, null, null, null);
-            ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
+        var controller = new RatingController(appointmentService.Object, null, null, null);
+        ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
 
-            var result = await controller.RateAppointment(model);
+        var result = await controller.RateAppointment(model);
 
-            var route = Assert.IsType<StatusCodeResult>(result);
+        var route = Assert.IsType<StatusCodeResult>(result);
 
-            Assert.Equal(404, route.StatusCode);
-        }
+        Assert.Equal(404, route.StatusCode);
+    }
 
-        [Fact]
-        public async Task RateAppointmentShouldRedirectToMyAppointmentsIfAppointmentIsRated()
+    [Fact]
+    public async Task RateAppointmentShouldRedirectToMyAppointmentsIfAppointmentIsRated()
+    {
+        var model = new CreateRatingFormModel
         {
-            var model = new CreateRatingFormModel
-            {
-                AppointmentId = 1,
-                Comment = "goshogoshogosho",
-                DoctorId = "doc",
-                Number = 5,
-                PatientId = "patient"
-            };
+            AppointmentId = 1,
+            Comment = "goshogoshogosho",
+            DoctorId = "doc",
+            Number = 5,
+            PatientId = "patient"
+        };
 
-            var appointmentService = new Mock<IAppointmentService>();
-            appointmentService.Setup(x => x.GetUserAppointmentAsync("1", model.AppointmentId))
-                .ReturnsAsync(new AppointmentViewModel() { IsRated = true });
+        var appointmentService = new Mock<IAppointmentService>();
+        appointmentService.Setup(x => x.GetUserAppointmentAsync("1", model.AppointmentId))
+            .ReturnsAsync(new AppointmentViewModel() { IsRated = true });
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
-
-            var controller = new RatingController(appointmentService.Object, null, null, null)
-            {
-                TempData = tempData
-            };
-
-            ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
-
-            var result = await controller.RateAppointment(model);
-
-            var route = Assert.IsType<RedirectToActionResult>(result);
-
-            Assert.Equal("MyPastAppointments", route.ActionName);
-            Assert.Equal("Appointment", route.ControllerName);
-        }
-
-        [Fact]
-        public async Task RateAppointmentShouldReturnStatusCode404IfDoctorIdIsNull()
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
-            var model = new CreateRatingFormModel
-            {
-                AppointmentId = 1,
-                Comment = "goshogoshogosho",
-                DoctorId = "doc",
-                Number = 5,
-                PatientId = "patient"
-            };
+            ["SessionVariable"] = "admin"
+        };
 
-            var appointmentService = new Mock<IAppointmentService>();
-            appointmentService.Setup(x => x.GetUserAppointmentAsync("1", model.AppointmentId))
-                .ReturnsAsync(new AppointmentViewModel() { IsRated = false });
-
-            var doctorService = new Mock<IDoctorService>();
-            doctorService.Setup(x => x.GetDoctorIdByAppointmentId(model.AppointmentId))
-                .ReturnsAsync(value: null);
-
-            var controller = new RatingController(appointmentService.Object, doctorService.Object, null, null);
-
-            ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
-
-            var result = await controller.RateAppointment(model);
-
-            var route = Assert.IsType<StatusCodeResult>(result);
-
-            Assert.Equal(404, route.StatusCode);
-        }
-
-        [Fact]
-        public async Task RateAppointmentShouldReturnStatusCodeResult404IfPatientIdIsNull()
+        var controller = new RatingController(appointmentService.Object, null, null, null)
         {
-            var model = new CreateRatingFormModel
-            {
-                AppointmentId = 1,
-                Comment = "goshogoshogosho",
-                DoctorId = "doc",
-                Number = 5,
-                PatientId = "patient"
-            };
+            TempData = tempData
+        };
 
-            var appointmentService = new Mock<IAppointmentService>();
-            appointmentService.Setup(x => x.GetUserAppointmentAsync("1", model.AppointmentId))
-                .ReturnsAsync(new AppointmentViewModel() { IsRated = false });
+        ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
 
-            var doctorService = new Mock<IDoctorService>();
-            doctorService.Setup(x => x.GetDoctorIdByAppointmentId(model.AppointmentId))
-                .ReturnsAsync("doc");
+        var result = await controller.RateAppointment(model);
 
-            var patientService = new Mock<IPatientService>();
-            patientService.Setup(x => x.GetPatientIdByUserId("1"))
-                .ReturnsAsync(value: null);
+        var route = Assert.IsType<RedirectToActionResult>(result);
 
-            var controller = new RatingController(appointmentService.Object, doctorService.Object, patientService.Object, null);
+        Assert.Equal("MyPastAppointments", route.ActionName);
+        Assert.Equal("Appointment", route.ControllerName);
+    }
 
-            ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
-
-            var result = await controller.RateAppointment(model);
-
-            var route = Assert.IsType<StatusCodeResult>(result);
-
-            Assert.Equal(404, route.StatusCode);
-        }
-
-        [Fact]
-        public async Task RateAppointmentShouldRedirectToAllAppointmentsIfAppointmentCanNotBeRated()
+    [Fact]
+    public async Task RateAppointmentShouldReturnStatusCode404IfDoctorIdIsNull()
+    {
+        var model = new CreateRatingFormModel
         {
-            var model = new CreateRatingFormModel
-            {
-                AppointmentId = 1,
-                Comment = "goshogoshogosho",
-                DoctorId = "doc",
-                Number = 5,
-                PatientId = "patient"
-            };
+            AppointmentId = 1,
+            Comment = "goshogoshogosho",
+            DoctorId = "doc",
+            Number = 5,
+            PatientId = "patient"
+        };
 
-            var appointmentService = new Mock<IAppointmentService>();
-            appointmentService.Setup(x => x.GetUserAppointmentAsync("1", model.AppointmentId))
-                .ReturnsAsync(new AppointmentViewModel() { IsRated = false });
+        var appointmentService = new Mock<IAppointmentService>();
+        appointmentService.Setup(x => x.GetUserAppointmentAsync("1", model.AppointmentId))
+            .ReturnsAsync(new AppointmentViewModel() { IsRated = false });
 
-            var doctorService = new Mock<IDoctorService>();
-            doctorService.Setup(x => x.GetDoctorIdByAppointmentId(model.AppointmentId))
-                .ReturnsAsync("doc");
+        var doctorService = new Mock<IDoctorService>();
+        doctorService.Setup(x => x.GetDoctorIdByAppointmentId(model.AppointmentId))
+            .ReturnsAsync(value: null);
 
-            var patientService = new Mock<IPatientService>();
-            patientService.Setup(x => x.GetPatientIdByUserId("1"))
-                .ReturnsAsync("patient");
+        var controller = new RatingController(appointmentService.Object, doctorService.Object, null, null);
 
-            var ratingService = new Mock<IRatingService>();
-            ratingService.Setup(x => x.AddAsync(model))
-                .ReturnsAsync(false);
+        ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
+        var result = await controller.RateAppointment(model);
 
-            var controller = new RatingController(appointmentService.Object, doctorService.Object, patientService.Object, ratingService.Object)
-            {
-                TempData = tempData
-            };
+        var route = Assert.IsType<StatusCodeResult>(result);
 
-            ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
+        Assert.Equal(404, route.StatusCode);
+    }
 
-            var result = await controller.RateAppointment(model);
-
-            var route = Assert.IsType<RedirectToActionResult>(result);
-
-            Assert.Equal("MyPastAppointments", route.ActionName);
-            Assert.Equal("Appointment", route.ControllerName);
-        }
-
-        [Fact]
-        public async Task ApproveShouldRedirectToDoctorAppoitmentsIfSuccesful()
+    [Fact]
+    public async Task RateAppointmentShouldReturnStatusCodeResult404IfPatientIdIsNull()
+    {
+        var model = new CreateRatingFormModel
         {
-            var ratingService = new Mock<IRatingService>();
-            ratingService.Setup(x => x.ApproveRating(1))
-                .ReturnsAsync(true);
+            AppointmentId = 1,
+            Comment = "goshogoshogosho",
+            DoctorId = "doc",
+            Number = 5,
+            PatientId = "patient"
+        };
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
+        var appointmentService = new Mock<IAppointmentService>();
+        appointmentService.Setup(x => x.GetUserAppointmentAsync("1", model.AppointmentId))
+            .ReturnsAsync(new AppointmentViewModel() { IsRated = false });
 
-            var controller = new RatingController(null, null, null, ratingService.Object)
-            {
-                TempData = tempData
-            };
+        var doctorService = new Mock<IDoctorService>();
+        doctorService.Setup(x => x.GetDoctorIdByAppointmentId(model.AppointmentId))
+            .ReturnsAsync("doc");
 
-            ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Doctor");
+        var patientService = new Mock<IPatientService>();
+        patientService.Setup(x => x.GetPatientIdByUserId("1"))
+            .ReturnsAsync(value: null);
 
-            var result = await controller.Approve(1);
+        var controller = new RatingController(appointmentService.Object, doctorService.Object, patientService.Object, null);
 
-            var route = Assert.IsType<RedirectToActionResult>(result);
+        ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
 
-            Assert.Equal("DoctorPastAppointments", route.ActionName);
-            Assert.Equal("Appointment", route.ControllerName);
-        }
+        var result = await controller.RateAppointment(model);
 
-        [Fact]
-        public async Task ApproveShouldRedirectToAdminAreaIfUserIsAdmin()
+        var route = Assert.IsType<StatusCodeResult>(result);
+
+        Assert.Equal(404, route.StatusCode);
+    }
+
+    [Fact]
+    public async Task RateAppointmentShouldRedirectToAllAppointmentsIfAppointmentCanNotBeRated()
+    {
+        var model = new CreateRatingFormModel
         {
-            var ratingService = new Mock<IRatingService>();
-            ratingService.Setup(x => x.ApproveRating(1))
-                .ReturnsAsync(true);
+            AppointmentId = 1,
+            Comment = "goshogoshogosho",
+            DoctorId = "doc",
+            Number = 5,
+            PatientId = "patient"
+        };
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
+        var appointmentService = new Mock<IAppointmentService>();
+        appointmentService.Setup(x => x.GetUserAppointmentAsync("1", model.AppointmentId))
+            .ReturnsAsync(new AppointmentViewModel() { IsRated = false });
 
-            var controller = new RatingController(null, null, null, ratingService.Object)
-            {
-                TempData = tempData
-            };
+        var doctorService = new Mock<IDoctorService>();
+        doctorService.Setup(x => x.GetDoctorIdByAppointmentId(model.AppointmentId))
+            .ReturnsAsync("doc");
 
-            ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Administrator");
+        var patientService = new Mock<IPatientService>();
+        patientService.Setup(x => x.GetPatientIdByUserId("1"))
+            .ReturnsAsync("patient");
 
-            var result = await controller.Approve(1);
+        var ratingService = new Mock<IRatingService>();
+        ratingService.Setup(x => x.AddAsync(model))
+            .ReturnsAsync(false);
 
-            var route = Assert.IsType<RedirectToActionResult>(result);
-
-            Assert.Equal("All", route.ActionName);
-            Assert.Equal("Appointment", route.ControllerName);
-            Assert.Equal("Administration", route.RouteValues.Values.First());
-        }
-
-        [Fact]
-        public async Task ApproveShouldRedirectToDoctorAppoitmentsIfSuccesfulIfRatingIsNotSuccessful()
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
-            var ratingService = new Mock<IRatingService>();
-            ratingService.Setup(x => x.ApproveRating(1))
-                .ReturnsAsync(false);
+            ["SessionVariable"] = "admin"
+        };
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
-
-            var controller = new RatingController(null, null, null, ratingService.Object)
-            {
-                TempData = tempData
-            };
-
-            ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Doctor");
-
-            var result = await controller.Approve(1);
-
-            var route = Assert.IsType<RedirectToActionResult>(result);
-
-            Assert.Equal("DoctorPastAppointments", route.ActionName);
-            Assert.Equal("Appointment", route.ControllerName);
-        }
-
-        [Fact]
-        public async Task ApproveShouldRedirectToAdminAreaIfUserIsAdminIfRatingIsNotSuccessful()
+        var controller = new RatingController(appointmentService.Object, doctorService.Object, patientService.Object, ratingService.Object)
         {
-            var ratingService = new Mock<IRatingService>();
-            ratingService.Setup(x => x.ApproveRating(1))
-                .ReturnsAsync(false);
+            TempData = tempData
+        };
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
+        ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
 
-            var controller = new RatingController(null, null, null, ratingService.Object)
-            {
-                TempData = tempData
-            };
+        var result = await controller.RateAppointment(model);
 
-            ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Administrator");
+        var route = Assert.IsType<RedirectToActionResult>(result);
 
-            var result = await controller.Approve(1);
+        Assert.Equal("MyPastAppointments", route.ActionName);
+        Assert.Equal("Appointment", route.ControllerName);
+    }
 
-            var route = Assert.IsType<RedirectToActionResult>(result);
+    [Fact]
+    public async Task ApproveShouldRedirectToDoctorAppoitmentsIfSuccesful()
+    {
+        var ratingService = new Mock<IRatingService>();
+        ratingService.Setup(x => x.ApproveRating(1))
+            .ReturnsAsync(true);
 
-            Assert.Equal("All", route.ActionName);
-            Assert.Equal("Appointment", route.ControllerName);
-            Assert.Equal("Administration", route.RouteValues.Values.First());
-        }
-
-        [Fact]
-        public async Task DeleteShouldRedirectToDoctorAppointmentsIfSuccessful()
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
-            var ratingService = new Mock<IRatingService>();
-            ratingService.Setup(x => x.DeleteRating(1))
-                .ReturnsAsync(true);
+            ["SessionVariable"] = "admin"
+        };
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
-
-            var controller = new RatingController(null, null, null, ratingService.Object)
-            {
-                TempData = tempData
-            };
-
-            ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Doctor");
-
-            var result = await controller.Delete(1);
-
-            var route = Assert.IsType<RedirectToActionResult>(result);
-
-            Assert.Equal("DoctorPastAppointments", route.ActionName);
-            Assert.Equal("Appointment", route.ControllerName);
-        }
-
-        [Fact]
-        public async Task DeleteShouldRedirectToAdminAreaIfUserIsAdmin()
+        var controller = new RatingController(null, null, null, ratingService.Object)
         {
-            var ratingService = new Mock<IRatingService>();
-            ratingService.Setup(x => x.DeleteRating(1))
-                .ReturnsAsync(true);
+            TempData = tempData
+        };
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
+        ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Doctor");
 
-            var controller = new RatingController(null, null, null, ratingService.Object)
-            {
-                TempData = tempData
-            };
+        var result = await controller.Approve(1);
 
-            ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Administrator");
+        var route = Assert.IsType<RedirectToActionResult>(result);
 
-            var result = await controller.Delete(1);
+        Assert.Equal("DoctorPastAppointments", route.ActionName);
+        Assert.Equal("Appointment", route.ControllerName);
+    }
 
-            var route = Assert.IsType<RedirectToActionResult>(result);
+    [Fact]
+    public async Task ApproveShouldRedirectToAdminAreaIfUserIsAdmin()
+    {
+        var ratingService = new Mock<IRatingService>();
+        ratingService.Setup(x => x.ApproveRating(1))
+            .ReturnsAsync(true);
 
-            Assert.Equal("All", route.ActionName);
-            Assert.Equal("Appointment", route.ControllerName);
-            Assert.Equal("Administration", route.RouteValues.Values.First());
-        }
-
-        [Fact]
-        public async Task DeleteShouldRedirectToDoctorAppointmentsIfSuccessfulIfRatingIsNotSuccessful()
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
-            var ratingService = new Mock<IRatingService>();
-            ratingService.Setup(x => x.DeleteRating(1))
-                .ReturnsAsync(false);
+            ["SessionVariable"] = "admin"
+        };
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
-
-            var controller = new RatingController(null, null, null, ratingService.Object)
-            {
-                TempData = tempData
-            };
-
-            ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Doctor");
-
-            var result = await controller.Delete(1);
-
-            var route = Assert.IsType<RedirectToActionResult>(result);
-
-            Assert.Equal("DoctorPastAppointments", route.ActionName);
-            Assert.Equal("Appointment", route.ControllerName);
-        }
-
-        [Fact]
-        public async Task DeleteShouldRedirectToAdminAreaIfUserIsAdminIfRatingIsNotSuccessful()
+        var controller = new RatingController(null, null, null, ratingService.Object)
         {
-            var ratingService = new Mock<IRatingService>();
-            ratingService.Setup(x => x.DeleteRating(1))
-                .ReturnsAsync(false);
+            TempData = tempData
+        };
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
+        ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Administrator");
 
-            var controller = new RatingController(null, null, null, ratingService.Object)
-            {
-                TempData = tempData
-            };
+        var result = await controller.Approve(1);
 
-            ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Administrator");
+        var route = Assert.IsType<RedirectToActionResult>(result);
 
-            var result = await controller.Delete(1);
+        Assert.Equal("All", route.ActionName);
+        Assert.Equal("Appointment", route.ControllerName);
+        Assert.Equal("Administration", route.RouteValues.Values.First());
+    }
 
-            var route = Assert.IsType<RedirectToActionResult>(result);
+    [Fact]
+    public async Task ApproveShouldRedirectToDoctorAppoitmentsIfSuccesfulIfRatingIsNotSuccessful()
+    {
+        var ratingService = new Mock<IRatingService>();
+        ratingService.Setup(x => x.ApproveRating(1))
+            .ReturnsAsync(false);
 
-            Assert.Equal("All", route.ActionName);
-            Assert.Equal("Appointment", route.ControllerName);
-            Assert.Equal("Administration", route.RouteValues.Values.First());
-        }
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
+        {
+            ["SessionVariable"] = "admin"
+        };
+
+        var controller = new RatingController(null, null, null, ratingService.Object)
+        {
+            TempData = tempData
+        };
+
+        ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Doctor");
+
+        var result = await controller.Approve(1);
+
+        var route = Assert.IsType<RedirectToActionResult>(result);
+
+        Assert.Equal("DoctorPastAppointments", route.ActionName);
+        Assert.Equal("Appointment", route.ControllerName);
+    }
+
+    [Fact]
+    public async Task ApproveShouldRedirectToAdminAreaIfUserIsAdminIfRatingIsNotSuccessful()
+    {
+        var ratingService = new Mock<IRatingService>();
+        ratingService.Setup(x => x.ApproveRating(1))
+            .ReturnsAsync(false);
+
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
+        {
+            ["SessionVariable"] = "admin"
+        };
+
+        var controller = new RatingController(null, null, null, ratingService.Object)
+        {
+            TempData = tempData
+        };
+
+        ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Administrator");
+
+        var result = await controller.Approve(1);
+
+        var route = Assert.IsType<RedirectToActionResult>(result);
+
+        Assert.Equal("All", route.ActionName);
+        Assert.Equal("Appointment", route.ControllerName);
+        Assert.Equal("Administration", route.RouteValues.Values.First());
+    }
+
+    [Fact]
+    public async Task DeleteShouldRedirectToDoctorAppointmentsIfSuccessful()
+    {
+        var ratingService = new Mock<IRatingService>();
+        ratingService.Setup(x => x.DeleteRating(1))
+            .ReturnsAsync(true);
+
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
+        {
+            ["SessionVariable"] = "admin"
+        };
+
+        var controller = new RatingController(null, null, null, ratingService.Object)
+        {
+            TempData = tempData
+        };
+
+        ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Doctor");
+
+        var result = await controller.Delete(1);
+
+        var route = Assert.IsType<RedirectToActionResult>(result);
+
+        Assert.Equal("DoctorPastAppointments", route.ActionName);
+        Assert.Equal("Appointment", route.ControllerName);
+    }
+
+    [Fact]
+    public async Task DeleteShouldRedirectToAdminAreaIfUserIsAdmin()
+    {
+        var ratingService = new Mock<IRatingService>();
+        ratingService.Setup(x => x.DeleteRating(1))
+            .ReturnsAsync(true);
+
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
+        {
+            ["SessionVariable"] = "admin"
+        };
+
+        var controller = new RatingController(null, null, null, ratingService.Object)
+        {
+            TempData = tempData
+        };
+
+        ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Administrator");
+
+        var result = await controller.Delete(1);
+
+        var route = Assert.IsType<RedirectToActionResult>(result);
+
+        Assert.Equal("All", route.ActionName);
+        Assert.Equal("Appointment", route.ControllerName);
+        Assert.Equal("Administration", route.RouteValues.Values.First());
+    }
+
+    [Fact]
+    public async Task DeleteShouldRedirectToDoctorAppointmentsIfSuccessfulIfRatingIsNotSuccessful()
+    {
+        var ratingService = new Mock<IRatingService>();
+        ratingService.Setup(x => x.DeleteRating(1))
+            .ReturnsAsync(false);
+
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
+        {
+            ["SessionVariable"] = "admin"
+        };
+
+        var controller = new RatingController(null, null, null, ratingService.Object)
+        {
+            TempData = tempData
+        };
+
+        ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Doctor");
+
+        var result = await controller.Delete(1);
+
+        var route = Assert.IsType<RedirectToActionResult>(result);
+
+        Assert.Equal("DoctorPastAppointments", route.ActionName);
+        Assert.Equal("Appointment", route.ControllerName);
+    }
+
+    [Fact]
+    public async Task DeleteShouldRedirectToAdminAreaIfUserIsAdminIfRatingIsNotSuccessful()
+    {
+        var ratingService = new Mock<IRatingService>();
+        ratingService.Setup(x => x.DeleteRating(1))
+            .ReturnsAsync(false);
+
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
+        {
+            ["SessionVariable"] = "admin"
+        };
+
+        var controller = new RatingController(null, null, null, ratingService.Object)
+        {
+            TempData = tempData
+        };
+
+        ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Administrator");
+
+        var result = await controller.Delete(1);
+
+        var route = Assert.IsType<RedirectToActionResult>(result);
+
+        Assert.Equal("All", route.ActionName);
+        Assert.Equal("Appointment", route.ControllerName);
+        Assert.Equal("Administration", route.RouteValues.Values.First());
     }
 }

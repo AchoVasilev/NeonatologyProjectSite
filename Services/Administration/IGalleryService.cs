@@ -1,13 +1,12 @@
-﻿namespace Services.Administration
+﻿namespace Services.Administration;
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using ViewModels.Administration.Galery;
+
+public interface IGalleryService
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using ViewModels.Administration.Galery;
+    Task<ICollection<GalleryViewModel>> GetGalleryImages();
 
-    public interface IGalleryService
-    {
-        Task<ICollection<GalleryViewModel>> GetGalleryImages();
-
-        Task<bool> Delete(string id);
-    }
+    Task<bool> Delete(string id);
 }

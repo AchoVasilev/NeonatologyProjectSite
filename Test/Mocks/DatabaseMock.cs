@@ -1,23 +1,22 @@
-﻿namespace Test.Mocks
+﻿namespace Test.Mocks;
+
+using System;
+
+using Data;
+
+using Microsoft.EntityFrameworkCore;
+
+public static class DatabaseMock
 {
-    using System;
-
-    using Data;
-
-    using Microsoft.EntityFrameworkCore;
-
-    public static class DatabaseMock
+    public static NeonatologyDbContext Instance
     {
-        public static NeonatologyDbContext Instance
+        get
         {
-            get
-            {
-                var dbContextOptions = new DbContextOptionsBuilder<NeonatologyDbContext>()
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                    .Options;
+            var dbContextOptions = new DbContextOptionsBuilder<NeonatologyDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options;
 
-                return new NeonatologyDbContext(dbContextOptions);
-            }
+            return new NeonatologyDbContext(dbContextOptions);
         }
     }
 }

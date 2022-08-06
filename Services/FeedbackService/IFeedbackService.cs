@@ -1,22 +1,21 @@
-﻿namespace Services.FeedbackService
+﻿namespace Services.FeedbackService;
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using ViewModels.Feedback;
+
+public interface IFeedbackService
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+    Task CreateFeedback(FeedbackInputModel model);
 
-    using ViewModels.Feedback;
+    Task<ICollection<FeedbackViewModel>> GetUserFeedbacks(string email);
 
-    public interface IFeedbackService
-    {
-        Task CreateFeedback(FeedbackInputModel model);
+    Task<ICollection<FeedbackViewModel>> GetAll();
 
-        Task<ICollection<FeedbackViewModel>> GetUserFeedbacks(string email);
+    Task<bool> Delete(int id);
 
-        Task<ICollection<FeedbackViewModel>> GetAll();
+    Task<FeedbackViewModel> GetById(int id);
 
-        Task<bool> Delete(int id);
-
-        Task<FeedbackViewModel> GetById(int id);
-
-        Task SolveFeedback(int id);
-    }
+    Task SolveFeedback(int id);
 }

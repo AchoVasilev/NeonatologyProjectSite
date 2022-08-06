@@ -1,29 +1,28 @@
-﻿namespace ViewModels.Doctor
+﻿namespace ViewModels.Doctor;
+
+using System.Collections.Generic;
+
+using Address;
+
+public class DoctorProfileViewModel
 {
-    using System.Collections.Generic;
+    public string Id { get; set; }
 
-    using Address;
+    public string FullName { get; set; }
 
-    public class DoctorProfileViewModel
-    {
-        public string Id { get; set; }
+    public string UserImageUrl { get; set; }
 
-        public string FullName { get; set; }
+    public int Age { get; set; }
 
-        public string UserImageUrl { get; set; }
+    public string PhoneNumber { get; set; }
 
-        public int Age { get; set; }
+    public int? YearsOfExperience { get; set; }
 
-        public string PhoneNumber { get; set; }
+    public string Email { get; set; }
 
-        public int? YearsOfExperience { get; set; }
+    public string Biography { get; set; }
 
-        public string Email { get; set; }
+    public ICollection<AddressFormModel> Addresses { get; set; }
 
-        public string Biography { get; set; }
-
-        public ICollection<AddressFormModel> Addresses { get; set; }
-
-        public ICollection<SpecializationFormModel> Specializations { get; set; }
-    }
+    public ICollection<SpecializationFormModel> Specializations { get; set; }
 }

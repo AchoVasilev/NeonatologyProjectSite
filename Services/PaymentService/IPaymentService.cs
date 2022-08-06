@@ -1,17 +1,16 @@
-﻿namespace Services.PaymentService
+﻿namespace Services.PaymentService;
+
+using System.Threading.Tasks;
+
+using ViewModels.Payment;
+
+public interface IPaymentService
 {
-    using System.Threading.Tasks;
+    Task CreateCheckoutSession(string sessionId, string paymentId, string toStripeAccountId);
 
-    using ViewModels.Payment;
+    Task<string> CreatePayment(CreatePaymentModel model);
 
-    public interface IPaymentService
-    {
-        Task CreateCheckoutSession(string sessionId, string paymentId, string toStripeAccountId);
+    Task<bool> PatientHasPaid(string patientId);
 
-        Task<string> CreatePayment(CreatePaymentModel model);
-
-        Task<bool> PatientHasPaid(string patientId);
-
-        Task<bool> ChangePaymentStatus(string patientId);
-    }
+    Task<bool> ChangePaymentStatus(string patientId);
 }

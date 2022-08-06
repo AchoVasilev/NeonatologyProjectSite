@@ -1,110 +1,109 @@
-﻿namespace Services.OfferService
+﻿namespace Services.OfferService;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+
+using Data;
+using Data.Models;
+
+using Microsoft.EntityFrameworkCore;
+
+using ViewModels.Administration.Offer;
+using ViewModels.Offer;
+
+public class OfferService : IOfferService
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+    private readonly NeonatologyDbContext data;
+    private readonly IMapper mapper;
+    private const string onlineConsultationName = "Онлайн консултация";
 
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
-
-    using Data;
-    using Data.Models;
-
-    using Microsoft.EntityFrameworkCore;
-
-    using ViewModels.Administration.Offer;
-    using ViewModels.Offer;
-
-    public class OfferService : IOfferService
+    public OfferService(NeonatologyDbContext data, IMapper mapper)
     {
-        private readonly NeonatologyDbContext data;
-        private readonly IMapper mapper;
-        private const string onlineConsultationName = "Онлайн консултация";
+        this.data = data;
+        this.mapper = mapper;
+    }
 
-        public OfferService(NeonatologyDbContext data, IMapper mapper)
+    public async Task<ICollection<OfferViewModel>> GetAllAsync()
+        => await this.data.OfferedServices
+            .Where(x => x.IsDeleted == false)
+            .OrderByDescending(x => x.CreatedOn)
+            .AsNoTracking()
+            .ProjectTo<OfferViewModel>(this.mapper.ConfigurationProvider)
+            .ToListAsync();
+
+    public async Task<int> GetOnlineConsultationId()
+        => await this.data.OfferedServices
+            .Where(x => x.Name == onlineConsultationName && x.IsDeleted == false)
+            .Select(x => x.Id)
+            .FirstOrDefaultAsync();
+
+    public async Task<OfferViewModel> GetOnlineConsultationModelAsync() 
+        => await this.data.OfferedServices
+            .Where(x => x.Name == onlineConsultationName && x.IsDeleted == false)
+            .AsNoTracking()
+            .ProjectTo<OfferViewModel>(this.mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync();
+
+    public async Task<bool> DeleteOffer(int offerId)
+    {
+        var model = await this.data.OfferedServices
+            .Where(x => x.Id == offerId && x.IsDeleted == false)
+            .FirstOrDefaultAsync();
+
+        if (model == null)
         {
-            this.data = data;
-            this.mapper = mapper;
+            return false;
         }
 
-        public async Task<ICollection<OfferViewModel>> GetAllAsync()
-            => await this.data.OfferedServices
-                .Where(x => x.IsDeleted == false)
-                .OrderByDescending(x => x.CreatedOn)
-                .AsNoTracking()
-                .ProjectTo<OfferViewModel>(this.mapper.ConfigurationProvider)
-                .ToListAsync();
+        model.IsDeleted = true;
+        model.DeletedOn = DateTime.UtcNow;
 
-        public async Task<int> GetOnlineConsultationId()
-            => await this.data.OfferedServices
-                        .Where(x => x.Name == onlineConsultationName && x.IsDeleted == false)
-                        .Select(x => x.Id)
-                        .FirstOrDefaultAsync();
+        await this.data.SaveChangesAsync();
 
-        public async Task<OfferViewModel> GetOnlineConsultationModelAsync() 
-            => await this.data.OfferedServices
-                        .Where(x => x.Name == onlineConsultationName && x.IsDeleted == false)
-                        .AsNoTracking()
-                        .ProjectTo<OfferViewModel>(this.mapper.ConfigurationProvider)
-                        .FirstOrDefaultAsync();
+        return true;
+    }
 
-        public async Task<bool> DeleteOffer(int offerId)
+    public async Task AddOffer(CreateOfferFormModel model)
+    {
+        var offer = new OfferedService
         {
-            var model = await this.data.OfferedServices
-                .Where(x => x.Id == offerId && x.IsDeleted == false)
-                .FirstOrDefaultAsync();
+            Name = model.Name,
+            Price = model.Price
+        };
 
-            if (model == null)
-            {
-                return false;
-            }
+        await this.data.OfferedServices.AddAsync(offer);
+        await this.data.SaveChangesAsync();
+    }
 
-            model.IsDeleted = true;
-            model.DeletedOn = DateTime.UtcNow;
+    public async Task<EditOfferFormModel> GetOffer(int id)
+        => await this.data.OfferedServices
+            .Where(x => x.Id == id && x.IsDeleted == false)
+            .AsNoTracking()
+            .ProjectTo<EditOfferFormModel>(this.mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync();
 
-            await this.data.SaveChangesAsync();
+    public async Task<bool> EditOffer(EditOfferFormModel model)
+    {
+        var offer = await this.data.OfferedServices
+            .Where(x => x.Id == model.Id && x.IsDeleted == false)
+            .FirstOrDefaultAsync();
 
-            return true;
+        if (offer == null)
+        {
+            return false;
         }
 
-        public async Task AddOffer(CreateOfferFormModel model)
-        {
-            var offer = new OfferedService
-            {
-                Name = model.Name,
-                Price = model.Price
-            };
+        offer.Name = model.Name;
+        offer.Price = model.Price;
+        offer.ModifiedOn = DateTime.UtcNow;
 
-            await this.data.OfferedServices.AddAsync(offer);
-            await this.data.SaveChangesAsync();
-        }
+        await this.data.SaveChangesAsync();
 
-        public async Task<EditOfferFormModel> GetOffer(int id)
-            => await this.data.OfferedServices
-                        .Where(x => x.Id == id && x.IsDeleted == false)
-                        .AsNoTracking()
-                        .ProjectTo<EditOfferFormModel>(this.mapper.ConfigurationProvider)
-                        .FirstOrDefaultAsync();
-
-        public async Task<bool> EditOffer(EditOfferFormModel model)
-        {
-            var offer = await this.data.OfferedServices
-                                   .Where(x => x.Id == model.Id && x.IsDeleted == false)
-                                   .FirstOrDefaultAsync();
-
-            if (offer == null)
-            {
-                return false;
-            }
-
-            offer.Name = model.Name;
-            offer.Price = model.Price;
-            offer.ModifiedOn = DateTime.UtcNow;
-
-            await this.data.SaveChangesAsync();
-
-            return true;
-        }
+        return true;
     }
 }

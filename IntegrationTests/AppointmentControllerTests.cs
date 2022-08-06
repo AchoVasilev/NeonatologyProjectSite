@@ -1,36 +1,35 @@
-﻿namespace IntegrationTests
-{
-    using System.Net;
-    using System.Threading.Tasks;
+﻿namespace IntegrationTests;
 
-    using Microsoft.AspNetCore.Mvc.Testing;
+using System.Net;
+using System.Threading.Tasks;
 
-    using Neonatology;
+using Microsoft.AspNetCore.Mvc.Testing;
 
-    using Xunit;
+using Neonatology;
 
-    public class AppointmentControllerTests
-    { 
-        [Theory]
-        [InlineData("/Appointment/MyPastAppointments")]
-        [InlineData("/Appointment/MyUpcomingAppointments")]
-        [InlineData("/Appointment/DoctorPastAppointments")]
-        [InlineData("/Appointment/DoctorUpcomingAppointments")]
-        [InlineData("/Appointment/TodaysAppointments")]
-        [InlineData("/Appointment/MakePatientAppointment")]
-        public async Task AuthorizeOverTheseMethodsShouldReturnRedirectStatusCodeIfUserIsAnnonymous(string url)
-        {
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient(
-                new WebApplicationFactoryClientOptions
-                {
-                    AllowAutoRedirect = false
-                });
+using Xunit;
 
-            var response = await client.GetAsync(url);
+public class AppointmentControllerTests
+{ 
+    [Theory]
+    [InlineData("/Appointment/MyPastAppointments")]
+    [InlineData("/Appointment/MyUpcomingAppointments")]
+    [InlineData("/Appointment/DoctorPastAppointments")]
+    [InlineData("/Appointment/DoctorUpcomingAppointments")]
+    [InlineData("/Appointment/TodaysAppointments")]
+    [InlineData("/Appointment/MakePatientAppointment")]
+    public async Task AuthorizeOverTheseMethodsShouldReturnRedirectStatusCodeIfUserIsAnnonymous(string url)
+    {
+        var factory = new WebApplicationFactory<Startup>();
+        var client = factory.CreateClient(
+            new WebApplicationFactoryClientOptions
+            {
+                AllowAutoRedirect = false
+            });
 
-            Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-            Assert.Contains("/Identity/Account/Login", response.Headers.Location.OriginalString);
-        }
+        var response = await client.GetAsync(url);
+
+        Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+        Assert.Contains("/Identity/Account/Login", response.Headers.Location.OriginalString);
     }
 }

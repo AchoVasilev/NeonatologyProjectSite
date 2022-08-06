@@ -1,32 +1,31 @@
-﻿namespace Data.Models
+﻿namespace Data.Models;
+
+using System.ComponentModel.DataAnnotations;
+
+using Data.Common.Models;
+
+using static Common.DataConstants.Constants;
+
+public class Feedback : BaseModel<int>
 {
-    using System.ComponentModel.DataAnnotations;
+    [Required]
+    [MaxLength(DefaultMaxLength)]
+    public string FirstName { get; set; }
 
-    using Data.Common.Models;
+    [Required]
+    [MaxLength(DefaultMaxLength)]
+    public string LastName { get; set; }
 
-    using static Common.DataConstants.Constants;
+    [Required]
+    [MaxLength(DefaultMaxLength)]
+    public string Email { get; set; }
 
-    public class Feedback : BaseModel<int>
-    {
-        [Required]
-        [MaxLength(DefaultMaxLength)]
-        public string FirstName { get; set; }
+    [Required]
+    public string Type { get; set; }
 
-        [Required]
-        [MaxLength(DefaultMaxLength)]
-        public string LastName { get; set; }
+    [Required]
+    [MaxLength(DescriptionMaxLength)]
+    public string Comment { get; set; }
 
-        [Required]
-        [MaxLength(DefaultMaxLength)]
-        public string Email { get; set; }
-
-        [Required]
-        public string Type { get; set; }
-
-        [Required]
-        [MaxLength(DescriptionMaxLength)]
-        public string Comment { get; set; }
-
-        public bool? IsSolved { get; set; }
-    }
+    public bool? IsSolved { get; set; }
 }

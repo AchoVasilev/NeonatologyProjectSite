@@ -1,25 +1,24 @@
-﻿namespace Services.FileService
+﻿namespace Services.FileService;
+
+using System.Threading.Tasks;
+
+using CloudinaryDotNet;
+
+using Microsoft.AspNetCore.Http;
+
+using FileServiceModels;
+
+using ViewModels.Gallery;
+
+public interface IFileService
 {
-    using System.Threading.Tasks;
+    Task<IFileServiceModel> UploadImage(Cloudinary cloudinary, IFormFile image, string folderName);
 
-    using CloudinaryDotNet;
+    Task<IFileServiceModel> UploadFile(Cloudinary cloudinary, IFormFile file, string folderName);
 
-    using Microsoft.AspNetCore.Http;
+    Task DeleteFile(Cloudinary cloudinary, string name, string folderName);
 
-    using FileServiceModels;
+    Task AddImageToDatabase(IFileServiceModel model);
 
-    using ViewModels.Gallery;
-
-    public interface IFileService
-    {
-        Task<IFileServiceModel> UploadImage(Cloudinary cloudinary, IFormFile image, string folderName);
-
-        Task<IFileServiceModel> UploadFile(Cloudinary cloudinary, IFormFile file, string folderName);
-
-        Task DeleteFile(Cloudinary cloudinary, string name, string folderName);
-
-        Task AddImageToDatabase(IFileServiceModel model);
-
-        Task<GalleryViewModel> GetGalleryImagesAsync(int page, int itemsPerPage);
-    }
+    Task<GalleryViewModel> GetGalleryImagesAsync(int page, int itemsPerPage);
 }

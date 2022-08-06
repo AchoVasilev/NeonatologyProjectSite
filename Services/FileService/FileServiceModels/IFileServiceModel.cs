@@ -1,11 +1,10 @@
-﻿namespace Services.FileService.FileServiceModels
+﻿namespace Services.FileService.FileServiceModels;
+
+public interface IFileServiceModel
 {
-    public interface IFileServiceModel
-    {
-        string Extension { get; set; }
+    string Extension { get; set; }
 
-        string Uri { get; set; }
+    string Uri { get; set; }
 
-        string Name { get; set; }
-    }
+    string Name { get; set; }
 }

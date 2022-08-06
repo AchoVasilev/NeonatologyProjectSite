@@ -1,34 +1,33 @@
-﻿namespace Services.ChatService
+﻿namespace Services.ChatService;
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using Data.Models;
+
+using Microsoft.AspNetCore.Http;
+
+using ViewModels.Chat;
+
+public interface IChatService
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+    Task AddUserToGroup(string groupName, string senderName, string receiverName);
 
-    using Data.Models;
+    Task<string> SendMessageToUser(string senderName, string receiverName, string message, string groupName);
 
-    using Microsoft.AspNetCore.Http;
+    Task<SendFilesResponseViewModel> SendMessageWitFilesToUser(IList<IFormFile> files, string group, string toUsername, string fromUsername, string message);
 
-    using ViewModels.Chat;
+    Task<ICollection<Message>> ExtractAllMessages(string group);
 
-    public interface IChatService
-    {
-        Task AddUserToGroup(string groupName, string senderName, string receiverName);
+    Task<ICollection<LoadMoreMessagesViewModel>> LoadMoreMessages(string group, int messagesSkipCount, ApplicationUser currentUser, string receiverFullname, string senderFullname);
 
-        Task<string> SendMessageToUser(string senderName, string receiverName, string message, string groupName);
+    Task<ICollection<ChatConversationsViewModel>> GetAllMessages(string userId, int page, int itemsPerPage);
 
-        Task<SendFilesResponseViewModel> SendMessageWitFilesToUser(IList<IFormFile> files, string group, string toUsername, string fromUsername, string message);
+    Task<string> GetLastMessage(string currentUserId, string userId);
 
-        Task<ICollection<Message>> ExtractAllMessages(string group);
+    Task<string> GetLastActivityAsync(string currentUserId, string userId);
 
-        Task<ICollection<LoadMoreMessagesViewModel>> LoadMoreMessages(string group, int messagesSkipCount, ApplicationUser currentUser, string receiverFullname, string senderFullname);
+    Task<string> GetGroupId(string currentUserId, string userId);
 
-        Task<ICollection<ChatConversationsViewModel>> GetAllMessages(string userId, int page, int itemsPerPage);
-
-        Task<string> GetLastMessage(string currentUserId, string userId);
-
-        Task<string> GetLastActivityAsync(string currentUserId, string userId);
-
-        Task<string> GetGroupId(string currentUserId, string userId);
-
-        Task<string> GetGroupName(string groupId);
-    }
+    Task<string> GetGroupName(string groupId);
 }

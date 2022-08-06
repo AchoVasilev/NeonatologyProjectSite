@@ -1,9 +1,8 @@
-﻿namespace Data.Models.Dto
-{
-    public class CityDto
-    {
-        public string Name { get; set; }
+﻿namespace Data.Models.Dto;
 
-        public int ZipCode { get; set; }
-    }
+public class CityDto
+{
+    public string Name { get; set; }
+
+    public int ZipCode { get; set; }
 }

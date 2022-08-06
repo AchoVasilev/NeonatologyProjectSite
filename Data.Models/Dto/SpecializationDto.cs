@@ -1,16 +1,15 @@
-﻿namespace Data.Models.Dto
+﻿namespace Data.Models.Dto;
+
+using System.ComponentModel.DataAnnotations;
+
+using static Common.DataConstants.Constants;
+
+public class SpecializationDto
 {
-    using System.ComponentModel.DataAnnotations;
+    [Required]
+    [MaxLength(DefaultMaxLength)]
+    public string Name { get; set; }
 
-    using static Common.DataConstants.Constants;
-
-    public class SpecializationDto
-    {
-        [Required]
-        [MaxLength(DefaultMaxLength)]
-        public string Name { get; set; }
-
-        [MaxLength(DescriptionMaxLength)]
-        public string Description { get; set; }
-    }
+    [MaxLength(DescriptionMaxLength)]
+    public string Description { get; set; }
 }

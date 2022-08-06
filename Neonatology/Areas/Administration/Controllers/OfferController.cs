@@ -1,79 +1,78 @@
-﻿namespace Neonatology.Areas.Administration.Controllers
+﻿namespace Neonatology.Areas.Administration.Controllers;
+
+using System.Threading.Tasks;
+
+using global::Services.OfferService;
+
+using Microsoft.AspNetCore.Mvc;
+
+using ViewModels.Administration.Offer;
+
+using static Common.GlobalConstants.MessageConstants;
+
+public class OfferController : BaseController
 {
-    using System.Threading.Tasks;
+    private readonly IOfferService offerService;
 
-    using global::Services.OfferService;
-
-    using Microsoft.AspNetCore.Mvc;
-
-    using ViewModels.Administration.Offer;
-
-    using static Common.GlobalConstants.MessageConstants;
-
-    public class OfferController : BaseController
+    public OfferController(IOfferService offerService)
     {
-        private readonly IOfferService offerService;
+        this.offerService = offerService;
+    }
 
-        public OfferController(IOfferService offerService)
+    public async Task<IActionResult> All()
+    {
+        var services = await this.offerService.GetAllAsync();
+
+        return this.View(services);
+    }
+
+    public async Task<IActionResult> Delete(int id)
+    {
+        var isDeleted = await this.offerService.DeleteOffer(id);
+        if (isDeleted == false)
         {
-            this.offerService = offerService;
-        }
-
-        public async Task<IActionResult> All()
-        {
-            var services = await this.offerService.GetAllAsync();
-
-            return this.View(services);
-        }
-
-        public async Task<IActionResult> Delete(int id)
-        {
-            var isDeleted = await this.offerService.DeleteOffer(id);
-            if (isDeleted == false)
-            {
-                this.TempData["Message"] = ErrorDeletingMsg;
-                return this.RedirectToAction(nameof(this.All));
-            }
-
-            this.TempData["Message"] = SuccessfulDeleteMsg;
-
+            this.TempData["Message"] = ErrorDeletingMsg;
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public IActionResult Add() 
-            =>
-                this.View(new CreateOfferFormModel());
+        this.TempData["Message"] = SuccessfulDeleteMsg;
 
-        [HttpPost]
-        public async Task<IActionResult> Add(CreateOfferFormModel model)
+        return this.RedirectToAction(nameof(this.All));
+    }
+
+    public IActionResult Add() 
+        =>
+            this.View(new CreateOfferFormModel());
+
+    [HttpPost]
+    public async Task<IActionResult> Add(CreateOfferFormModel model)
+    {
+        await this.offerService.AddOffer(model);
+
+        this.TempData["Message"] = SuccessfulAddedItemMsg;
+
+        return this.RedirectToAction(nameof(this.All));
+    }
+
+    public async Task<IActionResult> Edit(int id)
+    {
+        var model = await this.offerService.GetOffer(id);
+
+        return this.View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(EditOfferFormModel model)
+    {
+        var isEdited = await this.offerService.EditOffer(model);
+        if (isEdited == false)
         {
-            await this.offerService.AddOffer(model);
-
-            this.TempData["Message"] = SuccessfulAddedItemMsg;
-
+            this.TempData["Message"] = ErrorDeletingMsg;
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public async Task<IActionResult> Edit(int id)
-        {
-            var model = await this.offerService.GetOffer(id);
+        this.TempData["Message"] = SuccessfulEditMsg;
 
-            return this.View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(EditOfferFormModel model)
-        {
-            var isEdited = await this.offerService.EditOffer(model);
-            if (isEdited == false)
-            {
-                this.TempData["Message"] = ErrorDeletingMsg;
-                return this.RedirectToAction(nameof(this.All));
-            }
-
-            this.TempData["Message"] = SuccessfulEditMsg;
-
-            return this.RedirectToAction(nameof(this.All));
-        }
+        return this.RedirectToAction(nameof(this.All));
     }
 }

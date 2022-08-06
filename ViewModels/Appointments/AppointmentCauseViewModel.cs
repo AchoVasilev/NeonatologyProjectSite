@@ -1,12 +1,11 @@
-﻿namespace ViewModels.Appointments
+﻿namespace ViewModels.Appointments;
+
+using System.ComponentModel.DataAnnotations;
+
+public class AppointmentCauseViewModel
 {
-    using System.ComponentModel.DataAnnotations;
+    public int Id { get; init; }
 
-    public class AppointmentCauseViewModel
-    {
-        public int Id { get; init; }
-
-        [Required]
-        public string Name { get; set; }
-    }
+    [Required]
+    public string Name { get; set; }
 }

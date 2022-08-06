@@ -1,27 +1,26 @@
-﻿namespace ViewModels.Chat
+﻿namespace ViewModels.Chat;
+
+using System.Collections.Generic;
+
+using Data.Models;
+
+public class PrivateChatViewModel
 {
-    using System.Collections.Generic;
+    public ApplicationUser CurrentUser { get; set; }
 
-    using Data.Models;
+    public ApplicationUser ToUser { get; set; }
 
-    public class PrivateChatViewModel
-    {
-        public ApplicationUser CurrentUser { get; set; }
+    public string ReceiverFullName { get; set; }
 
-        public ApplicationUser ToUser { get; set; }
+    public string SenderFullName { get; set; }
 
-        public string ReceiverFullName { get; set; }
+    public string ReceiverEmail { get; set; }
 
-        public string SenderFullName { get; set; }
+    public string SenderEmail { get; set; }
 
-        public string ReceiverEmail { get; set; }
+    public string GroupName { get; set; }
 
-        public string SenderEmail { get; set; }
+    public bool HasPaid { get; set; } = true;
 
-        public string GroupName { get; set; }
-
-        public bool HasPaid { get; set; } = true;
-
-        public ICollection<Message> ChatMessages { get; set; } = new HashSet<Message>();
-    }
+    public ICollection<Message> ChatMessages { get; set; } = new HashSet<Message>();
 }

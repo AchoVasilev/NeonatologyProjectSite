@@ -1,23 +1,22 @@
-﻿namespace Neonatology.Controllers
+﻿namespace Neonatology.Controllers;
+
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Mvc;
+
+using Services.OfferService;
+
+public class OfferController : BaseController
 {
-    using System.Threading.Tasks;
+    private readonly IOfferService offerService;
 
-    using Microsoft.AspNetCore.Mvc;
+    public OfferController(IOfferService offerService) 
+        => this.offerService = offerService;
 
-    using Services.OfferService;
-
-    public class OfferController : BaseController
+    public async Task<IActionResult> All()
     {
-        private readonly IOfferService offerService;
+        var services = await this.offerService.GetAllAsync();
 
-        public OfferController(IOfferService offerService) 
-            => this.offerService = offerService;
-
-        public async Task<IActionResult> All()
-        {
-            var services = await this.offerService.GetAllAsync();
-
-            return this.View(services);
-        }
+        return this.View(services);
     }
 }

@@ -1,17 +1,16 @@
-﻿namespace ViewModels.Administration.Galery
+﻿namespace ViewModels.Administration.Galery;
+
+using System.Collections.Generic;
+using System.ComponentModel;
+
+using Microsoft.AspNetCore.Http;
+
+public class GalleryModel
 {
-    using System.Collections.Generic;
-    using System.ComponentModel;
+    private const string ImagesName = "Качи снимки";
 
-    using Microsoft.AspNetCore.Http;
+    [DisplayName(ImagesName)]
+    public IEnumerable<IFormFile> Images { get; set; }
 
-    public class GalleryModel
-    {
-        private const string ImagesName = "Качи снимки";
-
-        [DisplayName(ImagesName)]
-        public IEnumerable<IFormFile> Images { get; set; }
-
-        public ICollection<GalleryViewModel> GalleryImages { get; set; }
-    }
+    public ICollection<GalleryViewModel> GalleryImages { get; set; }
 }

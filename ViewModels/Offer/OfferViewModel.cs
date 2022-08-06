@@ -1,14 +1,13 @@
-﻿namespace ViewModels.Offer
+﻿namespace ViewModels.Offer;
+
+using System.ComponentModel.DataAnnotations;
+
+public class OfferViewModel
 {
-    using System.ComponentModel.DataAnnotations;
+    public int Id { get; init; }
 
-    public class OfferViewModel
-    {
-        public int Id { get; init; }
+    [Required]
+    public string Name { get; set; }
 
-        [Required]
-        public string Name { get; set; }
-
-        public decimal Price { get; set; }
-    }
+    public decimal Price { get; set; }
 }

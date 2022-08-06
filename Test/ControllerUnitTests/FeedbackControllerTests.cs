@@ -1,95 +1,94 @@
-﻿namespace Test.ControllerUnitTests
+﻿namespace Test.ControllerUnitTests;
+
+using System.Threading.Tasks;
+using Helpers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+
+using Moq;
+
+using Neonatology.Controllers;
+
+using Services.FeedbackService;
+
+using ViewModels.Feedback;
+
+using Xunit;
+
+public class FeedbackControllerTests
 {
-    using System.Threading.Tasks;
-    using Helpers;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.ViewFeatures;
-
-    using Moq;
-
-    using Neonatology.Controllers;
-
-    using Services.FeedbackService;
-
-    using ViewModels.Feedback;
-
-    using Xunit;
-
-    public class FeedbackControllerTests
+    [Fact]
+    public void SendShouldReturnViewWithModel()
     {
-        [Fact]
-        public void SendShouldReturnViewWithModel()
+        var controller = new FeedbackController(null);
+
+        var result = controller.Send();
+
+        var route = Assert.IsType<ViewResult>(result);
+
+        Assert.IsType<FeedbackInputModel>(route.Model);
+    }
+
+    [Fact]
+    public async Task SendShouldRedirectToIndexHomeIfSuccessfulWithTempDataMessage()
+    {
+        var serviceMock = new Mock<IFeedbackService>();
+
+        var controller = new FeedbackController(serviceMock.Object);
+
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
-            var controller = new FeedbackController(null);
-
-            var result = controller.Send();
-
-            var route = Assert.IsType<ViewResult>(result);
-
-            Assert.IsType<FeedbackInputModel>(route.Model);
-        }
-
-        [Fact]
-        public async Task SendShouldRedirectToIndexHomeIfSuccessfulWithTempDataMessage()
+            ["SessionVariable"] = "admin"
+        };
+        controller.TempData = tempData;
+        var model = new FeedbackInputModel
         {
-            var serviceMock = new Mock<IFeedbackService>();
+            Comment = "asdasdasd",
+            FirstName = "Gosho",
+            LastName = "Peshev",
+            Email = "Gosho@gosho.bg",
+            Type = "GoshoEpechen"
+        };
 
-            var controller = new FeedbackController(serviceMock.Object);
+        var result = await controller.Send(model);
 
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
-            controller.TempData = tempData;
-            var model = new FeedbackInputModel
-            {
-                Comment = "asdasdasd",
-                FirstName = "Gosho",
-                LastName = "Peshev",
-                Email = "Gosho@gosho.bg",
-                Type = "GoshoEpechen"
-            };
+        var route = Assert.IsType<RedirectToActionResult>(result);
 
-            var result = await controller.Send(model);
+        Assert.Equal("Index", route.ActionName);
+        Assert.Equal("Home", route.ControllerName);
+    }
 
-            var route = Assert.IsType<RedirectToActionResult>(result);
+    [Fact]
+    public async Task MyFeedbacksShouldReturnViewAndModelWhenSuccessful()
+    {
+        var serviceMock = new Mock<IFeedbackService>();
 
-            Assert.Equal("Index", route.ActionName);
-            Assert.Equal("Home", route.ControllerName);
-        }
+        var controller = new FeedbackController(serviceMock.Object);
 
-        [Fact]
-        public async Task MyFeedbacksShouldReturnViewAndModelWhenSuccessful()
+        var httpContext = new DefaultHttpContext();
+        var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
-            var serviceMock = new Mock<IFeedbackService>();
-
-            var controller = new FeedbackController(serviceMock.Object);
-
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                ["SessionVariable"] = "admin"
-            };
+            ["SessionVariable"] = "admin"
+        };
             
-            controller.TempData = tempData;
-            ControllerExtensions.WithIdentity(controller, "1", "Gosho@gosho.bg", "Patient");
+        controller.TempData = tempData;
+        ControllerExtensions.WithIdentity(controller, "1", "Gosho@gosho.bg", "Patient");
             
-            var model = new FeedbackInputModel
-            {
-                Comment = "asdasdasd",
-                FirstName = "Gosho",
-                LastName = "Peshev",
-                Email = "Gosho@gosho.bg",
-                Type = "GoshoEpechen"
-            };
+        var model = new FeedbackInputModel
+        {
+            Comment = "asdasdasd",
+            FirstName = "Gosho",
+            LastName = "Peshev",
+            Email = "Gosho@gosho.bg",
+            Type = "GoshoEpechen"
+        };
 
-            var sentResult = await controller.Send(model);
+        var sentResult = await controller.Send(model);
 
-            var myFeedbacks = await controller.MyFeedbacks("Gosho@gosho.bg");
+        var myFeedbacks = await controller.MyFeedbacks("Gosho@gosho.bg");
 
-            var route = Assert.IsType<ViewResult>(myFeedbacks);
-        }
+        var route = Assert.IsType<ViewResult>(myFeedbacks);
     }
 }

@@ -1,46 +1,45 @@
-﻿namespace Neonatology.Controllers
+﻿namespace Neonatology.Controllers;
+
+using System.Threading.Tasks;
+
+using Infrastructure;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+
+using Services.PatientService;
+
+using ViewModels.Patient;
+
+[Authorize]
+public class PatientController : BaseController
 {
-    using System.Threading.Tasks;
+    private readonly IPatientService patientService;
+    private readonly IWebHostEnvironment environment;
 
-    using Infrastructure;
-
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc;
-
-    using Services.PatientService;
-
-    using ViewModels.Patient;
-
-    [Authorize]
-    public class PatientController : BaseController
+    public PatientController(IPatientService patientService, IWebHostEnvironment environment)
     {
-        private readonly IPatientService patientService;
-        private readonly IWebHostEnvironment environment;
+        this.patientService = patientService;
+        this.environment = environment;
+    }
 
-        public PatientController(IPatientService patientService, IWebHostEnvironment environment)
+    public IActionResult Finish()
+        =>
+            this.View(new CreatePatientFormModel());
+
+    [HttpPost]
+    public async Task<IActionResult> Finish(CreatePatientFormModel model)
+    {
+        if (!this.ModelState.IsValid)
         {
-            this.patientService = patientService;
-            this.environment = environment;
+            return this.View(model);
         }
 
-        public IActionResult Finish()
-            =>
-                this.View(new CreatePatientFormModel());
+        var userId = this.User.GetId();
 
-        [HttpPost]
-        public async Task<IActionResult> Finish(CreatePatientFormModel model)
-        {
-            if (!this.ModelState.IsValid)
-            {
-                return this.View(model);
-            }
+        await this.patientService.CreatePatient(model, userId, $"{this.environment.WebRootPath}");
 
-            var userId = this.User.GetId();
-
-            await this.patientService.CreatePatient(model, userId, $"{this.environment.WebRootPath}");
-
-            return this.RedirectToAction("Index", "Home");
-        }
+        return this.RedirectToAction("Index", "Home");
     }
 }

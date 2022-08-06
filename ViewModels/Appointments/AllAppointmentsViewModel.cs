@@ -1,11 +1,10 @@
-﻿namespace ViewModels.Appointments
+﻿namespace ViewModels.Appointments;
+
+using System.Collections.Generic;
+
+using Common;
+
+public class AllAppointmentsViewModel : PagingModel
 {
-    using System.Collections.Generic;
-
-    using Common;
-
-    public class AllAppointmentsViewModel : PagingModel
-    {
-        public ICollection<AppointmentViewModel> Appointments { get; set; }
-    }
+    public ICollection<AppointmentViewModel> Appointments { get; set; }
 }

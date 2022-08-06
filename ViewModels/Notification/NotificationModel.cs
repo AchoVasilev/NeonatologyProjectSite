@@ -1,11 +1,10 @@
-﻿namespace ViewModels.Notification
+﻿namespace ViewModels.Notification;
+
+using System.Collections.Generic;
+
+public class NotificationModel
 {
-    using System.Collections.Generic;
+    public bool IsLessThanDefaultCount { get; set; }
 
-    public class NotificationModel
-    {
-        public bool IsLessThanDefaultCount { get; set; }
-
-        public ICollection<NotificationViewModel> Notifications { get; set; } = new HashSet<NotificationViewModel>();
-    }
+    public ICollection<NotificationViewModel> Notifications { get; set; } = new HashSet<NotificationViewModel>();
 }

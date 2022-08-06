@@ -106,7 +106,7 @@ function loadMoreNotifications(take, isForDeleted) {
 
     $.ajax({
         type: "GET",
-        url: `/Notification/GetMoreNotitifications`,
+        url: `/Notification/GetMoreNotifications`,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: {

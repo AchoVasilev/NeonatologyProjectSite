@@ -1,9 +1,8 @@
-﻿namespace ViewModels.Doctor
-{
-    public class SpecializationFormModel
-    {
-        public string Name { get; set; }
+﻿namespace ViewModels.Doctor;
 
-        public string Description { get; set; }
-    }
+public class SpecializationFormModel
+{
+    public string Name { get; set; }
+
+    public string Description { get; set; }
 }

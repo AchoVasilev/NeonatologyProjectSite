@@ -1,17 +1,16 @@
-﻿namespace ViewModels.Administration.Offer
+﻿namespace ViewModels.Administration.Offer;
+
+using System.ComponentModel.DataAnnotations;
+
+using static Data.Common.DataConstants.Constants;
+
+public class EditOfferFormModel
 {
-    using System.ComponentModel.DataAnnotations;
+    public int Id { get; set; }
 
-    using static Data.Common.DataConstants.Constants;
+    [Required]
+    [MaxLength(DefaultMaxLength)]
+    public string Name { get; set; }
 
-    public class EditOfferFormModel
-    {
-        public int Id { get; set; }
-
-        [Required]
-        [MaxLength(DefaultMaxLength)]
-        public string Name { get; set; }
-
-        public decimal Price { get; set; }
-    }
+    public decimal Price { get; set; }
 }

@@ -1,13 +1,12 @@
-﻿namespace Services.ProfileService
+﻿namespace Services.ProfileService;
+
+using System.Threading.Tasks;
+using Common;
+using ViewModels.Profile;
+
+public interface IProfileService
 {
-    using System.Threading.Tasks;
+    Task<ProfileViewModel> GetPatientData(string userId);
 
-    using ViewModels.Profile;
-
-    public interface IProfileService
-    {
-        Task<ProfileViewModel> GetPatientData(string userId);
-
-        Task<bool> EditProfileAsync(EditProfileFormModel model);
-    }
+    Task<OperationResult> EditProfileAsync(EditProfileFormModel model);
 }

@@ -1,63 +1,62 @@
-﻿namespace Neonatology.Controllers
+﻿namespace Neonatology.Controllers;
+
+using System.Threading.Tasks;
+
+using CloudinaryDotNet;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Services.FileService;
+
+using ViewModels.Gallery;
+
+using static Common.GlobalConstants;
+using static Common.GlobalConstants.FileConstants;
+
+public class GalleryController : BaseController
 {
-    using System.Threading.Tasks;
+    private const int GalleryItemsPerPage = 8;
+    private readonly IFileService fileService;
+    private readonly Cloudinary cloudinary;
 
-    using CloudinaryDotNet;
-
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-    using Services.FileService;
-
-    using ViewModels.Gallery;
-
-    using static Common.GlobalConstants;
-    using static Common.GlobalConstants.FileConstants;
-
-    public class GalleryController : BaseController
+    public GalleryController(IFileService fileService, Cloudinary cloudinary)
     {
-        private const int GalleryItemsPerPage = 8;
-        private readonly IFileService fileService;
-        private readonly Cloudinary cloudinary;
+        this.fileService = fileService;
+        this.cloudinary = cloudinary;
+    }
 
-        public GalleryController(IFileService fileService, Cloudinary cloudinary)
-        {
-            this.fileService = fileService;
-            this.cloudinary = cloudinary;
-        }
+    public async Task<IActionResult> All([FromQuery] int page)
+    {
+        var model = await this.fileService.GetGalleryImagesAsync(page, GalleryItemsPerPage);
 
-        public async Task<IActionResult> All([FromQuery] int page)
-        {
-            var model = await this.fileService.GetGalleryImagesAsync(page, GalleryItemsPerPage);
+        return this.View(model);
+    }
 
-            return this.View(model);
-        }
+    [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
+    public IActionResult Add()
+    {
+        return this.View(new UploadImageModel());
+    }
 
-        [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
-        public IActionResult Add()
+    [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
+    [HttpPost]
+    public async Task<IActionResult> Add(UploadImageModel model)
+    {
+        if (model.Images == null)
         {
             return this.View(new UploadImageModel());
         }
 
-        [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
-        [HttpPost]
-        public async Task<IActionResult> Add(UploadImageModel model)
+        foreach (var image in model.Images)
         {
-            if (model.Images == null)
+            var result = await this.fileService.UploadImage(this.cloudinary, image, DefaultFolderName);
+
+            if (result != null)
             {
-                return this.View(new UploadImageModel());
+                await this.fileService.AddImageToDatabase(result);
             }
-
-            foreach (var image in model.Images)
-            {
-                var result = await this.fileService.UploadImage(this.cloudinary, image, DefaultFolderName);
-
-                if (result != null)
-                {
-                    await this.fileService.AddImageToDatabase(result);
-                }
-            }
-
-            return this.RedirectToAction(nameof(this.All), "Gallery", new { area = "", page = 1 });
         }
+
+        return this.RedirectToAction(nameof(this.All), "Gallery", new { area = "", page = 1 });
     }
 }

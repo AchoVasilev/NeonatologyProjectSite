@@ -1,34 +1,33 @@
-﻿namespace Infrastructure.Hubs
+﻿namespace Infrastructure.Hubs;
+
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
+using Services.NotificationService;
+using Services.UserService;
+
+[Authorize]
+public class NotificationHub : Hub
 {
-    using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.SignalR;
-    using Services.NotificationService;
-    using Services.UserService;
+    private readonly IUserService userService;
+    private readonly INotificationService notificationService;
 
-    [Authorize]
-    public class NotificationHub : Hub
+    public NotificationHub(IUserService userService, INotificationService notificationService)
     {
-        private readonly IUserService userService;
-        private readonly INotificationService notificationService;
+        this.userService = userService;
+        this.notificationService = notificationService;
+    }
 
-        public NotificationHub(IUserService userService, INotificationService notificationService)
+    public async Task GetUserNotificationCount(bool isFirstNotificationSound)
+    {
+        var userId = this.Context.UserIdentifier;
+
+        if (userId != null)
         {
-            this.userService = userService;
-            this.notificationService = notificationService;
-        }
+            var targetUser = await this.userService.GetUserByIdAsync(userId);
+            var notificationsCount = await this.notificationService.GetUserNotificationsCount(targetUser.UserName);
 
-        public async Task GetUserNotificationCount(bool isFirstNotificationSound)
-        {
-            var userId = this.Context.UserIdentifier;
-
-            if (userId != null)
-            {
-                var targetUser = await this.userService.GetUserByIdAsync(userId);
-                var notificationsCount = await this.notificationService.GetUserNotificationsCount(targetUser.UserName);
-
-                await this.Clients.User(targetUser.Id).SendAsync("ReceiveNotification", notificationsCount, isFirstNotificationSound);
-            }
+            await this.Clients.User(targetUser.Id).SendAsync("ReceiveNotification", notificationsCount, isFirstNotificationSound);
         }
     }
 }

@@ -1,27 +1,26 @@
-﻿namespace Data.Models
+﻿namespace Data.Models;
+
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+using Data.Common.Models;
+
+using static Common.DataConstants.Constants;
+
+public class AppointmentSlot : BaseModel<int>
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+    [MaxLength(DefaultMaxLength)]
+    public string Text { get; set; }
 
-    using Data.Common.Models;
+    public DateTime Start { get; set; }
 
-    using static Common.DataConstants.Constants;
+    public DateTime End { get; set; }
 
-    public class AppointmentSlot : BaseModel<int>
-    {
-        [MaxLength(DefaultMaxLength)]
-        public string Text { get; set; }
+    public string Status { get; set; } = "Свободен";
 
-        public DateTime Start { get; set; }
+    [ForeignKey(nameof(Address))]
+    public int AddressId { get; set; }
 
-        public DateTime End { get; set; }
-
-        public string Status { get; set; } = "Свободен";
-
-        [ForeignKey(nameof(Address))]
-        public int AddressId { get; set; }
-
-        public virtual Address Address { get; set; }
-    }
+    public virtual Address Address { get; set; }
 }

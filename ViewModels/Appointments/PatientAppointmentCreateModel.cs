@@ -1,29 +1,28 @@
-﻿namespace ViewModels.Appointments
+﻿namespace ViewModels.Appointments;
+
+using System.ComponentModel.DataAnnotations;
+
+using static Data.Common.DataConstants.Constants;
+using static Common.GlobalConstants.MessageConstants;
+using System.Collections.Generic;
+
+public class PatientAppointmentCreateModel
 {
-    using System.ComponentModel.DataAnnotations;
+    public string Start { get; set; }
 
-    using static Data.Common.DataConstants.Constants;
-    using static Common.GlobalConstants.MessageConstants;
-    using System.Collections.Generic;
+    public string End { get; set; }
 
-    public class PatientAppointmentCreateModel
-    {
-        public string Start { get; set; }
+    [Required(ErrorMessage = RequiredFieldErrorMsg)]
+    [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
+    public string ChildFirstName { get; set; }
 
-        public string End { get; set; }
+    public string DoctorId { get; set; }
 
-        [Required(ErrorMessage = RequiredFieldErrorMsg)]
-        [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-        public string ChildFirstName { get; set; }
+    public string PatientId { get; set; }
 
-        public string DoctorId { get; set; }
+    public int AppointmentCauseId { get; set; }
 
-        public string PatientId { get; set; }
+    public int AddressId { get; set; }
 
-        public int AppointmentCauseId { get; set; }
-
-        public int AddressId { get; set; }
-
-        public ICollection<AppointmentCauseViewModel> AppointmentCauses { get; set; }
-    }
+    public ICollection<AppointmentCauseViewModel> AppointmentCauses { get; set; }
 }

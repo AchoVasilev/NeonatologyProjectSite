@@ -1,38 +1,37 @@
-﻿namespace ViewModels.Notification
+﻿namespace ViewModels.Notification;
+
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+using Data.Models.Enums;
+
+using static Data.Common.DataConstants.Constants;
+
+public class NotificationViewModel
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    public string Id { get; set; }
 
-    using Data.Models.Enums;
+    [Required]
+    public string Heading { get; set; }
 
-    using static Data.Common.DataConstants.Constants;
+    public NotificationStatus Status { get; set; }
 
-    public class NotificationViewModel
-    {
-        public string Id { get; set; }
+    public ICollection<string> AllStatuses { get; set; } = new HashSet<string>();
 
-        [Required]
-        public string Heading { get; set; }
+    public string TargetFirstName { get; set; }
 
-        public NotificationStatus Status { get; set; }
+    public string TargetLastName { get; set; }
 
-        public ICollection<string> AllStatuses { get; set; } = new HashSet<string>();
+    [Required]
+    [MaxLength(DefaultMaxLength)]
+    public string TargetUsername { get; set; }
 
-        public string TargetFirstName { get; set; }
+    [Required]
+    public string CreatedOn { get; set; }
 
-        public string TargetLastName { get; set; }
+    [Required]
+    [MaxLength(DescriptionMaxLength)]
+    public string Text { get; set; }
 
-        [Required]
-        [MaxLength(DefaultMaxLength)]
-        public string TargetUsername { get; set; }
-
-        [Required]
-        public string CreatedOn { get; set; }
-
-        [Required]
-        [MaxLength(DescriptionMaxLength)]
-        public string Text { get; set; }
-
-        public string ImageUrl { get; set; }
-    }
+    public string ImageUrl { get; set; }
 }

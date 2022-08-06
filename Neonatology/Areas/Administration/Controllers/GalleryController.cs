@@ -1,79 +1,78 @@
-﻿namespace Neonatology.Areas.Administration.Controllers
+﻿namespace Neonatology.Areas.Administration.Controllers;
+
+using System.Threading.Tasks;
+
+using CloudinaryDotNet;
+
+using global::Services.FileService;
+using Microsoft.AspNetCore.Mvc;
+using Services.Administration;
+using ViewModels.Administration.Galery;
+
+using static Common.GlobalConstants.MessageConstants;
+using static Common.GlobalConstants.FileConstants;
+using ViewModels.Gallery;
+
+public class GalleryController : BaseController
 {
-    using System.Threading.Tasks;
+    private readonly IGalleryService galleryService;
+    private readonly IFileService fileService;
+    private readonly Cloudinary cloudinary;
 
-    using CloudinaryDotNet;
-
-    using global::Services.FileService;
-    using Microsoft.AspNetCore.Mvc;
-    using Services.Administration;
-    using ViewModels.Administration.Galery;
-
-    using static Common.GlobalConstants.MessageConstants;
-    using static Common.GlobalConstants.FileConstants;
-    using ViewModels.Gallery;
-
-    public class GalleryController : BaseController
+    public GalleryController(IGalleryService galleryService, IFileService fileService, Cloudinary cloudinary)
     {
-        private readonly IGalleryService galleryService;
-        private readonly IFileService fileService;
-        private readonly Cloudinary cloudinary;
+        this.galleryService = galleryService;
+        this.fileService = fileService;
+        this.cloudinary = cloudinary;
+    }
 
-        public GalleryController(IGalleryService galleryService, IFileService fileService, Cloudinary cloudinary)
+    public async Task<IActionResult> All()
+    {
+        var model = new GalleryModel
         {
-            this.galleryService = galleryService;
-            this.fileService = fileService;
-            this.cloudinary = cloudinary;
-        }
+            GalleryImages = await this.galleryService.GetGalleryImages()
+        };
 
-        public async Task<IActionResult> All()
+        return this.View(model);
+    }
+
+    public async Task<IActionResult> Delete(string id)
+    {
+        var result = await this.galleryService.Delete(id);
+
+        if (result == false)
         {
-            var model = new GalleryModel
-            {
-                GalleryImages = await this.galleryService.GetGalleryImages()
-            };
-
-            return this.View(model);
-        }
-
-        public async Task<IActionResult> Delete(string id)
-        {
-            var result = await this.galleryService.Delete(id);
-
-            if (result == false)
-            {
-                this.TempData["Message"] = ErrorDeletingMsg;
-                return this.RedirectToAction(nameof(this.All));
-            }
-
-            this.TempData["Message"] = SuccessfulDeleteMsg;
+            this.TempData["Message"] = ErrorDeletingMsg;
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public IActionResult Add()
+        this.TempData["Message"] = SuccessfulDeleteMsg;
+        return this.RedirectToAction(nameof(this.All));
+    }
+
+    public IActionResult Add()
+    {
+        return this.View(new UploadImageModel());
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Add(UploadImageModel model)
+    {
+        if (model.Images == null)
         {
             return this.View(new UploadImageModel());
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Add(UploadImageModel model)
+        foreach (var image in model.Images)
         {
-            if (model.Images == null)
+            var result = await this.fileService.UploadImage(this.cloudinary, image, DefaultFolderName);
+
+            if (result != null)
             {
-                return this.View(new UploadImageModel());
+                await this.fileService.AddImageToDatabase(result);
             }
-
-            foreach (var image in model.Images)
-            {
-                var result = await this.fileService.UploadImage(this.cloudinary, image, DefaultFolderName);
-
-                if (result != null)
-                {
-                    await this.fileService.AddImageToDatabase(result);
-                }
-            }
-
-            return this.RedirectToAction(nameof(this.All));
         }
+
+        return this.RedirectToAction(nameof(this.All));
     }
 }

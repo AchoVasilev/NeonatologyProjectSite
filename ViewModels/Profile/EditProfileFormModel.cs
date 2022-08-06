@@ -1,47 +1,46 @@
-﻿namespace ViewModels.Profile
+﻿namespace ViewModels.Profile;
+
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+using Microsoft.AspNetCore.Http;
+
+using City;
+
+using static Data.Common.DataConstants.Constants;
+using static Common.GlobalConstants.MessageConstants;
+using static Common.GlobalConstants.AccountConstants;
+
+public class EditProfileFormModel
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    public string Id { get; set; }
 
-    using Microsoft.AspNetCore.Http;
+    public string UserId { get; set; }
 
-    using City;
+    [Display(Name = Name)]
+    [Required(ErrorMessage = RequiredFieldErrorMsg)]
+    [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
+    public string FirstName { get; set; }
 
-    using static Data.Common.DataConstants.Constants;
-    using static Common.GlobalConstants.MessageConstants;
-    using static Common.GlobalConstants.AccountConstants;
+    [Display(Name = FamilyName)]
+    [Required(ErrorMessage = RequiredFieldErrorMsg)]
+    [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
+    public string LastName { get; set; }
 
-    public class EditProfileFormModel
-    {
-        public string Id { get; set; }
-
-        public string UserId { get; set; }
-
-        [Display(Name = Name)]
-        [Required(ErrorMessage = RequiredFieldErrorMsg)]
-        [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-        public string FirstName { get; set; }
-
-        [Display(Name = FamilyName)]
-        [Required(ErrorMessage = RequiredFieldErrorMsg)]
-        [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-        public string LastName { get; set; }
-
-        [Required(ErrorMessage = RequiredFieldErrorMsg)]
-        [Phone]
-        [Display(Name = Phone)]
-        public string PhoneNumber { get; set; }
+    [Required(ErrorMessage = RequiredFieldErrorMsg)]
+    [Phone]
+    [Display(Name = Phone)]
+    public string PhoneNumber { get; set; }
         
-        [Display(Name = CityName)]
-        public int CityId { get; set; }
+    [Display(Name = CityName)]
+    public int CityId { get; set; }
 
-        public string UserImageUrl { get; set; }
+    public string UserImageUrl { get; set; }
 
-        [EmailAddress]
-        public string Email { get; set; }
+    [EmailAddress]
+    public string Email { get; set; }
 
-        public IFormFile Picture { get; set; }
+    public IFormFile Picture { get; set; }
 
-        public ICollection<CityFormModel> Cities { get; set; }
-    }
+    public ICollection<CityFormModel> Cities { get; set; }
 }

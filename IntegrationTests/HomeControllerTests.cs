@@ -1,50 +1,49 @@
-﻿namespace IntegrationTests
+﻿namespace IntegrationTests;
+
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Mvc.Testing;
+
+using Neonatology;
+
+using Xunit;
+
+public class HomeControllerTests : IClassFixture<WebApplicationFactory<Startup>>
 {
-    using System.Threading.Tasks;
+    private readonly WebApplicationFactory<Startup> factory;
 
-    using Microsoft.AspNetCore.Mvc.Testing;
+    public HomeControllerTests(WebApplicationFactory<Startup> factory) 
+        => this.factory = factory;
 
-    using Neonatology;
-
-    using Xunit;
-
-    public class HomeControllerTests : IClassFixture<WebApplicationFactory<Startup>>
+    [Theory]
+    [InlineData("/")]
+    [InlineData("/Index")]
+    public async Task IndexShouldReturnSuccessAndCorrectContentType(string url)
     {
-        private readonly WebApplicationFactory<Startup> factory;
+        //Arrange
+        var client = this.factory.CreateClient();
 
-        public HomeControllerTests(WebApplicationFactory<Startup> factory) 
-            => this.factory = factory;
+        //Act
+        var response = await client.GetAsync(url);
 
-        [Theory]
-        [InlineData("/")]
-        [InlineData("/Index")]
-        public async Task IndexShouldReturnSuccessAndCorrectContentType(string url)
-        {
-            //Arrange
-            var client = this.factory.CreateClient();
+        //Assert
+        response.EnsureSuccessStatusCode();
+        var html = await response.Content.ReadAsStringAsync();
+        Assert.Equal("text/html; charset=utf-8", response.Content.Headers.ContentType.ToString());
+        Assert.Contains("Тук можете да запишете вашия час за преглед и да получите консултация", html);
+    }
 
-            //Act
-            var response = await client.GetAsync(url);
+    [Fact]
+    public async Task PrivacyShouldReturnSuccessAndCorrectContentType()
+    {
+        var client = this.factory.CreateClient();
 
-            //Assert
-            response.EnsureSuccessStatusCode();
-            var html = await response.Content.ReadAsStringAsync();
-            Assert.Equal("text/html; charset=utf-8", response.Content.Headers.ContentType.ToString());
-            Assert.Contains("Тук можете да запишете вашия час за преглед и да получите консултация", html);
-        }
+        var response = await client.GetAsync("/Home/Privacy");
 
-        [Fact]
-        public async Task PrivacyShouldReturnSuccessAndCorrectContentType()
-        {
-            var client = this.factory.CreateClient();
+        response.EnsureSuccessStatusCode();
+        var html = await response.Content.ReadAsStringAsync();
 
-            var response = await client.GetAsync("/Home/Privacy");
-
-            response.EnsureSuccessStatusCode();
-            var html = await response.Content.ReadAsStringAsync();
-
-            Assert.Equal("text/html; charset=utf-8", response.Content.Headers.ContentType.ToString());
-            Assert.Contains("Какви данни събираме:", html);
-        }
+        Assert.Equal("text/html; charset=utf-8", response.Content.Headers.ContentType.ToString());
+        Assert.Contains("Какви данни събираме:", html);
     }
 }

@@ -1,15 +1,14 @@
-﻿namespace ViewModels.Chat
+﻿namespace ViewModels.Chat;
+
+public class ChatMessageWithUserViewModel
 {
-    public class ChatMessageWithUserViewModel
-    {
-        public string Content { get; set; }
+    public string Content { get; set; }
 
-        public string SenderId { get; set; }
+    public string SenderId { get; set; }
 
-        public string FullName { get; set; }
+    public string FullName { get; set; }
 
-        public string CreatedOn { get; set; }
+    public string CreatedOn { get; set; }
 
-        public bool CanChat { get; set; }
-    }
+    public bool CanChat { get; set; }
 }

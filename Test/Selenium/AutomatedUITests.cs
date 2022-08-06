@@ -1,65 +1,64 @@
-﻿namespace Test.Selenium
+﻿namespace Test.Selenium;
+
+using System;
+
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+using Xunit;
+
+public class AutomatedUITests : IDisposable
 {
-    using System;
+    private readonly IWebDriver driver;
+    private const string Url = "https://localhost:5001/";
 
-    using OpenQA.Selenium;
-    using OpenQA.Selenium.Chrome;
+    public AutomatedUITests()
+        =>
+            this.driver = new ChromeDriver();
 
-    using Xunit;
-
-    public class AutomatedUITests : IDisposable
+    public void Dispose()
     {
-        private readonly IWebDriver driver;
-        private const string Url = "https://localhost:5001/";
+        this.driver.Quit();
+        this.driver.Dispose();
+    }
 
-        public AutomatedUITests()
-            =>
-                this.driver = new ChromeDriver();
+    [Fact]
+    public void HomeReturnsIndexView()
+    {
+        this.driver.Navigate()
+            .GoToUrl(Url);
 
-        public void Dispose()
-        {
-            this.driver.Quit();
-            this.driver.Dispose();
-        }
+        Assert.Equal("Начало - Педиамед", this.driver.Title);
+        Assert.Contains("Добре дошли в Педиамед", this.driver.PageSource);
+    }
 
-        [Fact]
-        public void HomeReturnsIndexView()
-        {
-            this.driver.Navigate()
-                .GoToUrl(Url);
+    [Fact]
+    public void DoctorProfileReturnsView()
+    {
+        this.driver.Navigate()
+            .GoToUrl(Url + "Doctor/Profile");
 
-            Assert.Equal("Начало - Педиамед", this.driver.Title);
-            Assert.Contains("Добре дошли в Педиамед", this.driver.PageSource);
-        }
+        Assert.Equal("Професионален профил - Педиамед", this.driver.Title);
+        Assert.Contains("Биография", this.driver.PageSource);
+    }
 
-        [Fact]
-        public void DoctorProfileReturnsView()
-        {
-            this.driver.Navigate()
-                .GoToUrl(Url + "Doctor/Profile");
+    [Fact]
+    public void OfferAllReturnsView()
+    {
+        this.driver.Navigate()
+            .GoToUrl(Url + "Offer/All");
 
-            Assert.Equal("Професионален профил - Педиамед", this.driver.Title);
-            Assert.Contains("Биография", this.driver.PageSource);
-        }
+        Assert.Equal("Нашите услуги - Педиамед", this.driver.Title);
+        Assert.Contains("Вид услуга", this.driver.PageSource);
+    }
 
-        [Fact]
-        public void OfferAllReturnsView()
-        {
-            this.driver.Navigate()
-               .GoToUrl(Url + "Offer/All");
+    [Fact]
+    public void GaleryAllReturnsView()
+    {
+        this.driver.Navigate()
+            .GoToUrl(Url + "Gallery/All?page=1");
 
-            Assert.Equal("Нашите услуги - Педиамед", this.driver.Title);
-            Assert.Contains("Вид услуга", this.driver.PageSource);
-        }
-
-        [Fact]
-        public void GaleryAllReturnsView()
-        {
-            this.driver.Navigate()
-               .GoToUrl(Url + "Gallery/All?page=1");
-
-            Assert.Equal("Галерия - Педиамед", this.driver.Title);
-            Assert.Contains("Галерия", this.driver.PageSource);
-        }
+        Assert.Equal("Галерия - Педиамед", this.driver.Title);
+        Assert.Contains("Галерия", this.driver.PageSource);
     }
 }

@@ -1,13 +1,12 @@
-﻿namespace ViewModels.Chat
+﻿namespace ViewModels.Chat;
+
+using System.Collections.Generic;
+
+public class ChatWithUserViewModel
 {
-    using System.Collections.Generic;
+    public ChatUserViewModel User { get; set; }
 
-    public class ChatWithUserViewModel
-    {
-        public ChatUserViewModel User { get; set; }
+    public IEnumerable<ChatMessageWithUserViewModel> Messages { get; set; }
 
-        public IEnumerable<ChatMessageWithUserViewModel> Messages { get; set; }
-
-        public bool CanChat { get; set; }
-    }
+    public bool CanChat { get; set; }
 }

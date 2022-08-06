@@ -1,24 +1,23 @@
-﻿namespace Data.Models
+﻿namespace Data.Models;
+
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+using Data.Common.Models;
+
+using static Common.DataConstants.Constants;
+
+public class Specialization : BaseModel<int>
 {
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+    [Required]
+    [MaxLength(DefaultMaxLength)]
+    public string Name { get; set; }
 
-    using Data.Common.Models;
+    [MaxLength(DescriptionMaxLength)]
+    public string Description { get; set; }
 
-    using static Common.DataConstants.Constants;
+    [ForeignKey(nameof(Doctor))]
+    public string DoctorId { get; set; }
 
-    public class Specialization : BaseModel<int>
-    {
-        [Required]
-        [MaxLength(DefaultMaxLength)]
-        public string Name { get; set; }
-
-        [MaxLength(DescriptionMaxLength)]
-        public string Description { get; set; }
-
-        [ForeignKey(nameof(Doctor))]
-        public string DoctorId { get; set; }
-
-        public virtual Doctor Doctor { get; set; }
-    }
+    public virtual Doctor Doctor { get; set; }
 }

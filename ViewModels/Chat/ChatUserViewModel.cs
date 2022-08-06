@@ -1,21 +1,20 @@
-﻿namespace ViewModels.Chat
+﻿namespace ViewModels.Chat;
+
+using System.Collections.Generic;
+
+using Common;
+
+public class ChatUserViewModel : PagingModel
 {
-    using System.Collections.Generic;
+    public string Id { get; set; }
 
-    using Common;
+    public string FullName { get; set; }
 
-    public class ChatUserViewModel : PagingModel
-    {
-        public string Id { get; set; }
+    public string DoctorEmail { get; set; }
 
-        public string FullName { get; set; }
+    public string GroupName { get; set; }
 
-        public string DoctorEmail { get; set; }
+    public bool HasPaid { get; set; }
 
-        public string GroupName { get; set; }
-
-        public bool HasPaid { get; set; }
-
-        public IEnumerable<ChatConversationsViewModel> ChatModels { get; set; }
-    }
+    public IEnumerable<ChatConversationsViewModel> ChatModels { get; set; }
 }

@@ -1,37 +1,36 @@
-﻿namespace Test.ControllerUnitTests
+﻿namespace Test.ControllerUnitTests;
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Mvc;
+
+using Moq;
+
+using Neonatology.Controllers;
+
+using Services.OfferService;
+
+using ViewModels.Offer;
+
+using Xunit;
+
+public class OfferControllerTests
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-
-    using Microsoft.AspNetCore.Mvc;
-
-    using Moq;
-
-    using Neonatology.Controllers;
-
-    using Services.OfferService;
-
-    using ViewModels.Offer;
-
-    using Xunit;
-
-    public class OfferControllerTests
+    [Fact]
+    public async Task AllShouldReturnViewWithModel()
     {
-        [Fact]
-        public async Task AllShouldReturnViewWithModel()
-        {
-            var feedbacks = new List<OfferViewModel>();
-            var serviceMock = new Mock<IOfferService>();
-            serviceMock.Setup(x => x.GetAllAsync())
-                .ReturnsAsync(feedbacks);
+        var feedbacks = new List<OfferViewModel>();
+        var serviceMock = new Mock<IOfferService>();
+        serviceMock.Setup(x => x.GetAllAsync())
+            .ReturnsAsync(feedbacks);
 
-            var controller = new OfferController(serviceMock.Object);
+        var controller = new OfferController(serviceMock.Object);
 
-            var result = await controller.All();
+        var result = await controller.All();
 
-            var route = Assert.IsType<ViewResult>(result);
+        var route = Assert.IsType<ViewResult>(result);
 
-            Assert.IsAssignableFrom<ICollection<OfferViewModel>>(route.Model);
-        }
+        Assert.IsAssignableFrom<ICollection<OfferViewModel>>(route.Model);
     }
 }

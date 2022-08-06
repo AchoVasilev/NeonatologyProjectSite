@@ -1,19 +1,20 @@
-﻿namespace Services.CityService
+﻿namespace Services.CityService;
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Common;
+using ViewModels.Address;
+using ViewModels.City;
+
+public interface ICityService
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+    Task<ICollection<CityFormModel>> GetAllCities();
 
-    using ViewModels.Address;
-    using ViewModels.City;
+    Task<int> GetCityIdByName(string cityName);
 
-    public interface ICityService
-    {
-        Task<ICollection<CityFormModel>> GetAllCities();
+    Task<CityFormModel> GetCityById(int id);
 
-        Task<int> GetCityIdByName(string cityName);
+    Task<OperationResult> CityExists(int id);
 
-        Task<CityFormModel> GetCityById(int id);
-
-        Task<ICollection<AddressFormModel>> GetDoctorAddressesByDoctorId(string doctorId);
-    }
+    Task<ICollection<AddressFormModel>> GetDoctorAddressesByDoctorId(string doctorId);
 }

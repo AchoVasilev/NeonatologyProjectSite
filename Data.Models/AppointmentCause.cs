@@ -1,21 +1,20 @@
-﻿namespace Data.Models
+﻿namespace Data.Models;
+
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+using Data.Common.Models;
+
+using static Common.DataConstants.Constants;
+
+public class AppointmentCause : BaseModel<int>
 {
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+    [Required]
+    [MaxLength(DefaultMaxLength)]
+    public string Name { get; set; }
 
-    using Data.Common.Models;
+    [ForeignKey(nameof(Appointment))]
+    public int? AppointmentId { get; set; }
 
-    using static Common.DataConstants.Constants;
-
-    public class AppointmentCause : BaseModel<int>
-    {
-        [Required]
-        [MaxLength(DefaultMaxLength)]
-        public string Name { get; set; }
-
-        [ForeignKey(nameof(Appointment))]
-        public int? AppointmentId { get; set; }
-
-        public Appointment Appointment { get; set; }
-    }
+    public Appointment Appointment { get; set; }
 }

@@ -1,38 +1,37 @@
-﻿namespace Services
+﻿namespace Services;
+
+using System.Net.Http;
+using System.Threading.Tasks;
+
+using Microsoft.Extensions.Options;
+
+using Newtonsoft.Json;
+
+using ViewModels.GoogleRecaptcha;
+
+public class ReCaptchaService
 {
-    using System.Net.Http;
-    using System.Threading.Tasks;
+    private readonly RecaptchaSetting recaptchaSetting;
+    private const string VerifyLink = "https://www.google.com/recaptcha/api/siteverify";
 
-    using Microsoft.Extensions.Options;
-
-    using Newtonsoft.Json;
-
-    using ViewModels.GoogleRecaptcha;
-
-    public class ReCaptchaService
+    public ReCaptchaService(IOptions<RecaptchaSetting> recaptchaSetting)
     {
-        private readonly RecaptchaSetting recaptchaSetting;
-        private const string VerifyLink = "https://www.google.com/recaptcha/api/siteverify";
+        this.recaptchaSetting = recaptchaSetting.Value;
+    }
 
-        public ReCaptchaService(IOptions<RecaptchaSetting> recaptchaSetting)
+    public virtual async Task<RecaptchaResponse> ValidateResponse(string token)
+    {
+        var data = new RecaptchaData
         {
-            this.recaptchaSetting = recaptchaSetting.Value;
-        }
+            ResponseToken = token,
+            Secret = this.recaptchaSetting.SecretKey
+        };
 
-        public virtual async Task<RecaptchaResponse> ValidateResponse(string token)
-        {
-            var data = new RecaptchaData
-            {
-                ResponseToken = token,
-                Secret = this.recaptchaSetting.SecretKey
-            };
+        var client = new HttpClient();
 
-            var client = new HttpClient();
+        var response = await client.GetStringAsync(VerifyLink + $"?secret={data.Secret}&response={data.ResponseToken}");
+        var capturedResponse = JsonConvert.DeserializeObject<RecaptchaResponse>(response);
 
-            var response = await client.GetStringAsync(VerifyLink + $"?secret={data.Secret}&response={data.ResponseToken}");
-            var capturedResponse = JsonConvert.DeserializeObject<RecaptchaResponse>(response);
-
-            return capturedResponse;
-        }
+        return capturedResponse;
     }
 }

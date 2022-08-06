@@ -1,20 +1,19 @@
-﻿namespace ViewModels.Address
-{
-    using System.ComponentModel.DataAnnotations;
+﻿namespace ViewModels.Address;
 
-    using static Common.GlobalConstants;
-    using static Data.Common.DataConstants.Constants;
+using System.ComponentModel.DataAnnotations;
+
+using static Common.GlobalConstants;
+using static Data.Common.DataConstants.Constants;
     
-    public class EditAddressFormModel
-    {
-        public int Id { get; set; }
+public class EditAddressFormModel
+{
+    public int Id { get; set; }
 
-        [Required(ErrorMessage = MessageConstants.RequiredFieldErrorMsg)]
-        [Display(Name = AccountConstants.AddressName)]
-        [StringLength(AddressMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = MessageConstants.LengthErrorMsg)]
-        public string StreetName { get; set; }
+    [Required(ErrorMessage = MessageConstants.RequiredFieldErrorMsg)]
+    [Display(Name = AccountConstants.AddressName)]
+    [StringLength(AddressMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = MessageConstants.LengthErrorMsg)]
+    public string StreetName { get; set; }
 
-        [Display(Name = AccountConstants.CityName)]
-        public int CityId { get; set; }
-    }
+    [Display(Name = AccountConstants.CityName)]
+    public int CityId { get; set; }
 }

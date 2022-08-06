@@ -1,21 +1,20 @@
-﻿namespace Services.RatingService
+﻿namespace Services.RatingService;
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using ViewModels.Administration.Rating;
+using ViewModels.Rating;
+
+public interface IRatingService
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+    Task<bool> AddAsync(CreateRatingFormModel model);
 
-    using ViewModels.Administration.Rating;
-    using ViewModels.Rating;
+    Task<bool> ApproveRating(int appointmentId);
 
-    public interface IRatingService
-    {
-        Task<bool> AddAsync(CreateRatingFormModel model);
+    Task<bool> DeleteRating(int appointmentId);
 
-        Task<bool> ApproveRating(int appointmentId);
+    Task<int> GetRatingsCount();
 
-        Task<bool> DeleteRating(int appointmentId);
-
-        Task<int> GetRatingsCount();
-
-        Task<ICollection<RatingViewModel>> GetRatings();
-    }
+    Task<ICollection<RatingViewModel>> GetRatings();
 }

@@ -1,8 +1,7 @@
-﻿namespace Data.Models.Enums
+﻿namespace Data.Models.Enums;
+
+public enum SlotStatus
 {
-    public enum SlotStatus
-    {
-        Свободен = 1,
-        Зает = 2
-    }
+    Свободен = 1,
+    Зает = 2
 }

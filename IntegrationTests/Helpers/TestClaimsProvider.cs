@@ -1,41 +1,40 @@
-﻿namespace IntegrationTests.Helpers
+﻿namespace IntegrationTests.Helpers;
+
+using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+
+public class TestClaimsProvider
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Security.Claims;
+    public IList<Claim> Claims { get; }
 
-    public class TestClaimsProvider
+    public TestClaimsProvider(IList<Claim> claims)
     {
-        public IList<Claim> Claims { get; }
+        this.Claims = claims;
+    }
 
-        public TestClaimsProvider(IList<Claim> claims)
-        {
-            this.Claims = claims;
-        }
+    public TestClaimsProvider()
+    {
+        this.Claims = new List<Claim>();
+    }
 
-        public TestClaimsProvider()
-        {
-            this.Claims = new List<Claim>();
-        }
+    public static TestClaimsProvider WithAdminClaims()
+    {
+        var provider = new TestClaimsProvider();
+        provider.Claims.Add(new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()));
+        provider.Claims.Add(new Claim(ClaimTypes.Name, "Admin user"));
+        provider.Claims.Add(new Claim(ClaimTypes.Role, "Administrator"));
 
-        public static TestClaimsProvider WithAdminClaims()
-        {
-            var provider = new TestClaimsProvider();
-            provider.Claims.Add(new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()));
-            provider.Claims.Add(new Claim(ClaimTypes.Name, "Admin user"));
-            provider.Claims.Add(new Claim(ClaimTypes.Role, "Administrator"));
+        return provider;
+    }
 
-            return provider;
-        }
+    public static TestClaimsProvider WithUserClaims()
+    {
+        var provider = new TestClaimsProvider();
+        provider.Claims.Add(new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()));
+        provider.Claims.Add(new Claim(ClaimTypes.Name, "Patient"));
+        provider.Claims.Add(new Claim(ClaimTypes.Role, "Patient"));
 
-        public static TestClaimsProvider WithUserClaims()
-        {
-            var provider = new TestClaimsProvider();
-            provider.Claims.Add(new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()));
-            provider.Claims.Add(new Claim(ClaimTypes.Name, "Patient"));
-            provider.Claims.Add(new Claim(ClaimTypes.Role, "Patient"));
-
-            return provider;
-        }
+        return provider;
     }
 }

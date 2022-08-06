@@ -87,7 +87,7 @@ public class ProfileServiceTests
 
         var result = await profileService.EditProfileAsync(editModel);
 
-        Assert.True(result);
+        Assert.True(result.Succeeded);
     }
 
     [Fact]
@@ -130,6 +130,6 @@ public class ProfileServiceTests
 
         var result = await profileService.EditProfileAsync(editModel);
 
-        Assert.False(result);
+        Assert.True(result.Failed);
     }
 }

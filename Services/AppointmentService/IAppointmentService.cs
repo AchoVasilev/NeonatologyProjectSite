@@ -1,43 +1,42 @@
-﻿namespace Services.AppointmentService
+﻿namespace Services.AppointmentService;
+
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using Data.Models;
+
+using ViewModels.Appointments;
+
+public interface IAppointmentService
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+    Task<ICollection<AppointmentViewModel>> GetAllAppointments();
 
-    using Data.Models;
+    Task<ICollection<AppointmentViewModel>> GetGabrovoAppointments();
 
-    using ViewModels.Appointments;
+    Task<ICollection<AppointmentViewModel>> GetPlevenAppointments();
 
-    public interface IAppointmentService
-    {
-        Task<ICollection<AppointmentViewModel>> GetAllAppointments();
+    Task<AllAppointmentsViewModel> GetUpcomingUserAppointments(string patientId, int itemsPerPage, int page);
 
-        Task<ICollection<AppointmentViewModel>> GetGabrovoAppointments();
+    Task<AllAppointmentsViewModel> GetPastUserAppointments(string patientId, int itemsPerPage, int page);
 
-        Task<ICollection<AppointmentViewModel>> GetPlevenAppointments();
+    Task<AllAppointmentsViewModel> GetUpcomingDoctorAppointments(string doctorId, int itemsPerPage, int page);
 
-        Task<AllAppointmentsViewModel> GetUpcomingUserAppointments(string patientId, int itemsPerPage, int page);
+    Task<AllAppointmentsViewModel> GetPastDoctorAppointments(string doctorId, int itemsPerPage, int page);
 
-        Task<AllAppointmentsViewModel> GetPastUserAppointments(string patientId, int itemsPerPage, int page);
+    Task<ICollection<TakenAppointmentsViewModel>> GetTakenAppointmentSlots();
 
-        Task<AllAppointmentsViewModel> GetUpcomingDoctorAppointments(string doctorId, int itemsPerPage, int page);
+    Task<bool> AddAsync(string doctorId, CreateAppointmentModel model, DateTime startDate, DateTime endDate);
 
-        Task<AllAppointmentsViewModel> GetPastDoctorAppointments(string doctorId, int itemsPerPage, int page);
+    Task<bool> AddAsync(string doctorId, PatientAppointmentCreateModel model, DateTime startDate, DateTime endDate);
 
-        Task<ICollection<TakenAppointmentsViewModel>> GetTakenAppointmentSlots();
+    Task<AppointmentViewModel> GetUserAppointmentAsync(string userId, int appointmentId);
 
-        Task<bool> AddAsync(string doctorId, CreateAppointmentModel model, DateTime startDate, DateTime endDate);
+    Task<Appointment> GetAppointmentByIdAsync(int id);
 
-        Task<bool> AddAsync(string doctorId, PatientAppointmentCreateModel model, DateTime startDate, DateTime endDate);
+    Task<ICollection<AppointmentViewModel>> GetTodaysAppointments(string doctorUserId);
 
-        Task<AppointmentViewModel> GetUserAppointmentAsync(string userId, int appointmentId);
+    Task<int> GetTotalAppointmentsCount();
 
-        Task<Appointment> GetAppointmentByIdAsync(int id);
-
-        Task<ICollection<AppointmentViewModel>> GetTodaysAppointments(string doctorUserId);
-
-        Task<int> GetTotalAppointmentsCount();
-
-        Task<bool> DeleteAppointment(int appointmentId);
-    }
+    Task<bool> DeleteAppointment(int appointmentId);
 }

@@ -1,18 +1,17 @@
-﻿namespace ViewModels.Address
+﻿namespace ViewModels.Address;
+
+using System.ComponentModel.DataAnnotations;
+
+using City;
+
+using static Data.Common.DataConstants.Constants;
+
+public class AddressFormModel
 {
-    using System.ComponentModel.DataAnnotations;
+    public int Id { get; set; }
 
-    using City;
+    [MaxLength(AddressMaxLength)]
+    public string StreetName { get; set; }
 
-    using static Data.Common.DataConstants.Constants;
-
-    public class AddressFormModel
-    {
-        public int Id { get; set; }
-
-        [MaxLength(AddressMaxLength)]
-        public string StreetName { get; set; }
-
-        public CityFormModel City { get; set; }
-    }
+    public CityFormModel City { get; set; }
 }

@@ -1,25 +1,24 @@
-﻿namespace Services.OfferService
+﻿namespace Services.OfferService;
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using ViewModels.Administration.Offer;
+using ViewModels.Offer;
+
+public interface IOfferService
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+    Task<ICollection<OfferViewModel>> GetAllAsync();
 
-    using ViewModels.Administration.Offer;
-    using ViewModels.Offer;
+    Task<int> GetOnlineConsultationId();
 
-    public interface IOfferService
-    {
-        Task<ICollection<OfferViewModel>> GetAllAsync();
+    Task<OfferViewModel> GetOnlineConsultationModelAsync();
 
-        Task<int> GetOnlineConsultationId();
+    Task<bool> DeleteOffer(int offerId);
 
-        Task<OfferViewModel> GetOnlineConsultationModelAsync();
+    Task AddOffer(CreateOfferFormModel model);
 
-        Task<bool> DeleteOffer(int offerId);
+    Task<EditOfferFormModel> GetOffer(int id);
 
-        Task AddOffer(CreateOfferFormModel model);
-
-        Task<EditOfferFormModel> GetOffer(int id);
-
-        Task<bool> EditOffer(EditOfferFormModel model);
-    }
+    Task<bool> EditOffer(EditOfferFormModel model);
 }
