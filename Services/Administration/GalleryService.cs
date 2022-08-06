@@ -8,13 +8,14 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using CloudinaryDotNet;
 using Common;
+using Common.Models;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using FileService;
 using ViewModels.Administration.Galery;
-using static Common.GlobalConstants.FileConstants;
+using static Common.Constants.GlobalConstants.FileConstants;
 
-using static Common.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
 
 public class GalleryService : IGalleryService
 {

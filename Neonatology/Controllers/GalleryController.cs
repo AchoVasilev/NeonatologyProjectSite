@@ -10,8 +10,8 @@ using Services.FileService;
 
 using ViewModels.Gallery;
 
-using static Common.GlobalConstants;
-using static Common.GlobalConstants.FileConstants;
+using static Common.Constants.GlobalConstants;
+using static Common.Constants.GlobalConstants.FileConstants;
 
 public class GalleryController : BaseController
 {

@@ -10,8 +10,8 @@ using Services.DoctorService;
 using Services.PatientService;
 using Services.RatingService;
 using ViewModels.Rating;
-using static Common.GlobalConstants;
-using static Common.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
 
 [Authorize]
 public class RatingController : BaseController

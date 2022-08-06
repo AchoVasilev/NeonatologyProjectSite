@@ -11,7 +11,7 @@ using Services.ProfileService;
 
 using ViewModels.Profile;
 
-using static Common.GlobalConstants;
+using static Common.Constants.GlobalConstants;
 
 [Authorize(Roles = $"{PatientRoleName}, {AdministratorRoleName}")]
 public class ProfileController : BaseController

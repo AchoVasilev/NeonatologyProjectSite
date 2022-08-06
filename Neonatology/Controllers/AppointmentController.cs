@@ -12,7 +12,7 @@ using Services.PatientService;
 
 using ViewModels.Appointments;
 
-using static Common.GlobalConstants;
+using static Common.Constants.GlobalConstants;
     
 
 public class AppointmentController : BaseController

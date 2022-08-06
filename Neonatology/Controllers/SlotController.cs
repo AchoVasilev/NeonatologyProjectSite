@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using Services.SlotService;
 
-using static Common.GlobalConstants;
+using static Common.Constants.GlobalConstants;
 
 public class SlotController : BaseController
 {

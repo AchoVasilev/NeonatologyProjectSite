@@ -1149,7 +1149,7 @@ public class AppointmentServiceTests
         await dataMock.Doctors.AddAsync(doctor);
         await dataMock.SaveChangesAsync();
 
-        var model = new CreateAppointmentModel()
+        var model = new CreateAppointmentServiceModel()
         {
             AppointmentCauseId = 1,
             ChildFirstName = "Evlogi",
@@ -1165,7 +1165,7 @@ public class AppointmentServiceTests
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.AddAsync(doctor.Id, model, DateTime.UtcNow, DateTime.UtcNow.AddDays(1));
 
-        Assert.True(result);
+        Assert.True(result.Succeeded);
         Assert.Equal(1, dataMock.Appointments.Count());
     }
 
@@ -1207,7 +1207,7 @@ public class AppointmentServiceTests
         await dataMock.Appointments.AddAsync(appointment);
         await dataMock.SaveChangesAsync();
 
-        var model = new CreateAppointmentModel()
+        var model = new CreateAppointmentServiceModel()
         {
             AppointmentCauseId = 1,
             ChildFirstName = "Evlogi",
@@ -1224,7 +1224,7 @@ public class AppointmentServiceTests
         var result = await service.AddAsync(doctor.Id, model, DateTime.ParseExact(model.Start, "dd.MM.yyyy HH:mm", null),
             DateTime.ParseExact(model.End, "dd.MM.yyyy HH:mm", null));
 
-        Assert.False(result);
+        Assert.True(result.Failed);
     }
 
     [Fact]
@@ -1261,7 +1261,7 @@ public class AppointmentServiceTests
         await dataMock.Patients.AddAsync(patient);
         await dataMock.SaveChangesAsync();
 
-        var model = new PatientAppointmentCreateModel()
+        var model = new CreatePatientAppointmentModel()
         {
             PatientId = "pat",
             AppointmentCauseId = 1,
@@ -1275,7 +1275,7 @@ public class AppointmentServiceTests
         var result = await service.AddAsync(doctor.Id, model, DateTime.ParseExact(model.Start, "dd.MM.yyyy HH:mm", null),
             DateTime.ParseExact(model.End, "dd.MM.yyyy HH:mm", null));
 
-        Assert.True(result);
+        Assert.True(result.Succeeded);
         Assert.Equal(1, dataMock.Appointments.Count());
     }
 
@@ -1317,7 +1317,7 @@ public class AppointmentServiceTests
         await dataMock.Appointments.AddAsync(appointment);
         await dataMock.SaveChangesAsync();
 
-        var model = new PatientAppointmentCreateModel()
+        var model = new CreatePatientAppointmentModel()
         {
             AppointmentCauseId = 1,
             ChildFirstName = "Evlogi",
@@ -1330,7 +1330,7 @@ public class AppointmentServiceTests
         var result = await service.AddAsync(doctor.Id, model, DateTime.ParseExact(model.Start, "dd.MM.yyyy HH:mm", null),
             DateTime.ParseExact(model.End, "dd.MM.yyyy HH:mm", null));
 
-        Assert.False(result);
+        Assert.True(result.Failed);
     }
 
     [Fact]

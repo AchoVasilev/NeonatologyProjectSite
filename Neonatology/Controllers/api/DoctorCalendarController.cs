@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 using ViewModels.Slot;
 
-using static Common.GlobalConstants;
-using static Common.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
 using Services.AppointmentService;
 using Services.SlotService;
 

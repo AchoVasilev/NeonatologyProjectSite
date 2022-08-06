@@ -16,8 +16,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using static Common.GlobalConstants.AccountConstants;
-using static Common.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.AccountConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
 
 public class ForgotPasswordModel : PageModel
 {

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Common;
+using Common.Models;
 using Data;
 using Data.Models;
 
@@ -15,8 +16,8 @@ using Microsoft.EntityFrameworkCore;
 
 using ViewModels.Appointments;
 
-using static Common.GlobalConstants.DoctorConstants;
-using static Common.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.DoctorConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
 
 public class AppointmentService : IAppointmentService
 {
@@ -152,8 +153,13 @@ public class AppointmentService : IAppointmentService
             })
             .ToListAsync();
 
-    public async Task<bool> AddAsync(string doctorId, CreateAppointmentModel model, DateTime startDate, DateTime endDate)
+    public async Task<OperationResult> AddAsync(string doctorId, CreateAppointmentServiceModel model, DateTime startDate, DateTime endDate)
     {
+        if (startDate.Date < DateTime.Now.Date && startDate.Hour < DateTime.Now.Hour)
+        {
+            return AppointmentBeforeNowErrorMsg;
+        }
+        
         var doctorAppointment = await this.data.Doctors
             .FirstOrDefaultAsync(x => x.Id == doctorId && x.Appointments.Any(a => a.DateTime.Year == startDate.Year &&
                 a.DateTime.Day == startDate.Day &&
@@ -162,7 +168,7 @@ public class AppointmentService : IAppointmentService
 
         if (doctorAppointment != null)
         {
-            return false;
+            return TakenDateMsg;
         }
 
         var appointment = new Appointment()
@@ -184,8 +190,13 @@ public class AppointmentService : IAppointmentService
         return true;
     }
 
-    public async Task<bool> AddAsync(string doctorId, PatientAppointmentCreateModel model, DateTime startDate, DateTime endDate)
+    public async Task<OperationResult> AddAsync(string doctorId, CreatePatientAppointmentModel model, DateTime startDate, DateTime endDate)
     {
+        if (startDate.Date < DateTime.Now.Date && startDate.Hour < DateTime.Now.Hour)
+        {
+            return AppointmentBeforeNowErrorMsg;
+        }
+        
         var doctorAppointment = await this.data.Doctors
             .FirstOrDefaultAsync(x => x.Id == doctorId && x.Appointments.Any(a => a.DateTime.Year == startDate.Year &&
                 a.DateTime.Day == startDate.Day &&
@@ -194,15 +205,15 @@ public class AppointmentService : IAppointmentService
 
         if (doctorAppointment != null)
         {
-            return false;
+            return TakenDateMsg;
         }
 
         var patient = await this.data.Patients
             .FirstOrDefaultAsync(x => x.Id == model.PatientId);
 
-        if (patient == null)
+        if (patient is null)
         {
-            return false;
+            return PatientDoesNotExistErrorMsg;
         }
 
         var appointment = new Appointment()

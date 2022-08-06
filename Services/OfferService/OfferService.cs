@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Common;
+using Common.Models;
 using Data;
 using Data.Models;
 
@@ -16,7 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using ViewModels.Administration.Offer;
 using ViewModels.Offer;
 
-using static Common.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
 
 public class OfferService : IOfferService
 {
@@ -59,7 +60,7 @@ public class OfferService : IOfferService
 
         if (model is null)
         {
-            return OfferDoesNotExist;
+            return OfferDoesNotExistErrorMsg;
         }
 
         model.IsDeleted = true;
@@ -97,7 +98,7 @@ public class OfferService : IOfferService
 
         if (offer is null)
         {
-            return OfferDoesNotExist;
+            return OfferDoesNotExistErrorMsg;
         }
 
         offer.Name = model.Name;

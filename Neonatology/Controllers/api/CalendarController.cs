@@ -3,6 +3,7 @@
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -15,7 +16,8 @@ using Services.SlotService;
 
 using ViewModels.Appointments;
 
-using static Common.GlobalConstants;
+using static Common.Constants.GlobalConstants;
+using static Common.Constants.WebConstants.RouteTemplates;
 
 [ApiController]
 [Route("[controller]")]
@@ -26,23 +28,27 @@ public class CalendarController : ControllerBase
     private readonly IPatientService patientService;
     private readonly IAppointmentCauseService appointmentCauseService;
     private readonly IEmailSender emailSender;
+    private readonly IMapper mapper;
 
     public CalendarController(
         ISlotService slotService,
         IAppointmentService appointmentService,
         IEmailSender emailSender,
         IAppointmentCauseService appointmentCauseService,
-        IPatientService patientService)
+        IPatientService patientService, 
+        IMapper mapper)
     {
         this.slotService = slotService;
         this.appointmentService = appointmentService;
         this.emailSender = emailSender;
         this.patientService = patientService;
+        this.mapper = mapper;
         this.appointmentCauseService = appointmentCauseService;
     }
 
     [AllowAnonymous]
-    [HttpGet("getSlots/gabrovo")]
+    [HttpGet]
+    [Route(CalendarGetGabrovoSlots)]
     public async Task<JsonResult> GetCalendarGabrovoSlots()
     {
         var slots = await this.slotService.GetFreeGabrovoSlots();
@@ -51,7 +57,8 @@ public class CalendarController : ControllerBase
     }
 
     [AllowAnonymous]
-    [HttpGet("getSlots/pleven")]
+    [HttpGet]
+    [Route(CalendarGetPlevenSlots)]
     public async Task<JsonResult> GetCalendarPlevenSlots()
     {
         var slots = await this.slotService.GetFreePlevenSlots();
@@ -60,21 +67,17 @@ public class CalendarController : ControllerBase
     }
         
     [AllowAnonymous]
-    [HttpPost("makeAppointment/{id}")]
+    [HttpPost]
+    [Route(CalendarMakeAnAppointment)]
     public async Task<IActionResult> MakeAnAppointment(CreateAppointmentModel model, string id)
     {
         var startDate = DateTime.Parse(model.Start);
         var endDate = DateTime.Parse(model.End);
 
-        var cause = await this.appointmentCauseService.GetAppointmentCauseByIdAsync(model.AppointmentCauseId);
-        if (cause == null)
+        var cause = await this.appointmentCauseService.AppointmentCauseExists(model.AppointmentCauseId);
+        if (cause.Failed)
         {
-            return this.BadRequest(new { message = MessageConstants.AppointmentCauseWrongId });
-        }
-
-        if (startDate.Date < DateTime.Now.Date && startDate.Hour < DateTime.Now.Hour)
-        {
-            return this.BadRequest(new { message = MessageConstants.AppointmentBeforeNowErrorMsg });
+            return this.BadRequest(new { message = cause.Error });
         }
 
         if (await this.patientService.PatientExists(model.Email))
@@ -82,10 +85,11 @@ public class CalendarController : ControllerBase
             return this.BadRequest(new { message = MessageConstants.PatientIsRegistered });
         }
 
-        var result = await this.appointmentService.AddAsync(model.DoctorId, model, startDate, endDate);
-        if (result == false)
+        var serviceModel = this.mapper.Map<CreateAppointmentServiceModel>(model);
+        var result = await this.appointmentService.AddAsync(model.DoctorId, serviceModel, startDate, endDate);
+        if (result.Failed)
         {
-            return this.BadRequest(new { message = MessageConstants.TakenDateMsg });
+            return this.BadRequest(new { message = result.Error });
         }
 
         var slotId = await this.slotService.DeleteSlotById(int.Parse(id));
@@ -117,39 +121,42 @@ public class CalendarController : ControllerBase
     }
 
     [Authorize(Roles = PatientRoleName)]
-    [HttpPost("makePatientAppointment/{id}")]
+    [HttpPost]
+    [Route(CalendarMakePatientAppointment)]
     public async Task<IActionResult> MakePatientAppointment(PatientAppointmentCreateModel model, string id)
     {
         var startDate = DateTime.Parse(model.Start);
         var endDate = DateTime.Parse(model.End);
-        var cause = await this.appointmentCauseService.GetAppointmentCauseByIdAsync(model.AppointmentCauseId);
-        if (cause == null)
+        var cause = await this.appointmentCauseService.AppointmentCauseExists(model.AppointmentCauseId);
+        if (cause.Failed)
         {
-            return this.BadRequest(new { message = MessageConstants.AppointmentCauseWrongId });
-        }
-
-        if (startDate.Date < DateTime.Now.Date && startDate.Hour < DateTime.Now.Hour)
-        {
-            return this.BadRequest(new { message = MessageConstants.AppointmentBeforeNowErrorMsg });
+            return this.BadRequest(new { message = cause.Error });
         }
 
         var userId = this.User.GetId();
-        var userEmail = this.User.FindFirst(ClaimTypes.Email).Value;
         var patientId = await this.patientService.GetPatientIdByUserId(userId);
 
         model.PatientId = patientId;
-        var result = await this.appointmentService.AddAsync(model.DoctorId, model, startDate, endDate);
+        
+        var serviceModel = this.mapper.Map<CreatePatientAppointmentModel>(model);
+        
+        var result = await this.appointmentService.AddAsync(model.DoctorId, serviceModel, startDate, endDate);
+        if (result.Failed)
+        {
+            return this.BadRequest(new { message = result.Error });
+        }
 
-        if (result == false)
+        var slotId = await this.slotService.DeleteSlotById(int.Parse(id));
+        if (slotId == 0)
         {
             return this.BadRequest(new { message = MessageConstants.TakenDateMsg });
         }
-
-        await this.slotService.DeleteSlotById(int.Parse(id));
-
+        
         var emailMsg = string
             .Format(MessageConstants.AppointmentMakeEmailMsg, 
                 startDate.ToString(DateTimeFormats.TimeFormat), startDate.ToString(DateTimeFormats.DateFormat));
+
+        var userEmail = this.User.FindFirst(ClaimTypes.Email).Value;
 
         try
         {

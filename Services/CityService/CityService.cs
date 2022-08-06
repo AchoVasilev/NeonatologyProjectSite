@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Common;
+using Common.Models;
 using Data;
 
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using ViewModels.Address;
 using ViewModels.City;
 
-using static Common.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
 public class CityService : ICityService
 {
     private readonly NeonatologyDbContext data;

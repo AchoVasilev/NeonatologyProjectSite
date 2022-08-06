@@ -12,8 +12,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using static Common.GlobalConstants.MessageConstants;
-using static Common.GlobalConstants.AccountConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.AccountConstants;
 
 public class ResetPasswordModel : PageModel
 {

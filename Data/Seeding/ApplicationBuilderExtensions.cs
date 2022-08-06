@@ -16,7 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Identity;
-using static global::Common.GlobalConstants;
+using static global::Common.Constants.GlobalConstants;
 
 public static class ApplicationBuilderExtensions
 {

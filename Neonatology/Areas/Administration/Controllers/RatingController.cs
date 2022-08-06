@@ -3,7 +3,7 @@
 using System.Threading.Tasks;
 using Services.RatingService;
 using Microsoft.AspNetCore.Mvc;
-using static Common.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
 
 public class RatingController : BaseController
 {

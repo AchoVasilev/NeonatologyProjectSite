@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using ViewModels.Administration.Appointment;
 
-using static Common.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
 
 public class AppointmentController : BaseController
 {

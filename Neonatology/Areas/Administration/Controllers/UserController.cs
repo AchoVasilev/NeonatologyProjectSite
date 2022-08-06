@@ -9,7 +9,7 @@ using Services.ProfileService;
 using ViewModels.Profile;
 using Microsoft.AspNetCore.Mvc;
 using ViewModels.Administration.User;
-using static Common.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
 using Data.Models;
 using Microsoft.AspNetCore.Identity;
 

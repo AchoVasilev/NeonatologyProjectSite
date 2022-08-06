@@ -1,10 +1,10 @@
 ﻿namespace ViewModels.Patient;
 
 using System.ComponentModel.DataAnnotations;
-
+using Common.Constants;
 using static Data.Common.DataConstants.Constants;
-using static Common.GlobalConstants.MessageConstants;
-using static Common.GlobalConstants.AccountConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.AccountConstants;
 
 public class PatientViewModel
 {
@@ -20,7 +20,7 @@ public class PatientViewModel
     [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
     public string LastName { get; set; }
 
-    [Display(Name = Common.GlobalConstants.AccountConstants.Phone)]
+    [Display(Name = GlobalConstants.AccountConstants.Phone)]
     [Required(ErrorMessage = RequiredFieldErrorMsg)]
     [Phone]
     public string Phone { get; set; }

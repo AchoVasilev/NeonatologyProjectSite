@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
+using Common.Models;
 using ViewModels.Address;
 using ViewModels.Doctor;
 

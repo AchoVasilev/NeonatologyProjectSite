@@ -3,8 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using static Common.GlobalConstants.MessageConstants;
-using static Common.GlobalConstants.AccountConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.AccountConstants;
 using static Data.Common.DataConstants.Constants;
 using City;
 using Microsoft.AspNetCore.Http;

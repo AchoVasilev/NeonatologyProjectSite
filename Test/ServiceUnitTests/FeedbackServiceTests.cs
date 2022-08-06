@@ -26,7 +26,7 @@ public class FeedbackServiceTests
 
         var service = new FeedbackService(dataMock, mapperMock);
 
-        var model = new FeedbackInputModel()
+        var model = new CreateFeedbackModel()
         {
             Email = "gosho@gosho.bg",
             Comment = "goshogoshogoshogosho",

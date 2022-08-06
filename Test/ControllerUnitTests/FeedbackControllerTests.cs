@@ -5,7 +5,7 @@ using Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-
+using Mocks;
 using Moq;
 
 using Neonatology.Controllers;
@@ -21,7 +21,7 @@ public class FeedbackControllerTests
     [Fact]
     public void SendShouldReturnViewWithModel()
     {
-        var controller = new FeedbackController(null);
+        var controller = new FeedbackController(null, null);
 
         var result = controller.Send();
 
@@ -34,8 +34,9 @@ public class FeedbackControllerTests
     public async Task SendShouldRedirectToIndexHomeIfSuccessfulWithTempDataMessage()
     {
         var serviceMock = new Mock<IFeedbackService>();
-
-        var controller = new FeedbackController(serviceMock.Object);
+        var mapper = MapperMock.Instance;
+        
+        var controller = new FeedbackController(serviceMock.Object, mapper);
 
         var httpContext = new DefaultHttpContext();
         var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
@@ -64,8 +65,8 @@ public class FeedbackControllerTests
     public async Task MyFeedbacksShouldReturnViewAndModelWhenSuccessful()
     {
         var serviceMock = new Mock<IFeedbackService>();
-
-        var controller = new FeedbackController(serviceMock.Object);
+        
+        var controller = new FeedbackController(serviceMock.Object, null);
 
         var httpContext = new DefaultHttpContext();
         var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())

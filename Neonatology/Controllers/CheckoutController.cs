@@ -14,8 +14,8 @@ using Stripe;
 using Stripe.Checkout;
 using ViewModels.Payment;
 using ViewModels.Stripe;
-using static Common.WebConstants.RouteTemplates;
-using static Common.WebConstants.CheckoutConstants;
+using static Common.Constants.WebConstants.RouteTemplates;
+using static Common.Constants.WebConstants.CheckoutConstants;
 
 [IgnoreAntiforgeryToken]
 public class CheckoutController : BaseController

@@ -1,4 +1,4 @@
-namespace Infrastructure.CustomAttributes;
+namespace Common.Attributes;
 
 using System;
 

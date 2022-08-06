@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Services.NotificationService;
-using static Common.GlobalConstants.NotificationConstants;
-using static Common.WebConstants.RouteTemplates;
+using static Common.Constants.GlobalConstants.NotificationConstants;
+using static Common.Constants.WebConstants.RouteTemplates;
 
 [Authorize]
 public class NotificationController : BaseController

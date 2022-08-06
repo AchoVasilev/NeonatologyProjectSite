@@ -3,7 +3,7 @@
 using System.ComponentModel.DataAnnotations;
 
 using static Data.Common.DataConstants.Constants;
-using static Common.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
 using System.Collections.Generic;
 
 public class PatientAppointmentCreateModel

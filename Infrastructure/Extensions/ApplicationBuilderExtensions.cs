@@ -2,7 +2,7 @@ namespace Infrastructure.Extensions;
 
 using Hubs;
 using Microsoft.AspNetCore.Builder;
-using static Common.WebConstants.ApplicationBuilderExtensionsConstants;
+using static Common.Constants.WebConstants.ApplicationBuilderExtensionsConstants;
 public static class ApplicationBuilderExtensions
 {
     public static IApplicationBuilder UseMvcWithWithAreas(this IApplicationBuilder builder)

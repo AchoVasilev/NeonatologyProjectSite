@@ -2,7 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-using static Common.GlobalConstants;
+using static Common.Constants.GlobalConstants;
 using static Data.Common.DataConstants.Constants;
     
 public class EditAddressFormModel

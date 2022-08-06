@@ -22,7 +22,7 @@ using ViewModels.Profile;
 using ViewModels.Rating;
 using ViewModels.Slot;
 
-using static Common.GlobalConstants.DateTimeFormats;
+using static Common.Constants.GlobalConstants.DateTimeFormats;
 using GalleryViewModel = ViewModels.Administration.Galery.GalleryViewModel;
 
 public class MappingProfile : Profile
@@ -106,7 +106,10 @@ public class MappingProfile : Profile
         this.CreateMap<Patient, ProfileViewModel>();
         this.CreateMap<EditProfileFormModel, EditProfileModel>();
         this.CreateMap<CreateRatingFormModel, CreateRatingModel>();
-
+        this.CreateMap<FeedbackInputModel, CreateFeedbackModel>();
+        this.CreateMap<CreateAppointmentModel, CreateAppointmentServiceModel>();
+        this.CreateMap<PatientAppointmentCreateModel, CreatePatientAppointmentModel>();
+        
         this.CreateMap<Feedback, FeedbackViewModel>()
             .ForMember(x => x.CreatedOn, opt =>
                 opt.MapFrom(x => x.CreatedOn.ToString(DateTimeFormat)));

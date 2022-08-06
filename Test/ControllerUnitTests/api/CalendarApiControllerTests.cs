@@ -21,7 +21,7 @@ public class CalendarApiControllerTests
         slotServiceMock.Setup(x => x.GetFreeGabrovoSlots())
             .ReturnsAsync(model);
 
-        var controller = new CalendarController(slotServiceMock.Object, null, null, null, null);
+        var controller = new CalendarController(slotServiceMock.Object, null, null, null, null, null);
 
         var result = await controller.GetCalendarGabrovoSlots();
 
@@ -36,7 +36,7 @@ public class CalendarApiControllerTests
         slotServiceMock.Setup(x => x.GetFreePlevenSlots())
             .ReturnsAsync(model);
 
-        var controller = new CalendarController(slotServiceMock.Object, null, null, null, null);
+        var controller = new CalendarController(slotServiceMock.Object, null, null, null, null, null);
 
         var result = await controller.GetCalendarGabrovoSlots();
 

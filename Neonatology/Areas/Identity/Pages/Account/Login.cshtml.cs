@@ -19,7 +19,7 @@ using Microsoft.Extensions.Logging;
 
 using Services;
 
-using static Common.GlobalConstants;
+using static Common.Constants.GlobalConstants;
 
 public class LoginModel : PageModel
 {

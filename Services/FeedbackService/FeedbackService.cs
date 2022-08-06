@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Common;
+using Common.Models;
 using Data;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
 using ViewModels.Feedback;
-using static Common.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
 
 public class FeedbackService : IFeedbackService
 {
@@ -24,7 +25,7 @@ public class FeedbackService : IFeedbackService
         this.mapper = mapper;
     }
 
-    public async Task CreateFeedback(FeedbackInputModel model)
+    public async Task CreateFeedback(CreateFeedbackModel model)
     {
         var feedback = new Feedback
         {

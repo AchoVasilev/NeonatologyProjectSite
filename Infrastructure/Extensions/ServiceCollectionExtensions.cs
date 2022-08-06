@@ -34,7 +34,7 @@ using Services.RatingService;
 using Services.SlotService;
 using Services.SpecializationService;
 using Services.UserService;
-using static Common.WebConstants.ServiceCollectionExtensionsConstants;
+using static Common.Constants.WebConstants.ServiceCollectionExtensionsConstants;
 
 public static class ServiceCollectionExtensions
 {

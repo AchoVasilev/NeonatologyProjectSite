@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
+using Common.Models;
 using Data;
 
 using Microsoft.EntityFrameworkCore;
 
 using ViewModels.Appointments;
-
+using static Common.Constants.GlobalConstants.MessageConstants;
 public class AppointmentCauseService : IAppointmentCauseService
 {
     private readonly NeonatologyDbContext data;
@@ -37,4 +37,17 @@ public class AppointmentCauseService : IAppointmentCauseService
             .AsNoTracking()
             .ProjectTo<AppointmentCauseViewModel>(this.mapper.ConfigurationProvider)
             .FirstOrDefaultAsync();
+
+    public async Task<OperationResult> AppointmentCauseExists(int id)
+    {
+        var exists = await this.data.AppointmentCauses
+            .AnyAsync(x => x.Id == id && x.IsDeleted == false);
+
+        if (exists)
+        {
+            return AppointmentCauseWrongId;
+        }
+
+        return true;
+    }
 }

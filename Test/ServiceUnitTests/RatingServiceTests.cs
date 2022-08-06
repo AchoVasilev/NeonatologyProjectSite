@@ -50,7 +50,7 @@ public class RatingServiceTests
         await dataMock.Patients.AddAsync(patient);
         await dataMock.SaveChangesAsync();
 
-        var model = new PatientAppointmentCreateModel()
+        var model = new CreatePatientAppointmentModel()
         {
             PatientId = "pat",
             AppointmentCauseId = 1,
@@ -116,7 +116,7 @@ public class RatingServiceTests
         await dataMock.Patients.AddAsync(patient);
         await dataMock.SaveChangesAsync();
 
-        var model = new PatientAppointmentCreateModel()
+        var model = new CreatePatientAppointmentModel()
         {
             PatientId = "pat",
             AppointmentCauseId = 1,
@@ -180,7 +180,7 @@ public class RatingServiceTests
         await dataMock.Patients.AddAsync(patient);
         await dataMock.SaveChangesAsync();
 
-        var model = new PatientAppointmentCreateModel()
+        var model = new CreatePatientAppointmentModel()
         {
             PatientId = "pat",
             AppointmentCauseId = 1,
@@ -249,7 +249,7 @@ public class RatingServiceTests
         await dataMock.Patients.AddAsync(patient);
         await dataMock.SaveChangesAsync();
 
-        var model = new PatientAppointmentCreateModel()
+        var model = new CreatePatientAppointmentModel()
         {
             PatientId = "pat",
             AppointmentCauseId = 1,
@@ -317,7 +317,7 @@ public class RatingServiceTests
         await dataMock.Patients.AddAsync(patient);
         await dataMock.SaveChangesAsync();
 
-        var model = new PatientAppointmentCreateModel()
+        var model = new CreatePatientAppointmentModel()
         {
             PatientId = "pat",
             AppointmentCauseId = 1,
@@ -386,7 +386,7 @@ public class RatingServiceTests
         await dataMock.Patients.AddAsync(patient);
         await dataMock.SaveChangesAsync();
 
-        var model = new PatientAppointmentCreateModel()
+        var model = new CreatePatientAppointmentModel()
         {
             PatientId = "pat",
             AppointmentCauseId = 1,
@@ -454,7 +454,7 @@ public class RatingServiceTests
         await dataMock.Patients.AddAsync(patient);
         await dataMock.SaveChangesAsync();
 
-        var model = new PatientAppointmentCreateModel()
+        var model = new CreatePatientAppointmentModel()
         {
             PatientId = "pat",
             AppointmentCauseId = 1,
@@ -522,7 +522,7 @@ public class RatingServiceTests
         await dataMock.Patients.AddAsync(patient);
         await dataMock.SaveChangesAsync();
 
-        var model = new PatientAppointmentCreateModel()
+        var model = new CreatePatientAppointmentModel()
         {
             PatientId = "pat",
             AppointmentCauseId = 1,

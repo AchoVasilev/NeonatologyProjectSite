@@ -1,6 +1,6 @@
 ﻿namespace ViewModels.Feedback;
 
-using static Common.GlobalConstants;
+using static Common.Constants.GlobalConstants;
 public class FeedbackReplyModel
 {
     public int FeedbackId { get; set; }

@@ -6,8 +6,8 @@ using Services.FileService;
 using Microsoft.AspNetCore.Mvc;
 using Services.Administration;
 using ViewModels.Administration.Galery;
-using static Common.GlobalConstants.MessageConstants;
-using static Common.GlobalConstants.FileConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.FileConstants;
 using ViewModels.Gallery;
 
 public class GalleryController : BaseController

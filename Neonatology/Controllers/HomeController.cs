@@ -10,7 +10,7 @@ using Services.DoctorService;
 using ViewModels.ErrorViewModel;
 using ViewModels.Home;
 
-using static Common.WebConstants.RouteTemplates;
+using static Common.Constants.WebConstants.RouteTemplates;
 public class HomeController : BaseController
 {
     private readonly IDoctorService doctorService;

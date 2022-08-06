@@ -15,7 +15,7 @@ using Data.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 using ViewModels.Slot;
-using static Common.GlobalConstants.DoctorConstants;
+using static Common.Constants.GlobalConstants.DoctorConstants;
 
 public class SlotService : ISlotService
 {

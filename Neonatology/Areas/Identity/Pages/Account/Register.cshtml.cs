@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Common.Constants;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Data.Models;
@@ -12,8 +13,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using static Common.GlobalConstants.MessageConstants;
-using static Common.GlobalConstants.AccountConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.AccountConstants;
 
 [AllowAnonymous]
 public class RegisterModel : PageModel
@@ -98,7 +99,7 @@ public class RegisterModel : PageModel
             {
                 this.logger.LogInformation("User created a new account with password.");
 
-                await this.userManager.AddToRoleAsync(user, Common.GlobalConstants.PatientRoleName);
+                await this.userManager.AddToRoleAsync(user, GlobalConstants.PatientRoleName);
 
                 await this.signInManager.SignInAsync(user, isPersistent: false);
 

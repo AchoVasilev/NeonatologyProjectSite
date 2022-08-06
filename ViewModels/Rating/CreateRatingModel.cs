@@ -1,14 +1,8 @@
 namespace ViewModels.Rating;
 
-public class CreateRatingModel
+using Common.Attributes;
+
+[NotInherited]
+public class CreateRatingModel : CreateRatingFormModel
 {
-    public int AppointmentId { get; set; }
-
-    public string DoctorId { get; set; }
-
-    public string PatientId { get; set; }
-
-    public int Number { get; set; }
-
-    public string Comment { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿namespace Common;
+﻿namespace Common.Constants;
 
 public static class GlobalConstants
 {
@@ -106,7 +106,8 @@ public static class GlobalConstants
 
         public const string ImageDoesNotExistErrorMsg = "Тази снимка не съществува.";
 
-        public const string OfferDoesNotExist = "Тази услуга не съществува.";
+        public const string OfferDoesNotExistErrorMsg = "Тази услуга не съществува.";
+        public const string PatientDoesNotExistErrorMsg = "Този пациент не съществува";
     }
 
     public static class AccountConstants

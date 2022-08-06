@@ -1,4 +1,4 @@
-namespace Common;
+namespace Common.Constants;
 
 public static class WebConstants
 {
@@ -21,6 +21,11 @@ public static class WebConstants
         public const string NotificationEditStatus = "/Notification/EditStatus";
         public const string NotificationDelete = "/Notification/DeleteNotification";
         public const string NotificationGetMore = "/Notification/GetMoreNotifications";
+
+        public const string CalendarGetGabrovoSlots = "getSlots/gabrovo";
+        public const string CalendarGetPlevenSlots = "getSlots/pleven";
+        public const string CalendarMakeAnAppointment = "makeAppointment/{id}";
+        public const string CalendarMakePatientAppointment = "makePatientAppointment/{id}";
     }
 
     public static class CheckoutConstants

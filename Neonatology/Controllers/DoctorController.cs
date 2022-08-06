@@ -11,7 +11,7 @@ using Services.DoctorService;
 using ViewModels.Doctor;
 using ViewModels.Slot;
 
-using static Common.GlobalConstants;
+using static Common.Constants.GlobalConstants;
 
 [Authorize(Roles = DoctorConstants.DoctorRoleName)]
 public class DoctorController : BaseController

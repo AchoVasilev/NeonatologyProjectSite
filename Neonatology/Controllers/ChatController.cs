@@ -16,10 +16,10 @@ using Services.PatientService;
 using Services.UserService;
 using ViewModels.Chat;
 using ViewModels.Patient;
-using static Common.GlobalConstants;
-using static Common.GlobalConstants.ChatConstants;
-using static Common.WebConstants.RouteTemplates;
-using static Common.WebConstants.HubsConstants;
+using static Common.Constants.GlobalConstants;
+using static Common.Constants.GlobalConstants.ChatConstants;
+using static Common.Constants.WebConstants.RouteTemplates;
+using static Common.Constants.WebConstants.HubsConstants;
 
 [Authorize]
 public class ChatController : BaseController

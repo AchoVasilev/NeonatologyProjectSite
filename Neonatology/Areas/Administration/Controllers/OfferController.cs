@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Services.OfferService;
 using Microsoft.AspNetCore.Mvc;
 using ViewModels.Administration.Offer;
-using static Common.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
 
 public class OfferController : BaseController
 {

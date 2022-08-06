@@ -3,11 +3,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
+using Common.Models;
 using ViewModels.Feedback;
 
 public interface IFeedbackService
 {
-    Task CreateFeedback(FeedbackInputModel model);
+    Task CreateFeedback(CreateFeedbackModel model);
 
     Task<ICollection<FeedbackViewModel>> GetUserFeedbacks(string email);
 

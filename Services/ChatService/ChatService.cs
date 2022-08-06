@@ -25,9 +25,9 @@ using FileService.FileServiceModels;
 
 using ViewModels.Chat;
 
-using static Common.GlobalConstants.FileConstants;
-using static Common.GlobalConstants.ChatConstants;
-using static Common.GlobalConstants.DateTimeFormats;
+using static Common.Constants.GlobalConstants.FileConstants;
+using static Common.Constants.GlobalConstants.ChatConstants;
+using static Common.Constants.GlobalConstants.DateTimeFormats;
 
 public class ChatService : IChatService
 {

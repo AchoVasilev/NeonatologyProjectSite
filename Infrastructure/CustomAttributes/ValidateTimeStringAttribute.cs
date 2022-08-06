@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
 using Common;
+using Common.Constants;
 
 public class ValidateTimeStringAttribute : RequiredAttribute
 {

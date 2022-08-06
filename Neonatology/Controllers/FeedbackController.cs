@@ -1,7 +1,7 @@
 ﻿namespace Neonatology.Controllers;
 
 using System.Threading.Tasks;
-
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,14 +9,18 @@ using Services.FeedbackService;
 
 using ViewModels.Feedback;
 
-using static Common.GlobalConstants.MessageConstants;
+using static Common.Constants.GlobalConstants.MessageConstants;
 
 public class FeedbackController : BaseController
 {
     private readonly IFeedbackService feedbackService;
+    private readonly IMapper mapper;
 
-    public FeedbackController(IFeedbackService feedbackService) 
-        => this.feedbackService = feedbackService;
+    public FeedbackController(IFeedbackService feedbackService, IMapper mapper)
+    {
+        this.feedbackService = feedbackService;
+        this.mapper = mapper;
+    }
 
     public IActionResult Send() 
         => this.View(new FeedbackInputModel());
@@ -29,7 +33,8 @@ public class FeedbackController : BaseController
             return this.View(model);
         }
 
-        await this.feedbackService.CreateFeedback(model);
+        var feedbackModel = this.mapper.Map<CreateFeedbackModel>(model);
+        await this.feedbackService.CreateFeedback(feedbackModel);
 
         this.TempData["Message"] = SuccessfulFeedbackSent;
 
