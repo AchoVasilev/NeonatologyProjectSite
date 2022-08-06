@@ -18,7 +18,7 @@ using Services.PatientService;
 using Services.RatingService;
 
 using Helpers;
-
+using Mocks;
 using ViewModels.Appointments;
 using ViewModels.Rating;
 
@@ -29,7 +29,7 @@ public class RatingControllerTests
     [Fact]
     public void ControllerShouldHaveAuthorizeAttribute()
     {
-        var controller = new RatingController(null, null, null, null);
+        var controller = new RatingController(null, null, null, null, null);
         var actualAttribute = controller.GetType()
             .GetCustomAttributes(typeof(AuthorizeAttribute), true);
 
@@ -39,7 +39,7 @@ public class RatingControllerTests
     [Fact]
     public void RateAppointmentShouldReturnModelWithView()
     {
-        var controller = new RatingController(null, null, null, null);
+        var controller = new RatingController(null, null, null, null, null);
         ControllerExtensions.WithIdentity(controller, "1", "Gosho", "Patient");
 
         var result = controller.RateAppointment(1);
@@ -51,7 +51,16 @@ public class RatingControllerTests
     [Fact]
     public async Task RateAppointmentWithModelShouldReturnRedirectToActionToMyAppointmentsWhenSuccessful()
     {
-        var model = new CreateRatingFormModel
+        var model = new CreateRatingModel
+        {
+            AppointmentId = 1,
+            Comment = "goshogoshogosho",
+            DoctorId = "doc",
+            Number = 5,
+            PatientId = "patient"
+        };
+        
+        var controllerModel = new CreateRatingFormModel
         {
             AppointmentId = 1,
             Comment = "goshogoshogosho",
@@ -73,6 +82,7 @@ public class RatingControllerTests
             .ReturnsAsync("patient");
 
         var ratingService = new Mock<IRatingService>();
+        var mapperMock = MapperMock.Instance;
         ratingService.Setup(x => x.AddAsync(model))
             .ReturnsAsync(true);
 
@@ -82,14 +92,14 @@ public class RatingControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new RatingController(appointmentService.Object, doctorService.Object, patientService.Object, ratingService.Object)
+        var controller = new RatingController(appointmentService.Object, doctorService.Object, patientService.Object, ratingService.Object, mapperMock)
         {
             TempData = tempData
         };
 
         ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
 
-        var result = await controller.RateAppointment(model);
+        var result = await controller.RateAppointment(controllerModel);
 
         var route = Assert.IsType<RedirectToActionResult>(result);
 
@@ -100,7 +110,16 @@ public class RatingControllerTests
     [Fact]
     public async Task RateAppointmentShouldReturnStatusCode404IfAppointmentIsNull()
     {
-        var model = new CreateRatingFormModel
+        var model = new CreateRatingModel
+        {
+            AppointmentId = 1,
+            Comment = "goshogoshogosho",
+            DoctorId = "doc",
+            Number = 5,
+            PatientId = "patient"
+        };
+        
+        var controllerModel = new CreateRatingFormModel
         {
             AppointmentId = 1,
             Comment = "goshogoshogosho",
@@ -113,10 +132,12 @@ public class RatingControllerTests
         appointmentService.Setup(x => x.GetUserAppointmentAsync("1", model.AppointmentId))
             .ReturnsAsync(value: null);
 
-        var controller = new RatingController(appointmentService.Object, null, null, null);
+        var mapper = MapperMock.Instance;
+        
+        var controller = new RatingController(appointmentService.Object, null, null, null, mapper);
         ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
 
-        var result = await controller.RateAppointment(model);
+        var result = await controller.RateAppointment(controllerModel);
 
         var route = Assert.IsType<StatusCodeResult>(result);
 
@@ -126,7 +147,16 @@ public class RatingControllerTests
     [Fact]
     public async Task RateAppointmentShouldRedirectToMyAppointmentsIfAppointmentIsRated()
     {
-        var model = new CreateRatingFormModel
+        var model = new CreateRatingModel
+        {
+            AppointmentId = 1,
+            Comment = "goshogoshogosho",
+            DoctorId = "doc",
+            Number = 5,
+            PatientId = "patient"
+        };
+        
+        var controllerModel = new CreateRatingFormModel
         {
             AppointmentId = 1,
             Comment = "goshogoshogosho",
@@ -145,14 +175,15 @@ public class RatingControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new RatingController(appointmentService.Object, null, null, null)
+        var mapper = MapperMock.Instance;
+        var controller = new RatingController(appointmentService.Object, null, null, null, mapper)
         {
             TempData = tempData
         };
 
         ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
 
-        var result = await controller.RateAppointment(model);
+        var result = await controller.RateAppointment(controllerModel);
 
         var route = Assert.IsType<RedirectToActionResult>(result);
 
@@ -163,7 +194,16 @@ public class RatingControllerTests
     [Fact]
     public async Task RateAppointmentShouldReturnStatusCode404IfDoctorIdIsNull()
     {
-        var model = new CreateRatingFormModel
+        var model = new CreateRatingModel
+        {
+            AppointmentId = 1,
+            Comment = "goshogoshogosho",
+            DoctorId = "doc",
+            Number = 5,
+            PatientId = "patient"
+        };
+        
+        var controllerModel = new CreateRatingFormModel
         {
             AppointmentId = 1,
             Comment = "goshogoshogosho",
@@ -180,11 +220,12 @@ public class RatingControllerTests
         doctorService.Setup(x => x.GetDoctorIdByAppointmentId(model.AppointmentId))
             .ReturnsAsync(value: null);
 
-        var controller = new RatingController(appointmentService.Object, doctorService.Object, null, null);
+        var mapperMock = MapperMock.Instance;
+        var controller = new RatingController(appointmentService.Object, doctorService.Object, null, null, mapperMock);
 
         ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
 
-        var result = await controller.RateAppointment(model);
+        var result = await controller.RateAppointment(controllerModel);
 
         var route = Assert.IsType<StatusCodeResult>(result);
 
@@ -194,7 +235,16 @@ public class RatingControllerTests
     [Fact]
     public async Task RateAppointmentShouldReturnStatusCodeResult404IfPatientIdIsNull()
     {
-        var model = new CreateRatingFormModel
+        var model = new CreateRatingModel
+        {
+            AppointmentId = 1,
+            Comment = "goshogoshogosho",
+            DoctorId = "doc",
+            Number = 5,
+            PatientId = "patient"
+        };
+        
+        var controllerModel = new CreateRatingFormModel
         {
             AppointmentId = 1,
             Comment = "goshogoshogosho",
@@ -215,11 +265,12 @@ public class RatingControllerTests
         patientService.Setup(x => x.GetPatientIdByUserId("1"))
             .ReturnsAsync(value: null);
 
-        var controller = new RatingController(appointmentService.Object, doctorService.Object, patientService.Object, null);
+        var mapperMock = MapperMock.Instance;
+        var controller = new RatingController(appointmentService.Object, doctorService.Object, patientService.Object, null, mapperMock);
 
         ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
 
-        var result = await controller.RateAppointment(model);
+        var result = await controller.RateAppointment(controllerModel);
 
         var route = Assert.IsType<StatusCodeResult>(result);
 
@@ -229,7 +280,16 @@ public class RatingControllerTests
     [Fact]
     public async Task RateAppointmentShouldRedirectToAllAppointmentsIfAppointmentCanNotBeRated()
     {
-        var model = new CreateRatingFormModel
+        var model = new CreateRatingModel
+        {
+            AppointmentId = 1,
+            Comment = "goshogoshogosho",
+            DoctorId = "doc",
+            Number = 5,
+            PatientId = "patient"
+        };
+        
+        var controllerModel = new CreateRatingFormModel
         {
             AppointmentId = 1,
             Comment = "goshogoshogosho",
@@ -260,14 +320,15 @@ public class RatingControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new RatingController(appointmentService.Object, doctorService.Object, patientService.Object, ratingService.Object)
+        var mapper = MapperMock.Instance;
+        var controller = new RatingController(appointmentService.Object, doctorService.Object, patientService.Object, ratingService.Object, mapper)
         {
             TempData = tempData
         };
 
         ControllerExtensions.WithIdentity(controller, "1", "gosho@abv.bg", "Patient");
 
-        var result = await controller.RateAppointment(model);
+        var result = await controller.RateAppointment(controllerModel);
 
         var route = Assert.IsType<RedirectToActionResult>(result);
 
@@ -276,7 +337,7 @@ public class RatingControllerTests
     }
 
     [Fact]
-    public async Task ApproveShouldRedirectToDoctorAppoitmentsIfSuccesful()
+    public async Task ApproveShouldRedirectToDoctorAppointmentsIfSuccessful()
     {
         var ratingService = new Mock<IRatingService>();
         ratingService.Setup(x => x.ApproveRating(1))
@@ -288,7 +349,8 @@ public class RatingControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new RatingController(null, null, null, ratingService.Object)
+        var mapperMock = MapperMock.Instance;
+        var controller = new RatingController(null, null, null, ratingService.Object, mapperMock)
         {
             TempData = tempData
         };
@@ -316,7 +378,8 @@ public class RatingControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new RatingController(null, null, null, ratingService.Object)
+        var mapperMock = MapperMock.Instance;
+        var controller = new RatingController(null, null, null, ratingService.Object, mapperMock)
         {
             TempData = tempData
         };
@@ -345,7 +408,8 @@ public class RatingControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new RatingController(null, null, null, ratingService.Object)
+        var mapperMock = MapperMock.Instance;
+        var controller = new RatingController(null, null, null, ratingService.Object, mapperMock)
         {
             TempData = tempData
         };
@@ -373,7 +437,8 @@ public class RatingControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new RatingController(null, null, null, ratingService.Object)
+        var mapperMock = MapperMock.Instance;
+        var controller = new RatingController(null, null, null, ratingService.Object, mapperMock)
         {
             TempData = tempData
         };
@@ -402,7 +467,8 @@ public class RatingControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new RatingController(null, null, null, ratingService.Object)
+        var mapperMock = MapperMock.Instance;
+        var controller = new RatingController(null, null, null, ratingService.Object, mapperMock)
         {
             TempData = tempData
         };
@@ -430,7 +496,8 @@ public class RatingControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new RatingController(null, null, null, ratingService.Object)
+        var mapperMock = MapperMock.Instance;
+        var controller = new RatingController(null, null, null, ratingService.Object, mapperMock)
         {
             TempData = tempData
         };
@@ -459,7 +526,8 @@ public class RatingControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new RatingController(null, null, null, ratingService.Object)
+        var mapperMock = MapperMock.Instance;
+        var controller = new RatingController(null, null, null, ratingService.Object, mapperMock)
         {
             TempData = tempData
         };
@@ -487,7 +555,8 @@ public class RatingControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new RatingController(null, null, null, ratingService.Object)
+        var mapperMock = MapperMock.Instance;
+        var controller = new RatingController(null, null, null, ratingService.Object, mapperMock)
         {
             TempData = tempData
         };

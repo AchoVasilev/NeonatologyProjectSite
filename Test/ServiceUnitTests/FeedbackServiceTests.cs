@@ -531,7 +531,7 @@ public class FeedbackServiceTests
         var service = new FeedbackService(dataMock, mapperMock);
         var result = await service.Delete(5);
 
-        Assert.True(result);
+        Assert.True(result.Succeeded);
     }
 
     [Fact]
@@ -673,7 +673,7 @@ public class FeedbackServiceTests
         var service = new FeedbackService(dataMock, mapperMock);
         var result = await service.Delete(6);
 
-        Assert.False(result);
+        Assert.True(result.Failed);
     }
 
     [Fact]
@@ -743,7 +743,7 @@ public class FeedbackServiceTests
         var service = new FeedbackService(dataMock, mapperMock);
         var result = await service.Delete(5);
 
-        Assert.False(result);
+        Assert.True(result.Failed);
     }
 
     [Fact]

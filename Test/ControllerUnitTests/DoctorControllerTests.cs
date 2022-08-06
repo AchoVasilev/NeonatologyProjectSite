@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +14,7 @@ using Services.CityService;
 using Services.DoctorService;
 
 using Helpers;
-
+using Mocks;
 using ViewModels.City;
 using ViewModels.Doctor;
 using ViewModels.Slot;
@@ -27,7 +27,7 @@ public class DoctorControllerTests
     public void DoctorControllerShouldHaveAuthorizeAttribute()
     {
         // Arrange
-        var controller = new DoctorController(null, null);
+        var controller = new DoctorController(null, null, null);
 
         // Act
         var attribute = controller.GetType()
@@ -46,7 +46,7 @@ public class DoctorControllerTests
         service.Setup(x => x.GetDoctorById("1"))
             .ReturnsAsync(new DoctorProfileViewModel());
 
-        var controller = new DoctorController(service.Object, null);
+        var controller = new DoctorController(service.Object, null, null);
         var result = await controller.Profile();
 
         var route = Assert.IsType<ViewResult>(result);
@@ -87,7 +87,7 @@ public class DoctorControllerTests
             .ReturnsAsync(5);
 
         // Act
-        var controller = new DoctorController(doctorService.Object, cityService.Object);
+        var controller = new DoctorController(doctorService.Object, cityService.Object, null);
         ControllerExtensions.WithIdentity(controller, "1", "gosho", "Doctor");
 
         var result = await controller.Edit();
@@ -102,7 +102,21 @@ public class DoctorControllerTests
     {
         // Arrange
         var service = new Mock<IDoctorService>();
-        var model = new DoctorEditFormModel()
+        var model = new DoctorEditModel()
+        {
+            //Address = "Pleven",
+            Age = 30,
+            Biography = "asdasdasda",
+            Cities = new List<CityFormModel>(),
+            //CityId = 5,
+            Email = "gosho@abv.bg",
+            FirstName = "Pesho",
+            LastName = "Peshev",
+            Id = "1",
+            PhoneNumber = "098887885"
+        };
+        
+        var controllerModel = new DoctorEditFormModel()
         {
             //Address = "Pleven",
             Age = 30,
@@ -119,9 +133,10 @@ public class DoctorControllerTests
         service.Setup(x => x.EditDoctorAsync(model))
             .ReturnsAsync(true);
 
+        var mapper = MapperMock.Instance;
         // Act
-        var controller = new DoctorController(service.Object, null);
-        var result = await controller.Edit(model);
+        var controller = new DoctorController(service.Object, null, mapper);
+        var result = await controller.Edit(controllerModel);
 
         // Assert
         var route = Assert.IsType<RedirectToActionResult>(result);
@@ -134,7 +149,7 @@ public class DoctorControllerTests
         // Arrange
         var doctorService = new Mock<IDoctorService>();
         var cityService = new Mock<ICityService>();
-        var controller = new DoctorController(doctorService.Object, cityService.Object);
+        var controller = new DoctorController(doctorService.Object, cityService.Object, null);
 
         // Act
         var result = await controller.Calendar();

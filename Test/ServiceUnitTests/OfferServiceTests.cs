@@ -314,7 +314,7 @@ public class OfferServiceTests
         var service = new OfferService(dataMock, mapperMock);
         var result = await service.DeleteOffer(1);
 
-        Assert.True(result);
+        Assert.True(result.Succeeded);
     }
 
     [Fact]
@@ -413,7 +413,7 @@ public class OfferServiceTests
         var service = new OfferService(dataMock, mapperMock);
         var result = await service.DeleteOffer(7);
 
-        Assert.False(result);
+        Assert.True(result.Failed);
     }
 
     [Fact]
@@ -463,7 +463,7 @@ public class OfferServiceTests
         var service = new OfferService(dataMock, mapperMock);
         var result = await service.DeleteOffer(5);
 
-        Assert.False(result);
+        Assert.True(result.Failed);
     }
 
     [Fact]
@@ -634,7 +634,7 @@ public class OfferServiceTests
     }
 
     [Fact]
-    public async Task EditOfferShouldReturnTrueIfSuccesful()
+    public async Task EditOfferShouldReturnTrueIfSuccessful()
     {
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
@@ -685,7 +685,7 @@ public class OfferServiceTests
         var service = new OfferService(dataMock, mapperMock);
         var result = await service.EditOffer(model);
 
-        Assert.True(result);
+        Assert.True(result.Succeeded);
     }
 
     [Fact]
@@ -800,7 +800,7 @@ public class OfferServiceTests
         var service = new OfferService(dataMock, mapperMock);
         var result = await service.EditOffer(model);
 
-        Assert.False(result);
+        Assert.True(result.Failed);
     }
 
     [Fact]
@@ -857,6 +857,6 @@ public class OfferServiceTests
         var service = new OfferService(dataMock, mapperMock);
         var result = await service.EditOffer(model);
 
-        Assert.False(result);
+        Assert.True(result.Failed);
     }
 }

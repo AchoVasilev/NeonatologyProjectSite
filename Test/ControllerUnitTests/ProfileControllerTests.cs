@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@ using Services.CityService;
 using Services.ProfileService;
 
 using Helpers;
-
+using Mocks;
 using ViewModels.City;
 using ViewModels.Profile;
 
@@ -26,7 +27,7 @@ public class ProfileControllerTests
     [Fact]
     public void ProfileControllerShouldHaveAuthorizeAttribute()
     {
-        var controller = new ProfileController(null, null);
+        var controller = new ProfileController(null, null, null);
         var actualAttribute = controller.GetType()
             .GetCustomAttributes(typeof(AuthorizeAttribute), true);
 
@@ -40,7 +41,7 @@ public class ProfileControllerTests
         profileService.Setup(x => x.GetPatientData("1"))
             .ReturnsAsync(new ProfileViewModel());
 
-        var profileController = new ProfileController(profileService.Object, null);
+        var profileController = new ProfileController(profileService.Object, null, null);
         ControllerExtensions.WithIdentity(profileController, "1", "gosho", "Patient");
 
         var result = await profileController.Index();
@@ -61,7 +62,7 @@ public class ProfileControllerTests
         cityService.Setup(x => x.GetAllCities())
             .ReturnsAsync(cities);
 
-        var profileController = new ProfileController(profileService.Object, cityService.Object);
+        var profileController = new ProfileController(profileService.Object, cityService.Object, null);
         ControllerExtensions.WithIdentity(profileController, "1", "gosho", "Patient");
 
         var result = await profileController.Edit("1");
@@ -77,7 +78,8 @@ public class ProfileControllerTests
         profileService.Setup(x => x.GetPatientData("1"))
             .ReturnsAsync(value: null);
 
-        var profileController = new ProfileController(profileService.Object, null);
+        var mapper = MapperMock.Instance;
+        var profileController = new ProfileController(profileService.Object, null, mapper);
         ControllerExtensions.WithIdentity(profileController, "1", "gosho", "Patient");
 
         var result = await profileController.Edit("1");
@@ -89,8 +91,11 @@ public class ProfileControllerTests
     [Fact]
     public async Task EditShouldReturnRedirectToActionToIndexIfSuccessful()
     {
-        var model = new EditProfileFormModel() { CityId = 1 };
+        var controllerModel = new EditProfileFormModel() { CityId = 1 };
+        var model = new EditProfileModel() { CityId = 1 };
+        
         var profileService = new Mock<IProfileService>();
+        var mapper = MapperMock.Instance;
         profileService.Setup(x => x.EditProfileAsync(model))
             .ReturnsAsync(true);
 
@@ -98,10 +103,10 @@ public class ProfileControllerTests
         cityService.Setup(x => x.GetCityById(1))
             .ReturnsAsync(new CityFormModel());
 
-        var profileController = new ProfileController(profileService.Object, cityService.Object);
+        var profileController = new ProfileController(profileService.Object, cityService.Object, mapper);
         ControllerExtensions.WithIdentity(profileController, "1", "gosho", "Patient");
 
-        var result = await profileController.Edit(model);
+        var result = await profileController.Edit(controllerModel);
 
         var route = Assert.IsType<RedirectToActionResult>(result);
         Assert.Equal("Index", route.ActionName);
@@ -110,7 +115,8 @@ public class ProfileControllerTests
     [Fact]
     public async Task EditShouldReturnViewWithModelIfEditIsNotSuccessful()
     {
-        var model = new EditProfileFormModel();
+        var model = new EditProfileModel();
+        var controllerModel = new EditProfileFormModel();
         var profileService = new Mock<IProfileService>();
         profileService.Setup(x => x.EditProfileAsync(model))
             .ReturnsAsync(false);
@@ -126,13 +132,14 @@ public class ProfileControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var profileController = new ProfileController(profileService.Object, cityService.Object)
+        var mapper = MapperMock.Instance;
+        var profileController = new ProfileController(profileService.Object, cityService.Object, mapper)
         {
             TempData = tempData
         };
         ControllerExtensions.WithIdentity(profileController, "1", "gosho", "Patient");
 
-        var result = await profileController.Edit(model);
+        var result = await profileController.Edit(controllerModel);
 
         var route = Assert.IsType<ViewResult>(result);
         Assert.IsType<EditProfileFormModel>(route.Model);

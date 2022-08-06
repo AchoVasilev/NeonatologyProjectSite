@@ -66,7 +66,7 @@ public class RatingServiceTests
 
         var appointment = dataMock.Appointments.First();
 
-        var rating = new CreateRatingFormModel()
+        var rating = new CreateRatingModel()
         {
             AppointmentId = appointment.Id,
             PatientId = "pat",
@@ -130,7 +130,7 @@ public class RatingServiceTests
         await appointmentService.AddAsync(doctor.Id, model, DateTime.ParseExact(model.Start, "dd.MM.yyyy HH:mm", null),
             DateTime.ParseExact(model.End, "dd.MM.yyyy HH:mm", null));
 
-        var rating = new CreateRatingFormModel()
+        var rating = new CreateRatingModel()
         {
             AppointmentId = 15,
             PatientId = "pat",
@@ -196,7 +196,7 @@ public class RatingServiceTests
 
         var appointment = dataMock.Appointments.First();
 
-        var rating = new CreateRatingFormModel()
+        var rating = new CreateRatingModel()
         {
             AppointmentId = appointment.Id,
             PatientId = "pat",
@@ -265,7 +265,7 @@ public class RatingServiceTests
 
         var appointment = dataMock.Appointments.First();
 
-        var rating = new CreateRatingFormModel()
+        var rating = new CreateRatingModel()
         {
             AppointmentId = appointment.Id,
             PatientId = "pat",
@@ -333,7 +333,7 @@ public class RatingServiceTests
 
         var appointment = dataMock.Appointments.First();
 
-        var rating = new CreateRatingFormModel()
+        var rating = new CreateRatingModel()
         {
             AppointmentId = appointment.Id,
             PatientId = "pat",
@@ -402,7 +402,7 @@ public class RatingServiceTests
 
         var appointment = dataMock.Appointments.First();
 
-        var rating = new CreateRatingFormModel()
+        var rating = new CreateRatingModel()
         {
             AppointmentId = appointment.Id,
             PatientId = "pat",
@@ -470,7 +470,7 @@ public class RatingServiceTests
 
         var appointment = dataMock.Appointments.First();
 
-        var rating = new CreateRatingFormModel()
+        var rating = new CreateRatingModel()
         {
             AppointmentId = appointment.Id,
             PatientId = "pat",
@@ -538,7 +538,7 @@ public class RatingServiceTests
 
         var appointment = dataMock.Appointments.First();
 
-        var rating = new CreateRatingFormModel()
+        var rating = new CreateRatingModel()
         {
             AppointmentId = appointment.Id,
             PatientId = "pat",

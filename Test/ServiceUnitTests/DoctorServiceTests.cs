@@ -394,7 +394,7 @@ public class DoctorServiceTests
 
         var service = new DoctorService(dataMock, mapperMock, null, null);
 
-        var model = new DoctorEditFormModel()
+        var model = new DoctorEditModel()
         {
             Id = "doc",
             FirstName = "Mancho",
@@ -454,7 +454,7 @@ public class DoctorServiceTests
 
         var service = new DoctorService(dataMock, mapperMock, null, null);
 
-        var model = new DoctorEditFormModel()
+        var model = new DoctorEditModel()
         {
             Id = "asdasd",
             FirstName = "Mancho",

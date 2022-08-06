@@ -75,7 +75,7 @@ public class ProfileServiceTests
         var profileService = new ProfileService(dataMock, null, mapperMock, null);
         var patient = dataMock.Patients.First();
 
-        var editModel = new EditProfileFormModel()
+        var editModel = new EditProfileModel()
         {
             Id = patient.Id,
             UserId = user.Id,
@@ -118,7 +118,7 @@ public class ProfileServiceTests
         var profileService = new ProfileService(dataMock, null, mapperMock, null);
         var patient = dataMock.Patients.First();
 
-        var editModel = new EditProfileFormModel()
+        var editModel = new EditProfileModel()
         {
             Id = "fifi",
             UserId = user.Id,
