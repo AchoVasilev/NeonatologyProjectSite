@@ -1,9 +1,7 @@
 ﻿namespace Neonatology.Controllers;
 
 using System.Threading.Tasks;
-
-using Infrastructure;
-
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

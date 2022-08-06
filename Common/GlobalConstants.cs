@@ -60,11 +60,15 @@ public static class GlobalConstants
     public static class MessageConstants
     {
         public const string SuccessfulAppointment = "Успешно си записахте час за {0} от {1} часа. Може да проверите Вашия и-мейл";
-
+        public const string NotExistingAppointmentErrorMsg = "Този час не съществува.";
+        public const string AppointmentMakeEmailMsg = "Успешно си записахте час. Вашият час е от {0} часа на {1}";
+        public const string AppointmentDoesntExistErrorMsg = "Час с номер {0} не съществува";
+        public const string TakenDateMsg = "Съжаляваме, но някой Ви изпревари. Опитайте да запишете друг час.";
+        public const string AppointmentBeforeNowErrorMsg = "Не можете да си запишете час за минала дата";
+        
         public const string RatedAppointment = "Вече сте дали своята оценка";
         public const string SuccessfulRating = "Вие дадохте оценка {0}";
-        public const string ErrorRatingAppointmentMsg = "Възникна грешка с оценяването, опитайте пак";
-        public const string ErrorApprovingRating = "Възникна грешка с одобряването, опитайте пак";
+        public const string ErrorApprovingRating = "Възникна грешка с одобряването, тази оценка не съществува.";
         public const string SuccessfullyApprovedRating = "Одобрихте успешно оценката";
         public const string SuccessfullyDeletedRating = "Успешно изтрихте оценката";
 
@@ -75,24 +79,17 @@ public static class GlobalConstants
         public const string LengthErrorMsg = "Полето трябва да е между {0} и {1} символа.";
         public const string PasswordLengthErrorMsg = "Паролата трябва да е между {0} {1} символа.";
         public const string PasswordsNotMatchErrorMsg = "Паролите не съвпадат";
+        public const string InvalidEmailErrorMsg = "Моля въведете валиден и-мейл адрес";
 
         public const string DateBeforeNowErrorMsg = "Не можете да създавате събития за минала дата";
         public const string StartDateIsAfterEndDateMsg = "Подали сте грешни часове";
         public const string FailedSlotEditMsg = "Грешка при редакция, опитайте пак";
 
-        public const string TakenDateMsg = "Съжаляваме, но някой Ви изпревари. Опитайте да запишете друг час.";
-        public const string AppointmentBeforeNowErrorMsg = "Не можете да си запишете час за минала дата";
-
-        public const string InvalidEmailErrorMsg = "Моля въведете валиден и-мейл адрес";
-
-        public const string AppointmentMakeEmailMsg = "Успешно си записахте час. Вашият час е от {0} часа на {1}";
-        public const string AppointmentDoesntExistErrorMsg = "Час с номер {0} не съществува";
-
         public const string PatientProfileIsNotFinishedMsg = "За да си запазите час, трябва да си довършите профила";
         public const string ProfileDoesNotExistErrorMsg = "Този профил не съществува";
 
         public const string UnsuccessfulEditMsg = "Нещо се обърка, опитайте пак";
-        public const string AppointmentCauseWrongId = "Такъв преглед не съществува!";
+        public const string AppointmentCauseWrongId = "Такъв вид преглед не съществува!";
         public const string PatientIsRegistered = "Моля, използвайте платформата, за да си запишете час.";
 
         public const string SuccessfulFeedbackSent = "Успешно изпратихте вашето съобщение. Ще получите отговор на и-мейла си.";
@@ -106,6 +103,10 @@ public static class GlobalConstants
         public const string UploadFailErrorMsg = "Неуспешно качване на файла, опитайте пак.";
 
         public const string CityDoesNotExistErrorMsg = "Този град не е в базата данни.";
+
+        public const string ImageDoesNotExistErrorMsg = "Тази снимка не съществува.";
+
+        public const string OfferDoesNotExist = "Тази услуга не съществува.";
     }
 
     public static class AccountConstants

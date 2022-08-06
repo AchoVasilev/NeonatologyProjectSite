@@ -3,9 +3,7 @@
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-
-using Infrastructure;
-
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;

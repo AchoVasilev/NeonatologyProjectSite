@@ -19,6 +19,7 @@ using ViewModels.Gallery;
 using ViewModels.Offer;
 using ViewModels.Patient;
 using ViewModels.Profile;
+using ViewModels.Rating;
 using ViewModels.Slot;
 
 using static Common.GlobalConstants.DateTimeFormats;
@@ -53,9 +54,9 @@ public class MappingProfile : Profile
             {
                 opt.MapFrom(d => string.Join(' ', d.FirstName, d.LastName));
             });
+        this.CreateMap<DoctorEditFormModel, DoctorEditModel>();
 
         this.CreateMap<Address, EditAddressFormModel>();
-
         this.CreateMap<Address, AddressFormModel>();
 
         this.CreateMap<Specialization, SpecializationFormModel>();
@@ -103,6 +104,8 @@ public class MappingProfile : Profile
                     : m.Sender.Patient.FirstName + " " + m.Sender.Patient.LastName));
 
         this.CreateMap<Patient, ProfileViewModel>();
+        this.CreateMap<EditProfileFormModel, EditProfileModel>();
+        this.CreateMap<CreateRatingFormModel, CreateRatingModel>();
 
         this.CreateMap<Feedback, FeedbackViewModel>()
             .ForMember(x => x.CreatedOn, opt =>

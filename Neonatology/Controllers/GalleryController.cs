@@ -33,16 +33,14 @@ public class GalleryController : BaseController
     }
 
     [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
-    public IActionResult Add()
-    {
-        return this.View(new UploadImageModel());
-    }
+    public IActionResult Add() 
+        => this.View(new UploadImageModel());
 
     [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
     [HttpPost]
     public async Task<IActionResult> Add(UploadImageModel model)
     {
-        if (model.Images == null)
+        if (model.Images is null)
         {
             return this.View(new UploadImageModel());
         }

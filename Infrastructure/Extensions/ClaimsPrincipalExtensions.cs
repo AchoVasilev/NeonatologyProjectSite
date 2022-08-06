@@ -1,7 +1,6 @@
-﻿namespace Infrastructure;
+﻿namespace Infrastructure.Extensions;
 
 using System.Security.Claims;
-
 using static Common.GlobalConstants;
 
 public static class ClaimsPrincipalExtensions

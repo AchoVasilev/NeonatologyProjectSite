@@ -3,9 +3,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using global::Services.CityService;
-using global::Services.PatientService;
-using global::Services.ProfileService;
+using Services.CityService;
+using Services.PatientService;
+using Services.ProfileService;
 using ViewModels.Profile;
 using Microsoft.AspNetCore.Mvc;
 using ViewModels.Administration.User;
@@ -43,9 +43,9 @@ public class UserController : BaseController
     {
         var patientData = await this.profileService.GetPatientData(id);
 
-        if (patientData == null)
+        if (patientData is null)
         {
-            return new StatusCodeResult(404);
+            return this.NotFound();
         }
 
         var cityId = await this.cityService.GetCityIdByName(patientData.CityName);
@@ -73,7 +73,8 @@ public class UserController : BaseController
             return this.View(model);
         }
 
-        var result = await this.profileService.EditProfileAsync(model);
+        var editModel = this.mapper.Map<EditProfileModel>(model);
+        var result = await this.profileService.EditProfileAsync(editModel);
 
         if (result.Failed)
         {
@@ -89,7 +90,7 @@ public class UserController : BaseController
     public async Task<IActionResult> Delete(string userId)
     {
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user == null)
+        if (user is null)
         {
             return this.NotFound($"Не успяхме да заредим потребител с номер '{this.userManager.GetUserId(this.User)}'.");
         }
@@ -100,7 +101,6 @@ public class UserController : BaseController
         if (!result.Succeeded || !patientIsDeleted)
         {
             this.TempData["Message"] = UnsuccessfulEditMsg;
-            return this.RedirectToAction(nameof(this.All));
         }
 
         return this.RedirectToAction(nameof(this.All));

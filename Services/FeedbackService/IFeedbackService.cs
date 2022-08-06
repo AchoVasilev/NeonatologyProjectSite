@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Common;
 using ViewModels.Feedback;
 
 public interface IFeedbackService
@@ -13,7 +13,7 @@ public interface IFeedbackService
 
     Task<ICollection<FeedbackViewModel>> GetAll();
 
-    Task<bool> Delete(int id);
+    Task<OperationResult> Delete(int id);
 
     Task<FeedbackViewModel> GetById(int id);
 

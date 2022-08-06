@@ -1,9 +1,7 @@
 ﻿namespace Neonatology.Controllers;
 
 using System.Threading.Tasks;
-
-using Infrastructure;
-
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,8 +23,7 @@ public class PatientController : BaseController
     }
 
     public IActionResult Finish()
-        =>
-            this.View(new CreatePatientFormModel());
+        => this.View(new CreatePatientFormModel());
 
     [HttpPost]
     public async Task<IActionResult> Finish(CreatePatientFormModel model)

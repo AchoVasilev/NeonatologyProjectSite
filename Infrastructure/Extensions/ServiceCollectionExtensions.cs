@@ -1,4 +1,4 @@
-namespace Infrastructure;
+namespace Infrastructure.Extensions;
 
 using System;
 using System.Collections.Generic;
@@ -7,6 +7,7 @@ using Data;
 using Data.Models;
 using Hangfire;
 using Hangfire.SqlServer;
+using Hubs.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -33,7 +34,7 @@ using Services.RatingService;
 using Services.SlotService;
 using Services.SpecializationService;
 using Services.UserService;
-using ViewModels.Hubs;
+using static Common.WebConstants.ServiceCollectionExtensionsConstants;
 
 public static class ServiceCollectionExtensions
 {
@@ -46,9 +47,9 @@ public static class ServiceCollectionExtensions
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireDigit = false;
-                options.Password.RequiredUniqueChars = 0;
-                options.Lockout.MaxFailedAccessAttempts = 5;
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+                options.Password.RequiredUniqueChars = IdentityPasswordUniqueChars;
+                options.Lockout.MaxFailedAccessAttempts = MaxFailedAccessAttempts;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(DefaultLockoutTimeSpan);
             })
             .AddEntityFrameworkStores<NeonatologyDbContext>();
 
@@ -56,12 +57,8 @@ public static class ServiceCollectionExtensions
     }
 
     public static IServiceCollection AddDatabase(this IServiceCollection services, string connectionString)
-    {
-        services.AddDbContext<NeonatologyDbContext>(options =>
+        => services.AddDbContext<NeonatologyDbContext>(options =>
             options.UseSqlServer(connectionString));
-
-        return services;
-    }
 
     public static IServiceCollection AddMyControllers(this IServiceCollection services)
     {
@@ -70,7 +67,7 @@ public static class ServiceCollectionExtensions
             configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
         });
 
-        services.AddAntiforgery(options => { options.HeaderName = "X-CSRF-TOKEN"; });
+        services.AddAntiforgery(options => { options.HeaderName = XCSRFHeader; });
 
         services.AddControllers();
 
@@ -78,8 +75,7 @@ public static class ServiceCollectionExtensions
     }
 
     public static IServiceCollection RegisterServices(this IServiceCollection services)
-    {
-        services
+        => services
             .AddTransient<IAppointmentService, AppointmentService>()
             .AddTransient<IPatientService, PatientService>()
             .AddTransient<IDoctorService, DoctorService>()
@@ -100,12 +96,8 @@ public static class ServiceCollectionExtensions
             .AddTransient<IEmailSender, MailKitSender>()
             .AddTransient<ReCaptchaService>();
 
-        return services;
-    }
-
     public static IServiceCollection ConfigureMailkit(this IServiceCollection services, IConfiguration configuration)
-    {
-        services.Configure<MailKitEmailSenderOptions>(options =>
+        => services.Configure<MailKitEmailSenderOptions>(options =>
         {
             options.HostAddress = configuration["SmtpSettings:Server"];
             options.HostPort = Convert.ToInt32(configuration["SmtpSettings:Port"]);
@@ -114,9 +106,6 @@ public static class ServiceCollectionExtensions
             options.SenderEmail = configuration["SmtpSettings:SenderEmail"];
             options.SenderName = configuration["SmtpSettings:SenderName"];
         });
-
-        return services;
-    }
 
     public static IServiceCollection AddCloudinary(this IServiceCollection services, IConfiguration configuration)
     {
@@ -131,51 +120,38 @@ public static class ServiceCollectionExtensions
     }
 
     public static IServiceCollection RegisterHangfire(this IServiceCollection services, string connectionString)
-    {
-        services.AddHangfire(configuration =>
-            configuration.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-                .UseSimpleAssemblyNameTypeSerializer()
-                .UseRecommendedSerializerSettings()
-                .UseSqlServerStorage(connectionString,
-                    new SqlServerStorageOptions
-                    {
-                        CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-                        SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-                        QueuePollInterval = TimeSpan.Zero,
-                        UseRecommendedIsolationLevel = true,
-                        DisableGlobalLocks = true
-                    }));
-
-        services.AddHangfireServer();
-
-        return services;
-    }
+        => services.AddHangfire(configuration =>
+                configuration.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                    .UseSimpleAssemblyNameTypeSerializer()
+                    .UseRecommendedSerializerSettings()
+                    .UseSqlServerStorage(connectionString,
+                        new SqlServerStorageOptions
+                        {
+                            CommandBatchMaxTimeout = TimeSpan.FromMinutes(HangFireTimeSpan),
+                            SlidingInvisibilityTimeout = TimeSpan.FromMinutes(HangFireTimeSpan),
+                            QueuePollInterval = TimeSpan.Zero,
+                            UseRecommendedIsolationLevel = true,
+                            DisableGlobalLocks = true
+                        }))
+            .AddHangfireServer();
 
     public static IServiceCollection RegisterVoiceCallEntities(this IServiceCollection services)
-    {
-        services.AddSingleton<List<User>>();
-        services.AddSingleton<List<UserCall>>();
-        services.AddSingleton<List<CallOffer>>();
-
-        return services;
-    }
+        => services
+            .AddSingleton<List<User>>()
+            .AddSingleton<List<UserCall>>()
+            .AddSingleton<List<CallOffer>>();
 
     public static IServiceCollection ConfigureCookies(this IServiceCollection services)
-    {
-        services
+        => services
             .ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = "/Identity/Account/Login";
-                options.LogoutPath = "/Identity/Account/Logout";
-                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.LoginPath = LoginPath;
+                options.LogoutPath = LogoutPath;
+                options.AccessDeniedPath = AccessDeniedPath;
+            })
+            .Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-        services.Configure<CookiePolicyOptions>(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-            options.MinimumSameSitePolicy = SameSiteMode.None;
-        });
-
-        return services;
-    }
 }

@@ -2,9 +2,7 @@
 
 using System.Diagnostics;
 using System.Threading.Tasks;
-
-using Infrastructure;
-
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 using Services.DoctorService;
@@ -17,10 +15,8 @@ public class HomeController : BaseController
 {
     private readonly IDoctorService doctorService;
 
-    public HomeController(IDoctorService doctorService)
-    {
-        this.doctorService = doctorService;
-    }
+    public HomeController(IDoctorService doctorService) 
+        => this.doctorService = doctorService;
 
     [Route(HomeIndexSlash)]
     [Route(HomeIndex)]
@@ -40,25 +36,17 @@ public class HomeController : BaseController
     }
 
     [Route(HomeError404)]
-    public IActionResult Error404()
-    {
-        return this.View();
-    }
+    public IActionResult Error404() 
+        => this.View();
 
     [Route(HomeError400)]
-    public IActionResult Error400()
-    {
-        return this.View();
-    }
+    public IActionResult Error400() 
+        => this.View();
 
-    public IActionResult Privacy()
-    {
-        return this.View();
-    }
+    public IActionResult Privacy() 
+        => this.View();
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
-    }
+    public IActionResult Error() 
+        => this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
 }

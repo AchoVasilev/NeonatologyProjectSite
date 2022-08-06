@@ -79,7 +79,7 @@ public class RatingServiceTests
 
         var result = await ratingService.AddAsync(rating);
         
-        Assert.True(result);
+        Assert.True(result.Succeeded);
     }
     
     [Fact]
@@ -143,7 +143,7 @@ public class RatingServiceTests
 
         var result = await ratingService.AddAsync(rating);
         
-        Assert.False(result);
+        Assert.True(result.Failed);
     }
 
     [Fact]
@@ -212,7 +212,7 @@ public class RatingServiceTests
 
         var result = await ratingService.ApproveRating(ratingData.Id);
         
-        Assert.True(result);
+        Assert.True(result.Succeeded);
     }
     
     [Fact]
@@ -280,7 +280,7 @@ public class RatingServiceTests
 
         var result = await ratingService.ApproveRating(15);
         
-        Assert.False(result);
+        Assert.True(result.Failed);
     }
 
     [Fact]
@@ -349,7 +349,7 @@ public class RatingServiceTests
 
         var result = await ratingService.DeleteRating(ratingData.Id);
         
-        Assert.True(result);
+        Assert.True(result.Succeeded);
     }
 
     [Fact]
@@ -417,7 +417,7 @@ public class RatingServiceTests
 
         var result = await ratingService.DeleteRating(15);
         
-        Assert.False(result);
+        Assert.True(result.Failed);
     }
 
     [Fact]

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 
-using global::Services.AppointmentService;
+using Services.AppointmentService;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,7 +34,7 @@ public class AppointmentController : BaseController
     {
         var appointment = await this.appointmentService.GetAppointmentByIdAsync(id);
 
-        if (appointment == null)
+        if (appointment is null)
         {
             this.TempData["Message"] = AppointmentDoesntExistErrorMsg;
             return this.RedirectToAction(nameof(this.All));
@@ -48,9 +48,9 @@ public class AppointmentController : BaseController
     public async Task<IActionResult> Delete(int id)
     {
         var result = await this.appointmentService.DeleteAppointment(id);
-        if (result == false)
+        if (result.Failed)
         {
-            this.TempData["Message"] = ErrorDeletingMsg;
+            this.TempData["Message"] = result.Error;
             return this.RedirectToAction(nameof(this.All));
         }
 

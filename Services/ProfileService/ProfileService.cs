@@ -46,7 +46,7 @@ public class ProfileService : IProfileService
         return patientData;
     }
 
-    public async Task<OperationResult> EditProfileAsync(EditProfileFormModel model)
+    public async Task<OperationResult> EditProfileAsync(EditProfileModel model)
     {
         var patient = await this.data.Users
             .Where(x => x.PatientId == model.Id)
@@ -61,7 +61,7 @@ public class ProfileService : IProfileService
         if (model.Picture != null)
         {
             var result = await this.fileService.UploadImage(this.cloudinary, model.Picture, ProfileFolderName);
-            if (result == null)
+            if (result is null)
             {
                 return UnsuccessfulEditMsg;
             }

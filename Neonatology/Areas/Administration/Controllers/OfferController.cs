@@ -1,23 +1,17 @@
 ﻿namespace Neonatology.Areas.Administration.Controllers;
 
 using System.Threading.Tasks;
-
-using global::Services.OfferService;
-
+using Services.OfferService;
 using Microsoft.AspNetCore.Mvc;
-
 using ViewModels.Administration.Offer;
-
 using static Common.GlobalConstants.MessageConstants;
 
 public class OfferController : BaseController
 {
     private readonly IOfferService offerService;
 
-    public OfferController(IOfferService offerService)
-    {
-        this.offerService = offerService;
-    }
+    public OfferController(IOfferService offerService) 
+        => this.offerService = offerService;
 
     public async Task<IActionResult> All()
     {
@@ -29,20 +23,20 @@ public class OfferController : BaseController
     public async Task<IActionResult> Delete(int id)
     {
         var isDeleted = await this.offerService.DeleteOffer(id);
-        if (isDeleted == false)
+        if (isDeleted.Failed)
         {
-            this.TempData["Message"] = ErrorDeletingMsg;
-            return this.RedirectToAction(nameof(this.All));
+            this.TempData["Message"] = isDeleted.Error;
         }
-
-        this.TempData["Message"] = SuccessfulDeleteMsg;
+        else
+        {
+            this.TempData["Message"] = SuccessfulDeleteMsg;
+        }
 
         return this.RedirectToAction(nameof(this.All));
     }
 
-    public IActionResult Add() 
-        =>
-            this.View(new CreateOfferFormModel());
+    public IActionResult Add()
+        => this.View(new CreateOfferFormModel());
 
     [HttpPost]
     public async Task<IActionResult> Add(CreateOfferFormModel model)
@@ -65,13 +59,14 @@ public class OfferController : BaseController
     public async Task<IActionResult> Edit(EditOfferFormModel model)
     {
         var isEdited = await this.offerService.EditOffer(model);
-        if (isEdited == false)
+        if (isEdited.Failed)
         {
-            this.TempData["Message"] = ErrorDeletingMsg;
-            return this.RedirectToAction(nameof(this.All));
+            this.TempData["Message"] = isEdited.Error;
         }
-
-        this.TempData["Message"] = SuccessfulEditMsg;
+        else
+        {
+            this.TempData["Message"] = SuccessfulEditMsg;
+        }
 
         return this.RedirectToAction(nameof(this.All));
     }

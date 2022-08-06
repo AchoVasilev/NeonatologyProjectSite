@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Common;
 using ViewModels.Administration.Offer;
 using ViewModels.Offer;
 
@@ -14,11 +14,11 @@ public interface IOfferService
 
     Task<OfferViewModel> GetOnlineConsultationModelAsync();
 
-    Task<bool> DeleteOffer(int offerId);
+    Task<OperationResult> DeleteOffer(int offerId);
 
     Task AddOffer(CreateOfferFormModel model);
 
     Task<EditOfferFormModel> GetOffer(int id);
 
-    Task<bool> EditOffer(EditOfferFormModel model);
+    Task<OperationResult> EditOffer(EditOfferFormModel model);
 }

@@ -2,9 +2,9 @@
 
 using System.Threading.Tasks;
 
-using global::Services.AppointmentService;
-using global::Services.PatientService;
-using global::Services.RatingService;
+using Services.AppointmentService;
+using Services.PatientService;
+using Services.RatingService;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,17 +23,13 @@ public class HomeController : BaseController
         this.ratingService = ratingService;
     }
 
-    public async Task<IActionResult> Index()
-    {
-        var model = new IndexViewModel
+    public async Task<IActionResult> Index() 
+        => this.View(new IndexViewModel
         {
             LatestPatientsRegisterCount = await this.patientService.GetLastThisMonthsRegisteredCount(),
             TotalPatientsCount = await this.patientService.GetPatientsCount(),
             TotalRatingsCount = await this.ratingService.GetRatingsCount(),
             TotalAppointmentsCount = await this.appointmentService.GetTotalAppointmentsCount(),
             AllAppointments = await this.appointmentService.GetAllAppointments()
-        };
-
-        return this.View(model);
-    }
+        });
 }

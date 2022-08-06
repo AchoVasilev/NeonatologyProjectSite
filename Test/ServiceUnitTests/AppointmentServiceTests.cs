@@ -2253,7 +2253,7 @@ public class AppointmentServiceTests
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.DeleteAppointment(3);
 
-        Assert.True(result);
+        Assert.True(result.Succeeded);
     }
 
     [Fact]
@@ -2380,7 +2380,7 @@ public class AppointmentServiceTests
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.DeleteAppointment(5);
 
-        Assert.False(result);
+        Assert.True(result.Failed);
     }
 
     [Fact]
@@ -2443,6 +2443,6 @@ public class AppointmentServiceTests
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.DeleteAppointment(3);
 
-        Assert.False(result);
+        Assert.True(result.Failed);
     }
 }

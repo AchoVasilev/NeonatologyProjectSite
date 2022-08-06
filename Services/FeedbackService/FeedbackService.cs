@@ -4,16 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
+using Common;
 using Data;
 using Data.Models;
-
 using Microsoft.EntityFrameworkCore;
-
 using ViewModels.Feedback;
+using static Common.GlobalConstants.MessageConstants;
 
 public class FeedbackService : IFeedbackService
 {
@@ -41,7 +39,7 @@ public class FeedbackService : IFeedbackService
         await this.data.SaveChangesAsync();
     }
 
-    public async Task<ICollection<FeedbackViewModel>> GetUserFeedbacks(string email) 
+    public async Task<ICollection<FeedbackViewModel>> GetUserFeedbacks(string email)
         => await this.data.Feedbacks
             .Where(x => x.Email == email && x.IsDeleted == false)
             .OrderByDescending(x => x.CreatedOn)
@@ -57,15 +55,15 @@ public class FeedbackService : IFeedbackService
             .ProjectTo<FeedbackViewModel>(this.mapper.ConfigurationProvider)
             .ToListAsync();
 
-    public async Task<bool> Delete(int id)
+    public async Task<OperationResult> Delete(int id)
     {
         var model = await this.data.Feedbacks
             .Where(x => x.Id == id && x.IsDeleted == false)
             .FirstOrDefaultAsync();
 
-        if (model == null)
+        if (model is null)
         {
-            return false;
+            return ErrorDeletingMsg;
         }
 
         model.IsDeleted = true;

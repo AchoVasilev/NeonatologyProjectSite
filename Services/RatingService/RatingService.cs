@@ -14,9 +14,10 @@ using Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 using AppointmentService;
-
+using Common;
 using ViewModels.Administration.Rating;
 using ViewModels.Rating;
+using static Common.GlobalConstants.MessageConstants;
 
 public class RatingService : IRatingService
 {
@@ -31,12 +32,12 @@ public class RatingService : IRatingService
         this.mapper = mapper;
     }
 
-    public async Task<bool> AddAsync(CreateRatingFormModel model)
+    public async Task<OperationResult> AddAsync(CreateRatingModel model)
     {
         var appointment = await this.appointmentService.GetAppointmentByIdAsync(model.AppointmentId);
-        if (appointment == null)
+        if (appointment is null)
         {
-            return false;
+            return NotExistingAppointmentErrorMsg;
         }
 
         var rating = new Rating()
@@ -57,15 +58,17 @@ public class RatingService : IRatingService
         return true;
     }
 
-    public async Task<bool> ApproveRating(int appointmentId)
+    public async Task<OperationResult> ApproveRating(int appointmentId)
     {
         var rating = await this.data.Ratings
-            .Where(x => x.AppointmentId == appointmentId && x.IsDeleted == false && x.IsConfirmed == false)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(
+                x => x.AppointmentId == appointmentId 
+                     && x.IsDeleted == false 
+                     && x.IsConfirmed == false);
 
-        if (rating == null)
+        if (rating is null)
         {
-            return false;
+            return ErrorApprovingRating;
         }
 
         rating.IsConfirmed = true;
@@ -76,7 +79,7 @@ public class RatingService : IRatingService
         return true;
     }
 
-    public async Task<bool> DeleteRating(int appointmentId)
+    public async Task<OperationResult> DeleteRating(int appointmentId)
     {
         var rating = await this.data.Ratings
             .Where(x => x.AppointmentId == appointmentId && 
@@ -84,9 +87,9 @@ public class RatingService : IRatingService
                         x.IsConfirmed == false)
             .FirstOrDefaultAsync();
 
-        if (rating == null)
+        if (rating is null)
         {
-            return false;
+            return ErrorApprovingRating;
         }
 
         rating.IsDeleted = true;

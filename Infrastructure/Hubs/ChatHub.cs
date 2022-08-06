@@ -33,7 +33,7 @@ public class ChatHub : Hub
         await this.Groups.AddToGroupAsync(this.Context.ConnectionId, groupName);
         await this.chatService.AddUserToGroup(groupName, senderName, receiverName);
 
-        await this.Clients.Group(groupName).SendAsync("ReceiveMessage", senderName, $"{senderFullName} се присъдени към чат групата.");
+        await this.Clients.Group(groupName).SendAsync(nameof(this.ReceiveMessage), senderName, $"{senderFullName} се присъдени към чат групата.");
     }
 
     public async Task SendMessage(string senderUsername, string receiverUsername, string message, string group, string senderFullName)
@@ -48,7 +48,7 @@ public class ChatHub : Hub
         var sender = await this.userService.FindByUserNameAsync(senderUsername);
 
         await this.Clients.User(receiverId)
-            .SendAsync("ReceiveMessage", senderFullName, new HtmlSanitizer().Sanitize(message.Trim()), sender.Image.Url);
+            .SendAsync(nameof(this.ReceiveMessage), senderFullName, new HtmlSanitizer().Sanitize(message.Trim()), sender.Image.Url);
 
         var notificationId = await this.notificationService
             .AddMessageNotification(message, receiverUsername, senderUsername, group);
@@ -70,7 +70,7 @@ public class ChatHub : Hub
     public async Task ReceiveMessage(string senderUsername, string message, string group, string senderFullName)
     {
         var user = await this.userService.FindByUserNameAsync(senderUsername);
-        await this.Clients.User(user.Id).SendAsync("SendMessage", senderUsername, new HtmlSanitizer().Sanitize(message.Trim()), user.Image.Url);
+        await this.Clients.User(user.Id).SendAsync(nameof(this.SendMessage), senderUsername, new HtmlSanitizer().Sanitize(message.Trim()), user.Image.Url);
     }
 
     public async Task UpdateMessageNotifications(string fromUsername, string receiverUsername)

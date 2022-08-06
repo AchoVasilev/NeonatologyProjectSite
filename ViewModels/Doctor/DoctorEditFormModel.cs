@@ -50,7 +50,7 @@ public class DoctorEditFormModel
 
     public IFormFile Picture { get; set; }
 
-    public DateTime ModifiedOn { get; set; } = DateTime.UtcNow;
+    public DateTime ModifiedOn { get; set; }
 
     public ICollection<EditAddressFormModel> Addresses { get; set; }
 

@@ -6,28 +6,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using ViewModels.Hubs;
+using Models;
 
 [Authorize]
 public class ConnectionHub : Hub<IConnectionHub>
 {
-    private readonly List<User> Users;
-    private readonly List<UserCall> UserCalls;
-    private readonly List<CallOffer> CallOffers;
+    private readonly List<User> users;
+    private readonly List<UserCall> userCalls;
+    private readonly List<CallOffer> callOffers;
     private readonly IHubContext<ChatHub> chatHubContext;
 
     public ConnectionHub(List<User> users, List<UserCall> userCalls, List<CallOffer> callOffers, IHubContext<ChatHub> chatHubContext)
     {
-        this.Users = users;
-        this.UserCalls = userCalls;
-        this.CallOffers = callOffers;
+        this.users = users;
+        this.userCalls = userCalls;
+        this.callOffers = callOffers;
         this.chatHubContext = chatHubContext;
     }
 
     public async Task Join(string username)
     {
         // Add the new user
-        this.Users.Add(new User
+        this.users.Add(new User
         {
             Username = username,
             ConnectionId = this.Context.ConnectionId
@@ -43,7 +43,7 @@ public class ConnectionHub : Hub<IConnectionHub>
         await this.HangUp(); // Gets the user from "Context" which is available in the whole hub
 
         // Remove the user
-        this.Users.RemoveAll(u => u.ConnectionId == this.Context.ConnectionId);
+        this.users.RemoveAll(u => u.ConnectionId == this.Context.ConnectionId);
 
         // Send down the new user list to all clients
         await this.SendUserListUpdate();
@@ -53,8 +53,8 @@ public class ConnectionHub : Hub<IConnectionHub>
 
     public async Task CallUser(User targetConnectionId, string group)
     {
-        var callingUser = this.Users.SingleOrDefault(u => u.ConnectionId == this.Context.ConnectionId);
-        var targetUser = this.Users.SingleOrDefault(u => u.ConnectionId == targetConnectionId.ConnectionId);
+        var callingUser = this.users.SingleOrDefault(u => u.ConnectionId == this.Context.ConnectionId);
+        var targetUser = this.users.SingleOrDefault(u => u.ConnectionId == targetConnectionId.ConnectionId);
 
         // Make sure the person we are trying to call is still here
         if (targetUser == null)
@@ -85,7 +85,7 @@ public class ConnectionHub : Hub<IConnectionHub>
         await this.Clients.Client(targetConnectionId.ConnectionId).IncomingCall(callingUser);
 
         // Create an offer
-        this.CallOffers.Add(new CallOffer
+        this.callOffers.Add(new CallOffer
         {
             Caller = callingUser,
             Callee = targetUser
@@ -94,8 +94,8 @@ public class ConnectionHub : Hub<IConnectionHub>
 
     public async Task AnswerCall(bool acceptCall, User targetConnectionId, string group)
     {
-        var callingUser = this.Users.SingleOrDefault(u => u.ConnectionId == this.Context.ConnectionId);
-        var targetUser = this.Users.SingleOrDefault(u => u.ConnectionId == targetConnectionId.ConnectionId);
+        var callingUser = this.users.SingleOrDefault(u => u.ConnectionId == this.Context.ConnectionId);
+        var targetUser = this.users.SingleOrDefault(u => u.ConnectionId == targetConnectionId.ConnectionId);
 
         // This can only happen if the server-side came down and clients were cleared, while the user
         // still held their browser session.
@@ -124,7 +124,7 @@ public class ConnectionHub : Hub<IConnectionHub>
         }
 
         // Make sure there is still an active offer.  If there isn't, then the other use hung up before the Callee answered.
-        var offerCount = this.CallOffers.RemoveAll(c => c.Callee.ConnectionId == callingUser.ConnectionId
+        var offerCount = this.callOffers.RemoveAll(c => c.Callee.ConnectionId == callingUser.ConnectionId
                                                         && c.Caller.ConnectionId == targetUser.ConnectionId);
         if (offerCount < 1)
         {
@@ -141,10 +141,10 @@ public class ConnectionHub : Hub<IConnectionHub>
         }
 
         // Remove all the other offers for the call initiator, in case they have multiple calls out
-        this.CallOffers.RemoveAll(c => c.Caller.ConnectionId == targetUser.ConnectionId);
+        this.callOffers.RemoveAll(c => c.Caller.ConnectionId == targetUser.ConnectionId);
 
         // Create a new call to match these folks up
-        this.UserCalls.Add(new UserCall
+        this.userCalls.Add(new UserCall
         {
             Users = new List<User> { callingUser, targetUser }
         });
@@ -152,13 +152,13 @@ public class ConnectionHub : Hub<IConnectionHub>
         // Tell the original caller that the call was accepted
         await this.Clients.Client(targetConnectionId.ConnectionId).CallAccepted(callingUser);
 
-        // Update the user list, since thes two are now in a call
+        // Update the user list, since these two are now in a call
         await this.SendUserListUpdate();
     }
 
     public async Task HangUp()
     {
-        var callingUser = this.Users.SingleOrDefault(u => u.ConnectionId == this.Context.ConnectionId);
+        var callingUser = this.users.SingleOrDefault(u => u.ConnectionId == this.Context.ConnectionId);
 
         if (callingUser == null)
         {
@@ -180,12 +180,12 @@ public class ConnectionHub : Hub<IConnectionHub>
             currentCall.Users.RemoveAll(u => u.ConnectionId == callingUser.ConnectionId);
             if (currentCall.Users.Count < 2)
             {
-                this.UserCalls.Remove(currentCall);
+                this.userCalls.Remove(currentCall);
             }
         }
 
         // Remove all offers initiating from the caller
-        this.CallOffers.RemoveAll(c => c.Caller.ConnectionId == callingUser.ConnectionId);
+        this.callOffers.RemoveAll(c => c.Caller.ConnectionId == callingUser.ConnectionId);
 
         await this.SendUserListUpdate();
     }
@@ -193,8 +193,8 @@ public class ConnectionHub : Hub<IConnectionHub>
     // WebRTC Signal Handler
     public async Task SendSignal(string signal, string targetConnectionId)
     {
-        var callingUser = this.Users.SingleOrDefault(u => u.ConnectionId == this.Context.ConnectionId);
-        var targetUser = this.Users.SingleOrDefault(u => u.ConnectionId == targetConnectionId);
+        var callingUser = this.users.SingleOrDefault(u => u.ConnectionId == this.Context.ConnectionId);
+        var targetUser = this.users.SingleOrDefault(u => u.ConnectionId == targetConnectionId);
 
         // Make sure both users are valid
         if (callingUser == null || targetUser == null)
@@ -215,13 +215,13 @@ public class ConnectionHub : Hub<IConnectionHub>
 
     private async Task SendUserListUpdate()
     {
-        this.Users.ForEach(u => u.InCall = this.GetUserCall(u.ConnectionId) != null);
-        await this.Clients.All.UpdateUserList(this.Users);
+        this.users.ForEach(u => u.InCall = this.GetUserCall(u.ConnectionId) != null);
+        await this.Clients.All.UpdateUserList(this.users);
     }
 
     private UserCall GetUserCall(string connectionId)
     {
-        var matchingCall = this.UserCalls.SingleOrDefault(uc => uc.Users.SingleOrDefault(u => u.ConnectionId == connectionId) != null);
+        var matchingCall = this.userCalls.SingleOrDefault(uc => uc.Users.SingleOrDefault(u => u.ConnectionId == connectionId) != null);
 
         return matchingCall;
     }

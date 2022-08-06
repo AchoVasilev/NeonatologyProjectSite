@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Common;
 using Data.Models;
 
 using ViewModels.Appointments;
@@ -38,5 +38,5 @@ public interface IAppointmentService
 
     Task<int> GetTotalAppointmentsCount();
 
-    Task<bool> DeleteAppointment(int appointmentId);
+    Task<OperationResult> DeleteAppointment(int appointmentId);
 }

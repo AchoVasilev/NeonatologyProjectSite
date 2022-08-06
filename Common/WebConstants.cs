@@ -36,11 +36,41 @@ public static class WebConstants
             "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1641585449/pediamed/onlineConsultation_vyvebl.jpg";
 
         public const string CheckoutSessionCompleted = "checkout.session.completed";
+        public const string LocationHeader = "Location";
+        public const string StripeSignatureHeader = "Stripe-Signature";
+        public const int Quantity = 1;
+        public const int Multiplier = 100;
+        public const int HangFireBackgroundJobDays = 1;
     }
 
     public static class HubsConstants
     {
         public const string HubReceiveMessage = "ReceiveMessage";
         public const string HubSendMessage = "SendMessage";
+    }
+
+    public static class ServiceCollectionExtensionsConstants
+    {
+        public const string LoginPath = "/Identity/Account/Login";
+        public const string LogoutPath = "/Identity/Account/Logout";
+        public const string AccessDeniedPath = "/Identity/Account/AccessDenied";
+        public const string XCSRFHeader = "X-CSRF-TOKEN";
+        public const int IdentityPasswordUniqueChars = 0;
+        public const int MaxFailedAccessAttempts = 5;
+        public const int DefaultLockoutTimeSpan = 15;
+        public const int HangFireTimeSpan = 5;
+    }
+
+    public static class ApplicationBuilderExtensionsConstants
+    {
+        public const string AreasName = "areas";
+        public const string AreasPattern = "{area:exists}/{controller=Home}/{action=Index}/{id?}";
+
+        public const string DefaultName = "default";
+        public const string DefaultPattern = "{controller=Home}/{action=Index}/{id?}";
+
+        public const string ChatHubPattern = "/chatHub";
+        public const string NotificationHubPattern = "/notificationHub";
+        public const string ConnectionHubPattern = "/connectionHub";
     }
 }

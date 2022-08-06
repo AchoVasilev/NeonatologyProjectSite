@@ -18,7 +18,7 @@ public interface IDoctorService
 
     Task<string> GetDoctorId();
 
-    Task<OperationResult> EditDoctorAsync(DoctorEditFormModel model);
+    Task<OperationResult> EditDoctorAsync(DoctorEditModel model);
 
     Task<string> GetDoctorEmail(string doctorId);
 

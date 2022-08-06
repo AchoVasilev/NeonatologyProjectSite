@@ -1,7 +1,7 @@
 ﻿namespace Neonatology.Controllers;
 
 using System.Threading.Tasks;
-
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,11 +18,13 @@ public class DoctorController : BaseController
 {
     private readonly IDoctorService doctorService;
     private readonly ICityService cityService;
+    private readonly IMapper mapper;
 
-    public DoctorController(IDoctorService doctorService, ICityService cityService)
+    public DoctorController(IDoctorService doctorService, ICityService cityService, IMapper mapper)
     {
         this.doctorService = doctorService;
         this.cityService = cityService;
+        this.mapper = mapper;
     }
 
     [AllowAnonymous]
@@ -65,7 +67,8 @@ public class DoctorController : BaseController
             return this.View(model);
         }
 
-        var result = await this.doctorService.EditDoctorAsync(model);
+        var editModel = this.mapper.Map<DoctorEditModel>(model);
+        var result = await this.doctorService.EditDoctorAsync(editModel);
 
         if (result.Failed)
         {

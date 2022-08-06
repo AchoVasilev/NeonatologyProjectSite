@@ -83,10 +83,10 @@ public class CheckoutController : BaseController
             {
                 new SessionLineItemOptions
                 {
-                    Quantity = 1,
+                    Quantity = Quantity,
                     PriceData = new SessionLineItemPriceDataOptions
                     {
-                        UnitAmount = (long)(consultation.Price * 100),
+                        UnitAmount = (long)(consultation.Price * Multiplier),
                         Currency = Currency,
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {
@@ -103,7 +103,7 @@ public class CheckoutController : BaseController
 
         var service = new SessionService(this.stripeClient);
         var session = await service.CreateAsync(sessionCreateOptions);
-        this.Response.Headers.Add("Location", session.Url);
+        this.Response.Headers.Add(LocationHeader, session.Url);
 
         await this.paymentService.CreateCheckoutSession(session.Id, session.PaymentIntentId,
             session.ClientReferenceId);
@@ -122,7 +122,7 @@ public class CheckoutController : BaseController
         try
         {
             stripeEvent = EventUtility.ConstructEvent(
-                json, this.Request.Headers["Stripe-Signature"],
+                json, this.Request.Headers[StripeSignatureHeader],
                 secret
             );
         }
@@ -164,6 +164,6 @@ public class CheckoutController : BaseController
 
         BackgroundJob.Schedule(
             () => this.paymentService.ChangePaymentStatus(patientId),
-            TimeSpan.FromDays(1));
+            TimeSpan.FromDays(HangFireBackgroundJobDays));
     }
 }

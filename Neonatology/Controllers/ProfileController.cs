@@ -1,9 +1,8 @@
 ﻿namespace Neonatology.Controllers;
 
 using System.Threading.Tasks;
-
-using Infrastructure;
-
+using AutoMapper;
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,11 +18,13 @@ public class ProfileController : BaseController
 {
     private readonly IProfileService profileService;
     private readonly ICityService cityService;
+    private readonly IMapper mapper;
 
-    public ProfileController(IProfileService profileService, ICityService cityService)
+    public ProfileController(IProfileService profileService, ICityService cityService, IMapper mapper)
     {
         this.profileService = profileService;
         this.cityService = cityService;
+        this.mapper = mapper;
     }
 
     public async Task<IActionResult> Index()
@@ -39,7 +40,7 @@ public class ProfileController : BaseController
 
         if (patientData is null)
         {
-            return new StatusCodeResult(404);
+            return this.NotFound();
         }
 
         var cityId = await this.cityService.GetCityIdByName(patientData.CityName);
@@ -75,7 +76,8 @@ public class ProfileController : BaseController
             return this.View(model);
         }
 
-        var editResult = await this.profileService.EditProfileAsync(model);
+        var editModel = this.mapper.Map<EditProfileModel>(model);
+        var editResult = await this.profileService.EditProfileAsync(editModel);
 
         if (editResult.Failed)
         {
@@ -88,8 +90,6 @@ public class ProfileController : BaseController
     }
 
     [AllowAnonymous]
-    public IActionResult AllUsers()
-    {
-        return this.View();
-    }
+    public IActionResult AllUsers() 
+        => this.View();
 }

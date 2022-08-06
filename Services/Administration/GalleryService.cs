@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using CloudinaryDotNet;
+using Common;
 using Data;
 using Microsoft.EntityFrameworkCore;
-using Services.FileService;
+using FileService;
 using ViewModels.Administration.Galery;
 using static Common.GlobalConstants.FileConstants;
+
+using static Common.GlobalConstants.MessageConstants;
 
 public class GalleryService : IGalleryService
 {
@@ -36,15 +39,15 @@ public class GalleryService : IGalleryService
             .ProjectTo<GalleryViewModel>(this.mapper.ConfigurationProvider)
             .ToListAsync();
 
-    public async Task<bool> Delete(string id)
+    public async Task<OperationResult> Delete(string id)
     {
         var image = await this.data.Images
             .Where(x => x.Id == id && x.IsDeleted == false)
             .FirstOrDefaultAsync();
 
-        if (image == null)
+        if (image is null)
         {
-            return false;
+            return ImageDoesNotExistErrorMsg;
         }
 
         image.IsDeleted = true;

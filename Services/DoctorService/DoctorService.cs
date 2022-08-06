@@ -80,7 +80,7 @@ public class DoctorService : IDoctorService
             .ProjectTo<EditAddressFormModel>(this.mapper.ConfigurationProvider)
             .ToListAsync();
 
-    public async Task<OperationResult> EditDoctorAsync(DoctorEditFormModel model)
+    public async Task<OperationResult> EditDoctorAsync(DoctorEditModel model)
     {
         var doctor = await this.data.Doctors.FirstOrDefaultAsync(x => x.Id == model.Id);
         if (doctor is null)

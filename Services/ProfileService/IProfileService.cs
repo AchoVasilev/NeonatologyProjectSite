@@ -8,5 +8,5 @@ public interface IProfileService
 {
     Task<ProfileViewModel> GetPatientData(string userId);
 
-    Task<OperationResult> EditProfileAsync(EditProfileFormModel model);
+    Task<OperationResult> EditProfileAsync(EditProfileModel model);
 }

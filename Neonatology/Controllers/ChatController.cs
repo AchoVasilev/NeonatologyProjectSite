@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
-using Infrastructure;
+using Infrastructure.Extensions;
 using Infrastructure.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -15,10 +14,8 @@ using Services.ChatService;
 using Services.DoctorService;
 using Services.PatientService;
 using Services.UserService;
-
 using ViewModels.Chat;
 using ViewModels.Patient;
-
 using static Common.GlobalConstants;
 using static Common.GlobalConstants.ChatConstants;
 using static Common.WebConstants.RouteTemplates;
@@ -62,20 +59,7 @@ public class ChatController : BaseController
 
         var conversations = await this.chatService.GetAllMessages(currentUserId, page, ItemsPerPage);
 
-        foreach (var user in conversations)
-        {
-            var lastMessage = await this.chatService.GetLastMessage(currentUserId, user.Id);
-            var contentWithoutTags = Regex.Replace(lastMessage, "<.*?>", string.Empty);
-
-            user.LastMessage = contentWithoutTags.Length < 487 ?
-                contentWithoutTags :
-                $"{contentWithoutTags.Substring(0, 487)}...";
-
-            user.LastMessageActivity = await this.chatService.GetLastActivityAsync(currentUserId, user.Id);
-
-            var groupId = await this.chatService.GetGroupId(currentUserId, user.Id);
-            user.GroupName = await this.chatService.GetGroupName(groupId);
-        }
+        await this.ProcessConversations(conversations, currentUserId);
 
         var model = new ChatUserViewModel
         {
@@ -96,20 +80,7 @@ public class ChatController : BaseController
         var currentUserId = this.User.GetId();
         var conversations = await this.chatService.GetAllMessages(currentUserId, page, ItemsPerPage);
 
-        foreach (var user in conversations)
-        {
-            var lastMessage = await this.chatService.GetLastMessage(currentUserId, user.Id);
-            var contentWithoutTags = Regex.Replace(lastMessage, "<.*?>", string.Empty);
-
-            user.LastMessage = contentWithoutTags.Length < 487 ?
-                contentWithoutTags :
-                $"{contentWithoutTags.Substring(0, 487)}...";
-
-            user.LastMessageActivity = await this.chatService.GetLastActivityAsync(currentUserId, user.Id);
-
-            var groupId = await this.chatService.GetGroupId(currentUserId, user.Id);
-            user.GroupName = await this.chatService.GetGroupName(groupId);
-        }
+        await this.ProcessConversations(conversations, currentUserId);
 
         var doctorId = await this.doctorService.GetDoctorId();
         var doctorEmail = await this.doctorService.GetDoctorEmail(doctorId);
@@ -160,13 +131,9 @@ public class ChatController : BaseController
             SenderEmail = sender.Email
         };
 
-        if (patientSender != null)
+        if (patientSender != null && patientSender.Id == currentUser.PatientId && !patientSender.HasPaid)
         {
-            if (patientSender.Id == currentUser.PatientId && !patientSender.HasPaid)
-            {
-                model.HasPaid = false;
-                return this.View(model);
-            }
+            model.HasPaid = false;
         }
 
         return this.View(model);
@@ -174,7 +141,8 @@ public class ChatController : BaseController
 
     [HttpPost]
     [Route(ChatSendFiles)]
-    public async Task<IActionResult> SendFiles(IList<IFormFile> files, string group, string toUsername, string fromUsername, string message)
+    public async Task<IActionResult> SendFiles(IList<IFormFile> files, string group, string toUsername,
+        string fromUsername, string message)
     {
         //var currentUser = await this.userManager.GetUserAsync(this.User);
 
@@ -202,14 +170,12 @@ public class ChatController : BaseController
 
     [HttpGet]
     [Route(ChatLoadMoreMessages)]
-    public async Task<IActionResult> LoadMoreMessages(string username, string group, int? messagesSkipCount, string receiverFullname, string senderFullname)
+    public async Task<IActionResult> LoadMoreMessages(string username, string group, int? messagesSkipCount,
+        string receiverFullname, string senderFullname)
     {
         var currentUser = await this.userService.GetUserByIdAsync(this.User.GetId());
 
-        if (messagesSkipCount == null)
-        {
-            messagesSkipCount = 0;
-        }
+        messagesSkipCount ??= 0;
 
         var data = await this.chatService
             .LoadMoreMessages(group, (int)messagesSkipCount, currentUser, receiverFullname, senderFullname);
@@ -219,8 +185,24 @@ public class ChatController : BaseController
 
     private static string GetFullName(ViewModels.Doctor.DoctorProfileViewModel doctor, PatientViewModel patient)
     {
-        return doctor != null ?
-            $"Д-р {doctor.FullName}" :
-            $"{patient.FirstName} {patient.LastName}";
+        return doctor != null ? $"Д-р {doctor.FullName}" : $"{patient.FirstName} {patient.LastName}";
+    }
+
+    private async Task ProcessConversations(IEnumerable<ChatConversationsViewModel> conversations, string currentUserId)
+    {
+        foreach (var user in conversations)
+        {
+            var lastMessage = await this.chatService.GetLastMessage(currentUserId, user.Id);
+            var contentWithoutTags = Regex.Replace(lastMessage, "<.*?>", string.Empty);
+
+            user.LastMessage = contentWithoutTags.Length < 487
+                ? contentWithoutTags
+                : $"{contentWithoutTags.Substring(0, 487)}...";
+
+            user.LastMessageActivity = await this.chatService.GetLastActivityAsync(currentUserId, user.Id);
+
+            var groupId = await this.chatService.GetGroupId(currentUserId, user.Id);
+            user.GroupName = await this.chatService.GetGroupName(groupId);
+        }
     }
 }

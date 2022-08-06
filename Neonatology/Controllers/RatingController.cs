@@ -1,52 +1,48 @@
 ﻿namespace Neonatology.Controllers;
 
 using System.Threading.Tasks;
-
-using Infrastructure;
-
+using AutoMapper;
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 using Services.AppointmentService;
 using Services.DoctorService;
 using Services.PatientService;
 using Services.RatingService;
-
 using ViewModels.Rating;
-
 using static Common.GlobalConstants;
 using static Common.GlobalConstants.MessageConstants;
 
 [Authorize]
 public class RatingController : BaseController
 {
+    private const int Page = 1;
     private readonly IAppointmentService appointmentService;
     private readonly IDoctorService doctorService;
     private readonly IPatientService patientService;
     private readonly IRatingService ratingService;
+    private readonly IMapper mapper;
 
     public RatingController(
         IAppointmentService appointmentService,
         IDoctorService doctorService,
         IPatientService patientService,
-        IRatingService ratingService)
+        IRatingService ratingService,
+        IMapper mapper)
     {
         this.appointmentService = appointmentService;
         this.doctorService = doctorService;
         this.patientService = patientService;
         this.ratingService = ratingService;
+        this.mapper = mapper;
     }
 
     [Authorize(Roles = PatientRoleName)]
     public IActionResult RateAppointment(int appointmentId)
-    {
-        var model = new CreateRatingFormModel()
+        => this.View(new CreateRatingFormModel()
         {
             AppointmentId = appointmentId
-        };
-
-        return this.View(model);
-    }
+        });
 
     [Authorize(Roles = PatientRoleName)]
     [HttpPost]
@@ -68,7 +64,8 @@ public class RatingController : BaseController
         if (appointment.IsRated)
         {
             this.TempData["Message"] = RatedAppointment;
-            return this.RedirectToAction("MyPastAppointments", "Appointment", new { area = "", page = 1 });
+
+            return this.RedirectToAction("MyPastAppointments", "Appointment", new { area = "", page = Page });
         }
 
         var doctorId = await this.doctorService.GetDoctorIdByAppointmentId(model.AppointmentId);
@@ -86,17 +83,19 @@ public class RatingController : BaseController
         model.PatientId = patientId;
         model.DoctorId = doctorId;
 
-        var isRated = await this.ratingService.AddAsync(model);
+        var ratingModel = this.mapper.Map<CreateRatingModel>(model);
+        var isRated = await this.ratingService.AddAsync(ratingModel);
 
-        if (isRated == false)
+        if (isRated.Failed)
         {
-            this.TempData["Message"] = ErrorRatingAppointmentMsg;
-            return this.RedirectToAction("MyPastAppointments", "Appointment", new { area = "", page = 1 });
+            this.TempData["Message"] = isRated.Error;
+
+            return this.RedirectToAction("MyPastAppointments", "Appointment", new { area = "", page = Page });
         }
 
         this.TempData["Message"] = string.Format(SuccessfulRating, model.Number);
 
-        return this.RedirectToAction("MyPastAppointments", "Appointment", new { area = "", page = 1 });
+        return this.RedirectToAction("MyPastAppointments", "Appointment", new { area = "", page = Page });
     }
 
     [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
@@ -105,45 +104,40 @@ public class RatingController : BaseController
         var isApproved = await this.ratingService.ApproveRating(appointmentId);
         var userIsAdmin = this.User.IsAdmin();
 
-        if (isApproved == false)
-        { 
-            this.TempData["Message"] = ErrorApprovingRating;
+        if (isApproved.Failed)
+        {
+            this.TempData["Message"] = isApproved.Error;
 
-            return userIsAdmin 
-                ? this.RedirectToAction("All", "Appointment", new { area = "Administration" }) 
-                : this.RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
+            return userIsAdmin
+                ? this.RedirectToAction("All", "Appointment", new { area = "Administration" })
+                : this.RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = Page });
         }
 
         this.TempData["Message"] = SuccessfullyApprovedRating;
 
-        return userIsAdmin 
-            ? this.RedirectToAction("All", "Appointment", new { area = "Administration" }) 
-            : this.RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
+        return userIsAdmin
+            ? this.RedirectToAction("All", "Appointment", new { area = "Administration" })
+            : this.RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = Page });
     }
 
     [Authorize(Roles = $"{DoctorConstants.DoctorRoleName}, {AdministratorRoleName}")]
     public async Task<IActionResult> Delete(int appointmentId)
     {
-        var isDeleted = await this.ratingService.DeleteRating(appointmentId);
+        var result = await this.ratingService.DeleteRating(appointmentId);
         var userIsAdmin = this.User.IsAdmin();
 
-        if (isDeleted == false)
+        if (result.Failed)
         {
-            this.TempData["Message"] = ErrorApprovingRating;
-            if (userIsAdmin)
-            {
-                return this.RedirectToAction("All", "Appointment", new { area = "Administration" });
-            }
-
-            return this.RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
+            this.TempData["Message"] = result.Error;
+            return userIsAdmin
+                ? this.RedirectToAction("All", "Appointment", new { area = "Administration" })
+                : this.RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = Page });
         }
 
         this.TempData["Message"] = SuccessfullyApprovedRating;
-        if (userIsAdmin)
-        {
-            return this.RedirectToAction("All", "Appointment", new { area = "Administration" });
-        }
 
-        return this.RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = 1 });
+        return userIsAdmin
+            ? this.RedirectToAction("All", "Appointment", new { area = "Administration" })
+            : this.RedirectToAction("DoctorPastAppointments", "Appointment", new { area = "", page = Page });
     }
 }

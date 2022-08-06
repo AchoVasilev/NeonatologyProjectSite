@@ -13,10 +13,8 @@ using QRCoder;
 public class QrController : BaseController
 {
     [HttpGet]
-    public IActionResult CreateQRCode()
-    {
-        return this.View();
-    }
+    public IActionResult CreateQRCode() 
+        => this.View();
 
     [HttpPost]
     public IActionResult CreateQRCode(QRCodeModel qRCode)
@@ -28,7 +26,7 @@ public class QrController : BaseController
         var qrCodeInfo = qrGenerator.CreateQrCode(uriPayload, QRCodeGenerator.ECCLevel.Q);
         var qrCode = new PngByteQRCode(qrCodeInfo);
 
-        byte[] BitmapArray = qrCode.GetGraphic(60);
+        var BitmapArray = qrCode.GetGraphic(60);
         var QrUri = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(BitmapArray));
         this.ViewBag.QrCodeUri = QrUri;
 

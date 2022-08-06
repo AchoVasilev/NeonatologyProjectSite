@@ -2,11 +2,12 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common;
 using ViewModels.Administration.Galery;
 
 public interface IGalleryService
 {
     Task<ICollection<GalleryViewModel>> GetGalleryImages();
 
-    Task<bool> Delete(string id);
+    Task<OperationResult> Delete(string id);
 }

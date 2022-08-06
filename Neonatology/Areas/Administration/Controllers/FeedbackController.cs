@@ -2,7 +2,7 @@
 
 using System.Threading.Tasks;
 
-using global::Services.FeedbackService;
+using Services.FeedbackService;
 
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -32,9 +32,9 @@ public class FeedbackController : BaseController
     public async Task<IActionResult> Delete(int id)
     {
         var result = await this.feedbackService.Delete(id);
-        if (result == false)
+        if (result.Failed)
         {
-            this.TempData["Message"] = ErrorDeletingMsg;
+            this.TempData["Message"] = result.Error;
             return this.RedirectToAction(nameof(this.All));
         }
 

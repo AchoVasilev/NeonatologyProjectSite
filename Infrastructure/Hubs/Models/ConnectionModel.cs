@@ -1,4 +1,4 @@
-﻿namespace ViewModels.Hubs;
+﻿namespace Infrastructure.Hubs.Models;
 
 using System.Collections.Generic;
 

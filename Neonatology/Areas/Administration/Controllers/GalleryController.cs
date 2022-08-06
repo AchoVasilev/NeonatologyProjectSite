@@ -1,14 +1,11 @@
 ﻿namespace Neonatology.Areas.Administration.Controllers;
 
 using System.Threading.Tasks;
-
 using CloudinaryDotNet;
-
-using global::Services.FileService;
+using Services.FileService;
 using Microsoft.AspNetCore.Mvc;
 using Services.Administration;
 using ViewModels.Administration.Galery;
-
 using static Common.GlobalConstants.MessageConstants;
 using static Common.GlobalConstants.FileConstants;
 using ViewModels.Gallery;
@@ -40,25 +37,25 @@ public class GalleryController : BaseController
     {
         var result = await this.galleryService.Delete(id);
 
-        if (result == false)
+        if (result.Failed)
         {
-            this.TempData["Message"] = ErrorDeletingMsg;
-            return this.RedirectToAction(nameof(this.All));
+            this.TempData["Message"] = result.Error;
+        }
+        else
+        {
+            this.TempData["Message"] = SuccessfulDeleteMsg;
         }
 
-        this.TempData["Message"] = SuccessfulDeleteMsg;
         return this.RedirectToAction(nameof(this.All));
     }
 
-    public IActionResult Add()
-    {
-        return this.View(new UploadImageModel());
-    }
+    public IActionResult Add() 
+        => this.View(new UploadImageModel());
 
     [HttpPost]
     public async Task<IActionResult> Add(UploadImageModel model)
     {
-        if (model.Images == null)
+        if (model.Images is null)
         {
             return this.View(new UploadImageModel());
         }

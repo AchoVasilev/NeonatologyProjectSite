@@ -2,7 +2,7 @@
 
 using System.Threading.Tasks;
 using Data.Models;
-using Infrastructure;
+using Infrastructure.Extensions;
 using Infrastructure.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

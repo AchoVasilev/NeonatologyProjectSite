@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
+using Common;
 using Data;
 using Data.Models;
 
@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using ViewModels.Appointments;
 
 using static Common.GlobalConstants.DoctorConstants;
+using static Common.GlobalConstants.MessageConstants;
 
 public class AppointmentService : IAppointmentService
 {
@@ -263,14 +264,14 @@ public class AppointmentService : IAppointmentService
     public async Task<int> GetTotalAppointmentsCount()
         => await this.data.Appointments.CountAsync(x => x.IsDeleted == false);
 
-    public async Task<bool> DeleteAppointment(int appointmentId)
+    public async Task<OperationResult> DeleteAppointment(int appointmentId)
     {
         var appointment = await this.data.Appointments
             .FirstOrDefaultAsync(x => x.Id == appointmentId && x.IsDeleted == false);
 
-        if (appointment == null)
+        if (appointment is null)
         {
-            return false;
+            return NotExistingAppointmentErrorMsg;
         }
 
         appointment.IsDeleted = true;
