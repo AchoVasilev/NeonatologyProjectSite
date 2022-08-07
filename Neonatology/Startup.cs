@@ -21,7 +21,7 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        var connectionString = this.Configuration.GetConnectionString("DefaultConnection");
+        var connectionString = this.Configuration.GetConnectionString("LinuxConnection");
         services.AddIdentity()
             .AddDatabase(connectionString)
             .AddDatabaseDeveloperPageExceptionFilter()

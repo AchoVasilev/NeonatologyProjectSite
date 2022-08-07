@@ -25,9 +25,9 @@ public class LoginModel : PageModel
 {
     private readonly SignInManager<ApplicationUser> signInManager;
     private readonly ILogger<LoginModel> logger;
-    private readonly ReCaptchaService reCaptchaService;
+    private readonly IReCaptchaService reCaptchaService;
 
-    public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, ReCaptchaService reCaptchaService)
+    public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, IReCaptchaService reCaptchaService)
     {
         this.signInManager = signInManager;
         this.logger = logger;
@@ -87,13 +87,13 @@ public class LoginModel : PageModel
         this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
         var recaptchaResponse = await this.reCaptchaService.ValidateResponse(this.Input.Token);
-
-        if (recaptchaResponse.Success == false && recaptchaResponse.Score < 0.5)
-        {
-            this.ModelState.AddModelError(string.Empty, MessageConstants.FailedRecaptchaMsg);
-
-            return this.Page();
-        }
+        
+        // if (recaptchaResponse.Success == false && recaptchaResponse.Score < 0.5)
+        // {
+        //     this.ModelState.AddModelError(string.Empty, MessageConstants.FailedRecaptchaMsg);
+        //
+        //     return this.Page();
+        // }
 
         if (this.ModelState.IsValid)
         {

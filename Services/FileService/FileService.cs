@@ -4,23 +4,23 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Data;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-
 using FileServiceModels;
 using ViewModels.Gallery;
 
 public class FileService : IFileService
 {
     private readonly NeonatologyDbContext data;
-
-    public FileService(NeonatologyDbContext data) 
-        => this.data = data;
+    private readonly IFileProcessingService fileProcessingService;
+    public FileService(NeonatologyDbContext data, IFileProcessingService fileProcessingService)
+    {
+        this.data = data;
+        this.fileProcessingService = fileProcessingService;
+    }
 
     public async Task<IFileServiceModel> UploadImage(Cloudinary cloudinary, IFormFile image, string folderName)
     {
@@ -40,37 +40,11 @@ public class FileService : IFileService
 
         var imageName = image.FileName;
 
-        byte[] destinationImage;
-        using (var memoryStream = new MemoryStream())
-        {
-            await image.CopyToAsync(memoryStream);
-            destinationImage = memoryStream.ToArray();
-        }
+        var destinationImage = await this.fileProcessingService.GenerateByteArrayFromFile(image);
 
         var imageModel = new ImageServiceModel();
-        using (var ms = new MemoryStream(destinationImage))
-        {
-            // Cloudinary doesn't work with [?, &, #, \, %, <, >]
-            imageName = imageName.Replace("&", "And");
-            imageName = imageName.Replace("#", "sharp");
-            imageName = imageName.Replace("?", "questionMark");
-            imageName = imageName.Replace("\\", "right");
-            imageName = imageName.Replace("%", "percent");
-            imageName = imageName.Replace(">", "greater");
-            imageName = imageName.Replace("<", "lower");
-
-            var uploadParams = new ImageUploadParams()
-            {
-                File = new FileDescription(imageName, ms),
-                PublicId = $"{folderName}/{imageName}",
-            };
-
-            var uploadResult = cloudinary.Upload(uploadParams);
-
-            imageModel.Extension = extension;
-            imageModel.Uri = uploadResult.SecureUrl.AbsoluteUri;
-            imageModel.Name = imageName;
-        }
+        imageModel = await this.fileProcessingService.ProcessByteArray(destinationImage, cloudinary, imageModel, imageName,
+            folderName, extension) as ImageServiceModel;
 
         return imageModel;
     }
@@ -93,37 +67,11 @@ public class FileService : IFileService
 
         var fileName = file.FileName;
 
-        byte[] destinationImage;
-        using (var memoryStream = new MemoryStream())
-        {
-            await file.CopyToAsync(memoryStream);
-            destinationImage = memoryStream.ToArray();
-        }
+        var destinationImage = await this.fileProcessingService.GenerateByteArrayFromFile(file);
 
         var fileModel = new FileServiceModel();
-        using (var ms = new MemoryStream(destinationImage))
-        {
-            // Cloudinary doesn't work with [?, &, #, \, %, <, >]
-            fileName = fileName.Replace("&", "And");
-            fileName = fileName.Replace("#", "sharp");
-            fileName = fileName.Replace("?", "questionMark");
-            fileName = fileName.Replace("\\", "right");
-            fileName = fileName.Replace("%", "percent");
-            fileName = fileName.Replace(">", "greater");
-            fileName = fileName.Replace("<", "lower");
-
-            var uploadParams = new ImageUploadParams()
-            {
-                File = new FileDescription(fileName, ms),
-                PublicId = $"{folderName}/{fileName}",
-            };
-
-            var uploadResult = cloudinary.Upload(uploadParams, "auto");
-
-            fileModel.Extension = extension;
-            fileModel.Uri = uploadResult.SecureUrl.AbsoluteUri;
-            fileModel.Name = fileName;
-        }
+        fileModel = await this.fileProcessingService.ProcessByteArray(destinationImage, cloudinary, fileModel, fileName,
+            folderName, extension) as FileServiceModel;
 
         return fileModel;
     }
@@ -152,7 +100,8 @@ public class FileService : IFileService
             .ToListAsync();
 
         var count = await this.data.Images
-            .Where(x => string.IsNullOrWhiteSpace(x.UserId) && x.IsDeleted == false && x.Name != "NoAvatarProfileImage.png")
+            .Where(x => string.IsNullOrWhiteSpace(x.UserId) && x.IsDeleted == false &&
+                        x.Name != "NoAvatarProfileImage.png")
             .CountAsync();
 
         var viewModel = new GalleryViewModel

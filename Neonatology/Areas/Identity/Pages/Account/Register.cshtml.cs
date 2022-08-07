@@ -22,13 +22,13 @@ public class RegisterModel : PageModel
     private readonly SignInManager<ApplicationUser> signInManager;
     private readonly UserManager<ApplicationUser> userManager;
     private readonly ILogger<RegisterModel> logger;
-    private readonly ReCaptchaService reCaptchaService;
+    private readonly IReCaptchaService reCaptchaService;
 
     public RegisterModel(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
         ILogger<RegisterModel> logger,
-        ReCaptchaService reCaptchaService)
+        IReCaptchaService reCaptchaService)
     {
         this.userManager = userManager;
         this.signInManager = signInManager;

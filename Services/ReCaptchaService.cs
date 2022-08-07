@@ -9,15 +9,13 @@ using Newtonsoft.Json;
 
 using ViewModels.GoogleRecaptcha;
 
-public class ReCaptchaService : ITransientService
+public class ReCaptchaService : IReCaptchaService
 {
     private readonly RecaptchaSetting recaptchaSetting;
     private const string VerifyLink = "https://www.google.com/recaptcha/api/siteverify";
 
-    public ReCaptchaService(IOptions<RecaptchaSetting> recaptchaSetting)
-    {
-        this.recaptchaSetting = recaptchaSetting.Value;
-    }
+    public ReCaptchaService(IOptions<RecaptchaSetting> recaptchaSetting) 
+        => this.recaptchaSetting = recaptchaSetting.Value;
 
     public virtual async Task<RecaptchaResponse> ValidateResponse(string token)
     {
