@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Common.Models;
 using Data;
 using Data.Models;
 using Data.Models.Enums;
-
+using global::Common.Models;
 using Microsoft.EntityFrameworkCore;
 
 using ViewModels.Slot;
-using static Common.Constants.GlobalConstants.DoctorConstants;
-using static Common.Constants.GlobalConstants.MessageConstants;
+using static global::Common.Constants.GlobalConstants.DoctorConstants;
+using static global::Common.Constants.GlobalConstants.MessageConstants;
 public class SlotService : ISlotService
 {
     private readonly NeonatologyDbContext data;

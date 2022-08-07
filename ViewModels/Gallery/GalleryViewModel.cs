@@ -1,8 +1,6 @@
 ﻿namespace ViewModels.Gallery;
 
 using System.Collections.Generic;
-
-using Common;
 using Common.Models;
 
 public class GalleryViewModel : PagingModel

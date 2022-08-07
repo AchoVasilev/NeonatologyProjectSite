@@ -3,10 +3,11 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Common.Models;
+using Common;
+using global::Common.Models;
 using ViewModels.Slot;
 
-public interface ISlotService
+public interface ISlotService : ITransientService
 {
     Task<OperationResult> GenerateSlots(DateTime startDate, DateTime endDate, int slotDurationMinutes, int addressId);
     

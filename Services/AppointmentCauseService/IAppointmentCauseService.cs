@@ -2,10 +2,11 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Common.Models;
+using Common;
+using global::Common.Models;
 using ViewModels.Appointments;
 
-public interface IAppointmentCauseService
+public interface IAppointmentCauseService : ITransientService
 {
     Task<ICollection<AppointmentCauseViewModel>> GetAllCauses();
 

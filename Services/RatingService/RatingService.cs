@@ -14,11 +14,10 @@ using Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 using AppointmentService;
-using Common;
-using Common.Models;
+using global::Common.Models;
 using ViewModels.Administration.Rating;
 using ViewModels.Rating;
-using static Common.Constants.GlobalConstants.MessageConstants;
+using static global::Common.Constants.GlobalConstants.MessageConstants;
 
 public class RatingService : IRatingService
 {

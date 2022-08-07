@@ -3,11 +3,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
-using Common.Models;
+using global::Common.Models;
 using ViewModels.Address;
 using ViewModels.Doctor;
 
-public interface IDoctorService
+public interface IDoctorService : ITransientService
 {
     Task<DoctorProfileViewModel> GetDoctorById(string doctorId);
 

@@ -2,14 +2,14 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Common;
 using Data.Models;
 
 using Microsoft.AspNetCore.Http;
 
 using ViewModels.Chat;
 
-public interface IChatService
+public interface IChatService : ITransientService
 {
     Task AddUserToGroup(string groupName, string senderName, string receiverName);
 

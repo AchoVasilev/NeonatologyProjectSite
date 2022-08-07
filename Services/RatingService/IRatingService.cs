@@ -3,11 +3,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
-using Common.Models;
+using global::Common.Models;
 using ViewModels.Administration.Rating;
 using ViewModels.Rating;
 
-public interface IRatingService
+public interface IRatingService : ITransientService
 {
     Task<OperationResult> AddAsync(CreateRatingModel model);
 

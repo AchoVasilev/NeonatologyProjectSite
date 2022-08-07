@@ -3,11 +3,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
-using Common.Models;
+using global::Common.Models;
 using ViewModels.Address;
 using ViewModels.City;
 
-public interface ICityService
+public interface ICityService : ITransientService
 {
     Task<ICollection<CityFormModel>> GetAllCities();
 

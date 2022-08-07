@@ -3,14 +3,14 @@
 using System.Threading.Tasks;
 
 using CloudinaryDotNet;
-
+using Common;
 using Microsoft.AspNetCore.Http;
 
 using FileServiceModels;
 
 using ViewModels.Gallery;
 
-public interface IFileService
+public interface IFileService : ITransientService
 {
     Task<IFileServiceModel> UploadImage(Cloudinary cloudinary, IFormFile image, string folderName);
 

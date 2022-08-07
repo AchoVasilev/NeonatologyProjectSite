@@ -1,10 +1,10 @@
 ﻿namespace Services.UserService;
 
 using System.Threading.Tasks;
-
+using Common;
 using Data.Models;
 
-public interface IUserService
+public interface IUserService : ITransientService
 {
     Task<string> GetUserIdByDoctorIdAsync(string doctorId);
 

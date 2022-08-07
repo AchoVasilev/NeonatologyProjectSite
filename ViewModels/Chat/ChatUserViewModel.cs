@@ -1,8 +1,6 @@
 ﻿namespace ViewModels.Chat;
 
 using System.Collections.Generic;
-
-using Common;
 using Common.Models;
 
 public class ChatUserViewModel : PagingModel

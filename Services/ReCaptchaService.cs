@@ -2,14 +2,14 @@
 
 using System.Net.Http;
 using System.Threading.Tasks;
-
+using Common;
 using Microsoft.Extensions.Options;
 
 using Newtonsoft.Json;
 
 using ViewModels.GoogleRecaptcha;
 
-public class ReCaptchaService
+public class ReCaptchaService : ITransientService
 {
     private readonly RecaptchaSetting recaptchaSetting;
     private const string VerifyLink = "https://www.google.com/recaptcha/api/siteverify";

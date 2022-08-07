@@ -6,13 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Common;
-using Common.Models;
 using Data;
 using Data.Models;
+using global::Common.Models;
 using Microsoft.EntityFrameworkCore;
 using ViewModels.Feedback;
-using static Common.Constants.GlobalConstants.MessageConstants;
+using static global::Common.Constants.GlobalConstants.MessageConstants;
 
 public class FeedbackService : IFeedbackService
 {
