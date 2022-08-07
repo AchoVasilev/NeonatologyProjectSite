@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
+using Common.Models;
 using Data;
 using Data.Models;
 using Data.Models.Enums;
@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore;
 
 using ViewModels.Slot;
 using static Common.Constants.GlobalConstants.DoctorConstants;
-
+using static Common.Constants.GlobalConstants.MessageConstants;
 public class SlotService : ISlotService
 {
     private readonly NeonatologyDbContext data;
@@ -27,11 +27,21 @@ public class SlotService : ISlotService
         this.mapper = mapper;
     }
 
-    public async Task<bool> GenerateSlots(DateTime start, DateTime end, int slotDurationMinutes, int addressId)
+    public async Task<OperationResult> GenerateSlots(DateTime startDate, DateTime endDate, int slotDurationMinutes, int addressId)
     {
+        if (startDate.Date < DateTime.Now.Date)
+        {
+            return DateBeforeNowErrorMsg;
+        }
+
+        if (startDate >= endDate)
+        {
+            return StartDateIsAfterEndDateMsg;
+        }
+        
         var slots = new List<AppointmentSlot>();
 
-        for (var slotStart = start; slotStart < end; slotStart = slotStart.AddMinutes(slotDurationMinutes))
+        for (var slotStart = startDate; slotStart < endDate; slotStart = slotStart.AddMinutes(slotDurationMinutes))
         {
             var slotEnd = slotStart.AddMinutes(slotDurationMinutes);
 
@@ -52,10 +62,46 @@ public class SlotService : ISlotService
 
         if (slots.Count == 0)
         {
-            return false;
+            return SlotGenerationFailedErrorMsg;
         }
 
         await this.data.AppointmentSlots.AddRangeAsync(slots);
+        await this.data.SaveChangesAsync();
+
+        return true;
+    }
+    
+    public async Task<int> DeleteSlotById(int id)
+    {
+        var slot = await this.data.AppointmentSlots
+            .FirstOrDefaultAsync(x => x.Id == id);
+
+        if (slot is null)
+        {
+            return 0;
+        }
+
+        slot.IsDeleted = true;
+        slot.DeletedOn = DateTime.UtcNow;
+
+        await this.data.SaveChangesAsync();
+
+        return slot.Id;
+    }
+
+    public async Task<OperationResult> EditSlot(int id, string status, string text)
+    {
+        var slot = await this.data.AppointmentSlots
+            .FirstOrDefaultAsync(x => x.Id == id);
+
+        if (slot is null)
+        {
+            return FailedSlotEditMsg;
+        }
+
+        slot.Status = status;
+        slot.Text = text;
+
         await this.data.SaveChangesAsync();
 
         return true;
@@ -96,42 +142,6 @@ public class SlotService : ISlotService
             .AsNoTracking()
             .ProjectTo<SlotViewModel>(this.mapper.ConfigurationProvider)
             .ToListAsync();
-
-    public async Task<int> DeleteSlotById(int id)
-    {
-        var slot = await this.data.AppointmentSlots
-            .FirstOrDefaultAsync(x => x.Id == id);
-
-        if (slot is null)
-        {
-            return 0;
-        }
-
-        slot.IsDeleted = true;
-        slot.DeletedOn = DateTime.UtcNow;
-
-        await this.data.SaveChangesAsync();
-
-        return slot.Id;
-    }
-
-    public async Task<bool> EditSlot(int id, string status, string text)
-    {
-        var slot = await this.data.AppointmentSlots
-            .FirstOrDefaultAsync(x => x.Id == id);
-
-        if (slot == null)
-        {
-            return false;
-        }
-
-        slot.Status = status;
-        slot.Text = text;
-
-        await this.data.SaveChangesAsync();
-
-        return true;
-    }
 
     public async Task<ICollection<SlotViewModel>> GetTodaysTakenSlots() 
         => await this.data.AppointmentSlots

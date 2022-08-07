@@ -7,6 +7,7 @@ using Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Mocks;
 using Moq;
 using Neonatology.Areas.Administration.Controllers;
 using ViewModels.Administration.Offer;
@@ -30,7 +31,7 @@ public class OfferControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new OfferController(offerService.Object)
+        var controller = new OfferController(offerService.Object, null)
         {
             TempData = tempData
         };
@@ -57,7 +58,7 @@ public class OfferControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new OfferController(offerService.Object)
+        var controller = new OfferController(offerService.Object, null)
         {
             TempData = tempData
         };
@@ -84,7 +85,7 @@ public class OfferControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new OfferController(offerService.Object)
+        var controller = new OfferController(offerService.Object, null)
         {
             TempData = tempData
         };
@@ -106,7 +107,7 @@ public class OfferControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new OfferController(null)
+        var controller = new OfferController(null, null)
         {
             TempData = tempData
         };
@@ -123,16 +124,18 @@ public class OfferControllerTests
     {
         var offerService = new Mock<IOfferService>();
         var model = new CreateOfferFormModel();
-        offerService.Setup(x => x.AddOffer(model))
+        var serviceModel = new CreateOfferServiceModel();
+        offerService.Setup(x => x.AddOffer(serviceModel))
             .Returns(Task.CompletedTask);
 
+        var mapper = MapperMock.Instance;
         var httpContext = new DefaultHttpContext();
         var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new OfferController(offerService.Object)
+        var controller = new OfferController(offerService.Object, mapper)
         {
             TempData = tempData
         };
@@ -160,7 +163,7 @@ public class OfferControllerTests
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new OfferController(service.Object)
+        var controller = new OfferController(service.Object, null)
         {
             TempData = tempData
         };
@@ -177,16 +180,18 @@ public class OfferControllerTests
     {
         var offerService = new Mock<IOfferService>();
         var model = new EditOfferFormModel();
-        offerService.Setup(x => x.EditOffer(model))
+        var serviceModel = new EditOfferServiceModel();
+        offerService.Setup(x => x.EditOffer(serviceModel))
             .ReturnsAsync(true);
 
+        var mapper = MapperMock.Instance;
         var httpContext = new DefaultHttpContext();
         var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new OfferController(offerService.Object)
+        var controller = new OfferController(offerService.Object, mapper)
         {
             TempData = tempData
         };
@@ -204,16 +209,18 @@ public class OfferControllerTests
     {
         var offerService = new Mock<IOfferService>();
         var model = new EditOfferFormModel();
-        offerService.Setup(x => x.EditOffer(model))
+        var serviceModel = new EditOfferServiceModel();
+        offerService.Setup(x => x.EditOffer(serviceModel))
             .ReturnsAsync(false);
 
+        var mapper = MapperMock.Instance;
         var httpContext = new DefaultHttpContext();
         var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
             ["SessionVariable"] = "admin"
         };
 
-        var controller = new OfferController(offerService.Object)
+        var controller = new OfferController(offerService.Object, mapper)
         {
             TempData = tempData
         };

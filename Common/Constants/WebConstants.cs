@@ -26,6 +26,13 @@ public static class WebConstants
         public const string CalendarGetPlevenSlots = "getSlots/pleven";
         public const string CalendarMakeAnAppointment = "makeAppointment/{id}";
         public const string CalendarMakePatientAppointment = "makePatientAppointment/{id}";
+
+        public const string DoctorCalendarGetGabrovoAppointments = "gabrovo";
+        public const string DoctorCalendarGetGabrovoSlots = "getSlots/gabrovo";
+        public const string DoctorCalendarGetPlevenAppointments = "pleven";
+        public const string DoctorCalendarGetPlevenSlots = "getSlots/pleven";
+        public const string DoctorCalendarGenerate = "generate";
+        public const string DoctorCalendarEditSlot = "{id}";
     }
 
     public static class CheckoutConstants

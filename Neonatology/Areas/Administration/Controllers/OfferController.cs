@@ -1,6 +1,7 @@
 ﻿namespace Neonatology.Areas.Administration.Controllers;
 
 using System.Threading.Tasks;
+using AutoMapper;
 using Services.OfferService;
 using Microsoft.AspNetCore.Mvc;
 using ViewModels.Administration.Offer;
@@ -9,9 +10,12 @@ using static Common.Constants.GlobalConstants.MessageConstants;
 public class OfferController : BaseController
 {
     private readonly IOfferService offerService;
-
-    public OfferController(IOfferService offerService) 
-        => this.offerService = offerService;
+    private readonly IMapper mapper;
+    public OfferController(IOfferService offerService, IMapper mapper)
+    {
+        this.offerService = offerService;
+        this.mapper = mapper;
+    }
 
     public async Task<IActionResult> All()
     {
@@ -41,7 +45,8 @@ public class OfferController : BaseController
     [HttpPost]
     public async Task<IActionResult> Add(CreateOfferFormModel model)
     {
-        await this.offerService.AddOffer(model);
+        var serviceModel = this.mapper.Map<CreateOfferServiceModel>(model);
+        await this.offerService.AddOffer(serviceModel);
 
         this.TempData["Message"] = SuccessfulAddedItemMsg;
 
@@ -58,7 +63,9 @@ public class OfferController : BaseController
     [HttpPost]
     public async Task<IActionResult> Edit(EditOfferFormModel model)
     {
-        var isEdited = await this.offerService.EditOffer(model);
+        var serviceModel = this.mapper.Map<EditOfferServiceModel>(model);
+        var isEdited = await this.offerService.EditOffer(serviceModel);
+        
         if (isEdited.Failed)
         {
             this.TempData["Message"] = isEdited.Error;

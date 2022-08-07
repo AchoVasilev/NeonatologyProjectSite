@@ -71,7 +71,7 @@ public class OfferService : IOfferService
         return true;
     }
 
-    public async Task AddOffer(CreateOfferFormModel model)
+    public async Task AddOffer(CreateOfferServiceModel model)
     {
         var offer = new OfferedService
         {
@@ -90,7 +90,7 @@ public class OfferService : IOfferService
             .ProjectTo<EditOfferFormModel>(this.mapper.ConfigurationProvider)
             .FirstOrDefaultAsync();
 
-    public async Task<OperationResult> EditOffer(EditOfferFormModel model)
+    public async Task<OperationResult> EditOffer(EditOfferServiceModel model)
     {
         var offer = await this.data.OfferedServices
             .Where(x => x.Id == model.Id && x.IsDeleted == false)

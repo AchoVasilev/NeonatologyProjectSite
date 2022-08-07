@@ -472,7 +472,7 @@ public class OfferServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var createModel = new CreateOfferFormModel
+        var createModel = new CreateOfferServiceModel()
         {
             Name = "Consultation",
             Price = 30
@@ -675,7 +675,7 @@ public class OfferServiceTests
 
         await dataMock.OfferedServices.AddRangeAsync(offers);
         await dataMock.SaveChangesAsync();
-        var model = new EditOfferFormModel()
+        var model = new EditOfferServiceModel()
         {
             Id = 1,
             Name = "Consult",
@@ -731,7 +731,7 @@ public class OfferServiceTests
         await dataMock.OfferedServices.AddRangeAsync(offers);
         await dataMock.SaveChangesAsync();
 
-        var model = new EditOfferFormModel()
+        var model = new EditOfferServiceModel()
         {
             Id = 1,
             Name = "Consult",
@@ -790,7 +790,7 @@ public class OfferServiceTests
         await dataMock.OfferedServices.AddRangeAsync(offers);
         await dataMock.SaveChangesAsync();
 
-        var model = new EditOfferFormModel()
+        var model = new EditOfferServiceModel()
         {
             Id = 15,
             Name = "Consult",
@@ -847,7 +847,7 @@ public class OfferServiceTests
         await dataMock.OfferedServices.AddRangeAsync(offers);
         await dataMock.SaveChangesAsync();
 
-        var model = new EditOfferFormModel()
+        var model = new EditOfferServiceModel()
         {
             Id = 5,
             Name = "Consult",

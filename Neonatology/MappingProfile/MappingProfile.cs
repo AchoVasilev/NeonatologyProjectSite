@@ -109,6 +109,8 @@ public class MappingProfile : Profile
         this.CreateMap<FeedbackInputModel, CreateFeedbackModel>();
         this.CreateMap<CreateAppointmentModel, CreateAppointmentServiceModel>();
         this.CreateMap<PatientAppointmentCreateModel, CreatePatientAppointmentModel>();
+        this.CreateMap<CreateOfferFormModel, CreateOfferServiceModel>();
+        this.CreateMap<EditOfferFormModel, EditOfferServiceModel>();
         
         this.CreateMap<Feedback, FeedbackViewModel>()
             .ForMember(x => x.CreatedOn, opt =>

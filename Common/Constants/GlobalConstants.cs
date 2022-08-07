@@ -8,6 +8,7 @@ public static class GlobalConstants
     public const string PatientRoleName = "Patient";
 
     public const string AdministratorRoleName = "Administrator";
+    public const string AdministrationAreaName = "Administration";
     public const string AdministratorEmail = "pediamedbg@gmail.com";
     public const string AdministratorPassword = "administrator123";
 
@@ -108,6 +109,8 @@ public static class GlobalConstants
 
         public const string OfferDoesNotExistErrorMsg = "Тази услуга не съществува.";
         public const string PatientDoesNotExistErrorMsg = "Този пациент не съществува";
+
+        public const string SlotGenerationFailedErrorMsg = "Неуспешно генериране на часове.";
     }
 
     public static class AccountConstants

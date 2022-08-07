@@ -1,22 +1,17 @@
 ﻿namespace Neonatology.Controllers.api;
 
-using System.Threading.Tasks;
 using System;
-
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 using ViewModels.Slot;
-
-using static Common.Constants.GlobalConstants;
-using static Common.Constants.GlobalConstants.MessageConstants;
-using Services.AppointmentService;
 using Services.SlotService;
+using Services.AppointmentService;
+using static Common.Constants.GlobalConstants;
+using static Common.Constants.WebConstants.RouteTemplates;
 
-[ApiController]
 [Authorize(Roles = DoctorConstants.DoctorRoleName)]
-[Route("[controller]")]
-public class DoctorCalendarController : ControllerBase
+public class DoctorCalendarController : ApiController
 {
     private readonly IAppointmentService appointmentService;
     private readonly ISlotService slotService;
@@ -27,7 +22,8 @@ public class DoctorCalendarController : ControllerBase
         this.slotService = slotService;
     }
 
-    [HttpGet("gabrovo")]
+    [HttpGet]
+    [Route(DoctorCalendarGetGabrovoAppointments)]
     public async Task<JsonResult> GetDoctorGabrovoAppointments()
     {
         var result = await this.appointmentService.GetGabrovoAppointments();
@@ -35,7 +31,8 @@ public class DoctorCalendarController : ControllerBase
         return new JsonResult(result);
     }
 
-    [HttpGet("pleven")]
+    [HttpGet]
+    [Route(DoctorCalendarGetPlevenAppointments)]
     public async Task<JsonResult> GetDoctorPlevenAppointments()
     {
         var result = await this.appointmentService.GetPlevenAppointments();
@@ -43,29 +40,26 @@ public class DoctorCalendarController : ControllerBase
         return new JsonResult(result);
     }
 
-    [HttpPost("generate")]
+    [HttpPost]
+    [Route(DoctorCalendarGenerate)]
     public async Task<IActionResult> GenerateSlots([FromBody] SlotInputModel model)
     {
         var startDate = DateTime.Parse(model.StartDate);
         var endDate = DateTime.Parse(model.EndDate);
-
-        if (startDate.Date < DateTime.Now.Date)
-        {
-            return this.BadRequest(new { response = DateBeforeNowErrorMsg });
-        }
-
-        if (startDate >= endDate)
-        {
-            return this.BadRequest(new { response = StartDateIsAfterEndDateMsg });
-        }
-
+        
         var result = await this.slotService
             .GenerateSlots(startDate, endDate, model.SlotDurationMinutes, model.AddressId);
 
+        if (result.Failed)
+        {
+            return this.BadRequest(new { response = result.Error });
+        }
+        
         return new JsonResult(result);
     }
 
-    [HttpGet("getSlots/gabrovo")]
+    [HttpGet]
+    [Route(DoctorCalendarGetGabrovoSlots)]
     public async Task<JsonResult> GetCalendarGabrovoSlots()
     {
         var slots = await this.slotService.GetGabrovoSlots();
@@ -73,7 +67,8 @@ public class DoctorCalendarController : ControllerBase
         return new JsonResult(slots);
     }
 
-    [HttpGet("getSlots/pleven")]
+    [HttpGet]
+    [Route(DoctorCalendarGetPlevenSlots)]
     public async Task<JsonResult> GetCalendarPlevenSlots()
     {
         var slots = await this.slotService.GetPlevenSlots();
@@ -81,14 +76,15 @@ public class DoctorCalendarController : ControllerBase
         return new JsonResult(slots);
     }
 
-    [HttpPut("{id}")]
+    [HttpPut]
+    [Route(DoctorCalendarEditSlot)]
     public async Task<IActionResult> EditSlot(SlotEditModel model)
     {
-        var isEdited = await this.slotService.EditSlot(model.Id, model.Status, model.Text);
+        var result = await this.slotService.EditSlot(model.Id, model.Status, model.Text);
 
-        if (isEdited == false)
+        if (result.Failed)
         {
-            return this.BadRequest(new { message = FailedSlotEditMsg });
+            return this.BadRequest(new { message = result.Error });
         }
 
         return this.Ok(model.Id);

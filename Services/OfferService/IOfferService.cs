@@ -17,9 +17,9 @@ public interface IOfferService
 
     Task<OperationResult> DeleteOffer(int offerId);
 
-    Task AddOffer(CreateOfferFormModel model);
+    Task AddOffer(CreateOfferServiceModel model);
 
     Task<EditOfferFormModel> GetOffer(int id);
 
-    Task<OperationResult> EditOffer(EditOfferFormModel model);
+    Task<OperationResult> EditOffer(EditOfferServiceModel model);
 }

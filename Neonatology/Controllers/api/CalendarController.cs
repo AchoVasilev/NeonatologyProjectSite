@@ -19,9 +19,7 @@ using ViewModels.Appointments;
 using static Common.Constants.GlobalConstants;
 using static Common.Constants.WebConstants.RouteTemplates;
 
-[ApiController]
-[Route("[controller]")]
-public class CalendarController : ControllerBase
+public class CalendarController : ApiController
 {
     private readonly IAppointmentService appointmentService;
     private readonly ISlotService slotService;

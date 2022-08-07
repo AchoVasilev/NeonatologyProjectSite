@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using static Common.Constants.GlobalConstants;
 
-[Area(("Administration"))]
+[Area((AdministrationAreaName))]
 [Authorize(Roles = AdministratorRoleName)]
 public class BaseController : Controller
 {

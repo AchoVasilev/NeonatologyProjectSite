@@ -25,7 +25,7 @@ public class SlotServiceTests
 
         var result = await service.GenerateSlots(startDate, endDate, 10, 5);
 
-        Assert.True(result);
+        Assert.True(result.Succeeded);
     }
 
     [Fact]
@@ -303,7 +303,7 @@ public class SlotServiceTests
 
         var result = await service.EditSlot(1, "Зает", "asdasdasd");
 
-        Assert.True(result);
+        Assert.True(result.Succeeded);
     }
         
     [Fact]
@@ -334,6 +334,6 @@ public class SlotServiceTests
 
         var result = await service.EditSlot(15, "Зает", "asdasdasd");
 
-        Assert.False(result);
+        Assert.True(result.Failed);
     }
 }
