@@ -2,9 +2,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
-using Data.Models;
-
+using Helpers;
 using Services.AppointmentCauseService;
 
 using Mocks;
@@ -21,15 +19,7 @@ public class AppointmentCauseTests
         var databaseMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Name = "Start" },
-            new AppointmentCause { Name = "End" },
-            new AppointmentCause { Name = "Middle" },
-        };
-
-        await databaseMock.AppointmentCauses.AddRangeAsync(causes);
-        await databaseMock.SaveChangesAsync();
+        await AppointmentCauseData.GetCauses(databaseMock);
 
         var appointmentCauseService = new AppointmentCauseService(databaseMock, mapperMock);
         var result = await appointmentCauseService.GetAllCauses();
@@ -43,15 +33,7 @@ public class AppointmentCauseTests
         var databaseMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Name = "Start" },
-            new AppointmentCause { Name = "End", IsDeleted = true },
-            new AppointmentCause { Name = "Middle" },
-        };
-
-        await databaseMock.AppointmentCauses.AddRangeAsync(causes);
-        await databaseMock.SaveChangesAsync();
+        await AppointmentCauseData.GetCauses(databaseMock, true);
 
         var appointmentCauseService = new AppointmentCauseService(databaseMock, mapperMock);
         var result = await appointmentCauseService.GetAllCauses();
@@ -65,15 +47,7 @@ public class AppointmentCauseTests
         var databaseMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Name = "Start" },
-            new AppointmentCause { Name = "End", IsDeleted = true },
-            new AppointmentCause { Name = "Middle" },
-        };
-
-        await databaseMock.AppointmentCauses.AddRangeAsync(causes);
-        await databaseMock.SaveChangesAsync();
+        await AppointmentCauseData.GetCauses(databaseMock, true);
 
         var appointmentCauseService = new AppointmentCauseService(databaseMock, mapperMock);
         var result = await appointmentCauseService.GetAllCauses();
@@ -88,15 +62,7 @@ public class AppointmentCauseTests
         var databaseMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await databaseMock.AppointmentCauses.AddRangeAsync(causes);
-        await databaseMock.SaveChangesAsync();
+        await AppointmentCauseData.GetCauses(databaseMock);
 
         var appointmentCauseService = new AppointmentCauseService(databaseMock, mapperMock);
         var result = await appointmentCauseService.GetAppointmentCauseByIdAsync(1);
@@ -112,15 +78,7 @@ public class AppointmentCauseTests
         var databaseMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start", IsDeleted = true },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await databaseMock.AppointmentCauses.AddRangeAsync(causes);
-        await databaseMock.SaveChangesAsync();
+        await AppointmentCauseData.GetCauses(databaseMock, true);
 
         var appointmentCauseService = new AppointmentCauseService(databaseMock, mapperMock);
         var result = await appointmentCauseService.GetAppointmentCauseByIdAsync(1);
@@ -134,15 +92,7 @@ public class AppointmentCauseTests
         var databaseMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await databaseMock.AppointmentCauses.AddRangeAsync(causes);
-        await databaseMock.SaveChangesAsync();
+        await AppointmentCauseData.GetCauses(databaseMock);
 
         var appointmentCauseService = new AppointmentCauseService(databaseMock, mapperMock);
         var result = await appointmentCauseService.GetAppointmentCauseByIdAsync(1);
@@ -150,4 +100,6 @@ public class AppointmentCauseTests
         Assert.NotNull(result);
         Assert.IsType<AppointmentCauseViewModel>(result);
     }
+    
+   
 }

@@ -264,10 +264,11 @@ public class AppointmentService : IAppointmentService
                         x.DateTime.Date == DateTime.Now.Date &&
                         x.IsDeleted == false)
             .AsNoTracking()
-            .ProjectTo<AppointmentViewModel>(this.mapper.ConfigurationProvider)
             .ToListAsync();
 
-        return appointments;
+        var result = this.mapper.Map<ICollection<AppointmentViewModel>>(appointments);
+
+        return result;
     }
 
     public async Task<int> GetTotalAppointmentsCount()

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Data.Models;
-
+using Helpers;
 using Services.AppointmentService;
 
 using Microsoft.EntityFrameworkCore;
@@ -25,52 +25,9 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        var address = new Address
-        {
-            Id = 1,
-            StreetName = "Kaspichan 49",
-            City = new City
-            {
-                Name = "Kaspichan",
-                ZipCode = 1234
-            }
-        };
-
-        await dataMock.Addresses.AddAsync(address);
-
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                AddressId = 1
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                AddressId = 1
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                AddressId = 1
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AddressData.GetOneAddress(dataMock);
+        await AppointmentsData.GetAppointmentsWithAddress(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetAllAppointments();
@@ -85,59 +42,15 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        var address = new Address
-        {
-            Id = 1,
-            StreetName = "Kaspichan 49",
-            City = new City
-            {
-                Name = "Kaspichan",
-                ZipCode = 1234
-            }
-        };
-
-        await dataMock.Addresses.AddAsync(address);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                AddressId = 1
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                IsDeleted = true,
-                AddressId = 1
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                IsDeleted = true,
-                AddressId = 1
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AddressData.GetOneAddress(dataMock);
+        await AppointmentsData.GetAppointmentsWithOneDeleted(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetAllAppointments();
 
         Assert.NotNull(result);
-        Assert.Equal(1, result.Count);
+        Assert.Equal(2, result.Count);
     }
 
     [Fact]
@@ -146,36 +59,9 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AddressData.GetOneAddress(dataMock);
+        await AppointmentsData.GetAppointments(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetAllAppointments();
@@ -185,56 +71,14 @@ public class AppointmentServiceTests
     }
 
     [Fact]
-    public async Task GetUpcommingUserAppointmentsShouldReturnCorrectCount()
+    public async Task GetUpcomingUserAppointmentsShouldReturnCorrectCount()
     {
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            Phone = "098787862"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await PatientData.OnePatient(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithPatientId(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetUpcomingUserAppointments("pat", 8, 1);
@@ -243,57 +87,14 @@ public class AppointmentServiceTests
     }
 
     [Fact]
-    public async Task GetUpcommingUserAppointmentsShouldReturnCorrectCountIfOneIsDeleted()
+    public async Task GetUpcomingUserAppointmentsShouldReturnCorrectCountIfOneIsDeleted()
     {
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            Phone = "098787862"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10),
-                IsDeleted = true
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await PatientData.OnePatient(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithPatientId(dataMock, true);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetUpcomingUserAppointments("pat", 8, 1);
@@ -302,56 +103,14 @@ public class AppointmentServiceTests
     }
 
     [Fact]
-    public async Task GetUpcommingUserAppointmentsShouldReturnCorrectModel()
+    public async Task GetUpcomingUserAppointmentsShouldReturnCorrectModel()
     {
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            Phone = "098787862"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await PatientData.OnePatient(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithPatientId(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetUpcomingUserAppointments("pat", 8, 1);
@@ -366,51 +125,9 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            Phone = "098787862"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await PatientData.OnePatient(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithPatientIdWithNegativeDays(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetPastUserAppointments("pat", 8, 1);
@@ -424,52 +141,9 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            Phone = "098787862"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10),
-                IsDeleted = true
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await PatientData.OnePatient(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithPatientIdWithNegativeDays(dataMock, true);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetPastUserAppointments("pat", 8, 1);
@@ -483,51 +157,9 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            Phone = "098787862"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await PatientData.OnePatient(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithPatientIdWithNegativeDays(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetPastUserAppointments("pat", 8, 1);
@@ -537,176 +169,49 @@ public class AppointmentServiceTests
     }
 
     [Fact]
-    public async Task GetUpcommingDoctorAppointmentsShouldReturnCorrectCount()
+    public async Task GetUpcomingDoctorAppointmentsShouldReturnCorrectCount()
     {
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Doctors.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithDoctorId(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.GetUpcomingDoctorAppointments("pat", 8, 1);
+        var result = await service.GetUpcomingDoctorAppointments("doc", 8, 1);
 
         Assert.NotNull(result);
     }
 
     [Fact]
-    public async Task GetUpcommingDoctorAppointmentsShouldReturnCorrectCountIfOneIsDeleted()
+    public async Task GetUpcomingDoctorAppointmentsShouldReturnCorrectCountIfOneIsDeleted()
     {
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Doctors.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10),
-                IsDeleted = true
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithDoctorId(dataMock, true);
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.GetUpcomingDoctorAppointments("pat", 8, 1);
+        var result = await service.GetUpcomingDoctorAppointments("doc", 8, 1);
 
         Assert.NotNull(result);
     }
 
     [Fact]
-    public async Task GetUpcommingDoctorAppointmentsShouldReturnCorrectModel()
+    public async Task GetUpcomingDoctorAppointmentsShouldReturnCorrectModel()
     {
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Doctors.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithDoctorId(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.GetUpcomingDoctorAppointments("pat", 8, 1);
+        var result = await service.GetUpcomingDoctorAppointments("doc", 8, 1);
 
         Assert.NotNull(result);
         Assert.IsAssignableFrom<AllAppointmentsViewModel>(result);
@@ -718,54 +223,12 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Doctors.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithDoctorIdWithNegativeDays(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.GetPastDoctorAppointments("pat", 8, 1);
+        var result = await service.GetPastDoctorAppointments("doc", 8, 1);
 
         Assert.NotNull(result);
     }
@@ -776,55 +239,12 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Doctors.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10),
-                IsDeleted = true
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithDoctorIdWithNegativeDays(dataMock, true);
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.GetPastDoctorAppointments("pat", 8, 1);
+        var result = await service.GetPastDoctorAppointments("doc", 8, 1);
 
         Assert.NotNull(result);
     }
@@ -835,54 +255,12 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Doctors.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(-10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithDoctorIdWithNegativeDays(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.GetPastDoctorAppointments("pat", 8, 1);
+        var result = await service.GetPastDoctorAppointments("doc", 8, 1);
 
         Assert.NotNull(result);
         Assert.IsAssignableFrom<AllAppointmentsViewModel>(result);
@@ -894,39 +272,8 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                DateTime = DateTime.UtcNow.AddDays(2)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                DateTime = DateTime.UtcNow.AddDays(3)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.GetAppointments(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetTakenAppointmentSlots();
@@ -940,41 +287,9 @@ public class AppointmentServiceTests
     {
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                DateTime = DateTime.UtcNow,
-                IsDeleted = true
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                DateTime = DateTime.UtcNow.AddDays(2)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                DateTime = DateTime.UtcNow.AddDays(3)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.GetTakenAppointments(dataMock, true);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetTakenAppointmentSlots();
@@ -989,39 +304,8 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                DateTime = DateTime.UtcNow.AddDays(2)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                DateTime = DateTime.UtcNow.AddDays(-3)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.GetAppointmentsWithOneNegativeDay(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetTakenAppointmentSlots();
@@ -1035,40 +319,9 @@ public class AppointmentServiceTests
     {
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                DateTime = DateTime.UtcNow.AddDays(2)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                DateTime = DateTime.UtcNow.AddDays(3)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.GetAppointmentsWithThreeDifferentDates(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetTakenAppointmentSlots();
@@ -1083,39 +336,8 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                DateTime = DateTime.UtcNow.AddDays(2)
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                DateTime = DateTime.UtcNow.AddDays(3)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.GetAppointmentsWithThreeDifferentDates(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetTakenAppointmentSlots();
@@ -1130,24 +352,8 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var doctor = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.Doctors.AddAsync(doctor);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
 
         var model = new CreateAppointmentServiceModel()
         {
@@ -1156,14 +362,14 @@ public class AppointmentServiceTests
             ParentFirstName = "Mancho",
             ParentLastName = "Vanev",
             PhoneNumber = "098785623",
-            DoctorId = "pat",
+            DoctorId = "doc",
             Email = "gosho@abv.bg",
             Start = "23.04.2022 15:33",
             End = "28.04.2022 15:43"
         };
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.AddAsync(doctor.Id, model, DateTime.UtcNow, DateTime.UtcNow.AddDays(1));
+        var result = await service.AddAsync("doc", model, DateTime.UtcNow, DateTime.UtcNow.AddDays(1));
 
         Assert.True(result.Succeeded);
         Assert.Equal(1, dataMock.Appointments.Count());
@@ -1174,21 +380,9 @@ public class AppointmentServiceTests
     {
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
-
-        var doctor = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
+        
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
 
         var appointment = new Appointment()
         {
@@ -1197,13 +391,11 @@ public class AppointmentServiceTests
             ParentFirstName = "Mancho",
             ParentLastName = "Vanev",
             PhoneNumber = "098785623",
-            DoctorId = "pat",
+            DoctorId = "doc",
             DateTime = DateTime.ParseExact("29.01.2022 08:30", "dd.MM.yyyy HH:mm", null),
             End = DateTime.ParseExact("03.02.2022 08:40", "dd.MM.yyyy HH:mm", null)
         };
 
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.Doctors.AddAsync(doctor);
         await dataMock.Appointments.AddAsync(appointment);
         await dataMock.SaveChangesAsync();
 
@@ -1214,14 +406,14 @@ public class AppointmentServiceTests
             ParentFirstName = "Mancho",
             ParentLastName = "Vanev",
             PhoneNumber = "098785623",
-            DoctorId = "pat",
+            DoctorId = "doc",
             Email = "gosho@abv.bg",
             Start = "29.01.2022 08:30",
             End = "03.02.2022 08:40"
         };
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.AddAsync(doctor.Id, model, DateTime.ParseExact(model.Start, "dd.MM.yyyy HH:mm", null),
+        var result = await service.AddAsync("doc", model, DateTime.ParseExact(model.Start, "dd.MM.yyyy HH:mm", null),
             DateTime.ParseExact(model.End, "dd.MM.yyyy HH:mm", null));
 
         Assert.True(result.Failed);
@@ -1233,46 +425,22 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var doctor = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862"
-        };
-
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Gosho",
-            LastName = "Peshev",
-            Phone = "0988878264",
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.Doctors.AddAsync(doctor);
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.SaveChangesAsync();
-
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await PatientData.OnePatient(dataMock);
+        
         var model = new CreatePatientAppointmentModel()
         {
             PatientId = "pat",
             AppointmentCauseId = 1,
             ChildFirstName = "Evlogi",
-            DoctorId = "pat",
+            DoctorId = "doc",
             Start = "10.10.2022 15:30",
             End = "15.10.2022 15:35"
         };
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.AddAsync(doctor.Id, model, DateTime.ParseExact(model.Start, "dd.MM.yyyy HH:mm", null),
+        var result = await service.AddAsync("doc", model, DateTime.ParseExact(model.Start, "dd.MM.yyyy HH:mm", null),
             DateTime.ParseExact(model.End, "dd.MM.yyyy HH:mm", null));
 
         Assert.True(result.Succeeded);
@@ -1285,20 +453,8 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var doctor = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862",
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
 
         var appointment = new Appointment()
         {
@@ -1307,13 +463,11 @@ public class AppointmentServiceTests
             ParentFirstName = "Mancho",
             ParentLastName = "Vanev",
             PhoneNumber = "098785623",
-            DoctorId = "pat",
+            DoctorId = "doc",
             DateTime = new DateTime(2022, 01, 29, 08, 30, 00),
             End = new DateTime(2022, 01, 29, 08, 40, 00)
         };
 
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.Doctors.AddAsync(doctor);
         await dataMock.Appointments.AddAsync(appointment);
         await dataMock.SaveChangesAsync();
 
@@ -1321,13 +475,13 @@ public class AppointmentServiceTests
         {
             AppointmentCauseId = 1,
             ChildFirstName = "Evlogi",
-            DoctorId = "pat",
+            DoctorId = "doc",
             Start = "29.01.2022 08:30",
             End = "29.01.2022 08:40"
         };
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.AddAsync(doctor.Id, model, DateTime.ParseExact(model.Start, "dd.MM.yyyy HH:mm", null),
+        var result = await service.AddAsync("doc", model, DateTime.ParseExact(model.Start, "dd.MM.yyyy HH:mm", null),
             DateTime.ParseExact(model.End, "dd.MM.yyyy HH:mm", null));
 
         Assert.True(result.Failed);
@@ -1339,55 +493,9 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            Phone = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                Id = 1,
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 2,
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 3,
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await PatientData.OnePatient(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithPatientId(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetUserAppointmentAsync("patpat", 3);
@@ -1402,56 +510,10 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            Phone = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                Id = 1,
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 2,
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 3,
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
-
+        await PatientData.OnePatient(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithPatientId(dataMock);
+        
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetUserAppointmentAsync("patpat", 3);
 
@@ -1465,55 +527,9 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            Phone = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                Id = 1,
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 2,
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 3,
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await PatientData.OnePatient(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithPatientId(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetUserAppointmentAsync("pat", 3);
@@ -1527,55 +543,9 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            Phone = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                Id = 1,
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 2,
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 3,
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await PatientData.OnePatient(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithPatientId(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetUserAppointmentAsync("patpat", 5);
@@ -1589,59 +559,12 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            Phone = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                Id = 1,
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 2,
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 3,
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10),
-                IsDeleted = true
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await PatientData.OnePatient(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithPatientId(dataMock, true);
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.GetUserAppointmentAsync("patpat", 3);
+        var result = await service.GetUserAppointmentAsync("patpat", 1);
 
         Assert.Null(result);
     }
@@ -1652,55 +575,9 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            Phone = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                Id = 1,
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 2,
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 3,
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await PatientData.OnePatient(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithPatientId(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetAppointmentByIdAsync(3);
@@ -1716,55 +593,9 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            Phone = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                Id = 1,
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 2,
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 3,
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await PatientData.OnePatient(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithPatientId(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetAppointmentByIdAsync(3);
@@ -1778,57 +609,11 @@ public class AppointmentServiceTests
     {
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
-
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            Phone = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                Id = 1,
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 2,
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 3,
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
-
+        
+        await PatientData.OnePatient(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithPatientId(dataMock);
+        
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetAppointmentByIdAsync(5);
 
@@ -1840,60 +625,13 @@ public class AppointmentServiceTests
     {
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
-
-        var patient = new Patient()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            Phone = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Patients.AddAsync(patient);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                Id = 1,
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 2,
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-
-            new Appointment
-            {
-                Id = 3,
-                AppointmentCauseId = 3,
-                PatientId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10),
-                IsDeleted = true
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        
+        await PatientData.OnePatient(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithPatientId(dataMock, true);
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.GetAppointmentByIdAsync(3);
+        var result = await service.GetAppointmentByIdAsync(1);
 
         Assert.Null(result);
     }
@@ -1904,55 +642,12 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var doctor = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Doctors.AddAsync(doctor);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithDoctorIdForToday(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.GetTodaysAppointments("patpat");
+        var result = await service.GetTodaysAppointments("docdoc");
 
         Assert.NotNull(result);
     }
@@ -1963,46 +658,29 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var doctor = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Doctors.AddAsync(doctor);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
 
         var appointments = new List<Appointment>()
         {
             new Appointment
             {
                 AppointmentCauseId = 1,
-                DoctorId = "pat",
+                DoctorId = "doc",
                 DateTime = DateTime.UtcNow
             },
 
             new Appointment
             {
                 AppointmentCauseId = 2,
-                DoctorId = "pat",
+                DoctorId = "doc",
                 DateTime = DateTime.UtcNow
             },
 
             new Appointment
             {
                 AppointmentCauseId = 3,
-                DoctorId = "pat",
+                DoctorId = "doc",
                 DateTime = DateTime.UtcNow.AddDays(10)
             },
         };
@@ -2011,8 +689,9 @@ public class AppointmentServiceTests
         await dataMock.SaveChangesAsync();
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.GetTodaysAppointments("patpat");
+        var result = await service.GetTodaysAppointments("docdoc");
 
+        Assert.Equal(2, result.Count);
         Assert.NotNull(result);
     }
 
@@ -2022,39 +701,22 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var doctor = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Doctors.AddAsync(doctor);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
 
         var appointments = new List<Appointment>()
         {
             new Appointment
             {
                 AppointmentCauseId = 1,
-                DoctorId = "pat",
+                DoctorId = "doc",
                 DateTime = DateTime.UtcNow
             },
 
             new Appointment
             {
                 AppointmentCauseId = 2,
-                DoctorId = "pat",
+                DoctorId = "doc",
                 DateTime = DateTime.UtcNow,
                 IsDeleted = true
             },
@@ -2062,7 +724,7 @@ public class AppointmentServiceTests
             new Appointment
             {
                 AppointmentCauseId = 3,
-                DoctorId = "pat",
+                DoctorId = "doc",
                 DateTime = DateTime.UtcNow.AddDays(10)
             },
         };
@@ -2071,7 +733,7 @@ public class AppointmentServiceTests
         await dataMock.SaveChangesAsync();
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.GetTodaysAppointments("patpat");
+        var result = await service.GetTodaysAppointments("docdoc");
 
         Assert.NotNull(result);
     }
@@ -2082,55 +744,12 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var doctor = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Doctors.AddAsync(doctor);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithDoctorIdForToday(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.GetTodaysAppointments("patpat");
+        var result = await service.GetTodaysAppointments("docdoc");
 
         Assert.IsAssignableFrom<ICollection<AppointmentViewModel>>(result);
     }
@@ -2141,52 +760,9 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var doctor = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Doctors.AddAsync(doctor);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                AppointmentCauseId = 3,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithDoctorId(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.GetTotalAppointmentsCount();
@@ -2200,55 +776,9 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var doctor = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Doctors.AddAsync(doctor);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                Id = 1,
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                Id = 2,
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                Id = 3,
-                AppointmentCauseId = 3,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithDoctorId(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.DeleteAppointment(3);
@@ -2262,55 +792,9 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var doctor = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Doctors.AddAsync(doctor);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                Id = 1,
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                Id = 2,
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                Id = 3,
-                AppointmentCauseId = 3,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithDoctorId(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.DeleteAppointment(3);
@@ -2327,55 +811,9 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var doctor = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Doctors.AddAsync(doctor);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                Id = 1,
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                Id = 2,
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                Id = 3,
-                AppointmentCauseId = 3,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10)
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithDoctorId(dataMock);
 
         var service = new AppointmentService(dataMock, mapperMock);
         var result = await service.DeleteAppointment(5);
@@ -2389,59 +827,12 @@ public class AppointmentServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var doctor = new Doctor()
-        {
-            Id = "pat",
-            FirstName = "Evlogi",
-            LastName = "Manev",
-            PhoneNumber = "098787862",
-            UserId = "patpat"
-        };
-
-        var causes = new List<AppointmentCause>()
-        {
-            new AppointmentCause { Id = 1, Name = "Start" },
-            new AppointmentCause { Id = 2, Name = "End" },
-            new AppointmentCause { Id = 3, Name = "Middle" },
-        };
-
-        await dataMock.Doctors.AddAsync(doctor);
-        await dataMock.AppointmentCauses.AddRangeAsync(causes);
-        await dataMock.SaveChangesAsync();
-
-        var appointments = new List<Appointment>()
-        {
-            new Appointment
-            {
-                Id = 1,
-                AppointmentCauseId = 1,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                Id = 2,
-                AppointmentCauseId = 2,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow
-            },
-
-            new Appointment
-            {
-                Id = 3,
-                AppointmentCauseId = 3,
-                DoctorId = "pat",
-                DateTime = DateTime.UtcNow.AddDays(10),
-                IsDeleted = true
-            },
-        };
-
-        await dataMock.Appointments.AddRangeAsync(appointments);
-        await dataMock.SaveChangesAsync();
+        await DoctorData.OneDoctor(dataMock);
+        await AppointmentCauseData.GetCauses(dataMock);
+        await AppointmentsData.AppointmentsWithDoctorId(dataMock, true);
 
         var service = new AppointmentService(dataMock, mapperMock);
-        var result = await service.DeleteAppointment(3);
+        var result = await service.DeleteAppointment(1);
 
         Assert.True(result.Failed);
     }

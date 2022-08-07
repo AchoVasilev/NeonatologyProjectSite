@@ -1,10 +1,10 @@
 {
-  "Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programming\/Neonatology\/Common",
-  "Data.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programming\/Neonatology\/Data.Common",
-  "Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programming\/Neonatology\/Data",
-  "Data.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programming\/Neonatology\/Data.Models",
-  "Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programming\/Neonatology\/Infrastructure",
-  "Neonatology, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programming\/Neonatology\/Neonatology",
-  "Services, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programming\/Neonatology\/Services",
-  "ViewModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programming\/Neonatology\/ViewModels"
+  "Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Common",
+  "Data.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Data.Common",
+  "Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Data",
+  "Data.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Data.Models",
+  "Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Infrastructure",
+  "Neonatology, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Neonatology",
+  "Services, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Services",
+  "ViewModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/ViewModels"
 }
