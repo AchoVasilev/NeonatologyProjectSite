@@ -7,17 +7,15 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Common;
-using Common.Models;
 using Data;
 using Data.Models;
-
+using global::Common.Models;
 using Microsoft.EntityFrameworkCore;
 
 using ViewModels.Appointments;
 
-using static Common.Constants.GlobalConstants.DoctorConstants;
-using static Common.Constants.GlobalConstants.MessageConstants;
+using static global::Common.Constants.GlobalConstants.DoctorConstants;
+using static global::Common.Constants.GlobalConstants.MessageConstants;
 
 public class AppointmentService : IAppointmentService
 {

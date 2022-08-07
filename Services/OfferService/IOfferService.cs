@@ -3,11 +3,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
-using Common.Models;
+using global::Common.Models;
 using ViewModels.Administration.Offer;
 using ViewModels.Offer;
 
-public interface IOfferService
+public interface IOfferService : ITransientService
 {
     Task<ICollection<OfferViewModel>> GetAllAsync();
 

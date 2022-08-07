@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using CloudinaryDotNet;
-using Common;
-using Common.Models;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using FileService;
+using global::Common.Models;
 using ViewModels.Administration.Galery;
-using static Common.Constants.GlobalConstants.FileConstants;
-
-using static Common.Constants.GlobalConstants.MessageConstants;
+using static global::Common.Constants.GlobalConstants.FileConstants;
+using static global::Common.Constants.GlobalConstants.MessageConstants;
 
 public class GalleryService : IGalleryService
 {

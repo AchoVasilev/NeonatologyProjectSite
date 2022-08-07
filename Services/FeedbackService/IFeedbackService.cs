@@ -3,10 +3,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
-using Common.Models;
+using global::Common.Models;
 using ViewModels.Feedback;
 
-public interface IFeedbackService
+public interface IFeedbackService : ITransientService
 {
     Task CreateFeedback(CreateFeedbackModel model);
 

@@ -3,14 +3,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
-using Common.Models;
 using Data.Models;
-
+using global::Common.Models;
 using Models;
 
 using ViewModels.Patient;
 
-public interface IPatientService
+public interface IPatientService : ITransientService
 {
     Task CreatePatient(CreatePatientFormModel model, string userId, string webRootPath);
 

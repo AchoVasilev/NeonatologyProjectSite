@@ -7,37 +7,33 @@ using System.Threading.Tasks;
 
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
-
 using Data;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 using FileServiceModels;
-
 using ViewModels.Gallery;
 
 public class FileService : IFileService
 {
     private readonly NeonatologyDbContext data;
 
-    public FileService(NeonatologyDbContext data)
-    {
-        this.data = data;
-    }
+    public FileService(NeonatologyDbContext data) 
+        => this.data = data;
 
     public async Task<IFileServiceModel> UploadImage(Cloudinary cloudinary, IFormFile image, string folderName)
     {
-        if (image == null)
+        if (image is null)
         {
             return null;
         }
 
-        var AllowedExtensions = new[] { "jpg", "png", "gif", "jpeg" };
+        var allowedExtensions = new[] { "jpg", "png", "gif", "jpeg" };
 
         var extension = Path.GetExtension(image.FileName).TrimStart('.');
 
-        if (!AllowedExtensions.Any(x => extension.EndsWith(x)))
+        if (!allowedExtensions.Any(x => extension.EndsWith(x)))
         {
             throw new Exception($"Invalid image extension {extension}");
         }
@@ -81,21 +77,21 @@ public class FileService : IFileService
 
     public async Task<IFileServiceModel> UploadFile(Cloudinary cloudinary, IFormFile file, string folderName)
     {
-        if (file == null)
+        if (file is null)
         {
             return null;
         }
 
-        var AllowedExtensions = new[] { "txt", "text", "docx", "doc", "pdf", "ppt", "xls", "xlsx", "zip", "rar" };
+        var allowedExtensions = new[] { "txt", "text", "docx", "doc", "pdf", "ppt", "xls", "xlsx", "zip", "rar" };
 
         var extension = Path.GetExtension(file.FileName).TrimStart('.');
 
-        if (!AllowedExtensions.Any(x => extension.EndsWith(x)))
+        if (!allowedExtensions.Any(x => extension.EndsWith(x)))
         {
             throw new Exception($"Invalid file extension {extension}");
         }
 
-        string fileName = file.FileName;
+        var fileName = file.FileName;
 
         byte[] destinationImage;
         using (var memoryStream = new MemoryStream())

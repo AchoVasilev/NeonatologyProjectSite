@@ -2,10 +2,10 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Common;
 using ViewModels.Doctor;
 
-public interface ISpecializationService
+public interface ISpecializationService : ITransientService
 {
     Task<ICollection<SpecializationFormModel>> GetAllDoctorSpecializations(string doctorId);
 }

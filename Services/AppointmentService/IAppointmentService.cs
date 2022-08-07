@@ -4,12 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
-using Common.Models;
 using Data.Models;
-
+using global::Common.Models;
 using ViewModels.Appointments;
 
-public interface IAppointmentService
+public interface IAppointmentService : ITransientService
 {
     Task<ICollection<AppointmentViewModel>> GetAllAppointments();
 

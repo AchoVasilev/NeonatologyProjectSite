@@ -1,7 +1,6 @@
 namespace Neonatology;
 
 using System.Globalization;
-using Common;
 using Common.Constants;
 using Data.Seeding;
 using Hangfire;
@@ -12,7 +11,6 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Infrastructure;
 using Infrastructure.Extensions;
 using Stripe;
 using ViewModels.GoogleRecaptcha;

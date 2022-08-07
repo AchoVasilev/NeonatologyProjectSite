@@ -2,10 +2,10 @@
 
 using System.Threading.Tasks;
 using Common;
-using Common.Models;
+using global::Common.Models;
 using ViewModels.Profile;
 
-public interface IProfileService
+public interface IProfileService : ITransientService
 {
     Task<ProfileViewModel> GetPatientData(string userId);
 

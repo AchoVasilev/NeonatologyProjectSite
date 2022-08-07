@@ -1,10 +1,10 @@
 ﻿namespace Services.NotificationService;
 
 using System.Threading.Tasks;
-
+using Common;
 using ViewModels.Notification;
 
-public interface INotificationService
+public interface INotificationService : ITransientService
 {
     Task<int> GetUserNotificationsCount(string receiverUsername);
 

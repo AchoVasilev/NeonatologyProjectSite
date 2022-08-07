@@ -2,6 +2,7 @@ namespace Infrastructure.Extensions;
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using CloudinaryDotNet;
 using Data;
 using Data.Models;
@@ -10,30 +11,12 @@ using Hangfire.SqlServer;
 using Hubs.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Services;
-using Services.Administration;
-using Services.AppointmentCauseService;
-using Services.AppointmentService;
-using Services.ChatService;
-using Services.CityService;
-using Services.DoctorService;
+using Services.Common;
 using Services.EmailSenderService;
-using Services.FeedbackService;
-using Services.FileService;
-using Services.NotificationService;
-using Services.OfferService;
-using Services.PatientService;
-using Services.PaymentService;
-using Services.ProfileService;
-using Services.RatingService;
-using Services.SlotService;
-using Services.SpecializationService;
-using Services.UserService;
 using static Common.Constants.WebConstants.ServiceCollectionExtensionsConstants;
 
 public static class ServiceCollectionExtensions
@@ -75,26 +58,40 @@ public static class ServiceCollectionExtensions
     }
 
     public static IServiceCollection RegisterServices(this IServiceCollection services)
-        => services
-            .AddTransient<IAppointmentService, AppointmentService>()
-            .AddTransient<IPatientService, PatientService>()
-            .AddTransient<IDoctorService, DoctorService>()
-            .AddTransient<ICityService, CityService>()
-            .AddTransient<IRatingService, RatingService>()
-            .AddTransient<IFileService, FileService>()
-            .AddTransient<ISpecializationService, SpecializationService>()
-            .AddTransient<ISlotService, SlotService>()
-            .AddTransient<IOfferService, OfferService>()
-            .AddTransient<IChatService, ChatService>()
-            .AddTransient<IUserService, UserService>()
-            .AddTransient<IAppointmentCauseService, AppointmentCauseService>()
-            .AddTransient<IPaymentService, PaymentService>()
-            .AddTransient<INotificationService, NotificationService>()
-            .AddTransient<IProfileService, ProfileService>()
-            .AddTransient<IFeedbackService, FeedbackService>()
-            .AddTransient<IGalleryService, GalleryService>()
-            .AddTransient<IEmailSender, MailKitSender>()
-            .AddTransient<ReCaptchaService>();
+    {
+        var transientRegistration = typeof(ITransientService);
+        var scopedRegistration = typeof(IScopedService);
+        var singletonRegistration = typeof(ISingletonService);
+
+        var types = transientRegistration
+            .Assembly
+            .GetExportedTypes()
+            .Where(t => t.IsClass && !t.IsAbstract)
+            .Select(s => new
+            {
+                Service = s.GetInterface($"I{s.Name}"),
+                Implementation = s
+            })
+            .Where(x => x.Service != null);
+
+        foreach (var type in types)
+        {
+            if (transientRegistration.IsAssignableFrom(type.Service))
+            {
+                services.AddTransient(type.Service, type.Implementation);
+            }
+            else if (singletonRegistration.IsAssignableFrom(type.Service))
+            {
+                services.AddSingleton(type.Service, type.Implementation);
+            }
+            else if (scopedRegistration.IsAssignableFrom(type.Service))
+            {
+                services.AddScoped(type.Service, type.Implementation);
+            }
+        }
+
+        return services;
+    }
 
     public static IServiceCollection ConfigureMailkit(this IServiceCollection services, IConfiguration configuration)
         => services.Configure<MailKitEmailSenderOptions>(options =>

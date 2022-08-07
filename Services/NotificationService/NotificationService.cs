@@ -15,8 +15,8 @@ using Microsoft.EntityFrameworkCore;
 
 using ViewModels.Notification;
 
-using static Common.Constants.GlobalConstants.DateTimeFormats;
-using static Common.Constants.GlobalConstants.NotificationConstants;
+using static global::Common.Constants.GlobalConstants.DateTimeFormats;
+using static global::Common.Constants.GlobalConstants.NotificationConstants;
 
 public class NotificationService : INotificationService
 {

@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Common.Models;
 using Data;
-
+using global::Common.Models;
 using Microsoft.EntityFrameworkCore;
 
 using ViewModels.Appointments;
-using static Common.Constants.GlobalConstants.MessageConstants;
+using static global::Common.Constants.GlobalConstants.MessageConstants;
 public class AppointmentCauseService : IAppointmentCauseService
 {
     private readonly NeonatologyDbContext data;
