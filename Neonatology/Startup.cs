@@ -1,13 +1,8 @@
 namespace Neonatology;
 
-using System.Globalization;
-using Common.Constants;
 using Data.Seeding;
-using Hangfire;
-using Hangfire.Dashboard;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -54,23 +49,15 @@ public class Startup
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        var supportedCultures = new[] { new CultureInfo("bg-BG") };
-        app.UseRequestLocalization(new RequestLocalizationOptions
-        {
-            DefaultRequestCulture = new RequestCulture("bg-BG"),
-            SupportedCultures = supportedCultures,
-            SupportedUICultures = supportedCultures
-        });
-
-        app.PrepareDatabase()
+        app.ConfigureLocalization()
+            .PrepareDatabase()
             .GetAwaiter()
             .GetResult();
 
         if (env.IsDevelopment())
         {
-            //app.UseExceptionHandler("/Home/Error");
-            app.UseDeveloperExceptionPage();
-            app.UseMigrationsEndPoint();
+            app.UseDeveloperExceptionPage()
+                .UseMigrationsEndPoint();
         }
         else
         {
@@ -79,30 +66,8 @@ public class Startup
             app.UseHsts();
         }
 
-        app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
-        app.UseHttpsRedirection();
-        app.UseStaticFiles();
-        app.UseCookiePolicy();
-
-        app.UseRouting();
-
-        app.UseAuthentication();
-        app.UseAuthorization();
-
-        app.UseHangfireDashboard(
-            "/hangfire",
-            new DashboardOptions { Authorization = new[] { new HangfireAuthorizationFilter() } });
-
-        app.UseMvcWithWithAreas();
-    }
-
-    private class HangfireAuthorizationFilter : IDashboardAuthorizationFilter
-    {
-        public bool Authorize(DashboardContext context)
-        {
-            var httpContext = context.GetHttpContext();
-
-            return httpContext.User.IsInRole(GlobalConstants.AdministratorRoleName);
-        }
+        app.ConfigureApplication()
+            .ConfigureHangfireDashboard()
+            .UseMvcWithAreas();
     }
 }
