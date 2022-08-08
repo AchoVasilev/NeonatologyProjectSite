@@ -18,7 +18,7 @@ using Services.DoctorService;
 using Services.PatientService;
 
 using Helpers;
-
+using Helpers.Extensions;
 using ViewModels.Appointments;
 using ViewModels.Patient;
 

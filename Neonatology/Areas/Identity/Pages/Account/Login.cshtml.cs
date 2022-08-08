@@ -87,13 +87,13 @@ public class LoginModel : PageModel
         this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
         var recaptchaResponse = await this.reCaptchaService.ValidateResponse(this.Input.Token);
-        
-        // if (recaptchaResponse.Success == false && recaptchaResponse.Score < 0.5)
-        // {
-        //     this.ModelState.AddModelError(string.Empty, MessageConstants.FailedRecaptchaMsg);
-        //
-        //     return this.Page();
-        // }
+
+        if (recaptchaResponse.Success == false && recaptchaResponse.Score < 0.5)
+        {
+            this.ModelState.AddModelError(string.Empty, MessageConstants.FailedRecaptchaMsg);
+
+            return this.Page();
+        }
 
         if (this.ModelState.IsValid)
         {

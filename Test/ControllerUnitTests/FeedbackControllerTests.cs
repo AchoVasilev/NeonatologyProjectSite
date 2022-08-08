@@ -2,6 +2,7 @@
 
 using System.Threading.Tasks;
 using Helpers;
+using Helpers.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;

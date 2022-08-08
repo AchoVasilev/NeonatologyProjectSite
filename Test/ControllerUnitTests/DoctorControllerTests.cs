@@ -13,6 +13,7 @@ using Services.CityService;
 using Services.DoctorService;
 
 using Helpers;
+using Helpers.Extensions;
 using Mocks;
 using ViewModels.City;
 using ViewModels.Doctor;

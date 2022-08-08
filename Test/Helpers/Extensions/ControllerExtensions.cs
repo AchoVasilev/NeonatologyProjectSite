@@ -1,7 +1,6 @@
-﻿namespace Test.Helpers;
+﻿namespace Test.Helpers.Extensions;
 
 using System.Security.Claims;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

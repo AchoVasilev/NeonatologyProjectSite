@@ -1,8 +1,8 @@
-namespace Test.Helpers;
+namespace Test.Helpers.Data;
 
 using System.Threading.Tasks;
-using Data;
-using Data.Models;
+using global::Data;
+using global::Data.Models;
 
 public class PatientData
 {

@@ -18,6 +18,7 @@ using Services.PatientService;
 using Services.RatingService;
 
 using Helpers;
+using Helpers.Extensions;
 using Mocks;
 using ViewModels.Appointments;
 using ViewModels.Rating;

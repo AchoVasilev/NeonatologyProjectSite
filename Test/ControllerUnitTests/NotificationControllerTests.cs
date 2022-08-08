@@ -14,6 +14,7 @@ using Neonatology.Controllers;
 using Services.NotificationService;
 
 using Helpers;
+using Helpers.Extensions;
 using Infrastructure.Hubs;
 using ViewModels.Notification;
 

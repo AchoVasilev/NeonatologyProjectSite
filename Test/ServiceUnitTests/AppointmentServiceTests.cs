@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Data.Models;
 using Helpers;
+using Helpers.Data;
 using Services.AppointmentService;
 
 using Microsoft.EntityFrameworkCore;

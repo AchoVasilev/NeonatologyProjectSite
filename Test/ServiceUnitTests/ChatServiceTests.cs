@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Data.Models;
-
+using Helpers.Data;
 using Services.ChatService;
 
 using Microsoft.EntityFrameworkCore;
@@ -23,30 +23,8 @@ public class ChatServiceTests
     {
         var dataMock = DatabaseMock.Instance;
 
-        var users = new List<ApplicationUser>()
-        {
-            new ApplicationUser
-            {
-                Id = "firstUser",
-                UserName = "gosho"
-            },
-
-            new ApplicationUser
-            {
-                Id = "secondUser",
-                UserName = "evlogi"
-            },
-        };
-
-        var group = new Group
-        {
-            Id = "firstGroup",
-            Name = "evlogi->gosho"
-        };
-
-        await dataMock.Groups.AddAsync(group);
-        await dataMock.Users.AddRangeAsync(users);
-        await dataMock.SaveChangesAsync();
+        await ApplicationUserData.TwoUsers(dataMock);
+        await GroupsData.OneGroup(dataMock);
 
         var service = new ChatService(dataMock, null, null, null);
         var result = await service.SendMessageToUser("gosho", "evlogi", "mancho", "evlogi->gosho");
@@ -60,30 +38,8 @@ public class ChatServiceTests
     {
         var dataMock = DatabaseMock.Instance;
 
-        var users = new List<ApplicationUser>()
-        {
-            new ApplicationUser
-            {
-                Id = "firstUser",
-                UserName = "gosho"
-            },
-
-            new ApplicationUser
-            {
-                Id = "secondUser",
-                UserName = "evlogi"
-            },
-        };
-
-        var group = new Group
-        {
-            Id = "firstGroup",
-            Name = "evlogi->gosho"
-        };
-
-        await dataMock.Groups.AddAsync(group);
-        await dataMock.Users.AddRangeAsync(users);
-        await dataMock.SaveChangesAsync();
+        await ApplicationUserData.TwoUsers(dataMock);
+        await GroupsData.OneGroup(dataMock);
 
         var service = new ChatService(dataMock, null, null, null);
         var result = await service.SendMessageToUser("firstUser", "evlogi", "mancho", "evlogi->gosho");
@@ -96,30 +52,8 @@ public class ChatServiceTests
     {
         var dataMock = DatabaseMock.Instance;
 
-        var users = new List<ApplicationUser>()
-        {
-            new ApplicationUser
-            {
-                Id = "firstUser",
-                UserName = "gosho"
-            },
-
-            new ApplicationUser
-            {
-                Id = "secondUser",
-                UserName = "evlogi"
-            },
-        };
-
-        var group = new Group
-        {
-            Id = "firstGroup",
-            Name = "evlogi->gosho"
-        };
-
-        await dataMock.Groups.AddAsync(group);
-        await dataMock.Users.AddRangeAsync(users);
-        await dataMock.SaveChangesAsync();
+        await ApplicationUserData.TwoUsers(dataMock);
+        await GroupsData.OneGroup(dataMock);
 
         var service = new ChatService(dataMock, null, null, null);
         var result = await service.SendMessageToUser("gosho", "firstUser", "mancho", "evlogi->gosho");
@@ -132,23 +66,7 @@ public class ChatServiceTests
     {
         var dataMock = DatabaseMock.Instance;
 
-        var users = new List<ApplicationUser>()
-        {
-            new ApplicationUser
-            {
-                Id = "firstUser",
-                UserName = "gosho"
-            },
-
-            new ApplicationUser
-            {
-                Id = "secondUser",
-                UserName = "evlogi"
-            },
-        };
-
-        await dataMock.Users.AddRangeAsync(users);
-        await dataMock.SaveChangesAsync();
+        await ApplicationUserData.TwoUsers(dataMock);
 
         var service = new ChatService(dataMock, null, null, null);
         await service.AddUserToGroup("gosho->evlogi", "gosho", "evlogi");
@@ -165,56 +83,9 @@ public class ChatServiceTests
     {
         var dataMock = DatabaseMock.Instance;
 
-        var users = new List<ApplicationUser>()
-        {
-            new ApplicationUser
-            {
-                Id = "firstUser",
-                UserName = "gosho"
-            },
-
-            new ApplicationUser
-            {
-                Id = "secondUser",
-                UserName = "evlogi"
-            },
-        };
-
-        var group = new Group
-        {
-            Id = "firstGroup",
-            Name = "evlogi->gosho"
-        };
-
-        var messages = new List<Message>()
-        {
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-        };
-
-        await dataMock.Groups.AddAsync(group);
-        await dataMock.Users.AddRangeAsync(users);
-        await dataMock.Messages.AddRangeAsync(messages);
-        await dataMock.SaveChangesAsync();
+        await ApplicationUserData.TwoUsers(dataMock);
+        await GroupsData.OneGroup(dataMock);
+        await MessagesData.ThreeMessages(dataMock);
 
         var service = new ChatService(dataMock, null, null, null);
         var result = await service.ExtractAllMessages("evlogi->gosho");
@@ -227,56 +98,9 @@ public class ChatServiceTests
     {
         var dataMock = DatabaseMock.Instance;
 
-        var users = new List<ApplicationUser>()
-        {
-            new ApplicationUser
-            {
-                Id = "firstUser",
-                UserName = "gosho"
-            },
-
-            new ApplicationUser
-            {
-                Id = "secondUser",
-                UserName = "evlogi"
-            },
-        };
-
-        var group = new Group
-        {
-            Id = "firstGroup",
-            Name = "evlogi->gosho"
-        };
-
-        var messages = new List<Message>()
-        {
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-        };
-
-        await dataMock.Groups.AddAsync(group);
-        await dataMock.Users.AddRangeAsync(users);
-        await dataMock.Messages.AddRangeAsync(messages);
-        await dataMock.SaveChangesAsync();
+        await ApplicationUserData.TwoUsers(dataMock);
+        await GroupsData.OneGroup(dataMock);
+        await MessagesData.ThreeMessages(dataMock);
 
         var service = new ChatService(dataMock, null, null, null);
         var result = await service.ExtractAllMessages("evlogi->gosho");
@@ -289,64 +113,9 @@ public class ChatServiceTests
     {
         var dataMock = DatabaseMock.Instance;
 
-        var users = new List<ApplicationUser>()
-        {
-            new ApplicationUser
-            {
-                Id = "firstUser",
-                UserName = "gosho"
-            },
-
-            new ApplicationUser
-            {
-                Id = "secondUser",
-                UserName = "evlogi"
-            },
-        };
-
-        var groups = new List<Group>()
-        {
-            new Group
-            {
-                Id = "firstGroup",
-                Name = "evlogi->gosho"
-            },
-            new Group
-            {
-                Id = "secondGroup",
-                Name = "mancho->gosho"
-            },
-        };
-
-        var messages = new List<Message>()
-        {
-            new Message
-            {
-                GroupId = "secondGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-        };
-
-        await dataMock.Groups.AddRangeAsync(groups);
-        await dataMock.Users.AddRangeAsync(users);
-        await dataMock.Messages.AddRangeAsync(messages);
-        await dataMock.SaveChangesAsync();
+        await ApplicationUserData.TwoUsers(dataMock);
+        await GroupsData.TwoGroups(dataMock);
+        await MessagesData.ThreeMessagesWithTwoGroups(dataMock);
 
         var service = new ChatService(dataMock, null, null, null);
         var result = await service.ExtractAllMessages("mancho->gosho");
@@ -359,64 +128,9 @@ public class ChatServiceTests
     {
         var dataMock = DatabaseMock.Instance;
 
-        var users = new List<ApplicationUser>()
-        {
-            new ApplicationUser
-            {
-                Id = "firstUser",
-                UserName = "gosho"
-            },
-
-            new ApplicationUser
-            {
-                Id = "secondUser",
-                UserName = "evlogi"
-            },
-        };
-
-        var groups = new List<Group>()
-        {
-            new Group
-            {
-                Id = "firstGroup",
-                Name = "evlogi->gosho"
-            },
-            new Group
-            {
-                Id = "secondGroup",
-                Name = "mancho->gosho"
-            },
-        };
-
-        var messages = new List<Message>()
-        {
-            new Message
-            {
-                GroupId = "secondGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-        };
-
-        await dataMock.Groups.AddRangeAsync(groups);
-        await dataMock.Users.AddRangeAsync(users);
-        await dataMock.Messages.AddRangeAsync(messages);
-        await dataMock.SaveChangesAsync();
+        await ApplicationUserData.TwoUsers(dataMock);
+        await GroupsData.TwoGroups(dataMock);
+        await MessagesData.ThreeMessagesWithTwoGroups(dataMock);
 
         var service = new ChatService(dataMock, null, null, null);
         var result = await service.ExtractAllMessages("mancho->pancho");
@@ -430,134 +144,9 @@ public class ChatServiceTests
     {
         var dataMock = DatabaseMock.Instance;
 
-        var users = new List<ApplicationUser>()
-        {
-            new ApplicationUser
-            {
-                Id = "firstUser",
-                UserName = "gosho"
-            },
-
-            new ApplicationUser
-            {
-                Id = "secondUser",
-                UserName = "evlogi"
-            },
-        };
-
-        var groups = new List<Group>()
-        {
-            new Group
-            {
-                Id = "firstGroup",
-                Name = "evlogi->gosho"
-            },
-            new Group
-            {
-                Id = "secondGroup",
-                Name = "mancho->gosho"
-            },
-        };
-
-        var messages = new List<Message>()
-        {
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-        };
-
-        await dataMock.Groups.AddRangeAsync(groups);
-        await dataMock.Users.AddRangeAsync(users);
-        await dataMock.Messages.AddRangeAsync(messages);
-        await dataMock.SaveChangesAsync();
+        await ApplicationUserData.TwoUsers(dataMock);
+        await GroupsData.TwoGroups(dataMock);
+        await MessagesData.TenMessages(dataMock);
 
         var service = new ChatService(dataMock, null, null, null);
         var result = await service.ExtractAllMessages("evlogi->gosho");
@@ -570,57 +159,9 @@ public class ChatServiceTests
     {
         var dataMock = DatabaseMock.Instance;
 
-        var users = new List<ApplicationUser>()
-        {
-            new ApplicationUser
-            {
-                Id = "firstUser",
-                UserName = "gosho"
-            },
-
-            new ApplicationUser
-            {
-                Id = "secondUser",
-                UserName = "evlogi"
-            },
-        };
-
-        var group = new Group
-        {
-            Id = "firstGroup",
-            Name = "evlogi->gosho"
-        };
-
-        var messages = new List<Message>()
-        {
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf",
-                IsDeleted = true
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-        };
-
-        await dataMock.Groups.AddAsync(group);
-        await dataMock.Users.AddRangeAsync(users);
-        await dataMock.Messages.AddRangeAsync(messages);
-        await dataMock.SaveChangesAsync();
+        await ApplicationUserData.TwoUsers(dataMock);
+        await GroupsData.TwoGroups(dataMock);
+        await MessagesData.ThreeMessages(dataMock, true);
 
         var service = new ChatService(dataMock, null, null, null);
         var result = await service.ExtractAllMessages("evlogi->gosho");
@@ -633,134 +174,9 @@ public class ChatServiceTests
     {
         var dataMock = DatabaseMock.Instance;
 
-        var users = new List<ApplicationUser>()
-        {
-            new ApplicationUser
-            {
-                Id = "firstUser",
-                UserName = "gosho"
-            },
-
-            new ApplicationUser
-            {
-                Id = "secondUser",
-                UserName = "evlogi"
-            },
-        };
-
-        var groups = new List<Group>()
-        {
-            new Group
-            {
-                Id = "firstGroup",
-                Name = "evlogi->gosho"
-            },
-            new Group
-            {
-                Id = "secondGroup",
-                Name = "mancho->gosho"
-            },
-        };
-
-        var messages = new List<Message>()
-        {
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-        };
-
-        await dataMock.Groups.AddRangeAsync(groups);
-        await dataMock.Users.AddRangeAsync(users);
-        await dataMock.Messages.AddRangeAsync(messages);
-        await dataMock.SaveChangesAsync();
+        await ApplicationUserData.TwoUsers(dataMock);
+        await GroupsData.TwoGroups(dataMock);
+        await MessagesData.ThirteenMessages(dataMock);
 
         var firstUser = await dataMock.Users.FirstOrDefaultAsync(x => x.Id == "firstUser");
         var service = new ChatService(dataMock, null, null, null);
@@ -776,135 +192,9 @@ public class ChatServiceTests
     {
         var dataMock = DatabaseMock.Instance;
 
-        var users = new List<ApplicationUser>()
-        {
-            new ApplicationUser
-            {
-                Id = "firstUser",
-                UserName = "gosho"
-            },
-
-            new ApplicationUser
-            {
-                Id = "secondUser",
-                UserName = "evlogi"
-            },
-        };
-
-        var groups = new List<Group>()
-        {
-            new Group
-            {
-                Id = "firstGroup",
-                Name = "evlogi->gosho"
-            },
-            new Group
-            {
-                Id = "secondGroup",
-                Name = "mancho->gosho"
-            },
-        };
-
-        var messages = new List<Message>()
-        {
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf",
-                IsDeleted = true
-            },
-        };
-
-        await dataMock.Groups.AddRangeAsync(groups);
-        await dataMock.Users.AddRangeAsync(users);
-        await dataMock.Messages.AddRangeAsync(messages);
-        await dataMock.SaveChangesAsync();
+        await ApplicationUserData.TwoUsers(dataMock);
+        await GroupsData.TwoGroups(dataMock);
+        await MessagesData.TenMessages(dataMock, true);
 
         var firstUser = await dataMock.Users.FirstOrDefaultAsync(x => x.Id == "firstUser");
         var service = new ChatService(dataMock, null, null, null);
@@ -920,134 +210,9 @@ public class ChatServiceTests
     {
         var dataMock = DatabaseMock.Instance;
 
-        var users = new List<ApplicationUser>()
-        {
-            new ApplicationUser
-            {
-                Id = "firstUser",
-                UserName = "gosho"
-            },
-
-            new ApplicationUser
-            {
-                Id = "secondUser",
-                UserName = "evlogi"
-            },
-        };
-
-        var groups = new List<Group>()
-        {
-            new Group
-            {
-                Id = "firstGroup",
-                Name = "evlogi->gosho"
-            },
-            new Group
-            {
-                Id = "secondGroup",
-                Name = "mancho->gosho"
-            },
-        };
-
-        var messages = new List<Message>()
-        {
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-        };
-
-        await dataMock.Groups.AddRangeAsync(groups);
-        await dataMock.Users.AddRangeAsync(users);
-        await dataMock.Messages.AddRangeAsync(messages);
-        await dataMock.SaveChangesAsync();
+        await ApplicationUserData.TwoUsers(dataMock);
+        await GroupsData.TwoGroups(dataMock);
+        await MessagesData.ThirteenMessages(dataMock);
 
         var firstUser = await dataMock.Users.FirstOrDefaultAsync(x => x.Id == "firstUser");
         var service = new ChatService(dataMock, null, null, null);
@@ -1063,134 +228,9 @@ public class ChatServiceTests
     {
         var dataMock = DatabaseMock.Instance;
 
-        var users = new List<ApplicationUser>()
-        {
-            new ApplicationUser
-            {
-                Id = "firstUser",
-                UserName = "gosho"
-            },
-
-            new ApplicationUser
-            {
-                Id = "secondUser",
-                UserName = "evlogi"
-            },
-        };
-
-        var groups = new List<Group>()
-        {
-            new Group
-            {
-                Id = "firstGroup",
-                Name = "evlogi->gosho"
-            },
-            new Group
-            {
-                Id = "secondGroup",
-                Name = "mancho->gosho"
-            },
-        };
-
-        var messages = new List<Message>()
-        {
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-            new Message
-            {
-                GroupId = "firstGroup",
-                SenderId = "firstUser",
-                ReceiverId = "secondUser",
-                Content = "fasdasdasf"
-            },
-        };
-
-        await dataMock.Groups.AddRangeAsync(groups);
-        await dataMock.Users.AddRangeAsync(users);
-        await dataMock.Messages.AddRangeAsync(messages);
-        await dataMock.SaveChangesAsync();
+        await ApplicationUserData.TwoUsers(dataMock);
+        await GroupsData.TwoGroups(dataMock);
+        await MessagesData.ThirteenMessages(dataMock);
 
         var firstUser = await dataMock.Users.FirstOrDefaultAsync(x => x.Id == "firstUser");
         var service = new ChatService(dataMock, null, null, null);

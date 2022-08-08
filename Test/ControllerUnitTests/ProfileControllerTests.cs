@@ -15,6 +15,7 @@ using Services.CityService;
 using Services.ProfileService;
 
 using Helpers;
+using Helpers.Extensions;
 using Mocks;
 using ViewModels.City;
 using ViewModels.Profile;
