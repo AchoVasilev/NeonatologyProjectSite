@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Data.Models;
+using Helpers.Data;
 using Services.CityService;
 using Mocks;
 using ViewModels.City;
@@ -16,32 +17,7 @@ public class CityServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var cities = new List<City>()
-        {
-            new City
-            {
-                Id = 1,
-                Name = "Pleven"
-            },
-            new City
-            {
-                Id = 2,
-                Name = "Kaspichan"
-            },
-            new City
-            {
-                Id = 3,
-                Name = "Sofia"
-            },
-            new City
-            {
-                Id = 4,
-                Name = "Plovdiv"
-            }
-        };
-
-        await dataMock.Cities.AddRangeAsync(cities);
-        await dataMock.SaveChangesAsync();
+        await CitiesData.FourCities(dataMock);
 
         var service = new CityService(dataMock, mapperMock);
         var result = await service.GetAllCities();
@@ -56,33 +32,7 @@ public class CityServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var cities = new List<City>()
-        {
-            new City
-            {
-                Id = 1,
-                Name = "Pleven"
-            },
-            new City
-            {
-                Id = 2,
-                Name = "Kaspichan"
-            },
-            new City
-            {
-                Id = 3,
-                Name = "Sofia"
-            },
-            new City
-            {
-                Id = 4,
-                Name = "Plovdiv",
-                IsDeleted = true
-            }
-        };
-
-        await dataMock.Cities.AddRangeAsync(cities);
-        await dataMock.SaveChangesAsync();
+        await CitiesData.FourCities(dataMock, true);
 
         var service = new CityService(dataMock, mapperMock);
         var result = await service.GetAllCities();
@@ -97,32 +47,7 @@ public class CityServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var cities = new List<City>()
-        {
-            new City
-            {
-                Id = 1,
-                Name = "Pleven"
-            },
-            new City
-            {
-                Id = 2,
-                Name = "Kaspichan"
-            },
-            new City
-            {
-                Id = 3,
-                Name = "Sofia"
-            },
-            new City
-            {
-                Id = 4,
-                Name = "Plovdiv"
-            }
-        };
-
-        await dataMock.Cities.AddRangeAsync(cities);
-        await dataMock.SaveChangesAsync();
+        await CitiesData.FourCities(dataMock);
 
         var service = new CityService(dataMock, mapperMock);
         var result = await service.GetAllCities();
@@ -137,32 +62,7 @@ public class CityServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var cities = new List<City>()
-        {
-            new City
-            {
-                Id = 1,
-                Name = "Pleven"
-            },
-            new City
-            {
-                Id = 2,
-                Name = "Kaspichan"
-            },
-            new City
-            {
-                Id = 3,
-                Name = "Sofia"
-            },
-            new City
-            {
-                Id = 4,
-                Name = "Plovdiv"
-            }
-        };
-
-        await dataMock.Cities.AddRangeAsync(cities);
-        await dataMock.SaveChangesAsync();
+        await CitiesData.FourCities(dataMock);
 
         var service = new CityService(dataMock, mapperMock);
         var result = await service.GetCityIdByName("Pleven");
@@ -176,32 +76,7 @@ public class CityServiceTests
         var dataMock = DatabaseMock.Instance;
         var mapperMock = MapperMock.Instance;
 
-        var cities = new List<City>()
-        {
-            new City
-            {
-                Id = 1,
-                Name = "Pleven"
-            },
-            new City
-            {
-                Id = 2,
-                Name = "Kaspichan"
-            },
-            new City
-            {
-                Id = 3,
-                Name = "Sofia"
-            },
-            new City
-            {
-                Id = 4,
-                Name = "Plovdiv"
-            }
-        };
-
-        await dataMock.Cities.AddRangeAsync(cities);
-        await dataMock.SaveChangesAsync();
+        await CitiesData.FourCities(dataMock);
 
         var service = new CityService(dataMock, mapperMock);
         var result = await service.GetCityById(1);
