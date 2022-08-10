@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Neonatology.Common\Neonatology.Common.csproj" />
+    <ProjectReference Include="..\Neonatology.Data.Common\Neonatology.Data.Common.csproj" />
+    <ProjectReference Include="..\Neonatology.Data.Models\Neonatology.Data.Models.csproj" />
+  </ItemGroup>
+
+</Project>

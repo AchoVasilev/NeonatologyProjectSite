@@ -2,12 +2,12 @@ namespace Test.ServiceUnitTests;
 
 using System.Linq;
 using System.Threading.Tasks;
-using Data.Models;
 using Mocks;
-using Services.PatientService;
-using Services.ProfileService;
-using ViewModels.Patient;
-using ViewModels.Profile;
+using Neonatology.Data.Models;
+using Neonatology.Services.PatientService;
+using Neonatology.Services.ProfileService;
+using Neonatology.ViewModels.Patient;
+using Neonatology.ViewModels.Profile;
 using Xunit;
 
 public class ProfileServiceTests

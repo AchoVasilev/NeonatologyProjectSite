@@ -4,14 +4,100 @@
     "/home/acho/Programing/Neonatology/IntegrationTests/IntegrationTests.csproj": {}
   },
   "projects": {
-    "/home/acho/Programing/Neonatology/Common/Common.csproj": {
+    "/home/acho/Programing/Neonatology/IntegrationTests/IntegrationTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/acho/Programing/Neonatology/Common/Common.csproj",
-        "projectName": "Common",
-        "projectPath": "/home/acho/Programing/Neonatology/Common/Common.csproj",
+        "projectUniqueName": "/home/acho/Programing/Neonatology/IntegrationTests/IntegrationTests.csproj",
+        "projectName": "IntegrationTests",
+        "projectPath": "/home/acho/Programing/Neonatology/IntegrationTests/IntegrationTests.csproj",
         "packagesPath": "/home/acho/.nuget/packages/",
-        "outputPath": "/home/acho/Programing/Neonatology/Common/obj/",
+        "outputPath": "/home/acho/Programing/Neonatology/IntegrationTests/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/acho/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/acho/Programing/Neonatology/Neonatology.Web/Neonatology.Web.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Web/Neonatology.Web.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Testing": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.2.0, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.4.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/acho/Programing/Neonatology/Neonatology.Common/Neonatology.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/acho/Programing/Neonatology/Neonatology.Common/Neonatology.Common.csproj",
+        "projectName": "Neonatology.Common",
+        "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Common/Neonatology.Common.csproj",
+        "packagesPath": "/home/acho/.nuget/packages/",
+        "outputPath": "/home/acho/Programing/Neonatology/Neonatology.Common/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/acho/.nuget/NuGet/NuGet.Config"
@@ -38,6 +124,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[11.0.0, )"
@@ -62,14 +152,14 @@
         }
       }
     },
-    "/home/acho/Programing/Neonatology/Data.Common/Data.Common.csproj": {
+    "/home/acho/Programing/Neonatology/Neonatology.Data.Common/Neonatology.Data.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/acho/Programing/Neonatology/Data.Common/Data.Common.csproj",
-        "projectName": "Data.Common",
-        "projectPath": "/home/acho/Programing/Neonatology/Data.Common/Data.Common.csproj",
+        "projectUniqueName": "/home/acho/Programing/Neonatology/Neonatology.Data.Common/Neonatology.Data.Common.csproj",
+        "projectName": "Neonatology.Data.Common",
+        "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Data.Common/Neonatology.Data.Common.csproj",
         "packagesPath": "/home/acho/.nuget/packages/",
-        "outputPath": "/home/acho/Programing/Neonatology/Data.Common/obj/",
+        "outputPath": "/home/acho/Programing/Neonatology/Neonatology.Data.Common/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/acho/.nuget/NuGet/NuGet.Config"
@@ -124,14 +214,14 @@
         }
       }
     },
-    "/home/acho/Programing/Neonatology/Data.Models/Data.Models.csproj": {
+    "/home/acho/Programing/Neonatology/Neonatology.Data.Models/Neonatology.Data.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/acho/Programing/Neonatology/Data.Models/Data.Models.csproj",
-        "projectName": "Data.Models",
-        "projectPath": "/home/acho/Programing/Neonatology/Data.Models/Data.Models.csproj",
+        "projectUniqueName": "/home/acho/Programing/Neonatology/Neonatology.Data.Models/Neonatology.Data.Models.csproj",
+        "projectName": "Neonatology.Data.Models",
+        "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Data.Models/Neonatology.Data.Models.csproj",
         "packagesPath": "/home/acho/.nuget/packages/",
-        "outputPath": "/home/acho/Programing/Neonatology/Data.Models/obj/",
+        "outputPath": "/home/acho/Programing/Neonatology/Neonatology.Data.Models/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/acho/.nuget/NuGet/NuGet.Config"
@@ -146,8 +236,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/acho/Programing/Neonatology/Data.Common/Data.Common.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Data.Common/Data.Common.csproj"
+              "/home/acho/Programing/Neonatology/Neonatology.Data.Common/Neonatology.Data.Common.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Data.Common/Neonatology.Data.Common.csproj"
               }
             }
           }
@@ -194,14 +284,14 @@
         }
       }
     },
-    "/home/acho/Programing/Neonatology/Data/Data.csproj": {
+    "/home/acho/Programing/Neonatology/Neonatology.Data/Neonatology.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/acho/Programing/Neonatology/Data/Data.csproj",
-        "projectName": "Data",
-        "projectPath": "/home/acho/Programing/Neonatology/Data/Data.csproj",
+        "projectUniqueName": "/home/acho/Programing/Neonatology/Neonatology.Data/Neonatology.Data.csproj",
+        "projectName": "Neonatology.Data",
+        "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Data/Neonatology.Data.csproj",
         "packagesPath": "/home/acho/.nuget/packages/",
-        "outputPath": "/home/acho/Programing/Neonatology/Data/obj/",
+        "outputPath": "/home/acho/Programing/Neonatology/Neonatology.Data/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/acho/.nuget/NuGet/NuGet.Config"
@@ -216,11 +306,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/acho/Programing/Neonatology/Common/Common.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Common/Common.csproj"
+              "/home/acho/Programing/Neonatology/Neonatology.Common/Neonatology.Common.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Common/Neonatology.Common.csproj"
               },
-              "/home/acho/Programing/Neonatology/Data.Models/Data.Models.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Data.Models/Data.Models.csproj"
+              "/home/acho/Programing/Neonatology/Neonatology.Data.Models/Neonatology.Data.Models.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Data.Models/Neonatology.Data.Models.csproj"
               }
             }
           }
@@ -285,14 +375,14 @@
         }
       }
     },
-    "/home/acho/Programing/Neonatology/Infrastructure/Infrastructure.csproj": {
+    "/home/acho/Programing/Neonatology/Neonatology.Infrastructure/Neonatology.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/acho/Programing/Neonatology/Infrastructure/Infrastructure.csproj",
-        "projectName": "Infrastructure",
-        "projectPath": "/home/acho/Programing/Neonatology/Infrastructure/Infrastructure.csproj",
+        "projectUniqueName": "/home/acho/Programing/Neonatology/Neonatology.Infrastructure/Neonatology.Infrastructure.csproj",
+        "projectName": "Neonatology.Infrastructure",
+        "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Infrastructure/Neonatology.Infrastructure.csproj",
         "packagesPath": "/home/acho/.nuget/packages/",
-        "outputPath": "/home/acho/Programing/Neonatology/Infrastructure/obj/",
+        "outputPath": "/home/acho/Programing/Neonatology/Neonatology.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/acho/.nuget/NuGet/NuGet.Config"
@@ -307,14 +397,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/acho/Programing/Neonatology/Common/Common.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Common/Common.csproj"
+              "/home/acho/Programing/Neonatology/Neonatology.Common/Neonatology.Common.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Common/Neonatology.Common.csproj"
               },
-              "/home/acho/Programing/Neonatology/Data/Data.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Data/Data.csproj"
+              "/home/acho/Programing/Neonatology/Neonatology.Data/Neonatology.Data.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Data/Neonatology.Data.csproj"
               },
-              "/home/acho/Programing/Neonatology/Services/Services.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Services/Services.csproj"
+              "/home/acho/Programing/Neonatology/Neonatology.Services/Neonatology.Services.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Services/Neonatology.Services.csproj"
               }
             }
           }
@@ -361,14 +451,14 @@
         }
       }
     },
-    "/home/acho/Programing/Neonatology/IntegrationTests/IntegrationTests.csproj": {
+    "/home/acho/Programing/Neonatology/Neonatology.Services/Neonatology.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/acho/Programing/Neonatology/IntegrationTests/IntegrationTests.csproj",
-        "projectName": "IntegrationTests",
-        "projectPath": "/home/acho/Programing/Neonatology/IntegrationTests/IntegrationTests.csproj",
+        "projectUniqueName": "/home/acho/Programing/Neonatology/Neonatology.Services/Neonatology.Services.csproj",
+        "projectName": "Neonatology.Services",
+        "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Services/Neonatology.Services.csproj",
         "packagesPath": "/home/acho/.nuget/packages/",
-        "outputPath": "/home/acho/Programing/Neonatology/IntegrationTests/obj/",
+        "outputPath": "/home/acho/Programing/Neonatology/Neonatology.Services/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/acho/.nuget/NuGet/NuGet.Config"
@@ -383,8 +473,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/acho/Programing/Neonatology/Neonatology/Neonatology.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Neonatology/Neonatology.csproj"
+              "/home/acho/Programing/Neonatology/Neonatology.Data/Neonatology.Data.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Data/Neonatology.Data.csproj"
+              },
+              "/home/acho/Programing/Neonatology/Neonatology.ViewModels/Neonatology.ViewModels.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.ViewModels/Neonatology.ViewModels.csproj"
               }
             }
           }
@@ -399,33 +492,21 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Mvc.Testing": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
-              "version": "[6.0.7, )"
+              "version": "[11.0.0, )"
             },
-            "Microsoft.EntityFrameworkCore.InMemory": {
+            "CloudinaryDotNet": {
               "target": "Package",
-              "version": "[6.0.7, )"
+              "version": "[1.19.0, )"
             },
-            "Microsoft.NET.Test.Sdk": {
+            "HtmlSanitizer": {
               "target": "Package",
-              "version": "[17.2.0, )"
+              "version": "[7.1.542, )"
             },
-            "coverlet.collector": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "MailKit": {
               "target": "Package",
-              "version": "[3.1.2, )"
-            },
-            "xunit": {
-              "target": "Package",
-              "version": "[2.4.1, )"
-            },
-            "xunit.runner.visualstudio": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.4.5, )"
+              "version": "[3.3.0, )"
             }
           },
           "imports": [
@@ -447,14 +528,14 @@
         }
       }
     },
-    "/home/acho/Programing/Neonatology/Neonatology/Neonatology.csproj": {
+    "/home/acho/Programing/Neonatology/Neonatology.ViewModels/Neonatology.ViewModels.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/acho/Programing/Neonatology/Neonatology/Neonatology.csproj",
-        "projectName": "Neonatology",
-        "projectPath": "/home/acho/Programing/Neonatology/Neonatology/Neonatology.csproj",
+        "projectUniqueName": "/home/acho/Programing/Neonatology/Neonatology.ViewModels/Neonatology.ViewModels.csproj",
+        "projectName": "Neonatology.ViewModels",
+        "projectPath": "/home/acho/Programing/Neonatology/Neonatology.ViewModels/Neonatology.ViewModels.csproj",
         "packagesPath": "/home/acho/.nuget/packages/",
-        "outputPath": "/home/acho/Programing/Neonatology/Neonatology/obj/",
+        "outputPath": "/home/acho/Programing/Neonatology/Neonatology.ViewModels/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/acho/.nuget/NuGet/NuGet.Config"
@@ -469,17 +550,93 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/acho/Programing/Neonatology/Common/Common.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Common/Common.csproj"
+              "/home/acho/Programing/Neonatology/Neonatology.Common/Neonatology.Common.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Common/Neonatology.Common.csproj"
               },
-              "/home/acho/Programing/Neonatology/Data/Data.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Data/Data.csproj"
+              "/home/acho/Programing/Neonatology/Neonatology.Data.Common/Neonatology.Data.Common.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Data.Common/Neonatology.Data.Common.csproj"
               },
-              "/home/acho/Programing/Neonatology/Infrastructure/Infrastructure.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Infrastructure/Infrastructure.csproj"
+              "/home/acho/Programing/Neonatology/Neonatology.Data.Models/Neonatology.Data.Models.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Data.Models/Neonatology.Data.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/acho/Programing/Neonatology/Neonatology.Web/Neonatology.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/acho/Programing/Neonatology/Neonatology.Web/Neonatology.Web.csproj",
+        "projectName": "Neonatology.Web",
+        "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Web/Neonatology.Web.csproj",
+        "packagesPath": "/home/acho/.nuget/packages/",
+        "outputPath": "/home/acho/Programing/Neonatology/Neonatology.Web/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/acho/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/acho/Programing/Neonatology/Neonatology.Common/Neonatology.Common.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Common/Neonatology.Common.csproj"
               },
-              "/home/acho/Programing/Neonatology/Services/Services.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Services/Services.csproj"
+              "/home/acho/Programing/Neonatology/Neonatology.Data/Neonatology.Data.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Data/Neonatology.Data.csproj"
+              },
+              "/home/acho/Programing/Neonatology/Neonatology.Infrastructure/Neonatology.Infrastructure.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Infrastructure/Neonatology.Infrastructure.csproj"
+              },
+              "/home/acho/Programing/Neonatology/Neonatology.Services/Neonatology.Services.csproj": {
+                "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Services/Neonatology.Services.csproj"
               }
             }
           }
@@ -587,159 +744,6 @@
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "/home/acho/Programing/Neonatology/Services/Services.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/home/acho/Programing/Neonatology/Services/Services.csproj",
-        "projectName": "Services",
-        "projectPath": "/home/acho/Programing/Neonatology/Services/Services.csproj",
-        "packagesPath": "/home/acho/.nuget/packages/",
-        "outputPath": "/home/acho/Programing/Neonatology/Services/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/home/acho/.nuget/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net6.0"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
-            "projectReferences": {
-              "/home/acho/Programing/Neonatology/Data/Data.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Data/Data.csproj"
-              },
-              "/home/acho/Programing/Neonatology/ViewModels/ViewModels.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/ViewModels/ViewModels.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "dependencies": {
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[11.0.0, )"
-            },
-            "CloudinaryDotNet": {
-              "target": "Package",
-              "version": "[1.19.0, )"
-            },
-            "HtmlSanitizer": {
-              "target": "Package",
-              "version": "[7.1.542, )"
-            },
-            "MailKit": {
-              "target": "Package",
-              "version": "[3.3.0, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "/home/acho/Programing/Neonatology/ViewModels/ViewModels.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/home/acho/Programing/Neonatology/ViewModels/ViewModels.csproj",
-        "projectName": "ViewModels",
-        "projectPath": "/home/acho/Programing/Neonatology/ViewModels/ViewModels.csproj",
-        "packagesPath": "/home/acho/.nuget/packages/",
-        "outputPath": "/home/acho/Programing/Neonatology/ViewModels/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/home/acho/.nuget/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net6.0"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
-            "projectReferences": {
-              "/home/acho/Programing/Neonatology/Common/Common.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Common/Common.csproj"
-              },
-              "/home/acho/Programing/Neonatology/Data.Common/Data.Common.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Data.Common/Data.Common.csproj"
-              },
-              "/home/acho/Programing/Neonatology/Data.Models/Data.Models.csproj": {
-                "projectPath": "/home/acho/Programing/Neonatology/Data.Models/Data.Models.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "dependencies": {
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[11.0.0, )"
-            },
-            "Microsoft.AspNetCore.Http.Features": {
-              "target": "Package",
-              "version": "[5.0.17, )"
-            },
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[13.0.1, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

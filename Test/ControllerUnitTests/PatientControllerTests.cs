@@ -1,21 +1,14 @@
 ﻿namespace Test.ControllerUnitTests;
 
 using System.Threading.Tasks;
-
+using Helpers.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-
 using Moq;
-
-using Neonatology.Controllers;
-
-using Services.PatientService;
-
-using Helpers;
-using Helpers.Extensions;
-using ViewModels.Patient;
-
+using Neonatology.Services.PatientService;
+using Neonatology.ViewModels.Patient;
+using Neonatology.Web.Controllers;
 using Xunit;
 
 public class PatientControllerTests

@@ -2,21 +2,16 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
-using Data.Models;
-using global::Services.AppointmentService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-
-using Moq;
-
-using Neonatology.Areas.Administration.Controllers;
-
 using Mocks;
-using ViewModels.Administration.Appointment;
-using ViewModels.Appointments;
-
+using Moq;
+using Neonatology.Data.Models;
+using Neonatology.Services.AppointmentService;
+using Neonatology.ViewModels.Administration.Appointment;
+using Neonatology.ViewModels.Appointments;
+using Neonatology.Web.Areas.Administration.Controllers;
 using Xunit;
 
 public class AppointmentControllerTests

@@ -4,7 +4,7 @@
   "Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Data",
   "Data.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Data.Models",
   "Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Infrastructure",
-  "Neonatology, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Neonatology",
+  "Neonatology.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Neonatology.Web",
   "Services, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Services",
   "ViewModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/ViewModels"
 }

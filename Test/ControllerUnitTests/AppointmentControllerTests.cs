@@ -2,26 +2,19 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Helpers.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-
 using Moq;
-
-using Neonatology.Controllers;
-
-using Services.AppointmentCauseService;
-using Services.AppointmentService;
-using Services.DoctorService;
-using Services.PatientService;
-
-using Helpers;
-using Helpers.Extensions;
-using ViewModels.Appointments;
-using ViewModels.Patient;
-
+using Neonatology.Services.AppointmentCauseService;
+using Neonatology.Services.AppointmentService;
+using Neonatology.Services.DoctorService;
+using Neonatology.Services.PatientService;
+using Neonatology.ViewModels.Appointments;
+using Neonatology.ViewModels.Patient;
+using Neonatology.Web.Controllers;
 using Xunit;
 
 public class AppointmentControllerTests

@@ -1,0 +1,89 @@
+﻿@model Neonatology.ViewModels.Administration.Gallery.GalleryModel
+
+@section Styles{
+<link rel="stylesheet" href="~/adminLte/plugins/ekko-lightbox/ekko-lightbox.css" />
+<style type="text/css">
+    input[type="file"] {
+        display: none;
+    }
+</style>
+}
+
+@if (TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-danger">@TempData["Message"]</div>
+}
+
+@{
+    ViewBag.Title = "Всички снимки от галерията";
+}
+
+<div class="col-12">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h4 class="card-title">@ViewBag.Title</h4>
+            <a class="btn btn-info" asp-area="Administration" asp-controller="Gallery" asp-action="Add">Добави нови снимки</a>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @foreach (var image in Model.GalleryImages)
+                {
+                    <div class="col-sm-4">
+                        <a href="@image.Url" data-toggle="lightbox" data-title="@image.Id" data-gallery="gallery">
+                            <img src="@image.Url" class="img-fluid mb-2 hvr-grow" alt="white sample" />
+                        </a>
+                        <a asp-area="Administration"
+                       asp-controller="Gallery"
+                       asp-action="Delete"
+                       asp-route-id="@image.Id"
+                       data-toggle="modal" data-target="#modalDelete" class="btn btn-danger">Изтрий</a>
+                       <span class="float-right text-muted text-sm">@image.CreatedOn</span>
+                    </div>
+
+                    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalDeleteLabel">Потвърди изтриването</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        Потвърждавате ли изтриването?
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Затвори</button>
+                                    <a asp-area="Administration" asp-controller="Gallery" asp-action="Delete" asp-route-id="@image.Id" class="btn btn-danger">Изтрий</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<script src="~/adminLte/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+<script src="~/adminLte/plugins/filterzir/jquery.filterizr.min.js"></script>
+<script>
+    $(function () {
+      $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox({
+          alwaysShowClose: true
+        });
+      });
+
+      $('.filter-container').filterizr({gutterPixels: 3});
+      $('.btn[data-filter]').on('click', function() {
+        $('.btn[data-filter]').removeClass('active');
+        $(this).addClass('active');
+      });
+    })
+</script>
+}

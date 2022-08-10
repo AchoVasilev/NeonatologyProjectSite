@@ -2,24 +2,18 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Helpers.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-
-using Moq;
-
-using Neonatology.Controllers;
-
-using Services.CityService;
-using Services.ProfileService;
-
-using Helpers;
-using Helpers.Extensions;
 using Mocks;
-using ViewModels.City;
-using ViewModels.Profile;
-
+using Moq;
+using Neonatology.Services.CityService;
+using Neonatology.Services.ProfileService;
+using Neonatology.ViewModels.City;
+using Neonatology.ViewModels.Profile;
+using Neonatology.Web.Controllers;
 using Xunit;
 
 public class ProfileControllerTests

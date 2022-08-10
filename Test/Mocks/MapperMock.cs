@@ -1,8 +1,7 @@
 ﻿namespace Test.Mocks;
 
 using AutoMapper;
-
-using Neonatology.MappingProfile;
+using Neonatology.Web.MappingProfile;
 
 public static class MapperMock
 {

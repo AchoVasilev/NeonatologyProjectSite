@@ -1412,11 +1412,7 @@ C:/Users/defie/source/repos/Neonatology/IntegrationTests/bin/Debug/net6.0/QRCode
 /home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll
 /home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/xunit.runner.reporters.netcoreapp10.dll
 /home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/xunit.runner.utility.netcoreapp10.dll
-/home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Neonatology.deps.json
-/home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Neonatology.runtimeconfig.json
 /home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/libman.json
-/home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Neonatology.staticwebassets.runtime.json
-/home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Neonatology
 /home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Microsoft.TestPlatform.PlatformAbstractions.dll
 /home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/MvcTestingAppManifest.json
 /home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/wwwroot/img/admin.png
@@ -2087,10 +2083,8 @@ C:/Users/defie/source/repos/Neonatology/IntegrationTests/bin/Debug/net6.0/QRCode
 /home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Data.dll
 /home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Data.Models.dll
 /home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Infrastructure.dll
-/home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Neonatology.dll
 /home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Services.dll
 /home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/ViewModels.dll
-/home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Neonatology.pdb
 /home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Common.pdb
 /home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Data.pdb
 /home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Data.Common.pdb
@@ -2109,3 +2103,9 @@ C:/Users/defie/source/repos/Neonatology/IntegrationTests/bin/Debug/net6.0/QRCode
 /home/acho/Programing/Neonatology/IntegrationTests/obj/Debug/net6.0/ref/IntegrationTests.dll
 /home/acho/Programing/Neonatology/IntegrationTests/obj/Debug/net6.0/IntegrationTests.pdb
 /home/acho/Programing/Neonatology/IntegrationTests/obj/Debug/net6.0/IntegrationTests.genruntimeconfig.cache
+/home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Neonatology.Web.deps.json
+/home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Neonatology.Web.runtimeconfig.json
+/home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Neonatology.Web.staticwebassets.runtime.json
+/home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Neonatology.Web
+/home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Neonatology.Web.dll
+/home/acho/Programing/Neonatology/IntegrationTests/bin/Debug/net6.0/Neonatology.Web.pdb

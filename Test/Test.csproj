@@ -22,8 +22,8 @@
 		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Data\Data.csproj" />
-		<ProjectReference Include="..\Neonatology\Neonatology.csproj" />
+		<ProjectReference Include="..\Neonatology.Data\Neonatology.Data.csproj" />
+		<ProjectReference Include="..\Neonatology.Web\Neonatology.Web.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="AdministrationArea\Services\" />

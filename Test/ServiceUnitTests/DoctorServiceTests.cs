@@ -1,16 +1,12 @@
-﻿using ViewModels.Doctor;
-
-namespace Test.ServiceUnitTests;
+﻿namespace Test.ServiceUnitTests;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
-using Data.Models;
-
-using Services.DoctorService;
 using Microsoft.EntityFrameworkCore;
 using Mocks;
-
+using Neonatology.Data.Models;
+using Neonatology.Services.DoctorService;
+using Neonatology.ViewModels.Doctor;
 using Xunit;
 
 public class DoctorServiceTests
@@ -251,12 +247,12 @@ public class DoctorServiceTests
 
         var service = new DoctorService(dataMock, mapperMock, null, null);
         var doctor = await service.GetDoctorById("doc");
-            
+
         Assert.NotNull(doctor);
         Assert.IsType<DoctorProfileViewModel>(doctor);
         Assert.Equal("gosho@gosho.bg", doctor.Email);
     }
-        
+
     [Fact]
     public async Task GetDoctorByUserIdShouldReturnCorrectModel()
     {
@@ -299,7 +295,7 @@ public class DoctorServiceTests
 
         var service = new DoctorService(dataMock, mapperMock, null, null);
         var doctor = await service.GetDoctorByUserId("user");
-            
+
         Assert.NotNull(doctor);
         Assert.IsType<DoctorProfileViewModel>(doctor);
         Assert.Equal("gosho@gosho.bg", doctor.Email);
@@ -347,7 +343,7 @@ public class DoctorServiceTests
 
         var service = new DoctorService(dataMock, mapperMock, null, null);
         var addressesRes = await service.GetDoctorAddressesById("doc");
-            
+
         Assert.NotNull(addressesRes);
         Assert.Equal(1, addressesRes.Count);
     }
@@ -404,11 +400,11 @@ public class DoctorServiceTests
         };
 
         var result = await service.EditDoctorAsync(model);
-            
+
         Assert.True(result.Succeeded);
 
         var doctor = await dataMock.Doctors.FirstAsync();
-            
+
         Assert.Equal("Mancho", doctor.FirstName);
     }
 
@@ -464,7 +460,7 @@ public class DoctorServiceTests
         };
 
         var result = await service.EditDoctorAsync(model);
-            
+
         Assert.True(result.Failed);
     }
 }

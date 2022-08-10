@@ -2,8 +2,8 @@ namespace Test.Helpers.Data;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using global::Data;
-using global::Data.Models;
+using Neonatology.Data;
+using Neonatology.Data.Models;
 
 public static class CitiesData
 {

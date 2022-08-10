@@ -2,19 +2,18 @@ namespace Test.AdministrationArea.Controllers;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using global::Services.Administration;
-using global::Services.FileService;
-using Helpers;
 using Helpers.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
-using Neonatology.Areas.Administration.Controllers;
-using ViewModels.Administration.Galery;
-using ViewModels.Gallery;
+using Neonatology.Services.Administration;
+using Neonatology.Services.FileService;
+using Neonatology.ViewModels.Administration.Gallery;
+using Neonatology.ViewModels.Gallery;
+using Neonatology.Web.Areas.Administration.Controllers;
 using Xunit;
-using GalleryViewModel = ViewModels.Administration.Galery.GalleryViewModel;
+using GalleryViewModel = Neonatology.ViewModels.Administration.Gallery.GalleryViewModel;
 
 public class GalleryControllerTests
 {

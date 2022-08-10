@@ -4,14 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Mocks;
-using Services.AppointmentService;
-using Services.RatingService;
-using ViewModels.Administration.Rating;
-using ViewModels.Appointments;
-using ViewModels.Rating;
+using Neonatology.Data.Models;
+using Neonatology.Services.AppointmentService;
+using Neonatology.Services.RatingService;
+using Neonatology.ViewModels.Administration.Rating;
+using Neonatology.ViewModels.Appointments;
+using Neonatology.ViewModels.Rating;
 using Xunit;
 
 public class RatingServiceTests

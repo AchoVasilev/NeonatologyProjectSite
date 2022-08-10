@@ -1,12 +1,9 @@
 ﻿namespace Test.AdministrationArea.Controllers;
 
 using System.Reflection;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-using Neonatology.Areas.Administration.Controllers;
-
+using Neonatology.Web.Areas.Administration.Controllers;
 using Xunit;
 
 public class BaseControllerTests

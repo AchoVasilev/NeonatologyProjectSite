@@ -3,18 +3,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-using Data.Models;
-
-using Services.OfferService;
-
 using Microsoft.EntityFrameworkCore;
-
 using Mocks;
-
-using ViewModels.Administration.Offer;
-using ViewModels.Offer;
-
+using Neonatology.Data.Models;
+using Neonatology.Services.OfferService;
+using Neonatology.ViewModels.Administration.Offer;
+using Neonatology.ViewModels.Offer;
 using Xunit;
 
 public class OfferServiceTests

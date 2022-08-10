@@ -2,14 +2,10 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Helpers;
 using Helpers.Data;
-using Services.AppointmentCauseService;
-
 using Mocks;
-
-using ViewModels.Appointments;
-
+using Neonatology.Services.AppointmentCauseService;
+using Neonatology.ViewModels.Appointments;
 using Xunit;
 
 public class AppointmentCauseTests

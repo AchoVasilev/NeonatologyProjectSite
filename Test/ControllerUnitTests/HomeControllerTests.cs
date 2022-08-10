@@ -2,16 +2,15 @@ namespace Test.ControllerUnitTests;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Helpers;
 using Helpers.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
-using Neonatology.Controllers;
-using Services.DoctorService;
-using ViewModels.Gallery;
-using ViewModels.Home;
+using Neonatology.Services.DoctorService;
+using Neonatology.ViewModels.Gallery;
+using Neonatology.ViewModels.Home;
+using Neonatology.Web.Controllers;
 using Xunit;
 
 public class HomeControllerTests

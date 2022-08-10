@@ -3,12 +3,12 @@ namespace Test.ServiceUnitTests;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Common.Constants;
-using Data.Models;
-using Data.Models.Dto;
 using Mocks;
-using Services.SpecializationService;
-using ViewModels.Doctor;
+using Neonatology.Common.Constants;
+using Neonatology.Data.Models;
+using Neonatology.Data.Models.Dto;
+using Neonatology.Services.SpecializationService;
+using Neonatology.ViewModels.Doctor;
 using Xunit;
 
 public class SpecializationServiceTests

@@ -2,27 +2,20 @@
 
 using System.Linq;
 using System.Threading.Tasks;
-
+using Helpers.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-
-using Moq;
-
-using Neonatology.Controllers;
-
-using Services.AppointmentService;
-using Services.DoctorService;
-using Services.PatientService;
-using Services.RatingService;
-
-using Helpers;
-using Helpers.Extensions;
 using Mocks;
-using ViewModels.Appointments;
-using ViewModels.Rating;
-
+using Moq;
+using Neonatology.Services.AppointmentService;
+using Neonatology.Services.DoctorService;
+using Neonatology.Services.PatientService;
+using Neonatology.Services.RatingService;
+using Neonatology.ViewModels.Appointments;
+using Neonatology.ViewModels.Rating;
+using Neonatology.Web.Controllers;
 using Xunit;
 
 public class RatingControllerTests

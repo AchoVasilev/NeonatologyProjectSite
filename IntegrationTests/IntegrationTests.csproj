@@ -19,6 +19,6 @@
 		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Neonatology\Neonatology.csproj" />
+		<ProjectReference Include="..\Neonatology.Web\Neonatology.Web.csproj" />
 	</ItemGroup>
 </Project>

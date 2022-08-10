@@ -1,10 +1,8 @@
 ﻿namespace Test.Mocks;
 
 using System;
-
-using Data;
-
 using Microsoft.EntityFrameworkCore;
+using Neonatology.Data;
 
 public static class DatabaseMock
 {

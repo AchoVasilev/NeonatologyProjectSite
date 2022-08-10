@@ -3,15 +3,14 @@ namespace Test.ControllerUnitTests;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Helpers;
 using Helpers.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
-using Neonatology.Controllers;
-using Services.SlotService;
-using ViewModels.Slot;
+using Neonatology.Services.SlotService;
+using Neonatology.ViewModels.Slot;
+using Neonatology.Web.Controllers;
 using Xunit;
 
 public class SlotControllerTests

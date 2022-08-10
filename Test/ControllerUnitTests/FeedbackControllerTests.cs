@@ -1,20 +1,15 @@
 ﻿namespace Test.ControllerUnitTests;
 
 using System.Threading.Tasks;
-using Helpers;
 using Helpers.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Mocks;
 using Moq;
-
-using Neonatology.Controllers;
-
-using Services.FeedbackService;
-
-using ViewModels.Feedback;
-
+using Neonatology.Services.FeedbackService;
+using Neonatology.ViewModels.Feedback;
+using Neonatology.Web.Controllers;
 using Xunit;
 
 public class FeedbackControllerTests

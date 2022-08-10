@@ -27,7 +27,7 @@
           "lib/netstandard2.0/AngleSharp.Css.dll": {}
         }
       },
-      "AutoMapper/11.0.0": {
+      "AutoMapper/11.0.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0"
@@ -4309,40 +4309,41 @@
           "build/netcoreapp3.1/xunit.runner.visualstudio.props": {}
         }
       },
-      "Common/1.0.0": {
+      "Neonatology.Common/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "AutoMapper": "11.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0"
         },
         "compile": {
-          "bin/placeholder/Common.dll": {}
+          "bin/placeholder/Neonatology.Common.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Common.dll": {}
+          "bin/placeholder/Neonatology.Common.dll": {}
         }
       },
-      "Data/1.0.0": {
+      "Neonatology.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
-          "Common": "1.0.0",
-          "Data.Models": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.7",
           "Microsoft.AspNetCore.Identity.UI": "6.0.7",
           "Microsoft.EntityFrameworkCore": "6.0.7",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.7",
+          "Neonatology.Common": "1.0.0",
+          "Neonatology.Data.Models": "1.0.0",
           "Newtonsoft.Json": "13.0.1"
         },
         "compile": {
-          "bin/placeholder/Data.dll": {}
+          "bin/placeholder/Neonatology.Data.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Data.dll": {}
+          "bin/placeholder/Neonatology.Data.dll": {}
         }
       },
-      "Data.Common/1.0.0": {
+      "Neonatology.Data.Common/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
@@ -4350,60 +4351,93 @@
           "Microsoft.EntityFrameworkCore": "6.0.7"
         },
         "compile": {
-          "bin/placeholder/Data.Common.dll": {}
+          "bin/placeholder/Neonatology.Data.Common.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Data.Common.dll": {}
+          "bin/placeholder/Neonatology.Data.Common.dll": {}
         }
       },
-      "Data.Models/1.0.0": {
+      "Neonatology.Data.Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
-          "Data.Common": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.7",
-          "Microsoft.EntityFrameworkCore": "6.0.7"
+          "Microsoft.EntityFrameworkCore": "6.0.7",
+          "Neonatology.Data.Common": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/Data.Models.dll": {}
+          "bin/placeholder/Neonatology.Data.Models.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Data.Models.dll": {}
+          "bin/placeholder/Neonatology.Data.Models.dll": {}
         }
       },
-      "Infrastructure/1.0.0": {
+      "Neonatology.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
-          "Common": "1.0.0",
-          "Data": "1.0.0",
           "Hangfire.AspNetCore": "1.7.30",
           "Hangfire.SqlServer": "1.7.30",
-          "Services": "1.0.0"
+          "Neonatology.Common": "1.0.0",
+          "Neonatology.Data": "1.0.0",
+          "Neonatology.Services": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/Infrastructure.dll": {}
+          "bin/placeholder/Neonatology.Infrastructure.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Infrastructure.dll": {}
+          "bin/placeholder/Neonatology.Infrastructure.dll": {}
         }
       },
-      "Neonatology/1.0.0": {
+      "Neonatology.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
+          "CloudinaryDotNet": "1.19.0",
+          "HtmlSanitizer": "7.1.542",
+          "MailKit": "3.3.0",
+          "Neonatology.Data": "1.0.0",
+          "Neonatology.ViewModels": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Neonatology.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Neonatology.Services.dll": {}
+        }
+      },
+      "Neonatology.ViewModels/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
+          "Microsoft.AspNetCore.Http.Features": "5.0.17",
+          "Neonatology.Common": "1.0.0",
+          "Neonatology.Data.Common": "1.0.0",
+          "Neonatology.Data.Models": "1.0.0",
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "bin/placeholder/Neonatology.ViewModels.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Neonatology.ViewModels.dll": {}
+        }
+      },
+      "Neonatology.Web/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
           "Bootstrap.Datepicker": "1.8.0.1",
           "CloudinaryDotNet": "1.19.0",
-          "Common": "1.0.0",
-          "Data": "1.0.0",
           "FontAwesome": "4.7.0",
           "Hangfire.AspNetCore": "1.7.30",
           "Hangfire.Core": "1.7.30",
           "Hangfire.SqlServer": "1.7.30",
-          "Infrastructure": "1.0.0",
           "MailKit": "3.3.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.7",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.7",
@@ -4412,56 +4446,23 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.7",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.7",
           "Moment.js": "2.29.4",
+          "Neonatology.Common": "1.0.0",
+          "Neonatology.Data": "1.0.0",
+          "Neonatology.Infrastructure": "1.0.0",
+          "Neonatology.Services": "1.0.0",
           "Newtonsoft.Json": "13.0.1",
           "QRCoder": "1.4.3",
-          "Services": "1.0.0",
           "Stripe.net": "39.124.0"
         },
         "compile": {
-          "bin/placeholder/Neonatology.dll": {}
+          "bin/placeholder/Neonatology.Web.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Neonatology.dll": {}
+          "bin/placeholder/Neonatology.Web.dll": {}
         },
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
-      },
-      "Services/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
-          "CloudinaryDotNet": "1.19.0",
-          "Data": "1.0.0",
-          "HtmlSanitizer": "7.1.542",
-          "MailKit": "3.3.0",
-          "ViewModels": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Services.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Services.dll": {}
-        }
-      },
-      "ViewModels/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
-          "Common": "1.0.0",
-          "Data.Common": "1.0.0",
-          "Data.Models": "1.0.0",
-          "Microsoft.AspNetCore.Http.Features": "5.0.17",
-          "Newtonsoft.Json": "13.0.1"
-        },
-        "compile": {
-          "bin/placeholder/ViewModels.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ViewModels.dll": {}
-        }
       }
     }
   },
@@ -4504,15 +4505,15 @@
         "logo.png"
       ]
     },
-    "AutoMapper/11.0.0": {
-      "sha512": "+596AnKykYCk9RxXCEF4GYuapSebQtFVvIA1oVG1rrRkCLAC7AkWehJ0brCfYUbdDW3v1H/p0W3hob7JoXGjMw==",
+    "AutoMapper/11.0.1": {
+      "sha512": "WIadGC1pIwbnyTubvI577p3F++Bsj9q2Q3OaAc1I0QS+JhupN1xkdrPBhI9bPIeg63zM81tZplUNYkqU1HE5jQ==",
       "type": "package",
-      "path": "automapper/11.0.0",
+      "path": "automapper/11.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "automapper.11.0.0.nupkg.sha512",
+        "automapper.11.0.1.nupkg.sha512",
         "automapper.nuspec",
         "icon.png",
         "lib/netstandard2.1/AutoMapper.dll",
@@ -13101,55 +13102,55 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
-    "Common/1.0.0": {
+    "Neonatology.Common/1.0.0": {
       "type": "project",
-      "path": "../Common/Common.csproj",
-      "msbuildProject": "../Common/Common.csproj"
+      "path": "../Neonatology.Common/Neonatology.Common.csproj",
+      "msbuildProject": "../Neonatology.Common/Neonatology.Common.csproj"
     },
-    "Data/1.0.0": {
+    "Neonatology.Data/1.0.0": {
       "type": "project",
-      "path": "../Data/Data.csproj",
-      "msbuildProject": "../Data/Data.csproj"
+      "path": "../Neonatology.Data/Neonatology.Data.csproj",
+      "msbuildProject": "../Neonatology.Data/Neonatology.Data.csproj"
     },
-    "Data.Common/1.0.0": {
+    "Neonatology.Data.Common/1.0.0": {
       "type": "project",
-      "path": "../Data.Common/Data.Common.csproj",
-      "msbuildProject": "../Data.Common/Data.Common.csproj"
+      "path": "../Neonatology.Data.Common/Neonatology.Data.Common.csproj",
+      "msbuildProject": "../Neonatology.Data.Common/Neonatology.Data.Common.csproj"
     },
-    "Data.Models/1.0.0": {
+    "Neonatology.Data.Models/1.0.0": {
       "type": "project",
-      "path": "../Data.Models/Data.Models.csproj",
-      "msbuildProject": "../Data.Models/Data.Models.csproj"
+      "path": "../Neonatology.Data.Models/Neonatology.Data.Models.csproj",
+      "msbuildProject": "../Neonatology.Data.Models/Neonatology.Data.Models.csproj"
     },
-    "Infrastructure/1.0.0": {
+    "Neonatology.Infrastructure/1.0.0": {
       "type": "project",
-      "path": "../Infrastructure/Infrastructure.csproj",
-      "msbuildProject": "../Infrastructure/Infrastructure.csproj"
+      "path": "../Neonatology.Infrastructure/Neonatology.Infrastructure.csproj",
+      "msbuildProject": "../Neonatology.Infrastructure/Neonatology.Infrastructure.csproj"
     },
-    "Neonatology/1.0.0": {
+    "Neonatology.Services/1.0.0": {
       "type": "project",
-      "path": "../Neonatology/Neonatology.csproj",
-      "msbuildProject": "../Neonatology/Neonatology.csproj"
+      "path": "../Neonatology.Services/Neonatology.Services.csproj",
+      "msbuildProject": "../Neonatology.Services/Neonatology.Services.csproj"
     },
-    "Services/1.0.0": {
+    "Neonatology.ViewModels/1.0.0": {
       "type": "project",
-      "path": "../Services/Services.csproj",
-      "msbuildProject": "../Services/Services.csproj"
+      "path": "../Neonatology.ViewModels/Neonatology.ViewModels.csproj",
+      "msbuildProject": "../Neonatology.ViewModels/Neonatology.ViewModels.csproj"
     },
-    "ViewModels/1.0.0": {
+    "Neonatology.Web/1.0.0": {
       "type": "project",
-      "path": "../ViewModels/ViewModels.csproj",
-      "msbuildProject": "../ViewModels/ViewModels.csproj"
+      "path": "../Neonatology.Web/Neonatology.Web.csproj",
+      "msbuildProject": "../Neonatology.Web/Neonatology.Web.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Data >= 1.0.0",
       "Microsoft.AspNetCore.Mvc.Testing >= 6.0.7",
       "Microsoft.EntityFrameworkCore.InMemory >= 6.0.7",
       "Microsoft.NET.Test.Sdk >= 17.2.0",
       "Moq >= 4.18.1",
-      "Neonatology >= 1.0.0",
+      "Neonatology.Data >= 1.0.0",
+      "Neonatology.Web >= 1.0.0",
       "Selenium.WebDriver >= 4.3.0",
       "Selenium.WebDriver.ChromeDriver >= 103.0.5060.13400",
       "coverlet.collector >= 3.1.2",
@@ -13182,11 +13183,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/home/acho/Programing/Neonatology/Data/Data.csproj": {
-              "projectPath": "/home/acho/Programing/Neonatology/Data/Data.csproj"
+            "/home/acho/Programing/Neonatology/Neonatology.Data/Neonatology.Data.csproj": {
+              "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Data/Neonatology.Data.csproj"
             },
-            "/home/acho/Programing/Neonatology/Neonatology/Neonatology.csproj": {
-              "projectPath": "/home/acho/Programing/Neonatology/Neonatology/Neonatology.csproj"
+            "/home/acho/Programing/Neonatology/Neonatology.Web/Neonatology.Web.csproj": {
+              "projectPath": "/home/acho/Programing/Neonatology/Neonatology.Web/Neonatology.Web.csproj"
             }
           }
         }

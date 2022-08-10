@@ -2,17 +2,11 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Mvc;
-
 using Moq;
-
-using Neonatology.Controllers;
-
-using Services.OfferService;
-
-using ViewModels.Offer;
-
+using Neonatology.Services.OfferService;
+using Neonatology.ViewModels.Offer;
+using Neonatology.Web.Controllers;
 using Xunit;
 
 public class OfferControllerTests

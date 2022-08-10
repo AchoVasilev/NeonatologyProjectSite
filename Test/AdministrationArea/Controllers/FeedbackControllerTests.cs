@@ -2,20 +2,15 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using global::Services.FeedbackService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-
-using Moq;
-
-using Neonatology.Areas.Administration.Controllers;
-
 using Mocks;
-
-using ViewModels.Feedback;
-
+using Moq;
+using Neonatology.Services.FeedbackService;
+using Neonatology.ViewModels.Feedback;
+using Neonatology.Web.Areas.Administration.Controllers;
 using Xunit;
 
 public class FeedbackControllerTests

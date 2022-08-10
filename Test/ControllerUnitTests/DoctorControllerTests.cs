@@ -2,23 +2,17 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Helpers.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-using Moq;
-
-using Neonatology.Controllers;
-
-using Services.CityService;
-using Services.DoctorService;
-
-using Helpers;
-using Helpers.Extensions;
 using Mocks;
-using ViewModels.City;
-using ViewModels.Doctor;
-using ViewModels.Slot;
-
+using Moq;
+using Neonatology.Services.CityService;
+using Neonatology.Services.DoctorService;
+using Neonatology.ViewModels.City;
+using Neonatology.ViewModels.Doctor;
+using Neonatology.ViewModels.Slot;
+using Neonatology.Web.Controllers;
 using Xunit;
 
 public class DoctorControllerTests

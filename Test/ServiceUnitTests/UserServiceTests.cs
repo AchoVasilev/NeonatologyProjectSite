@@ -1,11 +1,11 @@
 namespace Test.ServiceUnitTests;
 
-using Services.UserService;
-using Xunit;
 using System.Collections.Generic;
-using Data.Models;
-using Mocks;
 using System.Threading.Tasks;
+using Mocks;
+using Neonatology.Data.Models;
+using Neonatology.Services.UserService;
+using Xunit;
 
 public class UserServiceTests
 {

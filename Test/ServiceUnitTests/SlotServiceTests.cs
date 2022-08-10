@@ -3,12 +3,10 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Data.Models;
-using Data.Models.Enums;
-using Services.SlotService;
-
 using Mocks;
-
+using Neonatology.Data.Models;
+using Neonatology.Data.Models.Enums;
+using Neonatology.Services.SlotService;
 using Xunit;
 
 public class SlotServiceTests

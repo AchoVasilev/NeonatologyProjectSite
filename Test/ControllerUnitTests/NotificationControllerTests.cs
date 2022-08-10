@@ -3,21 +3,17 @@
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using Data.Models;
+using Helpers.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Moq;
-
-using Neonatology.Controllers;
-using Services.NotificationService;
-
-using Helpers;
-using Helpers.Extensions;
-using Infrastructure.Hubs;
-using ViewModels.Notification;
-
+using Neonatology.Data.Models;
+using Neonatology.Infrastructure.Hubs;
+using Neonatology.Services.NotificationService;
+using Neonatology.ViewModels.Notification;
+using Neonatology.Web.Controllers;
 using Xunit;
 
 public class NotificationControllerTests

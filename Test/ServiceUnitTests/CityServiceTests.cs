@@ -2,11 +2,11 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Data.Models;
 using Helpers.Data;
-using Services.CityService;
 using Mocks;
-using ViewModels.City;
+using Neonatology.Data.Models;
+using Neonatology.Services.CityService;
+using Neonatology.ViewModels.City;
 using Xunit;
 
 public class CityServiceTests

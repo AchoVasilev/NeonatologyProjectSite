@@ -2,18 +2,17 @@ namespace Test.AdministrationArea.Controllers;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using global::Services.AppointmentService;
-using global::Services.PatientService;
-using global::Services.RatingService;
-using Helpers;
 using Helpers.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
-using Neonatology.Areas.Administration.Controllers;
-using ViewModels.Administration.Home;
-using ViewModels.Appointments;
+using Neonatology.Services.AppointmentService;
+using Neonatology.Services.PatientService;
+using Neonatology.Services.RatingService;
+using Neonatology.ViewModels.Administration.Home;
+using Neonatology.ViewModels.Appointments;
+using Neonatology.Web.Areas.Administration.Controllers;
 using Xunit;
 
 public class HomeControllerTests

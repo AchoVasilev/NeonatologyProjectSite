@@ -3,17 +3,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-using Data.Models;
-
-using Services.FeedbackService;
-
 using Microsoft.EntityFrameworkCore;
-
 using Mocks;
-
-using ViewModels.Feedback;
-
+using Neonatology.Data.Models;
+using Neonatology.Services.FeedbackService;
+using Neonatology.ViewModels.Feedback;
 using Xunit;
 
 public class FeedbackServiceTests

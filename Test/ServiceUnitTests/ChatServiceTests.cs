@@ -3,17 +3,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-using Data.Models;
 using Helpers.Data;
-using Services.ChatService;
-
 using Microsoft.EntityFrameworkCore;
-
 using Mocks;
-
-using ViewModels.Chat;
-
+using Neonatology.Data.Models;
+using Neonatology.Services.ChatService;
+using Neonatology.ViewModels.Chat;
 using Xunit;
 
 public class ChatServiceTests

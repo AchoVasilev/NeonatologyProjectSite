@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "P5wafTku3KFU/4ENKJ8mtaRsPu3Y+dXCUv2eas8nEQ+oUQacLabYplqbllWCZ43TbzPbRnIcUU6ImFUw8aYy8A==",
+  "dgSpecHash": "JP4PWBrbwokMLzVHOq2qbiJfzjTYBLh9QqQQO6Ndru4nuaJUA2mXpd8rGGxrm66OkNYVmWNXLtcWcZNPQOZ83A==",
   "success": true,
   "projectFilePath": "/home/acho/Programing/Neonatology/Test/Test.csproj",
   "expectedPackageFiles": [
     "/home/acho/.nuget/packages/anglesharp/0.17.1/anglesharp.0.17.1.nupkg.sha512",
     "/home/acho/.nuget/packages/anglesharp.css/0.16.4/anglesharp.css.0.16.4.nupkg.sha512",
-    "/home/acho/.nuget/packages/automapper/11.0.0/automapper.11.0.0.nupkg.sha512",
+    "/home/acho/.nuget/packages/automapper/11.0.1/automapper.11.0.1.nupkg.sha512",
     "/home/acho/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/11.0.0/automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "/home/acho/.nuget/packages/bootstrap.datepicker/1.8.0.1/bootstrap.datepicker.1.8.0.1.nupkg.sha512",
     "/home/acho/.nuget/packages/castle.core/5.0.0/castle.core.5.0.0.nupkg.sha512",

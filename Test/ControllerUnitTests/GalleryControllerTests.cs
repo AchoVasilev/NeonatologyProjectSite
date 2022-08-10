@@ -2,17 +2,16 @@ namespace Test.ControllerUnitTests;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Helpers;
 using Helpers.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
-using Neonatology.Controllers;
-using Services.AppointmentCauseService;
-using Services.FileService;
-using ViewModels.Appointments;
-using ViewModels.Gallery;
+using Neonatology.Services.AppointmentCauseService;
+using Neonatology.Services.FileService;
+using Neonatology.ViewModels.Appointments;
+using Neonatology.ViewModels.Gallery;
+using Neonatology.Web.Controllers;
 using Xunit;
 
 public class GalleryControllerTests

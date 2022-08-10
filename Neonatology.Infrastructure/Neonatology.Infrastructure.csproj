@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.30" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.7.30" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Neonatology.Common\Neonatology.Common.csproj" />
+    <ProjectReference Include="..\Neonatology.Data\Neonatology.Data.csproj" />
+    <ProjectReference Include="..\Neonatology.Services\Neonatology.Services.csproj" />
+  </ItemGroup>
+
+</Project>

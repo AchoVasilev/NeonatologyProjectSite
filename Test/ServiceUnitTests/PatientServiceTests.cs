@@ -1,15 +1,13 @@
-﻿using Services.PatientService.Models;
-
-namespace Test.ServiceUnitTests;
+﻿namespace Test.ServiceUnitTests;
 
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Data.Models;
-using Services.PatientService;
 using Microsoft.EntityFrameworkCore;
 using Mocks;
-using ViewModels.Patient;
+using Neonatology.Data.Models;
+using Neonatology.Services.PatientService;
+using Neonatology.ViewModels.Patient;
 using Xunit;
 
 public class PatientServiceTests

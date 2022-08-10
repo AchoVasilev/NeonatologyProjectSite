@@ -3,9 +3,9 @@ namespace Test.AdministrationArea.Services;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using global::Services.Administration;
 using Mocks;
-using ViewModels.Administration.Galery;
+using Neonatology.Services.Administration;
+using Neonatology.ViewModels.Administration.Gallery;
 using Xunit;
 
 public class GalleryServiceTests

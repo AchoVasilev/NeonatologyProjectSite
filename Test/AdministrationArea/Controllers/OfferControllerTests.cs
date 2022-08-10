@@ -2,17 +2,16 @@ namespace Test.AdministrationArea.Controllers;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using global::Services.OfferService;
-using Helpers;
 using Helpers.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Mocks;
 using Moq;
-using Neonatology.Areas.Administration.Controllers;
-using ViewModels.Administration.Offer;
-using ViewModels.Offer;
+using Neonatology.Services.OfferService;
+using Neonatology.ViewModels.Administration.Offer;
+using Neonatology.ViewModels.Offer;
+using Neonatology.Web.Areas.Administration.Controllers;
 using Xunit;
 
 public class OfferControllerTests

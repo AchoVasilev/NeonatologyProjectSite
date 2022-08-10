@@ -39,7 +39,7 @@
           "Microsoft.EntityFrameworkCore.InMemory": "6.0.7",
           "Microsoft.NET.Test.Sdk": "17.2.0",
           "Moq": "4.18.1",
-          "Neonatology": "1.0.0",
+          "Neonatology.Web": "1.0.0",
           "Selenium.WebDriver": "4.3.0",
           "Selenium.WebDriver.ChromeDriver": "103.0.5060.13400",
           "coverlet.collector": "3.1.2",
@@ -370,14 +370,14 @@
           "lib/netstandard2.0/AngleSharp.Css.dll": {}
         }
       },
-      "AutoMapper/11.0.0": {
+      "AutoMapper/11.0.1": {
         "dependencies": {
           "Microsoft.CSharp": "4.7.0"
         },
         "runtime": {
           "lib/netstandard2.1/AutoMapper.dll": {
             "assemblyVersion": "11.0.0.0",
-            "fileVersion": "11.0.0.0"
+            "fileVersion": "11.0.1.0"
           }
         },
         "compile": {
@@ -386,7 +386,7 @@
       },
       "AutoMapper.Extensions.Microsoft.DependencyInjection/11.0.0": {
         "dependencies": {
-          "AutoMapper": "11.0.0",
+          "AutoMapper": "11.0.1",
           "Microsoft.Extensions.Options": "6.0.0"
         },
         "runtime": {
@@ -3775,6 +3775,7 @@
       "xunit.runner.visualstudio/2.4.5": {},
       "Common/1.0.0": {
         "dependencies": {
+          "AutoMapper": "11.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0"
         },
         "runtime": {
@@ -3844,7 +3845,7 @@
           "Infrastructure.dll": {}
         }
       },
-      "Neonatology/1.0.0": {
+      "Neonatology.Web/1.0.0": {
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
           "Bootstrap.Datepicker": "1.8.0.1",
@@ -3870,10 +3871,10 @@
           "Stripe.net": "39.124.0"
         },
         "runtime": {
-          "Neonatology.dll": {}
+          "Neonatology.Web.dll": {}
         },
         "compile": {
-          "Neonatology.dll": {}
+          "Neonatology.Web.dll": {}
         }
       },
       "Services/1.0.0": {
@@ -5658,12 +5659,12 @@
       "path": "anglesharp.css/0.16.4",
       "hashPath": "anglesharp.css.0.16.4.nupkg.sha512"
     },
-    "AutoMapper/11.0.0": {
+    "AutoMapper/11.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+596AnKykYCk9RxXCEF4GYuapSebQtFVvIA1oVG1rrRkCLAC7AkWehJ0brCfYUbdDW3v1H/p0W3hob7JoXGjMw==",
-      "path": "automapper/11.0.0",
-      "hashPath": "automapper.11.0.0.nupkg.sha512"
+      "sha512": "sha512-WIadGC1pIwbnyTubvI577p3F++Bsj9q2Q3OaAc1I0QS+JhupN1xkdrPBhI9bPIeg63zM81tZplUNYkqU1HE5jQ==",
+      "path": "automapper/11.0.1",
+      "hashPath": "automapper.11.0.1.nupkg.sha512"
     },
     "AutoMapper.Extensions.Microsoft.DependencyInjection/11.0.0": {
       "type": "package",
@@ -7370,7 +7371,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Neonatology/1.0.0": {
+    "Neonatology.Web/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

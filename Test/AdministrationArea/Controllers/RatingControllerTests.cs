@@ -2,13 +2,13 @@ namespace Test.AdministrationArea.Controllers;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using global::Services.RatingService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
-using Neonatology.Areas.Administration.Controllers;
-using ViewModels.Administration.Rating;
+using Neonatology.Services.RatingService;
+using Neonatology.ViewModels.Administration.Rating;
+using Neonatology.Web.Areas.Administration.Controllers;
 using Xunit;
 
 public class RatingControllerTests

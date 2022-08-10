@@ -3,16 +3,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-using Data.Models;
-using Data.Models.Enums;
-
-using Services.NotificationService;
-
 using Microsoft.EntityFrameworkCore;
-
 using Mocks;
-
+using Neonatology.Data.Models;
+using Neonatology.Data.Models.Enums;
+using Neonatology.Services.NotificationService;
 using Xunit;
 
 public class NotificationServiceTests

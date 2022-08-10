@@ -1,11 +1,8 @@
 ﻿namespace IntegrationTests;
 
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Mvc.Testing;
-
-using Neonatology;
-
+using Neonatology.Web;
 using Xunit;
 
 public class HomeControllerTests : IClassFixture<WebApplicationFactory<Startup>>

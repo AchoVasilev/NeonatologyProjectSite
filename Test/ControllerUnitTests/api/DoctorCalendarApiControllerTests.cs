@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using Neonatology.Controllers.api;
-using Services.AppointmentService;
-using Services.SlotService;
-using ViewModels.Appointments;
-using ViewModels.Slot;
+using Neonatology.Services.AppointmentService;
+using Neonatology.Services.SlotService;
+using Neonatology.ViewModels.Appointments;
+using Neonatology.ViewModels.Slot;
+using Neonatology.Web.Controllers.api;
 using Xunit;
 
 public class DoctorCalendarApiControllerTests

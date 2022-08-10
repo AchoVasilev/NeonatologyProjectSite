@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using Neonatology.Controllers.api;
-using Services.SlotService;
-using ViewModels.Slot;
+using Neonatology.Services.SlotService;
+using Neonatology.ViewModels.Slot;
+using Neonatology.Web.Controllers.api;
 using Xunit;
 
 public class CalendarApiControllerTests
