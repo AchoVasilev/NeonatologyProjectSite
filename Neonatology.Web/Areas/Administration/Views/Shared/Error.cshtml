@@ -1,0 +1,32 @@
+﻿@model ErrorViewModel
+@section head{
+    <style type="text/css">
+        body {
+            background-image: url('/img/homepage.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+}
+<div class="jumbotron-opacity">
+    <div class="row ml-5">
+        <div class="row">
+            <div class="col-7">
+                <img src="/img/error.jpg" class="img-thumbnail mt-2 mb-2" alt="error"/>
+            </div>
+            <div class="col-5 pt-2">
+                <h1 class="medex-color">Опа!</h1>
+                <h2>Стана грешка!</h2>
+                <h5>
+                    @if (Model.ShowRequestId)
+                    {
+                        <p>
+                            <strong>Request ID:</strong> <code>@Model.RequestId</code>
+                        </p>
+                    }
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>

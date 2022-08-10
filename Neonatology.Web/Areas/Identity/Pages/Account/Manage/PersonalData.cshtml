@@ -1,0 +1,27 @@
+﻿@page
+@model PersonalDataModel
+@{
+    ViewData["Title"] = "Лични данни";
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <p>Вашият акаунт съдържа данните, които сте ни предоставили. Вие можете да ги изтеглите или изтриете.</p>
+        <p>
+            <strong>След изтриването на вашите данни, те няма да могат да бъдат възстановени.</strong>
+        </p>
+        <form id="download-data" asp-page="DownloadPersonalNeonatology.Data" method="post">
+            <button class="btn btn-primary" type="submit">Изтегли</button>
+        </form>
+        <p>
+            <a id="delete" asp-page="DeletePersonalNeonatology.Data" class="btn btn-danger">Изтрий</a>
+        </p>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

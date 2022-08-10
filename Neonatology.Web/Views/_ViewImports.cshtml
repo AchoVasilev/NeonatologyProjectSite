@@ -1,0 +1,27 @@
+﻿@using Neonatology.Web
+@using Neonatology.Data.Models
+@using Neonatology.Data.Models.Enums
+
+@using Neonatology.ViewModels.Slot
+@using Neonatology.ViewModels.ErrorViewModel
+@using Neonatology.ViewModels.Appointments
+@using Neonatology.ViewModels.Doctor
+@using Neonatology.ViewModels.Patient
+@using Neonatology.ViewModels.Rating
+@using Neonatology.ViewModels.Home
+@using Neonatology.ViewModels.Offer
+@using Neonatology.ViewModels.Gallery
+@using Neonatology.ViewModels.Chat
+@using Neonatology.ViewModels.Stripe
+@using Neonatology.ViewModels.Profile
+@using Neonatology.ViewModels.Feedback
+@using Neonatology.ViewModels.Notification
+
+@using Microsoft.AspNetCore.Identity
+@using static Neonatology.Common.Constants.GlobalConstants
+@using static Neonatology.Common.Constants.GlobalConstants.DateTimeFormats
+@using static Neonatology.Common.Constants.GlobalConstants.NotificationConstants
+
+@inject SignInManager<ApplicationUser> SignInManager
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Neonatology

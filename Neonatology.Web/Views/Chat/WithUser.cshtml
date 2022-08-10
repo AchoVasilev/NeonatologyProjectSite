@@ -1,0 +1,148 @@
+﻿@model PrivateChatViewModel
+
+@{
+    ViewData["Title"] = $"Разговор с {Model.ReceiverFullName}";
+}
+
+@section Styles{
+<link href="~/lib/alertifyjs/build/css/alertify.min.css" rel="stylesheet" />
+<link href="~/lib/alertifyjs/build/css/themes/default.min.css" rel="stylesheet" />
+<link href="~/chatVoice/css/Custom.css" rel="stylesheet" />
+}
+<div class="card card-body bg-light actions" id="actions">
+    <div id="callstatus" class="status">В изчакване</div>
+    <button class="btn btn-danger hangup">Затвори</button>
+    <div class="span6">
+        <h4>Partner</h4>
+        <audio class="audio partner" autoplay="" controls=""></audio>
+    </div>
+</div>
+
+<div class="container p-0">
+
+    <h1 class="h3 mb-3 text-center">@ViewData["Title"]</h1>
+
+    <div class="card">
+        <div class="row g-0">
+            <div class="container-fluid">
+                <div class="py-2 px-4 border-bottom d-sm-block d-lg-block">
+                    <h3 id="group-name" style="text-align:center" hidden>@Model.GroupName</h3>
+                    <div class="d-flex d-none align-items-center py-1">
+                        <div class="position-relative d-none d-lg-block">
+                            <img src="@Model.ToUser.Image.Url" class="rounded-circle mr-1 img-sm" alt="avatar">
+                        </div>
+
+                        <div class="flex-grow-1 pl-3" style="display: flex; justify-content:space-between">
+                            <strong id="receiver-fullname" class="d-none d-lg-block">@Model.ReceiverFullName</strong>
+                            <ul id="users" data-mode="idle">
+                                <li data-cid="" id="receiver" style="text-align:center" hidden>@Model.ReceiverEmail</li>
+                                <li data-cid="" class="user" id="receiverEmail" style="text-align:center" hidden>@Model.ReceiverEmail</li>
+                                <li class="m-b-0" id="sender-fullname" hidden>@Model.SenderFullName</li>
+                                <li data-cid="" id="sender" style="text-align:center" hidden>@Model.SenderEmail</li>
+                                <li data-cid="" class="user" id="senderEmail" style="text-align:center" hidden>@Model.SenderEmail</li>
+                            </ul>
+                            @if (Model.HasPaid)
+                            {
+                                <div id="icons">
+                                    <label type="button" id="close" class="btn btn-outline-danger"><i class="fas fa-phone-slash"></i></label>
+                                    <label type="button" id="call" class="btn btn-outline-secondary"><i class="fas fa-microphone"></i></label>
+                                    <label class="btn btn-outline-secondary" for="upload-image" style="cursor:pointer" id="image-button">
+                                        <i class="fa fa-camera"></i>
+                                    </label>
+                                    <input accept=".jpg, .jpeg, .png" type="file" multiple id="upload-image" class="btn btn-outline-secondary">
+                                    <span class="select-image-badge">
+                                        0
+                                    </span>
+                                    <div id="imageSpinner"></div>
+                                    <label class="btn btn-outline-primary" for="upload-file" style="cursor:pointer" id="file-button">
+                                        <i class="fa fa-paperclip"></i>
+                                    </label>
+                                    <input type="file" multiple id="upload-file" accept=".zip, .rar, .docx, .xlsx, application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf">
+                                    <span class="select-file-badge">
+                                        0
+                                    </span>
+                                    <div id="fileSpinner"></div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-6">
+                                    <a class="btn btn-success" asp-area="" asp-controller="Checkout" asp-action="Index">
+                                        Заяви онлайн консултация
+                                    </a>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="position-relative">
+                    <div onclick="scrollChatToBottom()" class="back-to-bottom-chat-body" id="scrollBottomButton">
+                        <i class="fas fa-chevron-circle-down"></i>
+                    </div>
+                    <div class="chat-messages p-4" id="chat-body">
+                        <ul class="list-unstyled media-block" id="message-list">
+                            @if (Model.ChatMessages != null && Model.ChatMessages.Count > 0)
+                            {
+                                @foreach (var message in Model.ChatMessages)
+                                {
+                                    @if (message.Receiver.Id == Model.CurrentUser.Id && Model.CurrentUser.Id != message.Sender.Id)
+                                    {
+                                        <li class="chat-message-left pb-4" id="@message.Id">
+                                            <div>
+                                                <img src="@Model.ToUser.Image.Url" class="rounded-circle mr-1 img-sm" alt="Avatar">
+                                            </div>
+                                            <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                                <div class="font-weight-bold mb-1">@Model.ReceiverFullName</div>
+                                                @Html.Raw(message.Content)
+                                            </div>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="chat-message-right pb-4" id="@message.Id">
+                                            <div>
+                                                <img src="@Model.CurrentUser.Image.Url" class="rounded-circle mr-1 img-sm" alt="Avatar">
+                                            </div>
+                                            <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                                <div class="font-weight-bold mb-1">@Model.SenderFullName</div>
+                                                @Html.Raw(message.Content)
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                            }
+                        </ul>
+                        <input id="messagesSkipCount" type="hidden" value="@Model.ChatMessages.Count" />
+                    </div>
+                </div>
+                @if (Model.HasPaid)
+                {
+                    <div class="flex-grow-0 py-3 px-4 border-top">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="chat-text" placeholder="Напиши съобщение..">
+                            <button class="btn btn-primary hvr-grow" id="send-button">Изпрати</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modalChatImage">
+    <div class="imageModalContent">
+        <i onclick="closeChatZoomedImage()" class="fas fa-window-close closeImage"></i>
+    </div>
+    <img id="image-content" class="imageModalContent" src="">
+    <div class="myCaption"></div>
+</div>
+
+@section Scripts{
+<script type="text/javascript" src="~/chat/js/chat.js"></script>
+<script type="text/javascript" src="~/chat/js/chatImagesScript.js"></script>
+<script type="text/javascript" src="~/chat/js/chatFilesScript.js"></script>
+<script type="text/javascript" src="~/chat/js/chatPerformanceScript.js"></script>
+<script type="text/javascript" src="~/chatVoice/js/connectionHub.js"></script>
+}

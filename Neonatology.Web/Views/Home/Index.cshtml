@@ -1,0 +1,64 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@model HomeViewModel
+@{
+    ViewBag.Title = "Начало";
+}
+
+@if (TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-info" id="locationMessage" style="font-size: 20px">@TempData["Message"]</div>
+}
+
+@section head{
+<style type="text/css">
+    body {
+        background-image: url('/img/homepage.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+</style>
+}
+<div class="jumbotron jumbotron-fluid jumbotron-opacity">
+    <div class="container">
+        <h1 class="display-4">Добре дошли в @SystemName</h1>
+        <p class="lead">Тук можете да запишете вашия час за преглед и да получите консултация</p>
+        <hr class="my-4">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            @if (User.IsInRole(DoctorConstants.DoctorRoleName))
+            {
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg hvr-grow" asp-area=""
+                    asp-controller="Appointment" asp-action="TodaysAppointments">Днешните часове</a>
+                </p>
+            }
+            else
+            {
+                <p class="lead">
+                    <a class="btn btn-info hvr-grow" 
+                    asp-area=""
+                    asp-controller="Appointment" 
+                    asp-action="MakePatientAppointment"
+                    asp-route-id="@Model.DoctorId">
+                        Запази час
+                    </a>
+                </p>
+            }
+        }
+        else
+        {
+            <p class="lead">
+                <a type="submit" class="btn btn-info hvr-grow" 
+                asp-area="" 
+                asp-controller="Appointment" 
+                asp-action="MakeAnAppointment"
+                asp-route-id="@Model.DoctorId">
+                    Запази час
+                </a>
+            </p>
+        }
+    </div>
+</div>

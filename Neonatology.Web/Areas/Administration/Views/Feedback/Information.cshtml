@@ -1,0 +1,55 @@
+﻿@model FeedbackViewModel
+
+@{
+    ViewBag.Title = $"Обратна връзка от {Model.Email}";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <a asp-area="Administration" asp-controller="Feedback" asp-action="All"
+        class="btn btn-primary btn-block mb-3">Към всички</a>
+    </div>
+    <!-- /.col -->
+    <div class="col-md-9">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">@ViewBag.Title</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+                <div class="mailbox-read-info">
+                    <h5>@Model.Type</h5>
+                    <h6>
+                        От: @Model.Email - @Model.FirstName @Model.LastName
+                        <span class="mailbox-read-time float-right">@Model.CreatedOn</span>
+                    </h6>
+                </div>
+                <!-- /.mailbox-read-info -->
+                <div class="mailbox-controls with-border text-center">
+                    <div class="btn-group">
+                        <a asp-area="Administration"
+                        asp-controller="Feedback" 
+                        asp-action="Delete"
+                        asp-route-id="@Model.Id"
+                        class="btn btn-danger btn-sm" data-container="body" title="Изтрий">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                        <a asp-area="Administration"
+                        asp-controller="Feedback" 
+                        asp-action="Reply"
+                        asp-route-id="@Model.Id"
+                        class="btn btn-default btn-sm" data-container="body" title="Отговори">
+                            <i class="fas fa-reply"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- /.mailbox-controls -->
+                <div class="mailbox-read-message">                 
+                    <p>
+                        @Model.Comment
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+{
+  "version": "1.0",
+  "defaultProvider": "jsdelivr",
+  "libraries": [
+    {
+      "library": "bootstrap@4.5.0",
+      "destination": "wwwroot/lib/bootstrap/",
+      "files": [
+        "dist/css/bootstrap.css",
+        "dist/css/bootstrap.min.css",
+        "dist/js/bootstrap.js",
+        "dist/js/bootstrap.min.js"
+      ]
+    },
+    {
+      "library": "@fortawesome/fontawesome-free@5.15.4",
+      "destination": "wwwroot/lib/fontawesome/",
+      "files": [
+        "webfonts/fa-brands-400.eot",
+        "webfonts/fa-brands-400.svg",
+        "webfonts/fa-brands-400.ttf",
+        "webfonts/fa-brands-400.woff",
+        "webfonts/fa-brands-400.woff2",
+        "webfonts/fa-regular-400.eot",
+        "webfonts/fa-regular-400.svg",
+        "webfonts/fa-regular-400.ttf",
+        "webfonts/fa-regular-400.woff",
+        "webfonts/fa-regular-400.woff2",
+        "webfonts/fa-solid-900.eot",
+        "webfonts/fa-solid-900.svg",
+        "webfonts/fa-solid-900.ttf",
+        "webfonts/fa-solid-900.woff",
+        "webfonts/fa-solid-900.woff2",
+        "css/all.css",
+        "css/all.min.css"
+      ]
+    },
+    {
+      "library": "fullcalendar@5.10.1",
+      "destination": "wwwroot/lib/fullcallendar",
+      "files": [
+        "locales-all.js",
+        "locales-all.min.js",
+        "main.css",
+        "main.min.css",
+        "main.js",
+        "main.min.js"
+      ]
+    },
+    {
+      "library": "datatables@latest",
+      "destination": "wwwroot/lib/datatables",
+      "files": [
+        "media/css/jquery.dataTables.css",
+        "media/css/jquery.dataTables.min.css",
+        "media/js/jquery.dataTables.js",
+        "media/js/jquery.dataTables.min.js"
+      ]
+    },
+    {
+      "provider": "unpkg",
+      "library": "@microsoft/signalr@latest",
+      "destination": "wwwroot/lib/microsoft/signalr/"
+    },
+    {
+      "library": "adapterjs@latest",
+      "destination": "wwwroot/lib/adapter/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "alertifyjs@latest",
+      "destination": "wwwroot/lib/alertifyjs/"
+    }
+  ]
+}
