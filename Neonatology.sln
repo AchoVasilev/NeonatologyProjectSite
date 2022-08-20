@@ -75,6 +75,8 @@ Global
 		{B366F351-9CF5-4B1B-B9E7-8D8F0015F855}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B366F351-9CF5-4B1B-B9E7-8D8F0015F855}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B366F351-9CF5-4B1B-B9E7-8D8F0015F855}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF515C8B-7CDA-4528-9DCB-755489D6E83A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF515C8B-7CDA-4528-9DCB-755489D6E83A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
