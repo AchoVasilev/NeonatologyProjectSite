@@ -196,10 +196,10 @@
           "lib/netstandard1.0/Humanizer.dll": {}
         }
       },
-      "MailKit/3.3.0": {
+      "MailKit/3.4.0": {
         "type": "package",
         "dependencies": {
-          "MimeKit": "3.3.0"
+          "MimeKit": "3.4.0"
         },
         "compile": {
           "lib/net6.0/MailKit.dll": {}
@@ -1146,7 +1146,7 @@
           }
         }
       },
-      "Microsoft.CodeCoverage/17.3.0": {
+      "Microsoft.CodeCoverage/17.3.1": {
         "type": "package",
         "compile": {
           "lib/netcoreapp1.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll": {}
@@ -1904,11 +1904,11 @@
           "lib/netstandard2.0/_._": {}
         }
       },
-      "Microsoft.NET.Test.Sdk/17.3.0": {
+      "Microsoft.NET.Test.Sdk/17.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.CodeCoverage": "17.3.0",
-          "Microsoft.TestPlatform.TestHost": "17.3.0"
+          "Microsoft.CodeCoverage": "17.3.1",
+          "Microsoft.TestPlatform.TestHost": "17.3.1"
         },
         "compile": {
           "lib/netcoreapp2.1/_._": {}
@@ -1942,7 +1942,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.TestPlatform.ObjectModel/17.3.0": {
+      "Microsoft.TestPlatform.ObjectModel/17.3.1": {
         "type": "package",
         "dependencies": {
           "NuGet.Frameworks": "5.11.0",
@@ -2039,10 +2039,10 @@
           }
         }
       },
-      "Microsoft.TestPlatform.TestHost/17.3.0": {
+      "Microsoft.TestPlatform.TestHost/17.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.TestPlatform.ObjectModel": "17.3.0",
+          "Microsoft.TestPlatform.ObjectModel": "17.3.1",
           "Newtonsoft.Json": "9.0.1"
         },
         "compile": {
@@ -2382,7 +2382,7 @@
           }
         }
       },
-      "MimeKit/3.3.0": {
+      "MimeKit/3.4.0": {
         "type": "package",
         "dependencies": {
           "Portable.BouncyCastle": "1.9.0",
@@ -2813,13 +2813,13 @@
           "lib/net5.0/WebDriver.dll": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/104.0.5112.7900": {
+      "Selenium.WebDriver.ChromeDriver/105.0.5195.5200": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
         }
       },
-      "Stripe.net/40.3.0": {
+      "Stripe.net/40.6.0": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "12.0.3",
@@ -4397,7 +4397,7 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
           "CloudinaryDotNet": "1.19.0",
           "HtmlSanitizer": "7.1.542",
-          "MailKit": "3.3.0",
+          "MailKit": "3.4.0",
           "Neonatology.Data": "1.0.0",
           "Neonatology.ViewModels": "1.0.0"
         },
@@ -4437,7 +4437,7 @@
           "Hangfire.AspNetCore": "1.7.31",
           "Hangfire.Core": "1.7.31",
           "Hangfire.SqlServer": "1.7.31",
-          "MailKit": "3.3.0",
+          "MailKit": "3.4.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.8",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.8",
           "Microsoft.AspNetCore.Identity.UI": "6.0.8",
@@ -4451,7 +4451,7 @@
           "Neonatology.Services": "1.0.0",
           "Newtonsoft.Json": "13.0.1",
           "QRCoder": "1.4.3",
-          "Stripe.net": "40.3.0"
+          "Stripe.net": "40.6.0"
         },
         "compile": {
           "bin/placeholder/Neonatology.Web.dll": {}
@@ -4911,10 +4911,10 @@
         "lib/netstandard1.0/Humanizer.dll"
       ]
     },
-    "MailKit/3.3.0": {
-      "sha512": "+TkmnfnicAgtwmPDiqZ/CvtLh7z36o44wjgvJzkbFXyGSnhVxmUWdvnzerA6EqslPTP9nK8aWqoQvr1uMpeHCw==",
+    "MailKit/3.4.0": {
+      "sha512": "xHsDSwvy2xHmmxJOeNol0AQuO4yJ391YjanSoTuD18DcIXc/sietgjBypR2/1vaqLgRZoVFyAUs1M9qfurHHTg==",
       "type": "package",
-      "path": "mailkit/3.3.0",
+      "path": "mailkit/3.4.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4928,9 +4928,6 @@
         "lib/net48/MailKit.dll",
         "lib/net48/MailKit.pdb",
         "lib/net48/MailKit.xml",
-        "lib/net5.0/MailKit.dll",
-        "lib/net5.0/MailKit.pdb",
-        "lib/net5.0/MailKit.xml",
         "lib/net6.0/MailKit.dll",
         "lib/net6.0/MailKit.pdb",
         "lib/net6.0/MailKit.xml",
@@ -4940,7 +4937,7 @@
         "lib/netstandard2.1/MailKit.dll",
         "lib/netstandard2.1/MailKit.pdb",
         "lib/netstandard2.1/MailKit.xml",
-        "mailkit.3.3.0.nupkg.sha512",
+        "mailkit.3.4.0.nupkg.sha512",
         "mailkit.nuspec"
       ]
     },
@@ -6026,10 +6023,10 @@
         "microsoft.codeanalysis.workspaces.msbuild.nuspec"
       ]
     },
-    "Microsoft.CodeCoverage/17.3.0": {
-      "sha512": "/xxz+e29F2V5pePtInjbLffoqWVTm60KCX87vSj2laNboeWq65WFJ634fGtBcMZO3VEfOmh9/XcoWEfLlWWG+g==",
+    "Microsoft.CodeCoverage/17.3.1": {
+      "sha512": "WqB7Ik4v8ku0Y9HZShqTStZdq8R1lyhsZr7IMp8zV/OcL5sHVYvlMnardQR+SDQc3dmbniCIl9mYxYM+V7x8MA==",
       "type": "package",
-      "path": "microsoft.codecoverage/17.3.0",
+      "path": "microsoft.codecoverage/17.3.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6086,7 +6083,7 @@
         "build/netstandard1.0/zh-Hant/Microsoft.VisualStudio.TraceDataCollector.resources.dll",
         "lib/net45/Microsoft.VisualStudio.CodeCoverage.Shim.dll",
         "lib/netcoreapp1.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll",
-        "microsoft.codecoverage.17.3.0.nupkg.sha512",
+        "microsoft.codecoverage.17.3.1.nupkg.sha512",
         "microsoft.codecoverage.nuspec"
       ]
     },
@@ -7198,10 +7195,10 @@
         "notices/THIRDPARTYNOTICES.txt"
       ]
     },
-    "Microsoft.NET.Test.Sdk/17.3.0": {
-      "sha512": "ch4JCT7AZdBzvCAKD36t6fDsl7NEzzunwW7MwXUG2uFPoWcMd8B8KYg5fiwxnpdXJHodJk6yIBdSwMpN3Ikt9w==",
+    "Microsoft.NET.Test.Sdk/17.3.1": {
+      "sha512": "jH9W5uYannaJ3HhrPBkzSidf3WkqP6XI+Yke0ODYVuFWM6GLVtBAyNgXvU/uQXPBsHq4aysLTsrN1FvG2hlKoQ==",
       "type": "package",
-      "path": "microsoft.net.test.sdk/17.3.0",
+      "path": "microsoft.net.test.sdk/17.3.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -7228,7 +7225,7 @@
         "lib/netcoreapp1.0/_._",
         "lib/netcoreapp2.1/_._",
         "lib/uap10.0/_._",
-        "microsoft.net.test.sdk.17.3.0.nupkg.sha512",
+        "microsoft.net.test.sdk.17.3.1.nupkg.sha512",
         "microsoft.net.test.sdk.nuspec"
       ]
     },
@@ -7262,10 +7259,10 @@
         "runtime.json"
       ]
     },
-    "Microsoft.TestPlatform.ObjectModel/17.3.0": {
-      "sha512": "6NRzi6QbmWV49Psf8A9z1LTJU4nBrlJdCcDOUyD4Ttm1J2wvksu98GlV+52CkxtpgNsUjGr9Mv1Rbb1/dB06yQ==",
+    "Microsoft.TestPlatform.ObjectModel/17.3.1": {
+      "sha512": "n1WSFCMiFt6KmD5JzV+Wye5Ntomez3YP2+d15bu5PS5Z1U0g+V7VBLdJIaJRnahz5BsXJDTnLYNVOUdntwjx6Q==",
       "type": "package",
-      "path": "microsoft.testplatform.objectmodel/17.3.0",
+      "path": "microsoft.testplatform.objectmodel/17.3.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -7503,14 +7500,14 @@
         "lib/uap10.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll",
         "lib/uap10.0/zh-Hant/Microsoft.TestPlatform.CoreUtilities.resources.dll",
         "lib/uap10.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll",
-        "microsoft.testplatform.objectmodel.17.3.0.nupkg.sha512",
+        "microsoft.testplatform.objectmodel.17.3.1.nupkg.sha512",
         "microsoft.testplatform.objectmodel.nuspec"
       ]
     },
-    "Microsoft.TestPlatform.TestHost/17.3.0": {
-      "sha512": "uOJALDWtKXZkISKuNI7kOlRi/lk2CqXZtLkNS0Ei+RXqRUjUpCsjAPYSP+DJ/a4QwJ5cI9CVF52vtajnGOaEpw==",
+    "Microsoft.TestPlatform.TestHost/17.3.1": {
+      "sha512": "co/GMz6rGxpzn2aJYTDDim61HvEk+SHBVtbXnu2RSrz20HxkaraEh0kltCsMkmLAX/6Hz5sa6NquLngBlURTow==",
       "type": "package",
-      "path": "microsoft.testplatform.testhost/17.3.0",
+      "path": "microsoft.testplatform.testhost/17.3.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -7718,7 +7715,7 @@
         "lib/uap10.0/Microsoft.VisualStudio.TestPlatform.Common.dll",
         "lib/uap10.0/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll",
         "lib/uap10.0/testhost.dll",
-        "microsoft.testplatform.testhost.17.3.0.nupkg.sha512",
+        "microsoft.testplatform.testhost.17.3.1.nupkg.sha512",
         "microsoft.testplatform.testhost.nuspec"
       ]
     },
@@ -8411,10 +8408,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "MimeKit/3.3.0": {
-      "sha512": "l3J4XEioKPfck1WnCSVPPH3Jc3BefaAd2ntU66zn6pHDM2F5ev4KSUCwg3VnEKBCe8up2T8+qhliKPxug9fRZw==",
+    "MimeKit/3.4.0": {
+      "sha512": "NNM6tdbE1Z5ujKc2CoCQDbstCI3wziO5MZok9yUfMFS7uYDN0qJxiyATg1OPn+qtfi2emzllZ4VMbJn5LqXOZg==",
       "type": "package",
-      "path": "mimekit/3.3.0",
+      "path": "mimekit/3.4.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8428,9 +8425,6 @@
         "lib/net48/MimeKit.dll",
         "lib/net48/MimeKit.pdb",
         "lib/net48/MimeKit.xml",
-        "lib/net5.0/MimeKit.dll",
-        "lib/net5.0/MimeKit.pdb",
-        "lib/net5.0/MimeKit.xml",
         "lib/net6.0/MimeKit.dll",
         "lib/net6.0/MimeKit.pdb",
         "lib/net6.0/MimeKit.xml",
@@ -8440,7 +8434,7 @@
         "lib/netstandard2.1/MimeKit.dll",
         "lib/netstandard2.1/MimeKit.pdb",
         "lib/netstandard2.1/MimeKit.xml",
-        "mimekit.3.3.0.nupkg.sha512",
+        "mimekit.3.4.0.nupkg.sha512",
         "mimekit.nuspec"
       ]
     },
@@ -9028,10 +9022,10 @@
         "selenium.webdriver.nuspec"
       ]
     },
-    "Selenium.WebDriver.ChromeDriver/104.0.5112.7900": {
-      "sha512": "vDH+7FqF4APZtvqyqtJ8XYTTh523EsUV88CpqW4d2xjxKjUp6ifpeLi9rDhnSuruDIoQDLJvRBZPI7UlcMTXOw==",
+    "Selenium.WebDriver.ChromeDriver/105.0.5195.5200": {
+      "sha512": "/OV++ThfRp7YcWilvbbfeZQDwtlQr0Gbkczxg+ll1EvTfxI02yjK52DSNyy39NkgsD4/643PZ2icAdTBSylzAw==",
       "type": "package",
-      "path": "selenium.webdriver.chromedriver/104.0.5112.7900",
+      "path": "selenium.webdriver.chromedriver/105.0.5195.5200",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9043,14 +9037,14 @@
         "driver/mac64arm/chromedriver",
         "driver/win32/chromedriver.exe",
         "nupkg-icon.png",
-        "selenium.webdriver.chromedriver.104.0.5112.7900.nupkg.sha512",
+        "selenium.webdriver.chromedriver.105.0.5195.5200.nupkg.sha512",
         "selenium.webdriver.chromedriver.nuspec"
       ]
     },
-    "Stripe.net/40.3.0": {
-      "sha512": "DaPU/8Q3S/PVXIHLpZ8aSv1ZwjifAiHYoNJSdv3ieAEJRvKG4waxfErB6ccr/ExC018rUkI9fk6QEIh8NTkfww==",
+    "Stripe.net/40.6.0": {
+      "sha512": "eeCY/yAyI0oL3GeMokhmb7UAS4InrBrG9vA2jR5BcdFyW80F+vjrW3fzaopA7u7Kk/QahRkYU85DJf3D6JyJrg==",
       "type": "package",
-      "path": "stripe.net/40.3.0",
+      "path": "stripe.net/40.6.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9066,7 +9060,7 @@
         "lib/netcoreapp3.1/Stripe.net.xml",
         "lib/netstandard2.0/Stripe.net.dll",
         "lib/netstandard2.0/Stripe.net.xml",
-        "stripe.net.40.3.0.nupkg.sha512",
+        "stripe.net.40.6.0.nupkg.sha512",
         "stripe.net.nuspec"
       ]
     },
@@ -13151,12 +13145,12 @@
     "net6.0": [
       "Microsoft.AspNetCore.Mvc.Testing >= 6.0.8",
       "Microsoft.EntityFrameworkCore.InMemory >= 6.0.8",
-      "Microsoft.NET.Test.Sdk >= 17.3.0",
+      "Microsoft.NET.Test.Sdk >= 17.3.1",
       "Moq >= 4.18.2",
       "Neonatology.Data >= 1.0.0",
       "Neonatology.Web >= 1.0.0",
       "Selenium.WebDriver >= 4.4.0",
-      "Selenium.WebDriver.ChromeDriver >= 104.0.5112.7900",
+      "Selenium.WebDriver.ChromeDriver >= 105.0.5195.5200",
       "coverlet.collector >= 3.1.2",
       "xunit >= 2.4.2",
       "xunit.runner.visualstudio >= 2.4.5"
@@ -13216,7 +13210,7 @@
           },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
-            "version": "[17.3.0, )"
+            "version": "[17.3.1, )"
           },
           "Moq": {
             "target": "Package",
@@ -13228,7 +13222,7 @@
           },
           "Selenium.WebDriver.ChromeDriver": {
             "target": "Package",
-            "version": "[104.0.5112.7900, )"
+            "version": "[105.0.5195.5200, )"
           },
           "coverlet.collector": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -13262,7 +13256,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.108/RuntimeIdentifierGraph.json"
       }
     }
   }
