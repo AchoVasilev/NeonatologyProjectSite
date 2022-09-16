@@ -106,7 +106,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             }
           },
           "imports": [
@@ -172,11 +172,11 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             }
           },
           "imports": [
@@ -245,25 +245,25 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -420,7 +420,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[3.4.0, )"
+              "version": "[3.4.1, )"
             }
           },
           "imports": [
@@ -595,37 +595,37 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[3.4.0, )"
+              "version": "[3.4.1, )"
             },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Moment.js": {
               "target": "Package",
@@ -641,7 +641,7 @@
             },
             "Stripe.net": {
               "target": "Package",
-              "version": "[40.6.0, )"
+              "version": "[40.9.0, )"
             }
           },
           "imports": [
@@ -709,11 +709,11 @@
           "dependencies": {
             "Microsoft.AspNetCore.Mvc.Testing": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
