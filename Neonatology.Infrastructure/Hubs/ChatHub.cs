@@ -1,7 +1,7 @@
 ﻿namespace Neonatology.Infrastructure.Hubs;
 
 using System.Threading.Tasks;
-using Ganss.XSS;
+using Ganss.Xss;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Services.ChatService;

@@ -797,7 +797,8 @@ public class AppointmentServiceTests
         var model = await dataMock.Appointments
             .FirstOrDefaultAsync(x => x.Id == 3);
 
-        Assert.True(model.IsDeleted);
+        Assert.True(result.Succeeded);
+        Assert.True(model?.IsDeleted);
     }
 
     [Fact]

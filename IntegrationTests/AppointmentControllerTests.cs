@@ -27,6 +27,6 @@ public class AppointmentControllerTests
         var response = await client.GetAsync(url);
 
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-        Assert.Contains("/Identity/Account/Login", response.Headers.Location.OriginalString);
+        Assert.Contains("/Identity/Account/Login", response.Headers.Location?.OriginalString);
     }
 }

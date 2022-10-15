@@ -1,10 +1,10 @@
 {
-  "Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Common",
-  "Data.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Data.Common",
-  "Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Data",
-  "Data.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Data.Models",
-  "Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Infrastructure",
-  "Neonatology.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Neonatology.Web",
-  "Services, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Services",
-  "ViewModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/ViewModels"
+  "Neonatology.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Neonatology.Common",
+  "Neonatology.Data.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Neonatology.Data.Common",
+  "Neonatology.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Neonatology.Data",
+  "Neonatology.Data.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Neonatology.Data.Models",
+  "Neonatology.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Neonatology.Infrastructure",
+  "Neonatology.Services, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Neonatology.Services",
+  "Neonatology.ViewModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Neonatology.ViewModels",
+  "Neonatology.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/acho\/Programing\/Neonatology\/Neonatology.Web"
 }

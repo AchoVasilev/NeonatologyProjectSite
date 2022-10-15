@@ -78,7 +78,7 @@ public class CheckoutController : BaseController
             SuccessUrl = SuccessUrl,
             CancelUrl = CancelUrl,
             Mode = SessionOptionsMode,
-            CustomerEmail = this.User.FindFirst(ClaimTypes.Email).Value,
+            CustomerEmail = this.User.FindFirst(ClaimTypes.Email)?.Value,
             LineItems = new List<SessionLineItemOptions>
             {
                 new SessionLineItemOptions
@@ -128,6 +128,7 @@ public class CheckoutController : BaseController
         }
         catch (Exception e)
         {
+            Console.WriteLine(e.Message);
             return this.BadRequest();
         }
 

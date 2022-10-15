@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Data;
 using Data.Models;
 using Data.Models.Enums;
-using Ganss.XSS;
+using Ganss.Xss;
 using Microsoft.EntityFrameworkCore;
 using ViewModels.Notification;
 using static Neonatology.Common.Constants.GlobalConstants.DateTimeFormats;
@@ -17,8 +17,8 @@ public class NotificationService : INotificationService
 {
     private readonly NeonatologyDbContext data;
 
-    private const string url = "/Chat/With/{0}/Group/{1}";
-    private const string notificationType = "Message";
+    private const string Url = "/Chat/With/{0}/Group/{1}";
+    private const string NotificationType = "Message";
 
     public NotificationService(NeonatologyDbContext data)
     {
@@ -35,7 +35,7 @@ public class NotificationService : INotificationService
     public async Task<string> AddMessageNotification(string message, string receiverUsername, string senderUsername, string group)
     {
         var notificationTypeId = await this.data.NotificationTypes
-            .Where(x => x.Name == notificationType)
+            .Where(x => x.Name == NotificationType)
             .Select(x => x.Id)
             .FirstOrDefaultAsync();
 
@@ -47,7 +47,7 @@ public class NotificationService : INotificationService
             Sender = sender,
             Receiver = receiver,
             NotificationStatus = NotificationStatus.Непрочетено,
-            Link = string.Format(url, senderUsername, group),
+            Link = string.Format(Url, senderUsername, group),
             Text = new HtmlSanitizer().Sanitize(message.Trim()),
             NotificationTypeId = notificationTypeId,
         };
@@ -205,7 +205,7 @@ public class NotificationService : INotificationService
         {
             Id = notification.Id,
             CreatedOn = notification.CreatedOn.ToLocalTime().ToString(DateTimeFormat),
-            Heading = this.GetNotificationHeading(notificationType, sender, notification.Link),
+            Heading = this.GetNotificationHeading(NotificationType, sender, notification.Link),
             Status = notification.NotificationStatus,
             Text = contentWithoutTags.Length < 487 ?
                 contentWithoutTags :
@@ -240,8 +240,6 @@ public class NotificationService : INotificationService
             case "Paid":
                 message =
                     $"<a href=\"/Profile/{user.Id}\" style=\"text-decoration: underline\">{user.UserName}</a> заплати <a href=\"{link}\" style=\"text-decoration: underline\">за консултация</a>.";
-                break;
-            default:
                 break;
         }
 

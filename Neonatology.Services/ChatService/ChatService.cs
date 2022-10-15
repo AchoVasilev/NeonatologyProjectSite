@@ -13,7 +13,7 @@ using Data;
 using Data.Models;
 using FileService;
 using FileService.FileServiceModels;
-using Ganss.XSS;
+using Ganss.Xss;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using ViewModels.Chat;
@@ -256,18 +256,19 @@ public class ChatService : IChatService
 
     public async Task<SendFilesResponseViewModel> SendMessageWitFilesToUser(IList<IFormFile> files, string group, string toUsername, string fromUsername, string message)
     {
-        var toUser = this.data.Users.FirstOrDefault(x => x.UserName == toUsername);
-        var toId = toUser.Id;
+        var toUser = await this.data.Users.FirstOrDefaultAsync(x => x.UserName == toUsername);
+        
+        var toId = toUser?.Id;
 
-        var fromUser = this.data.Users.FirstOrDefault(x => x.UserName == fromUsername);
-        var fromId = fromUser.Id;
+        var fromUser = await this.data.Users.FirstOrDefaultAsync(x => x.UserName == fromUsername);
+        var fromId = fromUser?.Id;
 
         await this.DeleteOldMessage(group);
 
         var newMessage = new Message
         {
             Sender = fromUser,
-            Group = this.data.Groups.FirstOrDefault(x => x.Name.ToLower() == group.ToLower()),
+            Group = await this.data.Groups.FirstOrDefaultAsync(x => x.Name.ToLower() == group.ToLower()),
             Receiver = toUser,
         };
 
@@ -282,9 +283,8 @@ public class ChatService : IChatService
         var filesContent = new StringBuilder();
 
         var imagesCount = files
-            .Where(x => x.ContentType
-                .Contains("image", StringComparison.CurrentCultureIgnoreCase))
-            .Count();
+            .Count(x => x.ContentType
+                .Contains("image", StringComparison.CurrentCultureIgnoreCase));
 
         var result = new SendFilesResponseViewModel();
 
@@ -294,9 +294,8 @@ public class ChatService : IChatService
         }
 
         var filesCount = files
-            .Where(x => !x.ContentType
-                .Contains("image", StringComparison.CurrentCultureIgnoreCase))
-            .Count();
+            .Count(x => !x.ContentType
+                .Contains("image", StringComparison.CurrentCultureIgnoreCase));
 
         if (filesCount > 0)
         {
@@ -308,7 +307,10 @@ public class ChatService : IChatService
             var chatFile = new ChatImage
             {
                 MessageId = newMessage.Id,
-                GroupId = this.data.Groups.FirstOrDefault(x => x.Name.ToLower() == group.ToLower()).Id,
+                GroupId = await this.data.Groups
+                    .Where(x => x.Name.ToLower() == group.ToLower())
+                    .Select(x => x.Id)
+                    .FirstOrDefaultAsync()
             };
 
             IFileServiceModel fileModel;
