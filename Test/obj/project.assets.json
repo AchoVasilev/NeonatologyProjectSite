@@ -3240,7 +3240,7 @@
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
         }
       },
-      "Stripe.net/40.13.0": {
+      "Stripe.net/40.14.0": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "12.0.3",
@@ -5062,7 +5062,7 @@
           "Neonatology.Services": "1.0.0",
           "Newtonsoft.Json": "13.0.1",
           "QRCoder": "1.4.3",
-          "Stripe.net": "40.13.0"
+          "Stripe.net": "40.14.0"
         },
         "compile": {
           "bin/placeholder/Neonatology.Web.dll": {}
@@ -9636,10 +9636,10 @@
         "selenium.webdriver.chromedriver.nuspec"
       ]
     },
-    "Stripe.net/40.13.0": {
-      "sha512": "f4nK8v+1r1Mp+WdjYchh4V03rSQ5RIrR++kdleLAmMJZ/YJJVrTHn3HRIcTmRqP/ifqBWx5UXvRzVC7laBKyQw==",
+    "Stripe.net/40.14.0": {
+      "sha512": "nm+BMOLGpxFxNWFwhZLugVUHHqBWGmDXerKHTI/eWaPD38Bb4ZCd2k768zPoqLQa0SO6cVH35Lf7e/KiBIVMrw==",
       "type": "package",
-      "path": "stripe.net/40.13.0",
+      "path": "stripe.net/40.14.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9655,7 +9655,7 @@
         "lib/netcoreapp3.1/Stripe.net.xml",
         "lib/netstandard2.0/Stripe.net.dll",
         "lib/netstandard2.0/Stripe.net.xml",
-        "stripe.net.40.13.0.nupkg.sha512",
+        "stripe.net.40.14.0.nupkg.sha512",
         "stripe.net.nuspec"
       ]
     },

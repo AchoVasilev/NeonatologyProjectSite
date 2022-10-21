@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0yud88a8U4quDzuDe3hCDNosYcDwWWDU/LzppfpKUxc2ga5xxjePiqUFyAgl6zW+yRove3SVaUfk/t7tQtQZBg==",
+  "dgSpecHash": "QFAjORnmmJymn2qaIm74AGsYF5TlW/8xFo4iLo1rfKA6XDf/jVNwbSZBXuW6Zk07RY6gm6Gct7GyU4JsLJ43PQ==",
   "success": true,
   "projectFilePath": "/home/acho/Programing/Neonatology/IntegrationTests/IntegrationTests.csproj",
   "expectedPackageFiles": [
@@ -151,7 +151,7 @@
     "/home/acho/.nuget/packages/runtime.win-arm64.runtime.native.system.data.sqlclient.sni/4.4.0/runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "/home/acho/.nuget/packages/runtime.win-x64.runtime.native.system.data.sqlclient.sni/4.4.0/runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "/home/acho/.nuget/packages/runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0/runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
-    "/home/acho/.nuget/packages/stripe.net/40.13.0/stripe.net.40.13.0.nupkg.sha512",
+    "/home/acho/.nuget/packages/stripe.net/40.14.0/stripe.net.40.14.0.nupkg.sha512",
     "/home/acho/.nuget/packages/system.appcontext/4.3.0/system.appcontext.4.3.0.nupkg.sha512",
     "/home/acho/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
     "/home/acho/.nuget/packages/system.collections/4.3.0/system.collections.4.3.0.nupkg.sha512",

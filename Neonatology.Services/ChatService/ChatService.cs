@@ -73,7 +73,7 @@ public class ChatService : IChatService
         var receiver = await this.data.Users
             .FirstOrDefaultAsync(x => x.UserName == receiverName);
         var targetGroup = await this.data.Groups
-            .FirstOrDefaultAsync(x => x.Name.ToLower() == groupName.ToLower());
+            .FirstOrDefaultAsync(x => string.Equals(x.Name, groupName, StringComparison.CurrentCultureIgnoreCase));
 
         if (targetGroup == null)
         {
@@ -134,7 +134,8 @@ public class ChatService : IChatService
     {
         var result = new List<LoadMoreMessagesViewModel>();
 
-        var targetGroup = await this.data.Groups.FirstOrDefaultAsync(x => x.Name.ToLower() == group.ToLower());
+        var targetGroup = await this.data.Groups
+            .FirstOrDefaultAsync(x => string.Equals(x.Name, group, StringComparison.CurrentCultureIgnoreCase));
 
         if (targetGroup != null)
         {
@@ -153,13 +154,11 @@ public class ChatService : IChatService
                     Content = message.Content,
                     SendedOn = message.CreatedOn.ToString(DateTimeFormat),
                     CurrentUsername = currentUser.UserName,
+                    //     .FirstOrDefaultAsync(x => x.Id == message.SenderId);
+                    // var messageFromUser = await this.data.Users
+                    FromUsername = senderFullname,
+                    ReceiverUsername = receiverFullname
                 };
-
-                // var messageFromUser = await this.data.Users
-                //     .FirstOrDefaultAsync(x => x.Id == message.SenderId);
-
-                currentMessageModel.FromUsername = senderFullname;
-                currentMessageModel.ReceiverUsername = receiverFullname;
 
                 result.Add(currentMessageModel);
             }
@@ -308,7 +307,7 @@ public class ChatService : IChatService
             {
                 MessageId = newMessage.Id,
                 GroupId = await this.data.Groups
-                    .Where(x => x.Name.ToLower() == group.ToLower())
+                    .Where(x => string.Equals(x.Name, group, StringComparison.CurrentCultureIgnoreCase))
                     .Select(x => x.Id)
                     .FirstOrDefaultAsync()
             };
@@ -339,14 +338,14 @@ public class ChatService : IChatService
 
                 string[] sizes = { "B", "KB", "MB", "GB", "TB" };
                 double fileLength = file.Length;
-                int order = 0;
+                var order = 0;
                 while (fileLength >= 1024 && order < sizes.Length - 1)
                 {
                     order++;
                     fileLength /= 1024;
                 }
 
-                string fileSize = string.Format("{0:0.##} {1}", fileLength, sizes[order]);
+                var fileSize = $"{fileLength:0.##} {sizes[order]}";
 
                 filesContent.AppendLine($"<p><a href=\"{fileModel.Uri}\"><i class=\"fas fa-download\"></i> {file.FileName} - ({fileSize})</a></p>");
             }
